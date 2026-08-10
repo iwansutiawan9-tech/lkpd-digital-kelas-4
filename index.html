@@ -1,1 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>LKPD Digital Kelas IV</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 65px 20px 75px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #4f46e5,
+                #7c3aed
+            );
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        .hero::before {
+            width: 180px;
+            height: 180px;
+            top: -70px;
+            left: -50px;
+        }
+
+        .hero::after {
+            width: 230px;
+            height: 230px;
+            bottom: -120px;
+            right: -60px;
+            animation-delay: 2s;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .book {
+            font-size: 65px;
+            margin-bottom: 10px;
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: clamp(30px, 6vw, 52px);
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            margin: 15px 0 0;
+            font-size: clamp(16px, 3vw, 21px);
+            opacity: 0.95;
+        }
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .container {
+            width: min(1100px, 92%);
+            margin: 45px auto;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .welcome h2 {
+            margin: 0 0 10px;
+            font-size: clamp(25px, 5vw, 34px);
+        }
+
+        .welcome p {
+            margin: 0;
+            color: #64748b;
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(230px, 1fr)
+            );
+            gap: 22px;
+        }
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            background: white;
+            border-radius: 24px;
+            padding: 28px 22px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(15,23,42,0.08);
+            border: 1px solid rgba(148,163,184,0.15);
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 40px rgba(15,23,42,0.13);
+        }
+
+        .icon {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 18px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            background: #eef2ff;
+        }
+
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 21px;
+        }
+
+        .card p {
+            min-height: 48px;
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 11px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .button.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .button.active:hover {
+            background: #1d4ed8;
+            transform: scale(1.04);
+        }
+
+        .button.disabled {
+            background: #e2e8f0;
+            color: #64748b;
+            cursor: default;
+        }
+
+        /* =========================
+           BADGE
+        ========================= */
+
+        .badge {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            margin-top: 60px;
+            padding: 30px 20px;
+            text-align: center;
+            background: #eaf0f7;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        footer strong {
+            color: #334155;
+        }
+
+        /* =========================
+           ANIMATION
+        ========================= */
+
+        @keyframes floating {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes bounce {
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding: 45px 18px 55px;
+            }
+
+            .book {
+                font-size: 52px;
+            }
+
+            .container {
+                width: 90%;
+                margin-top: 32px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="hero">
+
+        <div class="hero-content">
+
+            <div class="book">📚</div>
+
+            <h1>LKPD DIGITAL KELAS IV</h1>
+
+            <p>
+                Belajar Aktif • Kreatif • Bermakna • Menyenangkan
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         CONTENT
+    ========================== -->
+
+    <main class="container">
+
+        <section class="welcome">
+
+            <h2>🌟 Pilih Mata Pelajaran</h2>
+
+            <p>
+                Ayo pilih mata pelajaran dan temukan Lembar Kerja Digitalmu!
+            </p>
+
+        </section>
+
+
+        <section class="grid">
+
+
+            <!-- PENDIDIKAN PANCASILA -->
+
+            <div class="card">
+
+                <div class="icon">
+                    🇮🇩
+                </div>
+
+                <h3>
+                    Pendidikan Pancasila
+                </h3>
+
+                <p>
+                    Mengenal Pancasila, lingkungan,
+                    masyarakat, dan kehidupan bersama.
+                </p>
+
+                <span class="badge">
+                    1 LKPD Tersedia
+                </span>
+
+                <br>
+
+                <a
+                    class="button active"
+                    href="pendidikan-pancasila/1.1/"
+                >
+                    📖 Buka LKPD 1.1
+                </a>
+
+            </div>
+
+
+            <!-- BAHASA INDONESIA -->
+
+            <div class="card">
+
+                <div class="icon">
+                    📖
+                </div>
+
+                <h3>
+                    Bahasa Indonesia
+                </h3>
+
+                <p>
+                    Membaca, menulis, berbicara,
+                    dan memahami berbagai teks.
+                </p>
+
+                <span class="badge"
+                      style="background:#fef3c7;color:#b45309;">
+                    Segera Hadir
+                </span>
+
+                <br>
+
+                <span class="button disabled">
+                    🔒 LKPD Belum Tersedia
+                </span>
+
+            </div>
+
+
+            <!-- MATEMATIKA -->
+
+            <div class="card">
+
+                <div class="icon">
+                    🔢
+                </div>
+
+                <h3>
+                    Matematika
+                </h3>
+
+                <p>
+                    Belajar berhitung dan memecahkan
+                    masalah matematika dengan menyenangkan.
+                </p>
+
+                <span class="badge"
+                      style="background:#fef3c7;color:#b45309;">
+                    Segera Hadir
+                </span>
+
+                <br>
+
+                <span class="button disabled">
+                    🔒 LKPD Belum Tersedia
+                </span>
+
+            </div>
+
+
+            <!-- IPAS -->
+
+            <div class="card">
+
+                <div class="icon">
+                    🔬
+                </div>
+
+                <h3>
+                    IPAS
+                </h3>
+
+                <p>
+                    Menjelajahi alam, lingkungan,
+                    dan kehidupan di sekitar kita.
+                </p>
+
+                <span class="badge"
+                      style="background:#fef3c7;color:#b45309;">
+                    Segera Hadir
+                </span>
+
+                <br>
+
+                <span class="button disabled">
+                    🔒 LKPD Belum Tersedia
+                </span>
+
+            </div>
+
+
+            <!-- BAHASA INGGRIS -->
+
+            <div class="card">
+
+                <div class="icon">
+                    🇬🇧
+                </div>
+
+                <h3>
+                    Bahasa Inggris
+                </h3>
+
+                <p>
+                    Mengenal kosakata dan ungkapan
+                    Bahasa Inggris dalam kehidupan sehari-hari.
+                </p>
+
+                <span class="badge"
+                      style="background:#fef3c7;color:#b45309;">
+                    Segera Hadir
+                </span>
+
+                <br>
+
+                <span class="button disabled">
+                    🔒 LKPD Belum Tersedia
+                </span>
+
+            </div>
+
+
+            <!-- SENI MUSIK -->
+
+            <div class="card">
+
+                <div class="icon">
+                    🎵
+                </div>
+
+                <h3>
+                    Seni Musik
+                </h3>
+
+                <p>
+                    Bernyanyi, bermain musik,
+                    dan mengenal berbagai unsur musik.
+                </p>
+
+                <span class="badge"
+                      style="background:#fef3c7;color:#b45309;">
+                    Segera Hadir
+                </span>
+
+                <br>
+
+                <span class="button disabled">
+                    🔒 LKPD Belum Tersedia
+                </span>
+
+            </div>
+
+
+            <!-- KOKURIKULER -->
+
+            <div class="card">
+
+                <div class="icon">
+                    🌱
+                </div>
+
+                <h3>
+                    Kokurikuler
+                </h3>
+
+                <p>
+                    Kegiatan bermakna untuk mengembangkan
+                    karakter, keterampilan, dan pengalaman.
+                </p>
+
+                <span class="badge"
+                      style="background:#fef3c7;color:#b45309;">
+                    Segera Hadir
+                </span>
+
+                <br>
+
+                <span class="button disabled">
+                    🔒 LKPD Belum Tersedia
+                </span>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <strong>LKPD Digital Kelas IV</strong>
+
+        <br>
+
+        Belajar dengan semangat, berkarya dengan gembira! 🌟
+
+        <br><br>
+
+        © 2026 • Kelas IV
+
+    </footer>
+
+
+</body>
+</html>
