@@ -357,6 +357,76 @@ function confirmSend(){
  showModal("<div style='font-size:46px'>📤</div><h3>Kirim Lembar Kerja Murid?</h3><p>Lembar Kerja Murid boleh dikirim walaupun pekerjaan belum selesai.</p><p><b>Identitas halaman 1 harus sudah lengkap.</b></p><p>Salinan yang diterima guru akan dibuat <b>tidak dapat diedit oleh siswa</b>.</p><button class='btn-light' onclick='closeModal()'>Periksa Lagi</button> <button class='btn-green' id='yesSend'>Ya, Kirim</button>");
  document.getElementById("yesSend").onclick=async()=>{showModal("<div class='spinner'></div><h3>Mengirim LKPD…</h3><p>Mohon tunggu.</p>");try{await sendToGoogleDrive();showModal("<div style='font-size:52px'>✅</div><h3>Lembar Kerja Murid Berhasil Dikirim</h3><p>Salinan hasil kerja sudah dibuat untuk guru.</p><button class='btn-green' onclick='closeModal()'>Selesai</button>")}catch(err){showModal("<div style='font-size:52px'>⚠️</div><h3>Pengiriman belum terkonfirmasi</h3><p>"+esc(err)+"</p><button class='btn-light' onclick='closeModal()'>Tutup</button>")}}
 }
+
+function checkResult(id, ok, message){
+ const el=document.getElementById(id);
+ if(!el)return;
+ el.textContent=(ok?'✅ ':'❌ ')+message;
+ el.className='result '+(ok?'correct':'wrong');
+}
+function checkMisi1(){
+ const a=['m1_ribuan','m1_ratusan','m1_puluhan','m1_satuan'].map(n=>(form.elements[n]?.value||'').trim());
+ const okA=a.join('')==='7812';
+ checkResult('m1a_result',okA,okA?'Benar! Bilangannya 7.812.':'Coba lagi. Gunakan 7, 8, 1, 2 sesuai tempatnya.');
+ const b=(form.elements.m1_kasus2?.value||'').replace(/\D/g,'');
+ const okB=/^\d{4}$/.test(b)&&b[1]==='9';
+ checkResult('m1b_result',okB,okB?'Benar! Angka 9 berada di ratusan.':'Belum tepat. Angka kedua dari kiri harus 9.');
+ const c=(form.elements.m1_kasus3?.value||'').replace(/\D/g,'');
+ const okC=/^\d{4}$/.test(c)&&c[3]==='1';
+ checkResult('m1c_result',okC,okC?'Benar! Angka 1 berada di satuan.':'Belum tepat. Angka terakhir harus 1.');
+}
+function checkMisi2(){
+ const answers={q2a:'Puluhan',q2b:'Ratusan',q2c:'Ribuan',q2d:'Satuan'};
+ let score=0;
+ Object.entries(answers).forEach(([q,ans])=>{
+   const box=document.querySelector('.choices[data-q="'+q+'"]');
+   const chosen=box?.dataset.selected||'';
+   const ok=chosen===ans; if(ok)score++;
+   checkResult(q+'_result',ok,ok?'Benar!':'Belum tepat. Coba perhatikan posisi angka 6.');
+ });
+}
+function checkMisi3(){
+ const answers={m3a:'Ribuan',m3b:'Ribuan',m3c:'Ratusan'};
+ let score=0;
+ Object.entries(answers).forEach(([name,ans])=>{
+   const el=form.elements[name]; const ok=(el?.value||'')===ans; if(ok)score++;
+ });
+ const ok=score===3;
+ checkResult('m3_result',ok,ok?'Hebat! Semua jawaban benar ('+score+'/3).':'Ada jawaban yang perlu diperiksa lagi ('+score+'/3 benar).');
+}
+function checkMisi4(){
+ const answers={
+  m4_1_r:'6',m4_1_rt:'1',m4_1_p:'9',m4_1_s:'2',
+  m4_2_r:'2',m4_2_rt:'9',m4_2_p:'1',m4_2_s:'0',
+  m4_3_r:'4',m4_3_rt:'1',m4_3_p:'2',m4_3_s:'8',
+  m4_4_r:'9',m4_4_rt:'2',m4_4_p:'1',m4_4_s:'7'
+ };
+ let score=0,total=0;
+ Object.entries(answers).forEach(([name,ans])=>{
+   const el=form.elements[name]; if(!el)return;
+   total++; if((el.value||'').trim()===ans)score++;
+ });
+ const ok=score===total;
+ checkResult('m4_result',ok,ok?'Sempurna! Semua bagian tabel benar.':'Benar '+score+' dari '+total+'. Periksa kembali tabelmu.');
+}
+function initInteractiveChecks(){
+ document.querySelectorAll('.check-btn').forEach(btn=>{
+   btn.addEventListener('click',()=>{
+     const type=btn.dataset.check;
+     if(type==='m1a'||type==='m1b'||type==='m1c')checkMisi1();
+     else if(type==='m3')checkMisi3();
+     else if(type==='m4')checkMisi4();
+   });
+ });
+ document.querySelectorAll('.choices').forEach(box=>{
+   box.querySelectorAll('button[data-value]').forEach(btn=>btn.addEventListener('click',()=>{
+     box.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+     btn.classList.add('selected'); box.dataset.selected=btn.dataset.value;
+     checkMisi2();
+   }));
+ });
+}
+
 function clearAll(){fields().forEach(el=>{if(el.name==="mapel")el.value=SUBJECT;else if(el.name==="materi")el.value="Menentukan dan Menggunakan Nilai Tempat Bilangan Cacah sampai 10.000";else if(el.readOnly){}else el.value=""});localStorage.removeItem(STORAGE);updateProgress()}
 
 function initTeacherPanel(){
@@ -413,6 +483,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  const send2=document.getElementById("sendBtn2");if(send2)send2.onclick=confirmSend;
  const clear=document.getElementById("clearBtn");if(clear)clear.onclick=()=>showModal("<h3>Kosongkan semua isian?</h3><p>Data yang belum dikirim akan dihapus dari perangkat ini.</p><button class='btn-light' onclick='closeModal()'>Batal</button> <button class='btn-green' id='yesClear'>Ya, Kosongkan</button>");
  document.addEventListener("click",e=>{if(e.target.id==="yesClear"){clearAll();closeModal()}});
+ initInteractiveChecks();
  initTeacherPanel();
 });
 </script>
