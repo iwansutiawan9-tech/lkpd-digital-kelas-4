@@ -1,1 +1,660 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V1 — IPAS (LKPD 1.3: PERUBAHAN ENERGI PADA PROSES FOTOSINTESIS - INFOGRAFIK REVISI) -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 1.3 IPAS - Perubahan Energi pada Proses Fotosintesis</title>
+<style>
+:root{--green:#0b9f75;--green2:#087f60;--mint:#e9fbf5;--pink:#ffdfe4;--ink:#24313a;--muted:#64748b;--yellow:#fff36a;--line:#e5e7eb;--white:#fff;--blue:#2563eb;--gold:#f59e0b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#eefcf7,#fff7f8 55%,#eef6ff);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.45;pointer-events:none}
+body:before{width:180px;height:180px;background:#bff4df;left:-70px;top:120px;animation:float1 7s ease-in-out infinite}
+body:after{width:150px;height:150px;background:#ffd4dc;right:-50px;bottom:100px;animation:float2 9s ease-in-out infinite}
+@keyframes float1{50%{transform:translate(25px,18px) scale(1.08)}} @keyframes float2{50%{transform:translate(-20px,-25px) scale(1.12)}}
+.appbar{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;padding:12px 16px;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid #dfe7e4}
+.brand{font-weight:900;color:var(--green2);margin-right:auto}
+button{border:0;border-radius:12px;padding:10px 15px;font-weight:800;cursor:pointer;transition:.2s transform,.2s box-shadow}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #00000012}
+button:active{transform:scale(.98)}
+.btn-light{background:#f1f5f9;color:#334155}.btn-green{background:var(--green);color:#fff}.btn-blue{background:var(--blue);color:#fff}.btn-gold{background:#fef3c7;color:#92400e}
+.progress{height:5px;background:#dcefe9}.progress i{display:block;height:100%;width:0;background:var(--green);transition:.25s}
+.sheet{width:min(1000px,calc(100% - 24px));margin:18px auto;background:#fff;border-radius:24px;box-shadow:0 12px 35px #24483b16;padding:28px}
+.hero{display:grid;grid-template-columns:1.7fr .8fr;gap:20px;align-items:stretch}
+.hero-card{background:linear-gradient(135deg,#effcf7,#fff0f3);border-radius:22px;padding:28px}
+.badge{display:inline-block;background:var(--green);color:#fff;padding:7px 12px;border-radius:999px;font-weight:900;font-size:13px}
+h1{font-size:clamp(26px,4.5vw,46px);line-height:1.08;margin:16px 0 8px} h2{margin:0} p{line-height:1.75}
+.mission{background:#f7fafc;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center;text-align:center;font-size:18px}
+.mission-icon{font-size:64px;animation:bob 2.8s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+.idgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.field label{display:block;font-size:13px;font-weight:900;color:#475569;margin-bottom:6px}
+input,textarea,select{width:100%;font:inherit;border:2px solid #dbe4e1;border-radius:13px;padding:12px 14px;outline:none;background:#fff}
+input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px #0b9f7520}
+.idgrid input{min-height:52px;min-width:0}.idgrid .field{min-width:0}
+.section-title{display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--mint);padding-bottom:12px;margin-bottom:18px}
+.num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff;font-weight:900;flex:0 0 auto}
+.reading{font-size:16.5px;line-height:1.9}
+.tip{background:#fff9d6;border-left:5px solid #f2d73a;padding:14px 16px;border-radius:12px;margin:18px 0}
 
+/* INFOGRAFIK VEKTOR TERPADU & RAPI */
+.infographic-wrapper{background:#fff;border:2px solid #bbf7d0;border-radius:20px;padding:18px;margin:20px 0;box-shadow:0 10px 28px rgba(0,0,0,0.04)}
+.infographic-stage{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:center}
+.svg-canvas-box{background:linear-gradient(180deg,#e0f2fe 0%,#bae6fd 60%,#86efac 60%,#4ade80 66%,#d97706 66%,#92400e 100%);border-radius:18px;border:2px solid #7dd3fc;position:relative;overflow:hidden;min-height:430px;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 2px 10px rgba(0,0,0,0.05)}
+
+/* Animasi Elemen SVG */
+.sun-glow{animation:sunPulse 3s ease-in-out infinite;transform-origin:65px 65px}
+@keyframes sunPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.sun-beam{stroke-dasharray:8;animation:dashRay 2s linear infinite}
+@keyframes dashRay{to{stroke-dashoffset:-32}}
+.water-arrow{stroke-dasharray:6;animation:dashWater 1.5s linear infinite}
+@keyframes dashWater{to{stroke-dashoffset:-24}}
+.gas-in{stroke-dasharray:5;animation:dashGas 2s linear infinite}
+@keyframes dashGas{to{stroke-dashoffset:-20}}
+.gas-out{stroke-dasharray:5;animation:dashOut 2s linear infinite}
+@keyframes dashOut{to{stroke-dashoffset:20}}
+
+/* Daftar Kartu Langkah Interaktif */
+.steps-list{display:flex;flex-direction:column;gap:10px}
+.step-item{background:#f8fafc;border:1.5px solid #e2e8f0;border-left:5px solid var(--green);border-radius:12px;padding:10px 14px;font-size:13px;line-height:1.5;transition:.2s all}
+.step-item:hover{background:#f0fdf4;border-color:var(--green);transform:translateX(4px)}
+.step-item b{color:#0f172a;font-size:13.5px;display:inline-block;margin-bottom:2px}
+.step-num{display:inline-block;background:var(--green);color:#fff;border-radius:50%;width:20px;height:20px;text-align:center;font-size:11px;line-height:20px;margin-right:6px;font-weight:900}
+
+/* Tombol Aksi Bantuan Gambar Asli */
+.helper-bar{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px dashed #cbd5e1;flex-wrap:wrap;gap:10px}
+
+/* Rumus Box */
+.formula-box{background:#fefce8;border:2px solid #fef08a;border-radius:16px;padding:16px;text-align:center;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;font-weight:900;font-size:15px}
+.formula-part{background:#fff;padding:8px 14px;border-radius:10px;border:1px solid #e2e8f0;box-shadow:0 2px 4px rgba(0,0,0,0.04)}
+
+/* STORYBOARD / GRID KOMIK */
+.comic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+.comic-card{background:#fff;border:2px solid #cbd5e1;border-radius:16px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;min-height:220px;box-shadow:0 4px 10px rgba(0,0,0,0.03)}
+.comic-header{font-size:22px;font-weight:900;color:var(--green);border-bottom:2px solid var(--mint);padding-bottom:6px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.comic-content{font-size:13px;flex-grow:1;display:flex;flex-direction:column;justify-content:center}
+.comic-card textarea{border:1.5px solid #cbd5e1;border-radius:10px;resize:none;height:100%;font-size:13px;padding:8px}
+
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 8px}
+.footer-note{text-align:center;color:var(--muted);font-size:13px}
+.modal{position:fixed;inset:0;background:#0f172a88;display:none;place-items:center;z-index:50;padding:18px}
+.modal-card{width:min(680px,100%);background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 20px 60px #0003;max-height:90vh;overflow-y:auto}
+.spinner{width:42px;height:42px;border:5px solid #dbeee8;border-top-color:var(--green);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.submitted-banner{margin:16px auto;max-width:900px;background:var(--green2);color:#fff;padding:14px 18px;border-radius:16px;text-align:center;font-weight:900}
+.submitted-banner small{display:block;font-weight:600;margin-top:4px}
+.grade-panel{display:none;background:#f8fafc;border:2px solid #dbe4e1;border-radius:20px;padding:20px;margin:18px auto;max-width:900px}
+.grade-panel.show{display:block;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grade-grid textarea{min-height:90px}
+.locked{background:#f8fafc!important}
+.teacher-tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.teacher-note{font-size:12px;color:#64748b;text-align:center}
+.teacher-status{background:#fff9d6;border-left:5px solid #f2d73a;border-radius:12px;padding:11px 14px;margin:0 0 16px;font-size:14px}
+.grade-select{width:100%;min-height:50px;border:2px solid #dbe4e1;border-radius:13px;padding:10px 14px;font:inherit;font-weight:800;background:#fff}
+.grade-select:disabled{opacity:1;color:#24313a;background:#f8fafc}
+.star-rating{font-size:34px;letter-spacing:4px;text-align:center;margin:14px 0 4px;line-height:1;color:#cbd5e1}
+.scale-hint{text-align:center;color:#64748b;font-size:12px;margin-bottom:4px}
+
+@media(max-width:850px){
+ .infographic-stage{grid-template-columns:1fr}
+ .comic-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+ .appbar{flex-wrap:wrap}.brand{width:100%;text-align:center}
+ .sheet{padding:18px;border-radius:18px}
+ .hero{grid-template-columns:1fr}.idgrid{grid-template-columns:1fr}
+ .actions button{width:100%}.grade-grid{grid-template-columns:1fr}
+}
+@media print{
+ .appbar,.progress,.actions,.modal,.teacher-tools,.helper-bar{display:none!important}
+ body{background:#fff}.sheet{box-shadow:none;width:210mm;margin:0;border-radius:0;min-height:297mm}
+ input,textarea,select{border:0!important;box-shadow:none!important}
+}
+</style>
+</head>
+<body>
+<div class="appbar">
+  <div class="brand">🌿 LEMBAR KERJA MURID DIGITAL • IPAS</div>
+  <button class="btn-light" id="saveBtn">💾 Simpan</button>
+  <button class="btn-green" id="sendBtn">📤 Kirim Lembar Kerja Murid</button>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 1.3</span>
+      <h1>Perubahan Energi Fotosintesis</h1>
+      <p><b>IPAS • Ilmu Pengetahuan Alam dan Sosial</b></p>
+      <p>Bagaimana tumbuhan memproduksi makanannya sendiri? Mari amati infografik interaktif fotosintesis, pahami bahan dan hasilnya, serta lengkapi tahapan perubahan energinya.</p>
+      <div class="idgrid">
+        <div class="field"><label>Nama Anggota / Nama Siswa <span class="required-mark">*</span></label><input name="nama" placeholder="Tuliskan nama lengkap" required autocomplete="name"></div>
+        <div class="field"><label>Hari / Tanggal <span class="required-mark">*</span></label><input name="tanggal" placeholder="Contoh: Kamis, 20 Agustus 2026" required></div>
+        <div class="field"><label>Mata Pelajaran</label><input name="mapel" value="IPAS" readonly></div>
+        <div class="field"><label>Materi Pokok</label><input name="materi" value="Perubahan Energi pada Proses Fotosintesis" readonly></div>
+      </div>
+    </div>
+    <div class="mission">
+      <div class="mission-icon">☀️🌱</div>
+      <b>🎯 Misi Hari Ini</b>
+      <p>Amati infografik fotosintesis dan lengkapi ilustrasi alur perubahan energi!</p>
+    </div>
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num">2</div><h2>📋 Petunjuk Pengisian</h2></div>
+  <div class="tip">
+    <b>Selamat datang di Aktivitas Ayo Mengamati!</b><br>
+    Bacalah petunjuk pengerjaan di bawah ini sebelum mengisi lembar kerja.
+  </div>
+  <ol style="line-height:1.9;padding-left:22px">
+    <li><b>Wajib isi identitas pada halaman 1</b> (Nama dan Hari/Tanggal) sebelum mengirim hasil kerja[cite: 1].</li>
+    <li>Pelajari infografik proses fotosintesis pada bagian 3 dengan cermat.</li>
+    <li>Lengkapi <b>Ilustrasi Cerita Tahapan Fotosintesis</b> pada kotak 3 sampai 7 di bagian 4.</li>
+    <li>Tuliskan kesimpulan perubahan bentuk energi dan jawaban refleksi secara mandiri.</li>
+    <li><b>Lembar Kerja Murid tetap boleh dikirim walaupun belum selesai.</b> Guru akan menerima apa pun yang sudah dikerjakan[cite: 1].</li>
+    <li>Setelah dikirim, salinan menjadi <b>arsip hasil kerja siswa</b> dan terkunci dari perubahan[cite: 1].</li>
+  </ol>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num">3</div><h2>📖 Infografik: Bagaimana Tumbuhan Memasak?</h2></div>
+  <div class="reading">
+    <p>Ketika lapar, kita pergi ke dapur atau kantin untuk makan. Manusia dan hewan mendapat energi melalui makanan. <b>Lalu bagaimana dengan tumbuhan?</b></p>
+    <p>Tumbuhan menggunakan energi cahaya dari matahari untuk memproduksi makanannya sendiri agar tetap bertahan hidup. Proses ini dinamakan <b>fotosintesis</b>.</p>
+  </div>
+
+  <!-- INFOGRAFIK LENGKAP & RAPI DENGAN VEKTOR ANATOMI TUMBUHAN -->
+  <div class="infographic-wrapper">
+    <div class="infographic-stage">
+      
+      <!-- Sisi Kiri: Visual Grafis Tumbuhan Lengkap & Animasi Aliran Zat -->
+      <div class="svg-canvas-box">
+        <svg viewBox="0 0 360 420" style="width:100%;height:100%;max-height:410px" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff" />
+              <stop offset="40%" stop-color="#fef08a" />
+              <stop offset="80%" stop-color="#f59e0b" />
+              <stop offset="100%" stop-color="#d97706" />
+            </radialGradient>
+            <marker id="arrowHead" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb" />
+            </marker>
+            <marker id="arrowHeadGreen" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d" />
+            </marker>
+          </defs>
+
+          <!-- 1. Matahari -->
+          <g class="sun-glow">
+            <circle cx="65" cy="65" r="42" fill="url(#sunGrad)" />
+            <text x="65" y="69" text-anchor="middle" font-size="11" font-weight="bold" fill="#78350f">Matahari</text>
+          </g>
+          
+          <!-- Sinar Matahari ke Daun -->
+          <line x1="105" y1="95" x2="165" y2="155" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" class="sun-beam" />
+
+          <!-- Lapisan Tanah dan Akar -->
+          <!-- Akar primer & sekunder -->
+          <g stroke="#78350f" stroke-width="3" fill="none" stroke-linecap="round">
+            <path d="M 180 270 Q 180 320 180 370" />
+            <path d="M 180 285 Q 150 315 130 350" />
+            <path d="M 180 295 Q 210 325 235 360" />
+            <path d="M 155 315 Q 140 340 120 355" />
+            <path d="M 205 320 Q 225 345 245 365" />
+          </g>
+
+          <!-- Aliran Air Naik dari Akar -->
+          <path d="M 180 365 L 180 270" stroke="#0284c7" stroke-width="4" fill="none" class="water-arrow" />
+
+          <!-- Batang Utama Tumbuhan -->
+          <path d="M 180 270 Q 180 200 180 130" stroke="#15803d" stroke-width="9" fill="none" stroke-linecap="round" />
+          <path d="M 180 210 Q 150 180 130 170" stroke="#15803d" stroke-width="5" fill="none" />
+          <path d="M 180 180 Q 215 155 235 145" stroke="#15803d" stroke-width="5" fill="none" />
+          <path d="M 180 235 Q 220 220 240 215" stroke="#15803d" stroke-width="4" fill="none" />
+
+          <!-- Daun-Daun Rimbun -->
+          <g fill="#22c55e" stroke="#166534" stroke-width="1.5">
+            <!-- Daun Kiri Atas -->
+            <path d="M 130 170 C 100 150 100 120 135 135 C 160 145 150 170 130 170 Z" />
+            <!-- Daun Kanan Atas -->
+            <path d="M 235 145 C 270 130 270 105 240 120 C 210 130 220 150 235 145 Z" />
+            <!-- Daun Kiri Bawah -->
+            <path d="M 140 215 C 105 200 100 235 130 235 C 155 235 155 220 140 215 Z" />
+            <!-- Daun Kanan Bawah -->
+            <path d="M 240 215 C 275 205 280 240 245 245 C 225 245 230 225 240 215 Z" />
+            <!-- Pucuk Daun -->
+            <path d="M 180 130 C 165 95 195 95 180 130 Z" />
+          </g>
+
+          <!-- Bunga Kuning -->
+          <g fill="#fde047" stroke="#ca8a04" stroke-width="1" transform="translate(168, 115) scale(0.9)">
+            <circle cx="8" cy="8" r="4" fill="#ea580c" />
+            <circle cx="8" cy="2" r="3" />
+            <circle cx="14" cy="8" r="3" />
+            <circle cx="8" cy="14" r="3" />
+            <circle cx="2" cy="8" r="3" />
+          </g>
+
+          <!-- Buah Tomat Merah Matang -->
+          <g transform="translate(195, 175)">
+            <circle cx="16" cy="16" r="14" fill="#dc2626" stroke="#991b1b" stroke-width="1.5" />
+            <path d="M 16 2 Q 13 6 8 4 Q 13 8 16 8 Q 19 8 24 4 Q 19 6 16 2 Z" fill="#15803d" />
+            <ellipse cx="12" cy="11" rx="3" ry="2" fill="#fca5a5" opacity="0.8" />
+          </g>
+          <g transform="translate(135, 230)">
+            <circle cx="14" cy="14" r="12" fill="#ef4444" stroke="#991b1b" stroke-width="1.5" />
+            <path d="M 14 2 Q 11 6 7 4 Q 11 7 14 7 Q 17 7 21 4 Q 17 6 14 2 Z" fill="#15803d" />
+          </g>
+
+          <!-- Indikator Gas Karbon Dioksida (CO2) Masuk -->
+          <g class="gas-in">
+            <path d="M 320 210 L 260 210" stroke="#334155" stroke-width="2.5" marker-end="url(#arrowHead)" />
+            <text x="320" y="200" font-size="10" font-weight="900" fill="#1e293b">Karbon Dioksida (CO₂)</text>
+          </g>
+
+          <!-- Indikator Pelepasan Oksigen (O2) Keluar -->
+          <g class="gas-out">
+            <path d="M 230 110 L 285 85" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arrowHead)" />
+            <text x="250" y="75" font-size="10" font-weight="900" fill="#0369a1">Oksigen (O₂)</text>
+          </g>
+
+          <!-- Teks Keterangan Lapisan Tanah -->
+          <text x="25" y="300" font-size="11" font-weight="bold" fill="#fff">Lapisan Tanah</text>
+          <text x="25" y="390" font-size="11" font-weight="bold" fill="#bae6fd">Air Tanah (H₂O)</text>
+        </svg>
+      </div>
+
+      <!-- Sisi Kanan: Kartu Alur 6 Tahapan Sistematis Sesuai Buku -->
+      <div class="steps-list">
+        <div class="step-item" style="border-left-color:#f59e0b">
+          <b><span class="step-num" style="background:#f59e0b">1</span> Energi Cahaya</b><br>
+          Cahaya dari matahari diserap langsung oleh permukaan daun.
+        </div>
+        <div class="step-item" style="border-left-color:#16a34a">
+          <b><span class="step-num" style="background:#16a34a">2</span> Klorofil (Zat Hijau Daun)</b><br>
+          Bahan spesial di kloroplas yang bertugas menangkap cahaya matahari.
+        </div>
+        <div class="step-item" style="border-left-color:#0284c7">
+          <b><span class="step-num" style="background:#0284c7">3</span> Air ($H_2O$)</b><br>
+          Air di dalam tanah diserap oleh akar dan dialirkan batang sampai ke daun.
+        </div>
+        <div class="step-item" style="border-left-color:#475569">
+          <b><span class="step-num" style="background:#475569">4</span> Karbon Dioksida ($CO_2$)</b><br>
+          Gas dari hembusan napas makhluk hidup & asap diserap melalui pori daun (stomata).
+        </div>
+        <div class="step-item" style="border-left-color:#8b5cf6">
+          <b><span class="step-num" style="background:#8b5cf6">5</span> Proses Fotosintesis</b><br>
+          Semua bahan dimasak bersama di kloroplas pada daun.
+        </div>
+        <div class="step-item" style="border-left-color:#dc2626">
+          <b><span class="step-num" style="background:#dc2626">6</span> Hasil Akhir</b><br>
+          • <b>Karbohidrat:</b> Makanan untuk tumbuh & disimpan di buah/umbi.<br>
+          • <b>Oksigen ($O_2$):</b> Dilepas ke udara untuk bernapas.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bar Bantuan: Modal Zoom Gambar Asli -->
+    <div class="helper-bar">
+      <span style="font-size:12.5px;color:#64748b">🔍 <i>Lihat infografik versi gambar buku paket jika diperlukan:</i></span>
+      <button type="button" class="btn-light" onclick="openOriginalImage()" style="font-size:12px;padding:7px 12px">🖼️ Buka Gambar Asli Infografik</button>
+    </div>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-part">☀️ Cahaya Matahari + 💧 Air + 💨 Karbon Dioksida</div>
+    <div>➡️ <i>(Melalui Klorofil)</i> ➡️</div>
+    <div class="formula-part" style="background:#ecfdf5;border-color:#10b981;color:#065f46">🍞 Karbohidrat (Glukosa) + 🌬️ Oksigen</div>
+  </div>
+
+  <div class="tip" style="background:#e0f2fe;border-left-color:#0284c7">
+    <b>📚 Glosarium Penting:</b><br>
+    • <b>Klorofil:</b> Zat yang membuat daun berwarna hijau dan menangkap energi matahari.<br>
+    • <b>Karbohidrat:</b> Salah satu bahan makanan sumber tenaga hasil fotosintesis.<br>
+    • <b>Oksigen:</b> Gas yang kamu hirup setiap bernapas.<br>
+    • <b>Karbon dioksida:</b> Gas yang kamu hembuskan setiap bernapas.
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num">4</div><h2>✏️ Aktivitas: Ilustrasi Cerita & Perubahan Bentuk Energi</h2></div>
+  <p>Lengkapilah kartu ilustrasi cerita alur fotosintesis berikut berdasarkan urutan infografik di atas:</p>
+  
+  <div class="comic-grid">
+    <!-- Kotak 1 -->
+    <div class="comic-card" style="background:#f8fafc">
+      <div class="comic-header">1 <span>❓</span></div>
+      <div class="comic-content" style="text-align:center;font-weight:800;color:#334155">
+        Bagaimana tumbuhan menghasilkan makanan?
+      </div>
+    </div>
+
+    <!-- Kotak 2 (Contoh) -->
+    <div class="comic-card" style="background:#f0fdf4">
+      <div class="comic-header">2 <span>☀️🍃</span></div>
+      <div class="comic-content" style="text-align:center;font-size:12px;color:#166534">
+        <b>Klorofil</b> pada daun menangkap energi cahaya dari matahari.
+      </div>
+    </div>
+
+    <!-- Kotak 3 -->
+    <div class="comic-card">
+      <div class="comic-header">3 <span>💧</span></div>
+      <div class="comic-content">
+        <label style="font-size:11px;font-weight:800;color:#475569;margin-bottom:4px">Penyerapan Air:</label>
+        <textarea name="tahap3" placeholder="Tuliskan peran akar dan air..."></textarea>
+      </div>
+    </div>
+
+    <!-- Kotak 4 -->
+    <div class="comic-card">
+      <div class="comic-header">4 <span>💨</span></div>
+      <div class="comic-content">
+        <label style="font-size:11px;font-weight:800;color:#475569;margin-bottom:4px">Penyerapan Gas:</label>
+        <textarea name="tahap4" placeholder="Tuliskan penyerapan karbon dioksida..."></textarea>
+      </div>
+    </div>
+
+    <!-- Kotak 5 -->
+    <div class="comic-card">
+      <div class="comic-header">5 <span>🧪</span></div>
+      <div class="comic-content">
+        <label style="font-size:11px;font-weight:800;color:#475569;margin-bottom:4px">Proses Memasak:</label>
+        <textarea name="tahap5" placeholder="Tuliskan proses di kloroplas daun..."></textarea>
+      </div>
+    </div>
+
+    <!-- Kotak 6 -->
+    <div class="comic-card">
+      <div class="comic-header">6 <span>🍞</span></div>
+      <div class="comic-content">
+        <label style="font-size:11px;font-weight:800;color:#475569;margin-bottom:4px">Hasil Karbohidrat:</label>
+        <textarea name="tahap6" placeholder="Tuliskan makanan yang diedarkan..."></textarea>
+      </div>
+    </div>
+
+    <!-- Kotak 7 -->
+    <div class="comic-card">
+      <div class="comic-header">7 <span>🌬️</span></div>
+      <div class="comic-content">
+        <label style="font-size:11px;font-weight:800;color:#475569;margin-bottom:4px">Pelepasan Oksigen:</label>
+        <textarea name="tahap7" placeholder="Tuliskan pelepasan gas oksigen..."></textarea>
+      </div>
+    </div>
+
+    <!-- Kotak 8 -->
+    <div class="comic-card" style="background:#eff6ff">
+      <div class="comic-header">8 <span>🏆</span></div>
+      <div class="comic-content" style="text-align:center;font-weight:900;color:var(--blue);font-size:16px">
+        Fotosintesis Berhasil!
+      </div>
+    </div>
+  </div>
+
+  <div class="field" style="margin-top:20px">
+    <label style="font-size:15px;color:var(--green2)">⚡ Perubahan bentuk energi yang terjadi pada proses fotosintesis adalah:</label>
+    <textarea name="perubahan_energi" rows="3" placeholder="Contoh: Perubahan energi cahaya matahari menjadi energi kimia dalam bentuk karbohidrat/makanan..." required></textarea>
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num">5</div><h2>💭 Refleksi Pemahaman</h2></div>
+  <div class="field">
+    <label>1. Apa yang akan terjadi pada manusia dan hewan jika tumbuhan di bumi tidak melakukan fotosintesis?</label>
+    <textarea name="refleksi1" rows="3" placeholder="Tuliskan pendapat dan analisismu..."></textarea>
+  </div>
+  
+  <div class="field" style="margin-top:14px">
+    <label>2. Mengapa kita perlu merawat dan menanam pohon hijau di lingkungan tempat tinggal kita?</label>
+    <textarea name="refleksi2" rows="3" placeholder="Tuliskan alasan pentingnya menjaga tumbuhan hijau..."></textarea>
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num">6</div><h2>🌟 Penutup</h2></div>
+  <div class="tip" style="background:#ffeef1;border-left-color:#ef6c7b;text-align:center">
+    Luar biasa! Kamu telah memahami bagaimana energi matahari diubah menjadi energi kimia yang menopang kehidupan seluruh makhluk hidup di bumi.
+  </div>
+  <div class="actions">
+    <button type="button" class="btn-light" id="clearBtn">🗑️ Kosongkan Isian</button>
+    <button type="button" class="btn-green" id="sendBtn2">📤 Kirim Lembar Kerja Murid</button>
+  </div>
+  <p class="footer-note">Kamu <b>boleh mengirim LKPD walaupun belum selesai</b>. Guru akan menerima apa pun yang sudah kamu kerjakan[cite: 1].</p>
+</section>
+</form>
+
+<!-- Panel penilaian untuk guru pada salinan hasil kiriman -->
+<section class="sheet grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Penilaian Guru</h2></div>
+  <div class="teacher-status" id="teacherStatus">🔓 Penilaian belum dikunci. Tekan <b>Edit Penilaian</b> untuk mengoreksi.</div>
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Penilaian</label>
+      <select id="gradeScale" class="grade-select" disabled>
+        <option value="">Pilih skala</option>
+        <option value="A">A — Baik Sekali</option>
+        <option value="B">B — Baik</option>
+        <option value="C">C — Cukup</option>
+        <option value="D">D — Kurang</option>
+      </select>
+      <div class="star-rating" id="starRating" aria-label="Rating bintang">☆☆☆☆</div>
+      <div class="scale-hint">A = 4 ⭐ • B = 3 ⭐ • C = 2 ⭐ • D = 1 ⭐</div>
+    </div>
+    <div class="field"><label>Catatan / Umpan Balik Guru</label><textarea id="gradeNote" rows="4" placeholder="Tuliskan umpan balik..." disabled></textarea></div>
+  </div>
+  <div class="teacher-tools">
+    <button type="button" class="btn-light" id="editGradeBtn">✏️ Edit Penilaian</button>
+    <button type="button" class="btn-gold" id="lockGradeBtn">🔒 Kunci Penilaian</button>
+  </div>
+  <p class="teacher-note">Jawaban siswa tetap terkunci. Setelah penilaian dikunci, skala, bintang, dan catatan tidak dapat diedit lagi[cite: 1].</p>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbw_4ZBfSYYAubKD-83hrovWoyZz4aJ1Ew3dP9Gbsb7TPpsfmIAFH07MjViuzOL7bRoX/exec';
+const SUBJECT='IPAS';
+const FOLDER_NAME='IPAS';
+const FOLDER_ID='1s6LjJguI6RITgQyRSC8H_8OiJsMCT2fu';
+const LKPD_ID='1.3';
+const form=document.getElementById("lkpd"), modal=document.getElementById("modal"), modalBody=document.getElementById("modalBody");
+const STORAGE="lkpd_ipas_1_3_fotosintesis_rev";
+const GRADE_STORAGE="lkpd_grade_ipas_1_3_rev";
+const SUBMISSION_ID=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"SUB-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+
+function openOriginalImage(){
+  showModal(`
+    <h3 style="margin-top:0">Infografik Asli Fotosintesis</h3>
+    <img src="https://drive.google.com/thumbnail?id=1hcMzmccPn7bhNG5_hwWv_c8wDP64q8Xa&sz=w1000" style="max-width:100%;height:auto;border-radius:12px;border:1px solid #cbd5e1;margin:10px 0" alt="Infografik Fotosintesis Asli">
+    <div><button class="btn-green" onclick="closeModal()">Tutup Gambar</button></div>
+  `);
+}
+
+function fields(){return [...form.querySelectorAll("input,textarea,select")]}
+function collect(){const data={};fields().forEach(el=>data[el.name]=el.value);data.savedAt=new Date().toISOString();return data}
+function saveDraft(){
+  localStorage.setItem(STORAGE,JSON.stringify(collect()));
+  showModal("<div style='font-size:48px'>💾</div><h3>Draf Tersimpan</h3><p>Isianmu tersimpan di perangkat ini.</p><button class='btn-green' onclick='closeModal()'>Lanjut</button>");
+}
+function loadDraft(){
+  try{
+    const d=JSON.parse(localStorage.getItem(STORAGE)||"null");
+    if(!d)return;
+    fields().forEach(el=>{if(d[el.name]!==undefined && !el.readOnly)el.value=d[el.name]});
+  }catch(e){}
+}
+function updateProgress(){
+  const f=fields().filter(x=>!x.readOnly && x.type!=="hidden");
+  let filled=0;
+  f.forEach(x=>{if(String(x.value||"").trim())filled++});
+  document.getElementById("progressBar").style.width=(f.length?Math.round(filled/f.length*100):0)+"%";
+}
+function showModal(html){modalBody.innerHTML=html;modal.style.display="grid"} 
+function closeModal(){modal.style.display="none"}
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function base64Encode(text){const bytes=new TextEncoder().encode(text);let binary="";for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary)}
+
+function freezeValues(clone){
+ clone.querySelectorAll("input,textarea,select").forEach(el=>{
+  if(el.closest("#gradePanel")) return;
+  const value=el.value||"";
+  if(el.tagName.toLowerCase()==="textarea")el.textContent=value;
+  else if(el.tagName.toLowerCase()==="select"){
+    [...el.options].forEach(o=>o.removeAttribute("selected"));
+    const opt=[...el.options].find(o=>o.value===value);
+    if(opt)opt.setAttribute("selected","selected");
+  } else el.setAttribute("value",value);
+  el.setAttribute("readonly","readonly"); 
+  el.setAttribute("disabled","disabled");
+ });
+}
+
+function teacherOnlyScript(){
+ const ep=ENDPOINT,sub=SUBJECT,folder=FOLDER_NAME,fid=FOLDER_ID,lid=LKPD_ID,sid=SUBMISSION_ID;
+ return `(function(){
+  const ENDPOINT='${ep}',SUBJECT='${sub}',FOLDER_NAME='${folder}',FOLDER_ID='${fid}',LKPD_ID='${lid}',SUBMISSION_ID='${sid}';
+  const key='lkpd_grade_'+LKPD_ID+'_'+SUBJECT.replace(/\\s+/g,'_')+'_'+SUBMISSION_ID;
+  const scale=document.getElementById('gradeScale'),note=document.getElementById('gradeNote'),edit=document.getElementById('editGradeBtn'),lock=document.getElementById('lockGradeBtn'),status=document.getElementById('teacherStatus'),stars=document.getElementById('starRating');
+  let locked=localStorage.getItem(key+'_locked')==='1'; let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+  scale.value=d.scale||''; note.value=d.note||'';
+  function draw(){const n={A:4,B:3,C:2,D:1}[scale.value]||0;stars.textContent='★'.repeat(n)+'☆'.repeat(4-n);stars.style.color=n?'#f59e0b':'#cbd5e1';}
+  function state(){scale.disabled=locked;note.disabled=locked;note.readOnly=locked;edit.disabled=locked;lock.disabled=locked;lock.textContent=locked?'🔒 Penilaian Terkunci':'🔒 Kunci Penilaian';status.innerHTML=locked?'🔒 <b>Penilaian sudah dikunci.</b> Hanya dapat dilihat.':'🔓 <b>Penilaian dapat diedit.</b> Gunakan Edit Penilaian untuk melakukan koreksi.';draw()}
+  function save(){localStorage.setItem(key,JSON.stringify({scale:scale.value,note:note.value,savedAt:new Date().toISOString()}))}
+  edit.onclick=()=>{if(locked)return;scale.disabled=false;note.disabled=false;note.readOnly=false;status.innerHTML='✏️ <b>Mode edit aktif.</b> Setelah selesai, tekan Kunci Penilaian untuk menyimpan dan mengunci.';scale.focus()};
+  scale.onchange=()=>{draw();save()}; note.oninput=save;
+  lock.onclick=async()=>{if(locked)return;if(!scale.value){alert('Pilih skala penilaian A, B, C, atau D terlebih dahulu.');return}save();try{await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'saveGrade',studentName:(document.querySelector(\"input[name=nama]\")||{}).value||'Siswa',subject:SUBJECT,folderName:FOLDER_NAME,folderId:FOLDER_ID,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,scale:scale.value,rating:{A:4,B:3,C:2,D:1}[scale.value],note:note.value})})}catch(e){}localStorage.setItem(key+'_locked','1');locked=true;state();alert('Penilaian sudah dikunci.');};
+  state();
+ })();`;
+}
+
+function buildFinalHTML(){
+ const clone=document.documentElement.cloneNode(true);
+ clone.querySelectorAll(".appbar,.progress,.actions,.modal,.helper-bar").forEach(el=>el.remove());
+ const teacherScript=clone.ownerDocument.createElement("script");
+ teacherScript.textContent=teacherOnlyScript();
+ clone.querySelectorAll("script").forEach(el=>el.remove());
+ clone.querySelector("body").appendChild(teacherScript);
+ clone.querySelectorAll("*").forEach(el=>[...el.attributes].forEach(a=>{if(a.name.toLowerCase().startsWith("on"))el.removeAttribute(a.name)}));
+ freezeValues(clone);
+ const panel=clone.querySelector("#gradePanel"); if(panel){panel.classList.remove("show");panel.style.display="block"}
+ const banner=clone.ownerDocument.createElement("div");banner.className="submitted-banner";
+ const nama=(form.elements.nama?.value||"Siswa").trim();
+ banner.innerHTML="✅ LEMBAR KERJA MURID DIKIRIM<small>Nama: "+esc(nama)+" • "+new Date().toLocaleString("id-ID")+" • ID: "+esc(SUBMISSION_ID)+"</small>";
+ clone.querySelector("body").insertBefore(banner,clone.querySelector("body").firstChild);
+ return "<!doctype html>\n"+clone.outerHTML;
+}
+
+async function sendToGoogleDrive(){
+ const nama=(form.elements.nama?.value||"Siswa").trim().replace(/[\\/:*?"<>|]/g,"_")||"Siswa";
+ const finalHTML=buildFinalHTML();
+ const filename="LKPD_"+LKPD_ID+"_IPAS_Fotosintesis_"+nama+".html";
+ const payload={action:"saveHTML",filename,studentName:nama,subject:SUBJECT,mapel:SUBJECT,folderName:FOLDER_NAME,folderId:FOLDER_ID,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,htmlBase64:base64Encode(finalHTML),data:collect()};
+ await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+ const blob=new Blob([finalHTML],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+ localStorage.removeItem(STORAGE);
+}
+
+function focusIdentity(){
+ const el=form.elements.nama?.value.trim()?form.elements.tanggal:form.elements.nama;
+ el?.focus();
+ el?.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function confirmSend(){
+ const nama=(form.elements.nama?.value||"").trim();
+ const tanggal=(form.elements.tanggal?.value||"").trim();
+
+ if(!nama || !tanggal){
+   const belum=[];
+   if(!nama) belum.push("Nama Anggota / Nama Siswa");
+   if(!tanggal) belum.push("Hari / Tanggal");
+   showModal("<div style='font-size:46px'>📝</div><h3>Identitas Belum Lengkap</h3><p>Sebelum mengirim, identitas pada halaman 1 wajib diisi.</p><div class='tip' style='text-align:left'><b>Belum diisi:</b><br>• "+esc(belum.join("<br>• "))+"</div><button class='btn-green' onclick='closeModal();focusIdentity()'>Lengkapi Identitas</button>");
+   return;
+ }
+ showModal("<div style='font-size:46px'>📤</div><h3>Kirim Lembar Kerja Murid?</h3><p>Lembar Kerja Murid boleh dikirim walaupun pekerjaan belum selesai.</p><p><b>Identitas halaman 1 harus sudah lengkap.</b></p><p>Salinan yang diterima guru akan dibuat <b>tidak dapat diedit oleh siswa</b>.</p><button class='btn-light' onclick='closeModal()'>Periksa Lagi</button> <button class='btn-green' id='yesSend'>Ya, Kirim</button>");
+ document.getElementById("yesSend").onclick=async()=>{showModal("<div class='spinner'></div><h3>Mengirim LKPD…</h3><p>Mohon tunggu.</p>");try{await sendToGoogleDrive();showModal("<div style='font-size:52px'>✅</div><h3>Lembar Kerja Murid Berhasil Dikirim</h3><p>Salinan hasil kerja sudah dibuat untuk guru.</p><button class='btn-green' onclick='closeModal()'>Selesai</button>")}catch(err){showModal("<div style='font-size:52px'>⚠️</div><h3>Pengiriman belum terkonfirmasi</h3><p>"+esc(err)+"</p><button class='btn-light' onclick='closeModal()'>Tutup</button>")}}
+}
+
+function clearAll(){
+  fields().forEach(el=>{
+    if(el.name==="mapel") el.value=SUBJECT;
+    else if(el.name==="materi") el.value="Perubahan Energi pada Proses Fotosintesis";
+    else if(el.readOnly){}
+    else el.value="";
+  });
+  localStorage.removeItem(STORAGE);
+  updateProgress();
+}
+
+function initTeacherPanel(){
+ const panel=document.getElementById("gradePanel");
+ const submitted=document.querySelector(".submitted-banner");
+ if(!submitted)return;
+ panel.classList.add("show");
+ const scale=document.getElementById("gradeScale");
+ const note=document.getElementById("gradeNote");
+ const editBtn=document.getElementById("editGradeBtn");
+ const lockBtn=document.getElementById("lockGradeBtn");
+ const status=document.getElementById("teacherStatus");
+ const stars=document.getElementById("starRating");
+ let gradeKey=GRADE_STORAGE+"_"+SUBMISSION_ID;
+ let locked=localStorage.getItem(gradeKey+"_locked")==="1";
+ let d={}; try{d=JSON.parse(localStorage.getItem(gradeKey)||"{}")}catch(e){}
+ scale.value=d.scale||""; note.value=d.note||"";
+ function renderStars(v){const n={A:4,B:3,C:2,D:1}[v]||0;stars.textContent="★".repeat(n)+"☆".repeat(4-n);stars.style.color=n?"#f59e0b":"#cbd5e1";}
+ function saveLocal(){localStorage.setItem(gradeKey,JSON.stringify({scale:scale.value,note:note.value,savedAt:new Date().toISOString()}));}
+ function applyState(){scale.disabled=locked;note.disabled=locked;note.readOnly=locked;editBtn.disabled=locked;lockBtn.disabled=locked;lockBtn.textContent=locked?"🔒 Penilaian Terkunci":"🔒 Kunci Penilaian";status.innerHTML=locked?"🔒 <b>Penilaian sudah dikunci.</b> Hanya dapat dilihat.":"🔓 <b>Penilaian dapat diedit.</b> Gunakan Edit Penilaian untuk melakukan koreksi.";renderStars(scale.value);}
+ scale.addEventListener("change",()=>{renderStars(scale.value);saveLocal()});
+ note.addEventListener("input",saveLocal);
+ editBtn.onclick=()=>{
+  if(locked)return;
+  scale.disabled=false;
+  scale.removeAttribute("disabled");
+  note.disabled=false;
+  note.removeAttribute("disabled");
+  note.readOnly=false;
+  note.removeAttribute("readonly");
+  status.innerHTML="✏️ <b>Mode edit aktif.</b> Skala dan catatan guru sekarang dapat diedit. Setelah selesai, tekan Kunci Penilaian.";
+  note.focus();
+ };
+ lockBtn.onclick=async()=>{
+   if(locked)return;
+   if(!scale.value){showModal("<div style='font-size:46px'>⭐</div><h3>Pilih skala penilaian terlebih dahulu</h3><button class='btn-green' onclick='closeModal()'>OK</button>");return;}
+   saveLocal();
+   showModal("<div class='spinner'></div><h3>Menyimpan & mengunci penilaian…</h3><p>Mohon tunggu.</p>");
+   try{
+     const nama=(document.querySelector("input[name='nama']")?.value||"Siswa").trim();
+     const payload={action:"saveGrade",studentName:nama,subject:SUBJECT,folderName:FOLDER_NAME,folderId:FOLDER_ID,lkpdId:LKPD_ID,scale:scale.value,rating:{A:4,B:3,C:2,D:1}[scale.value],note:note.value};
+     await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+   }catch(e){console.warn("Penilaian lokal tersimpan; server belum terkonfirmasi",e)}
+   localStorage.setItem(gradeKey+"_locked","1");locked=true;applyState();
+   showModal("<div style='font-size:48px'>🔒</div><h3>Penilaian Dikunci</h3><p>Skala, rating bintang, dan catatan sekarang hanya dapat dilihat.</p><button class='btn-green' onclick='closeModal()'>OK</button>");
+ };
+ applyState();
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+ loadDraft();
+ updateProgress();
+ fields().forEach(el=>{
+   el.addEventListener("input",updateProgress);
+   el.addEventListener("change",updateProgress);
+ });
+ const save=document.getElementById("saveBtn");if(save)save.onclick=saveDraft;
+ const send=document.getElementById("sendBtn");if(send)send.onclick=confirmSend;
+ const send2=document.getElementById("sendBtn2");if(send2)send2.onclick=confirmSend;
+ const clear=document.getElementById("clearBtn");if(clear)clear.onclick=()=>showModal("<h3>Kosongkan semua isian?</h3><p>Data yang belum dikirim akan dihapus dari perangkat ini.</p><button class='btn-light' onclick='closeModal()'>Batal</button> <button class='btn-green' id='yesClear'>Ya, Kosongkan</button>");
+ document.addEventListener("click",e=>{if(e.target.id==="yesClear"){clearAll();closeModal()}});
+ initTeacherPanel();
+});
+</script>
+</body>
+</html>
