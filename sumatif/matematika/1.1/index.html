@@ -1,1 +1,987 @@
+<!doctype html>
+<!-- MASTER PENILAIAN SUMATIF / ULANGAN HARIAN DIGITAL V1.3 -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Penilaian Sumatif / Ulangan Harian Digital - Matematika</title>
+<style>
+:root{--green:#0b9f75;--green2:#087f60;--mint:#e9fbf5;--pink:#ffdfe4;--ink:#24313a;--muted:#64748b;--yellow:#fff36a;--line:#e5e7eb;--white:#fff;--blue:#2563eb;--gold:#f59e0b;--orange:#ea580c;--red:#dc2626}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#eefcf7,#fff7f8 55%,#eef6ff);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.45;pointer-events:none}
+body:before{width:180px;height:180px;background:#bff4df;left:-70px;top:120px;animation:float1 7s ease-in-out infinite}
+body:after{width:150px;height:150px;background:#ffd4dc;right:-50px;bottom:100px;animation:float2 9s ease-in-out infinite}
+@keyframes float1{50%{transform:translate(25px,18px) scale(1.08)}} @keyframes float2{50%{transform:translate(-20px,-25px) scale(1.12)}}
+.appbar{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;padding:12px 16px;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid #dfe7e4}
+.brand{font-weight:900;color:var(--green2);margin-right:auto}
+button{border:0;border-radius:12px;padding:10px 15px;font-weight:800;cursor:pointer;transition:.2s transform,.2s box-shadow}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #00000012}
+button:active{transform:scale(.98)}
+.btn-light{background:#f1f5f9;color:#334155}.btn-green{background:var(--green);color:#fff}.btn-blue{background:var(--blue);color:#fff}.btn-gold{background:#fef3c7;color:#92400e}.btn-red{background:#fee2e2;color:var(--red)}
+.progress{height:5px;background:#dcefe9}.progress i{display:block;height:100%;width:0;background:var(--green);transition:.25s}
+.sheet{width:min(1000px,calc(100% - 24px));margin:18px auto;background:#fff;border-radius:24px;box-shadow:0 12px 35px #24483b16;padding:28px}
+.hero{display:grid;grid-template-columns:1.7fr .8fr;gap:20px;align-items:stretch}
+.hero-card{background:linear-gradient(135deg,#effcf7,#fff0f3);border-radius:22px;padding:28px}
+.badge{display:inline-block;background:var(--green);color:#fff;padding:7px 12px;border-radius:999px;font-weight:900;font-size:13px}
+h1{font-size:clamp(22px,3.8vw,38px);line-height:1.1;margin:16px 0 8px} h2{margin:0} p{line-height:1.75}
+.mission{background:#f7fafc;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center;text-align:center;font-size:18px}
+.mission-icon{font-size:64px;animation:bob 2.8s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+.idgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.field label{display:block;font-size:13px;font-weight:900;color:#475569;margin-bottom:6px}
+input,textarea,select{width:100%;font:inherit;border:2px solid #dbe4e1;border-radius:13px;padding:12px 14px;outline:none;background:#fff}
+input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px #0b9f7520}
+.idgrid input{min-height:52px;min-width:0}.idgrid .field{min-width:0}
+.section-title{display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--mint);padding-bottom:12px;margin-bottom:18px}
+.num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff;font-weight:900;flex:0 0 auto}
+.tip{background:#fff9d6;border-left:5px solid #f2d73a;padding:14px 16px;border-radius:12px;margin:18px 0}
+.warning-box{background:#fee2e2;border-left:5px solid var(--red);padding:14px 16px;border-radius:12px;margin:14px 0;color:#991b1b;font-weight:700}
 
+/* KARTU SOAL & INTERAKSI */
+.question-card{background:#f8fafc;border:2px solid #e2e8f0;border-radius:18px;padding:20px;margin-bottom:20px}
+.question-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.q-number{font-weight:900;color:var(--green2);background:var(--mint);padding:5px 12px;border-radius:8px;font-size:13px}
+.q-weight{font-size:12px;font-weight:800;color:var(--muted);background:#e2e8f0;padding:4px 10px;border-radius:6px}
+.options-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.option-item{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #e2e8f0;padding:12px 14px;border-radius:12px;cursor:pointer;transition:.15s}
+.option-item:hover{border-color:var(--green);background:#f0fdf4}
+.option-item input{width:auto;min-height:auto}
+
+/* STIMULUS VISUAL */
+.stimulus-box{background:#fff;border:2px dashed #cbd5e1;border-radius:14px;padding:14px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+.stimulus-icon{font-size:38px;background:var(--mint);padding:10px;border-radius:12px}
+
+/* VALIDASI GURU */
+.grading-row{display:none;gap:12px;align-items:center;margin-top:14px;background:#fff;padding:12px;border-radius:12px;border:2px dashed #cbd5e1}
+.grading-row.teacher-visible{display:flex}
+.grading-row input[type="number"]{width:100px;text-align:center;font-weight:900;color:var(--green2)}
+
+/* KARTU NILAI BESAR DI HALAMAN IDENTITAS */
+.score-card-display{display:none;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:3px solid var(--green);border-radius:20px;padding:20px;text-align:center;margin-top:20px}
+.score-card-display.red-theme{background:linear-gradient(135deg,#fef2f2,#fee2e2);border-color:var(--red)}
+.score-big{font-size:56px;font-weight:900;color:var(--green2);line-height:1;margin:8px 0}
+.score-card-display.red-theme .score-big{color:var(--red)}
+
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 8px}
+.modal{position:fixed;inset:0;background:#0f172a88;display:none;place-items:center;z-index:50;padding:18px}
+.modal-card{width:min(560px,100%);background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 20px 60px #0003}
+.spinner{width:42px;height:42px;border:5px solid #dbeee8;border-top-color:var(--green);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.submitted-banner{display:none;margin:16px auto;max-width:900px;background:var(--green2);color:#fff;padding:14px 18px;border-radius:16px;text-align:center;font-weight:900}
+.submitted-banner.show{display:block}
+.submitted-banner small{display:block;font-weight:600;margin-top:4px}
+.grade-panel{display:none;background:#f8fafc;border:2px solid #dbe4e1;border-radius:20px;padding:20px;margin:18px auto;max-width:900px}
+.grade-panel.show{display:block}
+.teacher-tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.teacher-status{background:#fff9d6;border-left:5px solid #f2d73a;border-radius:12px;padding:11px 14px;margin:0 0 16px;font-size:14px}
+
+/* TABEL REKAP PENILAIAN */
+.recap-box{background:#fff;border:2px solid #cbd5e1;border-radius:16px;padding:16px;margin-top:20px}
+.recap-table{width:100%;border-collapse:collapse;margin-top:10px}
+.recap-table th,.recap-table td{border:1px solid #e2e8f0;padding:10px 12px;font-size:14px;text-align:left}
+.recap-table th{background:var(--mint);color:var(--green2);font-weight:900}
+
+@media(max-width:700px){
+ .appbar{flex-wrap:wrap}.brand{width:100%;text-align:center}
+ .sheet{padding:18px;border-radius:18px}
+ .hero{grid-template-columns:1fr}.idgrid{grid-template-columns:1fr}
+ .actions button{width:100%}
+}
+@media print{
+ .appbar,.progress,.actions,.modal,.teacher-tools{display:none!important}
+ body{background:#fff}.sheet{box-shadow:none;width:210mm;margin:0;border-radius:0}
+ input,textarea,select{border:0!important;box-shadow:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="appbar">
+  <div class="brand">📝 MASTER PENILAIAN SUMATIF DIGITAL</div>
+  <button class="btn-light" id="saveDraftBtn">💾 Simpan Draf</button>
+  <button class="btn-green" id="submitExamBtn">📤 Kirim Jawaban Ujian</button>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<div class="submitted-banner" id="submittedBanner">
+  ✅ JAWABAN SUMATIF BERHASIL TERKIRIM
+  <small id="submittedInfo">Menunggu proses koreksi dan validasi dari Guru.</small>
+</div>
+
+<form id="examForm">
+<!-- HALAMAN 1: IDENTITAS -->
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">ASESMEN SUMATIF / ULANGAN HARIAN</span>
+      <h1 id="examTitle">Penilaian Sumatif Matematika</h1>
+      <p><b>Mata Pelajaran:</b> <span id="labelMapel">Matematika</span> • Kelas IV (Empat)</p>
+      <p><b>Tujuan Pembelajaran:</b> <span id="labelTP">Membaca, menulis, membandingkan, mengurutkan, dan mendekomposisikan bilangan cacah sampai dengan 10.000.</span></p>
+      
+      <!-- KARTU NILAI BESAR (MUNCUL SETELAH GURU KLIK PERIKSA) -->
+      <div class="score-card-display" id="scoreCardDisplay">
+        <div style="font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:1px">Nilai Perolehan Akhir</div>
+        <div class="score-big" id="displayFinalScore">0</div>
+        <div id="scoreStatusBadge" style="font-weight:800;font-size:14px"></div>
+      </div>
+
+      <div class="idgrid">
+        <div class="field"><label>Nama Lengkap Siswa <span style="color:var(--red)">*</span></label><input name="nama" placeholder="Tuliskan nama lengkap" required autocomplete="name"></div>
+        <div class="field"><label>Hari / Tanggal <span style="color:var(--red)">*</span></label><input name="tanggal" placeholder="Contoh: Senin, 31 Agustus 2026" required></div>
+        <div class="field"><label>Nomor Absen</label><input name="absen" placeholder="Nomor absen" type="number"></div>
+        <div class="field"><label>Kelas</label><input name="kelas" value="IV (Empat)" readonly></div>
+      </div>
+    </div>
+    <div class="mission">
+      <div class="mission-icon">🎯</div>
+      <b>🛡️ Mode Ujian Aktif</b>
+      <p>Kerjakan dengan teliti secara mandiri. Dilarang berpindah tab atau keluar dari halaman ujian!</p>
+    </div>
+  </div>
+</section>
+
+<!-- HALAMAN 2: PETUNJUK -->
+<section class="sheet">
+  <div class="section-title"><div class="num">2</div><h2>📋 Petunjuk Pengerjaan & Sistem Penilaian</h2></div>
+  <div class="tip"><b>Ketentuan Umum Ujian:</b></div>
+  <ul style="line-height:1.8;padding-left:20px">
+    <li>Pastikan identitas terisi lengkap sebelum mengirimkan jawaban.</li>
+    <li><b>KKM:</b> <span id="kkmDisplay" style="font-weight:900;color:var(--blue)">75</span>.</li>
+    <li><b>Perhatian Khusus Soal 28 & 29:</b> Tuliskan jawaban dalam bentuk **angka saja tanpa menggunakan tanda titik (.)**.</li>
+  </ul>
+  <h3 style="margin-top:20px">⚖️ Bobot Nilai:</h3>
+  <table style="width:100%;border-collapse:collapse;margin-top:10px;background:#f8fafc;border-radius:12px;overflow:hidden">
+    <thead>
+      <tr style="background:var(--mint);text-align:left">
+        <th style="padding:10px 14px">Jenis Soal</th><th style="padding:10px 14px">Bobot per Soal</th><th style="padding:10px 14px">Jumlah</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:10px 14px">Pilihan Ganda (1-4, 6-9, 11-14, 16-19, 21-24)</td><td style="padding:10px 14px"><b>1 Poin</b></td><td style="padding:10px 14px">20 Soal</td></tr>
+      <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:10px 14px">Pilihan Ganda Kompleks (5, 10, 15, 20, 25)</td><td style="padding:10px 14px"><b>2 Poin</b></td><td style="padding:10px 14px">5 Soal</td></tr>
+      <tr style="border-bottom:1px solid #e2e8f0"><td style="padding:10px 14px">Isian Singkat (26-35)</td><td style="padding:10px 14px"><b>2 Poin</b></td><td style="padding:10px 14px">10 Soal</td></tr>
+      <tr><td style="padding:10px 14px">Uraian / Essay (36-40)</td><td style="padding:10px 14px"><b>4 Poin</b></td><td style="padding:10px 14px">5 Soal</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:14px;font-size:14px"><b>Skor Maksimal Total:</b> 20(1) + 5(2) + 10(2) + 5(4) = 20 + 10 + 20 + 20 = 70 Poin. Konversi Nilai Akhir = (Total Skor / 70) × 100.</p>
+</section>
+
+<!-- HALAMAN 3: LEMBAR SOAL (1 - 40) -->
+<section class="sheet">
+  <div class="section-title"><div class="num">3</div><h2>✍️ Lembar Soal Sumatif Matematika</h2></div>
+  
+  <div class="warning-box">
+    ⚠️ <b>Peringatan:</b> Berpindah tab atau keluar dari halaman ujian akan tercatat sebagai peringatan pelanggaran integritas akademik!
+  </div>
+
+  <!-- SOAL 1 -->
+  <div class="question-card" data-qtype="objective" data-key="A">
+    <div class="question-header"><span class="q-number">Soal 1 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <div class="stimulus-box"><div class="stimulus-icon">📚</div><p style="margin:0;font-size:14px"><b>Literasi Perpustakaan:</b> Sekolah senantiasa mencatat inventaris koleksi buku untuk mendukung minat baca siswa.</p></div>
+    <p>Perpustakaan sekolah memiliki 3.245 buku. Bilangan 3.245 dibaca ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal1" value="A"> A. tiga ribu dua ratus empat puluh lima</label>
+      <label class="option-item"><input type="radio" name="soal1" value="B"> B. tiga ribu dua puluh empat lima</label>
+      <label class="option-item"><input type="radio" name="soal1" value="C"> C. tiga ratus dua puluh empat lima</label>
+      <label class="option-item"><input type="radio" name="soal1" value="D"> D. tiga ribu empat ratus dua puluh lima</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal1" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 2 -->
+  <div class="question-card" data-qtype="objective" data-key="B">
+    <div class="question-header"><span class="q-number">Soal 2 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Dalam kegiatan Jumat Bersih, siswa mengumpulkan 5.708 gram sampah plastik. Cara membaca bilangan tersebut adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal2" value="A"> A. lima ribu tujuh puluh delapan</label>
+      <label class="option-item"><input type="radio" name="soal2" value="B"> B. lima ribu tujuh ratus delapan</label>
+      <label class="option-item"><input type="radio" name="soal2" value="C"> C. lima ribu tujuh ratus delapan puluh</label>
+      <label class="option-item"><input type="radio" name="soal2" value="D"> D. lima ribu tujuh ratus delapan belas</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal2" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 3 -->
+  <div class="question-card" data-qtype="objective" data-key="B">
+    <div class="question-header"><span class="q-number">Soal 3 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Pada tabel peminjaman buku tercatat jumlah berikut. Kelas IV: 4.016 buku. Bilangan tersebut dibaca ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal3" value="A"> A. empat ribu seratus enam belas</label>
+      <label class="option-item"><input type="radio" name="soal3" value="B"> B. empat ribu enam belas</label>
+      <label class="option-item"><input type="radio" name="soal3" value="C"> C. empat ribu enam puluh satu</label>
+      <label class="option-item"><input type="radio" name="soal3" value="D"> D. empat ratus enam belas</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal3" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 4 -->
+  <div class="question-card" data-qtype="objective" data-key="B">
+    <div class="question-header"><span class="q-number">Soal 4 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Ayah membeli beras sebanyak 2.500 gram untuk persediaan di rumah. Bilangan 2.500 dibaca ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal4" value="A"> A. dua ribu lima puluh</label>
+      <label class="option-item"><input type="radio" name="soal4" value="B"> B. dua ribu lima ratus</label>
+      <label class="option-item"><input type="radio" name="soal4" value="C"> C. dua ribu lima ratus nol</label>
+      <label class="option-item"><input type="radio" name="soal4" value="D"> D. dua ratus lima ribu</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal4" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 5 (PG Kompleks) -->
+  <div class="question-card" data-qtype="complex" data-key="A,B,C">
+    <div class="question-header"><span class="q-number">Soal 5 • PG Kompleks (Jawaban Lebih Dari Satu)</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Perhatikan data jumlah bibit yang ditanam siswa berikut. Kelas IV = 1.250, Kelas V = 2.015, Kelas VI = 3.400. <b>Pilih semua cara membaca bilangan yang benar!</b></p>
+    <div class="options-list">
+      <label class="option-item"><input type="checkbox" name="soal5" value="A"> A. 1.250 = seribu dua ratus lima puluh</label>
+      <label class="option-item"><input type="checkbox" name="soal5" value="B"> B. 2.015 = dua ribu lima belas</label>
+      <label class="option-item"><input type="checkbox" name="soal5" value="C"> C. 3.400 = tiga ribu empat ratus</label>
+      <label class="option-item"><input type="checkbox" name="soal5" value="D"> D. 2.015 = dua ribu seratus lima belas</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal5" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 6 -->
+  <div class="question-card" data-qtype="objective" data-key="B">
+    <div class="question-header"><span class="q-number">Soal 6 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Dalam sebuah berita sekolah disebutkan bahwa jumlah warga yang mengikuti kerja bakti adalah tiga ribu lima ratus dua puluh orang. Bilangan tersebut ditulis ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal6" value="A"> A. 3.250</label>
+      <label class="option-item"><input type="radio" name="soal6" value="B"> B. 3.520</label>
+      <label class="option-item"><input type="radio" name="soal6" value="C"> C. 3.502</label>
+      <label class="option-item"><input type="radio" name="soal6" value="D"> D. 3.052</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal6" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 7 -->
+  <div class="question-card" data-qtype="objective" data-key="C">
+    <div class="question-header"><span class="q-number">Soal 7 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Koperasi memiliki stok dua ribu tujuh belas buku tulis. Bentuk bilangannya adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal7" value="A"> A. 2.170</label>
+      <label class="option-item"><input type="radio" name="soal7" value="B"> B. 2.107</label>
+      <label class="option-item"><input type="radio" name="soal7" value="C"> C. 2.017</label>
+      <label class="option-item"><input type="radio" name="soal7" value="D"> D. 2.070</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal7" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 8 -->
+  <div class="question-card" data-qtype="objective" data-key="B">
+    <div class="question-header"><span class="q-number">Soal 8 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Jumlah air yang digunakan dalam kegiatan sekolah tercatat empat ribu delapan ratus lima liter. Bilangan yang tepat adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal8" value="A"> A. 4.850</label>
+      <label class="option-item"><input type="radio" name="soal8" value="B"> B. 4.805</label>
+      <label class="option-item"><input type="radio" name="soal8" value="C"> C. 4.085</label>
+      <label class="option-item"><input type="radio" name="soal8" value="D"> D. 4.508</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal8" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 9 -->
+  <div class="question-card" data-qtype="objective" data-key="B">
+    <div class="question-header"><span class="q-number">Soal 9 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Pada sebuah poster tertulis “Sebanyak sembilan ribu seratus dua puluh bibit telah dibagikan.” Penulisan bilangannya adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal9" value="A"> A. 9.012</label>
+      <label class="option-item"><input type="radio" name="soal9" value="B"> B. 9.120</label>
+      <label class="option-item"><input type="radio" name="soal9" value="C"> C. 9.210</label>
+      <label class="option-item"><input type="radio" name="soal9" value="D"> D. 9.102</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal9" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 10 (PG Kompleks) -->
+  <div class="question-card" data-qtype="complex" data-key="A,C">
+    <div class="question-header"><span class="q-number">Soal 10 • PG Kompleks (Jawaban Lebih Dari Satu)</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Guru membacakan bilangan berikut: “enam ribu tiga ratus empat.” <b>Pilih semua penulisan yang benar!</b></p>
+    <div class="options-list">
+      <label class="option-item"><input type="checkbox" name="soal10" value="A"> A. 6.304</label>
+      <label class="option-item"><input type="checkbox" name="soal10" value="B"> B. 6.034</label>
+      <label class="option-item"><input type="checkbox" name="soal10" value="C"> C. 6.304 buah</label>
+      <label class="option-item"><input type="checkbox" name="soal10" value="D"> D. 6.340</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal10" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 11 -->
+  <div class="question-card" data-qtype="objective" data-key="B">
+    <div class="question-header"><span class="q-number">Soal 11 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Jumlah pengunjung perpustakaan selama dua minggu adalah 3.245 orang pada minggu pertama dan 3.425 orang pada minggu kedua. Pernyataan yang benar adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal11" value="A"> A. 3.245 > 3.425</label>
+      <label class="option-item"><input type="radio" name="soal11" value="B"> B. 3.245 < 3.425</label>
+      <label class="option-item"><input type="radio" name="soal11" value="C"> C. 3.245 = 3.425</label>
+      <label class="option-item"><input type="radio" name="soal11" value="D"> D. 3.425 < 3.245</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal11" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 12 -->
+  <div class="question-card" data-qtype="objective" data-key="A">
+    <div class="question-header"><span class="q-number">Soal 12 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Data pengumpulan botol plastik: Kelompok A 2.850 botol, Kelompok B 2.805 botol. Kelompok yang mengumpulkan lebih banyak adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal12" value="A"> A. Kelompok A</label>
+      <label class="option-item"><input type="radio" name="soal12" value="B"> B. Kelompok B</label>
+      <label class="option-item"><input type="radio" name="soal12" value="C"> C. Keduanya sama</label>
+      <label class="option-item"><input type="radio" name="soal12" value="D"> D. Tidak dapat ditentukan</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal12" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 13 -->
+  <div class="question-card" data-qtype="objective" data-key="B">
+    <div class="question-header"><span class="q-number">Soal 13 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Manakah tanda yang tepat untuk membandingkan 7.015 .... 7.105?</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal13" value="A"> A. ></label>
+      <label class="option-item"><input type="radio" name="soal13" value="B"> B. <</label>
+      <label class="option-item"><input type="radio" name="soal13" value="C"> C. =</label>
+      <label class="option-item"><input type="radio" name="soal13" value="D"> D. ≥</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal13" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 14 -->
+  <div class="question-card" data-qtype="objective" data-key="C">
+    <div class="question-header"><span class="q-number">Soal 14 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Kantin mencatat penjualan air minum sebanyak 1.950 botol pada bulan Mei dan 1.905 botol pada bulan Juni. Kesimpulan yang benar adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal14" value="A"> A. Mei lebih sedikit</label>
+      <label class="option-item"><input type="radio" name="soal14" value="B"> B. Juni lebih banyak</label>
+      <label class="option-item"><input type="radio" name="soal14" value="C"> C. Mei lebih banyak</label>
+      <label class="option-item"><input type="radio" name="soal14" value="D"> D. Jumlahnya sama</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal14" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 15 (PG Kompleks) -->
+  <div class="question-card" data-qtype="complex" data-key="A,B,D">
+    <div class="question-header"><span class="q-number">Soal 15 • PG Kompleks (Jawaban Lebih Dari Satu)</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Perhatikan data jumlah buku yang dibaca siswa: Andi 1.250, Budi 1.520, Citra 1.205, Dini 1.502. <b>Pilih semua pernyataan yang benar!</b></p>
+    <div class="options-list">
+      <label class="option-item"><input type="checkbox" name="soal15" value="A"> A. Budi membaca lebih banyak daripada Andi.</label>
+      <label class="option-item"><input type="checkbox" name="soal15" value="B"> B. Citra membaca lebih sedikit daripada Andi.</label>
+      <label class="option-item"><input type="checkbox" name="soal15" value="C"> C. Dini membaca lebih banyak daripada Budi.</label>
+      <label class="option-item"><input type="checkbox" name="soal15" value="D"> D. 1.205 < 1.250</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal15" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 16 -->
+  <div class="question-card" data-qtype="objective" data-key="B">
+    <div class="question-header"><span class="q-number">Soal 16 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Jumlah langkah yang dicatat tiga siswa dalam satu hari adalah 4.250, 3.950, dan 4.025 langkah. Urutan dari yang paling sedikit adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal16" value="A"> A. 4.250, 4.025, 3.950</label>
+      <label class="option-item"><input type="radio" name="soal16" value="B"> B. 3.950, 4.025, 4.250</label>
+      <label class="option-item"><input type="radio" name="soal16" value="C"> C. 4.025, 3.950, 4.250</label>
+      <label class="option-item"><input type="radio" name="soal16" value="D"> D. 3.950, 4.250, 4.025</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal16" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 17 -->
+  <div class="question-card" data-qtype="objective" data-key="C">
+    <div class="question-header"><span class="q-number">Soal 17 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Jumlah buku yang tersedia di tiga rak adalah 2.450, 2.405, 2.540. Urutan dari yang paling banyak adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal17" value="A"> A. 2.405, 2.450, 2.540</label>
+      <label class="option-item"><input type="radio" name="soal17" value="B"> B. 2.450, 2.540, 2.405</label>
+      <label class="option-item"><input type="radio" name="soal17" value="C"> C. 2.540, 2.450, 2.405</label>
+      <label class="option-item"><input type="radio" name="soal17" value="D"> D. 2.540, 2.405, 2.450</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal17" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 18 -->
+  <div class="question-card" data-qtype="objective" data-key="D">
+    <div class="question-header"><span class="q-number">Soal 18 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Data hasil pengumpulan sampah: 1.875, 1.785, 1.958, 1.895 kg. Bilangan terbesar adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal18" value="A"> A. 1.785</label>
+      <label class="option-item"><input type="radio" name="soal18" value="B"> B. 1.875</label>
+      <label class="option-item"><input type="radio" name="soal18" value="C"> C. 1.895</label>
+      <label class="option-item"><input type="radio" name="soal18" value="D"> D. 1.958</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal18" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 19 -->
+  <div class="question-card" data-qtype="objective" data-key="A">
+    <div class="question-header"><span class="q-number">Soal 19 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Urutan bilangan berikut dari yang terkecil ke terbesar adalah .... 5.120, 5.012, 5.201, 5.102</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal19" value="A"> A. 5.012 – 5.102 – 5.120 – 5.201</label>
+      <label class="option-item"><input type="radio" name="soal19" value="B"> B. 5.012 – 5.120 – 5.102 – 5.201</label>
+      <label class="option-item"><input type="radio" name="soal19" value="C"> C. 5.102 – 5.012 – 5.120 – 5.201</label>
+      <label class="option-item"><input type="radio" name="soal19" value="D"> D. 5.201 – 5.120 – 5.102 – 5.012</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal19" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 20 -->
+  <div class="question-card" data-qtype="complex" data-key="A,B,C,D">
+    <div class="question-header"><span class="q-number">Soal 20 • PG Kompleks (Jawaban Lebih Dari Satu)</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Data jumlah bibit yang ditanam dalam empat hari: Senin 2.150, Selasa 1.950, Rabu 2.105, Kamis 2.500. <b>Pilih semua pernyataan yang benar!</b></p>
+    <div class="options-list">
+      <label class="option-item"><input type="checkbox" name="soal20" value="A"> A. Senin lebih banyak daripada Selasa.</label>
+      <label class="option-item"><input type="checkbox" name="soal20" value="B"> B. Kamis merupakan jumlah terbesar.</label>
+      <label class="option-item"><input type="checkbox" name="soal20" value="C"> C. Rabu lebih sedikit daripada Senin.</label>
+      <label class="option-item"><input type="checkbox" name="soal20" value="D"> D. Urutan dari terbesar adalah Kamis–Senin–Rabu–Selasa.</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal20" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 21 -->
+  <div class="question-card" data-qtype="objective" data-key="A">
+    <div class="question-header"><span class="q-number">Soal 21 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Harga sebuah sepeda yang tertera pada brosur adalah Rp4.325. Bentuk panjang dari 4.325 adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal21" value="A"> A. 4.000 + 300 + 20 + 5</label>
+      <label class="option-item"><input type="radio" name="soal21" value="B"> B. 4.000 + 30 + 200 + 5</label>
+      <label class="option-item"><input type="radio" name="soal21" value="C"> C. 400 + 300 + 20 + 5</label>
+      <label class="option-item"><input type="radio" name="soal21" value="D"> D. 4.000 + 300 + 25</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal21" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 22 -->
+  <div class="question-card" data-qtype="objective" data-key="A">
+    <div class="question-header"><span class="q-number">Soal 22 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Jumlah bibit di kebun sekolah adalah 6.204 bibit. Dekomposisi yang tepat adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal22" value="A"> A. 6.000 + 200 + 4</label>
+      <label class="option-item"><input type="radio" name="soal22" value="B"> B. 6.000 + 20 + 4</label>
+      <label class="option-item"><input type="radio" name="soal22" value="C"> C. 600 + 200 + 4</label>
+      <label class="option-item"><input type="radio" name="soal22" value="D"> D. 6.000 + 200 + 40</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal22" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 23 -->
+  <div class="question-card" data-qtype="objective" data-key="A">
+    <div class="question-header"><span class="q-number">Soal 23 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Bilangan 8.570 dapat diuraikan menjadi ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal23" value="A"> A. 8.000 + 500 + 70</label>
+      <label class="option-item"><input type="radio" name="soal23" value="B"> B. 8.000 + 50 + 70</label>
+      <label class="option-item"><input type="radio" name="soal23" value="C"> C. 800 + 500 + 70</label>
+      <label class="option-item"><input type="radio" name="soal23" value="D"> D. 8.000 + 570 + 0</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal23" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 24 -->
+  <div class="question-card" data-qtype="objective" data-key="B">
+    <div class="question-header"><span class="q-number">Soal 24 • Pilihan Ganda</span><span class="q-weight">Bobot: 1 Poin</span></div>
+    <p>Dalam sebuah kegiatan sosial terkumpul 9.015 kg beras. Dekomposisi berdasarkan nilai tempat yang tepat adalah ....</p>
+    <div class="options-list">
+      <label class="option-item"><input type="radio" name="soal24" value="A"> A. 9.000 + 100 + 5</label>
+      <label class="option-item"><input type="radio" name="soal24" value="B"> B. 9.000 + 10 + 5</label>
+      <label class="option-item"><input type="radio" name="soal24" value="C"> C. 900 + 10 + 5</label>
+      <label class="option-item"><input type="radio" name="soal24" value="D"> D. 9.000 + 15 + 0</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal24" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 25 -->
+  <div class="question-card" data-qtype="complex" data-key="A,C,D">
+    <div class="question-header"><span class="q-number">Soal 25 • PG Kompleks (Jawaban Lebih Dari Satu)</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Perhatikan bilangan 7.306. <b>Pilih semua bentuk dekomposisi yang benar!</b></p>
+    <div class="options-list">
+      <label class="option-item"><input type="checkbox" name="soal25" value="A"> A. 7.000 + 300 + 6</label>
+      <label class="option-item"><input type="checkbox" name="soal25" value="B"> B. 7.000 + 30 + 6</label>
+      <label class="option-item"><input type="checkbox" name="soal25" value="C"> C. 7.000 + 300 + 0 + 6</label>
+      <label class="option-item"><input type="checkbox" name="soal25" value="D"> D. 7.000 + 306</label>
+    </div>
+    <div class="grading-feedback-box" id="fb_soal25" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 26 -->
+  <div class="question-card" data-qtype="subjective" id="card_soal26">
+    <div class="question-header"><span class="q-number">Soal 26 • Isian Singkat</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Di koperasi sekolah terdapat 6.125 pensil. Tuliskan cara membaca bilangan tersebut!</p>
+    <input type="text" name="soal26" placeholder="Ketik cara membaca bilangan...">
+    <div class="grading-feedback-box" id="fb_soal26" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 27 -->
+  <div class="question-card" data-qtype="subjective" id="card_soal27">
+    <div class="question-header"><span class="q-number">Soal 27 • Isian Singkat</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Nomor peserta kegiatan sekolah adalah 8.040. Bilangan tersebut dibaca ....</p>
+    <input type="text" name="soal27" placeholder="Ketik cara membaca bilangan...">
+    <div class="grading-feedback-box" id="fb_soal27" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 28 -->
+  <div class="question-card" data-qtype="subjective" id="card_soal28">
+    <div class="question-header"><span class="q-number">Soal 28 • Isian Singkat (Penulisan Angka)</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Tuliskan dengan angka: <b>tujuh ribu dua ratus enam belas</b>. <br><small style="color:var(--orange)">⚠️ Informasi: Tuliskan angka saja tanpa menggunakan tanda titik (.).</small></p>
+    <input type="text" name="soal28" placeholder="Contoh: 1234">
+    <div class="grading-feedback-box" id="fb_soal28" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 29 -->
+  <div class="question-card" data-qtype="subjective" id="card_soal29">
+    <div class="question-header"><span class="q-number">Soal 29 • Isian Singkat (Penulisan Angka)</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Tuliskan dengan angka: <b>sembilan ribu empat puluh lima</b>. <br><small style="color:var(--orange)">⚠️ Informasi: Tuliskan angka saja tanpa menggunakan tanda titik (.).</small></p>
+    <input type="text" name="soal29" placeholder="Contoh: 9876">
+    <div class="grading-feedback-box" id="fb_soal29" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 30 -->
+  <div class="question-card" data-qtype="subjective" id="card_soal30">
+    <div class="question-header"><span class="q-number">Soal 30 • Isian Singkat</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Lengkapi tanda yang tepat: <b>4.506 .... 4.560</b></p>
+    <input type="text" name="soal30" placeholder="Ketik tanda <, >, atau =">
+    <div class="grading-feedback-box" id="fb_soal30" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 31 -->
+  <div class="question-card" data-qtype="subjective" id="card_soal31">
+    <div class="question-header"><span class="q-number">Soal 31 • Isian Singkat</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Jumlah peserta jalan sehat kelas IV sebanyak 2.750 orang, sedangkan kelas V sebanyak 2.570 orang. Kelas mana yang memiliki peserta lebih banyak?</p>
+    <input type="text" name="soal31" placeholder="Tuliskan nama kelas...">
+    <div class="grading-feedback-box" id="fb_soal31" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 32 -->
+  <div class="question-card" data-qtype="subjective" id="card_soal32">
+    <div class="question-header"><span class="q-number">Soal 32 • Mengurutkan Bilangan</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Urutkan bilangan berikut dari yang <b>terkecil</b>: <b>3.450, 3.405, 3.540, 3.045</b>.</p>
+    <input type="text" name="soal32" placeholder="Contoh: 1.000, 2.000, 3.000, 4.000 pakai spasi setelah koma">
+    <div class="grading-feedback-box" id="fb_soal32" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 33 -->
+  <div class="question-card" data-qtype="subjective" id="card_soal33">
+    <div class="question-header"><span class="q-number">Soal 33 • Mengurutkan Bilangan</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Urutkan bilangan berikut dari yang <b>terbesar</b>: <b>6.210, 6.120, 6.201, 6.021</b>.</p>
+    <input type="text" name="soal33" placeholder="Contoh: 4.000, 3.000, 2.000, 1.000 pakai sepasi setelah koma">
+    <div class="grading-feedback-box" id="fb_soal33" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 34 -->
+  <div class="question-card" data-qtype="subjective" id="card_soal34">
+    <div class="question-header"><span class="q-number">Soal 34 • Isian Singkat</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Uraikan bilangan <b>5.428</b> berdasarkan nilai tempatnya!</p>
+    <input type="text" name="soal34" placeholder="Contoh: 1000 + 100 + 10 + 1 setelah angka dan + pakai spasi">
+    <div class="grading-feedback-box" id="fb_soal34" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 35 -->
+  <div class="question-card" data-qtype="subjective" id="card_soal35">
+    <div class="question-header"><span class="q-number">Soal 35 • Isian Singkat</span><span class="q-weight">Bobot: 2 Poin</span></div>
+    <p>Bilangan <b>8.075</b> terdiri atas .... ribuan, .... ratusan, .... puluhan, dan .... satuan.</p>
+    <input type="text" name="soal35" placeholder="Ketik angkanya saja secara berurutan, contoh: 2,3,4,5">
+    <div class="grading-feedback-box" id="fb_soal35" style="display:none;margin-top:10px;font-weight:800"></div>
+  </div>
+
+  <!-- SOAL 36-40 (VALIDASI MANUAL GURU) -->
+  <div class="question-card" data-qtype="essay" id="card_soal36">
+    <div class="question-header"><span class="q-number">Soal 36 • Uraian / Essay</span><span class="q-weight">Maks. Bobot: 4 Poin</span></div>
+    <p>Perhatikan data berikut: Kelas IV mengumpulkan 2.450 botol plastik, Kelas V 3.025 botol, dan Kelas VI 1.875 botol. Seorang siswa mengatakan bahwa 3.025 dibaca “tiga ribu dua ratus lima puluh”. Apakah pendapat siswa tersebut benar? Analisis kesalahannya dan tuliskan cara membaca ketiga bilangan tersebut dengan benar.</p>
+    <textarea name="soal36" rows="4" placeholder="Tuliskan analisis jawaban secara lengkap..."></textarea>
+  </div>
+
+  <div class="question-card" data-qtype="essay" id="card_soal37">
+    <div class="question-header"><span class="q-number">Soal 37 • Uraian / Essay</span><span class="q-weight">Maks. Bobot: 4 Poin</span></div>
+    <p>Panitia sekolah mencatat jumlah uang yang terkumpul untuk kegiatan sosial sebesar “delapan ribu lima ratus dua rupiah”. Seorang siswa menuliskannya menjadi 8.520 rupiah. Analisis apakah penulisan siswa tersebut benar. Jelaskan alasanmu dan tuliskan bilangan yang seharusnya.</p>
+    <textarea name="soal37" rows="4" placeholder="Tuliskan analisis jawaban secara lengkap..."></textarea>
+  </div>
+
+  <div class="question-card" data-qtype="essay" id="card_soal38">
+    <div class="question-header"><span class="q-number">Soal 38 • Uraian / Essay</span><span class="q-weight">Maks. Bobot: 4 Poin</span></div>
+    <p>Perhatikan data berikut: Kelompok A = 4.205, Kelompok B = 4.250, dan Kelompok C = 4.052 sampah plastik yang dikumpulkan. Seorang siswa mengatakan bahwa Kelompok C mengumpulkan paling banyak karena angka 52 lebih besar daripada 05. Analisis kesalahan cara berpikir siswa tersebut dan tentukan kelompok yang sebenarnya mengumpulkan paling banyak.</p>
+    <textarea name="soal38" rows="4" placeholder="Tuliskan analisis jawaban secara lengkap..."></textarea>
+  </div>
+
+  <div class="question-card" data-qtype="essay" id="card_soal39">
+    <div class="question-header"><span class="q-number">Soal 39 • Uraian / Essay</span><span class="q-weight">Maks. Bobot: 4 Poin</span></div>
+    <p>OSIS mencatat jumlah botol plastik yang berhasil dikumpulkan setiap kelas: IV = 2.450 botol, V = 2.405 botol, VI = 2.540 botol. Seorang siswa mengurutkan data dari paling banyak menjadi V–IV–VI. Analisis kesalahan siswa tersebut dan tentukan urutan yang benar.</p>
+    <textarea name="soal39" rows="4" placeholder="Tuliskan analisis jawaban secara lengkap..."></textarea>
+  </div>
+
+  <div class="question-card" data-qtype="essay" id="card_soal40">
+    <div class="question-header"><span class="q-number">Soal 40 • Uraian / Essay</span><span class="q-weight">Maks. Bobot: 4 Poin</span></div>
+    <p>Sekolah memiliki 6.305 lembar kertas untuk kegiatan pembelajaran. Dua siswa mendekomposisikan bilangan tersebut. Rani: 6.000 + 300 + 5. Budi: 6.000 + 30 + 5. Analisis jawaban kedua siswa tersebut. Siapa yang benar? Jelaskan berdasarkan nilai tempat setiap angka pada bilangan 6.305.</p>
+    <textarea name="soal40" rows="4" placeholder="Tuliskan analisis jawaban secara lengkap..."></textarea>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn-light" id="saveDraftBtn2">💾 Simpan Draf</button>
+    <button type="button" class="btn-green" id="submitExamBtn2">📤 Kirim Jawaban Ujian</button>
+  </div>
+</section>
+</form>
+
+<!-- PANEL PENILAIAN GURU (TIDAK BERUBAH ID & STRUKTURNYA) -->
+<section class="sheet grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Panel Validasi & Penilaian Guru</h2></div>
+  <div class="teacher-status" id="teacherStatus">🔓 Penilaian belum diperiksa. Klik tombol <b>"Periksa Jawaban"</b> untuk mengoreksi otomatis, memunculkan kolom validasi manual, dan mengakumulasikan nilai.</div>
+  
+  <div class="teacher-tools" style="margin-bottom:18px">
+    <button type="button" class="btn-blue" id="inspectExamBtn">🔍 Periksa Jawaban</button>
+  </div>
+
+  <div class="field" style="margin-bottom:16px">
+    <label>Catatan / Umpan Balik Guru untuk Siswa</label>
+    <textarea id="teacherNote" rows="4" placeholder="Tuliskan catatan atau pesan motivasi untuk siswa..." disabled></textarea>
+  </div>
+
+  <!-- TABEL REKAP -->
+  <div class="recap-box" id="recapBox" style="display:none">
+    <h3 style="margin:0 0 10px;color:var(--green2)">📊 Rekapitulasi Hasil Penilaian Sumatif</h3>
+    <table class="recap-table">
+      <tr><th>Komponen Penilaian</th><th>Perolehan Skor</th><th>Keterangan</th></tr>
+      <tr><td>Pilihan Ganda & Kompleks (Soal 1-25)</td><td id="recapObjScore">0 / 30</td><td>Koreksi Sistem Otomatis</td></tr>
+      <tr><td>Isian & Menulis Angka (Soal 26-35)</td><td id="recapS3Score">0 / 20</td><td>Koreksi Sistem Otomatis</td></tr>
+      <tr><td>Uraian / Essay (Soal 36-40)</td><td id="recapS4Score">0 / 20</td><td>Validasi Manual Guru</td></tr>
+      <tr style="font-weight:900;background:#f8fafc"><td>Total Skor Perolehan</td><td id="recapTotalScore" colspan="2">0 / 70 (0%)</td></tr>
+      <tr style="font-weight:900;background:#f8fafc"><td>Status Ketuntasan</td><td id="recapStatus" colspan="2">-</td></tr>
+    </table>
+  </div>
+
+  <div class="teacher-tools" style="margin-top:20px">
+    <button type="button" class="btn-light" id="editGradeBtn" disabled>✏️ Edit Validasi</button>
+    <button type="button" class="btn-gold" id="finalizeGradeBtn" disabled>🔒 Akhiri Penilaian & Kunci Permanen</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<!-- SCRIPT MESIN UTAMA V1.3 MURNI -->
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbw_4ZBfSYYAubKD-83hrovWoyZz4aJ1Ew3dP9Gbsb7TPpsfmIAFH07MjViuzOL7bRoX/exec';
+const SUBJECT='Matematika';
+const FOLDER_NAME='PENILAIAN SUMATIF';
+const FOLDER_ID='1s6LjJguI6RITgQyRSC8H_8OiJsMCT2fu';
+const LKPD_ID='Sumatif-Matematika-IV';
+const KKM=75;
+const SUBMISSION_ID=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"SUB-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+const STORAGE="sumatif_matematika_v1";
+
+let violationCount=0;
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden){
+    violationCount++;
+    alert("⚠️ PERINGATAN INTEGRITAS UJIAN!\\nAnda terdeteksi meninggalkan halaman ujian ("+violationCount+" kali). Tetap berada di halaman ujian!");
+  }
+});
+
+function fields(){return [...document.querySelectorAll("#examForm input,#examForm textarea,#examForm select")]}
+function collectData(){const d={};fields().forEach(el=>d[el.name]=el.value);d.savedAt=new Date().toISOString();d.violations=violationCount;return d}
+
+function saveDraftToLocal(){
+  localStorage.setItem(STORAGE,JSON.stringify(collectData()));
+  showModal("<div style='font-size:48px'>💾</div><h3>Draf Tersimpan</h3><p>Jawaban sementara berhasil diamankan.</p><button class='btn-green' onclick='closeModal()'>Lanjut</button>");
+}
+
+function loadDraftFromLocal(){
+  try{
+    const d=JSON.parse(localStorage.getItem(STORAGE)||"null");
+    if(!d)return;
+    fields().forEach(el=>{
+      if(d[el.name]!==undefined && !el.readOnly){
+        if(el.type==="radio" || el.type==="checkbox") el.checked=(el.value===d[el.name]);
+        else el.value=d[el.name];
+      }
+    });
+  }catch(e){}
+}
+
+function updateProgressBar(){
+  const f=fields().filter(x=>!x.readOnly && x.type!=="hidden");
+  let filled=0; f.forEach(x=>{if(String(x.value||"").trim() || (x.type==="radio" && x.checked) || (x.type==="checkbox" && x.checked))filled++});
+  document.getElementById("progressBar").style.width=(f.length?Math.round(filled/f.length*100):0)+"%";
+}
+
+function showModal(html){document.getElementById("modalBody").innerHTML=html;document.getElementById("modal").style.display="grid"}
+function closeModal(){document.getElementById("modal").style.display="none"}
+
+function confirmSubmitExam(){
+  const nama=(document.querySelector("input[name='nama']")?.value||"").trim();
+  const tanggal=(document.querySelector("input[name='tanggal']")?.value||"").trim();
+  if(!nama || !tanggal){
+    showModal("<div style='font-size:46px'>📝</div><h3>Identitas Belum Lengkap</h3><p>Nama dan Hari/Tanggal wajib diisi.</p><button class='btn-green' onclick='closeModal()'>Lengkapi</button>");
+    return;
+  }
+  showModal("<div style='font-size:46px'>📤</div><h3>Kirim Jawaban Ujian?</h3><p>Setelah dikirim, jawaban terkunci permanen.</p><button class='btn-light' onclick='closeModal()'>Batal</button> <button class='btn-green' id='confirmYesSend'>Ya, Kirim</button>");
+  document.getElementById("confirmYesSend").onclick=async()=>{
+    closeModal();
+    fields().forEach(el=>{el.setAttribute("readonly","readonly");el.setAttribute("disabled","disabled");});
+    document.querySelectorAll("input[type='radio'], input[type='checkbox']").forEach(r=>r.disabled=true);
+    document.getElementById("submitExamBtn").style.display="none";
+    document.getElementById("submitExamBtn2").style.display="none";
+    document.getElementById("saveDraftBtn").style.display="none";
+    document.getElementById("saveDraftBtn2").style.display="none";
+
+    const banner=document.getElementById("submittedBanner");
+    banner.classList.add("show");
+    document.getElementById("submittedInfo").textContent="Siswa: "+nama+" • "+new Date().toLocaleString("id-ID")+" • ID: "+SUBMISSION_ID;
+
+    showModal("<div class='spinner'></div><h3>Mengirim Arsip…</h3><p>Mohon tunggu sebentar.</p>");
+    try{await sendToDriveAndDownload();}catch(e){}
+    showModal("<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim</h3><p>Menunggu koreksi Guru.</p><button class='btn-green' onclick='closeModal()'>OK</button>");
+  }
+}
+
+function base64Encode(text){const bytes=new TextEncoder().encode(text);let binary="";for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary)}
+
+function freezeExamInputs(clone){
+  clone.querySelectorAll("input,textarea,select").forEach(el=>{
+    if(el.closest("#gradePanel")) return;
+    const val=el.value||"";
+    if(el.type==="radio"||el.type==="checkbox"){if(el.checked)el.setAttribute("checked","checked");else el.removeAttribute("checked");}
+    else if(el.tagName.toLowerCase()==="textarea")el.textContent=val;
+    else el.setAttribute("value",val);
+    el.setAttribute("readonly","readonly");el.setAttribute("disabled","disabled");
+  });
+}
+
+function teacherEngineScript(){
+  const ep=ENDPOINT,sub=SUBJECT,folder=FOLDER_NAME,fid=FOLDER_ID,lid=LKPD_ID,sid=SUBMISSION_ID,kkmVal=KKM;
+  return `(function(){
+    const ENDPOINT='${ep}',SUBJECT='${sub}',FOLDER_NAME='${folder}',FOLDER_ID='${fid}',LKPD_ID='${lid}',SUBMISSION_ID='${sid}',KKM=${kkmVal};
+    const key='sumatif_grade_v1_'+SUBMISSION_ID;
+    
+    // Injeksi baris validasi manual ke HTML untuk Soal 36-40
+    [36,37,38,39,40].forEach(i=>{
+      const c=document.getElementById('card_soal'+i);
+      if(c && !document.getElementById('gradeRow_soal'+i)){
+        const row=document.createElement('div');
+        row.className='grading-row teacher-visible';
+        row.id='gradeRow_soal'+i;
+        row.innerHTML='<span style="font-size:13px;font-weight:900">Validasi Guru (Soal '+i+'):</span><input type="number" id="score_soal'+i+'" min="0" max="4" step="1" placeholder="Skor (0-4)"><span style="font-size:12px;color:var(--muted)">Maks: 4 Poin</span><span class="status-icon" id="icon_soal'+i+'">⏳</span>';
+        c.appendChild(row);
+      }
+    });
+
+    const noteIn=document.getElementById('teacherNote'),editBtn=document.getElementById('editGradeBtn'),finBtn=document.getElementById('finalizeGradeBtn'),status=document.getElementById('teacherStatus');
+    const inspectBtn=document.getElementById('inspectExamBtn'),recapBox=document.getElementById('recapBox');
+    const scoreCard=document.getElementById('scoreCardDisplay'),finalScoreEl=document.getElementById('displayFinalScore'),scoreBadge=document.getElementById('scoreStatusBadge');
+    
+    let inspected=localStorage.getItem(key+'_inspected')==='1';
+    let locked=localStorage.getItem(key+'_locked')==='1';
+    let d={note:''}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+    
+    for(let i=36; i<=40; i++){
+      let inp=document.getElementById('score_soal'+i);
+      if(inp && d['s'+i]!==undefined) inp.value=d['s'+i];
+    }
+    if(noteIn)noteIn.value=d.note||'';
+
+    function gradeObjectiveItems(){
+      let objScore=0;
+      let s3Score=0;
+
+      // PG (1 Poin)
+      const pg={1:'A',2:'B',3:'B',4:'B',6:'B',7:'C',8:'B',9:'B',11:'B',12:'A',13:'B',14:'C',16:'B',17:'C',18:'D',19:'A',21:'A',22:'A',23:'A',24:'B'};
+      for(let k in pg){
+        let val=(document.querySelector("input[name='soal"+k+"']:checked")||{}).value;
+        let fb=document.getElementById("fb_soal"+k);
+        if(fb){
+          fb.style.display="block";
+          if(val===pg[k]){ objScore+=1; fb.innerHTML="<span style='color:var(--green)'>✅ Benar (+1 Poin)</span>"; }
+          else { fb.innerHTML="<span style='color:var(--red)'>❌ Salah (Kunci: "+pg[k]+")</span>"; }
+        }
+      }
+
+      // PG Kompleks (2 Poin)
+      const pgk={5:'A,B,C',10:'A,C',15:'A,B,D',20:'A,B,C,D',25:'A,C,D'};
+      for(let k in pgk){
+        let checked=[...document.querySelectorAll("input[name='soal"+k+"']:checked")].map(e=>e.value).sort().join(',');
+        let fb=document.getElementById("fb_soal"+k);
+        if(fb){
+          fb.style.display="block";
+          if(checked===pgk[k]){ objScore+=2; fb.innerHTML="<span style='color:var(--green)'>✅ Benar (+2 Poin)</span>"; }
+          else { fb.innerHTML="<span style='color:var(--red)'>❌ Salah (Kunci: "+pgk[k]+")</span>"; }
+        }
+      }
+
+      // Isian Singkat & Penulisan Angka (2 Poin)
+      const isian={
+        26:'enam ribu seratus dua puluh lima',
+        27:'delapan ribu empat puluh',
+        28:'7216',
+        29:'9045',
+        30:'<',
+        31:'kelas iv',
+        32:'3.045, 3.405, 3.450, 3.540',
+        33:'6.210, 6.201, 6.120, 6.021',
+        34:'5.000 + 400 + 20 + 8',
+        35:'8, 0, 7, 5'
+      };
+      for(let k in isian){
+        let el=document.querySelector("input[name='soal"+k+"']");
+        let val=(el?.value||"").trim().toLowerCase().replace(/\\s+/g, ' ');
+        let fb=document.getElementById("fb_soal"+k);
+        let isCorrect=false;
+        
+        // Logika verifikasi teks (menghilangkan spasi dan titik untuk soal tertentu agar lebih toleran)
+        let cleanVal = val.replace(/[\\s\\.]/g,'');
+        let cleanKey = isian[k].toLowerCase().replace(/[\\s\\.]/g,'');
+
+        if(k == 28 || k == 29) {
+          if(val === isian[k] || cleanVal === cleanKey) isCorrect = true;
+        } else if (k == 32 || k == 33 || k == 34 || k == 35) {
+          if(cleanVal === cleanKey) isCorrect = true;
+        } else {
+          if(val === isian[k]) isCorrect = true;
+        }
+        
+        if(fb){
+          fb.style.display="block";
+          if(isCorrect){ s3Score+=2; fb.innerHTML="<span style='color:var(--green)'>✅ Benar (+2 Poin)</span>"; }
+          else { fb.innerHTML="<span style='color:var(--red)'>❌ Salah (Kunci: "+isian[k]+")</span>"; }
+        }
+      }
+
+      return {objScore, s3Score};
+    }
+
+    function computeFinal(){
+      const auto=gradeObjectiveItems();
+      const obj=auto.objScore;
+      const s3=auto.s3Score;
+      
+      let s4=0;
+      for(let i=36; i<=40; i++){ s4+=parseInt(document.getElementById('score_soal'+i)?.value||0); }
+      
+      const earned=obj+s3+s4;
+      const total=Math.round((earned/70)*100);
+      return {obj, s3, s4, earned, total};
+    }
+
+    function updateDisplayCard(){
+      const res=computeFinal();
+      if(finalScoreEl)finalScoreEl.textContent=res.total;
+      if(scoreCard)scoreCard.style.display='block';
+      if(res.total<KKM){
+        scoreCard.classList.add('red-theme');
+        if(scoreBadge)scoreBadge.innerHTML="<span style='color:var(--red)'>⚠️ Belum Mencapai KKM ("+KKM+")</span>";
+      } else {
+        scoreCard.classList.remove('red-theme');
+        if(scoreBadge)scoreBadge.innerHTML="<span style='color:var(--green2)'>🎉 Tuntas / Mencapai KKM ("+KKM+")</span>";
+      }
+
+      document.getElementById('recapObjScore').textContent=res.obj+" / 30";
+      document.getElementById('recapS3Score').textContent=res.s3+" / 20";
+      document.getElementById('recapS4Score').textContent=res.s4+" / 20";
+      document.getElementById('recapTotalScore').textContent=res.earned+" / 70 ("+res.total+"%)";
+      document.getElementById('recapStatus').innerHTML=res.total>=KKM?"<span style='color:var(--green2)'>TUNTAS</span>":"<span style='color:var(--red)'>REMEDIAL</span>";
+    }
+
+    function applyState(){
+      const mInp=[36,37,38,39,40].map(i=>document.getElementById('score_soal'+i));
+      if(!inspected){
+        mInp.forEach(inp=>{if(inp)inp.disabled=true;});
+        if(noteIn){noteIn.disabled=true;noteIn.readOnly=true;}
+        if(editBtn)editBtn.disabled=true; if(finBtn)finBtn.disabled=true;
+        return;
+      }
+      mInp.forEach(inp=>{if(inp)inp.disabled=locked;});
+      if(noteIn){noteIn.disabled=locked;noteIn.readOnly=locked;}
+      if(editBtn)editBtn.disabled=locked; if(finBtn)finBtn.disabled=locked;
+      if(finBtn)finBtn.textContent=locked?'🔒 Penilaian Selesai & Dikunci':'🔒 Akhiri Penilaian & Kunci Permanen';
+      if(status)status.innerHTML=locked?'🔒 <b>Penilaian resmi diakhiri & dikunci.</b> Nilai akhir dipublikasikan.':'🔓 <b>Mode pemeriksaan aktif.</b> Skor telah diakumulasikan.';
+      recapBox.style.display='block';
+      updateDisplayCard();
+    }
+
+    function saveLocal(){
+      const data={note:noteIn?.value, savedAt:new Date().toISOString()};
+      for(let i=36; i<=40; i++){
+        let inp=document.getElementById('score_soal'+i);
+        if(inp) data['s'+i]=inp.value;
+      }
+      localStorage.setItem(key,JSON.stringify(data));
+      updateDisplayCard();
+    }
+
+    if(inspectBtn)inspectBtn.onclick=()=>{
+      inspected=true;
+      localStorage.setItem(key+'_inspected','1');
+      applyState();
+      alert('Pemeriksaan berhasil! Pilihan ganda & isian otomatis dikoreksi.');
+    };
+
+    for(let i=36; i<=40; i++){
+      let inp=document.getElementById('score_soal'+i);
+      if(inp) inp.oninput=saveLocal;
+    }
+    if(noteIn)noteIn.oninput=saveLocal;
+
+    if(editBtn)editBtn.onclick=()=>{
+      if(locked)return;
+      for(let i=36; i<=40; i++){
+        let inp=document.getElementById('score_soal'+i);
+        if(inp) inp.disabled=false;
+      }
+      if(noteIn){noteIn.disabled=false;noteIn.readOnly=false;}
+      if(status)status.innerHTML='✏️ <b>Edit validasi aktif.</b> Sesuaikan nilai, lalu kunci kembali.';
+    };
+
+    if(finBtn)finBtn.onclick=async()=>{
+      if(locked)return;
+      saveLocal();
+      const res=computeFinal();
+      try{
+        await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'saveSumatifGrade',studentName:(document.querySelector("input[name=nama]")||{}).value||'Siswa',subject:SUBJECT,folderName:FOLDER_NAME,folderId:FOLDER_ID,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,finalScore:res.total,note:noteIn?.value})});
+      }catch(e){}
+      localStorage.setItem(key+'_locked','1');
+      locked=true;
+      applyState();
+      alert('Penilaian berhasil diakhiri dan dikunci permanen!');
+    };
+
+    if(inspected) applyState();
+  })();`;
+}
+
+function buildFinalHTML(){
+  const clone=document.documentElement.cloneNode(true);
+  clone.querySelectorAll(".appbar,.progress,.actions,.modal").forEach(el=>el.remove());
+  const tScript=clone.ownerDocument.createElement("script");
+  tScript.textContent=teacherEngineScript();
+  clone.querySelectorAll("script").forEach(el=>el.remove());
+  clone.querySelector("body").appendChild(tScript);
+  freezeExamInputs(clone);
+  
+  const banner=clone.querySelector("#submittedBanner");
+  if(banner) banner.classList.add("show");
+
+  const panel=clone.querySelector("#gradePanel");
+  if(panel){panel.classList.add("show");panel.style.display="block";}
+  
+  return "<!doctype html>\n"+clone.outerHTML;
+}
+
+async function sendToDriveAndDownload(){
+  const nama=(document.querySelector("input[name='nama']")?.value||"Siswa").trim().replace(/[\\/:*?"<>|]/g,"_")||"Siswa";
+  const finalHTML=buildFinalHTML();
+  const filename="Sumatif_"+LKPD_ID+"_"+nama+".html";
+  const payload={action:"saveHTML",filename,studentName:nama,subject:SUBJECT,mapel:SUBJECT,folderName:FOLDER_NAME,folderId:FOLDER_ID,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,htmlBase64:base64Encode(finalHTML),data:collectData()};
+  await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+  const blob=new Blob([finalHTML],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+  localStorage.removeItem(STORAGE);
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  loadDraftFromLocal();
+  updateProgressBar();
+  fields().forEach(el=>{el.addEventListener("input",updateProgressBar);el.addEventListener("change",updateProgressBar);});
+  
+  document.getElementById("saveDraftBtn").onclick=saveDraftToLocal;
+  document.getElementById("saveDraftBtn2").onclick=saveDraftToLocal;
+  document.getElementById("submitExamBtn").onclick=confirmSubmitExam;
+  document.getElementById("submitExamBtn2").onclick=confirmSubmitExam;
+});
+</script>
+</body>
+</html>
