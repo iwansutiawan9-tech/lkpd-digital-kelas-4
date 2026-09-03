@@ -1,1 +1,384 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V1.3 — BAHASA INGGRIS KELAS IV -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 1.5 English - My Morning Routine</title>
+<style>
+:root{--green:#0b9f75;--green2:#087f60;--mint:#e9fbf5;--pink:#ffdfe4;--ink:#24313a;--muted:#64748b;--yellow:#fff36a;--line:#e5e7eb;--white:#fff;--blue:#2563eb;--gold:#f59e0b;--teal:#0d9488}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#eefcf7,#fff7f8 55%,#eef6ff);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.45;pointer-events:none}
+body:before{width:180px;height:180px;background:#bff4df;left:-70px;top:120px;animation:float1 7s ease-in-out infinite}
+body:after{width:150px;height:150px;background:#ffd4dc;right:-50px;bottom:100px;animation:float2 9s ease-in-out infinite}
+@keyframes float1{50%{transform:translate(25px,18px) scale(1.08)}} @keyframes float2{50%{transform:translate(-20px,-25px) scale(1.12)}}
+.appbar{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;padding:12px 16px;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid #dfe7e4}
+.brand{font-weight:900;color:var(--green2);margin-right:auto}
+button{border:0;border-radius:12px;padding:10px 15px;font-weight:800;cursor:pointer;transition:.2s transform,.2s box-shadow}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #00000012}
+button:active{transform:scale(.98)}
+.btn-light{background:#f1f5f9;color:#334155}.btn-green{background:var(--green);color:#fff}.btn-blue{background:var(--blue);color:#fff}.btn-gold{background:#fef3c7;color:#92400e}
+.progress{height:5px;background:#dcefe9}.progress i{display:block;height:100%;width:0;background:var(--green);transition:.25s}
+.sheet{width:min(1000px,calc(100% - 24px));margin:18px auto;background:#fff;border-radius:24px;box-shadow:0 12px 35px #24483b16;padding:28px}
+.hero{display:grid;grid-template-columns:1.7fr .8fr;gap:20px;align-items:stretch}
+.hero-card{background:linear-gradient(135deg,#effcf7,#fff0f3);border-radius:22px;padding:28px}
+.badge{display:inline-block;background:var(--green);color:#fff;padding:7px 12px;border-radius:999px;font-weight:900;font-size:13px}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.05;margin:16px 0 8px} h2{margin:0} p{line-height:1.75}
+.mission{background:#f7fafc;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center;text-align:center;font-size:18px}
+.mission-icon{font-size:64px;animation:bob 2.8s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+.idgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.field label{display:block;font-size:13px;font-weight:900;color:#475569;margin-bottom:6px}
+input,textarea,select{width:100%;font:inherit;border:2px solid #dbe4e1;border-radius:13px;padding:12px 14px;outline:none;background:#fff}
+input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px #0b9f7520}
+.idgrid input{min-height:52px;min-width:0}.idgrid .field{min-width:0}
+.section-title{display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--mint);padding-bottom:12px;margin-bottom:18px}
+.num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--green);color:#fff;font-weight:900;flex:0 0 auto}
+.tip{background:#fff9d6;border-left:5px solid #f2d73a;padding:14px 16px;border-radius:12px;margin:18px 0}
+.vocab-box {background: #fdf4ff; border: 2px dashed #c7d2fe; padding: 16px; border-radius: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;}
+.vocab-item {font-weight: bold; color: #1e3a8a;}
+.vocab-item span {color: #64748b; font-weight: normal; margin-left: 8px;}
+.card-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 16px;}
+.flashcard {background: #f0fdfa; border: 2px solid #5eead4; border-radius: 12px; padding: 16px; text-align: center; font-weight: 800; color: #0f766e;}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 8px}
+.footer-note{text-align:center;color:var(--muted);font-size:13px}
+.modal{position:fixed;inset:0;background:#0f172a88;display:none;place-items:center;z-index:50;padding:18px}
+.modal-card{width:min(560px,100%);background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 20px 60px #0003}
+.spinner{width:42px;height:42px;border:5px solid #dbeee8;border-top-color:var(--green);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.submitted-banner{margin:16px auto;max-width:900px;background:var(--green2);color:#fff;padding:14px 18px;border-radius:16px;text-align:center;font-weight:900}
+.submitted-banner small{display:block;font-weight:600;margin-top:4px}
+.grade-panel{display:none;background:#f8fafc;border:2px solid #dbe4e1;border-radius:20px;padding:20px;margin:18px auto;max-width:900px}
+.grade-panel.show{display:block;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grade-grid textarea{min-height:90px}.score{font-size:28px;font-weight:900;text-align:center}
+.locked{background:#f8fafc!important}
+.teacher-tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.teacher-note{font-size:12px;color:#64748b;text-align:center}
+.teacher-status{background:#fff9d6;border-left:5px solid #f2d73a;border-radius:12px;padding:11px 14px;margin:0 0 16px;font-size:14px}
+.grade-select{width:100%;min-height:50px;border:2px solid #dbe4e1;border-radius:13px;padding:10px 14px;font:inherit;font-weight:800;background:#fff}
+.grade-select:disabled{opacity:1;color:#24313a;background:#f8fafc}
+.star-rating{font-size:34px;letter-spacing:4px;text-align:center;margin:14px 0 4px;line-height:1;color:#cbd5e1}
+.scale-hint{text-align:center;color:#64748b;font-size:12px;margin-bottom:4px}
+.blank-input {display: inline-block; width: 220px; margin: 0 6px; border-bottom: 3px solid var(--green); border-top: none; border-left: none; border-right: none; border-radius: 0; padding: 4px 8px; text-align: center; font-weight: bold; color: var(--blue); background: #f8fafc;}
+.blank-input:focus {background: #eefcf7; box-shadow: none; outline: none;}
 
+@media(max-width:700px){
+ .appbar{flex-wrap:wrap}.brand{width:100%;text-align:center}
+ .sheet{padding:18px;border-radius:18px}
+ .hero{grid-template-columns:1fr}.idgrid{grid-template-columns:1fr}
+ .actions button{width:100%}.grade-grid{grid-template-columns:1fr}
+ .vocab-box {grid-template-columns: 1fr;}
+ .blank-input {width: 150px;}
+}
+@media print{
+ .appbar,.progress,.actions,.modal,.teacher-tools{display:none!important}
+ body{background:#fff}.sheet{box-shadow:none;width:210mm;margin:0;border-radius:0;min-height:297mm}
+ input,textarea,select{border:0!important;box-shadow:none!important}
+ .blank-input {border-bottom: 1px solid #000!important;}
+}
+</style>
+</head>
+<body>
+<div class="appbar">
+  <div class="brand">📚 LEMBAR KERJA MURID DIGITAL • KELAS IV</div>
+  <button class="btn-light" id="saveBtn">💾 Save Draft</button>
+  <button class="btn-green" id="sendBtn">📤 Submit Worksheet</button>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge" style="background:var(--blue)">WORKSHEET 1.5</span>
+      <h1>My Morning Routine</h1>
+      <p><b>English • Class IV</b></p>
+      <p>Let's learn how to tell our daily morning activities in English!</p>
+      <div class="idgrid">
+        <div class="field"><label>Student Name <span style="color:red">*</span></label><input name="nama" placeholder="Full name..." required autocomplete="name"></div>
+        <div class="field"><label>Day / Date <span style="color:red">*</span></label><input name="tanggal" placeholder="e.g. Monday, August 11" required></div>
+        <div class="field"><label>Subject</label><input name="mapel" value="Bahasa Inggris" readonly></div>
+        <div class="field"><label>Topic</label><input name="materi" value="My Morning Routine" readonly></div>
+      </div>
+    </div>
+    <div class="mission">
+      <div class="mission-icon">🌅⏰</div>
+      <b>🎯 Today's Mission</b>
+      <p>Understand and write about morning habits.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--blue)">1</div><h2>📖 Let's Learn: Game Time</h2></div>
+  <p>Look at the question and the vocabulary cards below. These are common activities we do in the morning.</p>
+  
+  <div style="background:#fef2f2; border-left:5px solid #ef4444; padding:16px; border-radius:12px; margin-bottom: 20px;">
+    <h3 style="margin-top:0; color:#b91c1c;">Example Dialogue</h3>
+    <p><b>Player A:</b> What do you do in the morning?</p>
+    <p><b>Player B:</b> I get up in the morning. What do you do in the morning?</p>
+    <p><b>Player A:</b> I take a shower in the morning.</p>
+  </div>
+
+  <p><b>Action Cards:</b></p>
+  <div class="card-grid">
+    <div class="flashcard">🛏️<br>I get up in the morning.</div>
+    <div class="flashcard">🚿<br>I take a shower in the morning.</div>
+    <div class="flashcard">🪑<br>I make my bed in the morning.</div>
+    <div class="flashcard">🥞<br>I have breakfast in the morning.</div>
+    <div class="flashcard">🏫<br>I go to school in the morning.</div>
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--blue)">2</div><h2>✍️ My Turn: Fill in the Blanks</h2></div>
+  
+  <p>Read the vocabulary box below to help you understand the text.</p>
+  <div class="vocab-box">
+    <div class="vocab-item">Busy <span>: Sibuk</span></div>
+    <div class="vocab-item">After <span>: Setelah</span></div>
+    <div class="vocab-item">Always <span>: Selalu</span></div>
+    <div class="vocab-item">Then <span>: Kemudian</span></div>
+    <div class="vocab-item">Lastly <span>: Terakhir</span></div>
+  </div>
+
+  <div class="tip" style="background:#e0f2fe; border-left-color:var(--blue)">
+    <b>Instruction:</b> Complete the text based on the routine sequence below.<br>
+    <i>Choices:</i> <b>take a shower</b> | <b>make the bed</b> | <b>have breakfast</b>
+  </div>
+
+  <div style="background:#fff; border:2px solid #e2e8f0; padding:24px; border-radius:16px; font-size:18px; line-height:2.2;">
+    <h3 style="text-align:center; margin-top:0;">MY BUSY MORNING</h3>
+    Every morning, I am always busy.<br>
+    After I get up, I always <input type="text" name="blank1" class="blank-input" placeholder="type here..."> .<br>
+    Then, I <input type="text" name="blank2" class="blank-input" placeholder="type here..."> and <input type="text" name="blank3" class="blank-input" placeholder="type here..."> .<br>
+    Lastly, I go to school.
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--blue)">3</div><h2>📝 Write Your Routine</h2></div>
+  <p><b>Instruction:</b> Write your own morning routine. Tell us what you do from the moment you wake up until you go to school.</p>
+  <p><i>Tulislah kegiatan rutin pagi kalian menggunakan bahasamu sendiri di bawah ini.</i></p>
+  
+  <textarea name="essay_routine" rows="6" placeholder="Example: Every morning, I get up at 5 o'clock. Then, I..."></textarea>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--blue)">4</div><h2>🌟 Closing</h2></div>
+  <div class="tip" style="background:#f0fdf4;border-left-color:var(--green2);text-align:center">
+    Great job! You have learned how to tell your morning routine. Don't forget to practice reading it out loud!
+  </div>
+  <div class="actions">
+    <button type="button" class="btn-light" id="clearBtn">🗑️ Clear Form</button>
+    <button type="button" class="btn-blue" id="sendBtn2">📤 Submit Worksheet</button>
+  </div>
+  <p class="footer-note">You can submit even if it's not fully complete. Your teacher will receive your progress.</p>
+</section>
+</form>
+
+<!-- TEACHER PANEL -->
+<section class="sheet grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Teacher's Evaluation</h2></div>
+  <div class="teacher-status" id="teacherStatus">🔓 Evaluation is open. Click <b>Edit Grade</b> to begin.</div>
+  
+  <div style="background:#fff; border:1px solid #cbd5e1; padding:16px; border-radius:12px; margin-bottom:20px;">
+    <b>Auto-Correction (Fill in the Blanks):</b><br>
+    <span id="score_b1">⏳ Blank 1 (take a shower)</span><br>
+    <span id="score_b2">⏳ Blank 2 (make the bed)</span><br>
+    <span id="score_b3">⏳ Blank 3 (have breakfast)</span>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Overall Grade Scale</label>
+      <select id="gradeScale" class="grade-select" disabled>
+        <option value="">Select Scale...</option>
+        <option value="A">A — Excellent</option>
+        <option value="B">B — Good</option>
+        <option value="C">C — Fair</option>
+        <option value="D">D — Needs Improvement</option>
+      </select>
+      <div class="star-rating" id="starRating" aria-label="Rating bintang">☆☆☆☆</div>
+      <div class="scale-hint">A = 4 ⭐ • B = 3 ⭐ • C = 2 ⭐ • D = 1 ⭐</div>
+    </div>
+    <div class="field"><label>Teacher's Feedback</label><textarea id="gradeNote" rows="4" placeholder="Write your feedback here..." disabled></textarea></div>
+  </div>
+  <div class="teacher-tools">
+    <button type="button" class="btn-light" id="editGradeBtn">✏️ Edit Grade</button>
+    <button type="button" class="btn-gold" id="lockGradeBtn">🔒 Lock Grade</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbw_4ZBfSYYAubKD-83hrovWoyZz4aJ1Ew3dP9Gbsb7TPpsfmIAFH07MjViuzOL7bRoX/exec';
+const SUBJECT='Bahasa Inggris';
+const FOLDER_NAME='BAHASA INGGRIS';
+const LKPD_ID='1.5';
+const form=document.getElementById("lkpd"), modal=document.getElementById("modal"), modalBody=document.getElementById("modalBody");
+const STORAGE="lkpd_english_1_5";
+const GRADE_STORAGE="lkpd_grade_english_1_5";
+const SUBMISSION_ID=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"SUB-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+
+function fields(){return [...form.querySelectorAll("input,textarea,select")]}
+function collect(){const data={};fields().forEach(el=>data[el.name]=el.value);data.savedAt=new Date().toISOString();return data}
+function saveDraft(){
+  localStorage.setItem(STORAGE,JSON.stringify(collect()));
+  showModal("<div style='font-size:48px'>💾</div><h3>Draft Saved</h3><p>Your work has been saved locally.</p><button class='btn-green' onclick='closeModal()'>Continue</button>");
+}
+function loadDraft(){try{const d=JSON.parse(localStorage.getItem(STORAGE)||"null");if(!d)return;fields().forEach(el=>{if(d[el.name]!==undefined && !el.readOnly)el.value=d[el.name]})}catch(e){}}
+function updateProgress(){const f=fields().filter(x=>!x.readOnly);let filled=0;f.forEach(x=>{if(String(x.value||"").trim())filled++});document.getElementById("progressBar").style.width=(f.length?Math.round(filled/f.length*100):0)+"%"}
+function showModal(html){modalBody.innerHTML=html;modal.style.display="grid"} function closeModal(){modal.style.display="none"}
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function base64Encode(text){const bytes=new TextEncoder().encode(text);let binary="";for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary)}
+function freezeValues(clone){
+ clone.querySelectorAll("input,textarea,select").forEach(el=>{
+  if(el.closest("#gradePanel")) return;
+  const value=el.value||"";
+  if(el.tagName.toLowerCase()==="textarea")el.textContent=value;
+  else if(el.tagName.toLowerCase()==="select"){[...el.options].forEach(o=>o.removeAttribute("selected"));const opt=[...el.options].find(o=>o.value===value);if(opt)opt.setAttribute("selected","selected");}
+  else el.setAttribute("value",value);
+  el.setAttribute("readonly","readonly"); el.setAttribute("disabled","disabled");
+ });
+}
+function teacherOnlyScript(){
+ const ep=ENDPOINT,sub=SUBJECT,folder=FOLDER_NAME,lid=LKPD_ID,sid=SUBMISSION_ID;
+ return `(function(){
+  const ENDPOINT='${ep}',SUBJECT='${sub}',FOLDER_NAME='${folder}',LKPD_ID='${lid}',SUBMISSION_ID='${sid}';
+  const key='lkpd_grade_'+LKPD_ID+'_'+SUBJECT.replace(/\\s+/g,'_')+'_'+SUBMISSION_ID;
+  const scale=document.getElementById('gradeScale'),note=document.getElementById('gradeNote'),edit=document.getElementById('editGradeBtn'),lock=document.getElementById('lockGradeBtn'),status=document.getElementById('teacherStatus'),stars=document.getElementById('starRating');
+  let locked=localStorage.getItem(key+'_locked')==='1'; let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+  scale.value=d.scale||''; note.value=d.note||'';
+  
+  // Auto Correction Check
+  const b1 = (document.querySelector("input[name='blank1']")?.value||"").toLowerCase().trim();
+  const b2 = (document.querySelector("input[name='blank2']")?.value||"").toLowerCase().trim();
+  const b3 = (document.querySelector("input[name='blank3']")?.value||"").toLowerCase().trim();
+  
+  const fb1 = document.getElementById('score_b1');
+  if(fb1) fb1.innerHTML = b1 === 'take a shower' ? "✅ Blank 1: Correct" : "❌ Blank 1: Incorrect (Key: take a shower)";
+  const fb2 = document.getElementById('score_b2');
+  if(fb2) fb2.innerHTML = b2 === 'make the bed' ? "✅ Blank 2: Correct" : "❌ Blank 2: Incorrect (Key: make the bed)";
+  const fb3 = document.getElementById('score_b3');
+  if(fb3) fb3.innerHTML = b3 === 'have breakfast' ? "✅ Blank 3: Correct" : "❌ Blank 3: Incorrect (Key: have breakfast)";
+
+  function draw(){const n={A:4,B:3,C:2,D:1}[scale.value]||0;stars.textContent='★'.repeat(n)+'☆'.repeat(4-n);stars.style.color=n?'#f59e0b':'#cbd5e1';}
+  function state(){scale.disabled=locked;note.disabled=locked;note.readOnly=locked;edit.disabled=locked;lock.disabled=locked;lock.textContent=locked?'🔒 Grade Locked':'🔒 Lock Grade';status.innerHTML=locked?'🔒 <b>Grade is locked.</b> Read only.':'🔓 <b>Grade can be edited.</b> Use Edit Grade to provide feedback.';draw()}
+  function save(){localStorage.setItem(key,JSON.stringify({scale:scale.value,note:note.value,savedAt:new Date().toISOString()}))}
+  edit.onclick=()=>{if(locked)return;scale.disabled=false;note.disabled=false;note.readOnly=false;status.innerHTML='✏️ <b>Edit mode active.</b> Lock grade when finished.';scale.focus()};
+  scale.onchange=()=>{draw();save()}; note.oninput=save;
+  lock.onclick=async()=>{if(locked)return;if(!scale.value){alert('Select grade scale (A,B,C,D) first.');return}save();try{await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'saveGrade',studentName:(document.querySelector(\"input[name=nama]\")||{}).value||'Siswa',subject:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,scale:scale.value,rating:{A:4,B:3,C:2,D:1}[scale.value],note:note.value})})}catch(e){}localStorage.setItem(key+'_locked','1');locked=true;state();alert('Grade successfully locked.');};
+  state();
+ })();`;
+}
+
+function buildFinalHTML(){
+ const clone=document.documentElement.cloneNode(true);
+ clone.querySelectorAll(".appbar,.progress,.actions,.modal").forEach(el=>el.remove());
+ const teacherScript=clone.ownerDocument.createElement("script");
+ teacherScript.textContent=teacherOnlyScript();
+ clone.querySelectorAll("script").forEach(el=>el.remove());
+ clone.querySelector("body").appendChild(teacherScript);
+ clone.querySelectorAll("*").forEach(el=>[...el.attributes].forEach(a=>{if(a.name.toLowerCase().startsWith("on"))el.removeAttribute(a.name)}));
+ freezeValues(clone);
+ const panel=clone.querySelector("#gradePanel"); if(panel){panel.classList.remove("show");panel.style.display="block"}
+ const banner=clone.ownerDocument.createElement("div");banner.className="submitted-banner";
+ const nama=(form.elements.nama?.value||"Student").trim();
+ banner.innerHTML="✅ WORKSHEET SUBMITTED<small>Name: "+esc(nama)+" • "+new Date().toLocaleString("en-US")+" • ID: "+esc(SUBMISSION_ID)+"</small>";
+ clone.querySelector("body").insertBefore(banner,clone.querySelector("body").firstChild);
+ return "<!doctype html>\n"+clone.outerHTML;
+}
+async function sendToGoogleDrive(){
+ const nama=(form.elements.nama?.value||"Student").trim().replace(/[\\/:*?"<>|]/g,"_")||"Student";
+ const finalHTML=buildFinalHTML();
+ const filename="LKPD_"+LKPD_ID+"_English_"+nama+".html";
+ const payload={action:"saveHTML",filename,studentName:nama,subject:SUBJECT,mapel:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,htmlBase64:base64Encode(finalHTML),data:collect()};
+ await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+ const blob=new Blob([finalHTML],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+ localStorage.removeItem(STORAGE);
+}
+function focusIdentity(){
+ const el=form.elements.nama?.value.trim()?form.elements.tanggal:form.elements.nama;
+ el?.focus();
+ el?.scrollIntoView({behavior:"smooth",block:"center"});
+}
+function confirmSend(){
+ const nama=(form.elements.nama?.value||"").trim();
+ const tanggal=(form.elements.tanggal?.value||"").trim();
+
+ if(!nama || !tanggal){
+   const belum=[];
+   if(!nama) belum.push("Student Name");
+   if(!tanggal) belum.push("Day / Date");
+   showModal("<div style='font-size:46px'>📝</div><h3>Incomplete Identity</h3><p>Please fill your name and date on page 1.</p><div class='tip' style='text-align:left'><b>Missing:</b><br>• "+esc(belum.join("<br>• "))+"</div><button class='btn-green' onclick='closeModal();focusIdentity()'>Complete Identity</button>");
+   return;
+ }
+ showModal("<div style='font-size:46px'>📤</div><h3>Submit Worksheet?</h3><p>Make sure you have finished your work.</p><p>The submitted file will be locked for editing.</p><button class='btn-light' onclick='closeModal()'>Check Again</button> <button class='btn-blue' id='yesSend'>Yes, Submit</button>");
+ document.getElementById("yesSend").onclick=async()=>{showModal("<div class='spinner'></div><h3>Submitting…</h3><p>Please wait.</p>");try{await sendToGoogleDrive();showModal("<div style='font-size:52px'>✅</div><h3>Worksheet Submitted</h3><p>Your work has been safely sent to your teacher.</p><button class='btn-green' onclick='closeModal()'>Done</button>")}catch(err){showModal("<div style='font-size:52px'>⚠️</div><h3>Connection Error</h3><p>"+esc(err)+"</p><button class='btn-light' onclick='closeModal()'>Close</button>")}}
+}
+function clearAll(){fields().forEach(el=>{if(el.name==="mapel")el.value=SUBJECT;else if(el.name==="materi")el.value="My Morning Routine";else if(el.readOnly){}else el.value=""});localStorage.removeItem(STORAGE);updateProgress()}
+
+function initTeacherPanel(){
+ const panel=document.getElementById("gradePanel");
+ const submitted=document.querySelector(".submitted-banner");
+ if(!submitted)return;
+ panel.classList.add("show");
+ const scale=document.getElementById("gradeScale");
+ const note=document.getElementById("gradeNote");
+ const editBtn=document.getElementById("editGradeBtn");
+ const lockBtn=document.getElementById("lockGradeBtn");
+ const status=document.getElementById("teacherStatus");
+ const stars=document.getElementById("starRating");
+ let gradeKey=GRADE_STORAGE+"_"+SUBMISSION_ID;
+ let locked=localStorage.getItem(gradeKey+"_locked")==="1";
+ let d={}; try{d=JSON.parse(localStorage.getItem(gradeKey)||"{}")}catch(e){}
+ scale.value=d.scale||""; note.value=d.note||"";
+ function renderStars(v){const n={A:4,B:3,C:2,D:1}[v]||0;stars.textContent="★".repeat(n)+"☆".repeat(4-n);stars.style.color=n?"#f59e0b":"#cbd5e1";}
+ function saveLocal(){localStorage.setItem(gradeKey,JSON.stringify({scale:scale.value,note:note.value,savedAt:new Date().toISOString()}));}
+ function applyState(){scale.disabled=locked;note.disabled=locked;note.readOnly=locked;editBtn.disabled=locked;lockBtn.disabled=locked;lockBtn.textContent=locked?"🔒 Grade Locked":"🔒 Lock Grade";status.innerHTML=locked?"🔒 <b>Grade is locked.</b> Read only.":"🔓 <b>Grade can be edited.</b> Use Edit Grade to provide feedback.";renderStars(scale.value);}
+ scale.addEventListener("change",()=>{renderStars(scale.value);saveLocal()});
+ note.addEventListener("input",saveLocal);
+ editBtn.onclick=()=>{
+  if(locked)return;
+  scale.disabled=false;
+  scale.removeAttribute("disabled");
+  note.disabled=false;
+  note.removeAttribute("disabled");
+  note.readOnly=false;
+  note.removeAttribute("readonly");
+  status.innerHTML="✏️ <b>Edit mode active.</b> You can edit the grade and note now.";
+  note.focus();
+};
+ lockBtn.onclick=async()=>{
+   if(locked)return;
+   if(!scale.value){showModal("<div style='font-size:46px'>⭐</div><h3>Select a scale first</h3><button class='btn-green' onclick='closeModal()'>OK</button>");return;}
+   saveLocal();
+   showModal("<div class='spinner'></div><h3>Saving & locking…</h3><p>Please wait.</p>");
+   try{
+     const nama=(document.querySelector("input[name='nama']")?.value||"Siswa").trim();
+     const payload={action:"saveGrade",studentName:nama,subject:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,scale:scale.value,rating:{A:4,B:3,C:2,D:1}[scale.value],note:note.value};
+     await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+   }catch(e){console.warn("Local saved, server error",e)}
+   localStorage.setItem(gradeKey+"_locked","1");locked=true;applyState();
+   showModal("<div style='font-size:48px'>🔒</div><h3>Grade Locked</h3><p>The evaluation is now saved.</p><button class='btn-green' onclick='closeModal()'>OK</button>");
+ };
+ applyState();
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+ loadDraft();updateProgress();fields().forEach(el=>{el.addEventListener("input",updateProgress);el.addEventListener("change",updateProgress)});
+ const save=document.getElementById("saveBtn");if(save)save.onclick=saveDraft;
+ const send=document.getElementById("sendBtn");if(send)send.onclick=confirmSend;
+ const send2=document.getElementById("sendBtn2");if(send2)send2.onclick=confirmSend;
+ const clear=document.getElementById("clearBtn");if(clear)clear.onclick=()=>showModal("<h3>Clear all data?</h3><p>Unsubmitted data will be lost.</p><button class='btn-light' onclick='closeModal()'>Cancel</button> <button class='btn-green' id='yesClear'>Yes, Clear</button>");
+ document.addEventListener("click",e=>{if(e.target.id==="yesClear"){clearAll();closeModal()}});
+ initTeacherPanel();
+});
+</script>
+</body>
+</html>
