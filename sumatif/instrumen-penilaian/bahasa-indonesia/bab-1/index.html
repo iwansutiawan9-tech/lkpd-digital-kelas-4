@@ -1,1 +1,717 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisi-Kisi & Rubrik Penilaian Sumatif Bab 1 Bahasa Indonesia Kelas IV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #eff6ff;
+      --primary-border: #bfdbfe;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --border-color: #e2e8f0;
+      
+      /* SOLO Badges */
+      --uni-bg: #ecfdf5; --uni-text: #065f46; --uni-border: #a7f3d0;
+      --multi-bg: #eff6ff; --multi-text: #1e40af; --multi-border: #bfdbfe;
+      --rela-bg: #fefce8; --rela-text: #854d0e; --rela-border: #fde047;
+      --abst-bg: #faf5ff; --abst-text: #6b21a8; --abst-border: #e9d5ff;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2.5rem 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+      padding: 3rem;
+      border: 1px solid var(--border-color);
+    }
+
+    header {
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .header-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      background-color: var(--primary-light);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+      border: 1px solid var(--primary-border);
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+      background-color: #f8fafc;
+      padding: 1.25rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .meta-item {
+      font-size: 0.875rem;
+    }
+
+    .meta-item strong {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 2.5rem 0 1.25rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 1.35rem;
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: var(--text-main);
+      font-weight: 700;
+      padding: 1rem 0.85rem;
+      border-bottom: 2px solid var(--border-color);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+
+    td {
+      padding: 0.95rem 0.85rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: #fafbfd;
+    }
+
+    .text-center { text-align: center; }
+    .font-semibold { font-weight: 600; }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      line-height: 1.3;
+      border-width: 1px;
+      border-style: solid;
+      white-space: nowrap;
+    }
+
+    .badge-uni {
+      background-color: var(--uni-bg);
+      color: var(--uni-text);
+      border-color: var(--uni-border);
+    }
+
+    .badge-multi {
+      background-color: var(--multi-bg);
+      color: var(--multi-text);
+      border-color: var(--multi-border);
+    }
+
+    .badge-rela {
+      background-color: var(--rela-bg);
+      color: var(--rela-text);
+      border-color: var(--rela-border);
+    }
+
+    .badge-abst {
+      background-color: var(--abst-bg);
+      color: var(--abst-text);
+      border-color: var(--abst-border);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.25rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+
+    .card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p, .card li {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .card ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+      color: #ffffff;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .formula-box span {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+    }
+
+    .formula-box code {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 0.4rem 1.2rem;
+      border-radius: 8px;
+    }
+
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .container {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .table-wrapper {
+        border: 1px solid #94a3b8;
+      }
+      th, td {
+        border-color: #cbd5e1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="header-tag">Perencanaan Asesmen Kurikulum Merdeka</span>
+      <h1>Kisi-Kisi & Rubrik Penilaian Sumatif Akhir Bab 1</h1>
+      <div class="meta-grid">
+        <div class="meta-item">
+          <strong>Mata Pelajaran</strong>
+          Bahasa Indonesia
+        </div>
+        <div class="meta-item">
+          <strong>Fase / Kelas / Semester</strong>
+          Fase B / Kelas IV / Ganjil
+        </div>
+        <div class="meta-item">
+          <strong>Materi Pokok</strong>
+          Bab 1: Sudah Besar
+        </div>
+        <div class="meta-item">
+          <strong>Kerangka Kognitif</strong>
+          Taksonomi SOLO (Biggs & Collis)
+        </div>
+      </div>
+    </header>
+
+    <h2>1. Kisi-Kisi Penilaian Sumatif</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 50px;">No.</th>
+            <th style="width: 20%;">Tujuan Pembelajaran</th>
+            <th style="width: 18%;">Materi Pokok</th>
+            <th>Indikator Soal</th>
+            <th class="text-center" style="width: 130px;">Level Kognitif (SOLO)</th>
+            <th class="text-center" style="width: 90px;">Bentuk</th>
+            <th class="text-center" style="width: 50px;">No.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center font-semibold">1</td>
+            <td>Memaknai informasi teks isu lingkungan.</td>
+            <td>Literasi Teks (Sampah Pakaian)</td>
+            <td>Disajikan teks limbah pakaian dan gerakan “Tukar Baju”, peserta didik dapat menentukan tujuan utama gerakan ramah lingkungan secara tepat.</td>
+            <td class="text-center"><span class="badge badge-rela">Relasional</span></td>
+            <td class="text-center">PG</td>
+            <td class="text-center font-semibold">1</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">2</td>
+            <td>Membedakan unsur kalimat transitif & intransitif.</td>
+            <td>Kalimat Transitif (Unsur Objek)</td>
+            <td>Disajikan kalimat transitif bertema donasi baju, peserta didik dapat menentukan kata yang berkedudukan sebagai objek secara tepat.</td>
+            <td class="text-center"><span class="badge badge-uni">Unistruktural</span></td>
+            <td class="text-center">PG</td>
+            <td class="text-center font-semibold">2</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">3</td>
+            <td>Membaca dan menyimpulkan data tabel.</td>
+            <td>Literasi Tabel (Pertumbuhan Fisik)</td>
+            <td>Disajikan tabel pertambahan tinggi badan siswa UKS, peserta didik dapat menarik simpulan logis mengenai hubungan tinggi dan seragam sekolah.</td>
+            <td class="text-center"><span class="badge badge-rela">Relasional</span></td>
+            <td class="text-center">PG</td>
+            <td class="text-center font-semibold">3</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">4</td>
+            <td>Membedakan unsur kalimat transitif & intransitif.</td>
+            <td>Kalimat Intransitif</td>
+            <td>Disajikan empat opsi kalimat kegiatan sekolah, peserta didik dapat mengidentifikasi kalimat yang tidak memerlukan kehadiran objek.</td>
+            <td class="text-center"><span class="badge badge-uni">Unistruktural</span></td>
+            <td class="text-center">PG</td>
+            <td class="text-center font-semibold">4</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">5</td>
+            <td>Menjelaskan simbol lema kamus KBBI.</td>
+            <td>Penggunaan Kamus (Simbol Kelas Kata)</td>
+            <td>Disajikan entri kamus kata <i>fobia</i>, peserta didik dapat mengidentifikasi arti kode singkatan kelas kata (<i>n</i>) dengan tepat.</td>
+            <td class="text-center"><span class="badge badge-uni">Unistruktural</span></td>
+            <td class="text-center">PG</td>
+            <td class="text-center font-semibold">5</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">6</td>
+            <td>Memaknai kosakata baru secara denotatif.</td>
+            <td>Kosakata Baru (Makna Denotatif)</td>
+            <td>Disajikan konteks kepemilikan benda, peserta didik dapat menentukan arti denotatif dari kata <i>favorit</i> dengan tepat.</td>
+            <td class="text-center"><span class="badge badge-uni">Unistruktural</span></td>
+            <td class="text-center">PG</td>
+            <td class="text-center font-semibold">6</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">7</td>
+            <td>Menunjukkan empati atas kondisi teman.</td>
+            <td>Empati Sosial (Ketakutan/Fobia)</td>
+            <td>Disajikan cerita pertolongan saat panik, peserta didik dapat mengidentifikasi nilai sikap empati yang dicerminkan tokoh penolong.</td>
+            <td class="text-center"><span class="badge badge-rela">Relasional</span></td>
+            <td class="text-center">PG</td>
+            <td class="text-center font-semibold">7</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">8</td>
+            <td>Mengidentifikasi pola struktur kalimat.</td>
+            <td>Pola Kalimat (S-P-O)</td>
+            <td>Disajikan kalimat transitif tentang koleksi kartu, peserta didik dapat menentukan susunan pola struktur fungsinya (S-P-O).</td>
+            <td class="text-center"><span class="badge badge-rela">Relasional</span></td>
+            <td class="text-center">PG</td>
+            <td class="text-center font-semibold">8</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">9</td>
+            <td>Menjelaskan prosedur pencarian di KBBI cetak.</td>
+            <td>Prosedur Kamus (Kata Berimbuhan)</td>
+            <td>Disajikan situasi mencari kata <i>berkonsultasi</i>, peserta didik dapat menentukan langkah awal pencarian kata dasar di KBBI cetak.</td>
+            <td class="text-center"><span class="badge badge-rela">Relasional</span></td>
+            <td class="text-center">PG</td>
+            <td class="text-center font-semibold">9</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">10</td>
+            <td>Membedakan unsur kalimat transitif & intransitif.</td>
+            <td>Identifikasi Kalimat Transitif</td>
+            <td>Disajikan empat kalimat bernomor, peserta didik dapat memilih nomor kalimat yang berkedudukan sebagai kalimat transitif.</td>
+            <td class="text-center"><span class="badge badge-multi">Multistruktural</span></td>
+            <td class="text-center">PG</td>
+            <td class="text-center font-semibold">10</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">11</td>
+            <td>Menganalisis konsep takut vs fobia.</td>
+            <td>Teks Medis (Takut vs Fobia)</td>
+            <td>Disajikan bacaan medis, peserta didik dapat memilih dua pernyataan yang benar mengenai konsep fobia dan takut biasa.</td>
+            <td class="text-center"><span class="badge badge-multi">Multistruktural</span></td>
+            <td class="text-center">PG Kompleks</td>
+            <td class="text-center font-semibold">11</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">12</td>
+            <td>Menganalisis jenis kalimat transitif/intransitif.</td>
+            <td>Klasifikasi Jenis Kalimat</td>
+            <td>Disajikan tiga variasi kalimat, peserta didik dapat menentukan status Benar/Salah terkait identifikasi kalimat transitif.</td>
+            <td class="text-center"><span class="badge badge-multi">Multistruktural</span></td>
+            <td class="text-center">PGK (B-S)</td>
+            <td class="text-center font-semibold">12</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">13</td>
+            <td>Memaknai kosakata istilah ilmiah fobia.</td>
+            <td>Kosakata Khusus (Istilah Fobia)</td>
+            <td>Disajikan tiga istilah fobia dan artinya secara acak, peserta didik dapat menjodohkan pasangan istilah dan pemicunya secara tepat.</td>
+            <td class="text-center"><span class="badge badge-multi">Multistruktural</span></td>
+            <td class="text-center">Menjodohkan</td>
+            <td class="text-center font-semibold">13</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">14</td>
+            <td>Mengelompokkan kalimat berdasarkan jenisnya.</td>
+            <td>Pasangan Kalimat Bahasa</td>
+            <td>Disajikan dua kalimat berstruktur beda, peserta didik dapat menjodohkan masing-masing ke kelompok transitif atau intransitif.</td>
+            <td class="text-center"><span class="badge badge-multi">Multistruktural</span></td>
+            <td class="text-center">Menjodohkan</td>
+            <td class="text-center font-semibold">14</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">15</td>
+            <td>Menjelaskan pemanfaatan kamus digital.</td>
+            <td>Prosedur KBBI Daring</td>
+            <td>Disajikan pernyataan penelusuran lema daring, peserta didik dapat memilih dua langkah paling tepat dan efektif di KBBI daring.</td>
+            <td class="text-center"><span class="badge badge-multi">Multistruktural</span></td>
+            <td class="text-center">PG Kompleks</td>
+            <td class="text-center font-semibold">15</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">16</td>
+            <td>Menganalisis fungsi sintaksis kalimat transitif.</td>
+            <td>Fungsi Unsur Objek</td>
+            <td>Disajikan kalimat transitif bantuan kemanusiaan, peserta didik dapat mengisi unsur gramatikal yang wajib melengkapi verba transitif.</td>
+            <td class="text-center"><span class="badge badge-uni">Unistruktural</span></td>
+            <td class="text-center">Isian Singkat</td>
+            <td class="text-center font-semibold">16</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">17</td>
+            <td>Memaknai kosakata denotatif via teka-teki.</td>
+            <td>Kosakata Denotatif (Panik)</td>
+            <td>Disajikan petunjuk kotak TTS mendatar, peserta didik dapat melengkapi kata kunci <i>PANIK</i> sesuai arti denotatif kamus.</td>
+            <td class="text-center"><span class="badge badge-uni">Unistruktural</span></td>
+            <td class="text-center">TTS / Isian</td>
+            <td class="text-center font-semibold">17</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">18</td>
+            <td>Mengidentifikasi istilah via petunjuk denotatif.</td>
+            <td>Kosakata Denotatif (Fobia)</td>
+            <td>Disajikan petunjuk kotak TTS menurun, peserta didik dapat mengisi istilah <i>FOBIA</i> berdasarkan definisinya secara tepat.</td>
+            <td class="text-center"><span class="badge badge-uni">Unistruktural</span></td>
+            <td class="text-center">TTS / Isian</td>
+            <td class="text-center font-semibold">18</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">19</td>
+            <td>Menentukan kelas kata pada simbol kamus.</td>
+            <td>Kelas Kata (Verba)</td>
+            <td>Disajikan informasi lema bersimbol (<i>v</i>), peserta didik dapat mengidentifikasi nama kelas kata (verba/kata kerja) dengan benar.</td>
+            <td class="text-center"><span class="badge badge-uni">Unistruktural</span></td>
+            <td class="text-center">Isian Singkat</td>
+            <td class="text-center font-semibold">19</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">20</td>
+            <td>Menjelaskan arti frasa denotatif dalam teks.</td>
+            <td>Makna Denotatif (Mematut Diri)</td>
+            <td>Disajikan kutipan cerita bercermin, peserta didik dapat menuliskan arti denotatif dari frasa <i>mematut diri</i> secara tepat.</td>
+            <td class="text-center"><span class="badge badge-uni">Unistruktural</span></td>
+            <td class="text-center">Isian Singkat</td>
+            <td class="text-center font-semibold">20</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">21</td>
+            <td>Merumuskan gagasan solusi lingkungan hidup.</td>
+            <td>Pemecahan Masalah (Limbah Pakaian)</td>
+            <td>Disajikan fenomena lonjakan badan dan baju sempit, peserta didik dapat menguraikan dua solusi bijak ramah lingkungan untuk menanganinya.</td>
+            <td class="text-center"><span class="badge badge-abst">Abstrak Diperluas</span></td>
+            <td class="text-center">Uraian</td>
+            <td class="text-center font-semibold">21</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">22</td>
+            <td>Menganalisis syarat keutuhan struktur kalimat.</td>
+            <td>Kaidah Sintaksis (Transitif-Intransitif)</td>
+            <td>Disajikan dua kalimat perbandingan, peserta didik dapat menganalisis alasan gramatikal ketuntasan makna kalimat transitif vs intransitif.</td>
+            <td class="text-center"><span class="badge badge-rela">Relasional</span></td>
+            <td class="text-center">Uraian</td>
+            <td class="text-center font-semibold">22</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">23</td>
+            <td>Mengevaluasi sikap & penanganan kepanikan.</td>
+            <td>Empati & Intervensi Fobia</td>
+            <td>Disajikan kasus anak diejek karena fobia, peserta didik dapat mengevaluasi ejekan tersebut dan menguraikan dua tindakan pertolongan nyata.</td>
+            <td class="text-center"><span class="badge badge-abst">Abstrak Diperluas</span></td>
+            <td class="text-center">Uraian</td>
+            <td class="text-center font-semibold">23</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">24</td>
+            <td>Menyusun dan membedah struktur kalimat orisinal.</td>
+            <td>Produksi Kalimat (Tema Lingkungan)</td>
+            <td>Disajikan tema penghijauan sekolah, peserta didik dapat membuat satu kalimat transitif dan satu intransitif serta membedah pola SPOK-nya.</td>
+            <td class="text-center"><span class="badge badge-abst">Abstrak Diperluas</span></td>
+            <td class="text-center">Uraian</td>
+            <td class="text-center font-semibold">24</td>
+          </tr>
+          <tr>
+            <td class="text-center font-semibold">25</td>
+            <td>Menguraikan prosedur sistematis KBBI cetak.</td>
+            <td>Prosedur Penelusuran Kamus</td>
+            <td>Disajikan kata berimbuhan <i>terperanjat</i>, peserta didik dapat menuliskan tiga langkah runtut mencari artinya di kamus cetak.</td>
+            <td class="text-center"><span class="badge badge-rela">Relasional</span></td>
+            <td class="text-center">Uraian</td>
+            <td class="text-center font-semibold">25</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>2. Pedoman Penskoran Bentuk Objektif & Isian</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Pilihan Ganda Biasa (No. 1–10)</h3>
+        <p><strong>Bobot per Soal: 1 poin</strong> (Skor Maksimal: 10)</p>
+        <ul>
+          <li>Jawaban tepat sesuai kunci: <strong>1</strong></li>
+          <li>Jawaban salah / kosong: <strong>0</strong></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Kompleks & Menjodohkan (No. 11–15)</h3>
+        <p><strong>Bobot per Soal: 2 poin</strong> (Skor Maksimal: 10)</p>
+        <ul>
+          <li>No. 11 & 15: Benar 2 opsi = <strong>2</strong>; Benar 1 opsi = <strong>1</strong>; Salah/lebih = <strong>0</strong></li>
+          <li>No. 12: Benar 3 pernyataan = <strong>2</strong>; Benar 2 = <strong>1</strong>; Benar &le;1 = <strong>0</strong></li>
+          <li>No. 13: Benar 3 jodoh = <strong>2</strong>; Benar 1–2 = <strong>1</strong>; Salah = <strong>0</strong></li>
+          <li>No. 14: Benar 2 jodoh = <strong>2</strong>; Benar 1 = <strong>1</strong>; Salah = <strong>0</strong></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Isian Singkat & TTS (No. 16–20)</h3>
+        <p><strong>Bobot per Soal: 3 poin</strong> (Skor Maksimal: 15)</p>
+        <ul>
+          <li>Jawaban tepat dan lengkap: <strong>3</strong></li>
+          <li>Jawaban mendekati/kurang lengkap: <strong>1,5</strong></li>
+          <li>Jawaban salah atau tidak menjawab: <strong>0</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>3. Rubrik Analitik Uraian Berdasarkan Taksonomi SOLO (No. 21–25)</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 50px;">No.</th>
+            <th style="width: 25%;">Kriteria Penilaian</th>
+            <th style="width: 55%;">Deskripsi Respons Berdasarkan Tingkat Capaian SOLO</th>
+            <th class="text-center" style="width: 70px;">Skor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center font-semibold" rowspan="4">21</td>
+            <td rowspan="4">
+              <strong>Solusi Limbah Pakaian</strong><br>
+              <small class="text-muted">Mengemukakan 2 langkah bijak dan ramah lingkungan penanganan baju sempit.</small>
+            </td>
+            <td><strong>Abstrak Diperluas:</strong> Merumuskan minimal dua solusi nyata berbasis keberlanjutan (donasi panti/adik dan upcycling kerajinan) disertai alasan logis dampaknya terhadap pengurangan sampah.</td>
+            <td class="text-center font-semibold">4</td>
+          </tr>
+          <tr>
+            <td><strong>Multistruktural:</strong> Hanya menyebutkan satu solusi umum secara logis tanpa mengaitkannya dengan dampak lingkungan.</td>
+            <td class="text-center font-semibold">2</td>
+          </tr>
+          <tr>
+            <td><strong>Unistruktural:</strong> Solusi kurang relevan atau sekadar menyatakan disimpan di lemari/dibuang ke tempat sampah.</td>
+            <td class="text-center font-semibold">1</td>
+          </tr>
+          <tr>
+            <td><strong>Prastruktural:</strong> Jawaban melenceng, tidak logis, atau tidak menjawab sama sekali.</td>
+            <td class="text-center font-semibold">0</td>
+          </tr>
+
+          <tr>
+            <td class="text-center font-semibold" rowspan="4">22</td>
+            <td rowspan="4">
+              <strong>Analisis Struktur Kalimat</strong><br>
+              <small class="text-muted">Menjelaskan perbedaan keutuhan kalimat transitif dan intransitif.</small>
+            </td>
+            <td><strong>Relasional:</strong> Menjelaskan secara tuntas bahwa Kalimat A utuh karena verba intransitif tidak menuntut objek, sedangkan Kalimat B rancu karena verba transitif menuntut adanya objek penderita.</td>
+            <td class="text-center font-semibold">4</td>
+          </tr>
+          <tr>
+            <td><strong>Multistruktural:</strong> Menjelaskan konsep butuh/tidaknya objek dengan benar, namun istilah gramatikal transitif/intransitif belum digunakan secara tepat.</td>
+            <td class="text-center font-semibold">3</td>
+          </tr>
+          <tr>
+            <td><strong>Unistruktural:</strong> Hanya menyatakan kalimat B rancu karena "tidak jelas apa yang diambil" tanpa menghubungkan dengan aturan kalimat.</td>
+            <td class="text-center font-semibold">1</td>
+          </tr>
+          <tr>
+            <td><strong>Prastruktural:</strong> Memberikan argumen yang keliru atau tidak menjawab.</td>
+            <td class="text-center font-semibold">0</td>
+          </tr>
+
+          <tr>
+            <td class="text-center font-semibold" rowspan="4">23</td>
+            <td rowspan="4">
+              <strong>Empati Penanganan Fobia</strong><br>
+              <small class="text-muted">Menilai ejekan dan memberikan 2 aksi nyata menenangkan teman.</small>
+            </td>
+            <td><strong>Abstrak Diperluas:</strong> Mengkritisi ejekan sebagai tindakan salah/tidak berempati DAN memberikan minimal dua respon pertolongan nyata yang relevan (memeluk, mengajak menjauh, memberi minum).</td>
+            <td class="text-center font-semibold">4</td>
+          </tr>
+          <tr>
+            <td><strong>Relasional:</strong> Menolak perilaku mengejek, namun hanya menyebutkan satu bentuk tindakan pertolongan nyata.</td>
+            <td class="text-center font-semibold">3</td>
+          </tr>
+          <tr>
+            <td><strong>Unistruktural:</strong> Hanya menyebutkan tindakan menolong tanpa memberikan penilaian kritis terhadap perilaku mengejek.</td>
+            <td class="text-center font-semibold">2</td>
+          </tr>
+          <tr>
+            <td><strong>Prastruktural:</strong> Mendukung perbuatan mengejek atau lembar jawaban kosong.</td>
+            <td class="text-center font-semibold">0</td>
+          </tr>
+
+          <tr>
+            <td class="text-center font-semibold" rowspan="4">24</td>
+            <td rowspan="4">
+              <strong>Produksi Kalimat & SPOK</strong><br>
+              <small class="text-muted">Menyusun 1 kalimat transitif, 1 intransitif tema lingkungan & bedah SPOK.</small>
+            </td>
+            <td><strong>Abstrak Diperluas:</strong> Menciptakan 1 kalimat transitif dan 1 kalimat intransitif yang padu bertema lingkungan, serta menguraikan seluruh fungsi SPOK-nya dengan tepat tanpa kesalahan.</td>
+            <td class="text-center font-semibold">4</td>
+          </tr>
+          <tr>
+            <td><strong>Relasional:</strong> Kedua kalimat dan temanya tepat, namun terdapat satu kekeliruan kecil saat membedah unsur SPOK.</td>
+            <td class="text-center font-semibold">3</td>
+          </tr>
+          <tr>
+            <td><strong>Multistruktural:</strong> Mampu menyusun kalimat transitif dan intransitif yang benar, tetapi tidak membedah unsur pola strukturnya.</td>
+            <td class="text-center font-semibold">2</td>
+          </tr>
+          <tr>
+            <td><strong>Prastruktural:</strong> Pola kalimat rancu, tema tidak sesuai, atau tidak menjawab.</td>
+            <td class="text-center font-semibold">0</td>
+          </tr>
+
+          <tr>
+            <td class="text-center font-semibold" rowspan="4">25</td>
+            <td rowspan="4">
+              <strong>Prosedur KBBI Cetak</strong><br>
+              <small class="text-muted">Menguraikan 3 langkah sistematis menemukan lema kata berimbuhan.</small>
+            </td>
+            <td><strong>Relasional:</strong> Menguraikan alur 3 langkah runtut: 1) Mencari kata dasar <i>peranjat</i>, 2) Membuka abjad huruf P, 3) Menelusuri suku kata kedua/ketiga hingga menemukan maknanya.</td>
+            <td class="text-center font-semibold">4</td>
+          </tr>
+          <tr>
+            <td><strong>Multistruktural:</strong> Menguraikan dua langkah pencarian secara tepat, namun satu langkah lainnya terlewat.</td>
+            <td class="text-center font-semibold">2</td>
+          </tr>
+          <tr>
+            <td><strong>Unistruktural:</strong> Hanya fokus pada 1 langkah awal (misal: langsung membuka huruf T tanpa mengubah ke kata dasar).</td>
+            <td class="text-center font-semibold">1</td>
+          </tr>
+          <tr>
+            <td><strong>Prastruktural:</strong> Prosedur yang dituliskan keliru total atau kosong.</td>
+            <td class="text-center font-semibold">0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="formula-box">
+      <span>Perhitungan Nilai Akhir Peserta Didik</span>
+      <code>Nilai Akhir = (Skor Perolehan / 55) &times; 100</code>
+    </div>
+  </div>
+
+</body>
+</html>
