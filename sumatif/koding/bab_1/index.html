@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- PENILAIAN SUMATIF BAB 1 KODING KELAS V - MASTER V2.0 -->
+<!-- PENILAIAN SUMATIF KODING BAB 1 KELAS V (MASTER V4.0 - FULL CLOUD SYNC) -->
 <html lang="id">
 <head>
 <meta charset="utf-8">
@@ -49,6 +49,16 @@ input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0
 .option-item{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #e2e8f0;padding:12px 14px;border-radius:12px;cursor:pointer;transition:.15s}
 .option-item:hover{border-color:var(--green);background:#f0fdf4}
 .option-item input{width:auto;min-height:auto}
+
+/* KUNCI PERMANEN JAWABAN SISWA */
+.locked-mode .option-item{cursor:default!important;pointer-events:none!important}
+.locked-mode #examForm input, .locked-mode #examForm textarea, .locked-mode #examForm select{pointer-events:none!important}
+/* PENGECUALIAN MUTLAK UNTUK KOTAK SKOR GURU */
+.locked-mode #examForm .grading-row input, #examForm .grading-row input {
+    pointer-events: auto !important;
+    background-color: #fff !important;
+    cursor: text !important;
+}
 
 /* VALIDASI GURU */
 .grading-row{display:none;gap:12px;align-items:center;margin-top:14px;background:#fff;padding:12px;border-radius:12px;border:2px dashed #cbd5e1}
@@ -118,8 +128,8 @@ input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0
       <div style="font-size:13px;background:#fff;padding:12px;border-radius:12px;margin:10px 0;line-height:1.6">
         <b>Tujuan Pembelajaran (TP):</b>
         <ul style="margin:6px 0 0;padding-left:18px" id="tpList">
-          <li><b>TP1:</b> Memahami konsep dasar berpikir komputasional beserta empat fondasinya (dekomposisi, pengenalan pola, abstraksi, dan algoritma).</li>
-          <li><b>TP2:</b> Menerapkan prinsip berpikir komputasional dalam menyelesaikan persoalan nyata pada kehidupan sehari-hari.</li>
+          <li><b>TP1:</b> Memahami konsep dasar berpikir komputasional beserta empat fondasinya.</li>
+          <li><b>TP2:</b> Menerapkan prinsip berpikir komputasional dalam kehidupan sehari-hari.</li>
         </ul>
       </div>
       
@@ -169,9 +179,6 @@ input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0
 <!-- HALAMAN 3: LEMBAR SOAL -->
 <section class="sheet">
   <div class="section-title"><div class="num">3</div><h2>✍️ Lembar Soal Sumatif</h2></div>
-
-  <!-- BAGIAN I: PILIHAN GANDA (NO 1 - 5) -->
-  <h3 style="color:var(--green2);border-bottom:2px solid #e2e8f0;padding-bottom:6px;margin-bottom:16px">BAGIAN I: Pilihan Ganda (Nomor 1 - 5)</h3>
 
   <!-- SOAL 1 -->
   <div class="question-card" data-qnum="1" data-tp="TP1" data-type="PG" data-weight="1" data-scoring="auto" data-key="b">
@@ -272,9 +279,6 @@ input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0
     </div>
     <div class="grading-feedback-box" id="fb_soal5" style="display:none;margin-top:10px;font-weight:800"></div>
   </div>
-
-  <!-- BAGIAN II: BENAR / SALAH (NO 6 - 15) -->
-  <h3 style="color:var(--green2);border-bottom:2px solid #e2e8f0;padding-bottom:6px;margin:28px 0 16px">BAGIAN II: Analisis Benar atau Salah (Nomor 6 - 15)</h3>
 
   <!-- SOAL 6 -->
   <div class="question-card" data-qnum="6" data-tp="TP1" data-type="BS" data-weight="1" data-scoring="auto" data-key="S">
@@ -539,7 +543,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0
 <!-- PANEL PENILAIAN GURU -->
 <section class="sheet grade-panel" id="gradePanel">
   <div class="section-title"><div class="num">★</div><h2>Panel Validasi & Penilaian Guru</h2></div>
-  <div class="teacher-status" id="teacherStatus">🔓 Penilaian belum diperiksa. Klik <b>"Periksa Jawaban"</b> untuk mengoreksi otomatis soal 1-15, memunculkan form validasi esai 16-20, dan mengakumulasikan nilai capaian TP.</div>
+  <div class="teacher-status" id="teacherStatus">🔄 Menghubungkan dan memeriksa status dari Google Sheet...</div>
   
   <div class="teacher-tools" style="margin-bottom:18px">
     <button type="button" class="btn-blue" id="inspectExamBtn">🔍 Periksa Jawaban</button>
@@ -552,38 +556,34 @@ input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0
 
   <!-- TABEL REKAPITULASI -->
   <div class="recap-box" id="recapBox" style="display:none">
-    <h3 style="margin:0 0 10px;color:var(--green2)">📊 Rekapitulasi Hasil Penilaian Sumatif Bab 1</h3>
+    <h3 style="margin:0 0 10px;color:var(--green2)">📊 Rekapitulasi Hasil Penilaian Sumatif</h3>
     <table class="recap-table" id="recapTable">
       <thead>
         <tr><th>Komponen Penilaian</th><th>Perolehan Skor</th><th>Keterangan</th></tr>
       </thead>
       <tbody id="recapTableBody"></tbody>
       <tfoot>
-        <tr style="font-weight:900;background:#f8fafc"><td>Total Skor Perolehan</td><td id="recapTotalScore" colspan="2">0 / 25</td></tr>
+        <tr style="font-weight:900;background:#f8fafc"><td>Total Skor Perolehan</td><td id="recapTotalScore" colspan="2">0 / 0</td></tr>
         <tr style="font-weight:900;background:#f8fafc"><td>Status Ketuntasan (KKM 75)</td><td id="recapStatus" colspan="2">-</td></tr>
       </tfoot>
     </table>
   </div>
 
   <div class="teacher-tools" style="margin-top:20px">
-    <button type="button" class="btn-light" id="editGradeBtn" disabled>✏️ Edit Validasi</button>
-    <button type="button" class="btn-gold" id="finalizeGradeBtn" disabled>🔒 Akhiri Penilaian & Kirim ke Sheet</button>
+    <button type="button" class="btn-gold" id="finalizeGradeBtn" disabled>🔒 Akhiri Penilaian & Kunci Permanen</button>
   </div>
 </section>
 
 <div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
 
 <script>
-/* KONFIGURASI SUMATIF BAB 1 KODING */
 const ENDPOINT='https://script.google.com/macros/s/AKfycbyOM-aeLODahPaeBukqGKlUmOVkPRijBtTatFADL3pqgZB_OvUCZ9dzb5eaN2Fl7ABC/exec';
 const SUBJECT='Koding';
-const FOLDER_NAME='PENILAIAN SUMATIF';
-const FOLDER_ID='1s6LjJguI6RITgQyRSC8H_8OiJsMCT2fu';
 const LKPD_ID='Sumatif-Bab1-Koding-Kls5';
 const EXAM_TITLE='Penilaian Sumatif BAB 1';
 const KKM=75;
 const SUBMISSION_ID=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"SUB-"+Date.now()+"-"+Math.random().toString(36).slice(2);
-const STORAGE="sumatif_koding_bab1_v1";
+const STORAGE="sumatif_koding_bab1_v4";
 
 let violationCount=0;
 document.addEventListener("visibilitychange",()=>{if(document.hidden)violationCount++;});
@@ -641,7 +641,6 @@ function updateProgressBar(){
 function showModal(html){document.getElementById("modalBody").innerHTML=html;document.getElementById("modal").style.display="grid";}
 function closeModal(){document.getElementById("modal").style.display="none";}
 
-/* EVALUASI SKOR OTOMATIS TAHAP 1 (SEBELUM KIRIM) */
 function evaluateAutoItemsInitial(){
   const itemScores=[];
   let autoScore=0;
@@ -670,13 +669,11 @@ function confirmSubmitExam(){
     showModal("<div style='font-size:46px'>📝</div><h3>Identitas Belum Lengkap</h3><p>Nama Lengkap dan Hari/Tanggal wajib diisi.</p><button class='btn-green' onclick='closeModal()'>Lengkapi</button>");
     return;
   }
-  showModal("<div style='font-size:46px'>📤</div><h3>Kirim Jawaban Ujian?</h3><p>Setelah dikirim, jawaban terkunci dan tersimpan ke Google Sheets & Drive.</p><button class='btn-light' onclick='closeModal()'>Batal</button> <button class='btn-green' id='confirmYesSend'>Ya, Kirim</button>");
+  showModal("<div style='font-size:46px'>📤</div><h3>Kirim Jawaban Ujian?</h3><p>Setelah dikirim, lembar jawaban akan terkunci permanen dan diarsipkan ke Google Sheets.</p><button class='btn-light' onclick='closeModal()'>Batal</button> <button class='btn-green' id='confirmYesSend'>Ya, Kirim</button>");
   document.getElementById("confirmYesSend").onclick=async()=>{
     closeModal();
-    fields().forEach(el=>{
-      el.setAttribute("readonly","readonly");
-      el.style.pointerEvents="none";
-    });
+    document.body.classList.add("locked-mode");
+    fields().forEach(el=>{el.setAttribute("readonly","readonly");});
     document.getElementById("submitExamBtn").style.display="none";
     document.getElementById("submitExamBtn2").style.display="none";
     document.getElementById("saveDraftBtn").style.display="none";
@@ -686,19 +683,26 @@ function confirmSubmitExam(){
     banner.classList.add("show");
     document.getElementById("submittedInfo").textContent="Siswa: "+nama+" • "+new Date().toLocaleString("id-ID")+" • ID: "+SUBMISSION_ID;
 
-    showModal("<div class='spinner'></div><h3>Menyimpan Berkas & Mencatat ke Spreadsheet…</h3><p>Mohon tunggu sebentar.</p>");
-    try{await sendToDriveAndDownload();}catch(e){}
-    showModal("<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim</h3><p>Data berhasil dicatat di sistem Google Sheet. Menunggu validasi Guru.</p><button class='btn-green' onclick='closeModal()'>Selesai</button>");
+    showModal("<div class='spinner'></div><h3>Mengunduh Lembar Ujian & Mengarsipkan…</h3><p>Mohon tunggu sebentar.</p>");
+    
+    // Jalankan eksekusi unduh & kirim ke Apps Script
+    await sendToDriveAndDownload();
+    
+    showModal("<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim</h3><p>Berkas jawaban berhasil terunduh dan terkirim ke sistem.</p><button class='btn-green' onclick='closeModal()'>Selesai</button>");
   };
 }
 
 function base64Encode(text){const bytes=new TextEncoder().encode(text);let binary="";for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary);}
 
 function freezeExamInputs(clone){
+  const cloneBody = clone.querySelector("body");
+  if(cloneBody && cloneBody.classList){
+    cloneBody.classList.add("locked-mode");
+  }
+
   clone.querySelectorAll("input,textarea,select").forEach(el=>{
     if(el.closest("#gradePanel")) return;
-    el.style.pointerEvents="none";
-    el.setAttribute("readonly","readonly");
+    el.setAttribute("readonly", "readonly");
 
     if(el.type==="radio"||el.type==="checkbox"){
       const original=document.querySelector(`input[name="${el.name}"][value="${el.value}"]`);
@@ -721,48 +725,32 @@ function freezeExamInputs(clone){
   });
 }
 
-/* TEACHER ENGINE DINAMIS & TERINTEGRASI KE SHEET (TAHAP 2) */
+/* TEACHER ENGINE DENGAN SINKRONISASI CLOUD */
 function teacherEngineScript(){
-  const ep=ENDPOINT,sub=SUBJECT,folder=FOLDER_NAME,fid=FOLDER_ID,lid=LKPD_ID,title=EXAM_TITLE,sid=SUBMISSION_ID,kkmVal=KKM;
+  const ep=ENDPOINT,sub=SUBJECT,lid=LKPD_ID,title=EXAM_TITLE,sid=SUBMISSION_ID,kkmVal=KKM;
   return `(function(){
-    const ENDPOINT='${ep}',SUBJECT='${sub}',FOLDER_NAME='${folder}',FOLDER_ID='${fid}',LKPD_ID='${lid}',EXAM_TITLE='${title}',SUBMISSION_ID='${sid}',KKM=${kkmVal};
-    const key='sumatif_grade_koding_'+SUBMISSION_ID;
+    const ENDPOINT='${ep}',SUBJECT='${sub}',LKPD_ID='${lid}',EXAM_TITLE='${title}',SUBMISSION_ID='${sid}',KKM=${kkmVal};
 
-    document.querySelectorAll("input,select,textarea").forEach(el=>{
-      if(!el.closest("#gradePanel")){
-        el.disabled=false;
-        el.style.pointerEvents="none";
-      }
-    });
+    document.body.classList.add('locked-mode');
 
-    // Injeksi Dinamis Baris Validasi Esai (No 16-20)
     document.querySelectorAll(".question-card[data-scoring='manual']").forEach(c=>{
       const qnum=c.dataset.qnum, max=c.dataset.weight||2, tp=c.dataset.tp||"";
       if(!document.getElementById('gradeRow_s'+qnum)){
         const r=document.createElement('div');
         r.className='grading-row teacher-visible';
         r.id='gradeRow_s'+qnum;
-        r.innerHTML='<span style="font-size:13px;font-weight:900">Validasi Guru (Esai Soal '+qnum+' • '+tp+'):</span>'+
+        r.innerHTML='<span style="font-size:13px;font-weight:900">Validasi Guru (Soal '+qnum+' • '+tp+'):</span>'+
                     '<input type="number" id="score_s'+qnum+'" min="0" max="'+max+'" step="1" placeholder="Skor (0-'+max+')">'+
                     '<span style="font-size:12px;color:var(--muted)">Maks: '+max+' Poin</span>';
         c.appendChild(r);
       }
     });
 
-    const noteIn=document.getElementById('teacherNote'),editBtn=document.getElementById('editGradeBtn'),finBtn=document.getElementById('finalizeGradeBtn'),status=document.getElementById('teacherStatus');
+    const noteIn=document.getElementById('teacherNote'),finBtn=document.getElementById('finalizeGradeBtn'),status=document.getElementById('teacherStatus');
     const inspectBtn=document.getElementById('inspectExamBtn'),recapBox=document.getElementById('recapBox');
     const scoreCard=document.getElementById('scoreCardDisplay'),finalScoreEl=document.getElementById('displayFinalScore'),scoreBadge=document.getElementById('scoreStatusBadge');
 
-    let inspected=localStorage.getItem(key+'_inspected')==='1';
-    let locked=localStorage.getItem(key+'_locked')==='1';
-    let localGrades={}; try{localGrades=JSON.parse(localStorage.getItem(key)||'{}');}catch(e){}
-
-    document.querySelectorAll(".question-card[data-scoring='manual']").forEach(c=>{
-      const qnum=c.dataset.qnum;
-      const inp=document.getElementById('score_s'+qnum);
-      if(inp && localGrades['s'+qnum]!==undefined) inp.value=localGrades['s'+qnum];
-    });
-    if(noteIn) noteIn.value=localGrades.note||'';
+    let isLockedPermanently = false;
 
     function evaluateAllItems(){
       const itemScores=[];
@@ -816,7 +804,7 @@ function teacherEngineScript(){
       for(const tp in tpMap){
         const tr=document.createElement("tr");
         const persentase=tpMap[tp].max>0?Math.round((tpMap[tp].earned/tpMap[tp].max)*100):0;
-        tr.innerHTML='<td>Capaian '+tp+'</td><td>'+tpMap[tp].earned+' / '+tpMap[tp].max+'</td><td>'+persentase+'% Ketercapaian Kompetensi</td>';
+        tr.innerHTML='<td>Capaian '+tp+'</td><td>'+tpMap[tp].earned+' / '+tpMap[tp].max+'</td><td>'+persentase+'% Penguasaan Materi</td>';
         tbody.appendChild(tr);
       }
 
@@ -835,66 +823,73 @@ function teacherEngineScript(){
       }
     }
 
-    function applyState(){
-      document.querySelectorAll(".question-card[data-scoring='manual']").forEach(c=>{
-        const qnum=c.dataset.qnum;
-        const inp=document.getElementById('score_s'+qnum);
-        if(inp) inp.disabled=!inspected || locked;
-      });
-      if(!inspected){
-        if(noteIn){noteIn.disabled=true;noteIn.readOnly=true;}
-        if(editBtn)editBtn.disabled=true; if(finBtn)finBtn.disabled=true;
-        return;
-      }
-      if(noteIn){noteIn.disabled=locked;noteIn.readOnly=locked;}
-      if(editBtn)editBtn.disabled=locked; if(finBtn)finBtn.disabled=locked;
-      if(finBtn)finBtn.textContent=locked?'🔒 Penilaian Selesai & Tercatat di Sheets':'🔒 Akhiri Penilaian & Kirim ke Sheet';
-      if(status)status.innerHTML=locked?'🔒 <b>Penilaian Sumatif Bab 1 resmi diakhiri & dikunci.</b> Data nilai butir soal & capaian TP berhasil diperbarui di Google Sheet.':'🔓 <b>Mode pemeriksaan aktif.</b> Silakan berikan skor esai 16-20.';
+    function lockEverythingPermanently(){
+      isLockedPermanently=true;
+      document.querySelectorAll(".question-card[data-scoring='manual'] input").forEach(inp=>inp.disabled=true);
+      if(noteIn) noteIn.disabled=true;
+      if(inspectBtn) inspectBtn.style.display='none';
+      if(finBtn) finBtn.style.display='none';
       recapBox.style.display='block';
-      const res=evaluateAllItems();
-      renderRecapTable(res);
+      const evalRes=evaluateAllItems();
+      renderRecapTable(evalRes);
     }
 
-    function saveLocal(){
-      const payload={note:noteIn?.value,savedAt:new Date().toISOString()};
-      document.querySelectorAll(".question-card[data-scoring='manual']").forEach(c=>{
-        const qnum=c.dataset.qnum;
-        payload['s'+qnum]=document.getElementById('score_s'+qnum)?.value;
-      });
-      localStorage.setItem(key,JSON.stringify(payload));
-      const res=evaluateAllItems();
-      renderRecapTable(res);
+    async function syncFromCloudSheet(){
+      try{
+        const resp=await fetch(ENDPOINT,{
+          method:'POST',
+          headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify({action:'getSumatifGrade',lkpdId:LKPD_ID,submissionId:SUBMISSION_ID})
+        });
+        const res=await resp.json();
+
+        if(res.found && res.graded){
+          const row=res.rowData;
+          const manualCards=[...document.querySelectorAll(".question-card[data-scoring='manual']")];
+          
+          manualCards.forEach(c=>{
+            const qnum=parseInt(c.dataset.qnum);
+            const scoreVal=row[7 + qnum]; // Menyesuaikan index kolom dari G.Sheet
+            const inp=document.getElementById('score_s'+qnum);
+            if(inp && scoreVal!==undefined) inp.value=scoreVal;
+          });
+
+          if(noteIn) noteIn.value=row[row.length - 1] || '';
+
+          lockEverythingPermanently();
+          status.innerHTML='🔒 <b>Penilaian Telah Dikunci Permanen.</b> Data tersinkronisasi otomatis dari Google Sheet.';
+        } else {
+          status.innerHTML='🔓 <b>Belum Diperiksa.</b> Klik tombol <b>"Periksa Jawaban"</b> untuk mulai menilai.';
+          if(inspectBtn) inspectBtn.disabled=false;
+        }
+      }catch(e){
+        status.innerHTML='⚠️ <i>Offline Mode</i> (Tidak dapat terhubung ke Google Sheet).';
+      }
     }
 
     if(inspectBtn) inspectBtn.onclick=()=>{
-      inspected=true;
-      localStorage.setItem(key+'_inspected','1');
-      applyState();
-      alert('Pemeriksaan berhasil! Soal PG & Benar/Salah telah dikoreksi otomatis. Kolom validasi esai telah aktif.');
-    };
-
-    document.querySelectorAll(".question-card[data-scoring='manual']").forEach(c=>{
-      const qnum=c.dataset.qnum;
-      const inp=document.getElementById('score_s'+qnum);
-      if(inp) inp.oninput=saveLocal;
-    });
-    if(noteIn) noteIn.oninput=saveLocal;
-
-    if(editBtn) editBtn.onclick=()=>{
-      if(locked) return;
-      document.querySelectorAll(".question-card[data-scoring='manual']").forEach(c=>{
-        const qnum=c.dataset.qnum;
-        const inp=document.getElementById('score_s'+qnum);
-        if(inp) inp.disabled=false;
+      if(isLockedPermanently) return;
+      document.querySelectorAll(".question-card[data-scoring='manual'] input").forEach(inp=>{
+          inp.disabled=false;
+          inp.removeAttribute("readonly");
       });
-      if(noteIn){noteIn.disabled=false;noteIn.readOnly=false;}
-      if(status) status.innerHTML='✏️ <b>Edit validasi aktif.</b> Sesuaikan nilai esai, lalu kunci & kirim kembali.';
+      if(noteIn) noteIn.disabled=false;
+      if(finBtn) finBtn.disabled=false;
+      status.innerHTML='✏️ <b>Mode Pemeriksaan Aktif.</b> Pilihan ganda dinilai otomatis. Silakan periksa soal uraian lalu klik Akhiri Penilaian.';
+      recapBox.style.display='block';
+      const evalRes=evaluateAllItems();
+      renderRecapTable(evalRes);
     };
 
-    // TAHAP 2: KIRIM PEMBARUAN KE GOOGLE SPREADSHEET
+    document.querySelectorAll(".question-card[data-scoring='manual'] input").forEach(inp=>{
+      inp.oninput=()=>{
+        const evalRes=evaluateAllItems();
+        renderRecapTable(evalRes);
+      };
+    });
+
     if(finBtn) finBtn.onclick=async()=>{
-      if(locked) return;
-      saveLocal();
+      if(isLockedPermanently) return;
       const res=evaluateAllItems();
       const payload={
         action:'saveSumatifGrade',
@@ -909,17 +904,17 @@ function teacherEngineScript(){
         note:noteIn?.value||''
       };
 
+      status.innerHTML='⏳ Menyimpan penilaian ke Google Sheet...';
       try{
         await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
       }catch(e){}
 
-      localStorage.setItem(key+'_locked','1');
-      locked=true;
-      applyState();
-      alert('Penilaian berhasil diakhiri! Rincian skor butir soal & capaian TP1/TP2 berhasil diperbarui di Google Sheet.');
+      lockEverythingPermanently();
+      status.innerHTML='🔒 <b>Penilaian Selesai & Dikunci Permanen.</b> Nilai berhasil diperbarui di Google Sheet.';
+      alert('Penilaian berhasil diakhiri dan dikunci permanen!');
     };
 
-    if(inspected) applyState();
+    syncFromCloudSheet();
   })();`;
 }
 
@@ -941,7 +936,7 @@ function buildFinalHTML(){
   return "<!doctype html>\n"+clone.outerHTML;
 }
 
-// TAHAP 1: KIRIM SUBMISSION DENGAN DATA AWAL BUTIR SOAL KE GOOGLE SHEET
+// PENGUNDUHAN INSTAN LOKAL SEBELUM PENGIRIMAN
 async function sendToDriveAndDownload(){
   const nama=(document.querySelector("input[name='nama']")?.value||"Siswa").trim().replace(/[\\/:*?"<>|]/g,"_")||"Siswa";
   const kelas=(document.querySelector("input[name='kelas']")?.value||"").trim();
@@ -949,19 +944,31 @@ async function sendToDriveAndDownload(){
   const finalHTML=buildFinalHTML();
   const filename="Sumatif_"+LKPD_ID+"_"+nama+".html";
   
-  const initialData=evaluateAutoItemsInitial();
+  // 1. UNDUH INSTAN LOKAL
+  try {
+    const blob = new Blob([finalHTML], { type: "text/html;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  } catch(e) {
+    console.error("Gagal unduh lokal:", e);
+  }
 
+  // 2. TRANSMISI DATA KE CLOUD GOOGLE SHEET & DRIVE
+  const initialData=evaluateAutoItemsInitial();
   const payload={
     action:"saveHTML",
-    filename,
+    filename:filename,
     studentName:nama,
     kelas:kelas,
     absen:absen,
     subject:SUBJECT,
-    mapel:SUBJECT,
     examTitle:EXAM_TITLE,
-    folderName:FOLDER_NAME,
-    folderId:FOLDER_ID,
     lkpdId:LKPD_ID,
     submissionId:SUBMISSION_ID,
     itemScores:initialData.itemScores,
@@ -970,9 +977,17 @@ async function sendToDriveAndDownload(){
     data:collectData()
   };
 
-  await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
-  const blob=new Blob([finalHTML],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
-  a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+  try {
+    await fetch(ENDPOINT,{
+      method:"POST",
+      mode:"no-cors",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify(payload)
+    });
+  } catch(e) {
+    console.error("Gagal kirim ke server:", e);
+  }
+
   localStorage.removeItem(STORAGE);
 }
 
