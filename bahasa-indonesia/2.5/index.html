@@ -1,0 +1,502 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V2.0 (SYNC CLOUD) — BAHASA INDONESIA KELAS IV -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD Bahasa Indonesia - Kaidah Awalan me-</title>
+<style>
+:root{--green:#0b9f75;--green2:#087f60;--mint:#e9fbf5;--pink:#ffdfe4;--ink:#24313a;--muted:#64748b;--yellow:#fff36a;--line:#e5e7eb;--white:#fff;--blue:#2563eb;--gold:#f59e0b;--rose:#f43f5e;--rose-light:#ffe4e6;--cyan:#06b6d4}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#eefcf7,#fff7f8 55%,#eef6ff);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.45;pointer-events:none}
+body:before{width:180px;height:180px;background:#bff4df;left:-70px;top:120px;animation:float1 7s ease-in-out infinite}
+body:after{width:150px;height:150px;background:#ffd4dc;right:-50px;bottom:100px;animation:float2 9s ease-in-out infinite}
+@keyframes float1{50%{transform:translate(25px,18px) scale(1.08)}} @keyframes float2{50%{transform:translate(-20px,-25px) scale(1.12)}}
+.appbar{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;padding:12px 16px;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid #dfe7e4}
+.brand{font-weight:900;color:var(--green2);margin-right:auto}
+button{border:0;border-radius:12px;padding:10px 15px;font-weight:800;cursor:pointer;transition:.2s transform,.2s box-shadow}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #00000012}
+button:active{transform:scale(.98)}
+.btn-light{background:#f1f5f9;color:#334155}.btn-green{background:var(--green);color:#fff}.btn-blue{background:var(--blue);color:#fff}.btn-cyan{background:var(--cyan);color:#fff}.btn-rose{background:var(--rose);color:#fff}
+.progress{height:5px;background:#dcefe9}.progress i{display:block;height:100%;width:0;background:var(--green);transition:.25s}
+.sheet{width:min(1000px,calc(100% - 24px));margin:18px auto;background:#fff;border-radius:24px;box-shadow:0 12px 35px #24483b16;padding:28px}
+.hero{display:grid;grid-template-columns:1.7fr .8fr;gap:20px;align-items:stretch}
+.hero-card{background:linear-gradient(135deg,#ecfeff,#ecfdf5);border-radius:22px;padding:28px}
+.badge{display:inline-block;background:var(--cyan);color:#fff;padding:7px 12px;border-radius:999px;font-weight:900;font-size:13px}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.05;margin:16px 0 8px} h2{margin:0} p{line-height:1.75}
+.mission{background:#f0fdfa;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center;text-align:center;font-size:18px;border:2px dashed #99f6e4}
+.mission-icon{font-size:64px;animation:bob 2.8s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+.idgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.field label{display:block;font-size:13px;font-weight:900;color:#475569;margin-bottom:6px}
+input,textarea,select{width:100%;font:inherit;border:2px solid #dbe4e1;border-radius:13px;padding:12px 14px;outline:none;background:#fff}
+input:focus,textarea:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #06b6d430}
+.idgrid input{min-height:52px;min-width:0}.idgrid .field{min-width:0}
+.section-title{display:flex;align-items:center;gap:12px;border-bottom:3px solid #cffafe;padding-bottom:12px;margin-bottom:18px}
+.num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--cyan);color:#fff;font-weight:900;flex:0 0 auto}
+.tip{background:#fff9d6;border-left:5px solid #f2d73a;padding:14px 16px;border-radius:12px;margin:18px 0; line-height:1.6;}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 8px}
+.footer-note{text-align:center;color:var(--muted);font-size:13px}
+.modal{position:fixed;inset:0;background:#0f172a88;display:none;place-items:center;z-index:50;padding:18px}
+.modal-card{width:min(560px,100%);background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 20px 60px #0003}
+.spinner{width:42px;height:42px;border:5px solid #dbeee8;border-top-color:var(--green);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.submitted-banner{margin:16px auto;max-width:900px;background:var(--green2);color:#fff;padding:14px 18px;border-radius:16px;text-align:center;font-weight:900}
+.submitted-banner small{display:block;font-weight:600;margin-top:4px}
+.grade-panel{display:none;background:#f8fafc;border:2px solid #dbe4e1;border-radius:20px;padding:20px;margin:18px auto;max-width:900px}
+.grade-panel.show{display:block;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grade-grid textarea{min-height:90px}
+
+/* CUSTOM STYLES FOR AWALAN ME- */
+.img-center {display:block; margin:20px auto; max-width:100%; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.1);}
+.rule-table {width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.05); margin-bottom:24px;}
+.rule-table th {background:#fce7f3; color:#9f1239; padding:14px; text-align:left; font-weight:900; border:1px solid #fbcfe8;}
+.rule-table td {border:1px solid #fbcfe8; padding:12px; vertical-align:top;}
+.rule-table td:first-child {font-weight:900; color:var(--rose); width:15%; text-align:center;}
+.rule-table td:nth-child(2) {width:45%;}
+
+.kpts-box {background:#fff1f2; border:2px dashed #f43f5e; padding:20px; border-radius:16px; text-align:center; position:relative; margin:40px 0 20px;}
+.kpts-badge {background:#f43f5e; color:#fff; font-weight:900; padding:6px 16px; border-radius:99px; position:absolute; top:-16px; left:50%; transform:translateX(-50%); font-size:18px; letter-spacing:2px;}
+
+/* GAME / KUIS STYLES */
+.game-level {position:relative; background:#f8fafc; border:2px solid #cbd5e1; border-radius:16px; padding:24px; margin-bottom:24px; transition:all .3s;}
+.game-level.locked {opacity:0.6; pointer-events:none; filter:grayscale(100%);}
+.lock-overlay {position:absolute; inset:0; background:rgba(248, 250, 252, 0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:14px;}
+.lock-icon {font-size:54px; margin-bottom:8px;}
+.game-level.unlocked .lock-overlay {display:none;}
+.game-level.completed {border-color:var(--green); background:#f0fdf4;}
+
+.quiz-row {display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:12px; font-size:18px; font-weight:900;}
+.q-box {background:#e2e8f0; padding:10px 20px; border-radius:8px;}
+.q-input {width:200px; text-align:center; font-weight:900; color:var(--blue); border:2px solid #94a3b8; transition:.3s;}
+.q-input.correct {background-color:#dcfce7 !important; border-color:#22c55e !important; color:#15803d;}
+.q-input.wrong {animation:shake 0.4s; background-color:#fee2e2 !important; border-color:#ef4444 !important; color:#b91c1c;}
+
+/* TABEL MISI UTAMA */
+.main-task-grid {display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px;}
+.task-table {width:100%; border-collapse:collapse; background:#fff;}
+.task-table th {background:var(--cyan); color:#fff; padding:12px 8px; font-size:14px;}
+.task-table td {border:1px solid #cbd5e1; padding:8px;}
+.task-table .num-col {text-align:center; font-weight:900; background:#f8fafc; width:10%;}
+.task-table .me-col {text-align:center; font-weight:900; color:var(--muted); width:15%;}
+.task-in {width:100%; border:none; background:transparent; padding:4px; font-weight:700; text-align:center; border-bottom:2px solid transparent;}
+.task-in:focus {border-bottom-color:var(--cyan); outline:none; box-shadow:none;}
+
+.check-btn {display:block; margin:20px auto 0; background:var(--blue); color:#fff; border-radius:99px; padding:10px 24px; font-weight:800; font-size:16px;}
+
+@media(max-width:800px){
+ .appbar{flex-wrap:wrap}.brand{width:100%;text-align:center}
+ .sheet{padding:18px;border-radius:18px}
+ .hero{grid-template-columns:1fr}.idgrid{grid-template-columns:1fr}
+ .main-task-grid {grid-template-columns:1fr;}
+ .quiz-row {flex-wrap:wrap; font-size:15px;} .q-input {width:100%; margin-top:8px;}
+}
+@media print{
+ .appbar,.progress,.actions,.modal,.teacher-tools,.check-btn,.mission{display:none!important}
+ body{background:#fff}.sheet{box-shadow:none;width:210mm;margin:0;border-radius:0;}
+ .game-level.locked {opacity:1; filter:none;} .lock-overlay{display:none;}
+ input,textarea,select{border:0!important;box-shadow:none!important;}
+}
+</style>
+</head>
+<body>
+<div class="appbar">
+  <div class="brand">📚 LEMBAR KERJA MURID DIGITAL</div>
+  <button class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+  <button class="btn-green" id="sendBtn">📤 Kirim Lembar Kerja</button>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 2.5</span>
+      <h1>Kaidah Awalan 'me-'</h1>
+      <p><b>Bahasa Indonesia • Kelas IV</b></p>
+      <p>Tahukah kamu? Awalan 'me-' bisa berubah bentuk mengikuti kata dasar yang disambungnya. Mari kita pelajari aturannya!</p>
+      <div class="idgrid">
+        <div class="field"><label>Nama Lengkap Siswa <span style="color:red">*</span></label><input name="nama" placeholder="Tuliskan nama lengkap..." required autocomplete="name"></div>
+        <div class="field"><label>Hari / Tanggal <span style="color:red">*</span></label><input name="tanggal" placeholder="Contoh: Senin, 11 Agustus 2026" required></div>
+        <div class="field"><label>Mata Pelajaran</label><input name="mapel" value="Bahasa Indonesia" readonly></div>
+        <div class="field"><label>Materi Pokok</label><input name="materi" value="Kaidah Kebahasaan Awalan me-" readonly></div>
+      </div>
+    </div>
+    <div class="mission">
+      <div class="mission-icon">🔍🔤</div>
+      <b>🎯 Misi Hari Ini</b>
+      <p>Memahami peluluhan huruf, menaklukkan kuis pemanasan, dan berburu kata dasar!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EKSPLORASI MATERI ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Mengenal Perubahan Bentuk 'me-'</h2></div>
+  <p>Kamu sudah mengenal awalan 'me-' sebagai pembentuk kata kerja. Tergantung kata dasarnya, awalan 'me-' bisa berubah bentuk menjadi 'men-', 'mem-', 'meng-', 'menge-', 'meny-', atau tetap 'me-'. Perhatikan ilustrasi berikut ini!</p>
+  
+  <img src="https://raw.githubusercontent.com/iwansutiawan9-tech/asset/main/gambar%202.1.PNG" alt="Ilustrasi berbagai kata kerja dengan awalan me-" class="img-center">
+
+  <p>Agar lebih mudah memahaminya, pelajari tabel pedoman perubahan awalan 'me-' di bawah ini:</p>
+  
+  <table class="rule-table">
+    <thead>
+      <tr>
+        <th>Awalan 'me-'</th>
+        <th>Huruf Awal Kata Dasar</th>
+        <th>Contoh Kata Berimbuhan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>me-</td>
+        <td><b>l, m, n, r, w, y</b><br><span style="color:#64748b;font-size:14px;">(lihat, minum, nyanyi, rawat, warna, yakin)</span></td>
+        <td><b>me</b>lihat, <b>me</b>minum, <b>me</b>nyanyi, <b>me</b>rawat, <b>me</b>warnai, <b>me</b>yakini</td>
+      </tr>
+      <tr>
+        <td>men-</td>
+        <td><b>c, d, j, t*</b><br><span style="color:#64748b;font-size:14px;">(cuci, dengar, jemput, tulis)</span></td>
+        <td><b>men</b>cuci, <b>men</b>dengar, <b>men</b>jemput, <b>men</b>ulis*</td>
+      </tr>
+      <tr>
+        <td>mem-</td>
+        <td><b>b, f, p*, v</b><br><span style="color:#64748b;font-size:14px;">(buka, foto, pegang, program, veto)</span></td>
+        <td><b>mem</b>buka, <b>mem</b>foto, <b>mem</b>egang*, <b>mem</b>program, <b>mem</b>veto</td>
+      </tr>
+      <tr>
+        <td>meng-</td>
+        <td><b>a, e, g, h, i, k*, o, u</b><br><span style="color:#64748b;font-size:14px;">(ayun, ekor, gali, halau, injak, kupas, kristal, obrol, undang)</span></td>
+        <td><b>meng</b>ayun, <b>meng</b>ekor, <b>meng</b>gali, <b>meng</b>halau, <b>meng</b>injak, <b>meng</b>upas*, <b>meng</b>kristal, <b>meng</b>obrol, <b>meng</b>undang</td>
+      </tr>
+      <tr>
+        <td>menge-</td>
+        <td><b>bersuku kata satu</b><br><span style="color:#64748b;font-size:14px;">(tik, cat, pel)</span></td>
+        <td><b>menge</b>tik, <b>menge</b>cat, <b>menge</b>pel</td>
+      </tr>
+      <tr>
+        <td>meny-</td>
+        <td><b>s*</b><br><span style="color:#64748b;font-size:14px;">(siram, sapu)</span></td>
+        <td><b>meny</b>iram*, <b>meny</b>apu*</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="kpts-box">
+    <div class="kpts-badge">RUMUS K-P-T-S LULUH!</div>
+    <p style="font-size:16px; margin:0; line-height:1.6;">Apakah kamu melihat ada yang berbeda pada kata-kata yang diberi tanda bintang (*)?<br><br>
+    Ya, betul! Huruf awal kata dasar <b>tidak ditemukan</b> setelah diberi awalan 'me-'. Huruf /s/ pada "siram" luluh menjadi "menyiram". Huruf <b>/k/, /p/, /t/, dan /s/ akan LULUH</b> (hilang/melebur) jika ditambah awalan 'me-'.</p>
+  </div>
+</section>
+
+<!-- ================= ZONA KUIS PEMANASAN ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">2</div><h2>Kuis Pemanasan (Game Mode)</h2></div>
+  <div class="tip" style="background:#e0f2fe; border-left-color:#0ea5e9;">
+    💡 <b>Petunjuk:</b> Ketiklah bentuk kata berimbuhannya dengan benar. Ingat aturan <b>K-P-T-S Luluh</b>! Selesaikan kuis ini untuk membuka gembok Misi Utama di bawah.
+  </div>
+
+  <div class="game-level unlocked" id="quizLevel">
+    <div class="quiz-row"><div class="q-box">me- + tiup</div> ➔ <input type="text" class="q-input" name="w1" data-ans="meniup" placeholder="jawab..."></div>
+    <div class="quiz-row"><div class="q-box">me- + lipat</div> ➔ <input type="text" class="q-input" name="w2" data-ans="melipat" placeholder="jawab..."></div>
+    <div class="quiz-row"><div class="q-box">me- + potong</div> ➔ <input type="text" class="q-input" name="w3" data-ans="memotong" placeholder="jawab..."></div>
+    <div class="quiz-row"><div class="q-box">me- + siram</div> ➔ <input type="text" class="q-input" name="w4" data-ans="menyiram" placeholder="jawab..."></div>
+    <div class="quiz-row"><div class="q-box">me- + aduk</div> ➔ <input type="text" class="q-input" name="w5" data-ans="mengaduk" placeholder="jawab..."></div>
+    
+    <button type="button" class="check-btn" onclick="checkQuiz()">Cek Jawaban Kuis!</button>
+    <div class="success-msg" id="msgQuiz">🎉 Keren! Gembok Misi Utama Telah Terbuka! 👇</div>
+  </div>
+</section>
+
+<!-- ================= ZONA TUGAS UTAMA ================= -->
+<section class="sheet game-level locked" id="mainTaskLevel" style="background:#fff; border:2px solid var(--cyan);">
+  <div class="lock-overlay" style="background:rgba(255,255,255,0.9);"><div class="lock-icon">🔒</div><b>Misi Utama Terkunci</b><p>Selesaikan Kuis Pemanasan di atas terlebih dahulu!</p></div>
+  <div class="section-title"><div class="num" style="background:var(--cyan);">3</div><h2>Misi Utama: Berburu Kata</h2></div>
+  <p>Sekarang, tulislah 10 kata yang huruf pertamanya <b>Luluh</b> dan 10 kata yang <b>Tidak Luluh</b> ketika diberi awalan 'me-' di dalam tabel berikut ini!</p>
+
+  <div class="main-task-grid">
+    <!-- TABEL LULUH -->
+    <div>
+      <h3 style="text-align:center; color:var(--rose);">KATA DASAR LULUH (K-P-T-S)</h3>
+      <table class="task-table">
+        <thead><tr><th>No</th><th>Kata Dasar</th><th>Awalan</th><th>Kata Berimbuhan</th></tr></thead>
+        <tbody>
+          <tr><td class="num-col">1</td><td><input type="text" class="task-in" name="l_dsr_1" placeholder="cth: tiup"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="l_imb_1" placeholder="cth: meniup"></td></tr>
+          <tr><td class="num-col">2</td><td><input type="text" class="task-in" name="l_dsr_2"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="l_imb_2"></td></tr>
+          <tr><td class="num-col">3</td><td><input type="text" class="task-in" name="l_dsr_3"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="l_imb_3"></td></tr>
+          <tr><td class="num-col">4</td><td><input type="text" class="task-in" name="l_dsr_4"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="l_imb_4"></td></tr>
+          <tr><td class="num-col">5</td><td><input type="text" class="task-in" name="l_dsr_5"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="l_imb_5"></td></tr>
+          <tr><td class="num-col">6</td><td><input type="text" class="task-in" name="l_dsr_6"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="l_imb_6"></td></tr>
+          <tr><td class="num-col">7</td><td><input type="text" class="task-in" name="l_dsr_7"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="l_imb_7"></td></tr>
+          <tr><td class="num-col">8</td><td><input type="text" class="task-in" name="l_dsr_8"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="l_imb_8"></td></tr>
+          <tr><td class="num-col">9</td><td><input type="text" class="task-in" name="l_dsr_9"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="l_imb_9"></td></tr>
+          <tr><td class="num-col">10</td><td><input type="text" class="task-in" name="l_dsr_10"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="l_imb_10"></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TABEL TIDAK LULUH -->
+    <div>
+      <h3 style="text-align:center; color:var(--blue);">KATA DASAR TIDAK LULUH</h3>
+      <table class="task-table">
+        <thead><tr><th>No</th><th>Kata Dasar</th><th>Awalan</th><th>Kata Berimbuhan</th></tr></thead>
+        <tbody>
+          <tr><td class="num-col">1</td><td><input type="text" class="task-in" name="tl_dsr_1" placeholder="cth: lipat"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="tl_imb_1" placeholder="cth: melipat"></td></tr>
+          <tr><td class="num-col">2</td><td><input type="text" class="task-in" name="tl_dsr_2"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="tl_imb_2"></td></tr>
+          <tr><td class="num-col">3</td><td><input type="text" class="task-in" name="tl_dsr_3"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="tl_imb_3"></td></tr>
+          <tr><td class="num-col">4</td><td><input type="text" class="task-in" name="tl_dsr_4"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="tl_imb_4"></td></tr>
+          <tr><td class="num-col">5</td><td><input type="text" class="task-in" name="tl_dsr_5"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="tl_imb_5"></td></tr>
+          <tr><td class="num-col">6</td><td><input type="text" class="task-in" name="tl_dsr_6"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="tl_imb_6"></td></tr>
+          <tr><td class="num-col">7</td><td><input type="text" class="task-in" name="tl_dsr_7"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="tl_imb_7"></td></tr>
+          <tr><td class="num-col">8</td><td><input type="text" class="task-in" name="tl_dsr_8"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="tl_imb_8"></td></tr>
+          <tr><td class="num-col">9</td><td><input type="text" class="task-in" name="tl_dsr_9"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="tl_imb_9"></td></tr>
+          <tr><td class="num-col">10</td><td><input type="text" class="task-in" name="tl_dsr_10"></td><td class="me-col">me-</td><td><input type="text" class="task-in" name="tl_imb_10"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:32px;">
+    <button type="button" class="btn-cyan" id="sendBtn2">📤 Kirim Hasil Misi ke Guru</button>
+  </div>
+  <p class="footer-note">Seluruh daftar kata yang kamu buat akan dibaca dan dinilai langsung oleh gurumu.</p>
+</section>
+</form>
+
+<!-- PANEL PENILAIAN GURU (SINKRONISASI GOOGLE SHEETS) -->
+<section class="sheet grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Penilaian Guru</h2></div>
+  <div class="teacher-status" id="teacherStatus">⏳ <b>Sinkronisasi server...</b> Memeriksa data penilaian.</div>
+
+  <div style="background:#fff; border:1px solid #cbd5e1; padding:16px; border-radius:12px; margin-bottom:20px;">
+    <b>Hasil Kuis Pemanasan (Auto-Koreksi):</b><br>
+    <div id="autoGradeResult" style="margin-top:8px; line-height: 1.8; font-size: 14px;">⏳ Memuat hasil kuis...</div>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencarian 20 Kata (Manual)</label>
+      <select id="gradeScale" class="grade-select" disabled>
+        <option value="">Pilih skala</option>
+        <option value="A">A — Sangat Baik (Menemukan 20 kata dan merubah imbuahnnya dengan tepat)</option>
+        <option value="B">B — Baik (Hanya sedikit kesalahan peluluhan huruf)</option>
+        <option value="C">C — Cukup (Banyak kata tidak luluh dimasukkan ke tabel luluh)</option>
+        <option value="D">D — Kurang (Belum memahami konsep K-P-T-S Luluh)</option>
+      </select>
+      <div class="star-rating" id="starRating" aria-label="Rating bintang">☆☆☆☆</div>
+      <div class="scale-hint">A = 4 ⭐ • B = 3 ⭐ • C = 2 ⭐ • D = 1 ⭐</div>
+    </div>
+    <div class="field"><label>Catatan / Umpan Balik Guru</label><textarea id="gradeNote" rows="4" placeholder="Tuliskan umpan balik..." disabled></textarea></div>
+  </div>
+  <div class="teacher-tools">
+    <button type="button" class="btn-cyan" id="lockGradeBtn" disabled>🔒 Simpan & Kunci Penilaian</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbze-pehjnDPj3b3nrufGYQj_OPcNf3HtPbturxA4gH8zxpsnSlikGf0kS7WwkIz-drY0Q/exec';
+const SUBJECT='Bahasa Indonesia';
+const FOLDER_NAME='BAHASA INDONESIA';
+const LKPD_ID='2.5_Awalan_Me';
+const form=document.getElementById("lkpd"), modal=document.getElementById("modal"), modalBody=document.getElementById("modalBody");
+const STORAGE="lkpd_bindo_2_5";
+const SUBMISSION_ID=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"SUB-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+
+// GAME LOGIC (CASE INSENSITIVE)
+function checkQuiz() {
+  let inputs = document.querySelectorAll('#quizLevel .q-input:not([readonly])');
+  let allCorrect = true;
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    let studentAns = inp.value.trim().toLowerCase();
+    let trueAns = inp.dataset.ans.toLowerCase();
+    
+    if (studentAns === trueAns) { 
+      inp.classList.add('correct'); 
+    } else {
+      inp.classList.add('wrong'); allCorrect = false;
+      setTimeout(()=> inp.classList.remove('wrong'), 500); 
+    }
+  });
+
+  if (allCorrect) {
+    document.getElementById('mainTaskLevel').classList.remove('locked'); 
+    document.getElementById('mainTaskLevel').classList.add('unlocked');
+    document.getElementById('msgQuiz').style.display = 'block';
+    document.getElementById('quizLevel').classList.add('completed');
+  }
+}
+
+function fields(){return [...form.querySelectorAll("input,textarea,select")]}
+function collect(){const data={};fields().forEach(el=>data[el.name]=el.value);data.savedAt=new Date().toISOString();return data}
+function saveDraft(){
+  localStorage.setItem(STORAGE,JSON.stringify(collect()));
+  showModal("<div style='font-size:48px'>💾</div><h3>Draf Tersimpan</h3><p>Isianmu tersimpan di perangkat ini.</p><button class='btn-green' onclick='closeModal()'>Lanjut</button>");
+}
+function loadDraft(){try{const d=JSON.parse(localStorage.getItem(STORAGE)||"null");if(!d)return;fields().forEach(el=>{if(d[el.name]!==undefined && !el.readOnly)el.value=d[el.name]})}catch(e){}}
+function updateProgress(){const f=fields().filter(x=>!x.readOnly);let filled=0;f.forEach(x=>{if(String(x.value||"").trim())filled++});document.getElementById("progressBar").style.width=(f.length?Math.round(filled/f.length*100):0)+"%"}
+function showModal(html){modalBody.innerHTML=html;modal.style.display="grid"} function closeModal(){modal.style.display="none"}
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function base64Encode(text){const bytes=new TextEncoder().encode(text);let binary="";for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary)}
+
+function teacherOnlyScript(){
+ const ep=ENDPOINT,sub=SUBJECT,folder=FOLDER_NAME,lid=LKPD_ID,sid=SUBMISSION_ID;
+ return `(function(){
+  const ENDPOINT='${ep}',SUBJECT='${sub}',FOLDER_NAME='${folder}',LKPD_ID='${lid}',SUBMISSION_ID='${sid}';
+  const key='lkpd_grade_'+LKPD_ID+'_'+SUBJECT.replace(/\\s+/g,'_')+'_'+SUBMISSION_ID;
+  
+  const scale=document.getElementById('gradeScale'),note=document.getElementById('gradeNote'),lockBtn=document.getElementById('lockGradeBtn'),status=document.getElementById('teacherStatus'),stars=document.getElementById('starRating');
+  let locked=localStorage.getItem(key+'_locked')==='1'; 
+
+  // KOREKSI OTOMATIS KUIS PEMANASAN
+  const keys = { w1: "meniup", w2: "melipat", w3: "memotong", w4: "menyiram", w5: "mengaduk" };
+  let correctRows = 0;
+  let htmlFeedback = "";
+  
+  Object.keys(keys).forEach(k => {
+    let val = (document.querySelector("input[name='"+k+"']")?.value || "").trim().toLowerCase();
+    if(val === keys[k]) { correctRows++; htmlFeedback += k.toUpperCase() + ": ✅ | "; } 
+    else { htmlFeedback += k.toUpperCase() + ": ❌ | "; }
+  });
+  
+  document.getElementById('autoGradeResult').innerHTML = "<b>Skor Kuis Pemanasan: " + correctRows + " / 5 Benar</b><br><span style='color:#64748b; font-size:12px;'>" + htmlFeedback + "</span>";
+
+  function renderStars(v){const n={A:4,B:3,C:2,D:1}[v]||0;stars.textContent='★'.repeat(n)+'☆'.repeat(4-n);stars.style.color=n?'#f59e0b':'#cbd5e1';}
+  
+  function applyState(){
+    if (locked) {
+      scale.disabled = true; note.disabled = true; note.readOnly = true;
+      lockBtn.disabled = true; lockBtn.textContent = '🔒 Penilaian Tersimpan';
+      status.innerHTML = '🔒 <b>Penilaian dikunci.</b> Nilai tersinkronisasi dengan Google Sheets.';
+    } else {
+      scale.disabled = false; note.disabled = false; note.readOnly = false;
+      lockBtn.disabled = false; lockBtn.textContent = '🔒 Simpan & Kunci Nilai';
+      status.innerHTML = '📝 <b>Silakan periksa tabel Luluh/Tidak Luluh siswa, lalu berikan penilaian.</b>';
+    }
+    renderStars(scale.value);
+  }
+
+  async function fetchGradeFromServer() {
+    try {
+      const response = await fetch(ENDPOINT + "?action=getGrade&submissionId=" + SUBMISSION_ID);
+      const result = await response.json();
+      if (result.status === 'success' && result.scale) {
+        scale.value = result.scale; note.value = result.note; locked = true; 
+        localStorage.setItem(key+'_locked','1'); localStorage.setItem(key, JSON.stringify({scale: result.scale, note: result.note}));
+      } else {
+        let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+        scale.value=d.scale||''; note.value=d.note||'';
+      }
+    } catch (error) {
+      let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+      scale.value=d.scale||''; note.value=d.note||'';
+    }
+    applyState();
+  }
+
+  fetchGradeFromServer();
+  scale.addEventListener("change",()=>{renderStars(scale.value);});
+
+  lockBtn.onclick=async()=>{
+    if(locked)return;
+    if(!scale.value){alert('Pilih skala penilaian A, B, C, atau D terlebih dahulu.');return;}
+    status.innerHTML="⏳ <b>Menyimpan penilaian...</b> Mengirim data ke server.";
+    lockBtn.disabled=true; scale.disabled=true; note.disabled=true;
+    try{
+      const nama=(document.querySelector("input[name='nama']")?.value||'Siswa').trim();
+      const payload={action:'saveGrade',studentName:nama,subject:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,scale:scale.value,rating:{A:4,B:3,C:2,D:1}[scale.value],note:note.value};
+      await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+      localStorage.setItem(key,JSON.stringify({scale:scale.value,note:note.value}));
+      localStorage.setItem(key+'_locked','1'); locked=true; applyState();
+      alert('Penilaian berhasil dikunci dan dikirim ke Server.');
+    }catch(e){
+      alert('Gagal menyimpan ke server. Periksa koneksi internet Anda.'); applyState(); 
+    }
+  };
+ })();`;
+}
+
+function buildFinalHTML(){
+ const currentData = collect(); 
+ const clone=document.documentElement.cloneNode(true);
+ clone.querySelectorAll(".appbar,.progress,.actions,.modal,.check-btn").forEach(el=>el.remove());
+ const teacherScript=clone.ownerDocument.createElement("script");
+ teacherScript.textContent=teacherOnlyScript();
+ clone.querySelectorAll("script").forEach(el=>el.remove());
+ clone.querySelector("body").appendChild(teacherScript);
+ clone.querySelectorAll("*").forEach(el=>[...el.attributes].forEach(a=>{if(a.name.toLowerCase().startsWith("on"))el.removeAttribute(a.name)}));
+ 
+ clone.querySelectorAll("input,textarea,select").forEach(el=>{
+  if(el.closest("#gradePanel")) return;
+  const value = currentData[el.name] || "";
+  if(el.tagName.toLowerCase()==="textarea") { el.textContent = value; } 
+  else if(el.tagName.toLowerCase()==="select") {
+    [...el.options].forEach(o=>o.removeAttribute("selected"));
+    const opt=[...el.options].find(o=>o.value===value);
+    if(opt) opt.setAttribute("selected","selected");
+  } else { el.setAttribute("value", value); }
+  el.setAttribute("readonly","readonly"); el.setAttribute("disabled","disabled");
+ });
+ 
+ clone.querySelectorAll('.game-level').forEach(el=>{el.classList.remove('locked'); el.classList.add('unlocked');});
+ const panel=clone.querySelector("#gradePanel"); if(panel){panel.classList.remove("show");panel.style.display="block"}
+ const banner=clone.ownerDocument.createElement("div");banner.className="submitted-banner";
+ const nama=(form.elements.nama?.value||"Siswa").trim();
+ banner.innerHTML="✅ LEMBAR KERJA DIKIRIM<small>Nama: "+esc(nama)+" • "+new Date().toLocaleString("id-ID")+" • ID: "+esc(SUBMISSION_ID)+"</small>";
+ clone.querySelector("body").insertBefore(banner,clone.querySelector("body").firstChild);
+ return "<!doctype html>\n"+clone.outerHTML;
+}
+
+async function sendToGoogleDrive(){
+ const nama=(form.elements.nama?.value||"Siswa").trim().replace(/[\\/:*?"<>|]/g,"_")||"Siswa";
+ const finalHTML=buildFinalHTML();
+ const filename="LKPD_"+LKPD_ID+"_BIndo_"+nama+".html";
+ const payload={action:"saveHTML",filename,studentName:nama,subject:SUBJECT,mapel:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,htmlBase64:base64Encode(finalHTML),data:collect()};
+ await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+ const blob=new Blob([finalHTML],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+ localStorage.removeItem(STORAGE);
+}
+
+function focusIdentity(){
+ const el=form.elements.nama?.value.trim()?form.elements.tanggal:form.elements.nama;
+ el?.focus(); el?.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function confirmSend(){
+ const nama=(form.elements.nama?.value||"").trim();
+ const tanggal=(form.elements.tanggal?.value||"").trim();
+ if(!nama || !tanggal){
+   const belum=[]; if(!nama) belum.push("Nama Lengkap Siswa"); if(!tanggal) belum.push("Hari / Tanggal");
+   showModal("<div style='font-size:46px'>📝</div><h3>Identitas Belum Lengkap</h3><p>Sebelum mengirim, identitas pada halaman 1 wajib diisi.</p><div class='tip' style='text-align:left'><b>Belum diisi:</b><br>• "+esc(belum.join("<br>• "))+"</div><button class='btn-green' onclick='closeModal();focusIdentity()'>Lengkapi Identitas</button>");
+   return;
+ }
+ showModal("<div style='font-size:46px'>📤</div><h3>Kirim Hasil Belajar?</h3><p>Pastikan kamu sudah mengisi kedua tabel (Luluh dan Tidak Luluh).</p><p>Hasil ini akan dikunci dan dikirim ke guru.</p><button class='btn-light' onclick='closeModal()'>Periksa Lagi</button> <button class='btn-cyan' id='yesSend'>Ya, Kirim</button>");
+ 
+ document.getElementById("yesSend").onclick=async()=>{
+   showModal("<div class='spinner'></div><h3>Mengirim Jawaban…</h3><p>Mohon tunggu.</p>");
+   try{
+     await sendToGoogleDrive();
+     fields().forEach(el=>{el.setAttribute("readonly","readonly");el.setAttribute("disabled","disabled");});
+     document.getElementById("sendBtn").style.display="none";
+     document.getElementById("sendBtn2").style.display="none";
+     document.getElementById("saveBtn").style.display="none";
+     showModal("<div style='font-size:52px'>✅</div><h3>Jawaban Berhasil Dikirim</h3><p>Kerja bagus! Misi pencarian katamu sudah diamankan.</p><button class='btn-green' onclick='closeModal()'>Selesai</button>");
+   }catch(err){
+     showModal("<div style='font-size:52px'>⚠️</div><h3>Koneksi Terputus</h3><p>"+esc(err)+"</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+   }
+ }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+ loadDraft();updateProgress();fields().forEach(el=>{el.addEventListener("input",updateProgress);el.addEventListener("change",updateProgress)});
+ const save=document.getElementById("saveBtn");if(save)save.onclick=saveDraft;
+ const send=document.getElementById("sendBtn");if(send)send.onclick=confirmSend;
+ const send2=document.getElementById("sendBtn2");if(send2)send2.onclick=confirmSend;
+});
+</script>
+</body>
+</html>
