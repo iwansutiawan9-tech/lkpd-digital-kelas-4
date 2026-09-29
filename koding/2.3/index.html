@@ -1,1 +1,436 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V2.0 (SYNC CLOUD) — KODING KELAS V -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD Koding - Refleksi Teknologi Digital</title>
+<style>
+:root{--green:#0b9f75;--green2:#087f60;--mint:#e9fbf5;--pink:#ffdfe4;--ink:#24313a;--muted:#64748b;--yellow:#fff36a;--line:#e5e7eb;--white:#fff;--blue:#2563eb;--gold:#f59e0b;--rose:#f43f5e;--rose-light:#ffe4e6;--cyan:#06b6d4;--purple:#8b5cf6;--purple-light:#ede9fe}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#f5f3ff,#fff7f8 55%,#eff6ff);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.45;pointer-events:none}
+body:before{width:180px;height:180px;background:#ddd6fe;left:-70px;top:120px;animation:float1 7s ease-in-out infinite}
+body:after{width:150px;height:150px;background:#bfdbfe;right:-50px;bottom:100px;animation:float2 9s ease-in-out infinite}
+@keyframes float1{50%{transform:translate(25px,18px) scale(1.08)}} @keyframes float2{50%{transform:translate(-20px,-25px) scale(1.12)}}
+.appbar{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;padding:12px 16px;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid #dfe7e4}
+.brand{font-weight:900;color:var(--green2);margin-right:auto}
+button{border:0;border-radius:12px;padding:10px 15px;font-weight:800;cursor:pointer;transition:.2s transform,.2s box-shadow}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #00000012}
+button:active{transform:scale(.98)}
+.btn-light{background:#f1f5f9;color:#334155}.btn-green{background:var(--green);color:#fff}.btn-blue{background:var(--blue);color:#fff}.btn-purple{background:var(--purple);color:#fff}.btn-cyan{background:var(--cyan);color:#fff}
+.progress{height:5px;background:#dcefe9}.progress i{display:block;height:100%;width:0;background:var(--green);transition:.25s}
+.sheet{width:min(1000px,calc(100% - 24px));margin:18px auto;background:#fff;border-radius:24px;box-shadow:0 12px 35px #24483b16;padding:28px}
+.hero{display:grid;grid-template-columns:1.7fr .8fr;gap:20px;align-items:stretch}
+.hero-card{background:linear-gradient(135deg,#faf5ff,#eff6ff);border-radius:22px;padding:28px}
+.badge{display:inline-block;background:var(--purple);color:#fff;padding:7px 12px;border-radius:999px;font-weight:900;font-size:13px}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.05;margin:16px 0 8px} h2{margin:0} p{line-height:1.75}
+.mission{background:#f5f3ff;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center;text-align:center;font-size:18px;border:2px dashed #ddd6fe}
+.mission-icon{font-size:64px;animation:bob 2.8s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+.idgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.field label{display:block;font-size:13px;font-weight:900;color:#475569;margin-bottom:6px}
+input,textarea,select{width:100%;font:inherit;border:2px solid #dbe4e1;border-radius:13px;padding:12px 14px;outline:none;background:#fff; transition:.2s;}
+input:focus,textarea:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #06b6d430}
+.idgrid input{min-height:52px;min-width:0}.idgrid .field{min-width:0}
+.section-title{display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--purple-light);padding-bottom:12px;margin-bottom:18px}
+.num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--purple);color:#fff;font-weight:900;flex:0 0 auto}
+.tip{background:#fff9d6;border-left:5px solid #f2d73a;padding:14px 16px;border-radius:12px;margin:18px 0; line-height:1.6;}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 8px}
+.footer-note{text-align:center;color:var(--muted);font-size:13px}
+.modal{position:fixed;inset:0;background:#0f172a88;display:none;place-items:center;z-index:50;padding:18px}
+.modal-card{width:min(560px,100%);background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 20px 60px #0003}
+.spinner{width:42px;height:42px;border:5px solid #dbeee8;border-top-color:var(--green);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.submitted-banner{margin:16px auto;max-width:900px;background:var(--green2);color:#fff;padding:14px 18px;border-radius:16px;text-align:center;font-weight:900}
+.submitted-banner small{display:block;font-weight:600;margin-top:4px}
+.grade-panel{display:none;background:#f8fafc;border:2px solid #dbe4e1;border-radius:20px;padding:20px;margin:18px auto;max-width:900px}
+.grade-panel.show{display:block;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grade-grid textarea{min-height:90px}
+.star-rating{font-size:34px;letter-spacing:4px;text-align:center;margin:14px 0 4px;line-height:1;color:#cbd5e1}
 
+/* GAME LEVEL STYLES */
+.game-level {position:relative; background:#f8fafc; border:2px solid #cbd5e1; border-radius:16px; padding:24px; margin-bottom:24px; transition:all .3s;}
+.game-level.locked {opacity:0.6; pointer-events:none; filter:grayscale(100%);}
+.lock-overlay {position:absolute; inset:0; background:rgba(248, 250, 252, 0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:14px;}
+.lock-icon {font-size:54px; margin-bottom:8px;}
+.game-level.unlocked .lock-overlay {display:none;}
+.game-level.completed {border-color:var(--green); background:#f0fdf4;}
+
+.quiz-grid {display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px;}
+.quiz-card {background:#fff; border:2px solid #e2e8f0; padding:16px; border-radius:12px; display:flex; flex-direction:column; gap:10px; box-shadow:0 2px 6px rgba(0,0,0,0.05); text-align:center;}
+.quiz-desc {font-size:15px; font-weight:600; color:#334155; line-height:1.6;}
+.quiz-select {width:100%; border:2px solid #cbd5e1; border-radius:8px; padding:10px; font-weight:800; color:var(--cyan); text-align:center; font-size:15px; margin-top:auto;}
+.quiz-select.correct {background-color:#dcfce7 !important; border-color:#22c55e !important; color:#15803d;}
+.quiz-select.wrong {animation:shake 0.4s; background-color:#fee2e2 !important; border-color:#ef4444 !important; color:#b91c1c;}
+
+.check-btn {display:block; margin:20px auto 0; background:var(--blue); color:#fff; border-radius:99px; padding:12px 28px; font-weight:900; font-size:16px;}
+.success-msg {display:none; text-align:center; color:var(--green); font-weight:900; font-size:18px; margin-top:16px; animation:appear .3s;}
+@keyframes shake {0%{transform:translateX(0);} 25%{transform:translateX(-5px);} 50%{transform:translateX(5px);} 75%{transform:translateX(-5px);} 100%{transform:translateX(0);}}
+
+/* REFLEKSI STYLES */
+.robot-box {display:flex; align-items:center; gap:20px; background:#e0e7ff; padding:24px; border-radius:16px; border:2px solid #c7d2fe; margin-top:32px;}
+.robot-icon {font-size:64px; flex-shrink:0; background:#fff; width:90px; height:90px; border-radius:50%; display:grid; place-items:center; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+.robot-msg {font-size:16px; line-height:1.7; color:#312e81; font-weight:600;}
+
+@media(max-width:800px){
+ .appbar{flex-wrap:wrap}.brand{width:100%;text-align:center}
+ .sheet{padding:18px;border-radius:18px}
+ .hero{grid-template-columns:1fr}.idgrid{grid-template-columns:1fr}
+ .quiz-grid {grid-template-columns:1fr;}
+ .robot-box {flex-direction:column; text-align:center;}
+}
+@media print{
+ .appbar,.progress,.actions,.modal,.teacher-tools,.check-btn,.mission{display:none!important}
+ body{background:#fff}.sheet{box-shadow:none;width:210mm;margin:0;border-radius:0;}
+ .game-level.locked {opacity:1; filter:none;} .lock-overlay{display:none;}
+ input,textarea,select{border:0!important;box-shadow:none!important;}
+}
+</style>
+</head>
+<body>
+<div class="appbar">
+  <div class="brand">📚 LEMBAR KERJA MURID DIGITAL</div>
+  <button class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+  <button class="btn-green" id="sendBtn">📤 Kirim Lembar Kerja</button>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge" style="background:var(--cyan);">LEMBAR KERJA 2.3</span>
+      <h1>Refleksi Teknologi Digital</h1>
+      <p><b>Koding • Kelas V</b></p>
+      <p>Setelah belajar tentang teknologi analog dan digital, mari kita berhenti sejenak dan merenungkan manfaat serta dampaknya bagi kehidupan kita.</p>
+      <div class="idgrid">
+        <div class="field"><label>Nama Lengkap Siswa <span style="color:red">*</span></label><input name="nama" placeholder="Tuliskan nama lengkap..." required autocomplete="name"></div>
+        <div class="field"><label>Hari / Tanggal <span style="color:red">*</span></label><input name="tanggal" placeholder="Contoh: Senin, 11 Agustus 2026" required></div>
+        <div class="field"><label>Mata Pelajaran</label><input name="mapel" value="Koding" readonly></div>
+        <div class="field"><label>Materi Pokok</label><input name="materi" value="Refleksi Teknologi Digital" readonly></div>
+      </div>
+    </div>
+    <div class="mission">
+      <div class="mission-icon">🤔💡</div>
+      <b>🎯 Misi Refleksi</b>
+      <p>Selesaikan kuis analisis dampak untuk membuka ruang refleksi pemikiranmu!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZONA KUIS PEMANASAN ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--cyan);">1</div><h2>Kuis Analisis Dampak</h2></div>
+  <div class="tip" style="background:#f0fdfa; border-left-color:#2dd4bf;">
+    💡 <b>Tantangan Pembuka:</b> Tentukan apakah kejadian di bawah ini merupakan <b>Dampak Positif</b> (menguntungkan) atau <b>Dampak Negatif</b> (merugikan) dari teknologi digital. Jawab dengan benar untuk membuka gembok!
+  </div>
+
+  <div class="game-level unlocked" id="quizLevel">
+    <div class="quiz-grid">
+      <div class="quiz-card">
+        <div class="quiz-desc">Bermain *game online* di ponsel pintar sampai lupa waktu untuk belajar dan mengerjakan PR.</div>
+        <select class="quiz-select" name="q_1" data-ans="Negatif">
+          <option value="">-- Pilih Dampak --</option><option value="Positif">Dampak Positif ✅</option><option value="Negatif">Dampak Negatif ❌</option>
+        </select>
+      </div>
+      
+      <div class="quiz-card">
+        <div class="quiz-desc">Mencari informasi tambahan di internet untuk menyelesaikan tugas presentasi sekolah.</div>
+        <select class="quiz-select" name="q_2" data-ans="Positif">
+          <option value="">-- Pilih Dampak --</option><option value="Positif">Dampak Positif ✅</option><option value="Negatif">Dampak Negatif ❌</option>
+        </select>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-desc">Menatap layar gawai terlalu lama tanpa istirahat hingga mata terasa pedih dan lelah.</div>
+        <select class="quiz-select" name="q_3" data-ans="Negatif">
+          <option value="">-- Pilih Dampak --</option><option value="Positif">Dampak Positif ✅</option><option value="Negatif">Dampak Negatif ❌</option>
+        </select>
+      </div>
+
+      <div class="quiz-card">
+        <div class="quiz-desc">Mengirim pesan dengan cepat menggunakan aplikasi obrolan kepada keluarga yang ada di luar kota.</div>
+        <select class="quiz-select" name="q_4" data-ans="Positif">
+          <option value="">-- Pilih Dampak --</option><option value="Positif">Dampak Positif ✅</option><option value="Negatif">Dampak Negatif ❌</option>
+        </select>
+      </div>
+    </div>
+    
+    <button type="button" class="check-btn" onclick="checkQuiz()" style="background:var(--cyan);">Cek Kemampuan Analisis!</button>
+    <div class="success-msg" id="msgQuiz">🎉 Hebat! Kamu sudah paham dampaknya. Gembok Ruang Refleksi telah terbuka! 👇</div>
+  </div>
+</section>
+
+<!-- ================= ZONA AKTIVITAS UTAMA ================= -->
+<section class="sheet game-level locked" id="mainTaskLevel" style="background:#fff; border:2px solid var(--purple);">
+  <div class="lock-overlay" style="background:rgba(255,255,255,0.9);"><div class="lock-icon">🔒</div><b>Ruang Refleksi Terkunci</b><p>Selesaikan Kuis Analisis Dampak di atas terlebih dahulu!</p></div>
+  
+  <div class="section-title"><div class="num" style="background:var(--purple);">2</div><h2>Aktivitas 3: Refleksi Teknologi Digital</h2></div>
+  <p>Mari kita berhenti sejenak dan berpikir tentang apa yang sudah kamu pelajari. Jawablah setiap pertanyaan di bawah ini dengan jujur, jelas, dan terperinci.</p>
+
+  <div class="field" style="margin-bottom:24px;">
+    <label style="font-size:15px;">1. Jika kamu harus memilih <b>satu teknologi digital yang paling penting</b> untuk kamu, apa pilihanmu? Jelaskan alasanmu mengapa memilih teknologi digital tersebut!</label>
+    <textarea name="esai_1" rows="4" placeholder="Tuliskan pilihan alat digitalmu dan alasannya di sini..."></textarea>
+  </div>
+  
+  <div class="field" style="margin-bottom:24px;">
+    <label style="font-size:15px;">2. Berdasarkan apa yang kamu temukan dan pelajari, sebutkan masing-masing <b>dampak positif</b> dan <b>dampak negatif</b> dari penggunaan teknologi digital di rumah atau di sekolah!</label>
+    <textarea name="esai_2" rows="5" placeholder="Sebutkan dampak positif dan dampak negatifnya di sini..."></textarea>
+  </div>
+
+  <p style="text-align:center; color:#475569; font-style:italic; margin-top:20px;">"Dengan merenung, kita bisa lebih menghargai betapa pentingnya teknologi digital dalam membantu kita belajar, berkomunikasi, dan melakukan berbagai aktivitas lainnya."</p>
+
+  <div class="robot-box">
+    <div class="robot-icon">🤖</div>
+    <div class="robot-msg">
+      Teknologi digital membuat banyak hal lebih mudah dan cepat, tetapi kita juga harus tahu cara menggunakannya dengan bijak.<br><br>
+      Jadi, mari kita sama-sama belajar menggunakan teknologi digital dengan hati-hati dan memaksimalkan manfaatnya dalam kehidupan sehari-hari!
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:40px;">
+    <button type="button" class="btn-cyan" id="sendBtn2">📤 Kirim Lembar Refleksi ke Guru</button>
+  </div>
+  <p class="footer-note">Hasil jawaban kuis dan lembar refleksimu akan dibaca dan dinilai oleh gurumu.</p>
+</section>
+</form>
+
+<!-- PANEL PENILAIAN GURU (SINKRONISASI GOOGLE SHEETS) -->
+<section class="sheet grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Penilaian Guru</h2></div>
+  <div class="teacher-status" id="teacherStatus">⏳ <b>Sinkronisasi server...</b> Memeriksa data penilaian.</div>
+
+  <div style="background:#fff; border:1px solid #cbd5e1; padding:16px; border-radius:12px; margin-bottom:20px;">
+    <b>Hasil Kuis Analisis Dampak (Auto-Koreksi):</b><br>
+    <div id="autoGradeResult" style="margin-top:8px; line-height: 1.8; font-size: 14px;">⏳ Memuat hasil kuis...</div>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Evaluasi Pemahaman Reflektif (Manual)</label>
+      <select id="gradeScale" class="grade-select" disabled>
+        <option value="">Pilih skala</option>
+        <option value="A">A — Sangat Baik (Mampu merumuskan argumen dan menyadari dampak teknologi dengan sangat kritis)</option>
+        <option value="B">B — Baik (Mampu menguraikan alasan dan menyebutkan dampak dengan baik)</option>
+        <option value="C">C — Cukup (Jawaban refleksi terlalu singkat atau kurang tepat konteksnya)</option>
+        <option value="D">D — Kurang (Belum memahami dampak positif/negatif teknologi)</option>
+      </select>
+      <div class="star-rating" id="starRating" aria-label="Rating bintang">☆☆☆☆</div>
+      <div class="scale-hint">A = 4 ⭐ • B = 3 ⭐ • C = 2 ⭐ • D = 1 ⭐</div>
+    </div>
+    <div class="field"><label>Catatan / Umpan Balik Guru</label><textarea id="gradeNote" rows="4" placeholder="Tuliskan umpan balik untuk tulisan reflektif siswa..." disabled></textarea></div>
+  </div>
+  <div class="teacher-tools">
+    <button type="button" class="btn-cyan" id="lockGradeBtn" disabled>🔒 Simpan & Kunci Penilaian</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbze-pehjnDPj3b3nrufGYQj_OPcNf3HtPbturxA4gH8zxpsnSlikGf0kS7WwkIz-drY0Q/exec';
+const SUBJECT='Koding';
+const FOLDER_NAME='KODING';
+const LKPD_ID='2.3_Refleksi_Teknologi';
+const form=document.getElementById("lkpd"), modal=document.getElementById("modal"), modalBody=document.getElementById("modalBody");
+const STORAGE="lkpd_koding_2_3";
+const SUBMISSION_ID=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"SUB-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+
+// GAME LOGIC
+function checkQuiz() {
+  let selects = document.querySelectorAll('#quizLevel .quiz-select:not([readonly])');
+  let allCorrect = true;
+  selects.forEach(sel => {
+    sel.classList.remove('correct', 'wrong');
+    let studentAns = sel.value;
+    let trueAns = sel.dataset.ans;
+    
+    if (studentAns === trueAns) { 
+      sel.classList.add('correct'); 
+    } else {
+      sel.classList.add('wrong'); allCorrect = false;
+      setTimeout(()=> sel.classList.remove('wrong'), 500); 
+    }
+  });
+
+  if (allCorrect) {
+    document.getElementById('mainTaskLevel').classList.remove('locked'); 
+    document.getElementById('mainTaskLevel').classList.add('unlocked');
+    document.getElementById('msgQuiz').style.display = 'block';
+    document.getElementById('quizLevel').classList.add('completed');
+  }
+}
+
+function fields(){return [...form.querySelectorAll("input,textarea,select")]}
+function collect(){const data={};fields().forEach(el=>data[el.name]=el.value);data.savedAt=new Date().toISOString();return data}
+function saveDraft(){
+  localStorage.setItem(STORAGE,JSON.stringify(collect()));
+  showModal("<div style='font-size:48px'>💾</div><h3>Draf Tersimpan</h3><p>Isianmu tersimpan di perangkat ini.</p><button class='btn-green' onclick='closeModal()'>Lanjut</button>");
+}
+function loadDraft(){try{const d=JSON.parse(localStorage.getItem(STORAGE)||"null");if(!d)return;fields().forEach(el=>{if(d[el.name]!==undefined && !el.readOnly)el.value=d[el.name]})}catch(e){}}
+function updateProgress(){const f=fields().filter(x=>!x.readOnly);let filled=0;f.forEach(x=>{if(String(x.value||"").trim())filled++});document.getElementById("progressBar").style.width=(f.length?Math.round(filled/f.length*100):0)+"%"}
+function showModal(html){modalBody.innerHTML=html;modal.style.display="grid"} function closeModal(){modal.style.display="none"}
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function base64Encode(text){const bytes=new TextEncoder().encode(text);let binary="";for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary)}
+
+function teacherOnlyScript(){
+ const ep=ENDPOINT,sub=SUBJECT,folder=FOLDER_NAME,lid=LKPD_ID,sid=SUBMISSION_ID;
+ return `(function(){
+  const ENDPOINT='${ep}',SUBJECT='${sub}',FOLDER_NAME='${folder}',LKPD_ID='${lid}',SUBMISSION_ID='${sid}';
+  const key='lkpd_grade_'+LKPD_ID+'_'+SUBJECT.replace(/\\s+/g,'_')+'_'+SUBMISSION_ID;
+  
+  const scale=document.getElementById('gradeScale'),note=document.getElementById('gradeNote'),lockBtn=document.getElementById('lockGradeBtn'),status=document.getElementById('teacherStatus'),stars=document.getElementById('starRating');
+  let locked=localStorage.getItem(key+'_locked')==='1'; 
+
+  // KOREKSI OTOMATIS KUIS
+  const keys = { q_1: "Negatif", q_2: "Positif", q_3: "Negatif", q_4: "Positif" };
+  const labels = { q_1: "Main Game Lupa Waktu", q_2: "Cari Info Tugas", q_3: "Menatap Layar Lama", q_4: "Kirim Pesan Cepat" };
+  let correctRows = 0;
+  let htmlFeedback = "";
+  
+  Object.keys(keys).forEach(k => {
+    let val = (document.querySelector("select[name='"+k+"']")?.value || "");
+    if(val === keys[k]) { correctRows++; htmlFeedback += labels[k] + ": ✅ | "; } 
+    else { htmlFeedback += labels[k] + ": ❌ | "; }
+  });
+  
+  document.getElementById('autoGradeResult').innerHTML = "<b>Skor Kuis Dampak: " + correctRows + " / 4 Benar</b><br><span style='color:#64748b; font-size:12px;'>" + htmlFeedback + "</span>";
+
+  function renderStars(v){const n={A:4,B:3,C:2,D:1}[v]||0;stars.textContent='★'.repeat(n)+'☆'.repeat(4-n);stars.style.color=n?'#f59e0b':'#cbd5e1';}
+  
+  function applyState(){
+    if (locked) {
+      scale.disabled = true; note.disabled = true; note.readOnly = true;
+      lockBtn.disabled = true; lockBtn.textContent = '🔒 Penilaian Tersimpan';
+      status.innerHTML = '🔒 <b>Penilaian dikunci.</b> Nilai tersinkronisasi dengan Google Sheets.';
+    } else {
+      scale.disabled = false; note.disabled = false; note.readOnly = false;
+      lockBtn.disabled = false; lockBtn.textContent = '🔒 Simpan & Kunci Nilai';
+      status.innerHTML = '📝 <b>Silakan periksa jawaban esai refleksi siswa, lalu berikan penilaian akhir.</b>';
+    }
+    renderStars(scale.value);
+  }
+
+  async function fetchGradeFromServer() {
+    try {
+      const response = await fetch(ENDPOINT + "?action=getGrade&submissionId=" + SUBMISSION_ID);
+      const result = await response.json();
+      if (result.status === 'success' && result.scale) {
+        scale.value = result.scale; note.value = result.note; locked = true; 
+        localStorage.setItem(key+'_locked','1'); localStorage.setItem(key, JSON.stringify({scale: result.scale, note: result.note}));
+      } else {
+        let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+        scale.value=d.scale||''; note.value=d.note||'';
+      }
+    } catch (error) {
+      let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+      scale.value=d.scale||''; note.value=d.note||'';
+    }
+    applyState();
+  }
+
+  fetchGradeFromServer();
+  scale.addEventListener("change",()=>{renderStars(scale.value);});
+
+  lockBtn.onclick=async()=>{
+    if(locked)return;
+    if(!scale.value){alert('Pilih skala penilaian A, B, C, atau D terlebih dahulu.');return;}
+    status.innerHTML="⏳ <b>Menyimpan penilaian...</b> Mengirim data ke server.";
+    lockBtn.disabled=true; scale.disabled=true; note.disabled=true;
+    try{
+      const nama=(document.querySelector("input[name='nama']")?.value||'Siswa').trim();
+      const payload={action:'saveGrade',studentName:nama,subject:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,scale:scale.value,rating:{A:4,B:3,C:2,D:1}[scale.value],note:note.value};
+      await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+      localStorage.setItem(key,JSON.stringify({scale:scale.value,note:note.value}));
+      localStorage.setItem(key+'_locked','1'); locked=true; applyState();
+      alert('Penilaian berhasil dikunci dan dikirim ke Server.');
+    }catch(e){
+      alert('Gagal menyimpan ke server. Periksa koneksi internet Anda.'); applyState(); 
+    }
+  };
+ })();`;
+}
+
+function buildFinalHTML(){
+ const currentData = collect(); 
+ const clone=document.documentElement.cloneNode(true);
+ clone.querySelectorAll(".appbar,.progress,.actions,.modal,.check-btn").forEach(el=>el.remove());
+ const teacherScript=clone.ownerDocument.createElement("script");
+ teacherScript.textContent=teacherOnlyScript();
+ clone.querySelectorAll("script").forEach(el=>el.remove());
+ clone.querySelector("body").appendChild(teacherScript);
+ clone.querySelectorAll("*").forEach(el=>[...el.attributes].forEach(a=>{if(a.name.toLowerCase().startsWith("on"))el.removeAttribute(a.name)}));
+ 
+ clone.querySelectorAll("input,textarea,select").forEach(el=>{
+  if(el.closest("#gradePanel")) return;
+  const value = currentData[el.name] || "";
+  if(el.tagName.toLowerCase()==="textarea") { el.textContent = value; } 
+  else if(el.tagName.toLowerCase()==="select") {
+    [...el.options].forEach(o=>o.removeAttribute("selected"));
+    const opt=[...el.options].find(o=>o.value===value);
+    if(opt) opt.setAttribute("selected","selected");
+  } else { el.setAttribute("value", value); }
+  el.setAttribute("readonly","readonly"); el.setAttribute("disabled","disabled");
+ });
+ 
+ clone.querySelectorAll('.game-level').forEach(el=>{el.classList.remove('locked'); el.classList.add('unlocked');});
+ const panel=clone.querySelector("#gradePanel"); if(panel){panel.classList.remove("show");panel.style.display="block"}
+ const banner=clone.ownerDocument.createElement("div");banner.className="submitted-banner";
+ const nama=(form.elements.nama?.value||"Siswa").trim();
+ banner.innerHTML="✅ LEMBAR REFLEKSI DIKIRIM<small>Nama: "+esc(nama)+" • "+new Date().toLocaleString("id-ID")+" • ID: "+esc(SUBMISSION_ID)+"</small>";
+ clone.querySelector("body").insertBefore(banner,clone.querySelector("body").firstChild);
+ return "<!doctype html>\n"+clone.outerHTML;
+}
+
+async function sendToGoogleDrive(){
+ const nama=(form.elements.nama?.value||"Siswa").trim().replace(/[\\/:*?"<>|]/g,"_")||"Siswa";
+ const finalHTML=buildFinalHTML();
+ const filename="LKPD_"+LKPD_ID+"_Koding_"+nama+".html";
+ const payload={action:"saveHTML",filename,studentName:nama,subject:SUBJECT,mapel:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,htmlBase64:base64Encode(finalHTML),data:collect()};
+ await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+ const blob=new Blob([finalHTML],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+ localStorage.removeItem(STORAGE);
+}
+
+function focusIdentity(){
+ const el=form.elements.nama?.value.trim()?form.elements.tanggal:form.elements.nama;
+ el?.focus(); el?.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function confirmSend(){
+ const nama=(form.elements.nama?.value||"").trim();
+ const tanggal=(form.elements.tanggal?.value||"").trim();
+ if(!nama || !tanggal){
+   const belum=[]; if(!nama) belum.push("Nama Lengkap Siswa"); if(!tanggal) belum.push("Hari / Tanggal");
+   showModal("<div style='font-size:46px'>📝</div><h3>Identitas Belum Lengkap</h3><p>Sebelum mengirim, identitas pada halaman 1 wajib diisi.</p><div class='tip' style='text-align:left'><b>Belum diisi:</b><br>• "+esc(belum.join("<br>• "))+"</div><button class='btn-green' onclick='closeModal();focusIdentity()'>Lengkapi Identitas</button>");
+   return;
+ }
+ showModal("<div style='font-size:46px'>📤</div><h3>Kirim Hasil Refleksi?</h3><p>Pastikan kamu sudah menjawab kedua pertanyaan refleksi.</p><p>Hasil ini akan dikunci dan dikirim ke guru.</p><button class='btn-light' onclick='closeModal()'>Periksa Lagi</button> <button class='btn-cyan' id='yesSend'>Ya, Kirim</button>");
+ 
+ document.getElementById("yesSend").onclick=async()=>{
+   showModal("<div class='spinner'></div><h3>Mengirim Jawaban…</h3><p>Mohon tunggu.</p>");
+   try{
+     await sendToGoogleDrive();
+     fields().forEach(el=>{el.setAttribute("readonly","readonly");el.setAttribute("disabled","disabled");});
+     document.getElementById("sendBtn").style.display="none";
+     document.getElementById("sendBtn2").style.display="none";
+     document.getElementById("saveBtn").style.display="none";
+     showModal("<div style='font-size:52px'>✅</div><h3>Lembar Refleksi Berhasil Dikirim</h3><p>Kerja bagus! Hasil refleksimu sudah diamankan.</p><button class='btn-green' onclick='closeModal()'>Selesai</button>");
+   }catch(err){
+     showModal("<div style='font-size:52px'>⚠️</div><h3>Koneksi Terputus</h3><p>"+esc(err)+"</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+   }
+ }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+ loadDraft();updateProgress();fields().forEach(el=>{el.addEventListener("input",updateProgress);el.addEventListener("change",updateProgress)});
+ const save=document.getElementById("saveBtn");if(save)save.onclick=saveDraft;
+ const send=document.getElementById("sendBtn");if(send)send.onclick=confirmSend;
+ const send2=document.getElementById("sendBtn2");if(send2)send2.onclick=confirmSend;
+});
+</script>
+</body>
+</html>
