@@ -1,1 +1,544 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V2.0 (SYNC CLOUD) — MATEMATIKA KELAS IV (AKM NUMERASI) -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD Matematika - Analisis Pemecahan Masalah (AKM)</title>
+<style>
+:root{--green:#0b9f75;--green2:#087f60;--mint:#e9fbf5;--pink:#ffdfe4;--ink:#24313a;--muted:#64748b;--yellow:#fef08a;--line:#e5e7eb;--white:#fff;--blue:#2563eb;--gold:#f59e0b;--orange:#f97316;--red:#ef4444}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#eefcf7,#fff7f8 55%,#eef6ff);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.45;pointer-events:none}
+body:before{width:180px;height:180px;background:#bff4df;left:-70px;top:120px;animation:float1 7s ease-in-out infinite}
+body:after{width:150px;height:150px;background:#ffd4dc;right:-50px;bottom:100px;animation:float2 9s ease-in-out infinite}
+.appbar{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;padding:12px 16px;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid #dfe7e4}
+.brand{font-weight:900;color:var(--green2);margin-right:auto}
+button{border:0;border-radius:12px;padding:10px 15px;font-weight:800;cursor:pointer;transition:.2s transform,.2s box-shadow}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #00000012}
+button:active{transform:scale(.98)}
+.btn-light{background:#f1f5f9;color:#334155}.btn-green{background:var(--green);color:#fff}.btn-blue{background:var(--blue);color:#fff}.btn-orange{background:var(--orange);color:#fff}
+.progress{height:5px;background:#dcefe9}.progress i{display:block;height:100%;width:0;background:var(--green);transition:.25s}
+.sheet{width:min(1000px,calc(100% - 24px));margin:18px auto;background:#fff;border-radius:24px;box-shadow:0 12px 35px #24483b16;padding:28px}
+.hero{display:grid;grid-template-columns:1.7fr .8fr;gap:20px;align-items:stretch}
+.hero-card{background:linear-gradient(135deg,#fffbeb,#fff0f3);border-radius:22px;padding:28px}
+.badge{display:inline-block;background:var(--orange);color:#fff;padding:7px 12px;border-radius:999px;font-weight:900;font-size:13px}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.05;margin:16px 0 8px} h2{margin:0} p{line-height:1.75}
+.mission{background:#fff7ed;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center;text-align:center;font-size:18px;border:2px dashed #fed7aa;}
+.mission-icon{font-size:64px;animation:bob 2.8s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+.idgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.field label{display:block;font-size:13px;font-weight:900;color:#475569;margin-bottom:6px}
+input:not([type="checkbox"]),textarea,select{width:100%;font:inherit;border:2px solid #dbe4e1;border-radius:13px;padding:12px 14px;outline:none;background:#fff; transition:.2s;}
+input:not([type="checkbox"]):focus,textarea:focus,select:focus{border-color:var(--orange);box-shadow:0 0 0 3px #fdba7440}
+.idgrid input{min-height:52px;min-width:0}.idgrid .field{min-width:0}
+.section-title{display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--mint);padding-bottom:12px;margin-bottom:18px}
+.num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:#fff;font-weight:900;flex:0 0 auto}
+.tip{background:#fff9d6;border-left:5px solid #f2d73a;padding:14px 16px;border-radius:12px;margin:18px 0;line-height:1.6}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 8px}
+.footer-note{text-align:center;color:var(--muted);font-size:13px}
+.modal{position:fixed;inset:0;background:#0f172a88;display:none;place-items:center;z-index:50;padding:18px}
+.modal-card{width:min(560px,100%);background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 20px 60px #0003}
+.spinner{width:42px;height:42px;border:5px solid #dbeee8;border-top-color:var(--green);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.submitted-banner{margin:16px auto;max-width:900px;background:var(--green2);color:#fff;padding:14px 18px;border-radius:16px;text-align:center;font-weight:900}
+.submitted-banner small{display:block;font-weight:600;margin-top:4px}
+.grade-panel{display:none;background:#f8fafc;border:2px solid #dbe4e1;border-radius:20px;padding:20px;margin:18px auto;max-width:900px}
+.grade-panel.show{display:block;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grade-grid textarea{min-height:90px}
+.teacher-tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.teacher-status{background:#fff9d6;border-left:5px solid #f2d73a;border-radius:12px;padding:11px 14px;margin:0 0 16px;font-size:14px}
+.grade-select{width:100%;min-height:50px;border:2px solid #dbe4e1;border-radius:13px;padding:10px 14px;font:inherit;font-weight:800;background:#fff}
+.star-rating{font-size:34px;letter-spacing:4px;text-align:center;margin:14px 0 4px;line-height:1;color:#cbd5e1}
 
+/* GAME LEVEL STYLES */
+.game-level {position:relative; background:#f8fafc; border:2px solid #cbd5e1; border-radius:16px; padding:24px; margin-bottom:24px; transition:all .3s;}
+.game-level.locked {opacity:0.6; pointer-events:none; filter:grayscale(100%);}
+.lock-overlay {position:absolute; inset:0; background:rgba(248, 250, 252, 0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:14px;}
+.lock-icon {font-size:54px; margin-bottom:8px;}
+.game-level.unlocked .lock-overlay {display:none;}
+.game-level.completed {border-color:var(--green); background:#f0fdf4;}
+.story-box {background:#fff; border-left:4px solid var(--orange); padding:16px; border-radius:8px; margin-bottom:20px; font-size:16px; box-shadow:0 2px 8px rgba(0,0,0,0.05); line-height:1.7;}
+
+/* PGK CHECKBOX STYLES */
+.stmt-container {display:flex; flex-direction:column; gap:12px;}
+.stmt-row {display:flex; align-items:center; background:#fff; border:2px solid #cbd5e1; border-radius:10px; padding:14px 16px; cursor:pointer; transition:.2s;}
+.stmt-row:hover {border-color:#94a3b8; background:#f1f5f9;}
+.stmt-row input[type="checkbox"] {width:24px; height:24px; margin-right:16px; cursor:pointer;}
+.stmt-text {font-size:15px; color:#334155; font-weight:600; line-height:1.5; flex-grow:1;}
+.stmt-row.checked-state {background:#e0f2fe; border-color:var(--blue);}
+.stmt-row.error-state {animation:shake 0.4s; background:#fee2e2; border-color:#ef4444;}
+.stmt-row.success-state {background:#dcfce7; border-color:#22c55e;}
+
+.check-btn {display:block; margin:24px auto 0; background:var(--blue); color:#fff; border-radius:99px; padding:12px 28px; font-weight:900; font-size:16px;}
+.success-msg {display:none; text-align:center; color:var(--green); font-weight:900; font-size:18px; margin-top:16px; animation:appear .3s;}
+@keyframes shake {0%{transform:translateX(0);} 25%{transform:translateX(-5px);} 50%{transform:translateX(5px);} 75%{transform:translateX(-5px);} 100%{transform:translateX(0);}}
+
+@media(max-width:700px){
+ .appbar{flex-wrap:wrap}.brand{width:100%;text-align:center}
+ .sheet{padding:18px;border-radius:18px}
+ .stmt-row {padding:12px;}
+ .stmt-text {font-size:14px;}
+}
+@media print{
+ .appbar,.progress,.actions,.modal,.teacher-tools,.check-btn,.mission{display:none!important}
+ body{background:#fff}.sheet{box-shadow:none;width:210mm;margin:0;border-radius:0;}
+ .game-level.locked {opacity:1; filter:none;} .lock-overlay{display:none;}
+ input,textarea,select{border:0!important;box-shadow:none!important;}
+ .stmt-row {border:1px solid #000; break-inside: avoid;}
+}
+</style>
+</head>
+<body>
+<div class="appbar">
+  <div class="brand">📚 LEMBAR KERJA MURID DIGITAL</div>
+  <button class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+  <button class="btn-green" id="sendBtn">📤 Kirim ke Guru</button>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 1.9 (Sesi 2)</span>
+      <h1>Analisis Pemecahan Masalah (AKM)</h1>
+      <p><b>Matematika • Kelas IV</b></p>
+      <p>Uji nalar kritismu! Siapkan kertas buram untuk berhitung manual, lalu analisis pernyataan mana saja yang sesuai dengan hasil perhitunganmu.</p>
+      <div class="idgrid">
+        <div class="field"><label>Nama Lengkap Siswa <span style="color:red">*</span></label><input name="nama" placeholder="Tuliskan nama lengkap..." required autocomplete="name"></div>
+        <div class="field"><label>Hari / Tanggal <span style="color:red">*</span></label><input name="tanggal" placeholder="Contoh: Senin, 11 Agustus 2026" required></div>
+        <div class="field"><label>Mata Pelajaran</label><input name="mapel" value="Matematika" readonly></div>
+        <div class="field"><label>Materi Pokok</label><input name="materi" value="Analisis Penjumlahan (AKM Numerasi)" readonly></div>
+      </div>
+    </div>
+    <div class="mission">
+      <div class="mission-icon">📝🧠</div>
+      <b>🎯 Misi Detektif Angka</b>
+      <p>Hitung di kertasmu, lalu centang (☑) SEMUA pernyataan yang BENAR!</p>
+    </div>
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num">★</div><h2>Pilihan Ganda Kompleks</h2></div>
+  <div class="tip">💡 <b>Cara Mengerjakan:</b> Baca ceritanya, hitung jumlahnya menggunakan cara susun pendek di kertas kotretanmu. Setelah ketemu hasilnya, centang pernyataan yang bernilai BENAR. <b>(Jawaban benar bisa lebih dari satu!)</b></div>
+
+  <!-- LEVEL 1 -->
+  <div class="game-level unlocked" id="level1">
+    <div class="badge" style="background:var(--blue);margin-bottom:12px;">LEVEL 1</div>
+    <div class="story-box"><b>Koperasi Sekolah:</b> Koperasi SD Sukahaji menjual 348 buku tulis di bulan Agustus dan 275 buku tulis di bulan September.</div>
+    <div class="stmt-container" id="grp1">
+      <label class="stmt-row"><input type="checkbox" name="q1_1" data-ans="true"><span class="stmt-text">Penjualan buku tulis pada bulan Agustus lebih banyak dari bulan September.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q1_2" data-ans="false"><span class="stmt-text">Total buku tulis yang terjual selama dua bulan adalah 613 buku.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q1_3" data-ans="true"><span class="stmt-text">Total buku tulis yang terjual lebih dari 600 buku.</span></label>
+    </div>
+    <button type="button" class="check-btn" onclick="checkAKM(1)">Cek Analisis</button>
+  </div>
+
+  <!-- LEVEL 2 -->
+  <div class="game-level locked" id="level2">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 2 Terkunci</b></div>
+    <div class="badge" style="background:var(--blue);margin-bottom:12px;">LEVEL 2</div>
+    <div class="story-box"><b>Panen Buah Tradisional:</b> Kebun A memanen 456 buah manggis. Kebun B memanen 187 buah manggis.</div>
+    <div class="stmt-container" id="grp2">
+      <label class="stmt-row"><input type="checkbox" name="q2_1" data-ans="false"><span class="stmt-text">Kebun B memanen buah manggis lebih banyak dari Kebun A.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q2_2" data-ans="true"><span class="stmt-text">Jumlah panen manggis dari kedua kebun seluruhnya adalah 643 buah.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q2_3" data-ans="false"><span class="stmt-text">Jika digabungkan, hasil panen kedua kebun belum mencapai 600 buah.</span></label>
+    </div>
+    <button type="button" class="check-btn" onclick="checkAKM(2)">Cek Analisis</button>
+  </div>
+
+  <!-- LEVEL 3 -->
+  <div class="game-level locked" id="level3">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 3 Terkunci</b></div>
+    <div class="badge" style="background:var(--blue);margin-bottom:12px;">LEVEL 3</div>
+    <div class="story-box"><b>Kunjungan Museum:</b> Pengunjung museum sejarah pada hari Sabtu sebanyak 289 orang, sedangkan pada hari Minggu melonjak menjadi 334 orang.</div>
+    <div class="stmt-container" id="grp3">
+      <label class="stmt-row"><input type="checkbox" name="q3_1" data-ans="true"><span class="stmt-text">Pengunjung paling ramai terjadi pada hari Minggu.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q3_2" data-ans="true"><span class="stmt-text">Total pengunjung museum di akhir pekan tersebut adalah 623 orang.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q3_3" data-ans="true"><span class="stmt-text">Jika digabungkan, total pengunjung selama dua hari tersebut lebih dari 500 orang.</span></label>
+    </div>
+    <button type="button" class="check-btn" onclick="checkAKM(3)">Cek Analisis</button>
+  </div>
+
+  <!-- LEVEL 4 -->
+  <div class="game-level locked" id="level4">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 4 Terkunci</b></div>
+    <div class="badge" style="background:var(--blue);margin-bottom:12px;">LEVEL 4</div>
+    <div class="story-box"><b>Pabrik Sepatu:</b> Sebuah pabrik memproduksi 567 pasang sepatu sekolah dan 248 pasang sepatu olahraga dalam seminggu.</div>
+    <div class="stmt-container" id="grp4">
+      <label class="stmt-row"><input type="checkbox" name="q4_1" data-ans="true"><span class="stmt-text">Pabrik memproduksi lebih banyak sepatu sekolah.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q4_2" data-ans="true"><span class="stmt-text">Total produksi kedua jenis sepatu tersebut adalah 815 pasang.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q4_3" data-ans="false"><span class="stmt-text">Selisih produksi sepatu sekolah dan olahraga hanya sedikit (kurang dari 100 pasang).</span></label>
+    </div>
+    <button type="button" class="check-btn" onclick="checkAKM(4)">Cek Analisis</button>
+  </div>
+
+  <!-- LEVEL 5 -->
+  <div class="game-level locked" id="level5">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 5 Terkunci</b></div>
+    <div class="badge" style="background:var(--blue);margin-bottom:12px;">LEVEL 5</div>
+    <div class="story-box"><b>Peternakan Ikan:</b> Paman memiliki dua kolam. Kolam pertama diisi 398 bibit ikan lele, dan kolam kedua diisi 425 bibit ikan nila.</div>
+    <div class="stmt-container" id="grp5">
+      <label class="stmt-row"><input type="checkbox" name="q5_1" data-ans="false"><span class="stmt-text">Bibit ikan nila lebih sedikit dibandingkan bibit ikan lele.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q5_2" data-ans="true"><span class="stmt-text">Total keseluruhan bibit ikan di kedua kolam adalah 823 ekor.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q5_3" data-ans="false"><span class="stmt-text">Angka ratusan pada hasil penjumlahan kedua kolam tersebut adalah angka 7.</span></label>
+    </div>
+    <button type="button" class="check-btn" onclick="checkAKM(5)">Cek Analisis</button>
+  </div>
+
+  <!-- LEVEL 6 -->
+  <div class="game-level locked" id="level6">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 6 Terkunci</b></div>
+    <div class="badge" style="background:#dc2626;margin-bottom:12px;">LEVEL 6</div>
+    <div class="story-box"><b>Pembuatan Kerajinan:</b> Pengrajin membuat 175 anyaman bambu di minggu pertama. Pada minggu kedua, mereka membuat 246 anyaman.</div>
+    <div class="stmt-container" id="grp6">
+      <label class="stmt-row"><input type="checkbox" name="q6_1" data-ans="true"><span class="stmt-text">Hasil produksi anyaman mengalami peningkatan pada minggu kedua.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q6_2" data-ans="false"><span class="stmt-text">Total anyaman yang dibuat selama dua minggu adalah 411 buah.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q6_3" data-ans="true"><span class="stmt-text">Total produksi anyaman selama dua minggu masih kurang dari 500 buah.</span></label>
+    </div>
+    <button type="button" class="check-btn" style="background:#dc2626;" onclick="checkAKM(6)">Cek Analisis</button>
+  </div>
+
+  <!-- LEVEL 7 -->
+  <div class="game-level locked" id="level7">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 7 Terkunci</b></div>
+    <div class="badge" style="background:#dc2626;margin-bottom:12px;">LEVEL 7</div>
+    <div class="story-box"><b>Penumpang Kereta Api:</b> Kereta tujuan Bandung berangkat pagi membawa 486 penumpang. Kereta siang membawa 358 penumpang.</div>
+    <div class="stmt-container" id="grp7">
+      <label class="stmt-row"><input type="checkbox" name="q7_1" data-ans="true"><span class="stmt-text">Kereta jadwal keberangkatan pagi mengangkut penumpang lebih banyak.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q7_2" data-ans="true"><span class="stmt-text">Total penumpang yang diangkut oleh kedua jadwal kereta adalah 844 orang.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q7_3" data-ans="true"><span class="stmt-text">Nilai tempat puluhan pada total akhir penumpang diisi oleh angka 4.</span></label>
+    </div>
+    <button type="button" class="check-btn" style="background:#dc2626;" onclick="checkAKM(7)">Cek Analisis</button>
+  </div>
+
+  <!-- LEVEL 8 -->
+  <div class="game-level locked" id="level8">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 8 Terkunci</b></div>
+    <div class="badge" style="background:#dc2626;margin-bottom:12px;">LEVEL 8</div>
+    <div class="story-box"><b>Festival Kuliner:</b> Di acara festival, stan satai sukses menjual 259 porsi satai ayam dan 367 porsi satai kambing.</div>
+    <div class="stmt-container" id="grp8">
+      <label class="stmt-row"><input type="checkbox" name="q8_1" data-ans="false"><span class="stmt-text">Satai ayam terjual lebih laris dibandingkan satai kambing.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q8_2" data-ans="true"><span class="stmt-text">Total keseluruhan penjualan satai adalah 626 porsi.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q8_3" data-ans="false"><span class="stmt-text">Hasil penjumlahan porsi satai ayam dan satai kambing merupakan bilangan ganjil.</span></label>
+    </div>
+    <button type="button" class="check-btn" style="background:#dc2626;" onclick="checkAKM(8)">Cek Analisis</button>
+  </div>
+
+  <!-- LEVEL 9 -->
+  <div class="game-level locked" id="level9">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 9 Terkunci</b></div>
+    <div class="badge" style="background:#dc2626;margin-bottom:12px;">LEVEL 9</div>
+    <div class="story-box"><b>Perpustakaan Sekolah:</b> Pustakawan sedang mendata buku. Terdapat 548 buku fiksi (cerita) dan 265 buku non-fiksi (pengetahuan).</div>
+    <div class="stmt-container" id="grp9">
+      <label class="stmt-row"><input type="checkbox" name="q9_1" data-ans="false"><span class="stmt-text">Jumlah buku fiksi dan buku non-fiksi di perpustakaan sama banyak.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q9_2" data-ans="true"><span class="stmt-text">Jumlah seluruh buku yang didata oleh pustakawan adalah 813 buku.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q9_3" data-ans="true"><span class="stmt-text">Jika digabungkan, total kedua jenis buku tersebut jumlahnya lebih dari 800 buku.</span></label>
+    </div>
+    <button type="button" class="check-btn" style="background:#dc2626;" onclick="checkAKM(9)">Cek Analisis</button>
+  </div>
+
+  <!-- LEVEL 10 -->
+  <div class="game-level locked" id="level10">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 10 Terkunci</b></div>
+    <div class="badge" style="background:#991b1b;margin-bottom:12px;">LEVEL 10 (BOS AKHIR)</div>
+    <div class="story-box"><b>Tabungan Siswa:</b> Andi memecahkan celengannya. Ia mendapati uang logam sebanyak 376 keping di celengan pertama, dan 459 keping di celengan kedua.</div>
+    <div class="stmt-container" id="grp10">
+      <label class="stmt-row"><input type="checkbox" name="q10_1" data-ans="true"><span class="stmt-text">Celengan kedua menampung kepingan uang logam lebih banyak.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q10_2" data-ans="true"><span class="stmt-text">Total uang logam Andi dari kedua celengan tersebut adalah 835 keping.</span></label>
+      <label class="stmt-row"><input type="checkbox" name="q10_3" data-ans="true"><span class="stmt-text">Saat dijumlahkan dengan cara bersusun, terjadi teknik menyimpan angka lebih dari satu kali.</span></label>
+    </div>
+    <button type="button" class="check-btn" style="background:#991b1b;" onclick="checkAKM(10)">Kalahkan Bos Terakhir!</button>
+    <div class="success-msg" id="msg10" style="font-size:24px; color:#dc2626;">🎉 SELAMAT! KAMU MENJADI MASTER ANALISIS ANGKA! 🎉</div>
+  </div>
+  
+  <div class="actions" style="margin-top:24px;">
+    <button type="button" class="btn-green" id="sendBtn2">📤 Kirim Hasil Analisis ke Guru</button>
+  </div>
+  <p class="footer-note">Seluruh centang analisismu akan terekam dan dinilai secara otomatis.</p>
+</section>
+</form>
+
+<!-- PANEL PENILAIAN GURU (SINKRONISASI GOOGLE SHEETS) -->
+<section class="sheet grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Penilaian Guru</h2></div>
+  <div class="teacher-status" id="teacherStatus">⏳ <b>Sinkronisasi server...</b> Memeriksa data penilaian.</div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pemahaman Literasi-Numerasi</label>
+      <select id="gradeScale" class="grade-select" disabled>
+        <option value="">Pilih skala</option>
+        <option value="A">A — Sangat Baik (Mampu berhitung mandiri & menganalisis pernyataan sangat tepat)</option>
+        <option value="B">B — Baik (Hanya sedikit keliru menganalisis data pernyataan)</option>
+        <option value="C">C — Cukup (Sering terjebak pada pernyataan pengecoh)</option>
+        <option value="D">D — Kurang (Belum teliti menghitung manual sehingga analisis salah)</option>
+      </select>
+      <div class="star-rating" id="starRating" aria-label="Rating bintang">☆☆☆☆</div>
+      <div class="scale-hint">A = 4 ⭐ • B = 3 ⭐ • C = 2 ⭐ • D = 1 ⭐</div>
+    </div>
+    <div class="field"><label>Catatan / Umpan Balik Guru</label><textarea id="gradeNote" rows="4" placeholder="Tuliskan umpan balik..." disabled></textarea></div>
+  </div>
+  <div class="teacher-tools">
+    <button type="button" class="btn-green" id="lockGradeBtn" disabled>🔒 Simpan & Kunci Penilaian</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbze-pehjnDPj3b3nrufGYQj_OPcNf3HtPbturxA4gH8zxpsnSlikGf0kS7WwkIz-drY0Q/exec';
+const SUBJECT='Matematika';
+const FOLDER_NAME='MATEMATIKA';
+const LKPD_ID='1.9_Sesi2_AKM';
+const form=document.getElementById("lkpd"), modal=document.getElementById("modal"), modalBody=document.getElementById("modalBody");
+const STORAGE="lkpd_mtk_1_9_akm";
+const SUBMISSION_ID=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"SUB-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+
+// SCRIPT UNTUK EFEK KLIK CHECKBOX
+document.querySelectorAll('.stmt-row').forEach(row => {
+  const chk = row.querySelector('input[type="checkbox"]');
+  row.addEventListener('click', (e) => {
+    if(e.target !== chk) chk.checked = !chk.checked;
+    if(chk.checked) row.classList.add('checked-state');
+    else row.classList.remove('checked-state');
+  });
+  chk.addEventListener('change', () => {
+    if(chk.checked) row.classList.add('checked-state');
+    else row.classList.remove('checked-state');
+  });
+});
+
+// AUTO CHECK AKM LOGIC
+function checkAKM(levelNum) {
+  const container = document.getElementById('grp' + levelNum);
+  const rows = container.querySelectorAll('.stmt-row');
+  let allCorrect = true;
+  
+  rows.forEach(row => {
+    const chk = row.querySelector('input[type="checkbox"]');
+    row.classList.remove('error-state', 'success-state');
+    const isCorrect = (chk.checked.toString() === chk.dataset.ans);
+    
+    if(!isCorrect) {
+      allCorrect = false;
+      row.classList.add('error-state');
+      setTimeout(()=> row.classList.remove('error-state'), 500);
+    } else {
+      row.classList.add('success-state');
+    }
+  });
+
+  if (allCorrect) {
+    let nextLevel = document.getElementById('level' + (levelNum + 1));
+    if (nextLevel) { nextLevel.classList.remove('locked'); nextLevel.classList.add('unlocked'); } 
+    if (levelNum === 10) { document.getElementById('msg10').style.display = 'block'; }
+    document.getElementById('level'+levelNum).classList.add('completed');
+    
+    // Disable inputs after correct
+    rows.forEach(row => {
+      row.style.pointerEvents = 'none';
+      row.querySelector('input').disabled = true;
+    });
+    container.nextElementSibling.style.display = 'none'; // hide check button
+  }
+}
+
+function fields(){return [...form.querySelectorAll("input:not([type='checkbox']),textarea,select")]}
+function checkboxes(){return [...form.querySelectorAll("input[type='checkbox']")]}
+function collect(){
+  const data={};
+  fields().forEach(el=>data[el.name]=el.value);
+  checkboxes().forEach(el=>data[el.name]=el.checked);
+  data.savedAt=new Date().toISOString();return data;
+}
+
+function saveDraft(){
+  localStorage.setItem(STORAGE,JSON.stringify(collect()));
+  showModal("<div style='font-size:48px'>💾</div><h3>Draf Tersimpan</h3><p>Pilihanmu tersimpan di perangkat ini.</p><button class='btn-green' onclick='closeModal()'>Lanjut</button>");
+}
+
+function loadDraft(){
+  try{
+    const d=JSON.parse(localStorage.getItem(STORAGE)||"null");if(!d)return;
+    fields().forEach(el=>{if(d[el.name]!==undefined && !el.readOnly)el.value=d[el.name]});
+    checkboxes().forEach(el=>{
+      if(d[el.name]!==undefined){
+        el.checked=d[el.name];
+        if(el.checked) el.closest('.stmt-row').classList.add('checked-state');
+      }
+    });
+  }catch(e){}
+}
+
+function updateProgress(){
+  const f=fields().filter(x=>!x.readOnly);
+  let filled=0;
+  f.forEach(x=>{if(String(x.value||"").trim())filled++});
+  document.getElementById("progressBar").style.width=(f.length?Math.round(filled/f.length*100):0)+"%";
+}
+
+function showModal(html){modalBody.innerHTML=html;modal.style.display="grid"} function closeModal(){modal.style.display="none"}
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function base64Encode(text){const bytes=new TextEncoder().encode(text);let binary="";for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary)}
+
+function freezeValues(clone, currentData){
+ clone.querySelectorAll("input:not([type='checkbox']),textarea,select").forEach(el=>{
+  if(el.closest("#gradePanel")) return;
+  const value = currentData[el.name] || "";
+  if(el.tagName.toLowerCase()==="textarea") { el.textContent = value; } 
+  else if(el.tagName.toLowerCase()==="select") {
+    [...el.options].forEach(o=>o.removeAttribute("selected"));
+    const opt=[...el.options].find(o=>o.value===value);
+    if(opt) opt.setAttribute("selected","selected");
+  } else { el.setAttribute("value", value); }
+  el.setAttribute("readonly","readonly"); el.setAttribute("disabled","disabled");
+ });
+ 
+ clone.querySelectorAll("input[type='checkbox']").forEach(el=>{
+   el.setAttribute("disabled","disabled");
+   if(currentData[el.name]) el.setAttribute("checked","checked");
+ });
+}
+
+function teacherOnlyScript(){
+ const ep=ENDPOINT,sub=SUBJECT,folder=FOLDER_NAME,lid=LKPD_ID,sid=SUBMISSION_ID;
+ return `(function(){
+  const ENDPOINT='${ep}',SUBJECT='${sub}',FOLDER_NAME='${folder}',LKPD_ID='${lid}',SUBMISSION_ID='${sid}';
+  const key='lkpd_grade_'+LKPD_ID+'_'+SUBJECT.replace(/\\s+/g,'_')+'_'+SUBMISSION_ID;
+  
+  const scale=document.getElementById('gradeScale'),note=document.getElementById('gradeNote'),lockBtn=document.getElementById('lockGradeBtn'),status=document.getElementById('teacherStatus'),stars=document.getElementById('starRating');
+  let locked=localStorage.getItem(key+'_locked')==='1'; 
+
+  function renderStars(v){const n={A:4,B:3,C:2,D:1}[v]||0;stars.textContent='★'.repeat(n)+'☆'.repeat(4-n);stars.style.color=n?'#f59e0b':'#cbd5e1';}
+  
+  function applyState(){
+    if (locked) {
+      scale.disabled = true; note.disabled = true; note.readOnly = true;
+      lockBtn.disabled = true; lockBtn.textContent = '🔒 Penilaian Tersimpan';
+      status.innerHTML = '🔒 <b>Penilaian dikunci.</b> Nilai tersinkronisasi dengan Google Sheets.';
+    } else {
+      scale.disabled = false; note.disabled = false; note.readOnly = false;
+      lockBtn.disabled = false; lockBtn.textContent = '🔒 Simpan & Kunci Nilai';
+      status.innerHTML = '📝 <b>Silakan berikan penilaian akhir.</b>';
+    }
+    renderStars(scale.value);
+  }
+
+  async function fetchGradeFromServer() {
+    try {
+      const response = await fetch(ENDPOINT + "?action=getGrade&submissionId=" + SUBMISSION_ID);
+      const result = await response.json();
+      if (result.status === 'success' && result.scale) {
+        scale.value = result.scale; note.value = result.note; locked = true; 
+        localStorage.setItem(key+'_locked','1'); localStorage.setItem(key, JSON.stringify({scale: result.scale, note: result.note}));
+      } else {
+        let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+        scale.value=d.scale||''; note.value=d.note||'';
+      }
+    } catch (error) {
+      let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+      scale.value=d.scale||''; note.value=d.note||'';
+    }
+    applyState();
+  }
+
+  fetchGradeFromServer();
+  scale.addEventListener("change",()=>{renderStars(scale.value);});
+
+  lockBtn.onclick=async()=>{
+    if(locked)return;
+    if(!scale.value){alert('Pilih skala penilaian A, B, C, atau D terlebih dahulu.');return;}
+    status.innerHTML="⏳ <b>Menyimpan penilaian...</b> Mengirim data ke server.";
+    lockBtn.disabled=true; scale.disabled=true; note.disabled=true;
+    try{
+      const nama=(document.querySelector("input[name='nama']")?.value||'Siswa').trim();
+      const payload={action:'saveGrade',studentName:nama,subject:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,scale:scale.value,rating:{A:4,B:3,C:2,D:1}[scale.value],note:note.value};
+      await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+      localStorage.setItem(key,JSON.stringify({scale:scale.value,note:note.value}));
+      localStorage.setItem(key+'_locked','1'); locked=true; applyState();
+      alert('Penilaian berhasil dikunci dan dikirim ke Server.');
+    }catch(e){
+      alert('Gagal menyimpan ke server. Periksa koneksi internet Anda.'); applyState(); 
+    }
+  };
+ })();`;
+}
+
+function buildFinalHTML(){
+ const currentData = collect(); 
+ const clone=document.documentElement.cloneNode(true);
+ clone.querySelectorAll(".appbar,.progress,.actions,.modal,.check-btn").forEach(el=>el.remove());
+ const teacherScript=clone.ownerDocument.createElement("script");
+ teacherScript.textContent=teacherOnlyScript();
+ clone.querySelectorAll("script").forEach(el=>el.remove());
+ clone.querySelector("body").appendChild(teacherScript);
+ clone.querySelectorAll("*").forEach(el=>[...el.attributes].forEach(a=>{if(a.name.toLowerCase().startsWith("on"))el.removeAttribute(a.name)}));
+ 
+ freezeValues(clone, currentData);
+ 
+ clone.querySelectorAll('.game-level').forEach(el=>{
+   el.classList.remove('locked'); el.classList.add('unlocked');
+   const ovr = el.querySelector('.lock-overlay'); if(ovr) ovr.remove();
+ });
+ const panel=clone.querySelector("#gradePanel"); if(panel){panel.classList.remove("show");panel.style.display="block"}
+ const banner=clone.ownerDocument.createElement("div");banner.className="submitted-banner";
+ const nama=(form.elements.nama?.value||"Siswa").trim();
+ banner.innerHTML="✅ LEMBAR ANALISIS AKM DIKIRIM<small>Nama: "+esc(nama)+" • "+new Date().toLocaleString("id-ID")+" • ID: "+esc(SUBMISSION_ID)+"</small>";
+ clone.querySelector("body").insertBefore(banner,clone.querySelector("body").firstChild);
+ return "<!doctype html>\n"+clone.outerHTML;
+}
+
+async function sendToGoogleDrive(){
+ const nama=(form.elements.nama?.value||"Siswa").trim().replace(/[\\/:*?"<>|]/g,"_")||"Siswa";
+ const finalHTML=buildFinalHTML();
+ const filename="LKPD_"+LKPD_ID+"_MTK_"+nama+".html";
+ const payload={action:"saveHTML",filename,studentName:nama,subject:SUBJECT,mapel:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,htmlBase64:base64Encode(finalHTML),data:collect()};
+ await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+ const blob=new Blob([finalHTML],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+ localStorage.removeItem(STORAGE);
+}
+
+function focusIdentity(){
+ const el=form.elements.nama?.value.trim()?form.elements.tanggal:form.elements.nama;
+ el?.focus(); el?.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function confirmSend(){
+ const nama=(form.elements.nama?.value||"").trim();
+ const tanggal=(form.elements.tanggal?.value||"").trim();
+ if(!nama || !tanggal){
+   const belum=[]; if(!nama) belum.push("Nama Lengkap Siswa"); if(!tanggal) belum.push("Hari / Tanggal");
+   showModal("<div style='font-size:46px'>📝</div><h3>Identitas Belum Lengkap</h3><p>Sebelum mengirim, identitas pada halaman 1 wajib diisi.</p><div class='tip' style='text-align:left'><b>Belum diisi:</b><br>• "+esc(belum.join("<br>• "))+"</div><button class='btn-green' onclick='closeModal();focusIdentity()'>Lengkapi Identitas</button>");
+   return;
+ }
+ showModal("<div style='font-size:46px'>📤</div><h3>Kirim Hasil Analisis?</h3><p>Pastikan kamu sudah mengecek kembali jawabanmu.</p><p>Hasil ini akan dikunci dan dikirim ke guru.</p><button class='btn-light' onclick='closeModal()'>Periksa Lagi</button> <button class='btn-green' id='yesSend' style='background:var(--orange);'>Ya, Kirim</button>");
+ 
+ document.getElementById("yesSend").onclick=async()=>{
+   showModal("<div class='spinner'></div><h3>Mengirim Latihan…</h3><p>Mohon tunggu.</p>");
+   try{
+     await sendToGoogleDrive();
+     fields().forEach(el=>{el.setAttribute("readonly","readonly");el.setAttribute("disabled","disabled");});
+     document.getElementById("sendBtn").style.display="none";
+     document.getElementById("sendBtn2").style.display="none";
+     document.getElementById("saveBtn").style.display="none";
+     showModal("<div style='font-size:52px'>✅</div><h3>Latihan Berhasil Dikirim</h3><p>Kerja bagus! Petualangan analisis angkamu sudah selesai.</p><button class='btn-green' onclick='closeModal()'>Selesai</button>");
+   }catch(err){
+     showModal("<div style='font-size:52px'>⚠️</div><h3>Koneksi Terputus</h3><p>"+esc(err)+"</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+   }
+ }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+ loadDraft();updateProgress();fields().forEach(el=>{el.addEventListener("input",updateProgress);el.addEventListener("change",updateProgress)});
+ const save=document.getElementById("saveBtn");if(save)save.onclick=saveDraft;
+ const send=document.getElementById("sendBtn");if(send)send.onclick=confirmSend;
+ const send2=document.getElementById("sendBtn2");if(send2)send2.onclick=confirmSend;
+});
+</script>
+</body>
+</html>
