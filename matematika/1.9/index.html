@@ -1,1 +1,862 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V2.0 (SYNC CLOUD) — MATEMATIKA KELAS IV -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD Matematika - Susun Pendek Teknik Menyimpan</title>
+<style>
+:root{--green:#0b9f75;--green2:#087f60;--mint:#e9fbf5;--pink:#ffdfe4;--ink:#24313a;--muted:#64748b;--yellow:#fef08a;--line:#e5e7eb;--white:#fff;--blue:#2563eb;--gold:#f59e0b;--orange:#f97316;--red:#ef4444}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#eefcf7,#fff7f8 55%,#eef6ff);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.45;pointer-events:none}
+body:before{width:180px;height:180px;background:#bff4df;left:-70px;top:120px;animation:float1 7s ease-in-out infinite}
+body:after{width:150px;height:150px;background:#ffd4dc;right:-50px;bottom:100px;animation:float2 9s ease-in-out infinite}
+.appbar{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;padding:12px 16px;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid #dfe7e4}
+.brand{font-weight:900;color:var(--green2);margin-right:auto}
+button{border:0;border-radius:12px;padding:10px 15px;font-weight:800;cursor:pointer;transition:.2s transform,.2s box-shadow}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #00000012}
+button:active{transform:scale(.98)}
+.btn-light{background:#f1f5f9;color:#334155}.btn-green{background:var(--green);color:#fff}.btn-blue{background:var(--blue);color:#fff}.btn-orange{background:var(--orange);color:#fff}
+.progress{height:5px;background:#dcefe9}.progress i{display:block;height:100%;width:0;background:var(--green);transition:.25s}
+.sheet{width:min(1000px,calc(100% - 24px));margin:18px auto;background:#fff;border-radius:24px;box-shadow:0 12px 35px #24483b16;padding:28px}
+.hero{display:grid;grid-template-columns:1.7fr .8fr;gap:20px;align-items:stretch}
+.hero-card{background:linear-gradient(135deg,#fffbeb,#fff0f3);border-radius:22px;padding:28px}
+.badge{display:inline-block;background:var(--orange);color:#fff;padding:7px 12px;border-radius:999px;font-weight:900;font-size:13px}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.05;margin:16px 0 8px} h2{margin:0} p{line-height:1.75}
+.mission{background:#fff7ed;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center;text-align:center;font-size:18px;border:2px dashed #fed7aa;}
+.mission-icon{font-size:64px;animation:bob 2.8s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+.idgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.field label{display:block;font-size:13px;font-weight:900;color:#475569;margin-bottom:6px}
+input,textarea,select{width:100%;font:inherit;border:2px solid #dbe4e1;border-radius:13px;padding:12px 14px;outline:none;background:#fff; transition:.2s;}
+input:focus,textarea:focus,select:focus{border-color:var(--orange);box-shadow:0 0 0 3px #fdba7440}
+.idgrid input{min-height:52px;min-width:0}.idgrid .field{min-width:0}
+.section-title{display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--mint);padding-bottom:12px;margin-bottom:18px}
+.num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:#fff;font-weight:900;flex:0 0 auto}
+.tip{background:#fff9d6;border-left:5px solid #f2d73a;padding:14px 16px;border-radius:12px;margin:18px 0;line-height:1.6}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 8px}
+.footer-note{text-align:center;color:var(--muted);font-size:13px}
+.modal{position:fixed;inset:0;background:#0f172a88;display:none;place-items:center;z-index:50;padding:18px}
+.modal-card{width:min(560px,100%);background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 20px 60px #0003}
+.spinner{width:42px;height:42px;border:5px solid #dbeee8;border-top-color:var(--green);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.submitted-banner{margin:16px auto;max-width:900px;background:var(--green2);color:#fff;padding:14px 18px;border-radius:16px;text-align:center;font-weight:900}
+.submitted-banner small{display:block;font-weight:600;margin-top:4px}
+.grade-panel{display:none;background:#f8fafc;border:2px solid #dbe4e1;border-radius:20px;padding:20px;margin:18px auto;max-width:900px}
+.grade-panel.show{display:block;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grade-grid textarea{min-height:90px}
+.teacher-tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.teacher-status{background:#fff9d6;border-left:5px solid #f2d73a;border-radius:12px;padding:11px 14px;margin:0 0 16px;font-size:14px}
+.grade-select{width:100%;min-height:50px;border:2px solid #dbe4e1;border-radius:13px;padding:10px 14px;font:inherit;font-weight:800;background:#fff}
+.star-rating{font-size:34px;letter-spacing:4px;text-align:center;margin:14px 0 4px;line-height:1;color:#cbd5e1}
 
+/* GAME LEVEL STYLES */
+.game-level {position:relative; background:#f8fafc; border:2px solid #cbd5e1; border-radius:16px; padding:24px; margin-bottom:24px; transition:all .3s;}
+.game-level.locked {opacity:0.6; pointer-events:none; filter:grayscale(100%);}
+.lock-overlay {position:absolute; inset:0; background:rgba(248, 250, 252, 0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:14px;}
+.lock-icon {font-size:54px; margin-bottom:8px;}
+.game-level.unlocked .lock-overlay {display:none;}
+.game-level.completed {border-color:var(--green); background:#f0fdf4;}
+.story-box {background:#fff; border-left:4px solid var(--orange); padding:16px; border-radius:8px; margin-bottom:20px; font-size:15px; box-shadow:0 2px 8px rgba(0,0,0,0.05); line-height:1.7;}
+
+/* SCAFFOLDING & INPUT STYLES (ENHANCED PADDING/WIDTH) */
+.scaffold-box {background:#fff7ed; padding:16px; border-radius:8px; border:1px solid #fed7aa; margin-bottom:20px;}
+.scaffold-row {display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px; font-weight:700;}
+.scaffold-in {width:65px; height:42px; text-align:center; font-weight:900; border:2px solid #cbd5e1; border-radius:6px; padding:0 2px !important; outline:none; font-size:18px; transition:.2s;}
+.scaffold-select {flex-grow:1; height:42px; border:2px solid #cbd5e1; border-radius:6px; padding:0 10px; font-weight:800; color:var(--blue); font-size:15px; outline:none;}
+.scaffold-in:focus, .scaffold-select:focus {border-color:var(--orange); box-shadow:0 0 0 3px #fdba7440;}
+
+.susun-wrapper {display:flex; justify-content:center;}
+.susun-table {border-collapse:collapse; background:#fff; border:2px solid #94a3b8; width:220px; box-shadow:0 4px 12px rgba(0,0,0,0.08);}
+.susun-table th {border:1px solid #94a3b8; padding:8px 2px; font-size:13px; font-weight:900; color:#334155; text-align:center;}
+.susun-table th.col-r {background:#bae6fd;} /* Biru Ratusan */
+.susun-table th.col-p {background:#bbf7d0;} /* Hijau Puluhan */
+.susun-table th.col-s {background:#fecdd3;} /* Merah Muda Satuan */
+.susun-table td {border:1px solid #94a3b8; padding:6px; position:relative; text-align:center; vertical-align:middle;}
+.susun-table td.col-r {background:#f0f9ff;}
+.susun-table td.col-p {background:#f0fdf4;}
+.susun-table td.col-s {background:#fff1f2;}
+.susun-table .line-row td {border-top:4px solid #0f172a;}
+
+/* THE NEW BIG INPUTS */
+.m-in {width:46px; height:46px; border:2px solid #cbd5e1; background:#fff; padding:0 !important; text-align:center; font-size:26px; font-weight:900; color:#0f172a; border-radius:8px; outline:none; font-family:monospace; margin:0 auto; display:block; transition:.2s;}
+.m-in:focus {border-color:var(--orange); box-shadow:0 0 0 3px #fdba7440;}
+.m-in.final {background:#fef08a;}
+
+/* SIMPANAN CIRCLE INPUTS */
+.simpan-in {width:34px; height:34px; border:2px dashed #ca8a04; background:#fef08a; padding:0 !important; text-align:center; font-size:18px; font-weight:900; color:#854d0e; border-radius:50%; outline:none; margin:0 auto; display:block; transition:.2s;}
+.simpan-in:focus {border-color:#b45309; border-style:solid;}
+
+.sign-plus {position:absolute; right:-28px; bottom:20px; font-size:28px; font-weight:900; color:#0f172a;}
+
+/* VALIDATION FX */
+.scaffold-in.correct, .m-in.correct, .simpan-in.correct, .scaffold-select.correct {background-color:#dcfce7 !important; border-color:#22c55e !important; color:#15803d;}
+.scaffold-in.wrong, .m-in.wrong, .simpan-in.wrong, .scaffold-select.wrong {animation:shake 0.4s; background-color:#fee2e2 !important; border-color:#ef4444 !important; color:#b91c1c;}
+@keyframes shake {0%{transform:translateX(0);} 25%{transform:translateX(-5px);} 50%{transform:translateX(5px);} 75%{transform:translateX(-5px);} 100%{transform:translateX(0);}}
+.check-btn {display:block; margin:24px auto 0; background:var(--blue); color:#fff; border-radius:99px; padding:12px 28px; font-weight:900; font-size:16px;}
+.success-msg {display:none; text-align:center; color:var(--green); font-weight:900; font-size:18px; margin-top:16px; animation:appear .3s;}
+
+@media(max-width:700px){
+ .appbar{flex-wrap:wrap}.brand{width:100%;text-align:center}
+ .sheet{padding:18px;border-radius:18px}
+ .susun-table {width:100%; max-width:260px;}
+ .m-in {width:40px; height:40px; font-size:22px;}
+}
+@media print{
+ .appbar,.progress,.actions,.modal,.teacher-tools,.check-btn,.mission{display:none!important}
+ body{background:#fff}.sheet{box-shadow:none;width:210mm;margin:0;border-radius:0;}
+ .game-level.locked {opacity:1; filter:none;} .lock-overlay{display:none;}
+ input,textarea,select{border:0!important;box-shadow:none!important; padding:0 !important;}
+}
+</style>
+</head>
+<body>
+<div class="appbar">
+  <div class="brand">📚 LEMBAR KERJA MURID DIGITAL</div>
+  <button class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+  <button class="btn-green" id="sendBtn">📤 Kirim ke Guru</button>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 1.9</span>
+      <h1>Susun Pendek & Teknik Menyimpan</h1>
+      <p><b>Matematika • Kelas IV</b></p>
+      <p>Mari belajar menganalisis soal cerita bertema lingkungan, lalu hitung jumlahnya menggunakan cara bersusun pendek dengan teknik menyimpan yang teliti!</p>
+      <div class="idgrid">
+        <div class="field"><label>Nama Lengkap Siswa <span style="color:red">*</span></label><input name="nama" placeholder="Tuliskan nama lengkap..." required autocomplete="name"></div>
+        <div class="field"><label>Hari / Tanggal <span style="color:red">*</span></label><input name="tanggal" placeholder="Contoh: Senin, 11 Agustus 2026" required></div>
+        <div class="field"><label>Mata Pelajaran</label><input name="mapel" value="Matematika" readonly></div>
+        <div class="field"><label>Materi Pokok</label><input name="materi" value="Penjumlahan Susun Pendek (Menyimpan)" readonly></div>
+      </div>
+    </div>
+    <div class="mission">
+      <div class="mission-icon">🕵️️‍♂️➕</div>
+      <b>🎯 Misi Penyelamat Bumi</b>
+      <p>Buka 10 gembok level! Temukan angka dalam cerita lingkungan, lalu jumlahkan dengan teliti.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sheet">
+  <div class="section-title"><div class="num">★</div><h2>Zona Latihan Susun Pendek</h2></div>
+  <div class="tip">💡 <b>Petunjuk:</b> Isi analisis masalah (Diketahui & Ditanyakan). Lalu, masukkan angka ke tabel susun pendek. <b>Jangan lupa mengisi angka pada lingkaran simpanan warna kuning!</b></div>
+
+  <!-- LEVEL 1 -->
+  <div class="game-level unlocked" id="level1">
+    <div class="badge" style="background:var(--blue);margin-bottom:12px;">LEVEL 1</div>
+    <div class="story-box"><b>(Isu Peduli Sampah Plastik)</b> Dalam aksi bersih sungai, Regu Elang berhasil mengumpulkan 258 botol plastik kemasan pada pagi hari. Saat siang hari, mereka menemukan lagi 75 botol plastik. Berapakah jumlah seluruh botol plastik yang berhasil diangkat dari sungai?</div>
+    
+    <div class="scaffold-box">
+      <div style="font-weight:900; margin-bottom:8px; color:var(--orange);">🔎 ANALISIS MASALAH:</div>
+      <div class="scaffold-row">• Botol pagi hari = <input type="tel" class="scaffold-in lvl1" data-ans="258" name="l1_s1"></div>
+      <div class="scaffold-row">• Botol siang hari = <input type="tel" class="scaffold-in lvl1" data-ans="75" name="l1_s2"></div>
+      <div class="scaffold-row" style="margin-top:12px;">• Ditanyakan: 
+        <select class="scaffold-select lvl1" data-ans="ans_benar" name="l1_d">
+          <option value="">-- Pilih yang ditanyakan --</option>
+          <option value="ans_salah1">Selisih botol plastik</option>
+          <option value="ans_benar">Jumlah seluruh botol plastik</option>
+          <option value="ans_salah2">Banyaknya anak pramuka</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="susun-wrapper">
+      <table class="susun-table">
+        <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="col-r"><input type="tel" class="simpan-in lvl1" data-ans="1" name="l1_sr" placeholder="..."></td>
+            <td class="col-p"><input type="tel" class="simpan-in lvl1" data-ans="1" name="l1_sp" placeholder="..."></td>
+            <td class="col-s"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl1" data-ans="2" name="l1_r1"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl1" data-ans="5" name="l1_p1"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl1" data-ans="8" name="l1_sat1"></td>
+          </tr>
+          <tr>
+            <td class="col-r"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl1" data-ans="7" name="l1_p2"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl1" data-ans="5" name="l1_sat2"><span class="sign-plus">+</span></td>
+          </tr>
+          <tr class="line-row">
+            <td class="col-r"><input type="tel" class="m-in final lvl1" data-ans="3" name="l1_rf"></td>
+            <td class="col-p"><input type="tel" class="m-in final lvl1" data-ans="3" name="l1_pf"></td>
+            <td class="col-s"><input type="tel" class="m-in final lvl1" data-ans="3" name="l1_satf"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="check-btn" onclick="checkLevel(1)">Cek Jawaban</button>
+  </div>
+
+  <!-- LEVEL 2 -->
+  <div class="game-level locked" id="level2">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 2 Terkunci</b></div>
+    <div class="badge" style="background:var(--blue);margin-bottom:12px;">LEVEL 2</div>
+    <div class="story-box"><b>(Isu Hemat Energi)</b> Paguyuban pemuda desa telah memasang 186 bohlam LED di jalan poros. Karena masih ada gang gelap, mereka memasang lagi 58 bohlam LED tambahan. Berapakah total bohlam LED hemat energi yang telah terpasang?</div>
+    
+    <div class="scaffold-box">
+      <div style="font-weight:900; margin-bottom:8px; color:var(--orange);">🔎 ANALISIS MASALAH:</div>
+      <div class="scaffold-row">• LED di jalan poros = <input type="tel" class="scaffold-in lvl2" data-ans="186" name="l2_s1"></div>
+      <div class="scaffold-row">• LED tambahan = <input type="tel" class="scaffold-in lvl2" data-ans="58" name="l2_s2"></div>
+      <div class="scaffold-row" style="margin-top:12px;">• Ditanyakan: 
+        <select class="scaffold-select lvl2" data-ans="ans_benar" name="l2_d">
+          <option value="">-- Pilih yang ditanyakan --</option>
+          <option value="ans_benar">Total bohlam LED yang terpasang</option>
+          <option value="ans_salah1">Jumlah pemuda desa</option>
+          <option value="ans_salah2">Sisa bohlam LED yang rusak</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="susun-wrapper">
+      <table class="susun-table">
+        <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="col-r"><input type="tel" class="simpan-in lvl2" data-ans="1" name="l2_sr" placeholder="..."></td>
+            <td class="col-p"><input type="tel" class="simpan-in lvl2" data-ans="1" name="l2_sp" placeholder="..."></td>
+            <td class="col-s"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl2" data-ans="1" name="l2_r1"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl2" data-ans="8" name="l2_p1"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl2" data-ans="6" name="l2_sat1"></td>
+          </tr>
+          <tr>
+            <td class="col-r"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl2" data-ans="5" name="l2_p2"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl2" data-ans="8" name="l2_sat2"><span class="sign-plus">+</span></td>
+          </tr>
+          <tr class="line-row">
+            <td class="col-r"><input type="tel" class="m-in final lvl2" data-ans="2" name="l2_rf"></td>
+            <td class="col-p"><input type="tel" class="m-in final lvl2" data-ans="4" name="l2_pf"></td>
+            <td class="col-s"><input type="tel" class="m-in final lvl2" data-ans="4" name="l2_satf"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="check-btn" onclick="checkLevel(2)">Cek Jawaban</button>
+  </div>
+
+  <!-- LEVEL 3 -->
+  <div class="game-level locked" id="level3">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 3 Terkunci</b></div>
+    <div class="badge" style="background:var(--blue);margin-bottom:12px;">LEVEL 3</div>
+    <div class="story-box"><b>(Isu Literasi)</b> Di posko pustaka keliling sudah tersedia 347 buku dongeng. Hari ini, donasi dari para guru bertambah sebanyak 86 buku bacaan. Berapakah jumlah buku yang siap dikirim ke pelosok?</div>
+    
+    <div class="scaffold-box">
+      <div style="font-weight:900; margin-bottom:8px; color:var(--orange);">🔎 ANALISIS MASALAH:</div>
+      <div class="scaffold-row">• Buku dongeng awal = <input type="tel" class="scaffold-in lvl3" data-ans="347" name="l3_s1"></div>
+      <div class="scaffold-row">• Donasi tambahan guru = <input type="tel" class="scaffold-in lvl3" data-ans="86" name="l3_s2"></div>
+      <div class="scaffold-row" style="margin-top:12px;">• Ditanyakan: 
+        <select class="scaffold-select lvl3" data-ans="ans_benar" name="l3_d">
+          <option value="">-- Pilih yang ditanyakan --</option>
+          <option value="ans_salah1">Jumlah guru yang donasi</option>
+          <option value="ans_salah2">Buku yang rusak</option>
+          <option value="ans_benar">Jumlah buku siap dikirim</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="susun-wrapper">
+      <table class="susun-table">
+        <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="col-r"><input type="tel" class="simpan-in lvl3" data-ans="1" name="l3_sr" placeholder="..."></td>
+            <td class="col-p"><input type="tel" class="simpan-in lvl3" data-ans="1" name="l3_sp" placeholder="..."></td>
+            <td class="col-s"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl3" data-ans="3" name="l3_r1"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl3" data-ans="4" name="l3_p1"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl3" data-ans="7" name="l3_sat1"></td>
+          </tr>
+          <tr>
+            <td class="col-r"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl3" data-ans="8" name="l3_p2"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl3" data-ans="6" name="l3_sat2"><span class="sign-plus">+</span></td>
+          </tr>
+          <tr class="line-row">
+            <td class="col-r"><input type="tel" class="m-in final lvl3" data-ans="4" name="l3_rf"></td>
+            <td class="col-p"><input type="tel" class="m-in final lvl3" data-ans="3" name="l3_pf"></td>
+            <td class="col-s"><input type="tel" class="m-in final lvl3" data-ans="3" name="l3_satf"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="check-btn" onclick="checkLevel(3)">Cek Jawaban</button>
+  </div>
+
+  <!-- LEVEL 4 -->
+  <div class="game-level locked" id="level4">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 4 Terkunci</b></div>
+    <div class="badge" style="background:var(--blue);margin-bottom:12px;">LEVEL 4</div>
+    <div class="story-box"><b>(Isu Peduli Pantai)</b> Kelompok Melati mengumpulkan 429 sedotan plastik di zona utara pantai. Mereka menambahkan lagi 94 sedotan dari area dermaga. Berapakah total sedotan plastik yang dibersihkan?</div>
+    
+    <div class="scaffold-box">
+      <div class="scaffold-row">• Sedotan zona utara = <input type="tel" class="scaffold-in lvl4" data-ans="429" name="l4_s1"></div>
+      <div class="scaffold-row">• Sedotan area dermaga = <input type="tel" class="scaffold-in lvl4" data-ans="94" name="l4_s2"></div>
+      <div class="scaffold-row" style="margin-top:12px;">• Ditanyakan: 
+        <select class="scaffold-select lvl4" data-ans="ans_benar" name="l4_d">
+          <option value="">-- Pilih --</option>
+          <option value="ans_benar">Total sedotan plastik dibersihkan</option>
+          <option value="ans_salah1">Jumlah kelompok Melati</option>
+          <option value="ans_salah2">Sedotan yang tersisa di laut</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="susun-wrapper">
+      <table class="susun-table">
+        <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="col-r"><input type="tel" class="simpan-in lvl4" data-ans="1" name="l4_sr" placeholder="..."></td>
+            <td class="col-p"><input type="tel" class="simpan-in lvl4" data-ans="1" name="l4_sp" placeholder="..."></td>
+            <td class="col-s"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl4" data-ans="4" name="l4_r1"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl4" data-ans="2" name="l4_p1"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl4" data-ans="9" name="l4_sat1"></td>
+          </tr>
+          <tr>
+            <td class="col-r"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl4" data-ans="9" name="l4_p2"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl4" data-ans="4" name="l4_sat2"><span class="sign-plus">+</span></td>
+          </tr>
+          <tr class="line-row">
+            <td class="col-r"><input type="tel" class="m-in final lvl4" data-ans="5" name="l4_rf"></td>
+            <td class="col-p"><input type="tel" class="m-in final lvl4" data-ans="2" name="l4_pf"></td>
+            <td class="col-s"><input type="tel" class="m-in final lvl4" data-ans="3" name="l4_satf"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="check-btn" onclick="checkLevel(4)">Cek Jawaban</button>
+  </div>
+
+  <!-- LEVEL 5 -->
+  <div class="game-level locked" id="level5">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 5 Terkunci</b></div>
+    <div class="badge" style="background:var(--blue);margin-bottom:12px;">LEVEL 5</div>
+    <div class="story-box"><b>(Isu Pangan Lokal)</b> Ibu-ibu dasawisma membuat 565 kemasan keripik singkong. Pada sore hari, mereka menyelesaikan lagi 68 kemasan pesanan pos gizi. Berapa banyak bungkus keripik yang selesai diproduksi?</div>
+    
+    <div class="scaffold-box">
+      <div class="scaffold-row">• Keripik tahap awal = <input type="tel" class="scaffold-in lvl5" data-ans="565" name="l5_s1"></div>
+      <div class="scaffold-row">• Pesanan sore hari = <input type="tel" class="scaffold-in lvl5" data-ans="68" name="l5_s2"></div>
+      <div class="scaffold-row" style="margin-top:12px;">• Ditanyakan: 
+        <select class="scaffold-select lvl5" data-ans="ans_benar" name="l5_d">
+          <option value="">-- Pilih --</option>
+          <option value="ans_salah1">Jumlah pos gizi balita</option>
+          <option value="ans_benar">Bungkus keripik selesai diproduksi</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="susun-wrapper">
+      <table class="susun-table">
+        <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="col-r"><input type="tel" class="simpan-in lvl5" data-ans="1" name="l5_sr" placeholder="..."></td>
+            <td class="col-p"><input type="tel" class="simpan-in lvl5" data-ans="1" name="l5_sp" placeholder="..."></td>
+            <td class="col-s"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl5" data-ans="5" name="l5_r1"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl5" data-ans="6" name="l5_p1"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl5" data-ans="5" name="l5_sat1"></td>
+          </tr>
+          <tr>
+            <td class="col-r"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl5" data-ans="6" name="l5_p2"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl5" data-ans="8" name="l5_sat2"><span class="sign-plus">+</span></td>
+          </tr>
+          <tr class="line-row">
+            <td class="col-r"><input type="tel" class="m-in final lvl5" data-ans="6" name="l5_rf"></td>
+            <td class="col-p"><input type="tel" class="m-in final lvl5" data-ans="3" name="l5_pf"></td>
+            <td class="col-s"><input type="tel" class="m-in final lvl5" data-ans="3" name="l5_satf"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="check-btn" onclick="checkLevel(5)">Cek Jawaban</button>
+  </div>
+
+  <!-- LEVEL 6 -->
+  <div class="game-level locked" id="level6">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 6 Terkunci</b></div>
+    <div class="badge" style="background:#dc2626;margin-bottom:12px;">LEVEL 6 (Ratusan + Ratusan)</div>
+    <div class="story-box"><b>(Isu Penghijauan)</b> Siswa menanam 248 bibit pohon trembesi. Kemudian, ditambah sebanyak 375 bibit pohon mahoni dari dinas. Berapakah jumlah seluruh bibit pohon pelindung yang ditanam?</div>
+    
+    <div class="scaffold-box">
+      <div class="scaffold-row">• Bibit pohon trembesi = <input type="tel" class="scaffold-in lvl6" data-ans="248" name="l6_s1"></div>
+      <div class="scaffold-row">• Bibit pohon mahoni = <input type="tel" class="scaffold-in lvl6" data-ans="375" name="l6_s2"></div>
+      <div class="scaffold-row" style="margin-top:12px;">• Ditanyakan: 
+        <select class="scaffold-select lvl6" data-ans="ans_benar" name="l6_d">
+          <option value="">-- Pilih --</option>
+          <option value="ans_benar">Seluruh bibit pohon ditanam</option>
+          <option value="ans_salah1">Bibit pohon yang mati</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="susun-wrapper">
+      <table class="susun-table">
+        <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="col-r"><input type="tel" class="simpan-in lvl6" data-ans="1" name="l6_sr" placeholder="..."></td>
+            <td class="col-p"><input type="tel" class="simpan-in lvl6" data-ans="1" name="l6_sp" placeholder="..."></td>
+            <td class="col-s"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl6" data-ans="2" name="l6_r1"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl6" data-ans="4" name="l6_p1"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl6" data-ans="8" name="l6_sat1"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl6" data-ans="3" name="l6_r2"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl6" data-ans="7" name="l6_p2"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl6" data-ans="5" name="l6_sat2"><span class="sign-plus">+</span></td>
+          </tr>
+          <tr class="line-row">
+            <td class="col-r"><input type="tel" class="m-in final lvl6" data-ans="6" name="l6_rf"></td>
+            <td class="col-p"><input type="tel" class="m-in final lvl6" data-ans="2" name="l6_pf"></td>
+            <td class="col-s"><input type="tel" class="m-in final lvl6" data-ans="3" name="l6_satf"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="check-btn" style="background:#dc2626;" onclick="checkLevel(6)">Cek Jawaban</button>
+  </div>
+
+  <!-- LEVEL 7 -->
+  <div class="game-level locked" id="level7">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 7 Terkunci</b></div>
+    <div class="badge" style="background:#dc2626;margin-bottom:12px;">LEVEL 7 (Ratusan + Ratusan)</div>
+    <div class="story-box"><b>(Isu Solidaritas)</b> Posko menerima 365 paket makanan siap saji dari pedagang. Malam harinya, PMI mengirim bantuan tambahan 287 paket makanan. Berapa jumlah keseluruhan paket donasi?</div>
+    
+    <div class="scaffold-box">
+      <div class="scaffold-row">• Paket dari pedagang = <input type="tel" class="scaffold-in lvl7" data-ans="365" name="l7_s1"></div>
+      <div class="scaffold-row">• Paket tambahan PMI = <input type="tel" class="scaffold-in lvl7" data-ans="287" name="l7_s2"></div>
+      <div class="scaffold-row" style="margin-top:12px;">• Ditanyakan: 
+        <select class="scaffold-select lvl7" data-ans="ans_benar" name="l7_d">
+          <option value="">-- Pilih --</option>
+          <option value="ans_salah1">Jumlah warga mengungsi</option>
+          <option value="ans_benar">Keseluruhan paket donasi</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="susun-wrapper">
+      <table class="susun-table">
+        <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="col-r"><input type="tel" class="simpan-in lvl7" data-ans="1" name="l7_sr" placeholder="..."></td>
+            <td class="col-p"><input type="tel" class="simpan-in lvl7" data-ans="1" name="l7_sp" placeholder="..."></td>
+            <td class="col-s"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl7" data-ans="3" name="l7_r1"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl7" data-ans="6" name="l7_p1"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl7" data-ans="5" name="l7_sat1"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl7" data-ans="2" name="l7_r2"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl7" data-ans="8" name="l7_p2"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl7" data-ans="7" name="l7_sat2"><span class="sign-plus">+</span></td>
+          </tr>
+          <tr class="line-row">
+            <td class="col-r"><input type="tel" class="m-in final lvl7" data-ans="6" name="l7_rf"></td>
+            <td class="col-p"><input type="tel" class="m-in final lvl7" data-ans="5" name="l7_pf"></td>
+            <td class="col-s"><input type="tel" class="m-in final lvl7" data-ans="2" name="l7_satf"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="check-btn" style="background:#dc2626;" onclick="checkLevel(7)">Cek Jawaban</button>
+  </div>
+
+  <!-- LEVEL 8 -->
+  <div class="game-level locked" id="level8">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 8 Terkunci</b></div>
+    <div class="badge" style="background:#dc2626;margin-bottom:12px;">LEVEL 8 (Ratusan + Ratusan)</div>
+    <div class="story-box"><b>(Isu Konservasi Mangrove)</b> Tim A menancapkan 486 bibit bakau di pesisir berlumpur. Tim B menancapkan lagi 258 bibit di celah karang. Berapakah total bibit mangrove yang berhasil ditanam?</div>
+    
+    <div class="scaffold-box">
+      <div class="scaffold-row">• Bibit ditanam Tim A = <input type="tel" class="scaffold-in lvl8" data-ans="486" name="l8_s1"></div>
+      <div class="scaffold-row">• Bibit ditanam Tim B = <input type="tel" class="scaffold-in lvl8" data-ans="258" name="l8_s2"></div>
+      <div class="scaffold-row" style="margin-top:12px;">• Ditanyakan: 
+        <select class="scaffold-select lvl8" data-ans="ans_benar" name="l8_d">
+          <option value="">-- Pilih --</option>
+          <option value="ans_benar">Total bibit mangrove ditanam</option>
+          <option value="ans_salah1">Jumlah kepiting bakau</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="susun-wrapper">
+      <table class="susun-table">
+        <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="col-r"><input type="tel" class="simpan-in lvl8" data-ans="1" name="l8_sr" placeholder="..."></td>
+            <td class="col-p"><input type="tel" class="simpan-in lvl8" data-ans="1" name="l8_sp" placeholder="..."></td>
+            <td class="col-s"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl8" data-ans="4" name="l8_r1"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl8" data-ans="8" name="l8_p1"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl8" data-ans="6" name="l8_sat1"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl8" data-ans="2" name="l8_r2"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl8" data-ans="5" name="l8_p2"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl8" data-ans="8" name="l8_sat2"><span class="sign-plus">+</span></td>
+          </tr>
+          <tr class="line-row">
+            <td class="col-r"><input type="tel" class="m-in final lvl8" data-ans="7" name="l8_rf"></td>
+            <td class="col-p"><input type="tel" class="m-in final lvl8" data-ans="4" name="l8_pf"></td>
+            <td class="col-s"><input type="tel" class="m-in final lvl8" data-ans="4" name="l8_satf"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="check-btn" style="background:#dc2626;" onclick="checkLevel(8)">Cek Jawaban</button>
+  </div>
+
+  <!-- LEVEL 9 -->
+  <div class="game-level locked" id="level9">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 9 Terkunci</b></div>
+    <div class="badge" style="background:#dc2626;margin-bottom:12px;">LEVEL 9 (Ratusan + Ratusan)</div>
+    <div class="story-box"><b>(Isu Daur Ulang Kertas)</b> Kelas IV berhasil menimbang 178 kg kardus bekas. Kelas V mengumpulkan 264 kg kardus bekas. Berapakah total kilogram kardus bekas yang diselamatkan?</div>
+    
+    <div class="scaffold-box">
+      <div class="scaffold-row">• Kardus bekas Kelas IV = <input type="tel" class="scaffold-in lvl9" data-ans="178" name="l9_s1"></div>
+      <div class="scaffold-row">• Kardus bekas Kelas V = <input type="tel" class="scaffold-in lvl9" data-ans="264" name="l9_s2"></div>
+      <div class="scaffold-row" style="margin-top:12px;">• Ditanyakan: 
+        <select class="scaffold-select lvl9" data-ans="ans_benar" name="l9_d">
+          <option value="">-- Pilih --</option>
+          <option value="ans_salah1">Berat buku tulis baru</option>
+          <option value="ans_benar">Total kg kardus diselamatkan</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="susun-wrapper">
+      <table class="susun-table">
+        <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="col-r"><input type="tel" class="simpan-in lvl9" data-ans="1" name="l9_sr" placeholder="..."></td>
+            <td class="col-p"><input type="tel" class="simpan-in lvl9" data-ans="1" name="l9_sp" placeholder="..."></td>
+            <td class="col-s"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl9" data-ans="1" name="l9_r1"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl9" data-ans="7" name="l9_p1"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl9" data-ans="8" name="l9_sat1"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl9" data-ans="2" name="l9_r2"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl9" data-ans="6" name="l9_p2"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl9" data-ans="4" name="l9_sat2"><span class="sign-plus">+</span></td>
+          </tr>
+          <tr class="line-row">
+            <td class="col-r"><input type="tel" class="m-in final lvl9" data-ans="4" name="l9_rf"></td>
+            <td class="col-p"><input type="tel" class="m-in final lvl9" data-ans="4" name="l9_pf"></td>
+            <td class="col-s"><input type="tel" class="m-in final lvl9" data-ans="2" name="l9_satf"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="check-btn" style="background:#dc2626;" onclick="checkLevel(9)">Cek Jawaban</button>
+  </div>
+
+  <!-- LEVEL 10 -->
+  <div class="game-level locked" id="level10">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Level 10 Terkunci</b></div>
+    <div class="badge" style="background:#991b1b;margin-bottom:12px;">LEVEL 10 (BOS AKHIR)</div>
+    <div class="story-box"><b>(Isu Akses Air Bersih)</b> Dusun Sukamaju menerima kiriman 395 jeriken air bersih. Dusun Mekarsari menerima sebanyak 438 jeriken air bersih. Berapakah keseluruhan jeriken air bersih yang disalurkan?</div>
+    
+    <div class="scaffold-box">
+      <div class="scaffold-row">• Jeriken Dusun Sukamaju = <input type="tel" class="scaffold-in lvl10" data-ans="395" name="l10_s1"></div>
+      <div class="scaffold-row">• Jeriken Dusun Mekarsari = <input type="tel" class="scaffold-in lvl10" data-ans="438" name="l10_s2"></div>
+      <div class="scaffold-row" style="margin-top:12px;">• Ditanyakan: 
+        <select class="scaffold-select lvl10" data-ans="ans_benar" name="l10_d">
+          <option value="">-- Pilih --</option>
+          <option value="ans_benar">Keseluruhan jeriken air disalurkan</option>
+          <option value="ans_salah1">Jumlah sumur yang kering</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="susun-wrapper">
+      <table class="susun-table">
+        <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="col-r"><input type="tel" class="simpan-in lvl10" data-ans="1" name="l10_sr" placeholder="..."></td>
+            <td class="col-p"><input type="tel" class="simpan-in lvl10" data-ans="1" name="l10_sp" placeholder="..."></td>
+            <td class="col-s"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl10" data-ans="3" name="l10_r1"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl10" data-ans="9" name="l10_p1"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl10" data-ans="5" name="l10_sat1"></td>
+          </tr>
+          <tr>
+            <td class="col-r"><input type="tel" class="m-in lvl10" data-ans="4" name="l10_r2"></td>
+            <td class="col-p"><input type="tel" class="m-in lvl10" data-ans="3" name="l10_p2"></td>
+            <td class="col-s"><input type="tel" class="m-in lvl10" data-ans="8" name="l10_sat2"><span class="sign-plus">+</span></td>
+          </tr>
+          <tr class="line-row">
+            <td class="col-r"><input type="tel" class="m-in final lvl10" data-ans="8" name="l10_rf"></td>
+            <td class="col-p"><input type="tel" class="m-in final lvl10" data-ans="3" name="l10_pf"></td>
+            <td class="col-s"><input type="tel" class="m-in final lvl10" data-ans="3" name="l10_satf"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="check-btn" style="background:#991b1b;" onclick="checkLevel(10)">Kalahkan Bos Terakhir!</button>
+    <div class="success-msg" id="msg10" style="font-size:24px; color:#dc2626;">🎉 SELAMAT! KAMU MENJADI MASTER PENJUMLAHAN! 🎉</div>
+  </div>
+  
+  <div class="actions" style="margin-top:24px;">
+    <button type="button" class="btn-green" id="sendBtn2">📤 Kirim Hasil Latihan ke Guru</button>
+  </div>
+  <p class="footer-note">Seluruh kotak isian pada 10 level di atas akan terekam dan dinilai otomatis.</p>
+</section>
+</form>
+
+<!-- PANEL PENILAIAN GURU (SINKRONISASI GOOGLE SHEETS) -->
+<section class="sheet grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Penilaian Guru</h2></div>
+  <div class="teacher-status" id="teacherStatus">⏳ <b>Sinkronisasi server...</b> Memeriksa data penilaian.</div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pemahaman Susun Pendek</label>
+      <select id="gradeScale" class="grade-select" disabled>
+        <option value="">Pilih skala</option>
+        <option value="A">A — Sangat Baik (Mampu menganalisis soal & menyimpan dengan benar)</option>
+        <option value="B">B — Baik (Hanya sedikit kesalahan pada tahap menyimpan)</option>
+        <option value="C">C — Cukup (Masih bingung menjumlahkan angka simpanan)</option>
+        <option value="D">D — Kurang (Belum memahami konsep dasar susun pendek)</option>
+      </select>
+      <div class="star-rating" id="starRating" aria-label="Rating bintang">☆☆☆☆</div>
+      <div class="scale-hint">A = 4 ⭐ • B = 3 ⭐ • C = 2 ⭐ • D = 1 ⭐</div>
+    </div>
+    <div class="field"><label>Catatan / Umpan Balik Guru</label><textarea id="gradeNote" rows="4" placeholder="Tuliskan umpan balik..." disabled></textarea></div>
+  </div>
+  <div class="teacher-tools">
+    <button type="button" class="btn-green" id="lockGradeBtn" disabled>🔒 Simpan & Kunci Penilaian</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbze-pehjnDPj3b3nrufGYQj_OPcNf3HtPbturxA4gH8zxpsnSlikGf0kS7WwkIz-drY0Q/exec';
+const SUBJECT='Matematika';
+const FOLDER_NAME='MATEMATIKA';
+const LKPD_ID='1.9_Susun_Pendek';
+const form=document.getElementById("lkpd"), modal=document.getElementById("modal"), modalBody=document.getElementById("modalBody");
+const STORAGE="lkpd_mtk_1_9";
+const SUBMISSION_ID=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"SUB-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+
+// GAME LOGIC AUTO CHECK
+function checkLevel(levelNum) {
+  let inputs = document.querySelectorAll('.lvl' + levelNum + ':not([readonly])');
+  let allCorrect = true;
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    if (!inp.dataset.ans) return; 
+    if (inp.value.trim() === inp.dataset.ans) { inp.classList.add('correct'); } 
+    else {
+      inp.classList.add('wrong'); allCorrect = false;
+      setTimeout(()=> inp.classList.remove('wrong'), 500); 
+    }
+  });
+
+  if (allCorrect) {
+    let nextLevel = document.getElementById('level' + (levelNum + 1));
+    if (nextLevel) { nextLevel.classList.remove('locked'); nextLevel.classList.add('unlocked'); } 
+    if (levelNum === 10) { document.getElementById('msg10').style.display = 'block'; }
+    document.getElementById('level'+levelNum).classList.add('completed');
+  }
+}
+
+function fields(){return [...form.querySelectorAll("input,textarea,select")]}
+function collect(){const data={};fields().forEach(el=>data[el.name]=el.value);data.savedAt=new Date().toISOString();return data}
+function saveDraft(){
+  localStorage.setItem(STORAGE,JSON.stringify(collect()));
+  showModal("<div style='font-size:48px'>💾</div><h3>Draf Tersimpan</h3><p>Isianmu tersimpan di perangkat ini.</p><button class='btn-green' onclick='closeModal()'>Lanjut</button>");
+}
+function loadDraft(){try{const d=JSON.parse(localStorage.getItem(STORAGE)||"null");if(!d)return;fields().forEach(el=>{if(d[el.name]!==undefined && !el.readOnly)el.value=d[el.name]})}catch(e){}}
+function updateProgress(){const f=fields().filter(x=>!x.readOnly);let filled=0;f.forEach(x=>{if(String(x.value||"").trim())filled++});document.getElementById("progressBar").style.width=(f.length?Math.round(filled/f.length*100):0)+"%"}
+function showModal(html){modalBody.innerHTML=html;modal.style.display="grid"} function closeModal(){modal.style.display="none"}
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function base64Encode(text){const bytes=new TextEncoder().encode(text);let binary="";for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary)}
+
+function freezeValues(clone, currentData){
+ clone.querySelectorAll("input,textarea,select").forEach(el=>{
+  if(el.closest("#gradePanel")) return;
+  const value = currentData[el.name] || "";
+  if(el.tagName.toLowerCase()==="textarea") { el.textContent = value; } 
+  else if(el.tagName.toLowerCase()==="select") {
+    [...el.options].forEach(o=>o.removeAttribute("selected"));
+    const opt=[...el.options].find(o=>o.value===value);
+    if(opt) opt.setAttribute("selected","selected");
+  } else { el.setAttribute("value", value); }
+  el.setAttribute("readonly","readonly"); el.setAttribute("disabled","disabled");
+ });
+}
+
+function teacherOnlyScript(){
+ const ep=ENDPOINT,sub=SUBJECT,folder=FOLDER_NAME,lid=LKPD_ID,sid=SUBMISSION_ID;
+ return `(function(){
+  const ENDPOINT='${ep}',SUBJECT='${sub}',FOLDER_NAME='${folder}',LKPD_ID='${lid}',SUBMISSION_ID='${sid}';
+  const key='lkpd_grade_'+LKPD_ID+'_'+SUBJECT.replace(/\\s+/g,'_')+'_'+SUBMISSION_ID;
+  
+  const scale=document.getElementById('gradeScale'),note=document.getElementById('gradeNote'),lockBtn=document.getElementById('lockGradeBtn'),status=document.getElementById('teacherStatus'),stars=document.getElementById('starRating');
+  let locked=localStorage.getItem(key+'_locked')==='1'; 
+
+  function renderStars(v){const n={A:4,B:3,C:2,D:1}[v]||0;stars.textContent='★'.repeat(n)+'☆'.repeat(4-n);stars.style.color=n?'#f59e0b':'#cbd5e1';}
+  
+  function applyState(){
+    if (locked) {
+      scale.disabled = true; note.disabled = true; note.readOnly = true;
+      lockBtn.disabled = true; lockBtn.textContent = '🔒 Penilaian Tersimpan';
+      status.innerHTML = '🔒 <b>Penilaian dikunci.</b> Nilai tersinkronisasi dengan Google Sheets.';
+    } else {
+      scale.disabled = false; note.disabled = false; note.readOnly = false;
+      lockBtn.disabled = false; lockBtn.textContent = '🔒 Simpan & Kunci Nilai';
+      status.innerHTML = '📝 <b>Silakan berikan penilaian akhir.</b>';
+    }
+    renderStars(scale.value);
+  }
+
+  async function fetchGradeFromServer() {
+    try {
+      const response = await fetch(ENDPOINT + "?action=getGrade&submissionId=" + SUBMISSION_ID);
+      const result = await response.json();
+      if (result.status === 'success' && result.scale) {
+        scale.value = result.scale; note.value = result.note; locked = true; 
+        localStorage.setItem(key+'_locked','1'); localStorage.setItem(key, JSON.stringify({scale: result.scale, note: result.note}));
+      } else {
+        let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+        scale.value=d.scale||''; note.value=d.note||'';
+      }
+    } catch (error) {
+      let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+      scale.value=d.scale||''; note.value=d.note||'';
+    }
+    applyState();
+  }
+
+  fetchGradeFromServer();
+  scale.addEventListener("change",()=>{renderStars(scale.value);});
+
+  lockBtn.onclick=async()=>{
+    if(locked)return;
+    if(!scale.value){alert('Pilih skala penilaian A, B, C, atau D terlebih dahulu.');return;}
+    status.innerHTML="⏳ <b>Menyimpan penilaian...</b> Mengirim data ke server.";
+    lockBtn.disabled=true; scale.disabled=true; note.disabled=true;
+    try{
+      const nama=(document.querySelector("input[name='nama']")?.value||'Siswa').trim();
+      const payload={action:'saveGrade',studentName:nama,subject:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,scale:scale.value,rating:{A:4,B:3,C:2,D:1}[scale.value],note:note.value};
+      await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+      localStorage.setItem(key,JSON.stringify({scale:scale.value,note:note.value}));
+      localStorage.setItem(key+'_locked','1'); locked=true; applyState();
+      alert('Penilaian berhasil dikunci dan dikirim ke Server.');
+    }catch(e){
+      alert('Gagal menyimpan ke server. Periksa koneksi internet Anda.'); applyState(); 
+    }
+  };
+ })();`;
+}
+
+function buildFinalHTML(){
+ const currentData = collect(); 
+ const clone=document.documentElement.cloneNode(true);
+ clone.querySelectorAll(".appbar,.progress,.actions,.modal,.check-btn").forEach(el=>el.remove());
+ const teacherScript=clone.ownerDocument.createElement("script");
+ teacherScript.textContent=teacherOnlyScript();
+ clone.querySelectorAll("script").forEach(el=>el.remove());
+ clone.querySelector("body").appendChild(teacherScript);
+ clone.querySelectorAll("*").forEach(el=>[...el.attributes].forEach(a=>{if(a.name.toLowerCase().startsWith("on"))el.removeAttribute(a.name)}));
+ 
+ freezeValues(clone, currentData);
+ 
+ clone.querySelectorAll('.game-level').forEach(el=>{el.classList.remove('locked'); el.classList.add('unlocked');});
+ const panel=clone.querySelector("#gradePanel"); if(panel){panel.classList.remove("show");panel.style.display="block"}
+ const banner=clone.ownerDocument.createElement("div");banner.className="submitted-banner";
+ const nama=(form.elements.nama?.value||"Siswa").trim();
+ banner.innerHTML="✅ LEMBAR LATIHAN DIKIRIM<small>Nama: "+esc(nama)+" • "+new Date().toLocaleString("id-ID")+" • ID: "+esc(SUBMISSION_ID)+"</small>";
+ clone.querySelector("body").insertBefore(banner,clone.querySelector("body").firstChild);
+ return "<!doctype html>\n"+clone.outerHTML;
+}
+
+async function sendToGoogleDrive(){
+ const nama=(form.elements.nama?.value||"Siswa").trim().replace(/[\\/:*?"<>|]/g,"_")||"Siswa";
+ const finalHTML=buildFinalHTML();
+ const filename="LKPD_"+LKPD_ID+"_MTK_"+nama+".html";
+ const payload={action:"saveHTML",filename,studentName:nama,subject:SUBJECT,mapel:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,htmlBase64:base64Encode(finalHTML),data:collect()};
+ await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+ const blob=new Blob([finalHTML],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+ localStorage.removeItem(STORAGE);
+}
+
+function focusIdentity(){
+ const el=form.elements.nama?.value.trim()?form.elements.tanggal:form.elements.nama;
+ el?.focus(); el?.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function confirmSend(){
+ const nama=(form.elements.nama?.value||"").trim();
+ const tanggal=(form.elements.tanggal?.value||"").trim();
+ if(!nama || !tanggal){
+   const belum=[]; if(!nama) belum.push("Nama Lengkap Siswa"); if(!tanggal) belum.push("Hari / Tanggal");
+   showModal("<div style='font-size:46px'>📝</div><h3>Identitas Belum Lengkap</h3><p>Sebelum mengirim, identitas pada halaman 1 wajib diisi.</p><div class='tip' style='text-align:left'><b>Belum diisi:</b><br>• "+esc(belum.join("<br>• "))+"</div><button class='btn-green' onclick='closeModal();focusIdentity()'>Lengkapi Identitas</button>");
+   return;
+ }
+ showModal("<div style='font-size:46px'>📤</div><h3>Kirim Hasil Latihan?</h3><p>Pastikan kamu sudah mengecek kembali jawabanmu.</p><p>Hasil ini akan dikunci dan dikirim ke guru.</p><button class='btn-light' onclick='closeModal()'>Periksa Lagi</button> <button class='btn-green' id='yesSend' style='background:var(--orange);'>Ya, Kirim</button>");
+ 
+ document.getElementById("yesSend").onclick=async()=>{
+   showModal("<div class='spinner'></div><h3>Mengirim Latihan…</h3><p>Mohon tunggu.</p>");
+   try{
+     await sendToGoogleDrive();
+     fields().forEach(el=>{el.setAttribute("readonly","readonly");el.setAttribute("disabled","disabled");});
+     document.getElementById("sendBtn").style.display="none";
+     document.getElementById("sendBtn2").style.display="none";
+     document.getElementById("saveBtn").style.display="none";
+     showModal("<div style='font-size:52px'>✅</div><h3>Latihan Berhasil Dikirim</h3><p>Kerja bagus! Petualanganmu sudah selesai.</p><button class='btn-green' onclick='closeModal()'>Selesai</button>");
+   }catch(err){
+     showModal("<div style='font-size:52px'>⚠️</div><h3>Koneksi Terputus</h3><p>"+esc(err)+"</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+   }
+ }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+ loadDraft();updateProgress();fields().forEach(el=>{el.addEventListener("input",updateProgress);el.addEventListener("change",updateProgress)});
+ const save=document.getElementById("saveBtn");if(save)save.onclick=saveDraft;
+ const send=document.getElementById("sendBtn");if(send)send.onclick=confirmSend;
+ const send2=document.getElementById("sendBtn2");if(send2)send2.onclick=confirmSend;
+});
+</script>
+</body>
+</html>
