@@ -1,1 +1,519 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V2.0 (SYNC CLOUD) — BAHASA INGGRIS KELAS IV -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD English - Telling Time</title>
+<style>
+:root{--green:#0b9f75;--green2:#087f60;--mint:#e9fbf5;--pink:#ffdfe4;--ink:#24313a;--muted:#64748b;--yellow:#fef08a;--line:#e5e7eb;--white:#fff;--blue:#2563eb;--gold:#f59e0b;--orange:#f97316;--red:#ef4444;--purple:#8b5cf6}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(135deg,#f0f9ff,#fff7f8 55%,#f5f3ff);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(2px);opacity:.45;pointer-events:none}
+body:before{width:180px;height:180px;background:#bae6fd;left:-70px;top:120px;animation:float1 7s ease-in-out infinite}
+body:after{width:150px;height:150px;background:#ddd6fe;right:-50px;bottom:100px;animation:float2 9s ease-in-out infinite}
+@keyframes float1{50%{transform:translate(25px,18px) scale(1.08)}} @keyframes float2{50%{transform:translate(-20px,-25px) scale(1.12)}}
+.appbar{position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;padding:12px 16px;background:#ffffffee;backdrop-filter:blur(12px);border-bottom:1px solid #dfe7e4}
+.brand{font-weight:900;color:var(--blue);margin-right:auto}
+button{border:0;border-radius:12px;padding:10px 15px;font-weight:800;cursor:pointer;transition:.2s transform,.2s box-shadow}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 18px #00000012}
+button:active{transform:scale(.98)}
+.btn-light{background:#f1f5f9;color:#334155}.btn-green{background:var(--green);color:#fff}.btn-blue{background:var(--blue);color:#fff}.btn-purple{background:var(--purple);color:#fff}
+.progress{height:5px;background:#e0f2fe}.progress i{display:block;height:100%;width:0;background:var(--blue);transition:.25s}
+.sheet{width:min(1000px,calc(100% - 24px));margin:18px auto;background:#fff;border-radius:24px;box-shadow:0 12px 35px #0f172a08;padding:28px}
+.hero{display:grid;grid-template-columns:1.7fr .8fr;gap:20px;align-items:stretch}
+.hero-card{background:linear-gradient(135deg,#eff6ff,#f5f3ff);border-radius:22px;padding:28px}
+.badge{display:inline-block;background:var(--blue);color:#fff;padding:7px 12px;border-radius:999px;font-weight:900;font-size:13px}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.05;margin:16px 0 8px} h2{margin:0} p{line-height:1.75}
+.mission{background:#f0f9ff;border-radius:20px;padding:22px;display:flex;flex-direction:column;justify-content:center;text-align:center;font-size:18px;border:2px dashed #bae6fd;}
+.mission-icon{font-size:64px;animation:bob 2.8s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px) rotate(2deg)}}
+.idgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.field label{display:block;font-size:13px;font-weight:900;color:#475569;margin-bottom:6px}
+input,textarea,select{width:100%;font:inherit;border:2px solid #cbd5e1;border-radius:13px;padding:12px 14px;outline:none;background:#fff; transition:.2s;}
+input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #3b82f640}
+.idgrid input{min-height:52px;min-width:0}.idgrid .field{min-width:0}
+.section-title{display:flex;align-items:center;gap:12px;border-bottom:3px solid #e0f2fe;padding-bottom:12px;margin-bottom:18px}
+.num{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-weight:900;flex:0 0 auto}
+.tip{background:#fff9d6;border-left:5px solid #f2d73a;padding:14px 16px;border-radius:12px;margin:18px 0;line-height:1.6}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px 0 8px}
+.footer-note{text-align:center;color:var(--muted);font-size:13px}
+.modal{position:fixed;inset:0;background:#0f172a88;display:none;place-items:center;z-index:50;padding:18px}
+.modal-card{width:min(560px,100%);background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 20px 60px #0003}
+.spinner{width:42px;height:42px;border:5px solid #dbeee8;border-top-color:var(--blue);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.submitted-banner{margin:16px auto;max-width:900px;background:var(--green2);color:#fff;padding:14px 18px;border-radius:16px;text-align:center;font-weight:900}
+.grade-panel{display:none;background:#f8fafc;border:2px solid #dbe4e1;border-radius:20px;padding:20px;margin:18px auto;max-width:900px}
+.grade-panel.show{display:block;animation:appear .25s ease}@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grade-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grade-grid textarea{min-height:90px}
+.teacher-tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.teacher-status{background:#fff9d6;border-left:5px solid #f2d73a;border-radius:12px;padding:11px 14px;margin:0 0 16px;font-size:14px}
+.grade-select{width:100%;min-height:50px;border:2px solid #dbe4e1;border-radius:13px;padding:10px 14px;font:inherit;font-weight:800;background:#fff}
+.star-rating{font-size:34px;letter-spacing:4px;text-align:center;margin:14px 0 4px;line-height:1;color:#cbd5e1}
 
+/* GAME LEVEL STYLES */
+.game-level {position:relative; background:#f8fafc; border:2px solid #cbd5e1; border-radius:16px; padding:24px; margin-bottom:24px; transition:all .3s;}
+.game-level.locked {opacity:0.6; pointer-events:none; filter:grayscale(100%);}
+.lock-overlay {position:absolute; inset:0; background:rgba(248, 250, 252, 0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:14px;}
+.lock-icon {font-size:54px; margin-bottom:8px;}
+.game-level.unlocked .lock-overlay {display:none;}
+.game-level.completed {border-color:var(--green); background:#f0fdf4;}
+
+/* QUESTION GRIDS */
+.q-grid {display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.q-card {background:#fff; border:2px solid #e2e8f0; border-radius:12px; padding:16px; display:flex; align-items:center; justify-content:space-between; gap:12px; box-shadow:0 4px 6px #0f172a05;}
+.q-text {font-size:16px; font-weight:800; color:#1e293b; line-height:1.4;}
+.q-story {font-size:15px; font-weight:600; color:#334155; line-height:1.5;}
+.time-input-group {display:flex; align-items:center; gap:4px; font-size:24px; font-weight:900; color:#0f172a;}
+.t-in {width:48px; height:42px; text-align:center; font-size:18px; font-weight:900; border:2px solid #cbd5e1; border-radius:8px; padding:0!important; outline:none; font-family:monospace; background:#f1f5f9;}
+.t-in:focus {background:#fff; border-color:var(--blue); box-shadow:0 0 0 3px #3b82f630;}
+.sel-in {width:100%; max-width:200px; height:42px; border:2px solid #cbd5e1; border-radius:8px; font-weight:800; color:var(--blue); font-size:14px;}
+
+/* CSS ANALOG CLOCK */
+.clock-wrap {display:flex; flex-direction:column; align-items:center; gap:8px;}
+.clock {width:64px; height:64px; border:4px solid #334155; border-radius:50%; position:relative; background:#fff; box-shadow:0 4px 6px #0f172a10;}
+.clock::after {content:''; position:absolute; width:8px; height:8px; background:#ef4444; border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); z-index:5;}
+.hand {position:absolute; bottom:50%; left:50%; transform-origin:bottom center; background:#334155; border-radius:4px;}
+.hand.hour {width:4px; height:16px; margin-left:-2px;}
+.hand.min {width:3px; height:24px; margin-left:-1.5px; background:var(--blue);}
+.r-0 {transform:rotate(0deg);} .r-90 {transform:rotate(90deg);} .r-180 {transform:rotate(180deg);} .r-270 {transform:rotate(270deg);}
+.r-30 {transform:rotate(30deg);} .r-60 {transform:rotate(60deg);} .r-120 {transform:rotate(120deg);} .r-150 {transform:rotate(150deg);}
+.r-15 {transform:rotate(15deg);} .r-45 {transform:rotate(45deg);} .r-75 {transform:rotate(75deg);} .r-105 {transform:rotate(105deg);}
+.r-135 {transform:rotate(135deg);} .r-165 {transform:rotate(165deg);} .r-195 {transform:rotate(195deg);} .r-225 {transform:rotate(225deg);}
+.r-255 {transform:rotate(255deg);} .r-285 {transform:rotate(285deg);} .r-315 {transform:rotate(315deg);} .r-345 {transform:rotate(345deg);}
+
+/* VALIDATION FX */
+.t-in.correct, .sel-in.correct {background-color:#dcfce7 !important; border-color:#22c55e !important; color:#15803d;}
+.t-in.wrong, .sel-in.wrong {animation:shake 0.4s; background-color:#fee2e2 !important; border-color:#ef4444 !important; color:#b91c1c;}
+@keyframes shake {0%{transform:translateX(0);} 25%{transform:translateX(-5px);} 50%{transform:translateX(5px);} 75%{transform:translateX(-5px);} 100%{transform:translateX(0);}}
+.check-btn {display:block; margin:24px auto 0; background:var(--blue); color:#fff; border-radius:99px; padding:12px 28px; font-weight:900; font-size:16px;}
+.success-msg {display:none; text-align:center; color:var(--green); font-weight:900; font-size:18px; margin-top:16px; animation:appear .3s;}
+
+@media(max-width:800px){
+ .appbar{flex-wrap:wrap}.brand{width:100%;text-align:center}
+ .sheet{padding:18px;border-radius:18px}
+ .q-grid {grid-template-columns:1fr;}
+ .q-card {flex-direction:column; align-items:flex-start;}
+ .sel-in {max-width:100%;}
+ .time-input-group {align-self:flex-end;}
+}
+@media print{
+ .appbar,.progress,.actions,.modal,.teacher-tools,.check-btn,.mission{display:none!important}
+ body{background:#fff}.sheet{box-shadow:none;width:210mm;margin:0;border-radius:0;}
+ .game-level.locked {opacity:1; filter:none;} .lock-overlay{display:none;}
+ input,textarea,select{border:0!important;box-shadow:none!important; padding:0 !important;}
+}
+</style>
+</head>
+<body>
+<div class="appbar">
+  <div class="brand">📚 LEMBAR KERJA MURID DIGITAL</div>
+  <button class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+  <button class="btn-green" id="sendBtn">📤 Kirim ke Guru</button>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 1.6</span>
+      <h1>Telling Time & Daily Routine</h1>
+      <p><b>Bahasa Inggris • Kelas IV</b></p>
+      <p><i>What time is it?</i> Mari belajar menunjukkan waktu dalam bahasa Inggris menggunakan <i>o'clock, half past, quarter past,</i> dan <i>quarter to!</i></p>
+      <div class="idgrid">
+        <div class="field"><label>Nama Lengkap Siswa <span style="color:red">*</span></label><input name="nama" placeholder="Tuliskan nama lengkap..." required autocomplete="name"></div>
+        <div class="field"><label>Hari / Tanggal <span style="color:red">*</span></label><input name="tanggal" placeholder="Contoh: Senin, 11 Agustus 2026" required></div>
+        <div class="field"><label>Mata Pelajaran</label><input name="mapel" value="Bahasa Inggris" readonly></div>
+        <div class="field"><label>Materi Pokok</label><input name="materi" value="Telling Time (Jam Analog & Digital)" readonly></div>
+      </div>
+    </div>
+    <div class="mission">
+      <div class="mission-icon">⏰🏃</div>
+      <b>🎯 Misi Penjelajah Waktu</b>
+      <p>Selesaikan 3 level berjenjang! Jangan biarkan waktu terus berjalan tanpa jawabanmu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEVEL 1: DIGITAL DECODER ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Mission 1: Digital Decoder</h2></div>
+  <div class="tip">💡 <b>Instruction:</b> Read the sentences carefully and write the numbers in the digital clock! <br><i>(Contoh: It's nine o'clock = 09 : 00)</i></div>
+
+  <div class="game-level unlocked" id="level1">
+    <div class="q-grid">
+      <div class="q-card"><div class="q-text">1. It is nine o'clock.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl1" data-ans="09" name="l1_h1" maxlength="2" placeholder="00">:<input type="tel" class="t-in lvl1" data-ans="00" name="l1_m1" maxlength="2" placeholder="00"></div></div>
+      <div class="q-card"><div class="q-text">2. It is half past ten.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl1" data-ans="10" name="l1_h2" maxlength="2" placeholder="00">:<input type="tel" class="t-in lvl1" data-ans="30" name="l1_m2" maxlength="2" placeholder="00"></div></div>
+      <div class="q-card"><div class="q-text">3. It is a quarter past nine.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl1" data-ans="09" name="l1_h3" maxlength="2" placeholder="00">:<input type="tel" class="t-in lvl1" data-ans="15" name="l1_m3" maxlength="2" placeholder="00"></div></div>
+      <div class="q-card"><div class="q-text">4. It is a quarter to three.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl1" data-ans="02" name="l1_h4" maxlength="2" placeholder="00">:<input type="tel" class="t-in lvl1" data-ans="45" name="l1_m4" maxlength="2" placeholder="00"></div></div>
+      <div class="q-card"><div class="q-text">5. It is five o'clock.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl1" data-ans="05" name="l1_h5" maxlength="2" placeholder="00">:<input type="tel" class="t-in lvl1" data-ans="00" name="l1_m5" maxlength="2" placeholder="00"></div></div>
+      <div class="q-card"><div class="q-text">6. It is half past one.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl1" data-ans="01" name="l1_h6" maxlength="2" placeholder="00">:<input type="tel" class="t-in lvl1" data-ans="30" name="l1_m6" maxlength="2" placeholder="00"></div></div>
+      <div class="q-card"><div class="q-text">7. It is a quarter past seven.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl1" data-ans="07" name="l1_h7" maxlength="2" placeholder="00">:<input type="tel" class="t-in lvl1" data-ans="15" name="l1_m7" maxlength="2" placeholder="00"></div></div>
+      <div class="q-card"><div class="q-text">8. It is a quarter to eleven.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl1" data-ans="10" name="l1_h8" maxlength="2" placeholder="00">:<input type="tel" class="t-in lvl1" data-ans="45" name="l1_m8" maxlength="2" placeholder="00"></div></div>
+      <div class="q-card"><div class="q-text">9. It is twelve o'clock.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl1" data-ans="12" name="l1_h9" maxlength="2" placeholder="00">:<input type="tel" class="t-in lvl1" data-ans="00" name="l1_m9" maxlength="2" placeholder="00"></div></div>
+      <div class="q-card"><div class="q-text">10. It is half past six.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl1" data-ans="06" name="l1_h10" maxlength="2" placeholder="00">:<input type="tel" class="t-in lvl1" data-ans="30" name="l1_m10" maxlength="2" placeholder="00"></div></div>
+    </div>
+    <button type="button" class="check-btn" onclick="checkLevel(1)">Check Mission 1</button>
+    <div class="success-msg" id="msg1">🎉 Great! Mission 2 is UNLOCKED! 👇</div>
+  </div>
+</section>
+
+<!-- ================= LEVEL 2: ANALOG EXPLORER ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--purple);">2</div><h2>Mission 2: Analog Explorer</h2></div>
+  <div class="tip" style="background:#f5f3ff; border-left-color:var(--purple);">💡 <b>Instruction:</b> Look at the analog clocks and choose the correct English phrases! <br><i>(Lihat jarum jamnya, lalu pilih bahasa Inggris yang tepat!)</i></div>
+
+  <div class="game-level locked" id="level2" style="border-color:var(--purple);">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Mission 2 Locked</b><p>Finish Mission 1 first!</p></div>
+    
+    <div class="q-grid">
+      <!-- 03:00 -->
+      <div class="q-card"><div class="clock-wrap"><div class="clock"><div class="hand hour r-90"></div><div class="hand min r-0"></div></div><b>11.</b></div>
+        <select class="sel-in lvl2" data-ans="o_3" name="l2_1">
+          <option value="">-- Choose time --</option><option value="o_12">It is twelve o'clock</option><option value="o_3">It is three o'clock</option><option value="h_3">It is half past three</option>
+        </select>
+      </div>
+      <!-- 08:30 -->
+      <div class="q-card"><div class="clock-wrap"><div class="clock"><div class="hand hour r-255"></div><div class="hand min r-180"></div></div><b>12.</b></div>
+        <select class="sel-in lvl2" data-ans="h_8" name="l2_2">
+          <option value="">-- Choose time --</option><option value="h_8">It is half past eight</option><option value="o_8">It is eight o'clock</option><option value="h_9">It is half past nine</option>
+        </select>
+      </div>
+      <!-- 04:15 -->
+      <div class="q-card"><div class="clock-wrap"><div class="clock"><div class="hand hour r-135"></div><div class="hand min r-90"></div></div><b>13.</b></div>
+        <select class="sel-in lvl2" data-ans="qp_4" name="l2_3">
+          <option value="">-- Choose time --</option><option value="qt_4">It is a quarter to four</option><option value="qp_4">It is a quarter past four</option><option value="qp_3">It is a quarter past three</option>
+        </select>
+      </div>
+      <!-- 05:45 -->
+      <div class="q-card"><div class="clock-wrap"><div class="clock"><div class="hand hour r-165"></div><div class="hand min r-270"></div></div><b>14.</b></div>
+        <select class="sel-in lvl2" data-ans="qt_6" name="l2_4">
+          <option value="">-- Choose time --</option><option value="qt_5">It is a quarter to five</option><option value="qt_6">It is a quarter to six</option><option value="qp_6">It is a quarter past six</option>
+        </select>
+      </div>
+      <!-- 10:00 -->
+      <div class="q-card"><div class="clock-wrap"><div class="clock"><div class="hand hour r-300" style="transform:rotate(300deg);"></div><div class="hand min r-0"></div></div><b>15.</b></div>
+        <select class="sel-in lvl2" data-ans="o_10" name="l2_5">
+          <option value="">-- Choose time --</option><option value="o_10">It is ten o'clock</option><option value="o_12">It is twelve o'clock</option><option value="h_10">It is half past ten</option>
+        </select>
+      </div>
+      <!-- 01:30 -->
+      <div class="q-card"><div class="clock-wrap"><div class="clock"><div class="hand hour r-45"></div><div class="hand min r-180"></div></div><b>16.</b></div>
+        <select class="sel-in lvl2" data-ans="h_1" name="l2_6">
+          <option value="">-- Choose time --</option><option value="h_2">It is half past two</option><option value="h_1">It is half past one</option><option value="qp_1">It is a quarter past one</option>
+        </select>
+      </div>
+      <!-- 07:15 -->
+      <div class="q-card"><div class="clock-wrap"><div class="clock"><div class="hand hour r-225"></div><div class="hand min r-90"></div></div><b>17.</b></div>
+        <select class="sel-in lvl2" data-ans="qp_7" name="l2_7">
+          <option value="">-- Choose time --</option><option value="qt_7">It is a quarter to seven</option><option value="qp_7">It is a quarter past seven</option><option value="qp_8">It is a quarter past eight</option>
+        </select>
+      </div>
+      <!-- 09:45 -->
+      <div class="q-card"><div class="clock-wrap"><div class="clock"><div class="hand hour r-285"></div><div class="hand min r-270"></div></div><b>18.</b></div>
+        <select class="sel-in lvl2" data-ans="qt_10" name="l2_8">
+          <option value="">-- Choose time --</option><option value="qt_9">It is a quarter to nine</option><option value="qp_10">It is a quarter past ten</option><option value="qt_10">It is a quarter to ten</option>
+        </select>
+      </div>
+      <!-- 11:00 -->
+      <div class="q-card"><div class="clock-wrap"><div class="clock"><div class="hand hour r-330" style="transform:rotate(330deg);"></div><div class="hand min r-0"></div></div><b>19.</b></div>
+        <select class="sel-in lvl2" data-ans="o_11" name="l2_9">
+          <option value="">-- Choose time --</option><option value="o_1">It is one o'clock</option><option value="o_11">It is eleven o'clock</option><option value="h_11">It is half past eleven</option>
+        </select>
+      </div>
+      <!-- 02:30 -->
+      <div class="q-card"><div class="clock-wrap"><div class="clock"><div class="hand hour r-75"></div><div class="hand min r-180"></div></div><b>20.</b></div>
+        <select class="sel-in lvl2" data-ans="h_2" name="l2_10">
+          <option value="">-- Choose time --</option><option value="h_2">It is half past two</option><option value="h_3">It is half past three</option><option value="o_2">It is two o'clock</option>
+        </select>
+      </div>
+    </div>
+    
+    <button type="button" class="check-btn" style="background:var(--purple);" onclick="checkLevel(2)">Check Mission 2</button>
+    <div class="success-msg" id="msg2">🎉 Awesome! Final Mission is UNLOCKED! 👇</div>
+  </div>
+</section>
+
+<!-- ================= LEVEL 3: DAILY ROUTINE ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--gold);">3</div><h2>Mission 3: Daily Routine Detective</h2></div>
+  <div class="tip" style="background:#fffbeb; border-left-color:var(--gold);">💡 <b>Instruction:</b> Read the short stories about daily routines and fill in the digital clock correctly!</div>
+
+  <div class="game-level locked" id="level3" style="border-color:var(--gold);">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Mission 3 Locked</b><p>Finish Mission 2 first!</p></div>
+    
+    <div class="q-grid">
+      <div class="q-card"><div class="q-story">21. I wake up in the morning at <b>half past four</b>.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl3" data-ans="04" name="l3_h1" maxlength="2">:<input type="tel" class="t-in lvl3" data-ans="30" name="l3_m1" maxlength="2"></div></div>
+      <div class="q-card"><div class="q-story">22. Tigor takes a bath at <b>five o'clock</b>.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl3" data-ans="05" name="l3_h2" maxlength="2">:<input type="tel" class="t-in lvl3" data-ans="00" name="l3_m2" maxlength="2"></div></div>
+      <div class="q-card"><div class="q-story">23. Alya has breakfast at <b>a quarter past six</b>.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl3" data-ans="06" name="l3_h3" maxlength="2">:<input type="tel" class="t-in lvl3" data-ans="15" name="l3_m3" maxlength="2"></div></div>
+      <div class="q-card"><div class="q-story">24. We go to school together at <b>half past six</b>.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl3" data-ans="06" name="l3_h4" maxlength="2">:<input type="tel" class="t-in lvl3" data-ans="30" name="l3_m4" maxlength="2"></div></div>
+      <div class="q-card"><div class="q-story">25. The English class starts at <b>seven o'clock</b>.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl3" data-ans="07" name="l3_h5" maxlength="2">:<input type="tel" class="t-in lvl3" data-ans="00" name="l3_m5" maxlength="2"></div></div>
+      <div class="q-card"><div class="q-story">26. We have a break time at <b>a quarter to ten</b>.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl3" data-ans="09" name="l3_h6" maxlength="2">:<input type="tel" class="t-in lvl3" data-ans="45" name="l3_m6" maxlength="2"></div></div>
+      <div class="q-card"><div class="q-story">27. I go home from school at <b>one o'clock</b>.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl3" data-ans="01" name="l3_h7" maxlength="2">:<input type="tel" class="t-in lvl3" data-ans="00" name="l3_m7" maxlength="2"></div></div>
+      <div class="q-card"><div class="q-story">28. I play football with my friends at <b>a quarter past four</b>.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl3" data-ans="04" name="l3_h8" maxlength="2">:<input type="tel" class="t-in lvl3" data-ans="15" name="l3_m8" maxlength="2"></div></div>
+      <div class="q-card"><div class="q-story">29. My family has dinner at <b>half past seven</b>.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl3" data-ans="07" name="l3_h9" maxlength="2">:<input type="tel" class="t-in lvl3" data-ans="30" name="l3_m9" maxlength="2"></div></div>
+      <div class="q-card"><div class="q-story">30. I study and go to sleep at <b>a quarter to nine</b>.</div>
+        <div class="time-input-group"><input type="tel" class="t-in lvl3" data-ans="08" name="l3_h10" maxlength="2">:<input type="tel" class="t-in lvl3" data-ans="45" name="l3_m10" maxlength="2"></div></div>
+    </div>
+    
+    <button type="button" class="check-btn" style="background:var(--gold); color:#854d0e;" onclick="checkLevel(3)">Finish All Missions!</button>
+    <div class="success-msg" id="msg3" style="color:var(--gold); font-size:24px;">🏆 EXCELLENT! YOU ARE THE MASTER OF TIME! 🏆</div>
+  </div>
+  
+  <div class="actions" style="margin-top:32px;">
+    <button type="button" class="btn-blue" id="sendBtn2">📤 Send Worksheet to Teacher</button>
+  </div>
+  <p class="footer-note">All your 30 answers will be automatically recorded and graded by the system.</p>
+</section>
+</form>
+
+<!-- TEACHER PANEL -->
+<section class="sheet grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Teacher's Assessment</h2></div>
+  <div class="teacher-status" id="teacherStatus">⏳ <b>Syncing with server...</b> Checking data.</div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Telling Time Proficiency Scale</label>
+      <select id="gradeScale" class="grade-select" disabled>
+        <option value="">Select scale</option>
+        <option value="A">A — Excellent (Understands all time concepts perfectly)</option>
+        <option value="B">B — Good (Minor errors in translating 'past' or 'to')</option>
+        <option value="C">C — Fair (Needs more practice reading analog clocks)</option>
+        <option value="D">D — Poor (Still confused with English time rules)</option>
+      </select>
+      <div class="star-rating" id="starRating" aria-label="Rating">☆☆☆☆</div>
+      <div style="text-align:center;color:#64748b;font-size:12px;margin-bottom:4px">A = 4 ⭐ • B = 3 ⭐ • C = 2 ⭐ • D = 1 ⭐</div>
+    </div>
+    <div class="field"><label>Teacher's Feedback / Notes</label><textarea id="gradeNote" rows="4" placeholder="Write feedback here..." disabled></textarea></div>
+  </div>
+  <div class="teacher-tools">
+    <button type="button" class="btn-blue" id="lockGradeBtn" disabled>🔒 Save & Lock Assessment</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbze-pehjnDPj3b3nrufGYQj_OPcNf3HtPbturxA4gH8zxpsnSlikGf0kS7WwkIz-drY0Q/exec';
+const SUBJECT='Bahasa Inggris';
+const FOLDER_NAME='BAHASA INGGRIS';
+const LKPD_ID='1.6_Telling_Time';
+const form=document.getElementById("lkpd"), modal=document.getElementById("modal"), modalBody=document.getElementById("modalBody");
+const STORAGE="lkpd_eng_1_6";
+const SUBMISSION_ID=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():"SUB-"+Date.now()+"-"+Math.random().toString(36).slice(2);
+
+// GAME LOGIC
+function checkLevel(levelNum) {
+  let inputs = document.querySelectorAll('.lvl' + levelNum + '[data-ans]:not([readonly])');
+  let allCorrect = true;
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    let studentAns = inp.value.trim().toLowerCase();
+    // Allow single digit for hour (e.g., '9' instead of '09')
+    if(studentAns.length === 1 && inp.dataset.ans.startsWith('0')) {
+        studentAns = '0' + studentAns;
+    }
+    let trueAns = inp.dataset.ans.toLowerCase();
+    
+    if (studentAns === trueAns) { 
+      inp.classList.add('correct'); 
+    } else {
+      inp.classList.add('wrong'); allCorrect = false;
+      setTimeout(()=> inp.classList.remove('wrong'), 500); 
+    }
+  });
+
+  if (allCorrect) {
+    let nextLevel = document.getElementById('level' + (levelNum + 1));
+    if (nextLevel) { nextLevel.classList.remove('locked'); nextLevel.classList.add('unlocked'); } 
+    if (levelNum === 3) { document.getElementById('msg3').style.display = 'block'; }
+    document.getElementById('level'+levelNum).classList.add('completed');
+  }
+}
+
+function fields(){return [...form.querySelectorAll("input,textarea,select")]}
+function collect(){const data={};fields().forEach(el=>data[el.name]=el.value);data.savedAt=new Date().toISOString();return data}
+function saveDraft(){
+  localStorage.setItem(STORAGE,JSON.stringify(collect()));
+  showModal("<div style='font-size:48px'>💾</div><h3>Draft Saved</h3><p>Your answers are saved on this device.</p><button class='btn-blue' onclick='closeModal()'>Continue</button>");
+}
+function loadDraft(){try{const d=JSON.parse(localStorage.getItem(STORAGE)||"null");if(!d)return;fields().forEach(el=>{if(d[el.name]!==undefined && !el.readOnly)el.value=d[el.name]})}catch(e){}}
+function updateProgress(){const f=fields().filter(x=>!x.readOnly);let filled=0;f.forEach(x=>{if(String(x.value||"").trim())filled++});document.getElementById("progressBar").style.width=(f.length?Math.round(filled/f.length*100):0)+"%"}
+function showModal(html){modalBody.innerHTML=html;modal.style.display="grid"} function closeModal(){modal.style.display="none"}
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function base64Encode(text){const bytes=new TextEncoder().encode(text);let binary="";for(let i=0;i<bytes.length;i+=0x8000)binary+=String.fromCharCode(...bytes.subarray(i,Math.min(i+0x8000,bytes.length)));return btoa(binary)}
+
+function freezeValues(clone, currentData){
+ clone.querySelectorAll("input,textarea,select").forEach(el=>{
+  if(el.closest("#gradePanel")) return;
+  const value = currentData[el.name] || "";
+  if(el.tagName.toLowerCase()==="textarea") { el.textContent = value; } 
+  else if(el.tagName.toLowerCase()==="select") {
+    [...el.options].forEach(o=>o.removeAttribute("selected"));
+    const opt=[...el.options].find(o=>o.value===value);
+    if(opt) opt.setAttribute("selected","selected");
+  } else { el.setAttribute("value", value); }
+  el.setAttribute("readonly","readonly"); el.setAttribute("disabled","disabled");
+ });
+}
+
+function teacherOnlyScript(){
+ const ep=ENDPOINT,sub=SUBJECT,folder=FOLDER_NAME,lid=LKPD_ID,sid=SUBMISSION_ID;
+ return `(function(){
+  const ENDPOINT='${ep}',SUBJECT='${sub}',FOLDER_NAME='${folder}',LKPD_ID='${lid}',SUBMISSION_ID='${sid}';
+  const key='lkpd_grade_'+LKPD_ID+'_'+SUBJECT.replace(/\\s+/g,'_')+'_'+SUBMISSION_ID;
+  
+  const scale=document.getElementById('gradeScale'),note=document.getElementById('gradeNote'),lockBtn=document.getElementById('lockGradeBtn'),status=document.getElementById('teacherStatus'),stars=document.getElementById('starRating');
+  let locked=localStorage.getItem(key+'_locked')==='1'; 
+
+  function renderStars(v){const n={A:4,B:3,C:2,D:1}[v]||0;stars.textContent='★'.repeat(n)+'☆'.repeat(4-n);stars.style.color=n?'#f59e0b':'#cbd5e1';}
+  
+  function applyState(){
+    if (locked) {
+      scale.disabled = true; note.disabled = true; note.readOnly = true;
+      lockBtn.disabled = true; lockBtn.textContent = '🔒 Assessment Saved';
+      status.innerHTML = '🔒 <b>Assessment is locked and synced.</b>';
+    } else {
+      scale.disabled = false; note.disabled = false; note.readOnly = false;
+      lockBtn.disabled = false; lockBtn.textContent = '🔒 Save & Lock Assessment';
+      status.innerHTML = '📝 <b>Please provide your assessment below.</b>';
+    }
+    renderStars(scale.value);
+  }
+
+  async function fetchGradeFromServer() {
+    try {
+      const response = await fetch(ENDPOINT + "?action=getGrade&submissionId=" + SUBMISSION_ID);
+      const result = await response.json();
+      if (result.status === 'success' && result.scale) {
+        scale.value = result.scale; note.value = result.note; locked = true; 
+        localStorage.setItem(key+'_locked','1'); localStorage.setItem(key, JSON.stringify({scale: result.scale, note: result.note}));
+      } else {
+        let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+        scale.value=d.scale||''; note.value=d.note||'';
+      }
+    } catch (error) {
+      let d={}; try{d=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+      scale.value=d.scale||''; note.value=d.note||'';
+    }
+    applyState();
+  }
+
+  fetchGradeFromServer();
+  scale.addEventListener("change",()=>{renderStars(scale.value);});
+
+  lockBtn.onclick=async()=>{
+    if(locked)return;
+    if(!scale.value){alert('Please select a grade scale A, B, C, or D first.');return;}
+    status.innerHTML="⏳ <b>Saving assessment...</b> Sending to server.";
+    lockBtn.disabled=true; scale.disabled=true; note.disabled=true;
+    try{
+      const nama=(document.querySelector("input[name='nama']")?.value||'Siswa').trim();
+      const payload={action:'saveGrade',studentName:nama,subject:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,scale:scale.value,rating:{A:4,B:3,C:2,D:1}[scale.value],note:note.value};
+      await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+      localStorage.setItem(key,JSON.stringify({scale:scale.value,note:note.value}));
+      localStorage.setItem(key+'_locked','1'); locked=true; applyState();
+      alert('Assessment successfully saved to Server.');
+    }catch(e){
+      alert('Failed to save to server. Check your connection.'); applyState(); 
+    }
+  };
+ })();`;
+}
+
+function buildFinalHTML(){
+ const currentData = collect(); 
+ const clone=document.documentElement.cloneNode(true);
+ clone.querySelectorAll(".appbar,.progress,.actions,.modal,.check-btn").forEach(el=>el.remove());
+ const teacherScript=clone.ownerDocument.createElement("script");
+ teacherScript.textContent=teacherOnlyScript();
+ clone.querySelectorAll("script").forEach(el=>el.remove());
+ clone.querySelector("body").appendChild(teacherScript);
+ clone.querySelectorAll("*").forEach(el=>[...el.attributes].forEach(a=>{if(a.name.toLowerCase().startsWith("on"))el.removeAttribute(a.name)}));
+ 
+ freezeValues(clone, currentData);
+ 
+ clone.querySelectorAll('.game-level').forEach(el=>{
+   el.classList.remove('locked'); el.classList.add('unlocked');
+   const ovr = el.querySelector('.lock-overlay'); if(ovr) ovr.remove();
+ });
+ const panel=clone.querySelector("#gradePanel"); if(panel){panel.classList.remove("show");panel.style.display="block"}
+ const banner=clone.ownerDocument.createElement("div");banner.className="submitted-banner";
+ const nama=(form.elements.nama?.value||"Siswa").trim();
+ banner.innerHTML="✅ WORKSHEET SUBMITTED<small>Name: "+esc(nama)+" • "+new Date().toLocaleString("id-ID")+" • ID: "+esc(SUBMISSION_ID)+"</small>";
+ clone.querySelector("body").insertBefore(banner,clone.querySelector("body").firstChild);
+ return "<!doctype html>\n"+clone.outerHTML;
+}
+
+async function sendToGoogleDrive(){
+ const nama=(form.elements.nama?.value||"Siswa").trim().replace(/[\\/:*?"<>|]/g,"_")||"Siswa";
+ const finalHTML=buildFinalHTML();
+ const filename="LKPD_"+LKPD_ID+"_Eng_"+nama+".html";
+ const payload={action:"saveHTML",filename,studentName:nama,subject:SUBJECT,mapel:SUBJECT,folderName:FOLDER_NAME,lkpdId:LKPD_ID,submissionId:SUBMISSION_ID,htmlBase64:base64Encode(finalHTML),data:collect()};
+ await fetch(ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+ const blob=new Blob([finalHTML],{type:"text/html;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+ localStorage.removeItem(STORAGE);
+}
+
+function focusIdentity(){
+ const el=form.elements.nama?.value.trim()?form.elements.tanggal:form.elements.nama;
+ el?.focus(); el?.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function confirmSend(){
+ const nama=(form.elements.nama?.value||"").trim();
+ const tanggal=(form.elements.tanggal?.value||"").trim();
+ if(!nama || !tanggal){
+   const belum=[]; if(!nama) belum.push("Student's Name"); if(!tanggal) belum.push("Day / Date");
+   showModal("<div style='font-size:46px'>📝</div><h3>Identity Incomplete</h3><p>Please fill in your identity on page 1 before sending.</p><div class='tip' style='text-align:left'><b>Missing:</b><br>• "+esc(belum.join("<br>• "))+"</div><button class='btn-blue' onclick='closeModal();focusIdentity()'>Complete Identity</button>");
+   return;
+ }
+ showModal("<div style='font-size:46px'>📤</div><h3>Send Worksheet?</h3><p>Make sure you have completed all missions.</p><p>This will be locked and sent to your teacher.</p><button class='btn-light' onclick='closeModal()'>Check Again</button> <button class='btn-blue' id='yesSend'>Yes, Send</button>");
+ 
+ document.getElementById("yesSend").onclick=async()=>{
+   showModal("<div class='spinner'></div><h3>Sending...</h3><p>Please wait.</p>");
+   try{
+     await sendToGoogleDrive();
+     fields().forEach(el=>{el.setAttribute("readonly","readonly");el.setAttribute("disabled","disabled");});
+     document.getElementById("sendBtn").style.display="none";
+     document.getElementById("sendBtn2").style.display="none";
+     document.getElementById("saveBtn").style.display="none";
+     showModal("<div style='font-size:52px'>✅</div><h3>Successfully Sent!</h3><p>Great job! Your mission is accomplished.</p><button class='btn-blue' onclick='closeModal()'>Done</button>");
+   }catch(err){
+     showModal("<div style='font-size:52px'>⚠️</div><h3>Connection Error</h3><p>"+esc(err)+"</p><button class='btn-light' onclick='closeModal()'>Close</button>");
+   }
+ }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+ loadDraft();updateProgress();fields().forEach(el=>{el.addEventListener("input",updateProgress);el.addEventListener("change",updateProgress)});
+ const save=document.getElementById("saveBtn");if(save)save.onclick=saveDraft;
+ const send=document.getElementById("sendBtn");if(send)send.onclick=confirmSend;
+ const send2=document.getElementById("sendBtn2");if(send2)send2.onclick=confirmSend;
+});
+</script>
+</body>
+</html>
