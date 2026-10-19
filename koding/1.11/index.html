@@ -1,1 +1,418 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rubrik Penilaian LKPD - Koding & Kearifan Lokal Engklek Sunda Manda</title>
+<style>
+  :root {
+    --primary: #1a73e8;
+    --green: #0b9f75;
+    --dark: #1e293b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f1f5f9;
+    font-family: "Times New Roman", Times, serif;
+    color: #000;
+    line-height: 1.5;
+    font-size: 12pt;
+  }
+  /* Toolbar Kontrol Export */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #ffffff;
+    border-bottom: 2px solid #cbd5e1;
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    font-family: system-ui, -apple-system, sans-serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+  .toolbar-title {
+    font-weight: 800;
+    color: var(--dark);
+    font-size: 15px;
+  }
+  .toolbar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .btn {
+    border: 0;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.2s;
+  }
+  .btn-doc { background: var(--primary); color: #fff; }
+  .btn-doc:hover { background: #1557b0; }
+  .btn-copy { background: var(--green); color: #fff; }
+  .btn-copy:hover { background: #087f60; }
+  .btn-print { background: #e2e8f0; color: #1e293b; }
+  .toast {
+    display: none;
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: system-ui, sans-serif;
+  }
 
+  /* Kertas A4 Standar */
+  .page-container {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 24px auto;
+    background: #fff;
+    padding: 20mm 20mm 20mm 25mm;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  h2, h3, h4 {
+    margin-top: 14pt;
+    margin-bottom: 6pt;
+  }
+  .doc-title {
+    text-align: center;
+    font-size: 13.5pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 14pt;
+    border-bottom: 2px solid #000;
+    padding-bottom: 8pt;
+  }
+  .section-heading {
+    font-size: 12pt;
+    font-weight: bold;
+    background: #e2e8f0;
+    padding: 4pt 8pt;
+    border-left: 4px solid #000;
+    margin-top: 14pt;
+    margin-bottom: 8pt;
+  }
+  p { margin: 0 0 8pt 0; text-align: justify; }
+  ul, ol { margin: 0 0 8pt 0; padding-left: 22pt; }
+  li { margin-bottom: 4pt; text-align: justify; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8pt 0 14pt 0;
+    font-size: 10.5pt;
+  }
+  th, td {
+    border: 1px solid #000;
+    padding: 6pt 7pt;
+    vertical-align: top;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    font-weight: bold;
+    text-align: center;
+  }
+  table.info-table td:first-child {
+    width: 25%;
+    font-weight: bold;
+  }
+  table.info-table td:nth-child(2) {
+    width: 3%;
+    text-align: center;
+  }
+  table.no-border, table.no-border td {
+    border: none !important;
+  }
+
+  @media print {
+    .toolbar { display: none !important; }
+    body { background: #fff; }
+    .page-container {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div>
+    <div class="toolbar-title">📊 Rubrik Penilaian LKPD - Koding & Engklek Sunda Manda</div>
+    <div id="statusToast" class="toast">✅ Berhasil disalin! Buka Google Docs (docs.new) lalu tekan Ctrl+V.</div>
+  </div>
+  <div class="toolbar-actions">
+    <button class="btn btn-copy" onclick="copyForGoogleDocs()">📋 Salin Format Rapi (Paste ke Google Docs)</button>
+    <button class="btn btn-doc" onclick="exportToDoc()">📥 Unduh File .DOC (Google Docs / Word)</button>
+    <button class="btn btn-print" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+  </div>
+</div>
+
+<div class="page-container" id="docContent">
+
+  <div class="doc-title">
+    INSTRUMEN PENILAIAN &amp; RUBRIK LKPD<br>
+    KODING DAN KECERDASAN ARTIFISIAL KELAS V<br>
+    PROYEK: BERPIKIR KOMPUTASIONAL MELALUI PERMAINAN ENGKLEK (SUNDA MANDA)[cite: 1, 2, 64]
+  </div>
+
+  <div class="section-heading">I. IDENTITAS PENILAIAN</div>
+  <table class="info-table">
+    <tr>
+      <td>Nama Kelompok</td>
+      <td>:</td>
+      <td>........................................................................................................</td>
+    </tr>
+    <tr>
+      <td>Nama Anggota</td>
+      <td>:</td>
+      <td>1. ........................................ 3. ........................................ 5. ........................................<br>
+          2. ........................................ 4. ........................................</td>
+    </tr>
+    <tr>
+      <td>Kelas / Fase</td>
+      <td>:</td>
+      <td>V (Lima) / Fase C[cite: 1]</td>
+    </tr>
+    <tr>
+      <td>Mata Pelajaran</td>
+      <td>:</td>
+      <td>Koding dan Kecerdasan Artifisial[cite: 1]</td>
+    </tr>
+    <tr>
+      <td>Hari / Tanggal</td>
+      <td>:</td>
+      <td>........................................................................................................</td>
+    </tr>
+  </table>
+
+  <div class="section-heading">II. RUBRIK PENILAIAN PROYEK KELOMPOK</div>
+  <p>Rubrik ini digunakan oleh guru untuk menilai unjuk kerja, hasil analisis 4 pilar berpikir komputasional, penyusunan <i>pseudocode</i>, serta kerja sama kelompok dalam proyek permainan Engklek (<i>Sunda Manda</i>)[cite: 19, 43, 71].</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:16%">Aspek Penilaian[cite: 71]</th>
+        <th style="width:21%">Kriteria Sangat Baik (Skor 4)[cite: 71]</th>
+        <th style="width:21%">Kriteria Baik (Skor 3)[cite: 71]</th>
+        <th style="width:21%">Kriteria Cukup (Skor 2)[cite: 71]</th>
+        <th style="width:21%">Kriteria Perlu Bimbingan (Skor 1)[cite: 71]</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>1. Dekomposisi &amp; Abstraksi</b>[cite: 19, 25, 71]</td>
+        <td>Menguraikan seluruh tahapan permainan engklek secara rinci dan memilih seluruh informasi penting (abstraksi) dengan sangat tepat[cite: 19, 25, 71].</td>
+        <td>Menguraikan sebagian besar tahapan permainan dan memilih informasi penting dengan tepat[cite: 19, 25, 71].</td>
+        <td>Masih terdapat beberapa kesalahan dalam menguraikan tahapan atau memilih informasi penting[cite: 71].</td>
+        <td>Belum mampu melakukan dekomposisi dan abstraksi pada permainan engklek dengan benar[cite: 71].</td>
+      </tr>
+      <tr>
+        <td><b>2. Pengenalan Pola</b>[cite: 22, 71]</td>
+        <td>Mengidentifikasi seluruh pola petak dan pijakan kaki (1 kaki &amp; 2 kaki) serta menjelaskan aturan polanya dengan sangat benar dan teliti[cite: 22, 23, 71].</td>
+        <td>Mengidentifikasi sebagian besar pola petak dan pijakan kaki dengan benar[cite: 22, 71].</td>
+        <td>Masih mengalami kesalahan dalam menentukan pola petak dan pijakan kaki[cite: 71].</td>
+        <td>Belum mampu mengenali pola petak dan pijakan kaki dengan benar[cite: 71].</td>
+      </tr>
+      <tr>
+        <td><b>3. Penyusunan Algoritma &amp; Pseudocode</b>[cite: 27, 43, 71]</td>
+        <td>Menyusun seluruh langkah <i>pseudocode</i> (diawali <i>Mulai</i>, kata kerja aktif berurutan sesuai letak <i>gaco</i>, diakhiri <i>Selesai</i>) secara lengkap, rapi, dan benar[cite: 43, 71].</td>
+        <td>Menyusun langkah <i>pseudocode</i> dengan cukup lengkap, logis, dan benar[cite: 43, 71].</td>
+        <td>Penyusunan langkah <i>pseudocode</i> masih kurang lengkap atau ada langkah penting yang terlewat/terbalik[cite: 38, 71].</td>
+        <td>Belum mampu menyusun langkah algoritma dan <i>pseudocode</i> dengan benar[cite: 71].</td>
+      </tr>
+      <tr>
+        <td><b>4. Kerja Sama Kelompok (<i>Silih Asah, Asih, Asuh</i>)</b>[cite: 71]</td>
+        <td>Sangat aktif bekerja sama (<i>rereongan</i>), berbagi peran dengan adil, dan saling membantu anggota kelompok dengan santun (<i>someah</i>)[cite: 71].</td>
+        <td>Bekerja sama dengan baik dan rukun di dalam kelompok[cite: 71].</td>
+        <td>Kurang aktif dalam kerja sama kelompok dan pembagian tugas belum merata[cite: 71].</td>
+        <td>Tidak menunjukkan kerja sama di dalam kelompok[cite: 71].</td>
+      </tr>
+      <tr>
+        <td><b>5. Kejujuran, Ketelitian &amp; Tanggung Jawab</b>[cite: 71]</td>
+        <td>Sangat teliti, jujur/sportif saat menguji simulasi engklek, dan bertanggung jawab penuh menyelesaikan proyek[cite: 71].</td>
+        <td>Cukup teliti, jujur, dan bertanggung jawab dalam mengikuti kegiatan proyek[cite: 71].</td>
+        <td>Kurang teliti dan masih perlu diingatkan untuk mematuhi aturan kegiatan[cite: 71].</td>
+        <td>Tidak teliti dan tidak bertanggung jawab dalam kegiatan[cite: 71].</td>
+      </tr>
+      <tr>
+        <td><b>6. Presentasi &amp; Demonstrasi Proyek</b>[cite: 71]</td>
+        <td>Menjelaskan dan mendemonstrasikan hasil <i>pseudocode</i> serta refleksi dengan sangat jelas, percaya diri, dan benar[cite: 71].</td>
+        <td>Menjelaskan dan mendemonstrasikan hasil proyek dengan cukup jelas dan benar[cite: 71].</td>
+        <td>Penjelasan masih kurang jelas dan kurang percaya diri saat tampil di depan kelas[cite: 71].</td>
+        <td>Belum mampu menjelaskan dan mendemonstrasikan hasil proyek dengan baik[cite: 71].</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-heading">III. PEDOMAN PENSKORAN &amp; REKAP NILAI KELOMPOK</div>
+  <ul>
+    <li><b>Skor Maksimal tiap aspek:</b> 4 (Sangat Baik)[cite: 71]</li>
+    <li><b>Skor Maksimal Keseluruhan:</b> 6 Aspek × 4 = 24 Skor</li>
+    <li><b>Rumus Perhitungan Nilai Akhir:</b>[cite: 72]
+      $$\text{Nilai Akhir} = \frac{\text{Jumlah Skor yang Diperoleh}}{\text{Skor Maksimal (24)}} \times 100$$
+    </li>
+  </ul>
+
+  <table style="width:70%; margin: 12pt auto;">
+    <thead>
+      <tr>
+        <th style="width:70%">Aspek yang Dinilai[cite: 72]</th>
+        <th style="width:30%; text-align:center;">Skor (1 – 4)[cite: 72]</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1. Dekomposisi &amp; Abstraksi[cite: 19, 25, 72]</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>2. Pengenalan Pola[cite: 22, 72]</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>3. Penyusunan Algoritma &amp; Pseudocode[cite: 27, 43, 72]</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>4. Kerja Sama Kelompok (<i>Silih Asah, Silih Asih, Silih Asuh</i>)[cite: 72]</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>5. Kejujuran, Ketelitian &amp; Tanggung Jawab[cite: 72]</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>6. Presentasi &amp; Demonstrasi Hasil Proyek[cite: 72]</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold; text-align:right;">JUMLAH SKOR DIPEROLEH :</td>
+        <td style="font-weight:bold; text-align:center;"></td>
+      </tr>
+      <tr>
+        <td style="font-weight:bold; text-align:right;">NILAI AKHIR :</td>
+        <td style="font-weight:bold; text-align:center;"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><b>Catatan &amp; Umpan Balik Guru:</b><br>
+     ..................................................................................................................................................................<br>
+     ..................................................................................................................................................................</p>
+
+  <br>
+  <table class="no-border" style="width:100%; margin-top:20pt">
+    <tr>
+      <td style="width:50%; text-align:center;">
+        Mengetahui,<br>
+        Kepala SDN 1 Sukahaji[cite: 63]
+        <br><br><br><br>
+        <b><u>IIS GUSTINI RATNA NENGSIH, S.Pd.SD.</u></b><br>
+        NIP. 197108172014082002[cite: 63]
+      </td>
+      <td style="width:50%; text-align:center;">
+        Ciamis, .................................... 2026<br>
+        Guru Kelas / Mata Pelajaran[cite: 63]
+        <br><br><br><br>
+        <b><u>IWAN SUTIAWAN, S.Pd.I.</u></b><br>
+        NIP. 198610132025211115[cite: 63]
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+<script>
+// Membersihkan label sitasi sistem saat diekspor ke Google Docs / Word
+function getCleanHTML() {
+  const clone = document.getElementById("docContent").cloneNode(true);
+  clone.innerHTML = clone.innerHTML.replace(/\s*\[cite:\s*[\d,\s]+\]/g, "");
+  return clone.innerHTML;
+}
+
+// 1. Fungsi Salin Rich-Text (Langsung Ctrl+V di Google Docs)
+async function copyForGoogleDocs() {
+  const cleanHTML = getCleanHTML();
+  const wrapper = document.createElement("div");
+  wrapper.style.position = "fixed";
+  wrapper.style.left = "-9999px";
+  wrapper.innerHTML = cleanHTML;
+  document.body.appendChild(wrapper);
+
+  try {
+    if (navigator.clipboard && window.ClipboardItem) {
+      const blobHtml = new Blob([cleanHTML], { type: "text/html" });
+      const blobText = new Blob([wrapper.innerText], { type: "text/plain" });
+      await navigator.clipboard.write([new ClipboardItem({ "text/html": blobHtml, "text/plain": blobText })]);
+    } else {
+      const range = document.createRange();
+      range.selectNodeContents(wrapper);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      document.execCommand("copy");
+      sel.removeAllRanges();
+    }
+    const toast = document.getElementById("statusToast");
+    toast.style.display = "inline-block";
+    setTimeout(() => { toast.style.display = "none"; }, 5000);
+  } catch (err) {
+    alert("Silakan gunakan tombol Unduh File .DOC di sebelahnya.");
+  } finally {
+    document.body.removeChild(wrapper);
+  }
+}
+
+// 2. Fungsi Unduh File .DOC (Kompatibel Penuh dengan Google Docs & MS Word)
+function exportToDoc() {
+  const cleanContent = getCleanHTML();
+  const preHtml = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+  <head><meta charset='utf-8'><title>Rubrik Penilaian LKPD - Engklek Sunda Manda</title>
+  <style>
+    @page { size: 21cm 29.7cm; margin: 2cm 2cm 2cm 2.5cm; }
+    body { font-family: "Times New Roman", serif; font-size: 11pt; line-height: 1.5; color: #000; }
+    h2, h3, h4 { margin-top: 12pt; margin-bottom: 6pt; }
+    .doc-title { text-align: center; font-size: 13pt; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 8pt; margin-bottom: 14pt; }
+    .section-heading { font-size: 11.5pt; font-weight: bold; background-color: #e2e8f0; padding: 4pt 8pt; margin-top: 14pt; margin-bottom: 8pt; }
+    table { width: 100%; border-collapse: collapse; margin: 8pt 0 14pt 0; font-size: 10pt; }
+    th, td { border: 1px solid #000; padding: 5pt 6pt; vertical-align: top; }
+    th { background-color: #f1f5f9; font-weight: bold; text-align: center; }
+    table.no-border, table.no-border td { border: none !important; }
+  </style>
+  </head><body>`;
+  const postHtml = `</body></html>`;
+  const fullHtml = preHtml + cleanContent + postHtml;
+
+  const blob = new Blob(['\ufeff', fullHtml], { type: 'application/msword;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'Rubrik_Penilaian_LKPD_Koding_Engklek.doc';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+</script>
+
+</body>
+</html>
