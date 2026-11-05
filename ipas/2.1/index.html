@@ -1,1 +1,1069 @@
+<!doctype html>
+<!-- LKPD DIGITAL V4.0 (LMS INTEGRATED & VIRTUAL LAB) — IPAS KELAS IV -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 2.1 IPAS - Gaya di Sekitar Kita</title>
+<style>
+:root {
+  --green: #059669;
+  --green2: #047857;
+  --mint: #d1fae5;
+  --ink: #1e293b;
+  --muted: #64748b;
+  --yellow: #fef08a;
+  --line: #e2e8f0;
+  --white: #ffffff;
+  --blue: #0284c7;
+  --gold: #f59e0b;
+  --orange: #ea580c;
+  --red: #e11d48;
+  --purple: #7c3aed;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #ecfdf5, #f0f9ff 55%, #fffbeb);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  overflow-x: hidden;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(4px); opacity: .45; pointer-events: none;
+}
+body::before { width: 200px; height: 200px; background: #a7f3d0; left: -70px; top: 120px; }
+body::after { width: 170px; height: 170px; background: #bae6fd; right: -50px; bottom: 100px; }
 
+.appbar {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: 10px; align-items: center;
+  padding: 12px 18px; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--green2); margin-right: auto; font-size: 15px; }
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow; font-family: inherit;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-green { background: var(--green); color: #fff; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-orange { background: var(--orange); color: #fff; }
+.btn-rose { background: var(--red); color: #fff; }
+
+.progress { height: 6px; background: #d1fae5; position: sticky; top: 57px; z-index: 29; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--green), var(--blue)); transition: .3s; }
+
+.sheet {
+  width: min(1020px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px;
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #ecfdf5, #e0f2fe); border-radius: 22px; padding: 26px; border: 1px solid #a7f3d0; }
+.badge { display: inline-block; background: var(--green); color: #fff; padding: 7px 14px; border-radius: 999px; font-weight: 900; font-size: 13px; }
+h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.1; margin: 14px 0 8px; }
+h2 { margin: 0; font-size: 21px; }
+p { line-height: 1.7; }
+
+.mission {
+  background: #fffbeb; border-radius: 20px; padding: 22px; display: flex;
+  flex-direction: column; justify-content: center; text-align: center; font-size: 16px; border: 2px dashed #fcd34d;
+}
+.mission-icon { font-size: 58px; animation: bob 2.8s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(3deg); } }
+
+/* IDENTITAS & KELOMPOK LMS */
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+.field label { display: block; font-size: 13px; font-weight: 900; color: #334155; margin-bottom: 6px; }
+input:not([type="checkbox"]), textarea, select {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s;
+}
+input:not([type="checkbox"]):focus, textarea:focus, select:focus {
+  border-color: var(--green); box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge {
+  background: var(--blue); color: #fff; padding: 6px 14px; border-radius: 99px;
+  font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px;
+}
+.member-badge span {
+  cursor: pointer; background: #fff; color: var(--blue); width: 20px; height: 20px;
+  display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px;
+}
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--mint); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--green); color: #fff; font-weight: 900; flex: 0 0 auto; }
+
+/* GAME LEVEL & LITERASI */
+.game-level { position: relative; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 24px; margin-bottom: 26px; transition: all .3s; }
+.game-level.locked { opacity: 0.6; pointer-events: none; filter: grayscale(95%); }
+.lock-overlay {
+  position: absolute; inset: 0; background: rgba(248, 250, 252, 0.88);
+  display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; border-radius: 16px; text-align: center; padding: 20px;
+}
+.lock-icon { font-size: 52px; margin-bottom: 8px; }
+.game-level.unlocked .lock-overlay { display: none; }
+.game-level.completed { border-color: var(--green); background: #f0fdf4; }
+
+.literacy-card {
+  background: #fff; border-left: 5px solid var(--green); padding: 18px 20px;
+  border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.literacy-tag {
+  display: inline-block; background: #dcfce7; color: #166534; font-size: 12px;
+  font-weight: 900; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px;
+}
+
+/* LABORATORIUM SIMULASI INTERAKTIF */
+.sim-box {
+  background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
+  border: 2px solid #7dd3fc; border-radius: 16px; padding: 20px; margin-bottom: 20px;
+}
+.sim-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.sim-header h3 { font-size: 16px; font-weight: 900; color: #0369a1; margin: 0; }
+.sim-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+.sim-stage {
+  position: relative; height: 140px; background: linear-gradient(180deg, #bae6fd 0%, #e0f2fe 68%, #94a3b8 68%, #64748b 100%);
+  border-radius: 14px; overflow: hidden; border: 2px solid #64748b; display: flex; align-items: flex-end; padding-bottom: 26px;
+}
+.sim-stage.floor-licin { background: linear-gradient(180deg, #bae6fd 0%, #e0f2fe 68%, #cbd5e1 68%, #94a3b8 100%); }
+.sim-stage.floor-kasar { background: linear-gradient(180deg, #bae6fd 0%, #e0f2fe 68%, #78350f 68%, #451a03 100%); }
+.floor-label {
+  position: absolute; bottom: 4px; left: 14px; color: #fff; font-size: 12px; font-weight: 800; letter-spacing: 0.5px;
+}
+.actor-crate {
+  position: absolute; left: 30px; bottom: 26px; display: flex; align-items: center; gap: 4px;
+  font-size: 42px; transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sim-log {
+  background: #0f172a; color: #38bdf8; font-family: monospace; font-size: 13px;
+  padding: 12px 16px; border-radius: 10px; margin-top: 12px; line-height: 1.5; font-weight: 700;
+}
+
+/* SIMULASI 2: KARTU PENGARUH GAYA */
+.effect-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.effect-card {
+  background: #fff; border: 2px solid #cbd5e1; border-radius: 14px; padding: 14px;
+  text-align: center; cursor: pointer; transition: .2s;
+}
+.effect-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+.effect-card.tested { border-color: var(--green); background: #f0fdf4; }
+.effect-emoji { font-size: 38px; display: block; margin-bottom: 6px; transition: .4s; }
+.effect-card.anim-kick .effect-emoji { transform: translateX(35px) rotate(180deg); }
+.effect-card.anim-stop .effect-emoji { transform: scale(0.85); }
+.effect-card.anim-turn .effect-emoji { transform: translate(20px, -15px) rotate(-45deg); }
+.effect-card.anim-fast .effect-emoji { transform: translateX(45px) scale(1.15); }
+.effect-card.anim-shape .effect-emoji { transform: scaleX(1.4) scaleY(0.65); }
+
+/* SIMULASI 3: PEGAS, MAGNET, GRAVITASI */
+.lab3-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 18px; }
+.mini-lab { background: #fff; border: 2px solid #bae6fd; border-radius: 14px; padding: 16px; text-align: center; }
+.mini-stage {
+  height: 110px; background: #f1f5f9; border-radius: 10px; margin: 10px 0;
+  display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 34px; position: relative; overflow: hidden;
+}
+
+/* PERTANYAAN & VALIDASI */
+.q-box { background: #fff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+.q-row { display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; align-items: center; margin-bottom: 12px; font-weight: 700; font-size: 14px; }
+.lkpd-val.correct, .stmt-row.success-state { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d; }
+.lkpd-val.wrong, .stmt-row.error-state { animation: shake 0.4s; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);} }
+
+/* PILIHAN GANDA KOMPLEKS (AKM) */
+.stmt-container { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.stmt-row {
+  display: flex; align-items: center; background: #fff; border: 2px solid #cbd5e1;
+  border-radius: 12px; padding: 12px 16px; cursor: pointer; transition: .2s;
+}
+.stmt-row:hover { background: #f8fafc; border-color: #94a3b8; }
+.stmt-row input[type="checkbox"] { width: 22px; height: 22px; margin-right: 14px; cursor: pointer; flex-shrink: 0; }
+.stmt-text { font-size: 14px; font-weight: 700; color: #334155; line-height: 1.5; }
+
+.check-btn { display: block; margin: 20px auto 0; background: var(--blue); color: #fff; border-radius: 99px; padding: 12px 28px; font-weight: 900; font-size: 15px; }
+
+/* PANEL PENILAIAN & RUBRIK GURU */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 24px; margin: 20px auto; width: min(1020px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.rubric-table { width: 100%; border-collapse: collapse; margin: 14px 0 20px; font-size: 13px; background: #fff; }
+.rubric-table th, .rubric-table td { border: 1px solid #cbd5e1; padding: 10px 12px; text-align: left; }
+.rubric-table th { background: #e0f2fe; color: #0369a1; font-weight: 900; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 50; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #d1fae5; border-top-color: var(--green); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 750px) {
+  .hero, .idgrid, .q-row, .grade-grid { grid-template-columns: 1fr; }
+  .sheet { padding: 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="appbar" id="appbar">
+  <div class="brand">🔬 PORTAL LMS SDN 1 SUKAHAJI — IPAS KELAS IV</div>
+  <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+  <button type="button" class="btn-green" id="sendBtn">📤 Kirim Hasil Eksperimen</button>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<!-- ================= HEADER & IDENTITAS KELOMPOK ================= -->
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 2.1 • BAB 2</span>
+      <h1>Gaya di Sekitar Kita</h1>
+      <p><b>Ilmu Pengetahuan Alam dan Sosial (IPAS) • Fase B / Kelas IV</b></p>
+      <p>Mari bereksperimen melalui simulasi laboratorium virtual! Bacalah setiap cerita dengan teliti, jalankan simulasinya, dan temukan bagaimana gaya bekerja di sekitar kita.</p>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input name="tanggal" placeholder="Contoh: Jumat, 6 November 2026" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Bab 2 - Gaya di Sekitar Kita (Pengaruh & Macam Gaya)" readonly>
+        </div>
+
+        <div class="group-builder">
+          <label>👥 Data Kelompok Eksperimen (2 – 5 Siswa)</label>
+          <div class="member-list" id="memberList"></div>
+          <div class="add-row" id="addMemberTools">
+            <input type="tel" id="inNisn" placeholder="Ketik NISN anggota kelompok..." style="flex:1; background:#fff;">
+            <button type="button" class="btn-blue" id="btnAddMember" disabled>🔍 Cari & Tambah</button>
+          </div>
+          <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa SDN 1 Sukahaji...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">🧲🛸</div>
+      <b>🎯 Misi Ilmuwan Cilik</b>
+      <p>Jalankan <b>3 Simulasi Virtual</b> dan pecahkan <b>4 Level Literasi Sains</b> bersama kelompokmu!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEVEL 1: GAYA OTOT & GAYA GESEK (SIMULASI KONTAINER) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Aktivitas 1: Mendorong & Menarik Kontainer Berat</h2></div>
+
+  <div class="game-level unlocked" id="level1">
+    <div class="literacy-card">
+      <span class="literacy-tag">📖 WACANA LITERASI 1: KARDUS BUKU PERPUSTAKAAN</span>
+      <p>Pada pagi hari di SD Negeri 1 Sukahaji, Ian dan Banu mendapat tugas memindahkan kontainer plastik berisi 50 buku cerita baru dari depan pintu ke pojok baca kelas IV. Saat Ian mencoba mendorong kontainer itu sendirian di atas lantai kasar, kontainer terasa sangat berat dan sulit bergeser. Banu kemudian datang ikut mendorong bersama Ian, lalu mereka juga mencoba memindahkan kontainer di atas lantai keramik yang licin serta memasang papan beroda di bawah kontainer tersebut.</p>
+    </div>
+
+    <!-- LABORATORIUM VIRTUAL 1 -->
+    <div class="sim-box">
+      <div class="sim-header">
+        <h3>🧪 Laboratorium Virtual 1: Uji Gaya Otot & Gaya Gesek</h3>
+        <span style="font-size:12px; font-weight:800; color:#0369a1;">Ubah pengaturan lalu klik "Jalankan Simulasi"</span>
+      </div>
+      <div class="sim-controls">
+        <div>
+          <label style="font-size:12px; font-weight:800;">1. Jenis Aktivitas Gaya Otot:</label>
+          <select id="sim1Action">
+            <option value="dorong">Mendorong Kontainer (Menjauh)</option>
+            <option value="tarik">Menarik Kontainer (Mendekat)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:12px; font-weight:800;">2. Jumlah Anak (Besar Gaya):</label>
+          <select id="sim1Power">
+            <option value="1">1 Anak (Ian Sendirian)</option>
+            <option value="2">2 Anak (Ian & Banu Bersama)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:12px; font-weight:800;">3. Kondisi Permukaan Lantai:</label>
+          <select id="sim1Surface" onchange="updateSim1Floor()">
+            <option value="kasar">Lantai Kasar / Berpasir (Gesekan Besar)</option>
+            <option value="licin">Lantai Keramik Halus (Gesekan Kecil)</option>
+            <option value="roda">Diberi Papan Beroda (Sangat Mudah)</option>
+          </select>
+        </div>
+      </div>
+      <div style="text-align:center; margin-bottom:12px;">
+        <button type="button" class="btn-green" onclick="runSim1()">▶️ Jalankan Simulasi Kontainer</button>
+        <button type="button" class="btn-light" onclick="resetSim1()">🔄 Reset Posisi</button>
+      </div>
+
+      <div class="sim-stage floor-kasar" id="sim1Stage">
+        <div class="actor-crate" id="sim1Actor">🧍📦</div>
+        <div class="floor-label" id="sim1FloorLabel">Permukaan: Lantai Kasar (Gaya Gesek Besar)</div>
+      </div>
+      <div class="sim-log" id="sim1Log">💡 Hasil Pengamatan: Silakan klik tombol "Jalankan Simulasi Kontainer" di atas untuk mengamati gerak benda!</div>
+    </div>
+
+    <!-- PERTANYAAN LITERASI LEVEL 1 -->
+    <div class="q-box">
+      <div style="font-weight:900; color:var(--green2); margin-bottom:12px;">🔎 ANALISIS HASIL SIMULASI & LITERASI:</div>
+
+      <div class="q-row">
+        <span>1. Dorongan atau tarikan yang diberikan Ian dan Banu menggunakan tenaga tubuh disebut...</span>
+        <select class="lkpd-val lvl1" data-ans="otot" name="l1_q1">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="otot">Gaya Otot</option>
+          <option value="magnet">Gaya Magnet</option>
+          <option value="gravitasi">Gaya Gravitasi</option>
+        </select>
+      </div>
+
+      <div class="q-row">
+        <span>2. Saat kontainer didorong oleh 2 anak dibandingkan 1 anak, maka gerak kontainer menjadi...</span>
+        <select class="lkpd-val lvl1" data-ans="cepat" name="l1_q2">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="lambat">Lebih berat dan lambat</option>
+          <option value="cepat">Lebih ringan dan berpindah lebih jauh</option>
+          <option value="diam">Tetap diam tidak bergerak</option>
+        </select>
+      </div>
+
+      <div class="q-row">
+        <span>3. Gaya yang menahan gerak kontainer karena sentuhan antara bagian bawah kontainer dan lantai disebut...</span>
+        <select class="lkpd-val lvl1" data-ans="gesek" name="l1_q3">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="pegas">Gaya Pegas</option>
+          <option value="gesek">Gaya Gesek</option>
+          <option value="listrik">Gaya Listrik</option>
+        </select>
+      </div>
+
+      <div class="q-row">
+        <span>4. Berdasarkan simulasi, cara paling tepat untuk memperkecil gaya gesek agar kontainer berat mudah dipindahkan adalah...</span>
+        <select class="lkpd-val lvl1" data-ans="roda" name="l1_q4">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="pasir">Menaburkan pasir di lantai</option>
+          <option value="roda">Memasang roda di bawah kontainer</option>
+          <option value="buku">Menambah jumlah buku di dalam kontainer</option>
+        </select>
+      </div>
+
+      <div style="margin-top:10px;">
+        <label style="font-size:13px; font-weight:800;">✍️ Catatan Kesimpulan Kelompok (Tuliskan hubungan permukaan kasar/halus dengan besar kecilnya gaya gesek):</label>
+        <textarea class="lkpd-val" name="l1_kesimpulan" rows="2" placeholder="Semakin kasar permukaan lantai maka gaya geseknya semakin..."></textarea>
+      </div>
+    </div>
+
+    <button type="button" class="check-btn" onclick="checkLevel(1)">Cek Analisis & Buka Aktivitas 2 🔓</button>
+  </div>
+</section>
+
+<!-- ================= LEVEL 2: 5 PENGARUH GAYA TERHADAP BENDA ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--blue);">2</div><h2>Aktivitas 2: Menguji 5 Pengaruh Gaya terhadap Benda</h2></div>
+
+  <div class="game-level locked" id="level2">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Aktivitas 2 Terkunci</b><p>Selesaikan analisis Aktivitas 1 dengan benar untuk membuka laboratorium ini!</p></div>
+
+    <div class="literacy-card" style="border-left-color:var(--blue);">
+      <span class="literacy-tag" style="background:#e0f2fe; color:#0369a1;">📖 WACANA LITERASI 2: KEGIATAN DI LAPANGAN & KELAS SENI</span>
+      <p>Saat jam olahraga di halaman sekolah, Regu Elang sedang bermain sepak bola dan bersepeda. Andi menendang bola yang awalnya diam di titik tengah hingga meluncur deras. Penjaga gawang menangkap bola tersebut hingga berhenti. Saat bola dilempar lagi, Dito menyundul bola hingga berbelok arah ke samping. Di pinggir lapangan, Siti mengayuh sepedanya lebih kuat agar melaju makin cepat. Sementara itu di ruang kelas, Rina sedang menekan dan membentuk bongkahan tanah liat menjadi celengan berbentuk ayam.</p>
+    </div>
+
+    <!-- LABORATORIUM VIRTUAL 2 -->
+    <div class="sim-box">
+      <div class="sim-header">
+        <h3>🧪 Laboratorium Virtual 2: Klik Setiap Kartu untuk Menguji Pengaruh Gaya!</h3>
+        <span id="sim2Counter" style="font-size:12px; font-weight:900; color:var(--green2);">Uji Coba: 0 / 5 Selesai</span>
+      </div>
+      <div class="effect-grid">
+        <div class="effect-card" onclick="triggerEffect(this, 1, 'anim-kick', '⚽ Bola yang diam di lapangan menjadi bergerak meluncur setelah diberi gaya tendangan.')">
+          <span class="effect-emoji">⚽</span>
+          <b style="font-size:13px;">1. Tendang Bola Diam</b>
+          <div style="font-size:11px; color:var(--muted); margin-top:4px;">Klik untuk simulasi</div>
+        </div>
+        <div class="effect-card" onclick="triggerEffect(this, 2, 'anim-stop', '🧤 Bola yang bergerak cepat menjadi berhenti (diam) saat ditahan oleh tangan penjaga gawang.')">
+          <span class="effect-emoji">🧤⚽</span>
+          <b style="font-size:13px;">2. Tangkap Bola</b>
+          <div style="font-size:11px; color:var(--muted); margin-top:4px;">Klik untuk simulasi</div>
+        </div>
+        <div class="effect-card" onclick="triggerEffect(this, 3, 'anim-turn', '🗣️ Bola yang datang dari depan berubah arah geraknya setelah disundul kepala.')">
+          <span class="effect-emoji">🗣️⚽</span>
+          <b style="font-size:13px;">3. Sundul Bola</b>
+          <div style="font-size:11px; color:var(--muted); margin-top:4px;">Klik untuk simulasi</div>
+        </div>
+        <div class="effect-card" onclick="triggerEffect(this, 4, 'anim-fast', '🚲 Sepeda yang dikayuh lebih kuat bertambah kecepatannya (melaju makin kencang).')">
+          <span class="effect-emoji">🚲💨</span>
+          <b style="font-size:13px;">4. Kayuh Sepeda Kuat</b>
+          <div style="font-size:11px; color:var(--muted); margin-top:4px;">Klik untuk simulasi</div>
+        </div>
+        <div class="effect-card" onclick="triggerEffect(this, 5, 'anim-shape', '🏺 Tanah liat / plastisin yang ditekan dengan jari berubah bentuknya menjadi kerajinan.')">
+          <span class="effect-emoji">🏺✨</span>
+          <b style="font-size:13px;">5. Tekan Tanah Liat</b>
+          <div style="font-size:11px; color:var(--muted); margin-top:4px;">Klik untuk simulasi</div>
+        </div>
+      </div>
+      <div class="sim-log" id="sim2Log">💡 Klik kelima kartu percobaan di atas untuk mengamati perubahan yang terjadi pada benda!</div>
+    </div>
+
+    <!-- PERTANYAAN LEVEL 2 -->
+    <div class="q-box">
+      <div style="font-weight:900; color:var(--blue); margin-bottom:12px;">🔎 COCOKKAN PERISTIWA DENGAN PENGARUH GAYA YANG TEPAT:</div>
+
+      <div class="q-row">
+        <span>1. Andi menendang bola yang tadinya diam di tengah lapangan:</span>
+        <select class="lkpd-val lvl2" data-ans="diam_gerak" name="l2_q1">
+          <option value="">-- Pilih Pengaruh Gaya --</option>
+          <option value="diam_gerak">Mengubah benda diam menjadi bergerak</option>
+          <option value="gerak_diam">Mengubah benda bergerak menjadi diam</option>
+          <option value="bentuk">Mengubah bentuk benda</option>
+        </select>
+      </div>
+
+      <div class="q-row">
+        <span>2. Penjaga gawang menangkap bola yang ditendang ke arah gawang:</span>
+        <select class="lkpd-val lvl2" data-ans="gerak_diam" name="l2_q2">
+          <option value="">-- Pilih Pengaruh Gaya --</option>
+          <option value="arah">Mengubah arah gerak benda</option>
+          <option value="gerak_diam">Mengubah benda bergerak menjadi diam</option>
+          <option value="bentuk">Mengubah bentuk benda</option>
+        </select>
+      </div>
+
+      <div class="q-row">
+        <span>3. Dito menyundul bola yang dioper temannya hingga berbelok ke samping:</span>
+        <select class="lkpd-val lvl2" data-ans="arah" name="l2_q3">
+          <option value="">-- Pilih Pengaruh Gaya --</option>
+          <option value="arah">Mengubah arah gerak benda</option>
+          <option value="bentuk">Mengubah bentuk benda</option>
+          <option value="gerak_diam">Mengubah benda bergerak menjadi diam</option>
+        </select>
+      </div>
+
+      <div class="q-row">
+        <span>4. Rina menekan bongkahan tanah liat menjadi celengan ayam:</span>
+        <select class="lkpd-val lvl2" data-ans="bentuk" name="l2_q4">
+          <option value="">-- Pilih Pengaruh Gaya --</option>
+          <option value="kecepatan">Mengubah kecepatan gerak benda</option>
+          <option value="bentuk">Mengubah bentuk benda</option>
+          <option value="diam_gerak">Mengubah benda diam menjadi bergerak</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="button" class="check-btn" onclick="checkLevel(2)">Cek Analisis & Buka Aktivitas 3 🔓</button>
+  </div>
+</section>
+
+<!-- ================= LEVEL 3: GAYA PEGAS, MAGNET, & GRAVITASI ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--purple);">3</div><h2>Aktivitas 3: Eksplorasi Gaya Pegas, Magnet, dan Gravitasi</h2></div>
+
+  <div class="game-level locked" id="level3">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Aktivitas 3 Terkunci</b><p>Selesaikan Aktivitas 2 terlebih dahulu!</p></div>
+
+    <div class="literacy-card" style="border-left-color:var(--purple);">
+      <span class="literacy-tag" style="background:#ede9fe; color:#6d28d9;">📖 WACANA LITERASI 3: RAHASIA GAYA TAK KASAT MATA</span>
+      <p>Selain gaya otot dan gaya gesek, terdapat gaya lain yang bekerja dengan unik. Benda elastis seperti karet ketapel dan per kasur memiliki <b>gaya pegas</b> yang akan kembali ke bentuk semula setelah ditarik. Selain itu, ada <b>gaya magnet</b> yang mampu menarik benda-benda dari logam besi atau baja. Magnet memiliki dua kutub: Utara (U) dan Selatan (S). Jika dua kutub yang sama didekatkan akan tolak-menolak, sedangkan kutub yang berbeda akan tarik-menarik. Terakhir, semua benda yang kita lemparkan ke atas pasti jatuh kembali ke bawah karena adanya <b>gaya gravitasi bumi</b> yang menarik semua benda menuju pusat bumi.</p>
+    </div>
+
+    <!-- LABORATORIUM VIRTUAL 3 -->
+    <div class="lab3-grid">
+      <!-- Lab Pegas -->
+      <div class="mini-lab">
+        <b style="color:var(--purple);">🏹 1. Uji Ketapel (Gaya Pegas)</b>
+        <div class="mini-stage" id="stagePegas">🪵 rubber ➡️ 🪨</div>
+        <button type="button" class="btn-light" style="font-size:12px; padding:7px 10px;" onclick="simPegas('pendek')">Tarik Karet Pendek</button>
+        <button type="button" class="btn-blue" style="font-size:12px; padding:7px 10px;" onclick="simPegas('panjang')">Tarik Karet Panjang</button>
+      </div>
+
+      <!-- Lab Magnet -->
+      <div class="mini-lab">
+        <b style="color:var(--red);">🧲 2. Uji Kutub & Benda Magnet</b>
+        <div class="mini-stage" id="stageMagnet">🧲 ❓ 🔩</div>
+        <button type="button" class="btn-light" style="font-size:12px; padding:7px 10px;" onclick="simMagnet('sama')">Kutub U - U</button>
+        <button type="button" class="btn-rose" style="font-size:12px; padding:7px 10px;" onclick="simMagnet('beda')">Kutub U - S</button>
+      </div>
+
+      <!-- Lab Gravitasi -->
+      <div class="mini-lab">
+        <b style="color:var(--green2);">🍎 3. Uji Gravitasi Bumi</b>
+        <div class="mini-stage" id="stageGrav">🌳 🍎</div>
+        <button type="button" class="btn-green" style="font-size:12px; padding:7px 12px;" onclick="simGravitasi()">Lepaskan Buah dari Pohon</button>
+      </div>
+    </div>
+    <div class="sim-log" id="sim3Log" style="margin-bottom:18px;">💡 Klik tombol pada ketiga mini-lab di atas untuk melihat bagaimana gaya pegas, magnet, dan gravitasi bekerja!</div>
+
+    <!-- PERTANYAAN LEVEL 3 -->
+    <div class="q-box">
+      <div style="font-weight:900; color:var(--purple); margin-bottom:12px;">🔎 ANALISIS EKSPERIMEN GAYA PEGAS, MAGNET, & GRAVITASI:</div>
+
+      <div class="q-row">
+        <span>1. Semakin panjang karet ketapel ditarik ke belakang, maka gaya pegas yang dihasilkan semakin besar sehingga lontaran kerikil menjadi...</span>
+        <select class="lkpd-val lvl3" data-ans="jauh" name="l3_q1">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="dekat">Semakin dekat dan lemah</option>
+          <option value="jauh">Semakin jauh dan cepat</option>
+          <option value="diam">Tidak bergerak sama sekali</option>
+        </select>
+      </div>
+
+      <div class="q-row">
+        <span>2. Apa yang terjadi ketika kutub Utara (U) magnet didekatkan dengan kutub Utara (U) magnet lainnya?</span>
+        <select class="lkpd-val lvl3" data-ans="tolak" name="l3_q2">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="tarik">Saling tarik-menarik menempel kuat</option>
+          <option value="tolak">Saling tolak-menolak menjauh</option>
+          <option value="meleleh">Magnet menjadi meleleh</option>
+        </select>
+      </div>
+
+      <div class="q-row">
+        <span>3. Manakah pasangan benda di bawah ini yang KEDUANYA dapat ditarik dengan kuat oleh magnet (benda magnetis)?</span>
+        <select class="lkpd-val lvl3" data-ans="paku_peniti" name="l3_q3">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="kayu_plastik">Pensil kayu dan penggaris plastik</option>
+          <option value="paku_peniti">Paku besi dan peniti baja</option>
+          <option value="kertas_karet">Kertas buku dan karet penghapus</option>
+        </select>
+      </div>
+
+      <div class="q-row">
+        <span>4. Buah mangga yang matang di pohon selalu jatuh ke bawah menuju tanah dan tidak melayang ke angkasa karena adanya...</span>
+        <select class="lkpd-val lvl3" data-ans="gravitasi" name="l3_q4">
+          <option value="">-- Pilih Jawaban --</option>
+          <option value="gravitasi">Gaya Gravitasi Bumi</option>
+          <option value="pegas">Gaya Pegas Pohon</option>
+          <option value="magnet">Gaya Magnet Daun</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="button" class="check-btn" style="background:var(--purple);" onclick="checkLevel(3)">Cek Analisis & Buka Tantangan AKM 🔓</button>
+  </div>
+</section>
+
+<!-- ================= LEVEL 4: EVALUASI LITERASI SAINS (AKM PGK) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--orange);">4</div><h2>Aktivitas 4: Tantangan Literasi Sains (AKM HOTS)</h2></div>
+
+  <div class="game-level locked" id="level4">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Tantangan AKM Terkunci</b><p>Selesaikan Aktivitas 3 terlebih dahulu!</p></div>
+
+    <div class="literacy-card" style="border-left-color:var(--orange);">
+      <span class="literacy-tag" style="background:#ffedd5; color:#c2410c;">📖 STUDI KASUS LITERASI: MENGAPA BAN SEPEDA & SEPATU BOLA DIBUAT BERALUR?</span>
+      <p>Saat musim hujan tiba di Ciamis, jalanan aspal menuju sekolah menjadi basah dan licin. Ayah memeriksa ban sepeda milik Dika dan menemukan bahwa permukaan karet ban sepedanya sudah gundul (halus) karena sering dipakai. Ayah segera mengganti ban tersebut dengan ban baru yang memiliki alur atau corak timbul yang kasar. Selain itu, ketika Dika bermain bola di lapangan rumput yang becek, ia memakai sepatu bola yang bagian bawah solnya memiliki tonjolan-tonjolan (pul) agar tidak mudah terpeleset saat berlari kencang.</p>
+    </div>
+
+    <div class="q-box">
+      <b style="color:var(--orange);">☑️ PILIHAN GANDA KOMPLEKS (Centang SEMUA pernyataan yang BENAR sesuai wacana & konsep gaya!):</b>
+      <div class="stmt-container" id="akmGroup">
+        <label class="stmt-row">
+          <input type="checkbox" class="lkpd-chk" name="l4_c1" data-ans="true">
+          <span class="stmt-text">1. Alur kasar pada ban sepeda dan tonjolan pada sol sepatu bola berfungsi untuk memperbesar gaya gesek agar pengguna tidak mudah tergelincir.</span>
+        </label>
+        <label class="stmt-row">
+          <input type="checkbox" class="lkpd-chk" name="l4_c2" data-ans="false">
+          <span class="stmt-text">2. Jalanan aspal yang basah karena air hujan memiliki gaya gesek yang lebih besar dibandingkan jalanan aspal yang kering.</span>
+        </label>
+        <label class="stmt-row">
+          <input type="checkbox" class="lkpd-chk" name="l4_c3" data-ans="true">
+          <span class="stmt-text">3. Ban sepeda yang sudah gundul (halus) berbahaya dipakai saat hujan karena gaya geseknya sangat kecil sehingga rem sulit menghentikan laju sepeda.</span>
+        </label>
+        <label class="stmt-row">
+          <input type="checkbox" class="lkpd-chk" name="l4_c4" data-ans="true">
+          <span class="stmt-text">4. Gaya gesek dapat bersifat menguntungkan (seperti membantu kita berjalan tanpa terpeleset) namun juga dapat merugikan (seperti membuat ban lama-kelamaan aus/gundul).</span>
+        </label>
+      </div>
+
+      <div style="margin-top:16px;">
+        <label style="font-size:13px; font-weight:800;">✍️ Refleksi Literasi Kelompok: Tuliskan 2 contoh pemanfaatan gaya dalam kegiatan sehari-hari kalian di rumah atau sekolah!</label>
+        <textarea class="lkpd-val" name="l4_refleksi" rows="3" placeholder="Contoh: 1. Menimba air sumur menggunakan gaya otot dan katrol..."></textarea>
+      </div>
+    </div>
+
+    <button type="button" class="check-btn" style="background:var(--orange);" onclick="checkAKMFinal()">Periksa Tantangan Akhir 🏆</button>
+    <div id="msgFinal" style="display:none; text-align:center; color:var(--green2); font-weight:900; font-size:20px; margin-top:16px;">
+      🎉 LUAR BIASA! KELOMPOKMU TELAH MENYELESAIKAN SELURUH EKSPERIMEN BAB 2! 🎉
+    </div>
+  </div>
+
+  <div class="actions" style="display:flex; justify-content:center; margin-top:24px;">
+    <button type="button" class="btn-green" id="sendBtn2" style="padding:14px 28px; font-size:16px;">📤 Kirim Lembar Kerja Kelompok ke LMS</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN & RUBRIK GURU (LMS V4.0) ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik Penilaian & Pedoman Penskoran Guru</h2></div>
+  <div id="teacherStatus" style="background:#fef3c7; border-left:5px solid #f59e0b; padding:12px 16px; border-radius:10px; margin-bottom:16px; font-size:14px;">
+    ⏳ <b>Memeriksa status penilaian di Database LMS...</b>
+  </div>
+
+  <!-- TABEL PEDOMAN PENSKORAN -->
+  <table class="rubric-table">
+    <thead>
+      <tr>
+        <th>Skala</th>
+        <th>Rentang Skor</th>
+        <th>Indikator Ketercapaian Pembelajaran (IPAS Bab 2 - Gaya di Sekitar Kita)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>A (Sangat Baik)</b></td>
+        <td><b>86 – 100 (4 ⭐)</b></td>
+        <td>Mampu menganalisis konsep gaya otot & gaya gesek dari simulasi, mengidentifikasi 5 pengaruh gaya dengan tepat, memahami sifat gaya pegas/magnet/gravitasi, serta menyusun kesimpulan & refleksi literasi dengan runtut.</td>
+      </tr>
+      <tr>
+        <td><b>B (Baik)</b></td>
+        <td><b>71 – 85 (3 ⭐)</b></td>
+        <td>Mampu menyelesaikan seluruh aktivitas simulasi dan menjawab soal objektif dengan tepat, namun uraian kesimpulan/refleksi literasi masih singkat.</td>
+      </tr>
+      <tr>
+        <td><b>C (Cukup)</b></td>
+        <td><b>56 – 70 (2 ⭐)</b></td>
+        <td>Memahami konsep dasar dorongan dan tarikan, namun masih memerlukan bimbingan dalam membedakan sifat gaya gesek pada permukaan kasar/halus.</td>
+      </tr>
+      <tr>
+        <td><b>D (Perlu Bimbingan)</b></td>
+        <td><b>&le; 55 (1 ⭐)</b></td>
+        <td>Belum mampu mengidentifikasi jenis-jenis gaya dan pengaruhnya terhadap benda secara mandiri.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Ketercapaian Pembelajaran Kelompok</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (4 Bintang)</option>
+        <option value="B">B — Baik (3 Bintang)</option>
+        <option value="C">C — Cukup (2 Bintang)</option>
+        <option value="D">D — Perlu Bimbingan (1 Bintang)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan / Umpan Balik Guru untuk Kelompok</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi dan umpan balik untuk hasil eksperimen kelompok ini..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:16px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan & Distribusikan Nilai ke Seluruh Anggota</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LMS V4.0 - LKPD 2.1 IPAS (SDN 1 SUKAHAJI)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'IPAS';
+const LKPD_ID  = '2.1_Gaya_Di_Sekitar_Kita';
+const STORAGE  = 'lkpd_ipas_2_1_lms_v4';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+let testedEffects = new Set();
+
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+// ================= 1. INISIALISASI =================
+document.addEventListener("DOMContentLoaded", () => {
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+  }
+});
+
+// ================= 2. SIMULASI LABORATORIUM VIRTUAL =================
+function updateSim1Floor() {
+  const surf = document.getElementById("sim1Surface").value;
+  const stage = document.getElementById("sim1Stage");
+  const label = document.getElementById("sim1FloorLabel");
+  stage.className = "sim-stage " + (surf === 'kasar' ? 'floor-kasar' : 'floor-licin');
+  if (surf === 'kasar') label.innerText = "Permukaan: Lantai Kasar / Berpasir (Gaya Gesek Besar)";
+  if (surf === 'licin') label.innerText = "Permukaan: Lantai Keramik Halus (Gaya Gesek Kecil)";
+  if (surf === 'roda')  label.innerText = "Permukaan: Kontainer Diberi Papan Beroda (Gesekan Sangat Kecil)";
+  resetSim1();
+}
+
+function runSim1() {
+  const act  = document.getElementById("sim1Action").value;
+  const pwr  = document.getElementById("sim1Power").value;
+  const surf = document.getElementById("sim1Surface").value;
+  const actor = document.getElementById("sim1Actor");
+  const log   = document.getElementById("sim1Log");
+
+  let peopleIcon = pwr === "2" ? "🧍🧍‍♂️" : "🧍";
+  let crateIcon  = surf === "roda" ? "📦🛞" : "📦";
+  actor.innerText = act === "dorong" ? (peopleIcon + crateIcon + "💨") : ("💨" + crateIcon + peopleIcon);
+
+  let dist = 70;
+  if (pwr === "2") dist += 90;
+  if (surf === "licin") dist += 90;
+  if (surf === "roda") dist += 160;
+
+  actor.style.transform = `translateX(${dist}px)`;
+
+  let speedDesc = surf === 'kasar'
+    ? "Kontainer terasa BERAT karena permukaan kasar menghasilkan GAYA GESEK BESAR yang menahan gerak benda."
+    : (surf === 'licin'
+      ? "Kontainer bergeser LEBIH MUDAH karena lantai licin memiliki GAYA GESEK KECIL."
+      : "Kontainer meluncur SANGAT MUDAH & JAUH karena roda memperkecil gaya gesek secara drastis!");
+
+  log.innerHTML = `✅ <b>Data Pengamatan Simulasi:</b> ${pwr} anak melakukan gaya otot (${act}). Jarak geser: <b>${dist} cm</b>. ${speedDesc}`;
+}
+
+function resetSim1() {
+  const actor = document.getElementById("sim1Actor");
+  actor.style.transform = "translateX(0px)";
+  actor.innerText = "🧍📦";
+}
+
+function triggerEffect(cardEl, id, animClass, descText) {
+  cardEl.classList.add(animClass, "tested");
+  setTimeout(() => cardEl.classList.remove(animClass), 650);
+  testedEffects.add(id);
+  document.getElementById("sim2Counter").innerText = `Uji Coba: ${testedEffects.size} / 5 Selesai`;
+  document.getElementById("sim2Log").innerHTML = `✅ <b>Pengamatan Percobaan #${id}:</b> ${descText}`;
+}
+
+function simPegas(mode) {
+  const st = document.getElementById("stagePegas");
+  const log = document.getElementById("sim3Log");
+  if (mode === 'pendek') {
+    st.innerHTML = "🪵〰️🪨💨 (Jarak: 2 Meter)";
+    log.innerHTML = "🏹 <b>Gaya Pegas (Tarik Pendek):</b> Karet diregangkan sedikit, gaya pegas kecil sehingga batu terlontar dekat (2 meter).";
+  } else {
+    st.innerHTML = "🪵〰️〰️〰️🚀🪨 (Jarak: 8 Meter!)";
+    log.innerHTML = "🏹 <b>Gaya Pegas (Tarik Panjang):</b> Semakin panjang karet ketapel ditarik, semakin besar gaya pegasnya sehingga batu melesat jauh (8 meter)!";
+  }
+}
+
+function simMagnet(mode) {
+  const st = document.getElementById("stageMagnet");
+  const log = document.getElementById("sim3Log");
+  if (mode === 'sama') {
+    st.innerHTML = "🧲(U) ⬅️⚡➡️ (U)🧲";
+    log.innerHTML = "🧲 <b>Gaya Magnet (Kutub Senama U - U):</b> Dua kutub magnet yang sama saling TOLAK-MENOLAK menjauh.";
+  } else {
+    st.innerHTML = "🧲(U) ➡️❤️⬅️ (S)🧲 🔩";
+    log.innerHTML = "🧲 <b>Gaya Magnet (Kutub Berbeda U - S):</b> Dua kutub berbeda saling TARIK-MENARIK, serta menarik paku besi & peniti baja.";
+  }
+}
+
+function simGravitasi() {
+  const st = document.getElementById("stageGrav");
+  const log = document.getElementById("sim3Log");
+  st.innerHTML = "🌳 ⬇️🍎⬇️ 🌍";
+  log.innerHTML = "🍎 <b>Gaya Gravitasi Bumi:</b> Buah apel jatuh lurus ke bawah menuju permukaan tanah karena ditarik oleh gaya gravitasi ke pusat bumi.";
+}
+
+// ================= 3. FETCH DATA SISWA & AUTO-ADD SSO =================
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Terhubung ke Database Sekolah. Ketik NISN anggota kelompokmu lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+
+      // Jika siswa sudah login di Portal LMS V4.0, otomatis masukkan dirinya ke daftar kelompok
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+          }
+        }
+      } catch (e) {}
+    } else {
+      statusText.innerHTML = "⚠️ Gagal memuat daftar siswa.";
+    }
+  } catch (e) {
+    statusText.innerHTML = "⚠️ Offline: Periksa koneksi internet untuk memuat data NISN.";
+  }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return showModal("<h3>⚠️ Masukkan NISN</h3><p>Ketik NISN teman sekelompokmu terlebih dahulu.</p><button class='btn-blue' onclick='closeModal()'>Tutup</button>");
+
+  let found = studentList.find(s => s.nisn === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><p>Pastikan NISN yang dimasukkan sudah benar sesuai data sekolah.</p><button class='btn-rose' onclick='closeModal()'>Coba Lagi</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return showModal("<h3>⚠️ Sudah Terdaftar</h3><p>Nama siswa ini sudah ada di dalam kelompokmu.</p><button class='btn-blue' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><p>Maksimal anggota per kelompok adalah 5 siswa.</p><button class='btn-blue' onclick='closeModal()'>Tutup</button>");
+
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})" title="Hapus">✖</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+// ================= 4. VALIDASI LEVEL & AKM =================
+function checkLevel(lvl) {
+  let inputs = document.querySelectorAll('.lvl' + lvl + '[data-ans]:not([readonly])');
+  let allCorrect = true;
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    if (inp.value.trim() === inp.dataset.ans) {
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      allCorrect = false;
+      setTimeout(() => inp.classList.remove('wrong'), 500);
+    }
+  });
+
+  if (allCorrect) {
+    document.getElementById('level' + lvl).classList.add('completed');
+    let next = document.getElementById('level' + (lvl + 1));
+    if (next) {
+      next.classList.remove('locked');
+      next.classList.add('unlocked');
+      next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+}
+
+function checkAKMFinal() {
+  const rows = document.querySelectorAll('#akmGroup .stmt-row');
+  let allCorrect = true;
+  rows.forEach(row => {
+    const chk = row.querySelector('input[type="checkbox"]');
+    row.classList.remove('error-state', 'success-state');
+    if (String(chk.checked) === chk.dataset.ans) {
+      row.classList.add('success-state');
+    } else {
+      allCorrect = false;
+      row.classList.add('error-state');
+      setTimeout(() => row.classList.remove('error-state'), 500);
+    }
+  });
+
+  if (allCorrect) {
+    document.getElementById('level4').classList.add('completed');
+    document.getElementById('msgFinal').style.display = 'block';
+  }
+}
+
+// ================= 5. KOLEKSI DATA, PROGRESS, & SIMPAN DRAF =================
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+function getChkFields() { return [...document.querySelectorAll(".lkpd-chk")]; }
+
+function collect() {
+  const data = {};
+  getValFields().forEach(el => data[el.name] = el.value);
+  getChkFields().forEach(el => data[el.name] = el.checked);
+  return data;
+}
+
+function setupInputs() {
+  getValFields().forEach(el => { el.addEventListener("input", updateProgress); el.addEventListener("change", updateProgress); });
+  getChkFields().forEach(el => el.addEventListener("change", updateProgress));
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields();
+  let filled = 0;
+  vals.forEach(x => { if (String(x.value || "").trim()) filled++; });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  let total = vals.length + 2;
+  let current = filled + (groupMembers.length > 0 ? 1 : 0);
+  document.getElementById("progressBar").style.width = Math.min(100, Math.round(current / total * 100)) + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({
+    members: groupMembers,
+    tanggal: document.querySelector('[name="tanggal"]').value,
+    answers: collect()
+  }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Eksperimen Tersimpan</h3><p>Jawaban kelompokmu tersimpan aman di perangkat ini.</p><button class='btn-green' onclick='closeModal()'>Lanjutkan</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE));
+    if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = d.tanggal;
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+      getChkFields().forEach(el => { if (d.answers[el.name] !== undefined) el.checked = d.answers[el.name]; });
+    }
+  } catch (e) {}
+}
+
+// ================= 6. KIRIM KE DATABASE LMS =================
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) {
+    return showModal("<h3>⚠️ Data Kelompok Belum Lengkap</h3><p>Pastikan <b>Hari/Tanggal</b> sudah diisi dan minimal ada <b>1 NISN Anggota Kelompok</b> yang ditambahkan.</p><button class='btn-blue' onclick='closeModal()'>Lengkapi Dahulu</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Laporan Eksperimen...</h3><p>Menyimpan data kelompok ke Database LMS SDN 1 Sukahaji.</p>");
+
+  let payload = {
+    action: 'submitLKPD',
+    lkpdId: LKPD_ID,
+    subject: SUBJECT,
+    hariTanggal: tgl,
+    materiPokok: document.querySelector('[name="materi"]').value,
+    members: groupMembers,
+    answers: JSON.stringify(collect())
+  };
+
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      document.querySelectorAll("input,select,textarea,button").forEach(el => el.disabled = true);
+      showModal(`<div style='font-size:52px'>✅</div><h3>Eksperimen Berhasil Dikirim!</h3><p>Jawaban kelompokmu telah masuk ke Dasbor Guru untuk dinilai.</p><p style='font-size:12px;color:#64748b'>ID Kiriman: ${result.submissionId}</p>`);
+    } else {
+      showModal("<h3>⚠️ Gagal Mengirim</h3><p>" + result.message + "</p><button class='btn-rose' onclick='closeModal()'>Tutup</button>");
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Koneksi Terputus</h3><p>Periksa jaringan internet Anda lalu coba kirim kembali.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+};
+
+// ================= 7. MODE BACA (READ-ONLY) & PENILAIAN GURU =================
+async function loadLMSViewMode() {
+  document.getElementById("appbar").style.display = "none";
+  document.getElementById("addMemberTools").style.display = "none";
+  document.getElementById("dbStatusText").style.display = "none";
+  showModal("<div class='spinner'></div><h3>Memuat Data Kelompok...</h3><p>Mengambil arsip jawaban dari Database LMS.</p>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + LKPD_ID + "&submissionId=" + submissionId);
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      Object.keys(answers).forEach(k => {
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) {
+          if (el.type === 'checkbox') el.checked = Boolean(answers[k]);
+          else el.value = answers[k];
+        }
+      });
+
+      document.querySelectorAll('.game-level').forEach(el => {
+        el.classList.remove('locked'); el.classList.add('unlocked');
+        let ovr = el.querySelector('.lock-overlay'); if (ovr) ovr.remove();
+      });
+
+      document.querySelectorAll("input,select,textarea,button").forEach(el => {
+        if (!el.closest('#gradePanel')) { el.disabled = true; el.readOnly = true; }
+      });
+      document.getElementById("memberList").innerHTML = `<div class="member-badge">🔒 Mode Pratinjau Arsip Jawaban (Read-Only)</div>`;
+      closeModal();
+
+      let panel = document.getElementById("gradePanel");
+      let scale = document.getElementById("gradeScale");
+      let note  = document.getElementById("gradeNote");
+      let btn   = document.getElementById("lockGradeBtn");
+      let st    = document.getElementById("teacherStatus");
+      panel.classList.add("show");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          scale.disabled = true; note.disabled = true; btn.disabled = true;
+          btn.innerText = "🔒 Penilaian Sudah Terkunci";
+          st.innerHTML = "✅ <b>Selesai Dinilai.</b> Nilai sudah terdistribusi ke seluruh anggota kelompok.";
+          renderStars(scale.value);
+        } else {
+          st.innerHTML = "📝 <b>Mode Penilaian Guru Aktif.</b> Periksa jawaban di atas lalu pilih skala penilaian di bawah ini.";
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none";
+        scale.disabled = true; note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          st.innerHTML = "🏆 <b>Hasil Evaluasi Guru:</b> Berikut adalah nilai dan umpan balik untuk kelompokmu.";
+          renderStars(scale.value);
+        } else {
+          st.innerHTML = "⏳ <b>Menunggu Penilaian Guru.</b> Tugas kelompokmu sudah diterima dan sedang diperiksa.";
+        }
+      }
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Gagal Memuat Arsip</h3><p>Tidak dapat terhubung ke server LMS.</p>");
+  }
+}
+
+function renderStars(v) {
+  const n = { A: 4, B: 3, C: 2, D: 1 }[v] || 0;
+  const st = document.getElementById("starRating");
+  st.textContent = '★'.repeat(n) + '☆'.repeat(4 - n);
+  st.style.color = n ? '#f59e0b' : '#cbd5e1';
+}
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian (A, B, C, atau D) terlebih dahulu.");
+  let btn = document.getElementById("lockGradeBtn");
+  btn.disabled = true; btn.innerText = "⏳ Menyimpan & Mendistribusikan Nilai...";
+
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'saveGrade', lkpdId: LKPD_ID, submissionId: submissionId, grade: grade, feedback: feedback })
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Nilai Berhasil Didistribusikan";
+      document.getElementById("gradeScale").disabled = true;
+      document.getElementById("gradeNote").disabled = true;
+      document.getElementById("teacherStatus").innerHTML = "🔒 <b>Berhasil!</b> Nilai telah otomatis masuk ke riwayat masing-masing anggota kelompok.";
+    }
+  } catch (e) {
+    alert("Koneksi gagal saat menyimpan nilai.");
+    btn.disabled = false;
+  }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
