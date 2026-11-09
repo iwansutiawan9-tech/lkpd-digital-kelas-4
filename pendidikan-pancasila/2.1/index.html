@@ -1,1 +1,670 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.1 (LMS INTEGRATED & AUTO-OBSERVATION) -->
+<!-- MATA PELAJARAN: PENDIDIKAN PANCASILA -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD Pendidikan Pancasila - Aturan, Hak & Kewajiban</title>
+<style>
+:root {
+  --green: #059669; --green2: #047857; --mint: #d1fae5;
+  --ink: #1e293b; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --blue: #0284c7; --gold: #f59e0b;
+  --orange: #ea580c; --red: #e11d48; --purple: #7c3aed;
+  
+  /* Tema Khusus Pendidikan Pancasila (Merah Putih & Garuda) */
+  --pp-main: #dc2626; --pp-light: #fee2e2; --pp-dark: #b91c1c;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: linear-gradient(135deg, #fef2f2, #fffbeb 55%, #f0f9ff);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--ink); overflow-x: hidden;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(4px); opacity: .45; pointer-events: none;
+}
+body::before { width: 200px; height: 200px; background: #fca5a5; left: -70px; top: 120px; }
+body::after { width: 170px; height: 170px; background: #fde047; right: -50px; bottom: 100px; }
 
+/* ================= APPBAR (BILAH ATAS) ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--pp-main); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--blue); background: #e0f2fe; padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--pp-main); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+
+.progress { height: 6px; background: var(--pp-light); position: sticky; top: 61px; z-index: 29; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--pp-main), var(--gold)); transition: .3s; }
+
+/* ================= CONTAINER & HERO ================= */
+.sheet {
+  width: min(1020px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px;
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #fff1f2, #ffedd5); border-radius: 22px; padding: 26px; border: 1px solid #fecaca; }
+.badge { display: inline-block; background: var(--pp-main); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.15; margin: 0 0 12px; color: var(--pp-dark); }
+h2 { margin: 0; font-size: 21px; }
+p { line-height: 1.7; font-size: 15px; color: #334155; }
+
+.mission {
+  background: #fff; border-radius: 20px; padding: 22px; display: flex;
+  flex-direction: column; justify-content: center; text-align: center; font-size: 16px; border: 2px dashed #f87171; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+.mission-icon { font-size: 58px; animation: bob 2.8s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(3deg); } }
+
+/* ================= IDENTITAS & KELOMPOK ================= */
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+.field label { display: block; font-size: 13px; font-weight: 900; color: #334155; margin-bottom: 6px; }
+input:not([type="checkbox"]), textarea, select {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s;
+}
+input:not([type="checkbox"]):focus, textarea:focus, select:focus {
+  border-color: var(--pp-main); box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge {
+  background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px;
+  font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px;
+}
+.member-badge span {
+  cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px;
+  display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px;
+}
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* TAMPILAN KELOMPOK MODE BACA (READ-ONLY) */
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+.readonly-item::before { content: '👤'; font-size: 16px; }
+
+/* ================= ELEMEN LEMBAR KERJA ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--pp-light); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--pp-main); color: #fff; font-weight: 900; flex: 0 0 auto; }
+
+.literacy-card {
+  background: #fff; border-left: 5px solid var(--pp-main); padding: 18px 20px;
+  border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.literacy-tag {
+  display: inline-block; background: var(--pp-light); color: var(--pp-dark); font-size: 12px;
+  font-weight: 900; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px;
+}
+
+.game-level { position: relative; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 24px; margin-bottom: 26px; transition: all .3s; }
+.game-level.locked { opacity: 0.6; pointer-events: none; filter: grayscale(95%); }
+.lock-overlay {
+  position: absolute; inset: 0; background: rgba(248, 250, 252, 0.88);
+  display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; border-radius: 16px; text-align: center; padding: 20px;
+}
+.game-level.unlocked .lock-overlay { display: none; }
+.game-level.completed { border-color: var(--green); background: #f0fdf4; }
+
+/* INTERAKTIF: SORTING HAK & KEWAJIBAN */
+.sort-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.sort-card { background: #fff; border: 2px solid #cbd5e1; border-radius: 12px; padding: 16px; text-align: center; }
+.sort-item {
+  background: #f1f5f9; padding: 12px; border-radius: 8px; margin-bottom: 10px; font-weight: 700; font-size: 13px; color: #334155; text-align: left;
+}
+.sort-select { width: 100%; border: 2px solid var(--blue); color: var(--blue); font-weight: 800; font-size: 13px; margin-top: 8px; }
+
+/* KESEPAKATAN KELAS BUILDER */
+.rules-container { background: #fff; border: 2px solid var(--gold); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+.rule-row { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; }
+.rule-num { background: var(--gold); color: #fff; font-weight: 900; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; margin-top: 4px; }
+.rule-input { flex: 1; resize: vertical; min-height: 42px; border-color: #fcd34d; font-weight: 600; font-size: 14px; }
+
+.q-row { display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; align-items: center; margin-bottom: 12px; font-weight: 700; font-size: 14px; }
+
+.lkpd-val.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d; }
+.lkpd-val.wrong { animation: shake 0.4s; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);} }
+.check-btn { display: block; margin: 20px auto 0; background: var(--pp-main); color: #fff; border-radius: 99px; padding: 12px 28px; font-weight: 900; font-size: 15px; }
+
+/* ================= PANEL OBSERVASI & PENILAIAN GURU ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 24px; margin: 20px auto; width: min(1020px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+
+.obs-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 13px; background: #fff; }
+.obs-table th, .obs-table td { border: 1px solid #cbd5e1; padding: 10px; text-align: left; }
+.obs-table th { background: var(--gold); color: #fff; font-weight: 900; text-align: center; }
+.obs-chk { width: 18px; height: 18px; cursor: pointer; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 50; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #fecaca; border-top-color: var(--pp-main); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 750px) {
+  .hero, .idgrid, .q-row, .grade-grid, .sort-grid { grid-template-columns: 1fr; }
+  .sheet { padding: 18px; }
+  .top-actions .btn-light { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1. APPBAR CERDAS (BERUBAH SESUAI MODE) -->
+<div class="appbar" id="appbar">
+  <div class="brand">🦅 PORTAL LMS SDN 1 SUKAHAJI</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Penugasan</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<!-- 2. IDENTITAS & KELOMPOK -->
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA PENDIDIKAN PANCASILA</span>
+      <h1>Aturan, Hak, dan Kewajiban</h1>
+      <p>Mari belajar mengidentifikasi, membedakan, dan merancang aturan bersama di lingkungan sekolah serta memahami hak dan kewajiban kita sebagai warga sekolah yang baik!</p>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input name="tanggal" placeholder="Contoh: Senin, 9 November 2026" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Pelaksanaan Hak & Kewajiban, Membuat Aturan" readonly>
+        </div>
+
+        <div class="group-builder">
+          <label>👥 Data Kelompok (2 – 5 Siswa)</label>
+          
+          <!-- DAFTAR KELOMPOK (EDIT MODE) -->
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN anggota..." style="flex:1;">
+              <button type="button" class="btn-blue" id="btnAddMember" disabled>🔍 Cari</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa...</p>
+          </div>
+
+          <!-- DAFTAR KELOMPOK (READ-ONLY MODE) -->
+          <div id="readGroupView" style="display:none;">
+            <div class="readonly-group-list" id="readonlyMemberList">
+              <!-- Muncul berurutan ke bawah -->
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">⚖️🤝</div>
+      <b>🎯 Misi Warga Negara Bijak</b>
+      <p>Selesaikan 3 level analisis dan susun Kesepakatan Kelas bersamamu!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LEVEL 1: MEMBEDAKAN HAK & KEWAJIBAN ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Aktivitas 1: Identifikasi Hak dan Kewajiban</h2></div>
+
+  <div class="game-level unlocked" id="level1">
+    <div class="literacy-card">
+      <span class="literacy-tag">📖 WACANA LITERASI: PAGI DI SEKOLAH</span>
+      <p>Setiap pagi, Siti dan teman-temannya selalu datang ke sekolah tepat waktu. Mereka langsung membersihkan kelas sesuai jadwal piket harian. Setelah kelas bersih, lonceng berbunyi dan mereka masuk untuk menerima pelajaran dari Ibu Guru dengan nyaman. Saat istirahat, mereka bermain di halaman sekolah yang asri dan meminjam buku cerita yang bagus dari perpustakaan sekolah. Semua kegiatan berjalan tertib karena warga sekolah saling menghargai.</p>
+    </div>
+
+    <p style="font-weight:800; color:var(--blue); margin-bottom:14px;">Kelompokkan kalimat di bawah ini ke dalam kotak Hak atau Kewajiban!</p>
+    
+    <div class="sort-grid">
+      <div class="sort-card">
+        <div class="sort-item">A. Datang ke sekolah tepat waktu setiap hari.</div>
+        <select class="lkpd-val lvl1 sort-select" data-ans="kewajiban" name="l1_q1">
+          <option value="">-- Pilih --</option><option value="hak">Ini adalah HAK</option><option value="kewajiban">Ini adalah KEWAJIBAN</option>
+        </select>
+      </div>
+      <div class="sort-card">
+        <div class="sort-item">B. Mendapatkan pengajaran dari guru dengan baik.</div>
+        <select class="lkpd-val lvl1 sort-select" data-ans="hak" name="l1_q2">
+          <option value="">-- Pilih --</option><option value="hak">Ini adalah HAK</option><option value="kewajiban">Ini adalah KEWAJIBAN</option>
+        </select>
+      </div>
+      <div class="sort-card">
+        <div class="sort-item">C. Melaksanakan piket membersihkan ruang kelas.</div>
+        <select class="lkpd-val lvl1 sort-select" data-ans="kewajiban" name="l1_q3">
+          <option value="">-- Pilih --</option><option value="hak">Ini adalah HAK</option><option value="kewajiban">Ini adalah KEWAJIBAN</option>
+        </select>
+      </div>
+      <div class="sort-card">
+        <div class="sort-item">D. Meminjam dan membaca fasilitas buku di perpustakaan.</div>
+        <select class="lkpd-val lvl1 sort-select" data-ans="hak" name="l1_q4">
+          <option value="">-- Pilih --</option><option value="hak">Ini adalah HAK</option><option value="kewajiban">Ini adalah KEWAJIBAN</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="button" class="check-btn" onclick="checkLevel(1)">Cek Jawaban & Lanjut Level 2 🔓</button>
+  </div>
+</section>
+
+<!-- ================= LEVEL 2: ATURAN LINGKUNGAN TINGGAL ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--blue);">2</div><h2>Aktivitas 2: Aturan di Lingkungan Tempat Tinggal</h2></div>
+
+  <div class="game-level locked" id="level2">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Aktivitas 2 Terkunci</b><p>Selesaikan Aktivitas 1 dengan benar!</p></div>
+
+    <div class="literacy-card" style="border-left-color:var(--blue);">
+      <span class="literacy-tag" style="background:#e0f2fe; color:#0369a1;">📖 WACANA LITERASI: KERJA BAKTI HARI MINGGU</span>
+      <p>Pada hari Minggu pagi, warga Desa Sukahaji mengadakan kerja bakti membersihkan selokan agar tidak banjir saat musim hujan tiba. Pak RT sudah mengumumkan aturan bahwa setiap kepala keluarga wajib mengirimkan satu perwakilan. Bagi yang berhalangan hadir karena sakit, diperbolehkan untuk menyumbangkan makanan atau minuman untuk warga yang bekerja. Setelah selesai kerja bakti, warga tidak membuang sampah sembarangan lagi dan lingkungan menjadi bersih dan sehat.</p>
+    </div>
+
+    <div class="q-row">
+      <span>1. Apa tujuan utama diadakannya kerja bakti di Desa Sukahaji berdasarkan cerita di atas?</span>
+      <select class="lkpd-val lvl2" data-ans="banjir" name="l2_q1">
+        <option value="">-- Pilih Jawaban --</option>
+        <option value="lomba">Agar menang lomba desa bersih</option>
+        <option value="banjir">Mencegah banjir saat musim hujan</option>
+        <option value="makanan">Untuk saling bertukar makanan</option>
+      </select>
+    </div>
+
+    <div class="q-row">
+      <span>2. Jika ada warga yang sakit dan tidak bisa ikut kerja bakti, apa yang bisa ia lakukan sesuai aturan Pak RT?</span>
+      <select class="lkpd-val lvl2" data-ans="sumbang" name="l2_q2">
+        <option value="">-- Pilih Jawaban --</option>
+        <option value="sumbang">Menyumbangkan makanan atau minuman</option>
+        <option value="denda">Membayar denda uang yang besar</option>
+        <option value="pindah">Pindah dari desa tersebut</option>
+      </select>
+    </div>
+
+    <div class="q-row">
+      <span>3. Kerja bakti dan menjaga kebersihan lingkungan adalah contoh nyata dari pelaksanaan...</span>
+      <select class="lkpd-val lvl2" data-ans="kewajiban" name="l2_q3">
+        <option value="">-- Pilih Jawaban --</option>
+        <option value="hak">Hak warga masyarakat</option>
+        <option value="kewajiban">Kewajiban warga masyarakat</option>
+        <option value="hukuman">Hukuman warga masyarakat</option>
+      </select>
+    </div>
+
+    <button type="button" class="check-btn" style="background:var(--blue);" onclick="checkLevel(2)">Cek Jawaban & Lanjut Level 3 🔓</button>
+  </div>
+</section>
+
+<!-- ================= LEVEL 3: MERANCANG KESEPAKATAN KELAS ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--gold);">3</div><h2>Aktivitas 3: Menyusun Kesepakatan Kelas Kita</h2></div>
+
+  <div class="game-level locked" id="level3">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Aktivitas 3 Terkunci</b><p>Selesaikan Aktivitas 2 terlebih dahulu!</p></div>
+
+    <div class="literacy-card" style="border-left-color:var(--gold);">
+      <span class="literacy-tag" style="background:#fef3c7; color:#b45309;">📝 MISI KELOMPOK: KESEPAKATAN KELAS KITA</span>
+      <p>Sebuah kelas akan menjadi tempat belajar yang nyaman dan aman jika seluruh warganya menaati tata tertib yang dibuat bersama. Sekarang, diskusikan bersama kelompokmu dan tuliskan <b>5 sampai 10 Tata Tertib (Kesepakatan)</b> yang harus dipatuhi di kelasmu. <br><i>Perhatian: Kesepakatan yang kalian tulis ini akan langsung disalin otomatis menjadi <b>Lembar Observasi Guru</b> minggu depan!</i></p>
+    </div>
+
+    <div class="rules-container">
+      <div class="rule-row"><div class="rule-num">1</div><input type="text" class="rule-input lkpd-val lvl3" name="r1" data-ans="*" placeholder="Tulis kesepakatan ke-1... (Contoh: Berdoa sebelum belajar)" required></div>
+      <div class="rule-row"><div class="rule-num">2</div><input type="text" class="rule-input lkpd-val lvl3" name="r2" data-ans="*" placeholder="Tulis kesepakatan ke-2..." required></div>
+      <div class="rule-row"><div class="rule-num">3</div><input type="text" class="rule-input lkpd-val lvl3" name="r3" data-ans="*" placeholder="Tulis kesepakatan ke-3..." required></div>
+      <div class="rule-row"><div class="rule-num">4</div><input type="text" class="rule-input lkpd-val lvl3" name="r4" data-ans="*" placeholder="Tulis kesepakatan ke-4..." required></div>
+      <div class="rule-row"><div class="rule-num">5</div><input type="text" class="rule-input lkpd-val lvl3" name="r5" data-ans="*" placeholder="Tulis kesepakatan ke-5..." required></div>
+      
+      <!-- Opsi Tambahan (Tidak Wajib) -->
+      <p style="font-size:12px; color:var(--muted); margin-top:16px;">Tuliskan tambahan kesepakatan jika ada (opsional):</p>
+      <div class="rule-row"><div class="rule-num" style="background:#cbd5e1;">6</div><input type="text" class="rule-input lkpd-val" name="r6" placeholder="Opsional..."></div>
+      <div class="rule-row"><div class="rule-num" style="background:#cbd5e1;">7</div><input type="text" class="rule-input lkpd-val" name="r7" placeholder="Opsional..."></div>
+    </div>
+
+    <button type="button" class="check-btn" style="background:var(--gold); color:#854d0e;" onclick="finishLKPD()">Kunci Kesepakatan Kelas! 🏆</button>
+    
+    <div id="msgFinal" style="display:none; text-align:center; color:var(--green2); font-weight:900; font-size:18px; margin-top:16px;">
+      🎉 HEBAT! KALIAN TELAH MENYELESAIKAN SELURUH MISI! KLIK TOMBOL KIRIM DI BAWAH. 🎉
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:24px;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 28px; font-size:16px; display:none;">📤 Kirim Lembar Kerja ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN & OBSERVASI GURU ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Lembar Observasi & Rubrik Penilaian Guru</h2></div>
+  <div id="teacherStatus" style="background:#fef3c7; border-left:5px solid #f59e0b; padding:12px 16px; border-radius:10px; margin-bottom:16px; font-size:14px;">
+    ⏳ <b>Memeriksa status database...</b>
+  </div>
+
+  <!-- AUTO-GENERATOR LEMBAR OBSERVASI -->
+  <div style="background:#fff; border:2px solid var(--gold); border-radius:14px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:#b45309; margin:0 0 12px; font-size:16px;">📋 Lembar Observasi Ketaatan Kelompok (Sepekan)</h3>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:14px;">Daftar di bawah ini dihasilkan otomatis dari Kesepakatan Kelas yang diketik oleh kelompok siswa ini. Centang jika kelompok terpantau mematuhinya selama sepekan.</p>
+    
+    <table class="obs-table">
+      <thead>
+        <tr>
+          <th style="width:5%;">No</th>
+          <th>Butir Kesepakatan Kelas (Dibuat oleh Siswa)</th>
+          <th style="width:15%;">Terpantau Patuh</th>
+        </tr>
+      </thead>
+      <tbody id="obsTableBody">
+        <!-- Akan diisi otomatis oleh JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Pemahaman Hak & Kewajiban</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (Sangat memahami hak/kewajiban & merumuskan aturan logis)</option>
+        <option value="B">B — Baik (Memahami hak/kewajiban, aturan sudah cukup spesifik)</option>
+        <option value="C">C — Cukup (Masih terbalik membedakan hak dan kewajiban dasar)</option>
+        <option value="D">D — Perlu Bimbingan (Belum mampu merumuskan aturan bersama)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan Observasi & Tindak Lanjut Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi dan evaluasi observasi sepekan..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:16px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan Observasi & Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI MASTER LKPD V4.1
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Pendidikan Pancasila';
+const LKPD_ID  = 'PP_HakKewajiban_Aturan';
+const STORAGE  = 'lkpd_pp_v41';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+  }
+});
+
+// FETCH DATA SISWA UNTUK KELOMPOK
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN lalu Cari.";
+      btnAdd.disabled = false;
+      
+      // Auto-add jika dari Dasbor
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Gagal memuat database."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => s.nisn === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><p>Pastikan NISN benar.</p><button class='btn-rose' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><p>Maks 5 anggota.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+// 1. PENYEMPURNAAN RENDER KELOMPOK (EDIT & READ-ONLY MODE)
+function renderMembers() {
+  // Mode Edit (Label Biasa)
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})" title="Hapus">✖</span></div>
+  `).join('');
+
+  // Mode Read-Only (Daftar Bersusun Ke Bawah)
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item">
+      <span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span>
+    </div>
+  `).join('');
+}
+
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+// 2. VALIDASI LEVEL
+function checkLevel(lvl) {
+  let inputs = document.querySelectorAll('.lvl' + lvl + '[data-ans]:not([readonly])');
+  let allCorrect = true;
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    if (inp.value.trim() === inp.dataset.ans) { inp.classList.add('correct'); } 
+    else { inp.classList.add('wrong'); allCorrect = false; setTimeout(() => inp.classList.remove('wrong'), 500); }
+  });
+  if (allCorrect) {
+    document.getElementById('level' + lvl).classList.add('completed');
+    let next = document.getElementById('level' + (lvl + 1));
+    if (next) { next.classList.remove('locked'); next.classList.add('unlocked'); next.scrollIntoView({ behavior: 'smooth' }); }
+  }
+}
+
+function finishLKPD() {
+  // Hanya pastikan input rule yang wajib (r1-r5) terisi
+  let valid = true;
+  for(let i=1; i<=5; i++){
+    let el = document.querySelector(`[name="r${i}"]`);
+    if(el && el.value.trim() === "") valid = false;
+  }
+  if(!valid) return alert("Harap lengkapi ke-5 tata tertib kesepakatan kelas terlebih dahulu!");
+  
+  document.getElementById('level3').classList.add('completed');
+  document.getElementById('msgFinal').style.display = 'block';
+  document.getElementById('sendBtn2').style.display = 'block';
+}
+
+// 3. PROGRESS & SIMPAN DATA
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+function collect() { let d = {}; getValFields().forEach(el => d[el.name] = el.value); return d; }
+
+function setupInputs() {
+  getValFields().forEach(el => { el.addEventListener("input", updateProgress); el.addEventListener("change", updateProgress); });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields(); let filled = 0;
+  vals.forEach(x => { if (String(x.value || "").trim()) filled++; });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  let total = vals.length + 2;
+  document.getElementById("progressBar").style.width = Math.min(100, Math.round((filled + (groupMembers.length>0?1:0)) / total * 100)) + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({ members: groupMembers, tanggal: document.querySelector('[name="tanggal"]').value, answers: collect() }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><button class='btn-main' onclick='closeModal()'>Lanjut</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE)); if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = d.tanggal;
+    if (d.answers) getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+  } catch (e) {}
+}
+
+// 4. KIRIM KE LMS
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) return showModal("<h3>⚠️ Belum Lengkap</h3><p>Isi Hari/Tanggal dan Anggota Kelompok!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  
+  showModal("<div class='spinner'></div><h3>Mengirim Tugas...</h3>");
+  let payload = { action: 'submitLKPD', lkpdId: LKPD_ID, subject: SUBJECT, hariTanggal: tgl, materiPokok: document.querySelector('[name="materi"]').value, members: groupMembers, answers: JSON.stringify(collect()) };
+
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      document.querySelectorAll("input,select,textarea,button").forEach(el => el.disabled = true);
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Jawaban terkirim ke Guru.</p>`);
+      document.getElementById("appbar").style.display = "none";
+    }
+  } catch (e) { showModal("<h3>⚠️ Koneksi Terputus</h3>"); }
+};
+
+// 5. MODE BACA (READ-ONLY) & AUTO-GENERATOR LEMBAR OBSERVASI
+async function loadLMSViewMode() {
+  // A. SEMBUNYIKAN TOMBOL SIMPAN/KIRIM, MUNCULKAN STATUS TEXT
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  
+  // B. GANTI TAMPILAN KELOMPOK MENJADI DAFTAR BERSUSUN
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+
+  showModal("<div class='spinner'></div><h3>Memuat Data...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + LKPD_ID + "&submissionId=" + submissionId);
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      
+      // Ambil Data Anggota Kelompok dari API untuk ditampilkan berurutan
+      // Catatan: getSubmission saat ini belum mereturn list anggota. Kita asumsikan backend sudah mereturn data members, 
+      // Jika belum, pada script backend function getSubmissionData perlu ditambahkan pengambilan anggota.
+      // Sebagai fallback simulasi:
+      if(result.members) {
+        groupMembers = result.members;
+        renderMembers();
+      } else {
+        document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database Master LMS)</i></div>`;
+      }
+
+      // Isi Kotak Jawaban
+      Object.keys(answers).forEach(k => {
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+
+      // Buka Gembok dan Kunci Input
+      document.querySelectorAll('.game-level').forEach(el => { el.classList.remove('locked'); el.classList.add('unlocked'); let ovr = el.querySelector('.lock-overlay'); if (ovr) ovr.remove(); });
+      document.querySelectorAll("input,select,textarea,button").forEach(el => { if (!el.closest('#gradePanel')) { el.disabled = true; el.readOnly = true; } });
+      closeModal();
+
+      // MUNCULKAN PANEL GURU & GENERATE LEMBAR OBSERVASI
+      let panel = document.getElementById("gradePanel");
+      panel.classList.add("show");
+      
+      let tbodyObs = document.getElementById("obsTableBody");
+      let obsHtml = "";
+      let no = 1;
+      for(let i=1; i<=7; i++) {
+        let text = answers[`r${i}`];
+        if(text && text.trim() !== "") {
+          obsHtml += `<tr><td style="text-align:center;">${no}</td><td><b>${text}</b></td><td style="text-align:center;"><input type="checkbox" class="obs-chk" ${result.gradeStatus === 'Sudah Dinilai' ? 'disabled' : ''}></td></tr>`;
+          no++;
+        }
+      }
+      tbodyObs.innerHTML = obsHtml;
+
+      let scale = document.getElementById("gradeScale"), note = document.getElementById("gradeNote"), btn = document.getElementById("lockGradeBtn"), st = document.getElementById("teacherStatus");
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          scale.disabled = true; note.disabled = true; btn.style.display = "none";
+          st.innerHTML = "✅ <b>Penilaian Tersimpan.</b>"; renderStars(scale.value);
+        } else {
+          st.innerHTML = "📝 <b>Mode Penilaian Guru.</b> Amati kesepakatan siswa dan centang Lembar Observasi.";
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none"; scale.disabled = true; note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') { scale.value = result.grade; note.value = result.feedback; st.innerHTML = "🏆 <b>Hasil Evaluasi Guru:</b>"; renderStars(scale.value); }
+        else { st.innerHTML = "⏳ <b>Menunggu Penilaian Guru.</b>"; }
+      }
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) { const n = { A:4, B:3, C:2, D:1 }[v]||0; const st = document.getElementById("starRating"); st.textContent = '★'.repeat(n) + '☆'.repeat(4-n); st.style.color = n ? '#f59e0b' : '#cbd5e1'; }
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian!");
+  let btn = document.getElementById("lockGradeBtn"); btn.disabled = true; btn.innerText = "⏳ Menyimpan...";
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'saveGrade', lkpdId: LKPD_ID, submissionId: submissionId, grade: grade, feedback: feedback }) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Tersimpan"; document.getElementById("gradeScale").disabled = true; document.getElementById("gradeNote").disabled = true;
+      document.querySelectorAll(".obs-chk").forEach(c => c.disabled = true);
+      document.getElementById("teacherStatus").innerHTML = "🔒 <b>Selesai.</b> Nilai terdistribusi.";
+    }
+  } catch (e) { alert("Koneksi gagal."); btn.disabled = false; }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
