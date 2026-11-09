@@ -1,1 +1,627 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.1 (LMS INTEGRATED - OPEN FORMAT) -->
+<!-- MATA PELAJARAN: BAHASA INDONESIA (MENULIS TEKS ARGUMENTASI) -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD Bahasa Indonesia - Menulis Teks Argumentasi</title>
+<style>
+:root {
+  --green: #059669; --mint: #d1fae5;
+  --ink: #1e293b; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --blue: #0284c7; --gold: #f59e0b;
+  --orange: #ea580c; --red: #e11d48; --purple: #7c3aed;
+  
+  /* Tema Bahasa Indonesia (Biru & Emas) */
+  --bi-main: #2563eb; --bi-light: #dbeafe; --bi-dark: #1e3a8a;
+  --bi-accent: #f59e0b;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: linear-gradient(135deg, #eff6ff, #f8fafc 55%, #fffbeb);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--ink); overflow-x: hidden;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(4px); opacity: .45; pointer-events: none;
+}
+body::before { width: 250px; height: 250px; background: #bfdbfe; left: -100px; top: 120px; }
+body::after { width: 200px; height: 200px; background: #fde68a; right: -50px; bottom: 100px; }
 
+/* ================= APPBAR (BILAH ATAS) ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--bi-main); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--bi-main); background: var(--bi-light); padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--bi-main); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+
+.progress { height: 6px; background: var(--bi-light); position: sticky; top: 61px; z-index: 29; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--bi-main), var(--bi-accent)); transition: .3s; }
+
+/* ================= CONTAINER & HERO ================= */
+.sheet {
+  width: min(1020px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px;
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #dbeafe, #f3f4f6); border-radius: 22px; padding: 26px; border: 1px solid #bfdbfe; }
+.badge { display: inline-block; background: var(--bi-main); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.15; margin: 0 0 12px; color: var(--bi-dark); }
+h2 { margin: 0; font-size: 21px; }
+p { line-height: 1.7; font-size: 15px; color: #334155; }
+
+.mission {
+  background: #fff; border-radius: 20px; padding: 22px; display: flex;
+  flex-direction: column; justify-content: center; text-align: center; font-size: 16px; border: 2px dashed #93c5fd; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+.mission-icon { font-size: 58px; animation: bob 2.8s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(3deg); } }
+
+/* ================= IDENTITAS & KELOMPOK ================= */
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+.field label { display: block; font-size: 13px; font-weight: 900; color: #334155; margin-bottom: 6px; }
+input:not([type="checkbox"]), textarea, select {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s;
+}
+input:not([type="checkbox"]):focus, textarea:focus, select:focus {
+  border-color: var(--bi-main); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge {
+  background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px;
+  font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px;
+}
+.member-badge span {
+  cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px;
+  display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px;
+}
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+.readonly-item::before { content: '👤'; font-size: 16px; }
+
+/* ================= ELEMEN LEMBAR KERJA ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--bi-light); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--bi-main); color: #fff; font-weight: 900; flex: 0 0 auto; }
+
+.theory-box { background: #fff; border: 2px solid #cbd5e1; border-radius: 16px; padding: 20px; margin-bottom: 24px; }
+.theory-title { font-weight: 900; color: var(--bi-main); font-size: 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.bubble-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 16px; }
+.speech-bubble {
+  background: var(--bi-light); border: 2px solid #93c5fd; border-radius: 16px; padding: 16px;
+  font-weight: 800; color: var(--bi-dark); position: relative; text-align: center;
+}
+.speech-bubble::after {
+  content: ''; position: absolute; bottom: -10px; left: 20px; border-width: 10px 10px 0;
+  border-style: solid; border-color: #93c5fd transparent; display: block; width: 0;
+}
+
+.case-card {
+  background: #fff; border-left: 5px solid var(--bi-main); padding: 20px;
+  border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.case-tag {
+  display: inline-block; background: var(--bi-light); color: var(--bi-dark); font-size: 12px;
+  font-weight: 900; padding: 4px 10px; border-radius: 6px; margin-bottom: 12px; text-transform: uppercase;
+}
+.case-content { font-size: 16px; line-height: 1.8; color: #334155; }
+
+.textarea-wrap { margin-bottom: 20px; }
+.textarea-wrap label { display: block; font-weight: 800; color: #1e293b; margin-bottom: 8px; font-size: 15px; }
+.textarea-wrap textarea { min-height: 100px; line-height: 1.6; font-weight: 600; color: #0f172a; resize: vertical; }
+
+.issue-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.issue-card {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 14px; padding: 16px;
+  cursor: pointer; transition: .2s;
+}
+.issue-card:hover, .issue-card.selected { border-color: var(--bi-accent); background: #fffbeb; transform: translateY(-3px); }
+.issue-icon { font-size: 32px; margin-bottom: 8px; display: block; }
+.issue-title { font-weight: 900; font-size: 15px; margin-bottom: 6px; color: #0f172a; }
+.issue-desc { font-size: 13px; color: #475569; line-height: 1.5; }
+
+.guided-box { background: #fff; border: 2px solid var(--bi-accent); border-radius: 16px; padding: 24px; margin-top: 16px; }
+.guided-step { margin-bottom: 16px; }
+.guided-step label { display: flex; align-items: center; gap: 8px; font-weight: 900; color: var(--bi-dark); margin-bottom: 8px; }
+.guided-step .hint { font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 8px; display: block; }
+.guided-step textarea { min-height: 80px; }
+
+/* ================= PANEL PENILAIAN GURU ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 24px; margin: 20px auto; width: min(1020px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+
+.rubric-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 13px; background: #fff; }
+.rubric-table th, .rubric-table td { border: 1px solid #cbd5e1; padding: 10px; text-align: left; }
+.rubric-table th { background: var(--bi-light); color: var(--bi-dark); font-weight: 900; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 50; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #dbeafe; border-top-color: var(--bi-main); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 750px) {
+  .hero, .idgrid, .grade-grid, .issue-grid { grid-template-columns: 1fr; }
+  .sheet { padding: 18px; }
+  .top-actions .btn-light { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1. APPBAR CERDAS (BERUBAH SESUAI MODE) -->
+<div class="appbar" id="appbar">
+  <div class="brand">📚 PORTAL LMS SDN 1 SUKAHAJI</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Hasil Tulisan</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<!-- 2. IDENTITAS & KELOMPOK -->
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 3.2 • BAB 3</span>
+      <h1>Menulis Teks Argumentasi</h1>
+      <p><b>Bahasa Indonesia • Fase B / Kelas IV</b></p>
+      <p>Saatnya berani berpendapat! Mari belajar menyampaikan pandanganmu terhadap suatu masalah di sekitarmu, lalu perkuat pendapatmu dengan alasan yang masuk akal.</p>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input name="tanggal" placeholder="Contoh: Selasa, 10 November 2026" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Bab 3 (Lihat Sekitar) - Menulis Argumentasi" readonly>
+        </div>
+
+        <div class="group-builder">
+          <label>👥 Data Penulis / Kelompok (Maksimal 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN..." style="flex:1;">
+              <button type="button" class="btn-main" id="btnAddMember" disabled>🔍 Cari</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa...</p>
+          </div>
+          <div id="readGroupView" style="display:none;">
+            <div class="readonly-group-list" id="readonlyMemberList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">✍️💭</div>
+      <b>🎯 Misi Penulis Cilik</b>
+      <p>Ungkapkan pandanganmu, berikan alasan kuat, dan tarik kesimpulan yang meyakinkan pembaca!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 1: PEMAHAMAN KONSEP ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Mengenal Paragraf Argumentasi</h2></div>
+  
+  <div class="theory-box">
+    <div class="theory-title">💡 Apa itu Argumentasi?</div>
+    <p>Saat berdiskusi atau menyampaikan pendapat secara tertulis, kamu perlu menyebutkan <b>alasan</b> mengapa kamu berpendapat demikian. Makin kuat alasanmu (bisa berupa fakta, data, atau logika), makin kuat pula pendapatmu. Pernyataan inilah yang disebut <b>Argumentasi</b>.</p>
+    
+    <p style="margin-top:16px; font-weight:800;">Beberapa kalimat awalan yang bisa kamu gunakan saat menulis argumentasi:</p>
+    <div class="bubble-grid">
+      <div class="speech-bubble">"Menurut pendapatku..."</div>
+      <div class="speech-bubble">"Aku setuju dengan hal itu, karena..."</div>
+      <div class="speech-bubble">"Aku kurang sependapat, sebab..."</div>
+      <div class="speech-bubble">"Tepat sekali! Alasannya adalah..."</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 2: KASUS UTAMA (BUKU TEKS) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--bi-main);">2</div><h2>Menganalisis Peristiwa di Sekitar Kita</h2></div>
+  <p>Bacalah peristiwa di bawah ini dengan saksama, lalu tuliskan pendapat kelompokmu mengenai kejadian tersebut.</p>
+
+  <div class="case-card">
+    <span class="case-tag">Kasus 1: Pejalan Kaki & Pengendara Motor</span>
+    <div class="case-content">
+      Rudi sedang berjalan kaki pulang dari sekolah. Saat tiba di persimpangan jalan, lampu lalu lintas khusus pejalan kaki (pelikan) sudah menyala hijau. Rudi pun melangkah untuk menyeberang di atas <i>zebra cross</i>. Namun, tiba-tiba dari arah kiri ada seorang pengendara sepeda motor yang melaju kencang menerobos lampu merah dan hampir menyerempet Rudi. Pengendara motor itu malah membunyikan klakson dengan keras ke arah Rudi.
+    </div>
+  </div>
+
+  <div class="textarea-wrap">
+    <label>1. Menurutmu, apa yang seharusnya dilakukan oleh Rudi saat kejadian itu? Mengapa?</label>
+    <textarea class="lkpd-val" name="l2_q1" placeholder="Tuliskan pendapatmu di sini... (Contoh: Menurutku, Rudi sebaiknya tetap tenang dan menghindar, karena...)"></textarea>
+  </div>
+
+  <div class="textarea-wrap" style="margin-bottom:0;">
+    <label>2. Bagaimana pendapatmu tentang tindakan yang dilakukan oleh pengendara sepeda motor tersebut? Jelaskan alasanmu!</label>
+    <textarea class="lkpd-val" name="l2_q2" placeholder="Tuliskan pendapatmu di sini... (Contoh: Aku sangat tidak setuju dengan tindakan pengendara motor tersebut, sebab...)"></textarea>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 3: EKSPLORASI ISU SOSIAL ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--bi-accent);">3</div><h2>Menulis Paragraf Argumentasi Utuh</h2></div>
+  <p>Sekarang, mari berlatih menyusun sebuah teks argumentasi yang utuh. <b>Pilihlah salah satu isu sosial</b> yang sering terjadi di sekitar kita di bawah ini dengan cara mengekliknya!</p>
+
+  <div class="issue-grid" id="issueGrid">
+    <div class="issue-card" onclick="selectIssue('Sekolah', this)">
+      <span class="issue-icon">🏫</span>
+      <div class="issue-title">Isu Sekolah</div>
+      <div class="issue-desc">"Lebih baik membawa bekal makanan sehat dari rumah daripada jajan sembarangan di luar gerbang sekolah."</div>
+    </div>
+    <div class="issue-card" onclick="selectIssue('Rumah', this)">
+      <span class="issue-icon">📱</span>
+      <div class="issue-title">Isu Rumah</div>
+      <div class="issue-desc">"Bermain di luar rumah bersama teman lebih bermanfaat daripada bermain <i>game</i> di HP atau *gadget* seharian."</div>
+    </div>
+    <div class="issue-card" onclick="selectIssue('Masyarakat', this)">
+      <span class="issue-icon">🏞️</span>
+      <div class="issue-title">Isu Masyarakat</div>
+      <div class="issue-desc">"Kebiasaan membuang sampah plastik ke aliran sungai desa akan membawa dampak buruk bagi seluruh warga."</div>
+    </div>
+  </div>
+  
+  <input type="hidden" class="lkpd-val" name="selected_issue" id="selectedIssueVal">
+
+  <div class="guided-box" id="guidedBox" style="display:none;">
+    <div style="font-weight:900; font-size:16px; margin-bottom:16px; color:var(--bi-dark); border-bottom:1px dashed #cbd5e1; padding-bottom:10px;">
+      Topik Pilihan: <span id="lblSelectedIssue" style="color:var(--bi-accent);"></span>
+    </div>
+    
+    <div class="guided-step">
+      <label>Langkah 1: Tuliskan Pendapat Utama (Pernyataan)</label>
+      <span class="hint">Apakah kamu setuju atau tidak setuju dengan pernyataan di atas? Tuliskan secara jelas!</span>
+      <textarea class="lkpd-val" name="l3_pendapat" placeholder="Contoh: Saya sangat setuju bahwa membawa bekal dari rumah lebih baik..."></textarea>
+    </div>
+
+    <div class="guided-step">
+      <label>Langkah 2: Tuliskan Alasan atau Bukti Pendukung</label>
+      <span class="hint">Mengapa kamu berpendapat seperti itu? Jelaskan alasannya secara logis agar orang lain yakin.</span>
+      <textarea class="lkpd-val" name="l3_alasan" placeholder="Contoh: Hal ini karena makanan dari rumah dijamin kebersihannya dan kita bisa menghemat uang jajan..."></textarea>
+    </div>
+
+    <div class="guided-step">
+      <label>Langkah 3: Tarik Kesimpulan</label>
+      <span class="hint">Berikan kesimpulan atau saran sebagai penutup dari paragrafmu.</span>
+      <textarea class="lkpd-val" name="l3_kesimpulan" placeholder="Contoh: Oleh karena itu, mari kita biasakan membawa bekal setiap hari ke sekolah."></textarea>
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:32px;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 28px; font-size:16px;">📤 Kirim Hasil Tulisan ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN GURU ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik Penilaian & Pedoman Penskoran Guru</h2></div>
+  <div id="teacherStatus" style="background:#fef3c7; border-left:5px solid #f59e0b; padding:12px 16px; border-radius:10px; margin-bottom:16px; font-size:14px;">
+    ⏳ <b>Memeriksa status database...</b>
+  </div>
+
+  <table class="rubric-table">
+    <thead>
+      <tr>
+        <th>Skala</th>
+        <th>Rentang Skor</th>
+        <th>Indikator Ketercapaian Pembelajaran (Menulis Argumentasi)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>A (Sangat Baik)</b></td>
+        <td><b>86 – 100 (4 ⭐)</b></td>
+        <td>Gagasan orisinal, opini disampaikan dengan sangat jelas, didukung alasan/bukti yang logis dan kuat, serta ditutup dengan kesimpulan yang relevan. Kosakata variatif.</td>
+      </tr>
+      <tr>
+        <td><b>B (Baik)</b></td>
+        <td><b>71 – 85 (3 ⭐)</b></td>
+        <td>Opini jelas, alasan mendukung pendapat dengan baik, struktur argumentasi (Pendapat-Alasan-Kesimpulan) sudah terlihat cukup rapi.</td>
+      </tr>
+      <tr>
+        <td><b>C (Cukup)</b></td>
+        <td><b>56 – 70 (2 ⭐)</b></td>
+        <td>Mampu menyampaikan pendapat, namun alasan yang diberikan masih sangat singkat atau kurang berhubungan erat dengan pendapat utama.</td>
+      </tr>
+      <tr>
+        <td><b>D (Perlu Bimbingan)</b></td>
+        <td><b>&le; 55 (1 ⭐)</b></td>
+        <td>Belum mampu membedakan antara pendapat dan fakta, kesulitan dalam merangkai kalimat alasan dan kesimpulan.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Keterampilan Menulis</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (4 Bintang)</option>
+        <option value="B">B — Baik (3 Bintang)</option>
+        <option value="C">C — Cukup (2 Bintang)</option>
+        <option value="D">D — Perlu Bimbingan (1 Bintang)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Umpan Balik Kualitas Paragraf Siswa</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi dan saran perbaikan untuk tulisan siswa..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:16px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan & Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI MASTER LKPD V4.1
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Bahasa Indonesia';
+const LKPD_ID  = '3.2_Teks_Argumentasi';
+const STORAGE  = 'lkpd_bindo_3_2_v41';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+  }
+});
+
+// INTERAKTIF PEMILIHAN ISU
+function selectIssue(isuName, cardEl) {
+  if(viewMode === 'guru' || viewMode === 'siswa') return; // Kunci jika read-only
+  document.querySelectorAll('.issue-card').forEach(c => c.classList.remove('selected'));
+  cardEl.classList.add('selected');
+  document.getElementById("selectedIssueVal").value = isuName;
+  document.getElementById("lblSelectedIssue").innerText = "Isu " + isuName;
+  document.getElementById("guidedBox").style.display = "block";
+  updateProgress();
+}
+
+// FETCH DATA SISWA
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN lalu Cari.";
+      btnAdd.disabled = false;
+      
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Gagal memuat database."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => s.nisn === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><p>Pastikan NISN benar.</p><button class='btn-rose' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><p>Maks 5 anggota.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})" title="Hapus">✖</span></div>
+  `).join('');
+
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item">
+      <span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span>
+    </div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+// PROGRESS & SIMPAN DATA
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+function collect() { let d = {}; getValFields().forEach(el => d[el.name] = el.value); return d; }
+
+function setupInputs() {
+  getValFields().forEach(el => { el.addEventListener("input", updateProgress); el.addEventListener("change", updateProgress); });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields(); let filled = 0;
+  vals.forEach(x => { if (String(x.value || "").trim()) filled++; });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  let total = vals.length + 2;
+  document.getElementById("progressBar").style.width = Math.min(100, Math.round((filled + (groupMembers.length>0?1:0)) / total * 100)) + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({ members: groupMembers, tanggal: document.querySelector('[name="tanggal"]').value, answers: collect() }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><button class='btn-main' onclick='closeModal()'>Lanjut</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE)); if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = d.tanggal;
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+      if(d.answers['selected_issue']) {
+         let isu = d.answers['selected_issue'];
+         document.getElementById("lblSelectedIssue").innerText = "Isu " + isu;
+         document.getElementById("guidedBox").style.display = "block";
+         document.querySelectorAll('.issue-card').forEach(c => {
+           if(c.innerText.includes(isu)) c.classList.add('selected');
+         });
+      }
+    }
+  } catch (e) {}
+}
+
+// KIRIM KE LMS
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) return showModal("<h3>⚠️ Belum Lengkap</h3><p>Isi Hari/Tanggal dan Anggota Kelompok!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  
+  if (!document.getElementById("selectedIssueVal").value) {
+    return showModal("<h3>⚠️ Pilih Isu Sosial</h3><p>Pilih salah satu isu di Bagian 3 dan lengkapi paragraf argumentasimu sebelum mengirim.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Hasil Tulisan...</h3>");
+  let payload = { action: 'submitLKPD', lkpdId: LKPD_ID, subject: SUBJECT, hariTanggal: tgl, materiPokok: document.querySelector('[name="materi"]').value, members: groupMembers, answers: JSON.stringify(collect()) };
+
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      document.querySelectorAll("input,select,textarea,button").forEach(el => el.disabled = true);
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Tulisan argumentasimu sudah terkirim ke Guru.</p>`);
+      document.getElementById("appbar").style.display = "none";
+    }
+  } catch (e) { showModal("<h3>⚠️ Koneksi Terputus</h3>"); }
+};
+
+// MODE BACA (READ-ONLY) & PENILAIAN GURU
+async function loadLMSViewMode() {
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+
+  showModal("<div class='spinner'></div><h3>Memuat Data Tulisan...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + LKPD_ID + "&submissionId=" + submissionId);
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      
+      // Ambil Nama Anggota Kelompok dari API (Jika tersedia)
+      if(result.members) {
+        groupMembers = result.members;
+        renderMembers();
+      } else {
+        document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database Master LMS)</i></div>`;
+      }
+
+      // Isi Kotak Jawaban
+      Object.keys(answers).forEach(k => {
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+
+      // Tampilkan isu yang dipilih saat dibaca
+      if(answers['selected_issue']) {
+         document.getElementById("lblSelectedIssue").innerText = "Isu " + answers['selected_issue'];
+         document.getElementById("guidedBox").style.display = "block";
+         document.querySelectorAll('.issue-card').forEach(c => {
+           if(c.innerText.includes(answers['selected_issue'])) c.classList.add('selected');
+         });
+      }
+
+      // Kunci Input
+      document.querySelectorAll("input,select,textarea,button").forEach(el => { if (!el.closest('#gradePanel')) { el.disabled = true; el.readOnly = true; } });
+      closeModal();
+
+      // MUNCULKAN PANEL GURU
+      let panel = document.getElementById("gradePanel");
+      panel.classList.add("show");
+      
+      let scale = document.getElementById("gradeScale"), note = document.getElementById("gradeNote"), btn = document.getElementById("lockGradeBtn"), st = document.getElementById("teacherStatus");
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          scale.disabled = true; note.disabled = true; btn.style.display = "none";
+          st.innerHTML = "✅ <b>Penilaian Tersimpan.</b>"; renderStars(scale.value);
+        } else {
+          st.innerHTML = "📝 <b>Mode Penilaian Guru.</b> Baca hasil tulisan argumentasi siswa dan berikan penilaian rubrik.";
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none"; scale.disabled = true; note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') { scale.value = result.grade; note.value = result.feedback; st.innerHTML = "🏆 <b>Hasil Evaluasi Guru:</b>"; renderStars(scale.value); }
+        else { st.innerHTML = "⏳ <b>Menunggu Penilaian Guru.</b>"; }
+      }
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) { const n = { A:4, B:3, C:2, D:1 }[v]||0; const st = document.getElementById("starRating"); st.textContent = '★'.repeat(n) + '☆'.repeat(4-n); st.style.color = n ? '#f59e0b' : '#cbd5e1'; }
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian!");
+  let btn = document.getElementById("lockGradeBtn"); btn.disabled = true; btn.innerText = "⏳ Menyimpan...";
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'saveGrade', lkpdId: LKPD_ID, submissionId: submissionId, grade: grade, feedback: feedback }) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Tersimpan"; document.getElementById("gradeScale").disabled = true; document.getElementById("gradeNote").disabled = true;
+      document.getElementById("teacherStatus").innerHTML = "🔒 <b>Selesai.</b> Nilai terdistribusi.";
+    }
+  } catch (e) { alert("Koneksi gagal."); btn.disabled = false; }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
