@@ -1,0 +1,534 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.1 (NON-GAMIFIKASI) -->
+<!-- MATA PELAJARAN: BAHASA INDONESIA -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 3.3 Bahasa Indonesia - Berdiskusi Aktif</title>
+<style>
+:root {
+  --green: #059669; --green2: #047857; 
+  --ink: #1e293b; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --gold: #f59e0b; --orange: #ea580c; 
+  
+  /* Tema Khusus Bahasa Indonesia (Biru & Cyan) */
+  --bi-main: #0284c7; --bi-light: #e0f2fe; --bi-dark: #0369a1; --bi-accent: #0891b2;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: linear-gradient(135deg, #f0f9ff, #fffbeb 55%, #e0f2fe);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--ink); overflow-x: hidden;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(4px); opacity: .45; pointer-events: none;
+}
+body::before { width: 200px; height: 200px; background: #bae6fd; left: -70px; top: 120px; }
+body::after { width: 170px; height: 170px; background: #67e8f9; right: -50px; bottom: 100px; }
+
+/* ================= APPBAR ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--bi-main); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--bi-dark); background: var(--bi-light); padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--bi-main); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+
+.progress { height: 6px; background: var(--bi-light); position: sticky; top: 61px; z-index: 29; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--bi-main), var(--bi-accent)); transition: .3s; }
+
+/* ================= CONTAINER & HERO ================= */
+.sheet {
+  width: min(1020px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px;
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-radius: 22px; padding: 26px; border: 1px solid #bae6fd; }
+.badge { display: inline-block; background: var(--bi-main); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.15; margin: 0 0 12px; color: var(--bi-dark); }
+h2 { margin: 0; font-size: 21px; }
+p { line-height: 1.7; font-size: 15px; color: #334155; }
+
+.mission {
+  background: #fff; border-radius: 20px; padding: 22px; display: flex;
+  flex-direction: column; justify-content: center; text-align: center; font-size: 16px; border: 2px dashed #38bdf8; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+.mission-icon { font-size: 58px; animation: bob 2.8s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(3deg); } }
+
+/* ================= IDENTITAS & KELOMPOK ================= */
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+.field label { display: block; font-size: 13px; font-weight: 900; color: #334155; margin-bottom: 6px; }
+input:not([type="checkbox"]), textarea, select {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s;
+}
+input:not([type="checkbox"]):focus, textarea:focus, select:focus {
+  border-color: var(--bi-main); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge {
+  background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px;
+  font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px;
+}
+.member-badge span {
+  cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px;
+  display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px;
+}
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+.readonly-item::before { content: '🗣️'; font-size: 16px; }
+
+/* ================= ELEMEN LEMBAR KERJA ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--bi-light); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--bi-main); color: #fff; font-weight: 900; flex: 0 0 auto; }
+
+.content-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 24px; margin-bottom: 26px; }
+.book-img { width: 100%; max-width: 600px; display: block; margin: 0 auto 16px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; }
+
+.q-box { background: #fff; border: 2px solid var(--bi-light); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+.q-title { font-weight: 800; font-size: 15px; color: var(--bi-dark); margin-bottom: 10px; }
+.q-box textarea { min-height: 80px; resize: vertical; border-color: #bae6fd; background: #f0f9ff; }
+.q-box textarea:focus { background: #fff; }
+
+.rule-check { display: flex; align-items: center; gap: 12px; background: #fef3c7; padding: 14px 18px; border-radius: 12px; border: 1px solid #fde68a; margin-bottom: 12px; cursor: pointer; transition: .2s; }
+.rule-check:hover { background: #fde68a; }
+.rule-check input { width: 24px; height: 24px; cursor: pointer; flex-shrink: 0; }
+.rule-text { font-weight: 700; font-size: 14px; color: #92400e; }
+
+/* ================= PANEL OBSERVASI & PENILAIAN GURU ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 24px; margin: 20px auto; width: min(1020px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+.obs-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 13px; background: #fff; }
+.obs-table th, .obs-table td { border: 1px solid #cbd5e1; padding: 10px; text-align: left; }
+.obs-table th { background: var(--bi-dark); color: #fff; font-weight: 900; text-align: center; }
+.obs-chk { width: 18px; height: 18px; cursor: pointer; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 50; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #bae6fd; border-top-color: var(--bi-main); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 750px) {
+  .hero, .idgrid, .grade-grid { grid-template-columns: 1fr; }
+  .sheet { padding: 18px; }
+  .top-actions .btn-light { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- APPBAR CERDAS -->
+<div class="appbar" id="appbar">
+  <div class="brand">📖 PORTAL LMS SDN 1 SUKAHAJI</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Diskusi</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<!-- IDENTITAS & KELOMPOK -->
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 3.3 • BAB 3</span>
+      <h1>Berdiskusi dengan Tata Cara yang Benar</h1>
+      <p>Mari belajar menyimak teks, menghargai pendapat teman, dan mengemukakan hasil analisis kelompok dengan santun dan percaya diri!</p>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input name="tanggal" placeholder="Contoh: Rabu, 11 November 2026" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Bab 3 - Menyimak Teks & Berdiskusi Kendaraan" readonly>
+        </div>
+
+        <div class="group-builder">
+          <label>👥 Data Kelompok Diskusi (4 – 5 Siswa)</label>
+          
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN anggota..." style="flex:1;">
+              <button type="button" class="btn-blue" id="btnAddMember" disabled>🔍 Cari</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa...</p>
+          </div>
+
+          <div id="readGroupView" style="display:none;">
+            <div class="readonly-group-list" id="readonlyMemberList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">🗣️👂</div>
+      <b>🎯 Misi Ahli Diskusi</b>
+      <p>Simak bacaannya, jawab pertanyaannya, dan patuhi tata tertib berbicaranya!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 1: MENYIMAK TEKS ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">A</div><h2>Menyimak Teks "Jauh dan Dekat"</h2></div>
+  
+  <div class="content-box" style="background:#fff;">
+    <p style="margin-top:0; font-weight:700; color:var(--bi-dark); text-align:center;">Dengarkan gurumu membacakan teks berikut ini, atau bacalah dengan teliti bersama kelompokmu!</p>
+    <!-- Memanggil gambar dari GitHub Pages Bapak -->
+    <img src="https://iwansutiawan9-tech.github.io/lkpd-digital-kelas-4/asset/image14.png" class="book-img" alt="Halaman 1 Jauh dan Dekat">
+    <img src="https://iwansutiawan9-tech.github.io/lkpd-digital-kelas-4/asset/image15.png" class="book-img" alt="Halaman 2 Jauh dan Dekat">
+    <img src="https://iwansutiawan9-tech.github.io/lkpd-digital-kelas-4/asset/image16.png" class="book-img" alt="Halaman 3 Jauh dan Dekat">
+  </div>
+</section>
+
+<!-- ================= BAGIAN 2: MENDISKUSIKAN BACAAN ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--bi-accent);">B</div><h2>Mendiskusikan Bacaan</h2></div>
+  
+  <div class="content-box">
+    <p style="font-weight:800; color:var(--bi-dark); margin-top:0;">Setelah membaca teks, berdiskusilah membahas topik kendaraan. <br><span style="color:#e11d48;">⚠️ Ingat: Acungkan jari untuk meminta giliran dan berbicaralah setelah dipersilakan!</span></p>
+
+    <div class="q-box">
+      <div class="q-title">1. Apa saja alat transportasi yang dapat digunakan di sungai atau di laut? Adakah yang sama?</div>
+      <textarea class="lkpd-val" name="b_q1" placeholder="Tuliskan hasil diskusi kelompokmu di sini..."></textarea>
+    </div>
+
+    <div class="q-box">
+      <div class="q-title">2. Tahukah kamu alat transportasi darat yang disebut dokar? Apa yang dapat kamu ceritakan tentang dokar?</div>
+      <textarea class="lkpd-val" name="b_q2" placeholder="Tuliskan cerita kelompokmu tentang dokar..."></textarea>
+    </div>
+
+    <div class="q-box">
+      <div class="q-title">3. Di sebagian daerah, perahu disebut sampan. Apa sebutan untuk perahu di daerahmu?</div>
+      <textarea class="lkpd-val" name="b_q3" placeholder="Tuliskan sebutan perahu di daerahmu..."></textarea>
+    </div>
+
+    <div class="q-box">
+      <div class="q-title">4. Menurutmu, mengapa ada begitu banyak jenis kendaraan di dunia ini?</div>
+      <textarea class="lkpd-val" name="b_q4" placeholder="Tuliskan alasan kelompokmu..."></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 3: PILIH KENDARAAN ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--orange);">C</div><h2>Pilih & Analisis Kendaraan</h2></div>
+  
+  <div class="content-box">
+    <p style="font-weight:700; margin-top:0;">Pilih satu moda transportasi di bawah ini. Pastikan pilihan kelompokmu berbeda dengan kelompok lain jika memungkinkan. Diskusikan kelebihan dan kekurangannya, lalu bersiaplah untuk melakukan presentasi!</p>
+
+    <div class="q-box">
+      <div class="q-title">1. Moda Transportasi Pilihan Kelompok:</div>
+      <select class="lkpd-val" name="c_moda" style="border-color:var(--orange); color:var(--orange); font-weight:800;">
+        <option value="">-- Pilih Kendaraan --</option>
+        <option value="Mobil (Darat)">Mobil (Kelompok Darat)</option>
+        <option value="Perahu Cepat (Laut)">Perahu Cepat (Kelompok Laut)</option>
+        <option value="Pesawat Terbang (Udara)">Pesawat Terbang (Kelompok Udara)</option>
+        <option value="Unta / Kuda (Hewan)">Unta / Kuda (Kelompok Hewan)</option>
+        <option value="Lainnya">Kendaraan Lainnya (Tulis di analisis)</option>
+      </select>
+    </div>
+
+    <div class="q-box">
+      <div class="q-title">2. Seberapa cepat kendaraan tersebut bisa berjalan?</div>
+      <textarea class="lkpd-val" name="c_cepat" placeholder="Deskripsikan kecepatan kendaraan tersebut..."></textarea>
+    </div>
+
+    <div class="q-box">
+      <div class="q-title">3. Apa keuntungan / kelebihan menggunakan kendaraan tersebut?</div>
+      <textarea class="lkpd-val" name="c_untung" placeholder="Tuliskan kelebihannya (misal: bisa memuat banyak barang, anti macet, dll)..."></textarea>
+    </div>
+
+    <div class="q-box">
+      <div class="q-title">4. Apa kekurangan / kelemahan kendaraan tersebut?</div>
+      <textarea class="lkpd-val" name="c_kurang" placeholder="Tuliskan kekurangannya (misal: polusi udara, biaya mahal, dll)..."></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 4: REFLEKSI TATA CARA DISKUSI ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--green);">D</div><h2>Refleksi Tata Cara Diskusi</h2></div>
+  
+  <div class="content-box" style="background:#f0fdf4; border-color:#86efac;">
+    <p style="font-weight:800; color:var(--green2); margin-top:0;">Sebagai warga kelas yang santun, apakah seluruh anggota kelompokmu sudah mematuhi tata tertib diskusi hari ini? Centang pernyataan yang sesuai dengan kenyataan!</p>
+
+    <label class="rule-check">
+      <input type="checkbox" class="lkpd-chk" name="d_chk1">
+      <span class="rule-text">1. Kami mendengarkan dengan tenang saat guru membacakan teks.</span>
+    </label>
+    <label class="rule-check">
+      <input type="checkbox" class="lkpd-chk" name="d_chk2">
+      <span class="rule-text">2. Kami selalu mengacungkan jari terlebih dahulu sebelum mengemukakan pendapat.</span>
+    </label>
+    <label class="rule-check">
+      <input type="checkbox" class="lkpd-chk" name="d_chk3">
+      <span class="rule-text">3. Kami baru mulai berbicara setelah dipersilakan oleh guru atau pemimpin kelompok.</span>
+    </label>
+    <label class="rule-check">
+      <input type="checkbox" class="lkpd-chk" name="d_chk4">
+      <span class="rule-text">4. Kami tidak memotong pembicaraan teman yang sedang memberikan pendapat.</span>
+    </label>
+  </div>
+
+  <div class="actions" style="margin-top:24px; display:flex; justify-content:center;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 32px; font-size:16px;">📤 Kirim Hasil Diskusi ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL OBSERVASI & PENILAIAN GURU ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik Penilaian Presentasi & Diskusi</h2></div>
+  
+  <div style="background:#fff; border:2px solid var(--bi-dark); border-radius:14px; padding:20px; margin-bottom:20px;">
+    <h3 style="color:var(--bi-dark); margin:0 0 12px; font-size:16px;">📋 Ceklis Observasi Guru (Sikap Diskusi)</h3>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:14px;">Centang jika kelompok ini secara nyata mempraktikkan tata cara diskusi yang benar selama pembelajaran berlangsung.</p>
+    
+    <table class="obs-table">
+      <thead>
+        <tr><th style="width:5%;">No</th><th>Indikator Sikap Berdiskusi Secara Aktif</th><th style="width:15%;">Terpantau Patuh</th></tr>
+      </thead>
+      <tbody>
+        <tr><td style="text-align:center;">1</td><td><b>Mengacungkan jari</b> untuk meminta giliran berbicara</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs1"></td></tr>
+        <tr><td style="text-align:center;">2</td><td><b>Berbicara setelah dipersilakan</b> oleh guru/moderator</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs2"></td></tr>
+        <tr><td style="text-align:center;">3</td><td><b>Menyimak dengan baik</b> saat teman sedang menyampaikan presentasi</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs3"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Penilaian Kualitas Analisis & Presentasi</label>
+      <select id="gradeScale" style="border-color:var(--bi-main);">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (Analisis sangat logis, presentasi percaya diri & santun)</option>
+        <option value="B">B — Baik (Analisis masuk akal, sikap diskusi kooperatif)</option>
+        <option value="C">C — Cukup (Analisis kurang tajam, sering berebut bicara saat diskusi)</option>
+        <option value="D">D — Perlu Bimbingan (Pasif saat diskusi, hasil analisis tidak relevan)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi presentasi kelompok..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:16px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan Observasi & Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 3.3 BAHASA INDONESIA (LMS V4.1)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Bahasa Indonesia';
+const LKPD_ID  = '3.3_Berdiskusi_Transportasi';
+const STORAGE  = 'lkpd_bindo_3_3';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (submissionId) { loadLMSViewMode(); } 
+  else { fetchStudents(); loadDraft(); setupInputs(); }
+});
+
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data; statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN lalu Cari."; btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama }); renderMembers();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Gagal memuat database."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => s.nisn === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><p>Pastikan NISN benar.</p><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><p>Maks 5 anggota.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers(); document.getElementById("inNisn").value = ""; updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+function getChkFields() { return [...document.querySelectorAll(".lkpd-chk")]; }
+function collect() { 
+  let d = {}; 
+  getValFields().forEach(el => d[el.name] = el.value); 
+  getChkFields().forEach(el => d[el.name] = el.checked);
+  return d; 
+}
+
+function setupInputs() {
+  getValFields().forEach(el => { el.addEventListener("input", updateProgress); el.addEventListener("change", updateProgress); });
+  getChkFields().forEach(el => el.addEventListener("change", updateProgress));
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields(); let filled = 0;
+  vals.forEach(x => { if (String(x.value || "").trim()) filled++; });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  document.getElementById("progressBar").style.width = Math.min(100, Math.round((filled + (groupMembers.length>0?1:0)) / (vals.length+2) * 100)) + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({ members: groupMembers, tanggal: document.querySelector('[name="tanggal"]').value, answers: collect() }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><button class='btn-main' onclick='closeModal()'>Lanjut</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE)); if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = d.tanggal;
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+      getChkFields().forEach(el => { if (d.answers[el.name] !== undefined) el.checked = d.answers[el.name]; });
+    }
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) return showModal("<h3>⚠️ Belum Lengkap</h3><p>Isi Hari/Tanggal dan Anggota Kelompok!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  
+  showModal("<div class='spinner'></div><h3>Mengirim Diskusi...</h3>");
+  let payload = { action: 'submitLKPD', lkpdId: LKPD_ID, subject: SUBJECT, hariTanggal: tgl, materiPokok: document.querySelector('[name="materi"]').value, members: groupMembers, answers: JSON.stringify(collect()) };
+
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      document.querySelectorAll("input,select,textarea,button").forEach(el => el.disabled = true);
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Hasil diskusimu sudah masuk ke meja Guru.</p>`);
+      document.getElementById("appbar").style.display = "none";
+    }
+  } catch (e) { showModal("<h3>⚠️ Koneksi Terputus</h3>"); }
+};
+
+async function loadLMSViewMode() {
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  showModal("<div class='spinner'></div><h3>Memuat Data...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + LKPD_ID + "&submissionId=" + submissionId);
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if(result.members) { groupMembers = result.members; renderMembers(); } 
+      else { document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota dari Database)</i></div>`; }
+
+      Object.keys(answers).forEach(k => {
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) { if (el.type === 'checkbox') el.checked = Boolean(answers[k]); else el.value = answers[k]; }
+      });
+
+      document.querySelectorAll("input,select,textarea,button").forEach(el => { if (!el.closest('#gradePanel')) { el.disabled = true; el.readOnly = true; } });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel"); panel.classList.add("show");
+      let scale = document.getElementById("gradeScale"), note = document.getElementById("gradeNote"), btn = document.getElementById("lockGradeBtn");
+      
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          scale.disabled = true; note.disabled = true; btn.style.display = "none";
+          document.querySelectorAll(".obs-chk").forEach(c => c.disabled = true);
+          renderStars(scale.value);
+        } else {
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none"; scale.disabled = true; note.disabled = true; document.querySelectorAll(".obs-chk").forEach(c => c.disabled = true);
+        if (result.gradeStatus === 'Sudah Dinilai') { scale.value = result.grade; note.value = result.feedback; renderStars(scale.value); }
+      }
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) { const n = { A:4, B:3, C:2, D:1 }[v]||0; const st = document.getElementById("starRating"); st.textContent = '★'.repeat(n) + '☆'.repeat(4-n); st.style.color = n ? '#f59e0b' : '#cbd5e1'; }
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian!");
+  let btn = document.getElementById("lockGradeBtn"); btn.disabled = true; btn.innerText = "⏳ Menyimpan...";
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'saveGrade', lkpdId: LKPD_ID, submissionId: submissionId, grade: grade, feedback: feedback }) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Tersimpan"; document.getElementById("gradeScale").disabled = true; document.getElementById("gradeNote").disabled = true;
+      document.querySelectorAll(".obs-chk").forEach(c => c.disabled = true);
+    }
+  } catch (e) { alert("Koneksi gagal."); btn.disabled = false; }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
