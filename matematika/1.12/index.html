@@ -1,1 +1,1078 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.2 (GAMIFIKASI MATEMATIKA - BEST PRACTICE LAYOUT) -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 1.12 Matematika - Pengurangan Bilangan Cacah</title>
+<style>
+:root {
+  --green: #059669; --green2: #047857;
+  --ink: #1e293b; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --red: #ef4444;
+  --math-main: #2563eb; --math-light: #dbeafe; --math-dark: #1e3a8a; --math-accent: #f59e0b;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: linear-gradient(135deg, #eff6ff, #fef3c7 55%, #e0f2fe);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--ink); overflow-x: hidden;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(4px); opacity: .45; pointer-events: none;
+}
+body::before { width: 250px; height: 250px; background: #bfdbfe; left: -70px; top: 120px; }
+body::after { width: 200px; height: 200px; background: #fde68a; right: -50px; bottom: 100px; }
 
+/* ================= APPBAR ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--math-main); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--math-dark); background: var(--math-light); padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--math-main); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+
+.progress { height: 6px; background: var(--math-light); position: sticky; top: 61px; z-index: 29; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--math-main), var(--math-accent)); transition: .3s; }
+
+/* ================= HERO & IDENTITAS ================= */
+.sheet {
+  width: min(1040px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px;
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #eff6ff, #fffbeb); border-radius: 22px; padding: 26px; border: 1px solid #bfdbfe; }
+.badge { display: inline-block; background: var(--math-main); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(26px, 4vw, 34px); line-height: 1.15; margin: 0 0 12px; color: var(--math-dark); }
+h2 { margin: 0; font-size: 21px; }
+p { line-height: 1.7; font-size: 15px; color: #334155; }
+
+.mission {
+  background: #fff; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; justify-content: center; text-align: center; font-size: 16px; border: 2px dashed var(--math-accent);
+}
+.mission-icon { font-size: 58px; animation: bob 2.8s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(3deg); } }
+
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+.field label { display: block; font-size: 13px; font-weight: 900; color: #334155; margin-bottom: 6px; }
+.idgrid input, .grade-panel select, .grade-panel textarea {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s;
+}
+.idgrid input:focus, .grade-panel select:focus, .grade-panel textarea:focus {
+  border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge { background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.member-badge span { cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px; display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px; }
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+
+/* ================= GAME LEVEL ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--math-light); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--math-main); color: #fff; font-weight: 900; flex: 0 0 auto; }
+
+.game-level { position: relative; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 24px; margin-bottom: 26px; transition: all .3s; }
+.game-level.locked { opacity: 0.6; pointer-events: none; filter: grayscale(95%); }
+.lock-overlay { position: absolute; inset: 0; background: rgba(248, 250, 252, 0.88); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; border-radius: 16px; text-align: center; padding: 20px; }
+.lock-icon { font-size: 52px; margin-bottom: 8px; }
+.game-level.unlocked .lock-overlay { display: none; }
+.game-level.completed { border-color: var(--green); background: #f0fdf4; }
+
+.story-box { background: #fff; border-left: 5px solid var(--math-accent); padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); font-size: 15px; font-weight: 600; }
+
+/* ================= PRAKTIK BAIK: SUSUN PANJANG DENGAN KURUNG PINJAMAN ================= */
+.math-block {
+  background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 18px;
+  padding: 22px 18px; margin-bottom: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+.problem-story {
+  background: #fff; border: 1px solid #cbd5e1; border-left: 4px solid var(--math-main);
+  padding: 12px 16px; border-radius: 10px; font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 18px; line-height: 1.5;
+}
+.step-tag {
+  display: inline-block; font-size: 12px; font-weight: 800; color: #b45309;
+  background: #fef3c7; border: 1px solid #fde68a; padding: 4px 12px; border-radius: 99px; margin: 10px auto 8px;
+}
+.m-stage { text-align: center; overflow-x: auto; padding: 4px 0; }
+.m-row {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 8px; margin-bottom: 10px; font-size: 19px; font-weight: 800; color: #1e293b; font-family: 'Segoe UI', monospace;
+}
+.num-label { width: 48px; text-align: right; font-weight: 900; color: #0f172a; }
+.m-in {
+  width: 64px !important; height: 42px !important; text-align: center;
+  font-size: 17px; font-weight: 800; color: #0f172a;
+  border: 2px solid #cbd5e1; border-radius: 10px; background: #fff;
+  padding: 0 4px !important; outline: none; transition: .2s;
+}
+.m-in:focus { border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
+.m-in.final { width: 92px !important; background: #fef08a; border-color: #eab308; font-size: 19px; }
+
+/* Kotak Kurung Penguraian Pinjaman seperti Buku Teks */
+.borrow-group {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #fff1f2; border: 2px dashed #f43f5e; border-radius: 14px; padding: 4px 10px;
+}
+.paren { font-size: 22px; font-weight: 900; color: #e11d48; }
+.op-minus { font-size: 24px; font-weight: 900; color: #0f172a; margin-left: 6px; }
+.m-divider { width: min(500px, 92%); height: 3px; background: #1e293b; margin: 12px auto; border-radius: 2px; }
+
+/* ================= PRAKTIK BAIK: SUSUN PENDEK BERWARNA ================= */
+.short-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 18px; margin-bottom: 16px; }
+.short-card { background: #fff; border: 2px solid #cbd5e1; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+.short-card .ctx { font-size: 13px; color: #1e293b; font-weight: 800; margin-bottom: 12px; text-align: center; background: #f1f5f9; padding: 6px 12px; border-radius: 8px; width: 100%; line-height: 1.4; }
+
+.susun-table { border-collapse: collapse; width: 215px; border: 2px solid #64748b; background: #fff; }
+.susun-table th { border: 1px solid #64748b; padding: 6px 4px; font-size: 12px; font-weight: 900; color: #1e293b; text-align: center; }
+.susun-table th.col-r { background: #bae6fd; }
+.susun-table th.col-p { background: #bbf7d0; }
+.susun-table th.col-s { background: #fecdd3; }
+.susun-table td { border: 1px solid #94a3b8; padding: 6px 4px; text-align: center; font-size: 22px; font-weight: 900; font-family: monospace; position: relative; }
+.susun-table td.col-r { background: #f0f9ff; }
+.susun-table td.col-p { background: #f0fdf4; }
+.susun-table td.col-s { background: #fff1f2; }
+.susun-table tr.row-pinjam td { background: #fff; border-bottom: 1px dashed #cbd5e1; padding: 6px 2px; }
+.susun-table tr.line-bot td { border-bottom: 4px solid #0f172a; }
+
+.crossed { text-decoration: line-through; text-decoration-color: #ef4444; text-decoration-thickness: 3px; color: #64748b; }
+.inp-top {
+  width: 38px !important; height: 38px !important; border-radius: 50% !important;
+  border: 2px solid #ef4444 !important; background: #fef2f2 !important; color: #b91c1c;
+  font-size: 15px; font-weight: 900; text-align: center; padding: 0 !important; outline: none;
+}
+.inp-bot {
+  width: 42px !important; height: 42px !important; border-radius: 8px !important;
+  border: 2px solid #94a3b8 !important; background: #fef08a !important; color: #0f172a;
+  font-size: 20px; font-weight: 900; text-align: center; padding: 0 !important; outline: none;
+}
+.sign-min { position: absolute; right: -22px; bottom: 8px; font-size: 26px; font-weight: 900; color: #0f172a; }
+
+.lkpd-val.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+.lkpd-val.wrong { animation: shake 0.4s; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);} }
+.check-btn { display: block; margin: 20px auto 0; background: var(--math-main); color: #fff; border-radius: 99px; padding: 12px 32px; font-weight: 900; font-size: 15px; }
+
+/* ================= PANEL PENILAIAN GURU ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 24px; margin: 20px auto; width: min(1040px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 50; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #dbeafe; border-top-color: var(--math-main); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 750px) {
+  .hero, .idgrid, .grade-grid { grid-template-columns: 1fr; }
+  .sheet { padding: 16px; }
+  .m-in { width: 52px !important; height: 38px !important; font-size: 15px; }
+  .m-row { font-size: 15px; gap: 4px; }
+}
+</style>
+</head>
+<body>
+
+<div class="appbar" id="appbar">
+  <div class="brand">🧮 PORTAL LMS SDN 1 SUKAHAJI</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Jawaban</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 1.12</span>
+      <h1>Operasi Hitung Pengurangan Bilangan Cacah</h1>
+      <p><b>Matematika • Fase B / Kelas IV</b><br>Mari berlatih menyelesaikan masalah pengurangan bilangan cacah sampai 1.000 menggunakan cara <b>Susun Panjang</b> (dengan kotak penguraian pinjaman) dan <b>Susun Pendek</b>!</p>
+
+      <div class="idgrid">
+        <div class="field"><label>Hari / Tanggal <span style="color:red">*</span></label><input name="tanggal" placeholder="Contoh: Selasa, 10 November 2026" required></div>
+        <div class="field"><label>Materi Pokok</label><input name="materi" value="Pengurangan Bersusun dengan Mengambil/Meminjam" readonly></div>
+        <div class="group-builder">
+          <label>👥 Data Kelompok (2 – 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN temanmu..." style="flex:1;">
+              <button type="button" class="btn-main" id="btnAddMember" disabled>🔍 Cari & Tambah</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa...</p>
+          </div>
+          <div id="readGroupView" style="display:none;"><div class="readonly-group-list" id="readonlyMemberList"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">🕵️‍♂️🔢</div>
+      <b>🎯 Misi Detektif Sekolah</b>
+      <p>Pecahkan <b>6 Soal Susun Panjang</b> & <b>14 Soal Susun Pendek</b> di lingkungan sekolah kita!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZONA 1: SUSUN PANJANG 1 KALI MENGAMBIL (3 SOAL) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Zona 1: Susun Panjang dengan Satu Kali Mengambil (3 Soal)</h2></div>
+
+  <div class="game-level unlocked" id="level1">
+    <div class="story-box">
+      💡 <b>Petunjuk:</b> Uraikan bilangan terlebih dahulu. Jika angka satuan/puluhan tidak cukup dikurangkan, <b>ambil 1 puluhan (10) atau 1 ratusan (100)</b> menggunakan kotak kurung merah <b>( &nbsp; + &nbsp; )</b>!
+    </div>
+
+    <!-- SOAL 1: 345 - 128 = 217 -->
+    <div class="math-block">
+      <div class="problem-story">
+        📚 <b>Soal 1 (Perpustakaan):</b> Di perpustakaan SDN 1 Sukahaji terdapat <b>345</b> buku cerita. Hari ini dipinjam oleh siswa sebanyak <b>128</b> buku. Berapakah sisa buku cerita di rak perpustakaan? (<b>345 − 128</b>)
+      </div>
+      <div class="m-stage">
+        <div class="step-tag">Langkah 1: Uraikan menurut nilai tempatnya</div>
+        <div class="m-row">
+          <span class="num-label">345 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="300" name="z1_s1_1"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="40" name="z1_s1_2"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="5" name="z1_s1_3">
+        </div>
+        <div class="m-row">
+          <span class="num-label">128 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="100" name="z1_s1_4"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="20" name="z1_s1_5"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="8" name="z1_s1_6">
+        </div>
+
+        <div class="step-tag">Langkah 2: Karena 5 &lt; 8, uraikan 40 menjadi (30 + 10) lalu gabungkan 10 ke satuan</div>
+        <div class="m-row">
+          <span class="num-label">345 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="300" name="z1_s1_7"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl1" data-ans="30" name="z1_s1_8"> + <input type="tel" class="m-in lkpd-val lvl1" data-ans="10" name="z1_s1_9"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="5" name="z1_s1_10">
+        </div>
+        <div class="m-row">
+          <span class="num-label">345 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="300" name="z1_s1_11"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="30" name="z1_s1_12"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl1" data-ans="10" name="z1_s1_13"> + <input type="tel" class="m-in lkpd-val lvl1" data-ans="5" name="z1_s1_14"><span class="paren">)</span></span>
+        </div>
+        <div class="m-row">
+          <span class="num-label">128 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="100" name="z1_s1_15"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="20" name="z1_s1_16"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="8" name="z1_s1_17">
+          <span class="op-minus">−</span>
+        </div>
+        <div class="m-divider"></div>
+        <div class="m-row">
+          <span class="num-label">=</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="200" name="z1_s1_18"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="10" name="z1_s1_19"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="7" name="z1_s1_20">
+        </div>
+        <div class="m-row">
+          <span class="num-label">Jadi =</span>
+          <input type="tel" class="m-in final lkpd-val lvl1" data-ans="217" name="z1_s1_f">
+        </div>
+      </div>
+    </div>
+
+    <!-- SOAL 2: 562 - 247 = 315 -->
+    <div class="math-block">
+      <div class="problem-story">
+        ✏️ <b>Soal 2 (Koperasi Sekolah):</b> Koperasi sekolah memiliki persediaan <b>562</b> batang pensil. Sebanyak <b>247</b> pensil telah dibeli oleh murid-murid. Berapa batang pensil yang tersisa di koperasi? (<b>562 − 247</b>)
+      </div>
+      <div class="m-stage">
+        <div class="step-tag">Langkah 1: Uraikan menurut nilai tempatnya</div>
+        <div class="m-row">
+          <span class="num-label">562 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="500" name="z1_s2_1"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="60" name="z1_s2_2"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="2" name="z1_s2_3">
+        </div>
+        <div class="m-row">
+          <span class="num-label">247 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="200" name="z1_s2_4"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="40" name="z1_s2_5"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="7" name="z1_s2_6">
+        </div>
+
+        <div class="step-tag">Langkah 2: Karena 2 &lt; 7, uraikan 60 menjadi (50 + 10) lalu gabungkan 10 ke satuan</div>
+        <div class="m-row">
+          <span class="num-label">562 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="500" name="z1_s2_7"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl1" data-ans="50" name="z1_s2_8"> + <input type="tel" class="m-in lkpd-val lvl1" data-ans="10" name="z1_s2_9"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="2" name="z1_s2_10">
+        </div>
+        <div class="m-row">
+          <span class="num-label">562 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="500" name="z1_s2_11"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="50" name="z1_s2_12"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl1" data-ans="10" name="z1_s2_13"> + <input type="tel" class="m-in lkpd-val lvl1" data-ans="2" name="z1_s2_14"><span class="paren">)</span></span>
+        </div>
+        <div class="m-row">
+          <span class="num-label">247 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="200" name="z1_s2_15"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="40" name="z1_s2_16"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="7" name="z1_s2_17">
+          <span class="op-minus">−</span>
+        </div>
+        <div class="m-divider"></div>
+        <div class="m-row">
+          <span class="num-label">=</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="300" name="z1_s2_18"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="10" name="z1_s2_19"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="5" name="z1_s2_20">
+        </div>
+        <div class="m-row">
+          <span class="num-label">Jadi =</span>
+          <input type="tel" class="m-in final lkpd-val lvl1" data-ans="315" name="z1_s2_f">
+        </div>
+      </div>
+    </div>
+
+    <!-- SOAL 3: 426 - 153 = 273 (Mengambil 1 Ratusan) -->
+    <div class="math-block">
+      <div class="problem-story">
+        🪑 <b>Soal 3 (Aula Sekolah):</b> Di aula sekolah terdapat <b>426</b> kursi plastik. Sebanyak <b>153</b> kursi dipindahkan ke kelas-kelas. Berapakah sisa kursi di aula? (<b>426 − 153</b>)
+      </div>
+      <div class="m-stage">
+        <div class="step-tag">Langkah 1: Uraikan menurut nilai tempatnya</div>
+        <div class="m-row">
+          <span class="num-label">426 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="400" name="z1_s3_1"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="20" name="z1_s3_2"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="6" name="z1_s3_3">
+        </div>
+        <div class="m-row">
+          <span class="num-label">153 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="100" name="z1_s3_4"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="50" name="z1_s3_5"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="3" name="z1_s3_6">
+        </div>
+
+        <div class="step-tag">Langkah 2: Karena 20 &lt; 50, uraikan 400 menjadi (300 + 100) lalu gabungkan 100 ke puluhan</div>
+        <div class="m-row">
+          <span class="num-label">426 =</span>
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl1" data-ans="300" name="z1_s3_7"> + <input type="tel" class="m-in lkpd-val lvl1" data-ans="100" name="z1_s3_8"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="20" name="z1_s3_9"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="6" name="z1_s3_10">
+        </div>
+        <div class="m-row">
+          <span class="num-label">426 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="300" name="z1_s3_11"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl1" data-ans="100" name="z1_s3_12"> + <input type="tel" class="m-in lkpd-val lvl1" data-ans="20" name="z1_s3_13"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="6" name="z1_s3_14">
+        </div>
+        <div class="m-row">
+          <span class="num-label">153 =</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="100" name="z1_s3_15"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="50" name="z1_s3_16"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="3" name="z1_s3_17">
+          <span class="op-minus">−</span>
+        </div>
+        <div class="m-divider"></div>
+        <div class="m-row">
+          <span class="num-label">=</span>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="200" name="z1_s3_18"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="70" name="z1_s3_19"> +
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="3" name="z1_s3_20">
+        </div>
+        <div class="m-row">
+          <span class="num-label">Jadi =</span>
+          <input type="tel" class="m-in final lkpd-val lvl1" data-ans="273" name="z1_s3_f">
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="check-btn" onclick="checkLevel(1)">Periksa Zona 1 & Buka Zona 2 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 2: SUSUN PANJANG 2 KALI MENGAMBIL (3 SOAL) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--math-accent);">2</div><h2>Zona 2: Susun Panjang dengan Dua Kali Mengambil (3 Soal)</h2></div>
+
+  <div class="game-level locked" id="level2">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 2 Terkunci</b><p>Selesaikan Zona 1 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--math-accent);">
+      🍎 <b>Tantangan Ganda:</b> Pada zona ini, kamu harus mengambil <b>1 puluhan untuk satuan</b>, kemudian mengambil <b>1 ratusan untuk puluhan</b> secara bertahap!
+    </div>
+
+    <!-- SOAL 4: 432 - 158 = 274 -->
+    <div class="math-block">
+      <div class="problem-story">
+        🍎 <b>Soal 4 (Kantin Sehat):</b> Kantin sekolah menyediakan <b>432</b> potong buah pepaya segar. Saat jam istirahat terjual <b>158</b> potong. Berapa potong buah yang tersisa? (<b>432 − 158</b>)
+      </div>
+      <div class="m-stage">
+        <div class="step-tag">Langkah 1: Uraikan awal & Ambil 1 puluhan (30 diuraikan menjadi 20 + 10, gabung ke satuan 10 + 2 = 12)</div>
+        <div class="m-row">
+          <span class="num-label">432 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="400" name="z2_s4_1"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="20" name="z2_s4_2"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="10" name="z2_s4_3"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="2" name="z2_s4_4">
+        </div>
+        <div class="m-row">
+          <span class="num-label">432 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="400" name="z2_s4_5"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="20" name="z2_s4_6"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="10" name="z2_s4_7"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="2" name="z2_s4_8"><span class="paren">)</span></span>
+        </div>
+
+        <div class="step-tag">Langkah 2: Karena 20 &lt; 50, ambil 1 ratusan (400 menjadi 300 + 100) lalu gabung ke puluhan</div>
+        <div class="m-row">
+          <span class="num-label">432 =</span>
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="300" name="z2_s4_9"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="100" name="z2_s4_10"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="20" name="z2_s4_11"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="12" name="z2_s4_12">
+        </div>
+        <div class="m-row">
+          <span class="num-label">432 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="300" name="z2_s4_13"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="100" name="z2_s4_14"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="20" name="z2_s4_15"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="12" name="z2_s4_16">
+        </div>
+        <div class="m-row">
+          <span class="num-label">158 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="100" name="z2_s4_17"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="50" name="z2_s4_18"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="8" name="z2_s4_19">
+          <span class="op-minus">−</span>
+        </div>
+        <div class="m-divider"></div>
+        <div class="m-row">
+          <span class="num-label">=</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="200" name="z2_s4_20"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="70" name="z2_s4_21"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="4" name="z2_s4_22">
+        </div>
+        <div class="m-row">
+          <span class="num-label">Jadi =</span>
+          <input type="tel" class="m-in final lkpd-val lvl2" data-ans="274" name="z2_s4_f">
+        </div>
+      </div>
+    </div>
+
+    <!-- SOAL 5: 635 - 249 = 386 -->
+    <div class="math-block">
+      <div class="problem-story">
+        🥛 <b>Soal 5 (Program Makan Bergizi):</b> Sekolah menerima kiriman <b>635</b> kotak susu. Sebanyak <b>249</b> kotak telah dibagikan kepada siswa kelas bawah. Berapa kotak susu yang belum dibagikan? (<b>635 − 249</b>)
+      </div>
+      <div class="m-stage">
+        <div class="step-tag">Langkah 1: Ambil 1 puluhan (30 diuraikan menjadi 20 + 10, gabung ke satuan 10 + 5 = 15)</div>
+        <div class="m-row">
+          <span class="num-label">635 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="600" name="z2_s5_1"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="20" name="z2_s5_2"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="10" name="z2_s5_3"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="5" name="z2_s5_4">
+        </div>
+        <div class="m-row">
+          <span class="num-label">635 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="600" name="z2_s5_5"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="20" name="z2_s5_6"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="10" name="z2_s5_7"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="5" name="z2_s5_8"><span class="paren">)</span></span>
+        </div>
+
+        <div class="step-tag">Langkah 2: Karena 20 &lt; 40, ambil 1 ratusan (600 menjadi 500 + 100) lalu gabung ke puluhan</div>
+        <div class="m-row">
+          <span class="num-label">635 =</span>
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="500" name="z2_s5_9"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="100" name="z2_s5_10"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="20" name="z2_s5_11"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="15" name="z2_s5_12">
+        </div>
+        <div class="m-row">
+          <span class="num-label">635 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="500" name="z2_s5_13"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="100" name="z2_s5_14"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="20" name="z2_s5_15"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="15" name="z2_s5_16">
+        </div>
+        <div class="m-row">
+          <span class="num-label">249 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="200" name="z2_s5_17"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="40" name="z2_s5_18"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="9" name="z2_s5_19">
+          <span class="op-minus">−</span>
+        </div>
+        <div class="m-divider"></div>
+        <div class="m-row">
+          <span class="num-label">=</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="300" name="z2_s5_20"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="80" name="z2_s5_21"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="6" name="z2_s5_22">
+        </div>
+        <div class="m-row">
+          <span class="num-label">Jadi =</span>
+          <input type="tel" class="m-in final lkpd-val lvl2" data-ans="386" name="z2_s5_f">
+        </div>
+      </div>
+    </div>
+
+    <!-- SOAL 6: 824 - 367 = 457 -->
+    <div class="math-block">
+      <div class="problem-story">
+        ♻️ <b>Soal 6 (Bank Sampah Sekolah):</b> Murid-murid berhasil mengumpulkan <b>824</b> botol plastik bekas. Sebanyak <b>367</b> botol dibuat menjadi kerajinan pot gantung. Berapa sisa botol di bank sampah? (<b>824 − 367</b>)
+      </div>
+      <div class="m-stage">
+        <div class="step-tag">Langkah 1: Ambil 1 puluhan (20 diuraikan menjadi 10 + 10, gabung ke satuan 10 + 4 = 14)</div>
+        <div class="m-row">
+          <span class="num-label">824 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="800" name="z2_s6_1"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="10" name="z2_s6_2"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="10" name="z2_s6_3"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="4" name="z2_s6_4">
+        </div>
+        <div class="m-row">
+          <span class="num-label">824 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="800" name="z2_s6_5"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="10" name="z2_s6_6"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="10" name="z2_s6_7"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="4" name="z2_s6_8"><span class="paren">)</span></span>
+        </div>
+
+        <div class="step-tag">Langkah 2: Karena 10 &lt; 60, ambil 1 ratusan (800 menjadi 700 + 100) lalu gabung ke puluhan</div>
+        <div class="m-row">
+          <span class="num-label">824 =</span>
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="700" name="z2_s6_9"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="100" name="z2_s6_10"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="10" name="z2_s6_11"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="14" name="z2_s6_12">
+        </div>
+        <div class="m-row">
+          <span class="num-label">824 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="700" name="z2_s6_13"> +
+          <span class="borrow-group"><span class="paren">(</span><input type="tel" class="m-in lkpd-val lvl2" data-ans="100" name="z2_s6_14"> + <input type="tel" class="m-in lkpd-val lvl2" data-ans="10" name="z2_s6_15"><span class="paren">)</span></span> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="14" name="z2_s6_16">
+        </div>
+        <div class="m-row">
+          <span class="num-label">367 =</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="300" name="z2_s6_17"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="60" name="z2_s6_18"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="7" name="z2_s6_19">
+          <span class="op-minus">−</span>
+        </div>
+        <div class="m-divider"></div>
+        <div class="m-row">
+          <span class="num-label">=</span>
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="400" name="z2_s6_20"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="50" name="z2_s6_21"> +
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="7" name="z2_s6_22">
+        </div>
+        <div class="m-row">
+          <span class="num-label">Jadi =</span>
+          <input type="tel" class="m-in final lkpd-val lvl2" data-ans="457" name="z2_s6_f">
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="check-btn" style="background:var(--math-accent); color:#854d0e;" onclick="checkLevel(2)">Periksa Zona 2 & Buka Zona 3 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 3: SUSUN PENDEK 1 KALI MENGAMBIL (7 SOAL) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--green);">3</div><h2>Zona 3: Susun Pendek dengan Satu Kali Mengambil (7 Soal)</h2></div>
+
+  <div class="game-level locked" id="level3">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 3 Terkunci</b><p>Selesaikan Zona 2 terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--green);">
+      🛒 <b>Petunjuk Susun Pendek:</b> Isilah <b>lingkaran merah di atas</b> dengan angka hasil pinjaman pada bilangan yang dicoret, lalu hitung hasil pengurangannya di kotak kuning bawah!
+    </div>
+
+    <div class="short-grid">
+      <!-- S7: 354 - 126 = 228 -->
+      <div class="short-card">
+        <div class="ctx">7. Stok Buku Tulis Koperasi:<br><b>354 − 126</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam"><td></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="4" name="s3_t7_2"></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="14" name="s3_t7_3"></td></tr>
+            <tr><td class="col-r">3</td><td class="col-p crossed">5</td><td class="col-s crossed">4</td></tr>
+            <tr class="line-bot"><td class="col-r">1</td><td class="col-p">2</td><td class="col-s">6<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="2" name="s3_b7_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="2" name="s3_b7_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="8" name="s3_b7_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S8: 528 - 263 = 265 -->
+      <div class="short-card">
+        <div class="ctx">8. Stok Pulpen Biru:<br><b>528 − 263</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam"><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="4" name="s3_t8_1"></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="12" name="s3_t8_2"></td><td></td></tr>
+            <tr><td class="col-r crossed">5</td><td class="col-p crossed">2</td><td class="col-s">8</td></tr>
+            <tr class="line-bot"><td class="col-r">2</td><td class="col-p">6</td><td class="col-s">3<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="2" name="s3_b8_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="6" name="s3_b8_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="5" name="s3_b8_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S9: 481 - 259 = 222 -->
+      <div class="short-card">
+        <div class="ctx">9. Stok Karet Penghapus:<br><b>481 − 259</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam"><td></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="7" name="s3_t9_2"></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="11" name="s3_t9_3"></td></tr>
+            <tr><td class="col-r">4</td><td class="col-p crossed">8</td><td class="col-s crossed">1</td></tr>
+            <tr class="line-bot"><td class="col-r">2</td><td class="col-p">5</td><td class="col-s">9<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="2" name="s3_b9_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="2" name="s3_b9_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="2" name="s3_b9_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S10: 745 - 382 = 363 -->
+      <div class="short-card">
+        <div class="ctx">10. Stok Penggaris Plastik:<br><b>745 − 382</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam"><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="6" name="s3_t10_1"></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="14" name="s3_t10_2"></td><td></td></tr>
+            <tr><td class="col-r crossed">7</td><td class="col-p crossed">4</td><td class="col-s">5</td></tr>
+            <tr class="line-bot"><td class="col-r">3</td><td class="col-p">8</td><td class="col-s">2<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="3" name="s3_b10_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="6" name="s3_b10_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="3" name="s3_b10_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S11: 293 - 157 = 136 -->
+      <div class="short-card">
+        <div class="ctx">11. Stok Buku Gambar:<br><b>293 − 157</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam"><td></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="8" name="s3_t11_2"></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="13" name="s3_t11_3"></td></tr>
+            <tr><td class="col-r">2</td><td class="col-p crossed">9</td><td class="col-s crossed">3</td></tr>
+            <tr class="line-bot"><td class="col-r">1</td><td class="col-p">5</td><td class="col-s">7<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="1" name="s3_b11_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="3" name="s3_b11_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="6" name="s3_b11_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S12: 619 - 245 = 374 -->
+      <div class="short-card">
+        <div class="ctx">12. Stok Sampul Cokelat:<br><b>619 − 245</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam"><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="5" name="s3_t12_1"></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="11" name="s3_t12_2"></td><td></td></tr>
+            <tr><td class="col-r crossed">6</td><td class="col-p crossed">1</td><td class="col-s">9</td></tr>
+            <tr class="line-bot"><td class="col-r">2</td><td class="col-p">4</td><td class="col-s">5<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="3" name="s3_b12_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="7" name="s3_b12_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="4" name="s3_b12_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S13: 576 - 349 = 227 -->
+      <div class="short-card">
+        <div class="ctx">13. Stok Rautan Pensil:<br><b>576 − 349</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam"><td></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="6" name="s3_t13_2"></td><td><input type="tel" class="inp-top lkpd-val lvl3" data-ans="16" name="s3_t13_3"></td></tr>
+            <tr><td class="col-r">5</td><td class="col-p crossed">7</td><td class="col-s crossed">6</td></tr>
+            <tr class="line-bot"><td class="col-r">3</td><td class="col-p">4</td><td class="col-s">9<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="2" name="s3_b13_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="2" name="s3_b13_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl3" data-ans="7" name="s3_b13_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <button type="button" class="check-btn" style="background:var(--green);" onclick="checkLevel(3)">Periksa Zona 3 & Buka Zona 4 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 4: SUSUN PENDEK 2 KALI MENGAMBIL (7 SOAL) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--red);">4</div><h2>Zona 4: Susun Pendek dengan Dua Kali Mengambil (7 Soal)</h2></div>
+
+  <div class="game-level locked" id="level4">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 4 Terkunci</b><p>Selesaikan Zona 3 terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--red);">
+      🌻 <b>Misi Puncak Taman Sekolah:</b> Pada 7 soal terakhir ini, baik satuan maupun puluhan sama-sama meminjam! Pastikan angka di ketiga lingkaran merah atas diisi dengan teliti!
+    </div>
+
+    <div class="short-grid">
+      <!-- S14: 532 - 267 = 265 -->
+      <div class="short-card">
+        <div class="ctx">14. Bibit Bunga Matahari:<br><b>532 − 267</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam">
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="4" name="s4_t14_1"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="12" name="s4_t14_2"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="12" name="s4_t14_3"></td>
+            </tr>
+            <tr><td class="col-r crossed">5</td><td class="col-p crossed">3</td><td class="col-s crossed">2</td></tr>
+            <tr class="line-bot"><td class="col-r">2</td><td class="col-p">6</td><td class="col-s">7<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="2" name="s4_b14_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="6" name="s4_b14_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="5" name="s4_b14_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S15: 421 - 158 = 263 -->
+      <div class="short-card">
+        <div class="ctx">15. Karung Pupuk Kompos:<br><b>421 − 158</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam">
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="3" name="s4_t15_1"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="11" name="s4_t15_2"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="11" name="s4_t15_3"></td>
+            </tr>
+            <tr><td class="col-r crossed">4</td><td class="col-p crossed">2</td><td class="col-s crossed">1</td></tr>
+            <tr class="line-bot"><td class="col-r">1</td><td class="col-p">5</td><td class="col-s">8<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="2" name="s4_b15_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="6" name="s4_b15_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="3" name="s4_b15_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S16: 645 - 389 = 256 -->
+      <div class="short-card">
+        <div class="ctx">16. Batu Bata Taman:<br><b>645 − 389</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam">
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="5" name="s4_t16_1"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="13" name="s4_t16_2"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="15" name="s4_t16_3"></td>
+            </tr>
+            <tr><td class="col-r crossed">6</td><td class="col-p crossed">4</td><td class="col-s crossed">5</td></tr>
+            <tr class="line-bot"><td class="col-r">3</td><td class="col-p">8</td><td class="col-s">9<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="2" name="s4_b16_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="5" name="s4_b16_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="6" name="s4_b16_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S17: 713 - 456 = 257 -->
+      <div class="short-card">
+        <div class="ctx">17. Pot Tanaman Kelas:<br><b>713 − 456</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam">
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="6" name="s4_t17_1"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="10" name="s4_t17_2"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="13" name="s4_t17_3"></td>
+            </tr>
+            <tr><td class="col-r crossed">7</td><td class="col-p crossed">1</td><td class="col-s crossed">3</td></tr>
+            <tr class="line-bot"><td class="col-r">4</td><td class="col-p">5</td><td class="col-s">6<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="2" name="s4_b17_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="5" name="s4_b17_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="7" name="s4_b17_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S18: 824 - 568 = 256 -->
+      <div class="short-card">
+        <div class="ctx">18. Paving Block Halaman:<br><b>824 − 568</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam">
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="7" name="s4_t18_1"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="11" name="s4_t18_2"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="14" name="s4_t18_3"></td>
+            </tr>
+            <tr><td class="col-r crossed">8</td><td class="col-p crossed">2</td><td class="col-s crossed">4</td></tr>
+            <tr class="line-bot"><td class="col-r">5</td><td class="col-p">6</td><td class="col-s">8<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="2" name="s4_b18_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="5" name="s4_b18_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="6" name="s4_b18_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S19: 935 - 679 = 256 -->
+      <div class="short-card">
+        <div class="ctx">19. Kerikil Hias Kolam:<br><b>935 − 679</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam">
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="8" name="s4_t19_1"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="12" name="s4_t19_2"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="15" name="s4_t19_3"></td>
+            </tr>
+            <tr><td class="col-r crossed">9</td><td class="col-p crossed">3</td><td class="col-s crossed">5</td></tr>
+            <tr class="line-bot"><td class="col-r">6</td><td class="col-p">7</td><td class="col-s">9<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="2" name="s4_b19_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="5" name="s4_b19_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="6" name="s4_b19_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- S20: 512 - 246 = 266 -->
+      <div class="short-card">
+        <div class="ctx">20. Bendera Hias Sekolah:<br><b>512 − 246</b></div>
+        <table class="susun-table">
+          <thead><tr><th class="col-r">Ratusan</th><th class="col-p">Puluhan</th><th class="col-s">Satuan</th></tr></thead>
+          <tbody>
+            <tr class="row-pinjam">
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="4" name="s4_t20_1"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="10" name="s4_t20_2"></td>
+              <td><input type="tel" class="inp-top lkpd-val lvl4" data-ans="12" name="s4_t20_3"></td>
+            </tr>
+            <tr><td class="col-r crossed">5</td><td class="col-p crossed">1</td><td class="col-s crossed">2</td></tr>
+            <tr class="line-bot"><td class="col-r">2</td><td class="col-p">4</td><td class="col-s">6<span class="sign-min">−</span></td></tr>
+            <tr><td class="col-r"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="2" name="s4_b20_1"></td><td class="col-p"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="6" name="s4_b20_2"></td><td class="col-s"><input type="tel" class="inp-bot lkpd-val lvl4" data-ans="6" name="s4_b20_3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <button type="button" class="check-btn" style="background:var(--red);" onclick="checkLevel(4)">Kunci Jawaban Akhir! 🏆</button>
+    <div id="msgFinal" style="display:none; text-align:center; color:var(--green2); font-weight:900; font-size:18px; margin-top:16px;">
+      🎉 LUAR BIASA! SELURUH 20 SOAL PENGURANGAN BERSUSUN TELAH DISELESAIKAN DENGAN TEPAT! 🎉
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:24px; display:flex; justify-content:center;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 28px; font-size:16px; display:none;">📤 Kirim Hasil Perhitungan ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN GURU ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik Penilaian Guru</h2></div>
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Pemahaman Pengurangan Meminjam</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (Menguasai penguraian 1x dan 2x meminjam dengan tepat)</option>
+        <option value="B">B — Baik (Hanya sedikit keliru pada peminjaman ganda)</option>
+        <option value="C">C — Cukup (Masih memerlukan bimbingan saat menguraikan nilai tempat)</option>
+        <option value="D">D — Perlu Bimbingan (Belum memahami konsep meminjam puluhan/ratusan)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan evaluasi untuk kelompok ini..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:16px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan & Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 1.12 MATEMATIKA (LMS V4.2)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Matematika';
+const LKPD_ID  = '1.12_Pengurangan_Cacah';
+const STORAGE  = 'lkpd_mtk_1_12_v42';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (submissionId) { loadLMSViewMode(); }
+  else { fetchStudents(); loadDraft(); setupInputs(); }
+});
+
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN anggota kelompok lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama }); renderMembers();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Gagal memuat database."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => s.nisn === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers(); document.getElementById("inNisn").value = ""; updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+function collect() { let d = {}; getValFields().forEach(el => d[el.name] = el.value); return d; }
+
+function setupInputs() {
+  getValFields().forEach(el => { el.addEventListener("input", updateProgress); el.addEventListener("change", updateProgress); });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields(); let filled = 0;
+  vals.forEach(x => { if (String(x.value || "").trim()) filled++; });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  document.getElementById("progressBar").style.width = Math.min(100, Math.round((filled + (groupMembers.length>0?1:0)) / (vals.length+2) * 100)) + "%";
+}
+
+function checkLevel(lvl) {
+  let inputs = document.querySelectorAll('.lvl' + lvl + ':not([readonly])');
+  let allCorrect = true;
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    if (inp.value.trim() === String(inp.dataset.ans).trim()) {
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      allCorrect = false;
+      setTimeout(() => inp.classList.remove('wrong'), 500);
+    }
+  });
+  if (allCorrect) {
+    document.getElementById('level' + lvl).classList.add('completed');
+    if (lvl === 4) {
+      document.getElementById('msgFinal').style.display = 'block';
+      document.getElementById('sendBtn2').style.display = 'block';
+    } else {
+      let next = document.getElementById('level' + (lvl + 1));
+      if (next) { next.classList.remove('locked'); next.classList.add('unlocked'); next.scrollIntoView({ behavior: 'smooth' }); }
+    }
+  }
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({ members: groupMembers, tanggal: document.querySelector('[name="tanggal"]').value, answers: collect() }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><button class='btn-main' onclick='closeModal()'>Lanjut</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE)); if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = d.tanggal;
+    if (d.answers) { getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; }); }
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) return showModal("<h3>⚠️ Belum Lengkap</h3><p>Isi Hari/Tanggal dan Anggota Kelompok!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+
+  showModal("<div class='spinner'></div><h3>Mengirim Jawaban...</h3>");
+  let payload = { action: 'submitLKPD', lkpdId: LKPD_ID, subject: SUBJECT, hariTanggal: tgl, materiPokok: document.querySelector('[name="materi"]').value, members: groupMembers, answers: JSON.stringify(collect()) };
+
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      document.querySelectorAll("input,select,textarea,button").forEach(el => el.disabled = true);
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Jawaban kelompokmu telah masuk ke Dasbor Guru.</p>`);
+      document.getElementById("appbar").style.display = "none";
+    }
+  } catch (e) { showModal("<h3>⚠️ Koneksi Terputus</h3>"); }
+};
+
+async function loadLMSViewMode() {
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  showModal("<div class='spinner'></div><h3>Memuat Data...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + LKPD_ID + "&submissionId=" + submissionId);
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if (result.members) { groupMembers = result.members; renderMembers(); }
+      else { document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database)</i></div>`; }
+
+      Object.keys(answers).forEach(k => {
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+
+      document.querySelectorAll('.game-level').forEach(el => { el.classList.remove('locked'); el.classList.add('unlocked'); let ovr = el.querySelector('.lock-overlay'); if (ovr) ovr.remove(); });
+      document.querySelectorAll("input,select,textarea,button").forEach(el => { if (!el.closest('#gradePanel')) { el.disabled = true; el.readOnly = true; } });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel"); panel.classList.add("show");
+      let scale = document.getElementById("gradeScale"), note = document.getElementById("gradeNote"), btn = document.getElementById("lockGradeBtn");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          scale.disabled = true; note.disabled = true; btn.style.display = "none";
+          renderStars(scale.value);
+        } else {
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none"; scale.disabled = true; note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') { scale.value = result.grade; note.value = result.feedback; renderStars(scale.value); }
+      }
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) { const n = { A:4, B:3, C:2, D:1 }[v]||0; const st = document.getElementById("starRating"); st.textContent = '★'.repeat(n) + '☆'.repeat(4-n); st.style.color = n ? '#f59e0b' : '#cbd5e1'; }
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian!");
+  let btn = document.getElementById("lockGradeBtn"); btn.disabled = true; btn.innerText = "⏳ Menyimpan...";
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'saveGrade', lkpdId: LKPD_ID, submissionId: submissionId, grade: grade, feedback: feedback }) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Tersimpan"; document.getElementById("gradeScale").disabled = true; document.getElementById("gradeNote").disabled = true;
+    }
+  } catch (e) { alert("Koneksi gagal."); btn.disabled = false; }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
