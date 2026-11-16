@@ -1,1 +1,1118 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.2 (NON-GAMIFIKASI) — BAHASA INDONESIA KELAS IV -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 3.4 Bahasa Indonesia - Kaidah Imbuhan ber-</title>
+<style>
+:root {
+  --green: #059669; --green2: #047857; --mint: #d1fae5;
+  --ink: #0f172a; --slate: #334155; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --blue: #0284c7; --blue-light: #e0f2fe; --blue-dark: #0369a1;
+  --amber: #d97706; --amber-light: #fef3c7;
+  --rose: #e11d48; --rose-light: #ffe4e6;
+  --purple: #7c3aed; --purple-light: #ede9fe;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #ecfdf5, #f0f9ff 55%, #fffbeb);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  line-height: 1.65;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(4px); opacity: .45; pointer-events: none;
+}
+body::before { width: 220px; height: 220px; background: #a7f3d0; left: -70px; top: 120px; }
+body::after { width: 190px; height: 190px; background: #bae6fd; right: -50px; bottom: 100px; }
 
+/* ================= APPBAR (BILAH ATAS) ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 100; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--green2); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--blue-dark); background: var(--blue-light); padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--green); color: #fff; }
+.btn-blue { background: var(--blue); color: #fff; }
+
+.progress { height: 6px; background: var(--mint); position: sticky; top: 61px; z-index: 99; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--green), var(--blue)); transition: .3s; }
+
+/* ================= CONTAINER & HERO ================= */
+.sheet {
+  width: min(1040px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px; border: 1px solid var(--line);
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #ecfdf5, #e0f2fe); border-radius: 22px; padding: 26px; border: 1px solid #a7f3d0; }
+.badge { display: inline-block; background: var(--green); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(25px, 4vw, 34px); line-height: 1.15; margin: 0 0 10px; color: var(--ink); font-weight: 900; }
+h2 { margin: 0; font-size: 20px; color: var(--ink); font-weight: 900; }
+p { line-height: 1.7; font-size: 15px; color: var(--slate); margin: 0 0 10px; }
+
+.mission {
+  background: #fffbeb; border-radius: 20px; padding: 22px; display: flex;
+  flex-direction: column; justify-content: center; text-align: center; font-size: 15px; border: 2px dashed #f59e0b;
+}
+.mission-icon { font-size: 54px; margin-bottom: 8px; }
+
+/* ================= IDENTITAS & KELOMPOK ================= */
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.field label { display: block; font-size: 13px; font-weight: 800; color: #334155; margin-bottom: 6px; }
+input:not([type="checkbox"]), textarea, select {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s; font-size: 14.5px;
+}
+input:not([type="checkbox"]):focus, textarea:focus, select:focus {
+  border-color: var(--green); box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.18);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge {
+  background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px;
+  font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px;
+}
+.member-badge span {
+  cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px;
+  display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px;
+}
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+.readonly-item::before { content: '👤'; font-size: 16px; }
+
+/* ================= SECTION HEADER ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--mint); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--green); color: #fff; font-weight: 900; flex: 0 0 auto; font-size: 18px; }
+
+/* ================= BAHAS BAHASA & TABEL KAIDAH IMBUHAN BER- ================= */
+.concept-box {
+  background: #f0fdf4; border: 2px solid #86efac; border-left: 6px solid var(--green);
+  border-radius: 16px; padding: 20px; margin-bottom: 22px;
+}
+.concept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 14px; }
+.concept-card { background: #fff; border: 1px solid #bbf7d0; border-radius: 12px; padding: 14px 16px; }
+.concept-card b { color: var(--green2); display: block; margin-bottom: 4px; font-size: 14.5px; }
+
+/* TABEL PEMBENTUKAN IMBUHAN BER- YANG DIPERTEGAS */
+.kaidah-table-wrap { overflow-x: auto; border-radius: 18px; border: 2px solid #cbd5e1; box-shadow: 0 6px 20px rgba(0,0,0,0.04); }
+.kaidah-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 14.5px; }
+.kaidah-table th {
+  background: #0f172a; color: #fff; padding: 14px 16px; text-align: left; font-weight: 900; font-size: 14px; letter-spacing: 0.3px;
+}
+.kaidah-table td { padding: 16px; border-bottom: 2px solid #e2e8f0; vertical-align: top; }
+.kaidah-table tr:last-child td { border-bottom: none; }
+
+.pola-badge {
+  display: inline-block; padding: 5px 12px; border-radius: 99px; font-weight: 900; font-size: 12.5px; margin-bottom: 8px;
+}
+.pola-1 { background: #ffe4e6; color: #be123c; border: 1px solid #fda4af; }
+.pola-2 { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+.pola-3 { background: #ede9fe; color: #6d28d9; border: 1px solid #ddd6fe; }
+.pola-4 { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+
+.word-formula {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+  background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px;
+  padding: 8px 12px; margin-bottom: 8px; font-family: 'Segoe UI', monospace; font-size: 15px; font-weight: 700;
+}
+.pfx-orig { background: #e2e8f0; color: #475569; padding: 2px 7px; border-radius: 6px; text-decoration: line-through; font-size: 13px; }
+.pfx-be { background: #e11d48; color: #fff; padding: 2px 8px; border-radius: 6px; font-weight: 900; }
+.pfx-bel { background: #7c3aed; color: #fff; padding: 2px 8px; border-radius: 6px; font-weight: 900; }
+.pfx-ber { background: #059669; color: #fff; padding: 2px 8px; border-radius: 6px; font-weight: 900; }
+.hl-r { background: #fecdd3; color: #9f1239; padding: 1px 5px; border-radius: 4px; font-weight: 900; border: 1px dashed #e11d48; }
+.hl-er { background: #fde68a; color: #92400e; padding: 1px 5px; border-radius: 4px; font-weight: 900; border: 1px dashed #d97706; }
+.word-res { background: #ecfdf5; color: #047857; border: 1.5px solid #34d399; padding: 2px 10px; border-radius: 8px; font-weight: 900; }
+.wrong-note { font-size: 12px; color: #dc2626; font-weight: 700; margin-left: auto; }
+
+/* SIMULATOR PENGUJI IMBUHAN INTERAKTIF */
+.tester-box {
+  margin-top: 20px; background: linear-gradient(135deg, #eff6ff, #f8fafc);
+  border: 2px solid #93c5fd; border-radius: 16px; padding: 18px;
+}
+.tester-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px; }
+.chip-btn {
+  background: #fff; border: 1.5px solid #93c5fd; color: var(--blue-dark);
+  padding: 7px 13px; border-radius: 99px; font-size: 13px; font-weight: 800; cursor: pointer;
+}
+.chip-btn:hover, .chip-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+.tester-output {
+  background: #fff; border: 2px dashed #60a5fa; border-radius: 12px; padding: 14px 18px; font-size: 15px;
+}
+
+/* ================= WIDGET PENCARIAN GOOGLE KOSAKATA BARU ================= */
+.google-search-card {
+  background: linear-gradient(135deg, #f0f9ff, #ecfdf5);
+  border: 2px solid #7dd3fc; border-radius: 18px; padding: 22px;
+}
+.search-bar-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+.search-input-wrap { flex: 1; min-width: 240px; position: relative; }
+.search-input-wrap input {
+  padding-left: 16px; border: 2px solid var(--blue); font-size: 15px; font-weight: 700; height: 48px;
+}
+.quick-words { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.q-word-pill {
+  background: #fff; border: 1px solid #cbd5e1; color: var(--ink); padding: 4px 11px; border-radius: 99px;
+  font-size: 12.5px; font-weight: 800; cursor: pointer;
+}
+.q-word-pill:hover { background: var(--blue-light); border-color: var(--blue); color: var(--blue-dark); }
+
+/* ================= BAGIAN MENULIS: KALIMAT TEPAT DI BAWAH KATA ================= */
+.writing-list { display: flex; flex-direction: column; gap: 18px; }
+.writing-item {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 16px; padding: 18px 20px;
+  transition: .2s;
+}
+.writing-item:focus-within { border-color: var(--green); background: #fff; box-shadow: 0 8px 20px rgba(5,150,105,0.08); }
+
+.prompt-header {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px dashed #cbd5e1;
+}
+.prompt-sentence { font-size: 16.5px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.prompt-num {
+  width: 32px; height: 32px; border-radius: 10px; background: var(--green); color: #fff;
+  display: inline-grid; place-items: center; font-size: 14px; font-weight: 900; flex-shrink: 0;
+}
+.target-word-tag {
+  background: #fef3c7; color: #b45309; border: 1.5px solid #f59e0b;
+  padding: 2px 10px; border-radius: 8px; font-weight: 900;
+}
+.word-transform-row {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;
+  background: #fff; padding: 10px 14px; border-radius: 10px; border: 1px solid #e2e8f0;
+}
+.word-transform-row label { font-size: 13px; font-weight: 800; color: var(--muted); }
+.small-word-in { width: 190px !important; font-weight: 800; color: var(--green2); }
+.rule-hint { font-size: 12.5px; color: var(--blue-dark); background: var(--blue-light); padding: 4px 10px; border-radius: 99px; font-weight: 700; margin-left: auto; }
+
+.sentence-box-under { margin-top: 6px; }
+.sentence-box-under label {
+  display: block; font-size: 13px; font-weight: 800; color: var(--slate); margin-bottom: 6px;
+}
+.sentence-input {
+  width: 100%; border: 2px solid #94a3b8; border-radius: 12px; padding: 12px 14px;
+  font-size: 15px; font-weight: 600; background: #fff; min-height: 52px; resize: vertical;
+}
+
+/* KARTU MENULIS MANDIRI DI BAWAH KATA PILIHAN */
+.word-cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.word-write-card {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 16px; padding: 16px;
+}
+.word-head-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: #fff; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 10px 14px; margin-bottom: 10px;
+}
+.word-big { font-size: 18px; font-weight: 900; color: var(--green2); }
+.word-formula-mini { font-size: 12.5px; font-weight: 800; color: var(--muted); background: #f1f5f9; padding: 3px 9px; border-radius: 6px; }
+
+/* VALIDASI WARNA OPSIONAL */
+.lkpd-val.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+.lkpd-val.wrong { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+/* ================= PANEL OBSERVASI & PENILAIAN GURU ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 22px; padding: 26px; margin: 22px auto; width: min(1040px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+.obs-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 13px; background: #fff; }
+.obs-table th, .obs-table td { border: 1px solid #cbd5e1; padding: 10px 12px; text-align: left; }
+.obs-table th { background: var(--green2); color: #fff; font-weight: 800; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 200; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #d1fae5; border-top-color: var(--green); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 780px) {
+  .hero, .idgrid, .grade-grid, .word-cards-grid { grid-template-columns: 1fr; }
+  .sheet { padding: 18px; }
+  .top-actions .btn-light { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1. APPBAR CERDAS -->
+<div class="appbar" id="appbar">
+  <div class="brand">📖 PORTAL LMS SDN 1 SUKAHAJI — BAHASA INDONESIA</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Lembar Kerja</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<!-- 2. HERO & IDENTITAS KELOMPOK -->
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 3.4 • BAB 3 (LIHAT SEKITAR)</span>
+      <h1>Kaidah Kebahasaan: Awalan ‘ber-’</h1>
+      <p><b>Bahasa Indonesia • Fase B / Kelas IV</b><br>Mari mempelajari bagaimana awalan <b>‘ber-’</b> membentuk kata kerja dan kata sifat, memahami mengapa awalan <b>‘ber-’</b> bisa berubah menjadi <b>‘be-’</b> atau <b>‘bel-’</b>, serta menulis kalimat dengan tepat!</p>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input name="tanggal" placeholder="Contoh: Selasa, 17 November 2026" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Bab 3 - Kaidah Kebahasaan Imbuhan 'ber-'" readonly>
+        </div>
+
+        <div class="group-builder">
+          <label>👥 Data Siswa / Kelompok Belajar (1 – 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN anggota kelompok..." style="flex:1;">
+              <button type="button" class="btn-blue" id="btnAddMember" disabled>🔍 Cari & Tambah</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa SDN 1 Sukahaji...</p>
+          </div>
+          <div id="readGroupView" style="display:none;">
+            <div class="readonly-group-list" id="readonlyMemberList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">🦜✍️</div>
+      <b>🎯 Tujuan Pembelajaran</b>
+      <p>Memahami <b>4 Pola Perubahan Awalan ‘ber-’</b> (<i>ber-, be-, bel-</i>), mencari arti kosakata baru, dan menyusun kalimat berimbuhan dengan benar!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 1: BAHAS BAHASA & TABEL KAIDAH IMBUHAN BER- ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Bahas Bahasa: Mengenal Awalan ‘ber-’ dan Perubahan Bentuknya</h2></div>
+
+  <div class="concept-box">
+    <p style="margin-bottom:8px;">
+      Salah satu imbuhan di dalam bahasa Indonesia adalah awalan <b>‘ber-’</b>. Penulisan kata yang memiliki imbuhan <b>‘ber-’</b> pada umumnya adalah <b>‘ber-’ + kata dasar</b>. Namun, kamu harus berhati-hati karena ada aturan perubahan bunyi menjadi <b>‘be-’</b> atau <b>‘bel-’</b>!
+    </p>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <b>🔹 Fungsi Awalan ‘ber-’</b>
+        Sebagai pembentuk <b>kata kerja</b> (contoh: <i>bermain, bekerja, belajar</i>) atau <b>kata sifat</b> (contoh: <i>beragam, berambut</i>).
+      </div>
+      <div class="concept-card">
+        <b>🔹 Ciri Kalimatnya (Tidak Butuh Objek)</b>
+        Kata kerja yang dibentuk oleh awalan <b>‘ber-’</b> tidak membutuhkan objek, karena itu kalimat yang dihasilkannya <b>tidak bisa dijadikan kalimat pasif</b>.
+      </div>
+    </div>
+  </div>
+
+  <p style="font-weight:800; color:var(--ink); margin-bottom:12px;">
+    📌 Perhatikan Tabel 4 Pola Perubahan Bentuk Imbuhan ‘ber-’ di bawah ini dengan saksama agar kamu mampu membedakannya:
+  </p>
+
+  <div class="kaidah-table-wrap">
+    <table class="kaidah-table">
+      <thead>
+        <tr>
+          <th style="width:24%;">Pola Perubahan</th>
+          <th style="width:44%;">Contoh Pembentukan Kata Berimbuhan<br><span style="font-weight:400; font-size:12px; color:#cbd5e1;">(Perhatikan huruf yang diberi warna!)</span></th>
+          <th style="width:32%;">Keterangan & Cara Mudah Mengingat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- POLA 1: Huruf Awal r -->
+        <tr>
+          <td>
+            <span class="pola-badge pola-1">POLA 1: Berubah Jadi ‘be-’</span>
+            <div style="font-weight:800; font-size:14px; color:#9f1239;">Kata Dasar Diawali Huruf /r/</div>
+            <div style="font-size:12.5px; color:var(--muted); margin-top:4px;">Rumus:<br><b>be- + [r...]</b></div>
+          </td>
+          <td>
+            <div class="word-formula">
+              <span class="pfx-orig">ber-</span> <span class="pfx-be">be-</span> + <span class="hl-r">r</span>ambut &rarr; <span class="word-res">berambut</span>
+              <span class="wrong-note">❌ Bukan berrambut</span>
+            </div>
+            <div class="word-formula">
+              <span class="pfx-orig">ber-</span> <span class="pfx-be">be-</span> + <span class="hl-r">r</span>agam &rarr; <span class="word-res">beragam</span>
+              <span class="wrong-note">❌ Bukan berragam</span>
+            </div>
+            <div class="word-formula">
+              <span class="pfx-orig">ber-</span> <span class="pfx-be">be-</span> + <span class="hl-r">r</span>encana &rarr; <span class="word-res">berencana</span>
+              <span class="wrong-note">❌ Bukan berrencana</span>
+            </div>
+            <div class="word-formula" style="margin-bottom:0;">
+              <span class="pfx-orig">ber-</span> <span class="pfx-be">be-</span> + <span class="hl-r">r</span>endam &rarr; <span class="word-res">berendam</span>
+              <span class="wrong-note">❌ Bukan berrendam</span>
+            </div>
+          </td>
+          <td>
+            Awalan <b>‘ber-’</b> berubah bentuk menjadi <b>‘be-’</b> jika <b>huruf awal kata dasar adalah /r/</b>.<br><br>
+            💡 <b>Tips Mudah:</b> Huruf <b>r</b> tidak boleh kembar dua (<i>rr</i>). Jadi satu huruf <b>r</b> pada <i>ber-</i> hilang/melebur!
+          </td>
+        </tr>
+
+        <!-- POLA 2: Suku kata pertama berakhiran /er/ -->
+        <tr>
+          <td>
+            <span class="pola-badge pola-2">POLA 2: Berubah Jadi ‘be-’</span>
+            <div style="font-weight:800; font-size:14px; color:#92400e;">Suku Kata Pertama Berakhiran /er/</div>
+            <div style="font-size:12.5px; color:var(--muted); margin-top:4px;">Rumus:<br><b>be- + [...er-...]</b></div>
+          </td>
+          <td>
+            <div class="word-formula">
+              <span class="pfx-orig">ber-</span> <span class="pfx-be">be-</span> + k<span class="hl-er">er</span>ja &rarr; <span class="word-res">bekerja</span>
+              <span class="wrong-note">❌ Bukan berkerja</span>
+            </div>
+            <div class="word-formula">
+              <span class="pfx-orig">ber-</span> <span class="pfx-be">be-</span> + c<span class="hl-er">er</span>min &rarr; <span class="word-res">becermin</span>
+              <span class="wrong-note">❌ Bukan bercermin</span>
+            </div>
+            <div class="word-formula">
+              <span class="pfx-orig">ber-</span> <span class="pfx-be">be-</span> + s<span class="hl-er">er</span>ta &rarr; <span class="word-res">beserta</span>
+              <span class="wrong-note">❌ Bukan berserta</span>
+            </div>
+            <div class="word-formula">
+              <span class="pfx-orig">ber-</span> <span class="pfx-be">be-</span> + p<span class="hl-er">er</span>gi + an &rarr; <span class="word-res">bepergian</span>
+              <span class="wrong-note">❌ Bukan berpergian</span>
+            </div>
+            <div class="word-formula" style="margin-bottom:0;">
+              <span class="pfx-orig">ber-</span> <span class="pfx-be">be-</span> + t<span class="hl-er">er</span>bang + an &rarr; <span class="word-res">beterbangan</span>
+              <span class="wrong-note">❌ Bukan berterbangan</span>
+            </div>
+          </td>
+          <td>
+            Awalan <b>‘ber-’</b> berubah bentuk menjadi <b>‘be-’</b> jika <b>suku kata pertama kata dasar berakhiran bunyi /er/</b> yang diucapkan secara lemah (seperti <i><b>ker</b>-ja, <b>cer</b>-min, <b>ser</b>-ta, <b>per</b>-gi, <b>ter</b>-bang</i>).<br><br>
+            💡 <b>Tips Mudah:</b> Jika suku kata pertamanya sudah punya bunyi <b>-er</b>, maka awalan di depannya cukup <b>be-</b> saja!
+          </td>
+        </tr>
+
+        <!-- POLA 3: Pengecualian Khusus bel- -->
+        <tr>
+          <td>
+            <span class="pola-badge pola-3">POLA 3: Berubah Jadi ‘bel-’</span>
+            <div style="font-weight:800; font-size:14px; color:#5b21b6;">Pengecualian Khusus</div>
+            <div style="font-size:12.5px; color:var(--muted); margin-top:4px;">Rumus:<br><b>bel- + ajar / unjur</b></div>
+          </td>
+          <td>
+            <div class="word-formula">
+              <span class="pfx-orig">ber-</span> <span class="pfx-bel">bel-</span> + ajar &rarr; <span class="word-res">belajar</span>
+              <span class="wrong-note">❌ Bukan berajar</span>
+            </div>
+            <div class="word-formula" style="margin-bottom:0;">
+              <span class="pfx-orig">ber-</span> <span class="pfx-bel">bel-</span> + unjur &rarr; <span class="word-res">belunjur</span>
+              <span class="wrong-note">❌ Bukan berunjur</span>
+            </div>
+          </td>
+          <td>
+            <b>Pengecualian khusus</b> dalam bahasa Indonesia: huruf <b>r</b> pada <i>ber-</i> berubah menjadi huruf <b>l</b> (<b>bel-</b>) ketika bertemu kata dasar <b>ajar</b> dan <b>unjur</b>.
+          </td>
+        </tr>
+
+        <!-- POLA 4: Bentuk Umum ber- -->
+        <tr>
+          <td>
+            <span class="pola-badge pola-4">POLA 4: Tetap ‘ber-’</span>
+            <div style="font-weight:800; font-size:14px; color:#166534;">Bentuk Umum / Normal</div>
+            <div style="font-size:12.5px; color:var(--muted); margin-top:4px;">Rumus:<br><b>ber- + kata dasar</b></div>
+          </td>
+          <td>
+            <div class="word-formula">
+              <span class="pfx-ber">ber-</span> + main &rarr; <span class="word-res">bermain</span>
+            </div>
+            <div class="word-formula">
+              <span class="pfx-ber">ber-</span> + kunjung &rarr; <span class="word-res">berkunjung</span>
+            </div>
+            <div class="word-formula" style="margin-bottom:0;">
+              <span class="pfx-ber">ber-</span> + sekolah &rarr; <span class="word-res">bersekolah</span>
+            </div>
+          </td>
+          <td>
+            Bentuk umum kata berimbuhan <b>‘ber-’</b> tetap ditulis utuh <b>‘ber-’</b> untuk semua kata dasar selain ketiga aturan perubahan di atas.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SIMULATOR PENGUJI IMBUHAN INTERAKTIF (ALAT BANTU PAHAM) -->
+  <div class="tester-box">
+    <div style="font-weight:900; color:var(--blue-dark); font-size:15px;">
+      🧪 Alat Bantu Uji Perubahan Imbuhan ‘ber-’ (Klik kata dasar di bawah ini untuk melihat proses perubahannya!):
+    </div>
+    <div class="tester-chips">
+      <button type="button" class="chip-btn active" onclick="testWord('rambut', this)">rambut</button>
+      <button type="button" class="chip-btn" onclick="testWord('cermin', this)">cermin</button>
+      <button type="button" class="chip-btn" onclick="testWord('kerja', this)">kerja</button>
+      <button type="button" class="chip-btn" onclick="testWord('terbang', this)">terbang (+an)</button>
+      <button type="button" class="chip-btn" onclick="testWord('ajar', this)">ajar</button>
+      <button type="button" class="chip-btn" onclick="testWord('unjur', this)">unjur</button>
+      <button type="button" class="chip-btn" onclick="testWord('sekolah', this)">sekolah</button>
+      <button type="button" class="chip-btn" onclick="testWord('rendam', this)">rendam</button>
+    </div>
+    <div class="tester-output" id="testerOutput">
+      Kata Dasar: <b>rambut</b> &rarr; Huruf awalnya adalah <b>/r/</b> (Pola 1). Maka <b>ber- + rambut</b> berubah menjadi <b style="color:#059669; font-size:17px;">berambut</b> (awalan berubah menjadi <b>be-</b>).
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 2: PENCARIAN KOSAKATA BARU (TERHUBUNG GOOGLE) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--blue);">2</div><h2>Kamus & Pencarian Kosakata Baru (Terhubung Google)</h2></div>
+
+  <div class="google-search-card">
+    <p style="margin-top:0; font-weight:700; color:var(--slate);">
+      Menemukan kata yang belum kamu pahami artinya (seperti <i>belunjur, mematut diri, kubangan,</i> atau kata lainnya)? Ketik kata tersebut pada kotak di bawah ini untuk mencari arti dan contoh kalimatnya melalui <b>Google Pencarian</b>!
+    </p>
+
+    <div class="search-bar-row">
+      <div class="search-input-wrap">
+        <input type="text" id="googleWordInput" placeholder="Ketik kosakata yang ingin dicari artinya... (Contoh: belunjur)" onkeydown="if(event.key==='Enter'){event.preventDefault(); searchGoogleArti();}">
+      </div>
+      <button type="button" class="btn-blue" onclick="searchGoogleArti()">🔍 Cari Arti Kata di Google</button>
+      <button type="button" class="btn-main" onclick="searchGoogleKalimat()">📖 Cari Contoh Kalimat di Google</button>
+    </div>
+
+    <div class="quick-words">
+      <span>💡 Klik cepat kata sulit di materi ini:</span>
+      <button type="button" class="q-word-pill" onclick="fillAndSearch('belunjur')">belunjur</button>
+      <button type="button" class="q-word-pill" onclick="fillAndSearch('mematut diri')">mematut diri</button>
+      <button type="button" class="q-word-pill" onclick="fillAndSearch('kubangan')">kubangan</button>
+      <button type="button" class="q-word-pill" onclick="fillAndSearch('beragam')">beragam</button>
+      <button type="button" class="q-word-pill" onclick="fillAndSearch('bepergian')">bepergian</button>
+    </div>
+
+    <!-- Catatan Kosakata Baru Siswa -->
+    <div style="margin-top:16px; background:#fff; border:1.5px solid #bae6fd; border-radius:14px; padding:14px 16px;">
+      <label style="display:block; font-size:13.5px; font-weight:800; color:var(--blue-dark); margin-bottom:6px;">
+        📝 Catatan Kosakata Baruku (Tuliskan minimal 1–2 kata baru yang kamu cari beserta artinya):
+      </label>
+      <textarea class="lkpd-val" name="kosakata_baru" rows="2" placeholder="Contoh: 1. Belunjur artinya duduk sambil meluruskan kedua kaki ke depan. 2. Mematut diri artinya..."></textarea>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 3: MENULIS A (8 SOAL BUKU TEKS - KALIMAT DI BAWAH KATA) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--amber);">3</div><h2>Menulis A: Kata Berawalan ‘ber-’ dalam Kalimat</h2></div>
+
+  <p style="font-weight:700; margin-bottom:16px;">
+    Berilah imbuhan <b>‘ber-’</b> atau <b>‘ber-’ + ‘-an’</b> pada kata yang ada di dalam kurung, kemudian <b>tuliskan kembali kalimat lengkap yang benar tepat pada kolom di bawahnya!</b>
+  </p>
+
+  <div class="writing-list">
+    <!-- Nomor 1 -->
+    <div class="writing-item">
+      <div class="prompt-header">
+        <div class="prompt-sentence">
+          <span class="prompt-num">1</span>
+          <span>Capung <span class="target-word-tag">(terbang)</span> di udara.</span>
+        </div>
+        <span class="rule-hint">Suku kata ke-1: <b>ter-</b> (berakhiran /er/)</span>
+      </div>
+      <div class="word-transform-row">
+        <label>Kata Berimbuhan:</label>
+        <input type="text" class="small-word-in lkpd-val" name="a1_kata" data-ans="beterbangan|terbang" placeholder="ber + terbang (+an) = ...">
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Tuliskan Kalimat Lengkap yang Benar di Bawah Ini:</label>
+        <input type="text" class="sentence-input lkpd-val" name="a1_kalimat" placeholder="Ketik kalimat lengkap nomor 1 di sini... (Contoh: Capung beterbangan di udara.)">
+      </div>
+    </div>
+
+    <!-- Nomor 2 -->
+    <div class="writing-item">
+      <div class="prompt-header">
+        <div class="prompt-sentence">
+          <span class="prompt-num">2</span>
+          <span>Bibi <span class="target-word-tag">(cermin)</span> sambil mematut diri.</span>
+        </div>
+        <span class="rule-hint">Suku kata ke-1: <b>cer-</b> (berakhiran /er/) &rarr; jadi <b>be-</b></span>
+      </div>
+      <div class="word-transform-row">
+        <label>Kata Berimbuhan:</label>
+        <input type="text" class="small-word-in lkpd-val" name="a2_kata" data-ans="becermin" placeholder="ber + cermin = ...">
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Tuliskan Kalimat Lengkap yang Benar di Bawah Ini:</label>
+        <input type="text" class="sentence-input lkpd-val" name="a2_kalimat" placeholder="Ketik kalimat lengkap nomor 2 di sini...">
+      </div>
+    </div>
+
+    <!-- Nomor 3 -->
+    <div class="writing-item">
+      <div class="prompt-header">
+        <div class="prompt-sentence">
+          <span class="prompt-num">3</span>
+          <span>Bima <span class="target-word-tag">(sekolah)</span> di SD Tunas Mulia.</span>
+        </div>
+        <span class="rule-hint">Bentuk umum &rarr; tetap <b>ber-</b></span>
+      </div>
+      <div class="word-transform-row">
+        <label>Kata Berimbuhan:</label>
+        <input type="text" class="small-word-in lkpd-val" name="a3_kata" data-ans="bersekolah" placeholder="ber + sekolah = ...">
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Tuliskan Kalimat Lengkap yang Benar di Bawah Ini:</label>
+        <input type="text" class="sentence-input lkpd-val" name="a3_kalimat" placeholder="Ketik kalimat lengkap nomor 3 di sini...">
+      </div>
+    </div>
+
+    <!-- Nomor 4 -->
+    <div class="writing-item">
+      <div class="prompt-header">
+        <div class="prompt-sentence">
+          <span class="prompt-num">4</span>
+          <span>Adik <span class="target-word-tag">(ajar)</span> membaca.</span>
+        </div>
+        <span class="rule-hint">Pengecualian khusus &rarr; jadi <b>bel-</b></span>
+      </div>
+      <div class="word-transform-row">
+        <label>Kata Berimbuhan:</label>
+        <input type="text" class="small-word-in lkpd-val" name="a4_kata" data-ans="belajar" placeholder="ber + ajar = ...">
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Tuliskan Kalimat Lengkap yang Benar di Bawah Ini:</label>
+        <input type="text" class="sentence-input lkpd-val" name="a4_kalimat" placeholder="Ketik kalimat lengkap nomor 4 di sini...">
+      </div>
+    </div>
+
+    <!-- Nomor 5 -->
+    <div class="writing-item">
+      <div class="prompt-header">
+        <div class="prompt-sentence">
+          <span class="prompt-num">5</span>
+          <span>Tuti <span class="target-word-tag">(rambut)</span> panjang.</span>
+        </div>
+        <span class="rule-hint">Diawali huruf <b>/r/</b> &rarr; jadi <b>be-</b></span>
+      </div>
+      <div class="word-transform-row">
+        <label>Kata Berimbuhan:</label>
+        <input type="text" class="small-word-in lkpd-val" name="a5_kata" data-ans="berambut" placeholder="ber + rambut = ...">
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Tuliskan Kalimat Lengkap yang Benar di Bawah Ini:</label>
+        <input type="text" class="sentence-input lkpd-val" name="a5_kalimat" placeholder="Ketik kalimat lengkap nomor 5 di sini...">
+      </div>
+    </div>
+
+    <!-- Nomor 6 -->
+    <div class="writing-item">
+      <div class="prompt-header">
+        <div class="prompt-sentence">
+          <span class="prompt-num">6</span>
+          <span>Petani <span class="target-word-tag">(kerja)</span> di sawah.</span>
+        </div>
+        <span class="rule-hint">Suku kata ke-1: <b>ker-</b> (berakhiran /er/) &rarr; jadi <b>be-</b></span>
+      </div>
+      <div class="word-transform-row">
+        <label>Kata Berimbuhan:</label>
+        <input type="text" class="small-word-in lkpd-val" name="a6_kata" data-ans="bekerja" placeholder="ber + kerja = ...">
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Tuliskan Kalimat Lengkap yang Benar di Bawah Ini:</label>
+        <input type="text" class="sentence-input lkpd-val" name="a6_kalimat" placeholder="Ketik kalimat lengkap nomor 6 di sini...">
+      </div>
+    </div>
+
+    <!-- Nomor 7 -->
+    <div class="writing-item">
+      <div class="prompt-header">
+        <div class="prompt-sentence">
+          <span class="prompt-num">7</span>
+          <span>Tina dan Tini <span class="target-word-tag">(main)</span> petak umpet.</span>
+        </div>
+        <span class="rule-hint">Bentuk umum &rarr; tetap <b>ber-</b></span>
+      </div>
+      <div class="word-transform-row">
+        <label>Kata Berimbuhan:</label>
+        <input type="text" class="small-word-in lkpd-val" name="a7_kata" data-ans="bermain" placeholder="ber + main = ...">
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Tuliskan Kalimat Lengkap yang Benar di Bawah Ini:</label>
+        <input type="text" class="sentence-input lkpd-val" name="a7_kalimat" placeholder="Ketik kalimat lengkap nomor 7 di sini...">
+      </div>
+    </div>
+
+    <!-- Nomor 8 -->
+    <div class="writing-item">
+      <div class="prompt-header">
+        <div class="prompt-sentence">
+          <span class="prompt-num">8</span>
+          <span>Kerbau <span class="target-word-tag">(rendam)</span> di kubangan.</span>
+        </div>
+        <span class="rule-hint">Diawali huruf <b>/r/</b> &rarr; jadi <b>be-</b></span>
+      </div>
+      <div class="word-transform-row">
+        <label>Kata Berimbuhan:</label>
+        <input type="text" class="small-word-in lkpd-val" name="a8_kata" data-ans="berendam" placeholder="ber + rendam = ...">
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Tuliskan Kalimat Lengkap yang Benar di Bawah Ini:</label>
+        <input type="text" class="sentence-input lkpd-val" name="a8_kalimat" placeholder="Ketik kalimat lengkap nomor 8 di sini...">
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:18px;">
+    <button type="button" class="btn-blue" onclick="checkWordsSelf()">🔎 Cek Ejaan Kata Berimbuhan (No. 1 – 8)</button>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 4: MENULIS B (MEMBUAT KALIMAT MANDIRI DI BAWAH KATA) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--purple);">4</div><h2>Menulis B: Membuat Kalimat Baru di Bawah Kata Berimbuhan</h2></div>
+
+  <p style="font-weight:700; margin-bottom:16px;">
+    Buatlah kalimatmu sendiri menggunakan kata-kata berimbuhan di bawah ini! Tuliskan kalimatmu tepat pada kolom yang tersedia di bawah masing-masing kata.
+  </p>
+
+  <div class="word-cards-grid">
+    <!-- Kata 1 -->
+    <div class="word-write-card">
+      <div class="word-head-banner">
+        <span class="word-big">1. berencana</span>
+        <span class="word-formula-mini">ber + rencana (Pola 1: be-)</span>
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Kalimat dengan kata <b>“berencana”</b>:</label>
+        <textarea class="sentence-input lkpd-val" name="b1_kalimat" rows="2" placeholder="Tulis kalimatmu tepat di bawah kata 'berencana'..."></textarea>
+      </div>
+    </div>
+
+    <!-- Kata 2 -->
+    <div class="word-write-card">
+      <div class="word-head-banner">
+        <span class="word-big">2. beragam</span>
+        <span class="word-formula-mini">ber + ragam (Pola 1: be-)</span>
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Kalimat dengan kata <b>“beragam”</b>:</label>
+        <textarea class="sentence-input lkpd-val" name="b2_kalimat" rows="2" placeholder="Tulis kalimatmu tepat di bawah kata 'beragam'..."></textarea>
+      </div>
+    </div>
+
+    <!-- Kata 3 -->
+    <div class="word-write-card">
+      <div class="word-head-banner">
+        <span class="word-big">3. bepergian</span>
+        <span class="word-formula-mini">ber + pergi + an (Pola 2: be-)</span>
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Kalimat dengan kata <b>“bepergian”</b>:</label>
+        <textarea class="sentence-input lkpd-val" name="b3_kalimat" rows="2" placeholder="Tulis kalimatmu tepat di bawah kata 'bepergian'..."></textarea>
+      </div>
+    </div>
+
+    <!-- Kata 4 -->
+    <div class="word-write-card">
+      <div class="word-head-banner">
+        <span class="word-big">4. beserta</span>
+        <span class="word-formula-mini">ber + serta (Pola 2: be-)</span>
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Kalimat dengan kata <b>“beserta”</b>:</label>
+        <textarea class="sentence-input lkpd-val" name="b4_kalimat" rows="2" placeholder="Tulis kalimatmu tepat di bawah kata 'beserta'..."></textarea>
+      </div>
+    </div>
+
+    <!-- Kata 5 -->
+    <div class="word-write-card">
+      <div class="word-head-banner">
+        <span class="word-big">5. belunjur</span>
+        <span class="word-formula-mini">ber + unjur (Pola 3: bel-)</span>
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Kalimat dengan kata <b>“belunjur”</b>:</label>
+        <textarea class="sentence-input lkpd-val" name="b5_kalimat" rows="2" placeholder="Tulis kalimatmu tepat di bawah kata 'belunjur'..."></textarea>
+      </div>
+    </div>
+
+    <!-- Kata 6 -->
+    <div class="word-write-card">
+      <div class="word-head-banner">
+        <span class="word-big">6. berkunjung</span>
+        <span class="word-formula-mini">ber + kunjung (Pola 4: ber-)</span>
+      </div>
+      <div class="sentence-box-under">
+        <label>✍️ Kalimat dengan kata <b>“berkunjung”</b>:</label>
+        <textarea class="sentence-input lkpd-val" name="b6_kalimat" rows="2" placeholder="Tulis kalimatmu tepat di bawah kata 'berkunjung'..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:center; margin-top:26px;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 32px; font-size:16px;">📤 Kirim Hasil Pekerjaan ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN & RUBRIK GURU (LMS V4.2) ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik Penilaian & Umpan Balik Guru</h2></div>
+  <div id="teacherStatus" style="background:#fef3c7; border-left:5px solid #f59e0b; padding:12px 16px; border-radius:10px; margin-bottom:16px; font-size:14px;">
+    ⏳ <b>Memeriksa status penilaian di Database LMS...</b>
+  </div>
+
+  <table class="obs-table">
+    <thead>
+      <tr>
+        <th style="width:20%;">Skala Nilai</th>
+        <th>Indikator Ketercapaian Kompetensi (Kaidah Imbuhan ‘ber-’)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>A (Sangat Baik)</b><br>4 Bintang ⭐</td>
+        <td>Mampu mengubah seluruh kata dasar berimbuhan ‘ber-’ (termasuk perubahan <i>be-</i> dan <i>bel-</i>) secara tepat tanpa salah ejaan, serta menyusun kalimat yang efektif dan bermakna.</td>
+      </tr>
+      <tr>
+        <td><b>B (Baik)</b><br>3 Bintang ⭐</td>
+        <td>Mampu menerapkan sebagian besar aturan perubahan awalan ‘ber-’ dengan benar dan menyusun kalimat dengan struktur yang jelas.</td>
+      </tr>
+      <tr>
+        <td><b>C (Cukup)</b><br>2 Bintang ⭐</td>
+        <td>Masih sering keliru pada kata yang berubah menjadi <i>be-</i> (misal masih menulis <i>bercermin</i> atau <i>berkerja</i>) dan kalimat masih sangat sederhana.</td>
+      </tr>
+      <tr>
+        <td><b>D (Perlu Bimbingan)</b><br>1 Bintang ⭐</td>
+        <td>Belum memahami aturan perubahan bentuk awalan ‘ber-’ dan memerlukan pendampingan dalam menyusun kalimat.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Siswa / Kelompok</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (4 Bintang)</option>
+        <option value="B">B — Baik (3 Bintang)</option>
+        <option value="C">C — Cukup (2 Bintang)</option>
+        <option value="D">D — Perlu Bimbingan (1 Bintang)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan & Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi dan umpan balik untuk hasil penulisan kalimat siswa..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:18px;">
+    <button type="button" class="btn-main" id="lockGradeBtn">🔒 Simpan & Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 3.4 BAHASA INDONESIA (LMS V4.2 - NON-GAMIFIKASI)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Bahasa Indonesia';
+const LKPD_ID  = '3.4_Imbuhan_Ber';
+const STORAGE  = 'lkpd_bindo_3_4_v42';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+  }
+});
+
+// ================= 1. ALAT BANTU SIMULATOR IMBUHAN BER- =================
+const wordExplanations = {
+  rambut: 'Kata Dasar: <b>rambut</b> &rarr; Diawali huruf <b>/r/</b> (Pola 1). Maka <b>ber- + rambut</b> berubah menjadi <b style="color:#059669; font-size:17px;">berambut</b> (awalan berubah menjadi <b>be-</b>).',
+  cermin: 'Kata Dasar: <b>cermin</b> &rarr; Suku kata pertamanya <b>cer-</b> berakhiran bunyi <b>/er/</b> (Pola 2). Maka <b>ber- + cermin</b> berubah menjadi <b style="color:#059669; font-size:17px;">becermin</b> (bukan <i>bercermin</i>).',
+  kerja: 'Kata Dasar: <b>kerja</b> &rarr; Suku kata pertamanya <b>ker-</b> berakhiran bunyi <b>/er/</b> (Pola 2). Maka <b>ber- + kerja</b> berubah menjadi <b style="color:#059669; font-size:17px;">bekerja</b> (bukan <i>berkerja</i>).',
+  terbang: 'Kata Dasar: <b>terbang</b> &rarr; Suku kata pertamanya <b>ter-</b> berakhiran bunyi <b>/er/</b> (Pola 2). Jika diberi imbuhan <b>ber- + -an</b>, berubah menjadi <b style="color:#059669; font-size:17px;">beterbangan</b> (bukan <i>berterbangan</i>).',
+  ajar: 'Kata Dasar: <b>ajar</b> &rarr; Termasuk <b>Pengecualian Khusus (Pola 3)</b>. Huruf <b>r</b> berubah menjadi <b>l</b> sehingga <b>ber- + ajar</b> menjadi <b style="color:#7c3aed; font-size:17px;">belajar</b>.',
+  unjur: 'Kata Dasar: <b>unjur</b> &rarr; Termasuk <b>Pengecualian Khusus (Pola 3)</b>. Huruf <b>r</b> berubah menjadi <b>l</b> sehingga <b>ber- + unjur</b> menjadi <b style="color:#7c3aed; font-size:17px;">belunjur</b> (duduk meluruskan kaki).',
+  sekolah: 'Kata Dasar: <b>sekolah</b> &rarr; Tidak diawali /r/ dan suku kata pertamanya (se-) tidak berakhiran /er/ (Pola 4 Umum). Maka <b>ber- + sekolah</b> tetap menjadi <b style="color:#059669; font-size:17px;">bersekolah</b>.',
+  rendam: 'Kata Dasar: <b>rendam</b> &rarr; Diawali huruf <b>/r/</b> (Pola 1). Maka <b>ber- + rendam</b> berubah menjadi <b style="color:#059669; font-size:17px;">berendam</b> (bukan <i>berrendam</i>).'
+};
+
+function testWord(w, btnEl) {
+  document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+  btnEl.classList.add('active');
+  document.getElementById('testerOutput').innerHTML = wordExplanations[w] || '';
+}
+
+// ================= 2. PENCARIAN KOSAKATA TERHUBUNG GOOGLE =================
+function searchGoogleArti() {
+  const q = document.getElementById('googleWordInput').value.trim();
+  if (!q) return showModal("<h3>🔍 Ketik Kosakata</h3><p>Ketik terlebih dahulu kata yang ingin kamu cari artinya di kotak pencarian.</p><button class='btn-blue' onclick='closeModal()'>Tutup</button>");
+  const url = "https://www.google.com/search?q=" + encodeURIComponent("arti kata " + q + " dalam KBBI bahasa indonesia");
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+function searchGoogleKalimat() {
+  const q = document.getElementById('googleWordInput').value.trim();
+  if (!q) return showModal("<h3>📖 Ketik Kosakata</h3><p>Ketik terlebih dahulu kata yang ingin kamu cari contoh kalimatnya.</p><button class='btn-blue' onclick='closeModal()'>Tutup</button>");
+  const url = "https://www.google.com/search?q=" + encodeURIComponent("contoh kalimat dengan kata " + q);
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+function fillAndSearch(word) {
+  document.getElementById('googleWordInput').value = word;
+  searchGoogleArti();
+}
+
+// ================= 3. CEK MANDIRI EJAAN KATA BERIMBUHAN (BAGIAN A) =================
+function checkWordsSelf() {
+  const wordInputs = document.querySelectorAll('.small-word-in[data-ans]');
+  wordInputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    const val = inp.value.trim().toLowerCase();
+    const validAnswers = inp.dataset.ans.toLowerCase().split('|');
+    if (validAnswers.includes(val)) {
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+    }
+  });
+}
+
+// ================= 4. DATABASE SISWA & KELOMPOK =================
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN anggota kelompok lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Offline: Gagal memuat database siswa."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => s.nisn === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><p>Pastikan NISN sudah benar sesuai data sekolah.</p><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><p>Maksimal 5 siswa per kelompok.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+// ================= 5. PROGRES, SIMPAN DRAF, & PENGIRIMAN LMS =================
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+function collect() {
+  let d = {};
+  getValFields().forEach(el => d[el.name] = el.value);
+  return d;
+}
+
+function setupInputs() {
+  getValFields().forEach(el => { el.addEventListener("input", updateProgress); el.addEventListener("change", updateProgress); });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields(); let filled = 0;
+  vals.forEach(x => { if (String(x.value || "").trim()) filled++; });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  document.getElementById("progressBar").style.width = Math.min(100, Math.round((filled + (groupMembers.length > 0 ? 1 : 0)) / (vals.length + 2) * 100)) + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({
+    members: groupMembers,
+    tanggal: document.querySelector('[name="tanggal"]').value,
+    answers: collect()
+  }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><p>Jawabanmu telah disimpan di perangkat ini.</p><button class='btn-main' onclick='closeModal()'>Lanjutkan</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE)); if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = d.tanggal;
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+    }
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) {
+    return showModal("<h3>⚠️ Identitas Belum Lengkap</h3><p>Pastikan <b>Hari/Tanggal</b> dan <b>Data Siswa/Kelompok</b> sudah diisi sebelum mengirim!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Lembar Kerja...</h3><p>Menyimpan kalimat ke Database LMS SDN 1 Sukahaji.</p>");
+  let payload = {
+    action: 'submitLKPD',
+    lkpdId: LKPD_ID,
+    subject: SUBJECT,
+    hariTanggal: tgl,
+    materiPokok: document.querySelector('[name="materi"]').value,
+    members: groupMembers,
+    answers: JSON.stringify(collect())
+  };
+
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      document.querySelectorAll("input,select,textarea").forEach(el => el.disabled = true);
+      document.getElementById("topActions").style.display = "none";
+      document.getElementById("statusText").style.display = "block";
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Lembar kerja telah masuk ke Dasbor Guru.</p><button class='btn-main' onclick='closeModal()'>Selesai</button>`);
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Koneksi Terputus</h3><p>Silakan coba kirim kembali.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+};
+
+// ================= 6. MODE BACA (READ-ONLY) & PENILAIAN GURU =================
+async function loadLMSViewMode() {
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  document.getElementById("sendBtn2").style.display = "none";
+  showModal("<div class='spinner'></div><h3>Memuat Data Lembar Kerja...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + LKPD_ID + "&submissionId=" + submissionId);
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if (result.members && result.members.length > 0) {
+        groupMembers = result.members;
+        renderMembers();
+      } else {
+        document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database Master LMS)</i></div>`;
+      }
+
+      Object.keys(answers).forEach(k => {
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+
+      checkWordsSelf();
+
+      document.querySelectorAll("#lkpd input, #lkpd select, #lkpd textarea").forEach(el => {
+        el.disabled = true; el.readOnly = true;
+      });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel"); panel.classList.add("show");
+      let scale = document.getElementById("gradeScale"), note = document.getElementById("gradeNote"), btn = document.getElementById("lockGradeBtn"), st = document.getElementById("teacherStatus");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          scale.disabled = true; note.disabled = true; btn.style.display = "none";
+          st.innerHTML = "✅ <b>Selesai Dinilai.</b> Nilai sudah terdistribusi ke seluruh anggota kelompok.";
+          renderStars(scale.value);
+        } else {
+          st.innerHTML = "📝 <b>Mode Penilaian Guru Aktif.</b> Periksa ketepatan ejaan imbuhan 'ber-' dan kalimat siswa di atas.";
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none"; scale.disabled = true; note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          st.innerHTML = "🏆 <b>Hasil Penilaian Guru:</b>";
+          renderStars(scale.value);
+        } else {
+          st.innerHTML = "⏳ <b>Menunggu Penilaian Guru.</b>";
+        }
+      }
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) {
+  const n = { A:4, B:3, C:2, D:1 }[v] || 0;
+  const st = document.getElementById("starRating");
+  st.textContent = '★'.repeat(n) + '☆'.repeat(4 - n);
+  st.style.color = n ? '#f59e0b' : '#cbd5e1';
+}
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian terlebih dahulu!");
+  let btn = document.getElementById("lockGradeBtn"); btn.disabled = true; btn.innerText = "⏳ Menyimpan & Mendistribusikan Nilai...";
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'saveGrade', lkpdId: LKPD_ID, submissionId: submissionId, grade: grade, feedback: feedback })
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Nilai Berhasil Didistribusikan";
+      document.getElementById("gradeScale").disabled = true;
+      document.getElementById("gradeNote").disabled = true;
+      document.getElementById("teacherStatus").innerHTML = "🔒 <b>Berhasil!</b> Nilai telah masuk ke riwayat seluruh anggota kelompok.";
+    }
+  } catch (e) { alert("Koneksi gagal."); btn.disabled = false; }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
