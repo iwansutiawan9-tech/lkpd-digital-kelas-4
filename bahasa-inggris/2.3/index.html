@@ -1,1 +1,979 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.2 (NON-GAMIFIKASI — STORY TIME) — BAHASA INGGRIS KELAS IV -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 2.3 Bahasa Inggris - Story Time</title>
+<style>
+:root {
+  --pink: #e11d48; --pink2: #be123c; --pink-soft: #ffe4e6; --pink-line: #fce7f3;
+  --teal: #0d9488; --teal2: #0f766e; --teal-soft: #ccfbf1;
+  --green: #059669; --green2: #047857;
+  --blue: #0284c7; --blue-soft: #e0f2fe;
+  --amber: #d97706; --amber-soft: #fef3c7;
+  --paper: #ebd9be; --paper-border: #d4b88c;
+  --ink: #0f172a; --slate: #334155; --muted: #64748b; --line: #e2e8f0; --white: #ffffff;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #fff1f2, #f0fdfa 55%, #fffbeb);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  line-height: 1.65;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(4px); opacity: .45; pointer-events: none;
+}
+body::before { width: 230px; height: 230px; background: #fecdd3; left: -70px; top: 120px; }
+body::after { width: 200px; height: 200px; background: #99f6e4; right: -50px; bottom: 100px; }
 
+/* ================= APPBAR & PROGRESS ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 100; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--pink); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--teal2); background: var(--teal-soft); padding: 8px 14px; border-radius: 99px; display: none; border: 1px solid #5eead4; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--pink); color: #fff; }
+.btn-teal { background: var(--teal); color: #fff; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+.btn-amber { background: var(--amber); color: #fff; }
+
+.progress { height: 6px; background: var(--pink-soft); position: sticky; top: 61px; z-index: 99; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--pink), var(--teal)); transition: .3s; }
+
+/* ================= SHEET & HERO ================= */
+.sheet {
+  width: min(1040px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px; border: 1px solid var(--line);
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #fff1f2, #ecfdf5); border-radius: 22px; padding: 26px; border: 1px solid #fecdd3; }
+.badge { display: inline-block; background: var(--pink); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(25px, 4vw, 35px); line-height: 1.15; margin: 0 0 10px; color: var(--pink2); font-weight: 900; }
+h2 { margin: 0; font-size: 20px; color: var(--ink); font-weight: 900; }
+p { line-height: 1.68; font-size: 15px; color: var(--slate); margin: 0 0 10px; }
+
+.mission {
+  background: #fffbeb; border-radius: 20px; padding: 22px; display: flex;
+  flex-direction: column; justify-content: center; text-align: center; font-size: 15px; border: 2px dashed #f59e0b;
+}
+.mission-icon { font-size: 56px; margin-bottom: 8px; }
+
+/* ================= IDENTITAS & KELOMPOK ================= */
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.field label { display: block; font-size: 13px; font-weight: 800; color: #334155; margin-bottom: 6px; }
+input:not([type="checkbox"]), textarea, select {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s; font-size: 14.5px; font-weight: 600;
+}
+input:not([type="checkbox"]):focus, textarea:focus, select:focus {
+  border-color: var(--pink); box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.18);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge {
+  background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px;
+  font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px;
+}
+.member-badge span {
+  cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px;
+  display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px;
+}
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+.readonly-item::before { content: '📖'; font-size: 16px; }
+
+/* ================= SECTION HEADER ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--pink-soft); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--pink); color: #fff; font-weight: 900; flex: 0 0 auto; font-size: 17px; }
+
+/* ================= BAGIAN 1: AUDIO & COMIC STRIP 2.1 ================= */
+.audio-panel {
+  background: linear-gradient(135deg, #ecfdf5, #e0f2fe); border: 2px solid #5eead4;
+  border-radius: 16px; padding: 18px; margin-bottom: 20px; text-align: center;
+}
+.audio-panel audio { width: min(540px, 100%); margin-top: 10px; outline: none; }
+
+.comic-wrapper {
+  width: min(760px, 100%); margin: 0 auto; border-radius: 20px; overflow: hidden;
+  border: 3px solid #fda4af; box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+  background: #e6f6f2; display: flex; flex-direction: column; gap: 0;
+}
+.comic-wrapper img {
+  width: 100%; height: auto; display: block; margin: 0; padding: 0;
+}
+
+/* ================= NOTEBOOK CARD (WORKSHEET 2.4 & 2.6) ================= */
+.notebook-sheet {
+  position: relative; background: var(--paper); border: 3px solid var(--paper-border);
+  border-radius: 22px; padding: 42px 28px 26px; box-shadow: 0 10px 25px rgba(120, 53, 15, 0.1);
+}
+.notebook-holes {
+  position: absolute; top: 10px; left: 24px; right: 24px; display: flex; justify-content: space-around; pointer-events: none;
+}
+.hole { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2px solid var(--paper-border); box-shadow: inset 0 2px 4px rgba(0,0,0,0.15); }
+.ws-badge {
+  display: inline-block; background: #fff; border: 2px solid var(--pink); color: var(--pink2);
+  padding: 4px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 900; margin-bottom: 18px;
+}
+
+/* ================= BAGIAN 2: READ AND CIRCLE (WORKSHEET 2.4) ================= */
+.circle-story {
+  font-size: 17.5px; font-weight: 600; color: #1e293b; line-height: 2.55;
+}
+.circle-line { margin-bottom: 8px; }
+.choice-pair {
+  display: inline-flex; align-items: center; gap: 6px; vertical-align: middle; margin: 0 4px;
+}
+.choice-slash { color: #78350f; font-weight: 900; font-size: 18px; user-select: none; }
+.circle-opt {
+  display: inline-block; background: #fff; color: #0f172a; font-weight: 800; font-size: 16px;
+  padding: 2px 15px; border-radius: 99px; border: 2px solid transparent; cursor: pointer;
+  transition: all 0.2s ease; line-height: 1.7; user-select: none; box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+}
+.circle-opt:hover { border-color: var(--pink); transform: translateY(-1px); }
+
+/* Efek Lingkaran Pena / Spidol Saat Dipilih */
+.circle-opt.circled {
+  border: 3.5px solid var(--pink);
+  border-radius: 52% 46% 54% 48% / 48% 54% 46% 52%;
+  background: #fff1f2;
+  color: var(--pink2);
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.16);
+  transform: rotate(-1.5deg) scale(1.04);
+}
+.circle-opt.dimmed { opacity: 0.45; text-decoration: line-through; text-decoration-color: #94a3b8; }
+.circle-opt.correct-circle {
+  border-color: #16a34a !important; background: #dcfce7 !important; color: #15803d !important;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2) !important;
+}
+.circle-opt.wrong-circle {
+  border-color: #dc2626 !important; background: #fee2e2 !important; color: #b91c1c !important;
+  animation: shake 0.4s;
+}
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-4px);} 75%{transform:translateX(4px);} }
+
+.helper-bar {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px;
+}
+
+/* ================= BAGIAN 3: LOOK AND ORDER (WORKSHEET 2.5) ================= */
+.order-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 16px;
+}
+.order-card {
+  position: relative; background: #f8fafc; border: 3px solid #cbd5e1; border-radius: 20px;
+  overflow: hidden; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06); transition: .2s;
+}
+.order-card img {
+  width: 100%; height: 290px; object-fit: cover; display: block; background: #fff;
+}
+.order-card.correct-card { border-color: #16a34a; box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.18); }
+.order-card.wrong-card { border-color: #dc2626; animation: shake 0.4s; }
+
+.order-badge-box {
+  position: absolute; top: 14px; left: 14px; z-index: 10; display: flex; align-items: center; gap: 8px;
+}
+.order-select {
+  width: 64px !important; height: 54px !important; padding: 0 8px !important;
+  font-size: 24px !important; font-weight: 900 !important; text-align: center;
+  border: 3px solid var(--pink) !important; border-radius: 14px !important;
+  background: #fff !important; color: var(--pink2) !important; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+}
+.order-example-num {
+  width: 56px; height: 54px; display: grid; place-items: center;
+  font-size: 26px; font-weight: 900; color: #fff; background: var(--green);
+  border: 3px solid #fff; border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.example-tag {
+  background: rgba(5, 150, 105, 0.92); color: #fff; font-size: 12px; font-weight: 800;
+  padding: 5px 10px; border-radius: 99px; box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* ================= BAGIAN 4: SPEAK AND WRITE (WORKSHEET 2.6 — 4 BARIS) ================= */
+.word-bank-mini {
+  background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 14px 16px; margin-bottom: 18px;
+}
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.word-chip {
+  background: #fff; border: 1.5px solid #cbd5e1; color: var(--ink); padding: 5px 12px;
+  border-radius: 99px; font-size: 13px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+}
+.word-chip:hover { border-color: var(--teal); background: var(--teal-soft); color: var(--teal2); }
+
+.sw-list { display: flex; flex-direction: column; gap: 14px; }
+.sw-row { display: flex; align-items: center; gap: 12px; }
+.sw-num {
+  width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 3px solid var(--pink);
+  color: var(--pink2); font-size: 18px; font-weight: 900; display: grid; place-items: center; flex-shrink: 0;
+}
+.sw-input-wrap {
+  flex: 1; display: flex; align-items: center; gap: 10px; background: var(--pink-line);
+  border: 2px solid #fbcfe8; border-radius: 14px; padding: 6px 10px;
+}
+.sw-input-wrap input {
+  border: 0 !important; background: transparent !important; box-shadow: none !important;
+  padding: 8px 6px !important; font-size: 15.5px !important; font-weight: 700 !important; color: #1e293b;
+}
+.sw-input-wrap.example-row { background: #dcfce7; border-color: #86efac; }
+.btn-speak {
+  background: #fff; border: 2px solid var(--pink); color: var(--pink);
+  padding: 6px 12px; border-radius: 99px; font-size: 12.5px; font-weight: 800;
+  display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; cursor: pointer;
+}
+.btn-speak:hover { background: var(--pink); color: #fff; }
+.btn-speak.speaking { background: var(--teal); border-color: var(--teal); color: #fff; }
+
+/* ================= PANEL OBSERVASI & PENILAIAN GURU ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 22px; padding: 26px; margin: 22px auto; width: min(1040px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+.obs-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 13px; background: #fff; }
+.obs-table th, .obs-table td { border: 1px solid #cbd5e1; padding: 10px 12px; text-align: left; }
+.obs-table th { background: var(--pink); color: #fff; font-weight: 800; }
+.obs-chk { width: 18px; height: 18px; cursor: pointer; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 200; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #fecdd3; border-top-color: var(--pink); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 820px) {
+  .hero, .idgrid, .order-grid, .grade-grid { grid-template-columns: 1fr; }
+  .order-card img { height: 240px; }
+  .sheet { padding: 18px; }
+  .notebook-sheet { padding: 38px 16px 20px; }
+  .circle-story { font-size: 15.5px; line-height: 2.3; }
+  .sw-row { align-items: flex-start; }
+  .sw-input-wrap { flex-direction: column; align-items: stretch; }
+  .top-actions .btn-light { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1. APPBAR CERDAS -->
+<div class="appbar" id="appbar">
+  <div class="brand">📖 PORTAL LMS SDN 1 SUKAHAJI — BAHASA INGGRIS</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Lembar Kerja</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<!-- 2. HERO & IDENTITAS KELOMPOK -->
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 2.3 • STORY TIME</span>
+      <h1>Bara’s Lunch Story!</h1>
+      <p><b>Bahasa Inggris • Fase B / Kelas IV</b><br>Let’s listen to <b>Audio 2.3</b> and read <b>Comic Strip 2.1</b>! Circle the right words, order the story pictures, and practice speaking and writing sentences about Bara.</p>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Day / Date (Hari / Tanggal) <span style="color:red">*</span></label>
+          <input name="tanggal" placeholder="Contoh: Kamis, 19 November 2026" required>
+        </div>
+        <div class="field">
+          <label>Topic (Materi Pokok)</label>
+          <input name="materi" value="Chapter 2 - Describing Foods for Breakfast, Lunch, and Dinner" readonly>
+        </div>
+
+        <div class="group-builder">
+          <label>👥 Data Kelompok / Siswa (1 – 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN anggota kelompok..." style="flex:1;">
+              <button type="button" class="btn-blue" id="btnAddMember" disabled>🔍 Cari &amp; Tambah</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa SDN 1 Sukahaji...</p>
+          </div>
+          <div id="readGroupView" style="display:none;">
+            <div class="readonly-group-list" id="readonlyMemberList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">📚🍗🍉</div>
+      <b>🎯 Story Explorer</b>
+      <p>Simak <b>Comic Strip 2.1</b>, lingkari kata yang tepat, urutkan 4 gambar cerita, lalu tulis dan ucapkan kalimatnya!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 1: LISTEN AND READ (AUDIO 2.3 & COMIC STRIP 2.1) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Listen and Read (Audio 2.3 — Comic Strip 2.1)</h2></div>
+
+  <p style="font-weight:700; color:var(--ink);">
+    Listen to <b>Audio 2.3</b> and read along in the <b>Comic Strip 2.1</b>. Bara arrives home from school. He is very hungry.<br>
+    <i style="color:var(--muted); font-weight:600;">(Dengarkan Audio 2.3 dan baca Komik Strip 2.1. Bara baru saja pulang sekolah. Ia sangat lapar.)</i>
+  </p>
+
+  <div class="audio-panel">
+    <div style="font-weight:900; color:var(--teal2); font-size:15px;">🎧 Audio 2.3 — Bara Arrives Home From School</div>
+    <audio controls preload="metadata">
+      <source src="https://static.sc.cloudapp.web.id/content/audio/audiobook24/Inggris_4/K4-Chapter2-2.3.mp3" type="audio/mpeg">
+      Browser kamu tidak mendukung pemutar audio.
+    </audio>
+  </div>
+
+  <!-- SATU KESATUAN KOMIK (image24.png + image25.png menyambung rapat) -->
+  <div class="comic-wrapper">
+    <img src="https://iwansutiawan9-tech.github.io/lkpd-digital-kelas-4/asset/image24.png" alt="Comic Strip 2.1 Bagian 1">
+    <img src="https://iwansutiawan9-tech.github.io/lkpd-digital-kelas-4/asset/image25.png" alt="Comic Strip 2.1 Bagian 2">
+  </div>
+</section>
+
+<!-- ================= BAGIAN 2: READ AND CIRCLE (WORKSHEET 2.4) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--teal);">2</div><h2>Read and Circle (Worksheet 2.4)</h2></div>
+
+  <p style="font-weight:700; color:var(--ink);">
+    Read the text and <b>click to circle</b> the correct word in each sentence from the story in <b>Comic Strip 2.1</b>.<br>
+    <i style="color:var(--muted); font-weight:600;">(Bacalah teks berikut lalu <b>klik kata yang tepat</b> untuk melingkarinya sesuai cerita pada Komik Strip 2.1.)</i>
+  </p>
+
+  <!-- Hidden Inputs untuk penyimpanan ke Database LMS -->
+  <input type="hidden" class="lkpd-val" name="rc_1" id="inp_rc_1" data-ans="school">
+  <input type="hidden" class="lkpd-val" name="rc_2" id="inp_rc_2" data-ans="hungry">
+  <input type="hidden" class="lkpd-val" name="rc_3" id="inp_rc_3" data-ans="lunch">
+  <input type="hidden" class="lkpd-val" name="rc_4" id="inp_rc_4" data-ans="fried chicken">
+  <input type="hidden" class="lkpd-val" name="rc_5" id="inp_rc_5" data-ans="wash dishes">
+  <input type="hidden" class="lkpd-val" name="rc_6" id="inp_rc_6" data-ans="happy">
+
+  <div class="notebook-sheet">
+    <div class="notebook-holes">
+      <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+      <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+    </div>
+
+    <div class="ws-badge">📖 Worksheet 2.4 — Click to Circle the Correct Word!</div>
+
+    <div class="circle-story">
+      <div class="circle-line">
+        Bara comes home from
+        <span class="choice-pair" data-q="1">
+          <span class="circle-opt" data-val="school" onclick="pickCircle(1, 'school')">school</span>
+          <span class="choice-slash">/</span>
+          <span class="circle-opt" data-val="play" onclick="pickCircle(1, 'play')">play</span>
+        </span>.
+        He is very
+        <span class="choice-pair" data-q="2">
+          <span class="circle-opt" data-val="hungry" onclick="pickCircle(2, 'hungry')">hungry</span>
+          <span class="choice-slash">/</span>
+          <span class="circle-opt" data-val="angry" onclick="pickCircle(2, 'angry')">angry</span>
+        </span>.
+      </div>
+
+      <div class="circle-line">
+        He wants to eat
+        <span class="choice-pair" data-q="3">
+          <span class="circle-opt" data-val="lunch" onclick="pickCircle(3, 'lunch')">lunch</span>
+          <span class="choice-slash">/</span>
+          <span class="circle-opt" data-val="breakfast" onclick="pickCircle(3, 'breakfast')">breakfast</span>
+        </span>.
+        He eats
+        <span class="choice-pair" data-q="4">
+          <span class="circle-opt" data-val="fried chicken" onclick="pickCircle(4, 'fried chicken')">fried chicken</span>
+          <span class="choice-slash">/</span>
+          <span class="circle-opt" data-val="fried rice" onclick="pickCircle(4, 'fried rice')">fried rice</span>
+        </span>.
+      </div>
+
+      <div class="circle-line">
+        Bara helps mama clean the
+        <span class="choice-pair" data-q="5">
+          <span class="circle-opt" data-val="fridge" onclick="pickCircle(5, 'fridge')">fridge</span>
+          <span class="choice-slash">/</span>
+          <span class="circle-opt" data-val="wash dishes" onclick="pickCircle(5, 'wash dishes')">wash dishes</span>
+        </span>.
+      </div>
+
+      <div class="circle-line" style="margin-bottom:0;">
+        Mama is
+        <span class="choice-pair" data-q="6">
+          <span class="circle-opt" data-val="happy" onclick="pickCircle(6, 'happy')">happy</span>
+          <span class="choice-slash">/</span>
+          <span class="circle-opt" data-val="sad" onclick="pickCircle(6, 'sad')">sad</span>
+        </span>.
+      </div>
+    </div>
+
+    <div class="helper-bar">
+      <button type="button" class="btn-teal check-helper" onclick="checkCircles()">✔️ Cek Lingkaran Jawabanku</button>
+      <button type="button" class="btn-amber" onclick="readCircledStory(this)">🔊 Dengarkan Cerita Pilihanmu</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 3: LOOK AND ORDER (WORKSHEET 2.5) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--amber);">3</div><h2>Look and Order (Worksheet 2.5)</h2></div>
+
+  <p style="font-weight:700; color:var(--ink);">
+    Look at <b>Worksheet 2.5</b>. Number the order of the pictures based on the story. <b>Number one has been done for you.</b><br>
+    <i style="color:var(--muted); font-weight:600;">(Lihatlah Worksheet 2.5. Berikan nomor urut 1–4 berdasarkan alur cerita. Nomor satu sudah dikerjakan sebagai contoh.)</i>
+  </p>
+
+  <div class="order-grid">
+    <!-- Gambar 1 (Kiri Atas): image26.png (Mencuci piring -> Urutan 4) -->
+    <div class="order-card" id="ordCard_26">
+      <div class="order-badge-box">
+        <select class="order-select lkpd-val" name="ord_26" data-ans="4" aria-label="Urutan gambar mencuci piring">
+          <option value="">?</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+      <img src="https://iwansutiawan9-tech.github.io/lkpd-digital-kelas-4/asset/image26.png" alt="Bara is washing the dishes">
+    </div>
+
+    <!-- Gambar 2 (Kanan Atas): image27.png (Ayam goreng 3 / Menambah ayam -> Urutan 2) -->
+    <div class="order-card" id="ordCard_27">
+      <div class="order-badge-box">
+        <select class="order-select lkpd-val" name="ord_27" data-ans="2" aria-label="Urutan gambar menambah ayam goreng">
+          <option value="">?</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+      <img src="https://iwansutiawan9-tech.github.io/lkpd-digital-kelas-4/asset/image27.png" alt="Bara is eating more fried chicken">
+    </div>
+
+    <!-- Gambar 3 (Kiri Bawah): image28.png (Makan semangka -> Urutan 3) -->
+    <div class="order-card" id="ordCard_28">
+      <div class="order-badge-box">
+        <select class="order-select lkpd-val" name="ord_28" data-ans="3" aria-label="Urutan gambar makan semangka">
+          <option value="">?</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+      <img src="https://iwansutiawan9-tech.github.io/lkpd-digital-kelas-4/asset/image28.png" alt="Bara is eating watermelon">
+    </div>
+
+    <!-- Gambar 4 (Kanan Bawah): image29.png (Makan nasi & ayam -> Contoh Urutan 1) -->
+    <div class="order-card correct-card" id="ordCard_29">
+      <div class="order-badge-box">
+        <div class="order-example-num">1</div>
+        <span class="example-tag">Contoh / Example</span>
+        <input type="hidden" class="lkpd-val" name="ord_29" value="1">
+      </div>
+      <img src="https://iwansutiawan9-tech.github.io/lkpd-digital-kelas-4/asset/image29.png" alt="Bara is eating rice and fried chicken">
+    </div>
+  </div>
+
+  <div class="helper-bar">
+    <button type="button" class="btn-amber check-helper" onclick="checkOrder()">✔️ Cek Urutan Gambar (1 – 4)</button>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 4: SPEAK AND WRITE (WORKSHEET 2.6 — 4 BARIS) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--green);">4</div><h2>Speak and Write (Worksheet 2.6)</h2></div>
+
+  <p style="font-weight:700; color:var(--ink);">
+    Look at the pictures again and say what is in the pictures. Write a sentence in <b>Worksheet 2.6</b>. Number one has been done for you.<br>
+    <i style="color:var(--muted); font-weight:600;">(Lihat lagi keempat gambar sesuai urutan 1–4. Ucapkan dan tuliskan apa yang terjadi pada setiap gambar di bawah ini! Klik 🔊 untuk melatih pengucapan kalimatmu.)</i>
+  </p>
+
+  <!-- BANK KOSAKATA BANTU MENULIS -->
+  <div class="word-bank-mini">
+    <div style="font-size:13px; font-weight:900; color:var(--slate);">💡 Helpful Words (Klik untuk mendengar pengucapannya):</div>
+    <div class="chip-row">
+      <button type="button" class="word-chip" onclick="speakEN('eating', this)">eating <i>(sedang makan)</i> 🔊</button>
+      <button type="button" class="word-chip" onclick="speakEN('washing the dishes', this)">washing the dishes <i>(mencuci piring)</i> 🔊</button>
+      <button type="button" class="word-chip" onclick="speakEN('more fried chicken', this)">more fried chicken <i>(tambah ayam goreng)</i> 🔊</button>
+      <button type="button" class="word-chip" onclick="speakEN('watermelon', this)">watermelon <i>(semangka)</i> 🔊</button>
+      <button type="button" class="word-chip" onclick="speakEN('fruit', this)">fruit <i>(buah)</i> 🔊</button>
+      <button type="button" class="word-chip" onclick="speakEN('helping mama', this)">helping mama <i>(membantu mama)</i> 🔊</button>
+    </div>
+  </div>
+
+  <div class="notebook-sheet">
+    <div class="notebook-holes">
+      <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+      <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+    </div>
+
+    <div class="ws-badge">📖 Worksheet 2.6 — Speak and Write (4 Pictures)</div>
+
+    <div class="sw-list">
+      <!-- Baris 1 (Contoh) -->
+      <div class="sw-row">
+        <div class="sw-num" style="border-color:var(--green); color:var(--green2);">1</div>
+        <div class="sw-input-wrap example-row">
+          <input type="text" class="lkpd-val" name="sw_1" id="sw_1" value="In Picture 1, Bara is eating rice and fried chicken." readonly>
+          <button type="button" class="btn-speak" onclick="speakSentenceInput('sw_1', this)">🔊 Listen</button>
+        </div>
+      </div>
+
+      <!-- Baris 2 -->
+      <div class="sw-row">
+        <div class="sw-num">2</div>
+        <div class="sw-input-wrap">
+          <input type="text" class="lkpd-val" name="sw_2" id="sw_2" placeholder="In Picture 2, Bara is ...">
+          <button type="button" class="btn-speak" onclick="speakSentenceInput('sw_2', this)">🔊 Lafal</button>
+        </div>
+      </div>
+
+      <!-- Baris 3 -->
+      <div class="sw-row">
+        <div class="sw-num">3</div>
+        <div class="sw-input-wrap">
+          <input type="text" class="lkpd-val" name="sw_3" id="sw_3" placeholder="In Picture 3, Bara is ...">
+          <button type="button" class="btn-speak" onclick="speakSentenceInput('sw_3', this)">🔊 Lafal</button>
+        </div>
+      </div>
+
+      <!-- Baris 4 -->
+      <div class="sw-row">
+        <div class="sw-num">4</div>
+        <div class="sw-input-wrap">
+          <input type="text" class="lkpd-val" name="sw_4" id="sw_4" placeholder="In Picture 4, Bara is ...">
+          <button type="button" class="btn-speak" onclick="speakSentenceInput('sw_4', this)">🔊 Lafal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:center; margin-top:26px;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 32px; font-size:16px;">📤 Kirim Lembar Kerja Kelompok ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL OBSERVASI & PENILAIAN GURU (LMS V4.2) ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Lembar Observasi &amp; Rubrik Penilaian Guru</h2></div>
+  <div id="teacherStatus" style="background:#fef3c7; border-left:5px solid #f59e0b; padding:12px 16px; border-radius:10px; margin-bottom:16px; font-size:14px;">
+    ⏳ <b>Memeriksa status penilaian di Database LMS...</b>
+  </div>
+
+  <div style="background:#fff; border:2px solid #fda4af; border-radius:14px; padding:18px; margin-bottom:20px;">
+    <h3 style="color:var(--pink2); margin:0 0 8px; font-size:16px;">📋 Ceklis Observasi Keterampilan (Story Time 2.3)</h3>
+    <table class="obs-table" style="margin-bottom:0;">
+      <thead>
+        <tr>
+          <th style="width:6%; text-align:center;">No</th>
+          <th>Indikator Ketercapaian Pembelajaran</th>
+          <th style="width:16%; text-align:center;">Terpenuhi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="text-align:center;">1</td><td><b>Reading Comprehension:</b> Mampu melingkari 6 kata yang tepat pada <i>Worksheet 2.4</i> sesuai isi cerita.</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs1"></td></tr>
+        <tr><td style="text-align:center;">2</td><td><b>Story Sequencing:</b> Mampu mengurutkan keempat gambar cerita (1–4) pada <i>Worksheet 2.5</i> secara runtut.</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs2"></td></tr>
+        <tr><td style="text-align:center;">3</td><td><b>Writing:</b> Mampu menuliskan kalimat sederhana yang sesuai dengan aktivitas Bara pada gambar 2, 3, dan 4.</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs3"></td></tr>
+        <tr><td style="text-align:center;">4</td><td><b>Speaking:</b> Mampu mengucapkan kalimat yang ditulis dengan pelafalan Bahasa Inggris yang jelas dan percaya diri.</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs4"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Siswa / Kelompok</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (4 Bintang: Memahami cerita, urutan tepat, kalimat &amp; pelafalan sangat baik)</option>
+        <option value="B">B — Baik (3 Bintang: Memahami cerita &amp; urutan tepat, kalimat sudah sesuai gambar)</option>
+        <option value="C">C — Cukup (2 Bintang: Masih ada kekeliruan urutan/kata atau kalimat masih perlu bimbingan)</option>
+        <option value="D">D — Perlu Bimbingan (1 Bintang: Belum mampu memahami alur cerita &amp; menulis kalimat sederhana)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan &amp; Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi terhadap hasil membaca, menulis, dan berbicara kelompok..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:18px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan &amp; Distribusikan Nilai ke Seluruh Anggota</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 2.3 BAHASA INGGRIS (LMS V4.2 — NON-GAMIFIKASI)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Bahasa Inggris';
+const LKPD_ID  = '2.3_Story_Time';
+const STORAGE  = 'lkpd_bing_2_3_v42';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+const isReadOnly   = Boolean(submissionId);
+
+let studentList  = [];
+let groupMembers = [];
+const circleState = { 1: '', 2: '', 3: '', 4: '', 5: '', 6: '' };
+
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+  }
+});
+
+// ================= 1. PENGUCAPAN BAHASA INGGRIS (WEB SPEECH API) =================
+function speakEN(text, btnEl) {
+  if (!('speechSynthesis' in window)) {
+    return alert("Browser ini belum mendukung fitur suara pengucapan otomatis.");
+  }
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-US';
+  utter.rate = 0.85;
+  utter.pitch = 1.04;
+
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang === 'en-US') || voices.find(v => v.lang.startsWith('en'));
+  if (enVoice) utter.voice = enVoice;
+
+  if (btnEl) {
+    btnEl.classList.add('speaking');
+    utter.onend = () => btnEl.classList.remove('speaking');
+    utter.onerror = () => btnEl.classList.remove('speaking');
+  }
+  window.speechSynthesis.speak(utter);
+}
+
+function speakSentenceInput(inputId, btnEl) {
+  const txt = (document.getElementById(inputId)?.value || '').trim();
+  if (!txt) {
+    return showModal("<h3>✍️ Tuliskan Kalimat Dahulu</h3><p>Ketik kalimat bahasa Inggrismu pada baris tersebut, lalu klik tombol 🔊 untuk mendengar cara pelafalannya.</p><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  }
+  speakEN(txt, btnEl);
+}
+
+// ================= 2. INTERAKSI READ & CIRCLE (WORKSHEET 2.4) =================
+function pickCircle(qNum, val) {
+  if (isReadOnly) return;
+  circleState[qNum] = val;
+  document.getElementById('inp_rc_' + qNum).value = val;
+  renderCirclePair(qNum);
+  speakEN(val);
+  updateProgress();
+}
+
+function renderCirclePair(qNum) {
+  const pair = document.querySelector(`.choice-pair[data-q="${qNum}"]`);
+  if (!pair) return;
+  const chosen = circleState[qNum];
+  pair.querySelectorAll('.circle-opt').forEach(opt => {
+    opt.classList.remove('circled', 'dimmed', 'correct-circle', 'wrong-circle');
+    if (chosen) {
+      if (opt.dataset.val === chosen) opt.classList.add('circled');
+      else opt.classList.add('dimmed');
+    }
+  });
+}
+
+function checkCircles() {
+  for (let i = 1; i <= 6; i++) {
+    const inp = document.getElementById('inp_rc_' + i);
+    const pair = document.querySelector(`.choice-pair[data-q="${i}"]`);
+    const chosen = circleState[i];
+    pair.querySelectorAll('.circle-opt').forEach(opt => {
+      opt.classList.remove('correct-circle', 'wrong-circle');
+      if (chosen && opt.dataset.val === chosen) {
+        if (chosen === inp.dataset.ans) opt.classList.add('correct-circle');
+        else opt.classList.add('wrong-circle');
+      }
+    });
+  }
+}
+
+function readCircledStory(btnEl) {
+  const w1 = circleState[1] || 'school';
+  const w2 = circleState[2] || 'hungry';
+  const w3 = circleState[3] || 'lunch';
+  const w4 = circleState[4] || 'fried chicken';
+  const w5 = circleState[5] || 'wash dishes';
+  const w6 = circleState[6] || 'happy';
+
+  const fullText = `Bara comes home from ${w1}. He is very ${w2}. He wants to eat ${w3}. He eats ${w4}. Bara helps mama ${w5}. Mama is ${w6}.`;
+  speakEN(fullText, btnEl);
+}
+
+// ================= 3. CEK URUTAN GAMBAR (WORKSHEET 2.5) =================
+function checkOrder() {
+  ['26', '27', '28'].forEach(id => {
+    const sel = document.querySelector(`[name="ord_${id}"]`);
+    const card = document.getElementById('ordCard_' + id);
+    card.classList.remove('correct-card', 'wrong-card');
+    if (sel.value.trim() === sel.dataset.ans) {
+      card.classList.add('correct-card');
+    } else {
+      card.classList.add('wrong-card');
+      setTimeout(() => card.classList.remove('wrong-card'), 500);
+    }
+  });
+}
+
+// ================= 4. DATABASE SISWA & KELOMPOK =================
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN anggota kelompok lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Offline: Gagal memuat database siswa."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => s.nisn === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><p>Pastikan NISN sudah benar sesuai data sekolah.</p><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><p>Maksimal 5 siswa per kelompok.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+// ================= 5. PROGRES, SIMPAN DRAF, & PENGIRIMAN LMS =================
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+function collect() {
+  let d = {};
+  getValFields().forEach(el => d[el.name] = el.value);
+  return d;
+}
+
+function setupInputs() {
+  getValFields().forEach(el => { el.addEventListener("input", updateProgress); el.addEventListener("change", updateProgress); });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields(); let filled = 0;
+  vals.forEach(x => { if (String(x.value || "").trim()) filled++; });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  document.getElementById("progressBar").style.width = Math.min(100, Math.round((filled + (groupMembers.length > 0 ? 1 : 0)) / (vals.length + 2) * 100)) + "%";
+}
+
+function restoreInteractiveStates(answers) {
+  for (let i = 1; i <= 6; i++) {
+    circleState[i] = answers['rc_' + i] || '';
+    renderCirclePair(i);
+  }
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({
+    members: groupMembers,
+    tanggal: document.querySelector('[name="tanggal"]').value,
+    answers: collect()
+  }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><p>Jawaban kelompokmu telah disimpan di perangkat ini.</p><button class='btn-main' onclick='closeModal()'>Lanjutkan</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE)); if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = d.tanggal;
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined && !el.readOnly) el.value = d.answers[el.name]; });
+      restoreInteractiveStates(d.answers);
+    }
+    updateProgress();
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) {
+    return showModal("<h3>⚠️ Identitas Belum Lengkap</h3><p>Pastikan <b>Hari/Tanggal</b> dan <b>Data Siswa/Kelompok</b> sudah diisi sebelum mengirim!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Lembar Kerja...</h3><p>Menyimpan data ke Database LMS SDN 1 Sukahaji.</p>");
+  let payload = {
+    action: 'submitLKPD',
+    lkpdId: LKPD_ID,
+    subject: SUBJECT,
+    hariTanggal: tgl,
+    materiPokok: document.querySelector('[name="materi"]').value,
+    members: groupMembers,
+    answers: JSON.stringify(collect())
+  };
+
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      document.querySelectorAll("#lkpd input, #lkpd select, #lkpd textarea").forEach(el => el.disabled = true);
+      document.getElementById("topActions").style.display = "none";
+      document.getElementById("statusText").style.display = "block";
+      showModal(`<div style='font-size:52px'>✅</div><h3>Worksheet Sent!</h3><p>Lembar kerja kelompokmu telah masuk ke Dasbor Guru.</p><button class='btn-green' onclick='closeModal()'>Selesai</button>`);
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Koneksi Terputus</h3><p>Silakan coba kirim kembali.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+};
+
+// ================= 6. MODE BACA (READ-ONLY) & PENILAIAN GURU =================
+async function loadLMSViewMode() {
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  document.getElementById("sendBtn2").style.display = "none";
+  document.querySelectorAll(".check-helper").forEach(b => b.style.display = "none");
+  showModal("<div class='spinner'></div><h3>Memuat Arsip Kelompok...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + LKPD_ID + "&submissionId=" + submissionId);
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if (result.members && result.members.length > 0) {
+        groupMembers = result.members;
+        renderMembers();
+      } else {
+        document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database Master LMS)</i></div>`;
+      }
+
+      Object.keys(answers).forEach(k => {
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+
+      restoreInteractiveStates(answers);
+      checkCircles();
+      checkOrder();
+
+      document.querySelectorAll("#lkpd input, #lkpd select, #lkpd textarea").forEach(el => {
+        el.disabled = true; el.readOnly = true;
+      });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel"); panel.classList.add("show");
+      let scale = document.getElementById("gradeScale"), note = document.getElementById("gradeNote"), btn = document.getElementById("lockGradeBtn"), st = document.getElementById("teacherStatus");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          scale.disabled = true; note.disabled = true; btn.style.display = "none";
+          document.querySelectorAll(".obs-chk").forEach(c => c.disabled = true);
+          st.innerHTML = "✅ <b>Selesai Dinilai.</b> Nilai sudah terdistribusi ke seluruh anggota kelompok.";
+          renderStars(scale.value);
+        } else {
+          st.innerHTML = "📝 <b>Mode Penilaian Guru Aktif.</b> Periksa lingkaran kata, urutan gambar, dan kalimat tulisan siswa di atas.";
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none"; scale.disabled = true; note.disabled = true;
+        document.querySelectorAll(".obs-chk").forEach(c => c.disabled = true);
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          st.innerHTML = "🏆 <b>Hasil Penilaian Guru:</b>";
+          renderStars(scale.value);
+        } else {
+          st.innerHTML = "⏳ <b>Menunggu Penilaian Guru.</b>";
+        }
+      }
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) {
+  const n = { A:4, B:3, C:2, D:1 }[v] || 0;
+  const st = document.getElementById("starRating");
+  st.textContent = '★'.repeat(n) + '☆'.repeat(4 - n);
+  st.style.color = n ? '#f59e0b' : '#cbd5e1';
+}
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian terlebih dahulu!");
+  let btn = document.getElementById("lockGradeBtn"); btn.disabled = true; btn.innerText = "⏳ Menyimpan & Mendistribusikan Nilai...";
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'saveGrade', lkpdId: LKPD_ID, submissionId: submissionId, grade: grade, feedback: feedback })
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Nilai Berhasil Didistribusikan";
+      document.getElementById("gradeScale").disabled = true;
+      document.getElementById("gradeNote").disabled = true;
+      document.querySelectorAll(".obs-chk").forEach(c => c.disabled = true);
+      document.getElementById("teacherStatus").innerHTML = "🔒 <b>Berhasil!</b> Nilai telah masuk ke riwayat seluruh anggota kelompok.";
+    }
+  } catch (e) { alert("Koneksi gagal."); btn.disabled = false; }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
