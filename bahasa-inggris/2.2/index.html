@@ -1,1 +1,974 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.2 (NON-GAMIFIKASI — SONG TIME) — BAHASA INGGRIS KELAS IV -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 2.2 Bahasa Inggris - Song Time (Write and Sing)</title>
+<style>
+:root {
+  --pink: #e11d48; --pink2: #be123c; --pink-soft: #ffe4e6; --pink-card: #fce7f3;
+  --teal: #0d9488; --teal2: #0f766e; --teal-soft: #ccfbf1;
+  --green: #059669; --green2: #047857;
+  --blue: #0284c7; --blue-soft: #e0f2fe;
+  --amber: #d97706; --amber-soft: #fef3c7;
+  --paper: #ebd9be; --paper-border: #d4b88c;
+  --ink: #0f172a; --slate: #334155; --muted: #64748b; --line: #e2e8f0; --white: #ffffff;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #fff1f2, #f0fdfa 55%, #fffbeb);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  line-height: 1.65;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(4px); opacity: .45; pointer-events: none;
+}
+body::before { width: 230px; height: 230px; background: #fecdd3; left: -70px; top: 120px; }
+body::after { width: 200px; height: 200px; background: #fde68a; right: -50px; bottom: 100px; }
 
+/* ================= APPBAR & PROGRESS ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 100; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--pink); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--teal2); background: var(--teal-soft); padding: 8px 14px; border-radius: 99px; display: none; border: 1px solid #5eead4; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--pink); color: #fff; }
+.btn-teal { background: var(--teal); color: #fff; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+.btn-amber { background: var(--amber); color: #fff; }
+
+.progress { height: 6px; background: var(--pink-soft); position: sticky; top: 61px; z-index: 99; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--pink), var(--amber)); transition: .3s; }
+
+/* ================= SHEET & HERO ================= */
+.sheet {
+  width: min(1040px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px; border: 1px solid var(--line);
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #fff1f2, #fef3c7); border-radius: 22px; padding: 26px; border: 1px solid #fecdd3; }
+.badge { display: inline-block; background: var(--pink); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(25px, 4vw, 35px); line-height: 1.15; margin: 0 0 10px; color: var(--pink2); font-weight: 900; }
+h2 { margin: 0; font-size: 20px; color: var(--ink); font-weight: 900; }
+p { line-height: 1.68; font-size: 15px; color: var(--slate); margin: 0 0 10px; }
+
+.mission {
+  background: #f0fdfa; border-radius: 20px; padding: 22px; display: flex;
+  flex-direction: column; justify-content: center; text-align: center; font-size: 15px; border: 2px dashed #14b8a6;
+}
+.mission-icon { font-size: 56px; animation: bob 2.8s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(3deg); } }
+
+/* ================= IDENTITAS & KELOMPOK ================= */
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.field label { display: block; font-size: 13px; font-weight: 800; color: #334155; margin-bottom: 6px; }
+input:not([type="checkbox"]), textarea, select {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s; font-size: 14.5px; font-weight: 600;
+}
+input:not([type="checkbox"]):focus, textarea:focus, select:focus {
+  border-color: var(--pink); box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.18);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge {
+  background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px;
+  font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px;
+}
+.member-badge span {
+  cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px;
+  display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px;
+}
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+.readonly-item::before { content: '🎤'; font-size: 16px; }
+
+/* ================= SECTION HEADER ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--pink-soft); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--pink); color: #fff; font-weight: 900; flex: 0 0 auto; font-size: 17px; }
+
+/* ================= BAGIAN 1: SONG TIME (LISTEN & SING) ================= */
+.audio-panel {
+  background: linear-gradient(135deg, #ecfdf5, #e0f2fe); border: 2px solid #5eead4;
+  border-radius: 16px; padding: 18px; margin-bottom: 20px; text-align: center;
+}
+.audio-panel audio { width: min(540px, 100%); margin-top: 10px; outline: none; }
+
+.song-card-pink {
+  background: linear-gradient(135deg, #fce7f3, #ffe4e6);
+  border: 3px dashed #f472b6; border-radius: 22px; padding: 26px 28px;
+  display: grid; grid-template-columns: 1.5fr 0.85fr; gap: 20px; align-items: center;
+  margin-bottom: 22px;
+}
+.song-title {
+  font-size: 24px; font-weight: 900; color: var(--pink2); margin: 0 0 16px;
+  font-family: 'Comic Sans MS', 'Segoe UI', cursive, sans-serif;
+}
+.stanza {
+  background: rgba(255,255,255,0.72); border-radius: 14px; padding: 12px 16px; margin-bottom: 12px;
+  border-left: 4px solid var(--pink); display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+}
+.stanza:last-child { margin-bottom: 0; }
+.stanza p { margin: 0; font-size: 15.5px; font-weight: 700; color: #1e293b; line-height: 1.75; }
+.btn-speak {
+  background: #fff; border: 2px solid var(--pink); color: var(--pink);
+  padding: 5px 11px; border-radius: 99px; font-size: 12px; font-weight: 800;
+  display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; cursor: pointer;
+}
+.btn-speak:hover { background: var(--pink); color: #fff; }
+.btn-speak.speaking { background: var(--teal); border-color: var(--teal); color: #fff; transform: scale(1.05); }
+
+.food-deco-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; text-align: center;
+}
+.deco-item {
+  background: rgba(255,255,255,0.85); border-radius: 16px; padding: 12px 8px;
+  box-shadow: 0 4px 12px rgba(225,29,72,0.08); cursor: pointer; transition: .2s;
+}
+.deco-item:hover { transform: translateY(-3px) scale(1.03); }
+.deco-emoji { font-size: 36px; display: block; line-height: 1.2; }
+.deco-label { font-size: 12.5px; font-weight: 800; color: var(--slate); margin-top: 4px; display: block; }
+
+/* MINI COMPREHENSION CHECK */
+.comprehension-box {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 16px; padding: 18px 20px;
+}
+.q-row {
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; align-items: center;
+  background: #fff; padding: 11px 14px; border-radius: 12px; border: 1px solid #cbd5e1; margin-bottom: 10px; font-weight: 700; font-size: 14px;
+}
+.lkpd-val.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+.lkpd-val.wrong { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+
+/* ================= BAGIAN 2: WRITE AND SING (WORKSHEET 2.3) ================= */
+.word-bank-box {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 18px; margin-bottom: 20px;
+}
+.bank-group-title { font-size: 13px; font-weight: 900; color: var(--slate); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.4px; }
+.pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.meal-pill {
+  padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 14px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; border: 2px solid transparent; transition: .2s;
+}
+.meal-pill:hover { transform: translateY(-2px); }
+.mp-breakfast { background: #ccfbf1; color: #115e59; border-color: #5eead4; }
+.mp-lunch { background: #fce7f3; color: #9d174d; border-color: #f9a8d4; }
+.mp-dinner { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+
+.food-chip {
+  background: #fff; border: 1.5px solid #cbd5e1; color: var(--ink); padding: 6px 12px;
+  border-radius: 99px; font-size: 13px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+}
+.food-chip:hover { border-color: var(--blue); background: var(--blue-soft); color: #0369a1; }
+
+/* NOTEBOOK CARD WORKSHEET 2.3 */
+.notebook-sheet {
+  position: relative; background: var(--paper); border: 3px solid var(--paper-border);
+  border-radius: 22px; padding: 42px 28px 28px; box-shadow: 0 10px 25px rgba(120, 53, 15, 0.12);
+  margin-bottom: 20px;
+}
+.notebook-holes {
+  position: absolute; top: 10px; left: 24px; right: 24px; display: flex; justify-content: space-around; pointer-events: none;
+}
+.hole { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2px solid var(--paper-border); box-shadow: inset 0 2px 4px rgba(0,0,0,0.15); }
+.ws-badge {
+  display: inline-block; background: #fff; border: 2px solid var(--pink); color: var(--pink2);
+  padding: 4px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 900; margin-bottom: 16px;
+}
+
+.notebook-grid { display: grid; grid-template-columns: 1.65fr 0.75fr; gap: 20px; align-items: center; }
+.lyric-block { margin-bottom: 18px; font-size: 16.5px; font-weight: 700; color: #292524; line-height: 2.35; }
+.lyric-line { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
+
+.blank-in {
+  width: 150px !important; height: 38px !important; display: inline-block !important;
+  border-radius: 99px !important; border: 2px solid #b45309 !important; background: #fff !important;
+  padding: 0 14px !important; font-size: 15px !important; font-weight: 800 !important;
+  color: var(--pink2) !important; text-align: center;
+}
+.blank-in.food-blank { width: 175px !important; border-color: var(--teal) !important; color: var(--teal2) !important; }
+.blank-in:focus { box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.25) !important; }
+
+.practice-bar {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center;
+  background: rgba(255,255,255,0.85); border-radius: 16px; padding: 14px; margin-top: 16px;
+  border: 2px dashed #b45309;
+}
+
+/* REFLEKSI & CEKLIS KELOMPOK */
+.check-item {
+  display: flex; align-items: center; gap: 12px; background: #f0fdf4; padding: 12px 16px;
+  border-radius: 12px; border: 1.5px solid #86efac; margin-bottom: 10px; cursor: pointer;
+}
+.check-item input[type="checkbox"] { width: 22px; height: 22px; cursor: pointer; flex-shrink: 0; }
+.check-item span { font-size: 14px; font-weight: 700; color: #14532d; }
+
+/* ================= PANEL OBSERVASI & PENILAIAN GURU ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 22px; padding: 26px; margin: 22px auto; width: min(1040px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+.obs-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 13px; background: #fff; }
+.obs-table th, .obs-table td { border: 1px solid #cbd5e1; padding: 10px 12px; text-align: left; }
+.obs-table th { background: var(--pink); color: #fff; font-weight: 800; }
+.obs-chk { width: 18px; height: 18px; cursor: pointer; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 200; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #fecdd3; border-top-color: var(--pink); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 820px) {
+  .hero, .idgrid, .song-card-pink, .notebook-grid, .q-row, .grade-grid { grid-template-columns: 1fr; }
+  .food-deco-grid { grid-template-columns: repeat(4, 1fr); }
+  .sheet { padding: 18px; }
+  .notebook-sheet { padding: 38px 16px 20px; }
+  .blank-in { width: 130px !important; }
+  .top-actions .btn-light { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1. APPBAR CERDAS -->
+<div class="appbar" id="appbar">
+  <div class="brand">🎵 PORTAL LMS SDN 1 SUKAHAJI — BAHASA INGGRIS</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Karya Lagu</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<!-- 2. HERO & IDENTITAS KELOMPOK -->
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 2.2 • SONG TIME</span>
+      <h1>Listen, Write, and Sing!</h1>
+      <p><b>Bahasa Inggris • Fase B / Kelas IV</b><br>Let’s sing <b>“Mama, What’s For Lunch?”</b> together with Audio 2.2, then create your own favorite food song for <i>breakfast, lunch,</i> or <i>dinner</i>!</p>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Day / Date (Hari / Tanggal) <span style="color:red">*</span></label>
+          <input name="tanggal" placeholder="Contoh: Kamis, 19 November 2026" required>
+        </div>
+        <div class="field">
+          <label>Topic (Materi Pokok)</label>
+          <input name="materi" value="Chapter 2 - Describing Foods for Breakfast, Lunch, and Dinner" readonly>
+        </div>
+
+        <div class="group-builder">
+          <label>👥 Data Kelompok / Siswa (1 – 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN anggota kelompok..." style="flex:1;">
+              <button type="button" class="btn-blue" id="btnAddMember" disabled>🔍 Cari &amp; Tambah</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa SDN 1 Sukahaji...</p>
+          </div>
+          <div id="readGroupView" style="display:none;">
+            <div class="readonly-group-list" id="readonlyMemberList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">🎤🎶</div>
+      <b>🎯 Singing Mission</b>
+      <p>Dengarkan <b>Audio 2.2</b>, tulis lirik makanan favoritmu di <b>Worksheet 2.3</b>, dan nyanyikan bersama kelompok!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 1: LISTEN AND SING (AUDIO 2.2) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Listen and Sing (Audio 2.2)</h2></div>
+
+  <p style="font-weight:700; color:var(--ink);">
+    Listen to the song in <b>Audio 2.2</b> and sing it together with your teacher and classmates.<br>
+    <i style="color:var(--muted); font-weight:600;">(Dengarkan lagu pada Audio 2.2 dan nyanyikan bersama guru dan teman-teman sekelasmu.)</i>
+  </p>
+
+  <div class="audio-panel">
+    <div style="font-weight:900; color:var(--teal2); font-size:15px;">🎧 Audio 2.2 — Mama, What’s For Lunch?</div>
+    <audio id="audioSong22" controls preload="metadata">
+      <source src="https://static.sc.cloudapp.web.id/content/audio/audiobook24/Inggris_4/K4-Chapter2-2.2.mp3" type="audio/mpeg">
+      Browser kamu tidak mendukung pemutar audio.
+    </audio>
+  </div>
+
+  <!-- KARTU LIRIK LAGU -->
+  <div class="song-card-pink">
+    <div>
+      <div class="song-title">🎵 Mama, What’s For Lunch?</div>
+
+      <div class="stanza">
+        <p>
+          Dum, di dum!<br>
+          Let’s have a happy lunch.<br>
+          Let’s have a happy lunch.
+        </p>
+        <button type="button" class="btn-speak" onclick="speakEN('Dum, di dum! Let us have a happy lunch. Let us have a happy lunch.', this)">🔊 Lafal</button>
+      </div>
+
+      <div class="stanza">
+        <p>
+          Mama, what’s for lunch?<br>
+          Mama, what’s for lunch?<br>
+          Let’s have <b>fried chicken</b> for lunch.
+        </p>
+        <button type="button" class="btn-speak" onclick="speakEN('Mama, what is for lunch? Mama, what is for lunch? Let us have fried chicken for lunch.', this)">🔊 Lafal</button>
+      </div>
+
+      <div class="stanza">
+        <p>
+          Mama, what’s for lunch?<br>
+          Mama, what’s for lunch?<br>
+          Let’s have <b>vegetables</b> for lunch.
+        </p>
+        <button type="button" class="btn-speak" onclick="speakEN('Mama, what is for lunch? Mama, what is for lunch? Let us have vegetables for lunch.', this)">🔊 Lafal</button>
+      </div>
+
+      <div class="stanza">
+        <p>
+          Dum, di dum!<br>
+          Now I’m hungry again,<br>
+          hungry again.<br>
+          Dum, di dum!
+        </p>
+        <button type="button" class="btn-speak" onclick="speakEN('Dum, di dum! Now I am hungry again, hungry again. Dum, di dum!', this)">🔊 Lafal</button>
+      </div>
+    </div>
+
+    <!-- ILUSTRASI MAKANAN INTERAKTIF (KLIK UNTUK SUARA) -->
+    <div class="food-deco-grid">
+      <div class="deco-item" onclick="speakEN('Tofu', this)"><span class="deco-emoji">🧈</span><span class="deco-label">Tofu 🔊</span></div>
+      <div class="deco-item" onclick="speakEN('Cheese', this)"><span class="deco-emoji">🧀</span><span class="deco-label">Cheese 🔊</span></div>
+      <div class="deco-item" onclick="speakEN('Corn', this)"><span class="deco-emoji">🌽</span><span class="deco-label">Corn 🔊</span></div>
+      <div class="deco-item" onclick="speakEN('Broccoli', this)"><span class="deco-emoji">🥦</span><span class="deco-label">Vegetables 🔊</span></div>
+      <div class="deco-item" onclick="speakEN('Fried Chicken', this)"><span class="deco-emoji">🍗</span><span class="deco-label">Fried Chicken 🔊</span></div>
+      <div class="deco-item" onclick="speakEN('Egg', this)"><span class="deco-emoji">🍳</span><span class="deco-label">Egg 🔊</span></div>
+      <div class="deco-item" onclick="speakEN('Sausage', this)"><span class="deco-emoji">🌭</span><span class="deco-label">Sausage 🔊</span></div>
+      <div class="deco-item" onclick="speakEN('Cucumber', this)"><span class="deco-emoji">🥒</span><span class="deco-label">Cucumber 🔊</span></div>
+    </div>
+  </div>
+
+  <!-- MINI CEK PEMAHAMAN LAGU -->
+  <div class="comprehension-box">
+    <div style="font-weight:900; color:var(--pink2); margin-bottom:12px;">🔎 Mini Check: Memahami Isi Lagu (Listen &amp; Understand)</div>
+
+    <div class="q-row">
+      <span>1. What meal time is mentioned in the song? <i>(Waktu makan apa yang dinyanyikan?)</i></span>
+      <select class="lkpd-val q-check" data-ans="lunch" name="s1_q1">
+        <option value="">-- Choose Answer --</option>
+        <option value="breakfast">Breakfast (Sarapan)</option>
+        <option value="lunch">Lunch (Makan Siang)</option>
+        <option value="dinner">Dinner (Makan Malam)</option>
+      </select>
+    </div>
+
+    <div class="q-row">
+      <span>2. What two foods are mentioned in the lyrics? <i>(Dua makanan apa yang ada di lirik?)</i></span>
+      <select class="lkpd-val q-check" data-ans="chicken_veg" name="s1_q2">
+        <option value="">-- Choose Answer --</option>
+        <option value="chicken_veg">Fried chicken and vegetables</option>
+        <option value="bread_jam">Bread and jam</option>
+        <option value="noodles_egg">Noodles and egg</option>
+      </select>
+    </div>
+
+    <div class="q-row" style="margin-bottom:0;">
+      <span>3. What does <b>"Now I'm hungry again"</b> mean?</span>
+      <select class="lkpd-val q-check" data-ans="lapar" name="s1_q3">
+        <option value="">-- Choose Answer --</option>
+        <option value="lapar">Sekarang aku lapar lagi</option>
+        <option value="kenyang">Sekarang aku sudah kenyang</option>
+        <option value="ngantuk">Sekarang aku mengantuk</option>
+      </select>
+    </div>
+
+    <div style="text-align:center; margin-top:14px;">
+      <button type="button" class="btn-teal" onclick="checkMiniQuiz()">✔️ Cek Pemahaman Lagu</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 2: WRITE AND SING (WORKSHEET 2.3) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--amber);">2</div><h2>Write and Sing (Worksheet 2.3)</h2></div>
+
+  <p style="font-weight:700; color:var(--ink);">
+    Fill in the blanks with <span style="background:#ccfbf1; padding:2px 8px; border-radius:6px; color:#115e59;">breakfast</span>, <span style="background:#fce7f3; padding:2px 8px; border-radius:6px; color:#9d174d;">lunch</span>, <span style="background:#fef3c7; padding:2px 8px; border-radius:6px; color:#92400e;">dinner</span> and the names of your favorite foods. Then, sing it!<br>
+    <i style="color:var(--muted); font-weight:600;">(Isilah titik-titik di bawah ini dengan kata breakfast, lunch, dinner dan nama-nama makanan yang kamu sukai. Lalu, nyanyikanlah lagunya.)</i>
+  </p>
+
+  <!-- BANK KOSAKATA BERSUARA -->
+  <div class="word-bank-box">
+    <div class="bank-group-title">🍽️ Pilihan Waktu Makan (Klik untuk mendengar &amp; cek ejaan):</div>
+    <div class="pill-row">
+      <button type="button" class="meal-pill mp-breakfast" onclick="speakEN('breakfast', this)">🌅 breakfast <i>(sarapan)</i> 🔊</button>
+      <button type="button" class="meal-pill mp-lunch" onclick="speakEN('lunch', this)">☀️ lunch <i>(makan siang)</i> 🔊</button>
+      <button type="button" class="meal-pill mp-dinner" onclick="speakEN('dinner', this)">🌙 dinner <i>(makan malam)</i> 🔊</button>
+    </div>
+
+    <div class="bank-group-title">🥗 Ide Nama Makanan Favorit (Boleh pilih dari sini atau tulis makanan favoritmu sendiri):</div>
+    <div class="pill-row" style="margin-bottom:0;">
+      <button type="button" class="food-chip" onclick="speakEN('bread', this)">🍞 bread 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('porridge', this)">🥣 porridge 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('fried egg', this)">🍳 fried egg 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('fried rice', this)">🍚 fried rice 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('fried chicken', this)">🍗 fried chicken 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('noodles', this)">🍜 noodles 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('vegetables', this)">🥦 vegetables 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('carrot', this)">🥕 carrot 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('strawberry', this)">🍓 strawberry 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('dumpling', this)">🥟 dumpling 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('soup', this)">🍲 soup 🔊</button>
+      <button type="button" class="food-chip" onclick="speakEN('tofu', this)">🧈 tofu 🔊</button>
+    </div>
+  </div>
+
+  <!-- DATALIST SARAN PENGETIKAN -->
+  <datalist id="mealList">
+    <option value="breakfast">
+    <option value="lunch">
+    <option value="dinner">
+  </datalist>
+  <datalist id="foodList">
+    <option value="bread">
+    <option value="porridge">
+    <option value="fried egg">
+    <option value="fried rice">
+    <option value="fried chicken">
+    <option value="noodles">
+    <option value="vegetables">
+    <option value="carrot">
+    <option value="strawberry">
+    <option value="dumpling">
+    <option value="soup">
+    <option value="tofu">
+    <option value="cheese">
+    <option value="fish">
+  </datalist>
+
+  <!-- LEMBAR NOTEBOOK WORKSHEET 2.3 -->
+  <div class="notebook-sheet">
+    <div class="notebook-holes">
+      <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+      <div class="hole"></div><div class="hole"></div><div class="hole"></div><div class="hole"></div>
+    </div>
+
+    <div class="ws-badge">📖 Worksheet 2.3 — My Favorite Food Song</div>
+
+    <div class="notebook-grid">
+      <div>
+        <!-- Bait 1 -->
+        <div class="lyric-block">
+          <div class="lyric-line">Dum, di dum!</div>
+          <div class="lyric-line">
+            <span>Let’s have a happy</span>
+            <input type="text" list="mealList" class="blank-in lkpd-val" name="w1_m1" id="w1_m1" placeholder="breakfast/lunch/dinner">
+            <span>.</span>
+          </div>
+          <div class="lyric-line">
+            <span>Let’s have a happy</span>
+            <input type="text" list="mealList" class="blank-in lkpd-val" name="w1_m2" id="w1_m2" placeholder="breakfast/lunch/dinner">
+            <span>.</span>
+          </div>
+        </div>
+
+        <!-- Bait 2 -->
+        <div class="lyric-block">
+          <div class="lyric-line">
+            <span>Mama, what’s for</span>
+            <input type="text" list="mealList" class="blank-in lkpd-val" name="w2_m1" id="w2_m1" placeholder="waktu makan">
+            <span>?</span>
+          </div>
+          <div class="lyric-line">
+            <span>Mama, what’s for</span>
+            <input type="text" list="mealList" class="blank-in lkpd-val" name="w2_m2" id="w2_m2" placeholder="waktu makan">
+            <span>?</span>
+          </div>
+          <div class="lyric-line">
+            <span>Let’s have</span>
+            <input type="text" list="foodList" class="blank-in food-blank lkpd-val" name="w2_f1" id="w2_f1" placeholder="makanan favorit 1">
+            <span>for</span>
+            <input type="text" list="mealList" class="blank-in lkpd-val" name="w2_m3" id="w2_m3" placeholder="waktu makan">
+            <span>.</span>
+          </div>
+        </div>
+
+        <!-- Bait 3 -->
+        <div class="lyric-block">
+          <div class="lyric-line">
+            <span>Mama, what’s for</span>
+            <input type="text" list="mealList" class="blank-in lkpd-val" name="w3_m1" id="w3_m1" placeholder="waktu makan">
+            <span>?</span>
+          </div>
+          <div class="lyric-line">
+            <span>Mama, what’s for</span>
+            <input type="text" list="mealList" class="blank-in lkpd-val" name="w3_m2" id="w3_m2" placeholder="waktu makan">
+            <span>?</span>
+          </div>
+          <div class="lyric-line">
+            <span>Let’s have</span>
+            <input type="text" list="foodList" class="blank-in food-blank lkpd-val" name="w3_f2" id="w3_f2" placeholder="makanan favorit 2">
+            <span>for</span>
+            <input type="text" list="mealList" class="blank-in lkpd-val" name="w3_m3" id="w3_m3" placeholder="waktu makan">
+            <span>.</span>
+          </div>
+        </div>
+
+        <!-- Bait 4 -->
+        <div class="lyric-block" style="margin-bottom:0;">
+          <div class="lyric-line">Dum, di dum!</div>
+          <div class="lyric-line">Now I’m hungry again,</div>
+          <div class="lyric-line">hungry again.</div>
+          <div class="lyric-line">Dum, di dum!</div>
+        </div>
+      </div>
+
+      <!-- DEKORASI MAKANAN WORKSHEET 2.3 -->
+      <div class="food-deco-grid">
+        <div class="deco-item" onclick="speakEN('Strawberry', this)"><span class="deco-emoji">🍓</span><span class="deco-label">Strawberry</span></div>
+        <div class="deco-item" onclick="speakEN('Carrot', this)"><span class="deco-emoji">🥕</span><span class="deco-label">Carrot</span></div>
+        <div class="deco-item" onclick="speakEN('Dumpling', this)"><span class="deco-emoji">🥟</span><span class="deco-label">Dumpling</span></div>
+        <div class="deco-item" onclick="speakEN('Cherry', this)"><span class="deco-emoji">🍒</span><span class="deco-label">Cherry</span></div>
+        <div class="deco-item" onclick="speakEN('Fried Egg', this)"><span class="deco-emoji">🍳</span><span class="deco-label">Fried Egg</span></div>
+        <div class="deco-item" onclick="speakEN('Bread', this)"><span class="deco-emoji">🍞</span><span class="deco-label">Bread</span></div>
+      </div>
+    </div>
+
+    <!-- PANEL LATIHAN BERNYANYI LIRIK BUATAN SISWA -->
+    <div class="practice-bar">
+      <button type="button" class="btn-amber" onclick="speakCustomSong(this)">🔊 Dengar Pelafalan Lirik Buatanmu</button>
+      <button type="button" class="btn-teal" onclick="toggleBackgroundSong(this)" id="btnBgAudio">🎵 Putar Nada Lagu (Audio 2.2)</button>
+      <button type="button" class="btn-light" onclick="stopAllAudio()">⏹️ Berhenti</button>
+    </div>
+  </div>
+
+  <!-- CEKLIS KESIAPAN BERNYANYI -->
+  <div style="margin-top:20px;">
+    <p style="font-weight:800; color:var(--green2); margin-bottom:10px;">✅ Ceklis Kegiatan Bernyanyi Kelompok:</p>
+    <label class="check-item">
+      <input type="checkbox" class="lkpd-chk" name="chk_sing1">
+      <span>1. Kami sudah mendengarkan Audio 2.2 dan menyanyikan lagu <i>“Mama, What’s For Lunch?”</i> bersama.</span>
+    </label>
+    <label class="check-item">
+      <input type="checkbox" class="lkpd-chk" name="chk_sing2">
+      <span>2. Kami sudah melengkapi seluruh lirik <i>Worksheet 2.3</i> dan mendengarkan cara pelafalannya.</span>
+    </label>
+    <label class="check-item">
+      <input type="checkbox" class="lkpd-chk" name="chk_sing3">
+      <span>3. Kami siap menyanyikan lagu makanan favorit ciptaan kelompok kami di depan guru dan teman-teman!</span>
+    </label>
+  </div>
+
+  <div style="display:flex; justify-content:center; margin-top:24px;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 32px; font-size:16px;">📤 Kirim Lirik Lagu Kelompok ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL OBSERVASI & PENILAIAN GURU (LMS V4.2) ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Lembar Observasi Penampilan &amp; Rubrik Penilaian Guru</h2></div>
+  <div id="teacherStatus" style="background:#fef3c7; border-left:5px solid #f59e0b; padding:12px 16px; border-radius:10px; margin-bottom:16px; font-size:14px;">
+    ⏳ <b>Memeriksa status penilaian di Database LMS...</b>
+  </div>
+
+  <!-- CEKLIS OBSERVASI PENAMPILAN BERNYANYI -->
+  <div style="background:#fff; border:2px solid #fda4af; border-radius:14px; padding:18px; margin-bottom:20px;">
+    <h3 style="color:var(--pink2); margin:0 0 8px; font-size:16px;">🎤 Ceklis Observasi Penampilan Bernyanyi (Write &amp; Sing)</h3>
+    <p style="font-size:12.5px; color:var(--muted); margin-bottom:12px;">Centang aspek yang telah dikuasai oleh kelompok saat menyanyikan lagu ciptaan mereka di kelas.</p>
+    <table class="obs-table" style="margin-bottom:0;">
+      <thead>
+        <tr>
+          <th style="width:6%; text-align:center;">No</th>
+          <th>Aspek Penilaian Penampilan</th>
+          <th style="width:16%; text-align:center;">Terpenuhi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="text-align:center;">1</td><td><b>Writing:</b> Penulisan kata waktu makan (<i>breakfast/lunch/dinner</i>) dan nama makanan favorit sudah tepat dan sesuai konteks.</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs1"></td></tr>
+        <tr><td style="text-align:center;">2</td><td><b>Pronunciation:</b> Pelafalan lirik bahasa Inggris terdengar jelas dan mudah dipahami.</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs2"></td></tr>
+        <tr><td style="text-align:center;">3</td><td><b>Rhythm &amp; Teamwork:</b> Bernyanyi mengikuti irama lagu Audio 2.2 dengan kompak bersama anggota kelompok.</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs3"></td></tr>
+        <tr><td style="text-align:center;">4</td><td><b>Confidence:</b> Tampil dengan ceria, lantang, dan percaya diri di depan kelas.</td><td style="text-align:center;"><input type="checkbox" class="obs-chk" id="obs4"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Siswa / Kelompok</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (4 Bintang: Lirik tepat, pelafalan jelas, irama kompak &amp; percaya diri)</option>
+        <option value="B">B — Baik (3 Bintang: Lirik tepat, bernyanyi cukup lancar &amp; kooperatif)</option>
+        <option value="C">C — Cukup (2 Bintang: Lirik masih sedikit keliru ejaan / pelafalan perlu bimbingan)</option>
+        <option value="D">D — Perlu Bimbingan (1 Bintang: Belum menyelesaikan lirik atau belum berani bernyanyi)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan &amp; Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi terhadap lirik buatan siswa dan penampilan bernyanyi mereka..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:18px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan &amp; Distribusikan Nilai ke Seluruh Anggota</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 2.2 BAHASA INGGRIS (LMS V4.2 — SONG TIME)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Bahasa Inggris';
+const LKPD_ID  = '2.2_Song_Time_Write_and_Sing';
+const STORAGE  = 'lkpd_bing_2_2_v42';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+  }
+});
+
+// ================= 1. PENGUCAPAN BAHASA INGGRIS & AUDIO HELPER =================
+function speakEN(text, btnEl) {
+  if (!('speechSynthesis' in window)) {
+    return alert("Browser ini belum mendukung fitur suara pengucapan otomatis.");
+  }
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-US';
+  utter.rate = 0.85;
+  utter.pitch = 1.05;
+
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang === 'en-US') || voices.find(v => v.lang.startsWith('en'));
+  if (enVoice) utter.voice = enVoice;
+
+  if (btnEl) {
+    btnEl.classList.add('speaking');
+    utter.onend = () => btnEl.classList.remove('speaking');
+    utter.onerror = () => btnEl.classList.remove('speaking');
+  }
+  window.speechSynthesis.speak(utter);
+}
+
+function speakCustomSong(btnEl) {
+  const v = id => (document.getElementById(id)?.value || '').trim();
+  const m1 = v('w1_m1'), m2 = v('w1_m2');
+  const m3 = v('w2_m1'), m4 = v('w2_m2'), f1 = v('w2_f1'), m5 = v('w2_m3');
+  const m6 = v('w3_m1'), m7 = v('w3_m2'), f2 = v('w3_f2'), m8 = v('w3_m3');
+
+  if (!m1 || !f1 || !f2) {
+    return showModal("<h3>✍️ Lengkapi Lirik Dahulu</h3><p>Isi minimal waktu makan dan kedua makanan favoritmu di <b>Worksheet 2.3</b> agar sistem dapat membacakan lirik buatanmu!</p><button class='btn-amber' onclick='closeModal()'>Lengkapi</button>");
+  }
+
+  const fullLyrics =
+    `Dum, di dum! Let us have a happy ${m1}. Let us have a happy ${m2 || m1}. ` +
+    `Mama, what is for ${m3 || m1}? Mama, what is for ${m4 || m1}? Let us have ${f1} for ${m5 || m1}. ` +
+    `Mama, what is for ${m6 || m1}? Mama, what is for ${m7 || m1}? Let us have ${f2} for ${m8 || m1}. ` +
+    `Dum, di dum! Now I am hungry again, hungry again. Dum, di dum!`;
+
+  speakEN(fullLyrics, btnEl);
+}
+
+function toggleBackgroundSong(btnEl) {
+  const audio = document.getElementById('audioSong22');
+  if (!audio) return;
+  if (audio.paused) {
+    audio.currentTime = 0;
+    audio.play();
+    btnEl.innerText = '⏸️ Jeda Nada Lagu';
+  } else {
+    audio.pause();
+    btnEl.innerText = '🎵 Putar Nada Lagu (Audio 2.2)';
+  }
+}
+
+function stopAllAudio() {
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  const audio = document.getElementById('audioSong22');
+  if (audio) {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+  const btn = document.getElementById('btnBgAudio');
+  if (btn) btn.innerText = '🎵 Putar Nada Lagu (Audio 2.2)';
+}
+
+// ================= 2. MINI CEK PEMAHAMAN LAGU =================
+function checkMiniQuiz() {
+  document.querySelectorAll('.q-check[data-ans]').forEach(el => {
+    el.classList.remove('correct', 'wrong');
+    if (el.value.trim() === el.dataset.ans) el.classList.add('correct');
+    else el.classList.add('wrong');
+  });
+}
+
+// ================= 3. DATABASE SISWA & KELOMPOK =================
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN anggota kelompok lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Offline: Gagal memuat database siswa."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => s.nisn === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><p>Pastikan NISN sudah benar sesuai data sekolah.</p><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><p>Maksimal 5 siswa per kelompok.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+// ================= 4. PROGRES, SIMPAN DRAF, & PENGIRIMAN LMS =================
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+function getChkFields() { return [...document.querySelectorAll(".lkpd-chk")]; }
+function collect() {
+  let d = {};
+  getValFields().forEach(el => d[el.name] = el.value);
+  getChkFields().forEach(el => d[el.name] = el.checked);
+  return d;
+}
+
+function setupInputs() {
+  getValFields().forEach(el => { el.addEventListener("input", updateProgress); el.addEventListener("change", updateProgress); });
+  getChkFields().forEach(el => el.addEventListener("change", updateProgress));
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields(); let filled = 0;
+  vals.forEach(x => { if (String(x.value || "").trim()) filled++; });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  document.getElementById("progressBar").style.width = Math.min(100, Math.round((filled + (groupMembers.length > 0 ? 1 : 0)) / (vals.length + 2) * 100)) + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({
+    members: groupMembers,
+    tanggal: document.querySelector('[name="tanggal"]').value,
+    answers: collect()
+  }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><p>Lirik lagumu telah disimpan di perangkat ini.</p><button class='btn-main' onclick='closeModal()'>Lanjutkan</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE)); if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = d.tanggal;
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+      getChkFields().forEach(el => { if (d.answers[el.name] !== undefined) el.checked = Boolean(d.answers[el.name]); });
+    }
+    updateProgress();
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) {
+    return showModal("<h3>⚠️ Identitas Belum Lengkap</h3><p>Pastikan <b>Hari/Tanggal</b> dan <b>Data Siswa/Kelompok</b> sudah diisi sebelum mengirim!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Karya Lagu...</h3><p>Menyimpan data ke Database LMS SDN 1 Sukahaji.</p>");
+  let payload = {
+    action: 'submitLKPD',
+    lkpdId: LKPD_ID,
+    subject: SUBJECT,
+    hariTanggal: tgl,
+    materiPokok: document.querySelector('[name="materi"]').value,
+    members: groupMembers,
+    answers: JSON.stringify(collect())
+  };
+
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      document.querySelectorAll("#lkpd input, #lkpd select, #lkpd textarea").forEach(el => el.disabled = true);
+      document.getElementById("topActions").style.display = "none";
+      document.getElementById("statusText").style.display = "block";
+      showModal(`<div style='font-size:52px'>✅</div><h3>Song Sent!</h3><p>Lirik lagu kelompokmu telah masuk ke Dasbor Guru. Siap-siap bernyanyi ya!</p><button class='btn-green' onclick='closeModal()'>Selesai</button>`);
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Koneksi Terputus</h3><p>Silakan coba kirim kembali.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+};
+
+// ================= 5. MODE BACA (READ-ONLY) & PENILAIAN GURU =================
+async function loadLMSViewMode() {
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  document.getElementById("sendBtn2").style.display = "none";
+  showModal("<div class='spinner'></div><h3>Memuat Karya Lagu Kelompok...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + LKPD_ID + "&submissionId=" + submissionId);
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if (result.members && result.members.length > 0) {
+        groupMembers = result.members;
+        renderMembers();
+      } else {
+        document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database Master LMS)</i></div>`;
+      }
+
+      Object.keys(answers).forEach(k => {
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) {
+          if (el.type === 'checkbox') el.checked = Boolean(answers[k]);
+          else el.value = answers[k];
+        }
+      });
+
+      checkMiniQuiz();
+
+      document.querySelectorAll("#lkpd input, #lkpd select, #lkpd textarea").forEach(el => {
+        el.disabled = true; el.readOnly = true;
+      });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel"); panel.classList.add("show");
+      let scale = document.getElementById("gradeScale"), note = document.getElementById("gradeNote"), btn = document.getElementById("lockGradeBtn"), st = document.getElementById("teacherStatus");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          scale.disabled = true; note.disabled = true; btn.style.display = "none";
+          document.querySelectorAll(".obs-chk").forEach(c => c.disabled = true);
+          st.innerHTML = "✅ <b>Selesai Dinilai.</b> Nilai sudah terdistribusi ke seluruh anggota kelompok.";
+          renderStars(scale.value);
+        } else {
+          st.innerHTML = "📝 <b>Mode Penilaian Guru Aktif.</b> Periksa lirik ciptaan kelompok dan amati penampilan bernyanyi mereka.";
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none"; scale.disabled = true; note.disabled = true;
+        document.querySelectorAll(".obs-chk").forEach(c => c.disabled = true);
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          st.innerHTML = "🏆 <b>Hasil Penilaian Guru:</b>";
+          renderStars(scale.value);
+        } else {
+          st.innerHTML = "⏳ <b>Menunggu Penilaian Guru.</b>";
+        }
+      }
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) {
+  const n = { A:4, B:3, C:2, D:1 }[v] || 0;
+  const st = document.getElementById("starRating");
+  st.textContent = '★'.repeat(n) + '☆'.repeat(4 - n);
+  st.style.color = n ? '#f59e0b' : '#cbd5e1';
+}
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian terlebih dahulu!");
+  let btn = document.getElementById("lockGradeBtn"); btn.disabled = true; btn.innerText = "⏳ Menyimpan & Mendistribusikan Nilai...";
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'saveGrade', lkpdId: LKPD_ID, submissionId: submissionId, grade: grade, feedback: feedback })
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Nilai Berhasil Didistribusikan";
+      document.getElementById("gradeScale").disabled = true;
+      document.getElementById("gradeNote").disabled = true;
+      document.querySelectorAll(".obs-chk").forEach(c => c.disabled = true);
+      document.getElementById("teacherStatus").innerHTML = "🔒 <b>Berhasil!</b> Nilai telah masuk ke riwayat seluruh anggota kelompok.";
+    }
+  } catch (e) { alert("Koneksi gagal."); btn.disabled = false; }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
