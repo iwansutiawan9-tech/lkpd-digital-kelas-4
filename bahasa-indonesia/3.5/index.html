@@ -1,1 +1,755 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.2 (NON-GAMIFIKASI — TEKS DESKRIPSI) — BAHASA INDONESIA KELAS IV -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 3.5 Bahasa Indonesia - Menulis Teks Deskripsi (Rute Menuju Sekolah)</title>
+<style>
+:root {
+  --green: #059669; --green2: #047857; --mint: #d1fae5; --mint-soft: #ecfdf5;
+  --ink: #0f172a; --slate: #334155; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --blue: #0284c7; --blue-light: #e0f2fe; --blue-dark: #0369a1;
+  --amber: #d97706; --amber-light: #fef3c7; --amber-dark: #92400e;
+  --purple: #7c3aed; --purple-light: #ede9fe;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #ecfdf5, #f0f9ff 55%, #fffbeb);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  line-height: 1.65;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(4px); opacity: .45; pointer-events: none;
+}
+body::before { width: 220px; height: 220px; background: #a7f3d0; left: -70px; top: 120px; }
+body::after { width: 190px; height: 190px; background: #bae6fd; right: -50px; bottom: 100px; }
 
+/* ================= APPBAR & PROGRESS ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 100; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--green2); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--blue-dark); background: var(--blue-light); padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--green); color: #fff; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-amber { background: var(--amber); color: #fff; }
+
+.progress { height: 6px; background: var(--mint); position: sticky; top: 61px; z-index: 99; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--green), var(--blue)); transition: .3s; }
+
+/* ================= SHEET & HERO ================= */
+.sheet {
+  width: min(1040px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px; border: 1px solid var(--line);
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #ecfdf5, #e0f2fe); border-radius: 22px; padding: 26px; border: 1px solid #a7f3d0; }
+.badge { display: inline-block; background: var(--green); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(25px, 4vw, 34px); line-height: 1.15; margin: 0 0 10px; color: var(--ink); font-weight: 900; }
+h2 { margin: 0; font-size: 20px; color: var(--ink); font-weight: 900; }
+p { line-height: 1.7; font-size: 15px; color: var(--slate); margin: 0 0 10px; }
+
+.mission {
+  background: #fffbeb; border-radius: 20px; padding: 22px; display: flex;
+  flex-direction: column; justify-content: center; text-align: center; font-size: 15px; border: 2px dashed #f59e0b;
+}
+.mission-icon { font-size: 54px; margin-bottom: 8px; }
+
+/* ================= IDENTITAS & KELOMPOK ================= */
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.field label { display: block; font-size: 13px; font-weight: 800; color: #334155; margin-bottom: 6px; }
+input:not([type="checkbox"]), textarea, select {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s; font-size: 14.5px; font-weight: 600;
+}
+input:not([type="checkbox"]):focus, textarea:focus, select:focus {
+  border-color: var(--green); box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.18);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge {
+  background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px;
+  font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px;
+}
+.member-badge span {
+  cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px;
+  display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px;
+}
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+.readonly-item::before { content: '👤'; font-size: 16px; }
+
+/* ================= SECTION HEADER & KARTU PANDUAN ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--mint); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--green); color: #fff; font-weight: 900; flex: 0 0 auto; font-size: 18px; }
+
+.info-banner {
+  background: var(--mint-soft); border: 2px solid #86efac; border-left: 6px solid var(--green);
+  border-radius: 16px; padding: 18px 20px; margin-bottom: 18px;
+}
+.info-banner b { color: var(--green2); }
+
+.guide-step-card {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 20px;
+  margin-bottom: 18px; transition: .2s;
+}
+.guide-step-card:focus-within { border-color: var(--green); background: #fff; box-shadow: 0 8px 20px rgba(5, 150, 105, 0.08); }
+.step-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.step-tag {
+  background: var(--green); color: #fff; font-weight: 900; font-size: 13px;
+  padding: 5px 12px; border-radius: 99px; flex-shrink: 0; margin-top: 2px;
+}
+.step-tag.t2 { background: var(--blue); }
+.step-tag.t3 { background: var(--amber); }
+.step-q { font-size: 14.5px; font-weight: 700; color: var(--slate); line-height: 1.65; }
+
+.draft-textarea {
+  width: 100%; min-height: 110px; border: 2px solid #94a3b8; border-radius: 14px;
+  padding: 12px 14px; font-size: 15px; font-weight: 600; background: #fff; resize: vertical;
+}
+
+/* PARAGRAF UTUH TEKS DESKRIPSI */
+.full-desc-box {
+  background: linear-gradient(135deg, #f0fdf4, #f8fafc); border: 2px solid #34d399;
+  border-radius: 18px; padding: 20px; margin-top: 10px;
+}
+.full-desc-textarea {
+  width: 100%; min-height: 180px; border: 2px solid var(--green); border-radius: 14px;
+  padding: 14px 16px; font-size: 15.5px; font-weight: 600; background: #fff; resize: vertical; line-height: 1.75;
+}
+
+/* KANVAS DENAH RUTE SEDERHANA */
+.map-box {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 18px;
+}
+.map-toolbar {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px;
+}
+.tool-btn {
+  background: #fff; border: 2px solid #cbd5e1; color: var(--ink); padding: 7px 12px;
+  border-radius: 10px; font-size: 13px; font-weight: 800; cursor: pointer;
+}
+.tool-btn.active { border-color: var(--blue); background: var(--blue-light); color: var(--blue-dark); }
+.map-canvas-wrap {
+  width: 100%; overflow: hidden; border-radius: 14px; border: 2.5px dashed #64748b; background: #ffffff;
+}
+canvas#routeCanvas {
+  width: 100%; height: 320px; display: block; touch-action: none; cursor: crosshair;
+}
+
+/* ================= PANEL PENILAIAN GURU (LMS V4.2) ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 22px; padding: 26px; margin: 22px auto; width: min(1040px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+.obs-table { width: 100%; border-collapse: collapse; margin-bottom: 18px; font-size: 13px; background: #fff; }
+.obs-table th, .obs-table td { border: 1px solid #cbd5e1; padding: 10px 12px; text-align: left; }
+.obs-table th { background: var(--green2); color: #fff; font-weight: 800; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 200; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #d1fae5; border-top-color: var(--green); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 780px) {
+  .hero, .idgrid, .grade-grid { grid-template-columns: 1fr; }
+  .sheet { padding: 18px; }
+  canvas#routeCanvas { height: 260px; }
+  .top-actions .btn-light { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1. APPBAR CERDAS -->
+<div class="appbar" id="appbar">
+  <div class="brand">✍️ PORTAL LMS SDN 1 SUKAHAJI — BAHASA INDONESIA</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Lembar Kerja</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<!-- 2. HERO & IDENTITAS KELOMPOK -->
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 3.5 • MENULIS TEKS DESKRIPSI</span>
+      <h1>Rute Menuju Sekolah</h1>
+      <p><b>Bahasa Indonesia • Fase B / Kelas IV</b><br>Ceritakan rute perjalananmu dari rumah ke sekolah—dimulai dari <b>rumah sebagai titik awal</b> hingga <b>sekolah sebagai titik tujuan</b>—sehingga pembaca dapat membayangkannya dengan jelas[cite: 31, 32].</p>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input name="tanggal" placeholder="Contoh: Senin, 23 November 2026" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Menulis Teks Deskripsi - Rute Menuju Sekolah" readonly>
+        </div>
+
+        <div class="group-builder">
+          <label>👥 Data Siswa / Kelompok Belajar (1 – 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN anggota kelompok..." style="flex:1;">
+              <button type="button" class="btn-blue" id="btnAddMember" disabled>🔍 Cari &amp; Tambah</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa SDN 1 Sukahaji...</p>
+          </div>
+          <div id="readGroupView" style="display:none;">
+            <div class="readonly-group-list" id="readonlyMemberList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">🗺️🏫</div>
+      <b>🎯 Tujuan Menulis</b>
+      <p>Menyusun <b>paragraf deskripsi</b> tentang rute ke sekolah dan melengkapinya dengan <b>denah sederhana</b>[cite: 31, 32].</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 1: PANDUAN PERTANYAAN PER BAGIAN TULISAN ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Kerangka Ide: Menjawab Pertanyaan Panduan</h2></div>
+
+  <div class="info-banner">
+    <b>📌 Pengertian Paragraf Deskripsi:</b> Gunakan kosakata baru serta kaidah kebahasaan yang telah kamu pelajari dalam bab ini. Ceritakan pengalamanmu dengan jelas sehingga orang yang membaca dapat membayangkannya. Paragraf seperti ini disebut <b>paragraf deskripsi</b>[cite: 32].
+  </div>
+
+  <!-- Panduan 1: Bagian Awal -->
+  <div class="guide-step-card">
+    <div class="step-head">
+      <span class="step-tag">BAGIAN AWAL (1)</span>
+      <div class="step-q">Apakah kamu berjalan kaki atau naik kendaraan? Apakah kamu naik kendaraan umum atau diantar orang tua atau kakak? <b>Ini akan menjadi bagian awal tulisanmu</b> (titik awal dari rumah)[cite: 31].</div>
+    </div>
+    <textarea class="draft-textarea lkpd-val" name="ide_awal" placeholder="Tuliskan catatan awal perjalananmu berangkat dari rumah..."></textarea>
+  </div>
+
+  <!-- Panduan 2: Bagian Tengah -->
+  <div class="guide-step-card">
+    <div class="step-head">
+      <span class="step-tag t2">BAGIAN TENGAH (2)</span>
+      <div class="step-q">Lalu, ceritakan tempat-tempat yang kamu lewati. Hal-hal menarik apa yang kamu lihat di sepanjang perjalanan? Apakah rute yang kamu tempuh selalu sama ataukah kadang-kadang kamu mengambil rute yang berbeda? Mengapa kamu mengambil rute itu? Apa saja yang kamu jumpai sepanjang perjalanan? <b>Informasi-informasi ini akan menjadi bagian tengah tulisanmu</b>[cite: 31].</div>
+    </div>
+    <textarea class="draft-textarea lkpd-val" name="ide_tengah" placeholder="Tuliskan tempat yang dilewati, hal menarik, pilihan rute, dan hal yang dijumpai di jalan..."></textarea>
+  </div>
+
+  <!-- Panduan 3: Bagian Akhir -->
+  <div class="guide-step-card" style="margin-bottom:0;">
+    <div class="step-head">
+      <span class="step-tag t3">BAGIAN AKHIR (3)</span>
+      <div class="step-q">Berapa lama waktu yang kamu perlukan untuk sampai di sekolah? Apakah biasanya kamu datang saat sekolah masih sepi ataukah saat sekolah sudah ramai? <b>Itulah bagian akhir dari tulisanmu, yaitu sampai di sekolah sebagai titik tujuan</b>[cite: 31].</div>
+    </div>
+    <textarea class="draft-textarea lkpd-val" name="ide_akhir" placeholder="Tuliskan lama waktu perjalanan serta suasana sekolah saat kamu tiba..."></textarea>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 2: MENULIS PARAGRAF DESKRIPSI UTUH ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--blue);">2</div><h2>Menulis Paragraf Deskripsi: Rute Menuju Sekolah</h2></div>
+
+  <p style="font-weight:700; margin-bottom:12px;">
+    Gabungkan bagian awal, bagian tengah, dan bagian akhir menjadi <b>teks/paragraf deskripsi</b> yang runtut dan jelas sehingga pembaca dapat membayangkan perjalananmu dari rumah ke sekolah[cite: 31, 32].
+  </p>
+
+  <div class="full-desc-box">
+    <label style="display:block; font-size:14px; font-weight:900; color:var(--green2); margin-bottom:8px;">
+      ✍️ Teks Deskripsi Rute Menuju Sekolah:
+    </label>
+    <textarea class="full-desc-textarea lkpd-val" name="teks_deskripsi" placeholder="Tuliskan paragraf deskripsi lengkapmu di sini..."></textarea>
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-top:12px;">
+      <button type="button" class="btn-blue" onclick="gabungkanDariIde()">↙️ Salin &amp; Gabungkan dari Kerangka Bagian 1–3</button>
+      <span id="wordCountInfo" style="font-size:13px; font-weight:800; color:var(--slate);">0 kata</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BAGIAN 3: DENAH RUTE SEDERHANA ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--amber);">3</div><h2>Denah Rute Sederhana</h2></div>
+
+  <p style="font-weight:700; margin-bottom:12px;">
+    Kamu juga dapat menggambarkan rute tersebut dengan <b>denah sederhana</b> atau menceritakannya dalam gambar[cite: 32]. Gambar rute dari rumah ke sekolah pada papan denah di bawah ini!
+  </p>
+
+  <div class="map-box">
+    <div class="map-toolbar">
+      <button type="button" class="tool-btn active" id="toolPen" onclick="setDrawTool('pen', '#0f172a', 3)">✏️ Gambar Rute</button>
+      <button type="button" class="tool-btn" id="toolRoad" onclick="setDrawTool('road', '#7c3aed', 5)">🛣️ Jalan Utama</button>
+      <button type="button" class="tool-btn" id="toolGreen" onclick="setDrawTool('green', '#059669', 4)">🌳 Pepohonan / Sawah</button>
+      <button type="button" class="tool-btn" id="toolEraser" onclick="setDrawTool('eraser', '#ffffff', 20)">🧽 Hapus</button>
+      <button type="button" class="btn-light" onclick="clearMapCanvas()" style="margin-left:auto; font-size:13px;">🗑️ Bersihkan Denah</button>
+    </div>
+
+    <div class="map-canvas-wrap">
+      <canvas id="routeCanvas" width="920" height="320"></canvas>
+    </div>
+    <input type="hidden" class="lkpd-val" name="denah_gambar" id="denahDataInput">
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN GURU (LMS V4.2) ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik Penilaian Teks Deskripsi Guru</h2></div>
+  <div id="teacherStatus" style="background:#fef3c7; border-left:5px solid #f59e0b; padding:12px 16px; border-radius:10px; margin-bottom:16px; font-size:14px;">
+    ⏳ <b>Memeriksa status penilaian di Database LMS...</b>
+  </div>
+
+  <table class="obs-table">
+    <thead>
+      <tr>
+        <th style="width:20%;">Skala Nilai</th>
+        <th>Indikator Penulisan Teks Deskripsi (Rute Menuju Sekolah)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>A (Sangat Baik)</b><br>4 Bintang ⭐</td>
+        <td>Menyajikan bagian awal, tengah, dan akhir secara runtut; memerinci tempat/hal menarik sehingga pembaca mudah membayangkan; penggunaan kosakata dan ejaan sangat baik serta dilengkapi denah yang jelas.</td>
+      </tr>
+      <tr>
+        <td><b>B (Baik)</b><br>3 Bintang ⭐</td>
+        <td>Memuat alur perjalanan dari rumah ke sekolah dengan cukup runtut dan deskripsi yang dapat dipahami serta dilengkapi denah.</td>
+      </tr>
+      <tr>
+        <td><b>C (Cukup)</b><br>2 Bintang ⭐</td>
+        <td>Baru memuat sebagian bagian cerita (awal/tengah/akhir) atau kalimat deskripsi masih perlu diperjelas.</td>
+      </tr>
+      <tr>
+        <td><b>D (Perlu Bimbingan)</b><br>1 Bintang ⭐</td>
+        <td>Tulisan belum membentuk paragraf deskripsi rute perjalanan dan memerlukan pendampingan langsung.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Siswa / Kelompok</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (4 Bintang)</option>
+        <option value="B">B — Baik (3 Bintang)</option>
+        <option value="C">C — Cukup (2 Bintang)</option>
+        <option value="D">D — Perlu Bimbingan (1 Bintang)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan &amp; Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan umpan balik terhadap keruntutan deskripsi dan denah rute siswa..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:18px;">
+    <button type="button" class="btn-main" id="lockGradeBtn">🔒 Simpan &amp; Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 3.5 BAHASA INDONESIA (LMS V4.2 — NON-GAMIFIKASI)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Bahasa Indonesia';
+const LKPD_ID  = '3.5_Teks_Deskripsi_Rute_Sekolah';
+const STORAGE  = 'lkpd_bindo_3_5_v42';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+const isReadOnly   = Boolean(submissionId);
+
+let studentList  = [];
+let groupMembers = [];
+let drawColor    = '#0f172a';
+let drawSize     = 3;
+let isDrawing    = false;
+
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+const canvas = document.getElementById("routeCanvas");
+const ctx = canvas ? canvas.getContext("2d") : null;
+
+document.addEventListener("DOMContentLoaded", () => {
+  initCanvas();
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+  }
+  updateWordCount();
+});
+
+// ================= 1. KANVAS DENAH RUTE SEDERHANA =================
+function initCanvas() {
+  if (!ctx) return;
+  resetCanvasBackground();
+  if (isReadOnly) return;
+
+  const getPos = e => {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return {
+      x: (clientX - rect.left) * (canvas.width / rect.width),
+      y: (clientY - rect.top) * (canvas.height / rect.height)
+    };
+  };
+
+  const startDraw = e => {
+    if (isReadOnly) return;
+    isDrawing = true;
+    const p = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y);
+  };
+
+  const moveDraw = e => {
+    if (!isDrawing || isReadOnly) return;
+    e.preventDefault();
+    const p = getPos(e);
+    ctx.strokeStyle = drawColor;
+    ctx.lineWidth = drawSize;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+  };
+
+  const endDraw = () => {
+    if (!isDrawing) return;
+    isDrawing = false;
+    ctx.closePath();
+    syncCanvasToInput();
+    updateProgress();
+  };
+
+  canvas.addEventListener("mousedown", startDraw);
+  canvas.addEventListener("mousemove", moveDraw);
+  window.addEventListener("mouseup", endDraw);
+
+  canvas.addEventListener("touchstart", startDraw, { passive: false });
+  canvas.addEventListener("touchmove", moveDraw, { passive: false });
+  window.addEventListener("touchend", endDraw);
+}
+
+function resetCanvasBackground() {
+  if (!ctx) return;
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Petunjuk titik awal (Rumah) dan titik tujuan (Sekolah)
+  ctx.save();
+  ctx.font = "bold 14px 'Segoe UI', sans-serif";
+  ctx.fillStyle = "#047857";
+  ctx.fillRect(18, 16, 128, 30);
+  ctx.fillStyle = "#ffffff";
+  ctx.fillText("🏠 RUMAH (Awal)", 28, 36);
+
+  ctx.fillStyle = "#0369a1";
+  ctx.fillRect(canvas.width - 156, canvas.height - 46, 138, 30);
+  ctx.fillStyle = "#ffffff";
+  ctx.fillText("🏫 SEKOLAH (Tujuan)", canvas.width - 146, canvas.height - 26);
+  ctx.restore();
+}
+
+function setDrawTool(toolId, color, size) {
+  drawColor = color;
+  drawSize = size;
+  document.querySelectorAll(".tool-btn").forEach(b => b.classList.remove("active"));
+  const mapBtn = { pen: "toolPen", road: "toolRoad", green: "toolGreen", eraser: "toolEraser" };
+  document.getElementById(mapBtn[toolId])?.classList.add("active");
+}
+
+function clearMapCanvas() {
+  if (isReadOnly) return;
+  resetCanvasBackground();
+  syncCanvasToInput();
+  updateProgress();
+}
+
+function syncCanvasToInput() {
+  const inp = document.getElementById("denahDataInput");
+  if (inp && canvas) inp.value = canvas.toDataURL("image/png", 0.7);
+}
+
+function restoreCanvasFromData(dataUrl) {
+  if (!ctx || !dataUrl) return;
+  const img = new Image();
+  img.onload = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  };
+  img.src = dataUrl;
+}
+
+// ================= 2. BANTUAN MENGGABUNGKAN KERANGKA DESKRIPSI =================
+function gabungkanDariIde() {
+  const awal = (document.querySelector('[name="ide_awal"]')?.value || '').trim();
+  const tengah = (document.querySelector('[name="ide_tengah"]')?.value || '').trim();
+  const akhir = (document.querySelector('[name="ide_akhir"]')?.value || '').trim();
+  const parts = [awal, tengah, akhir].filter(Boolean);
+  if (parts.length === 0) {
+    return showModal("<h3>💡 Isi Kerangka Dahulu</h3><p>Tuliskan ide pada bagian awal, tengah, atau akhir terlebih dahulu sebelum digabungkan.</p><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  }
+  const target = document.querySelector('[name="teks_deskripsi"]');
+  target.value = parts.join(" ");
+  updateWordCount();
+  updateProgress();
+}
+
+function updateWordCount() {
+  const txt = (document.querySelector('[name="teks_deskripsi"]')?.value || '').trim();
+  const words = txt ? txt.split(/\s+/).filter(Boolean).length : 0;
+  const info = document.getElementById("wordCountInfo");
+  if (info) info.textContent = `${words} kata`;
+}
+
+// ================= 3. DATABASE SISWA & KELOMPOK =================
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN anggota kelompok lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Offline: Gagal memuat database siswa."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => s.nisn === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><p>Pastikan NISN sudah benar sesuai data sekolah.</p><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><p>Maksimal 5 siswa per kelompok.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+// ================= 4. PROGRES, SIMPAN DRAF, & PENGIRIMAN LMS =================
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+function collect() {
+  syncCanvasToInput();
+  let d = {};
+  getValFields().forEach(el => d[el.name] = el.value);
+  return d;
+}
+
+function setupInputs() {
+  getValFields().forEach(el => {
+    el.addEventListener("input", () => { updateProgress(); updateWordCount(); });
+    el.addEventListener("change", () => { updateProgress(); updateWordCount(); });
+  });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields(); let filled = 0;
+  vals.forEach(x => { if (String(x.value || "").trim()) filled++; });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  document.getElementById("progressBar").style.width = Math.min(100, Math.round((filled + (groupMembers.length > 0 ? 1 : 0)) / (vals.length + 2) * 100)) + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({
+    members: groupMembers,
+    tanggal: document.querySelector('[name="tanggal"]').value,
+    answers: collect()
+  }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><p>Tulisan deskripsi dan denahmu telah disimpan di perangkat ini.</p><button class='btn-main' onclick='closeModal()'>Lanjutkan</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE)); if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = d.tanggal;
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+      if (d.answers.denah_gambar) restoreCanvasFromData(d.answers.denah_gambar);
+    }
+    updateWordCount();
+    updateProgress();
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) {
+    return showModal("<h3>⚠️ Identitas Belum Lengkap</h3><p>Pastikan <b>Hari/Tanggal</b> dan <b>Data Siswa/Kelompok</b> sudah diisi sebelum mengirim!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Lembar Kerja...</h3><p>Menyimpan teks deskripsi ke Database LMS SDN 1 Sukahaji.</p>");
+  let payload = {
+    action: 'submitLKPD',
+    lkpdId: LKPD_ID,
+    subject: SUBJECT,
+    hariTanggal: tgl,
+    materiPokok: document.querySelector('[name="materi"]').value,
+    members: groupMembers,
+    answers: JSON.stringify(collect())
+  };
+
+  try {
+    let res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      document.querySelectorAll("#lkpd input, #lkpd select, #lkpd textarea").forEach(el => el.disabled = true);
+      document.getElementById("topActions").style.display = "none";
+      document.getElementById("statusText").style.display = "block";
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Lembar kerja telah masuk ke Dasbor Guru.</p><button class='btn-main' onclick='closeModal()'>Selesai</button>`);
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Koneksi Terputus</h3><p>Silakan coba kirim kembali.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+};
+
+// ================= 5. MODE BACA (READ-ONLY) & PENILAIAN GURU =================
+async function loadLMSViewMode() {
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  showModal("<div class='spinner'></div><h3>Memuat Data Lembar Kerja...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + LKPD_ID + "&submissionId=" + submissionId);
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if (result.members && result.members.length > 0) {
+        groupMembers = result.members;
+        renderMembers();
+      } else {
+        document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database Master LMS)</i></div>`;
+      }
+
+      Object.keys(answers).forEach(k => {
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+      if (answers.denah_gambar) restoreCanvasFromData(answers.denah_gambar);
+      updateWordCount();
+
+      document.querySelectorAll("#lkpd input, #lkpd select, #lkpd textarea, .tool-btn, .map-toolbar .btn-light").forEach(el => {
+        el.disabled = true; el.readOnly = true;
+      });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel"); panel.classList.add("show");
+      let scale = document.getElementById("gradeScale"), note = document.getElementById("gradeNote"), btn = document.getElementById("lockGradeBtn"), st = document.getElementById("teacherStatus");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          scale.disabled = true; note.disabled = true; btn.style.display = "none";
+          st.innerHTML = "✅ <b>Selesai Dinilai.</b> Nilai sudah terdistribusi ke seluruh anggota kelompok.";
+          renderStars(scale.value);
+        } else {
+          st.innerHTML = "📝 <b>Mode Penilaian Guru Aktif.</b> Periksa teks deskripsi dan denah rute siswa di atas.";
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none"; scale.disabled = true; note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade; note.value = result.feedback;
+          st.innerHTML = "🏆 <b>Hasil Penilaian Guru:</b>";
+          renderStars(scale.value);
+        } else {
+          st.innerHTML = "⏳ <b>Menunggu Penilaian Guru.</b>";
+        }
+      }
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) {
+  const n = { A:4, B:3, C:2, D:1 }[v] || 0;
+  const st = document.getElementById("starRating");
+  st.textContent = '★'.repeat(n) + '☆'.repeat(4 - n);
+  st.style.color = n ? '#f59e0b' : '#cbd5e1';
+}
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian terlebih dahulu!");
+  let btn = document.getElementById("lockGradeBtn"); btn.disabled = true; btn.innerText = "⏳ Menyimpan & Mendistribusikan Nilai...";
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'saveGrade', lkpdId: LKPD_ID, submissionId: submissionId, grade: grade, feedback: feedback })
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Nilai Berhasil Didistribusikan";
+      document.getElementById("gradeScale").disabled = true;
+      document.getElementById("gradeNote").disabled = true;
+      document.getElementById("teacherStatus").innerHTML = "🔒 <b>Berhasil!</b> Nilai telah masuk ke riwayat seluruh anggota kelompok.";
+    }
+  } catch (e) { alert("Koneksi gagal."); btn.disabled = false; }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
