@@ -1,1 +1,2143 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.2 (GAMIFIKASI MATEMATIKA - PERSEN & JEMBATAN PECAHAN) -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 2.4 Matematika - Persen & Jembatan Pecahan–Desimal–Persen</title>
+<style>
+:root {
+  --green: #059669; --green2: #047857; --green-soft: #dcfce7;
+  --ink: #1e293b; --slate: #334155; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --red: #ef4444; --red-soft: #fee2e2;
+  --math-main: #db2777; --math-light: #fce7f3; --math-dark: #831843; --math-accent: #f59e0b;
+  --teal: #0d9488; --teal-soft: #ccfbf1; --teal-dark: #115e59;
+  --blue: #0284c7; --blue-soft: #e0f2fe; --blue-dark: #0c4a6e;
+  --indigo: #4f46e5; --indigo-soft: #e0e7ff; --indigo-dark: #312e81;
+  --amber: #d97706; --amber-soft: #fef3c7; --amber-dark: #92400e;
+  --rose: #e11d48; --rose-soft: #ffe4e6; --rose-dark: #9f1239;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: linear-gradient(135deg, #fdf2f8, #fef3c7 52%, #ecfdf5);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--ink); overflow-x: hidden;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(6px); opacity: .45; pointer-events: none;
+}
+body::before { width: 260px; height: 260px; background: #fbcfe8; left: -75px; top: 120px; }
+body::after { width: 220px; height: 220px; background: #fde68a; right: -55px; bottom: 90px; }
 
+/* ================= APPBAR ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--math-main); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--math-dark); background: var(--math-light); padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow, .2s background; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--math-main); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-indigo { background: var(--indigo); color: #fff; }
+.btn-teal { background: var(--teal); color: #fff; }
+.btn-amber { background: var(--amber); color: #fff; }
+.btn-sm { padding: 6px 11px; font-size: 12.5px; border-radius: 9px; }
+
+.progress { height: 6px; background: var(--math-light); position: sticky; top: 61px; z-index: 29; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--math-main), var(--math-accent)); transition: .3s; }
+
+/* ================= HERO & IDENTITAS ================= */
+.sheet {
+  width: min(1040px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px;
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #fdf2f8, #fffbeb); border-radius: 22px; padding: 26px; border: 1px solid #fbcfe8; }
+.badge { display: inline-block; background: var(--math-main); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(25px, 4vw, 33px); line-height: 1.15; margin: 0 0 12px; color: var(--math-dark); }
+h2 { margin: 0; font-size: 20px; color: var(--ink); }
+p { line-height: 1.65; font-size: 15px; color: var(--slate); }
+
+.mission {
+  background: #fff; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; justify-content: center; text-align: center; font-size: 15px; border: 2px dashed var(--math-accent);
+}
+.mission-icon { font-size: 54px; animation: bob 2.8s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(-3deg); } }
+
+.concept-strip {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;
+}
+.concept-pill {
+  border-radius: 14px; padding: 11px 14px; font-size: 13.5px; line-height: 1.5; font-weight: 600;
+}
+.concept-pill.c-p { background: #fce7f3; border: 1.5px solid #f9a8d4; color: #831843; }
+.concept-pill.c-b { background: #d1fae5; border: 1.5px solid #6ee7b7; color: #065f46; }
+
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.field label { display: block; font-size: 13px; font-weight: 900; color: #334155; margin-bottom: 6px; }
+.idgrid input, .grade-panel select, .grade-panel textarea {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s;
+}
+.idgrid input:focus, .grade-panel select:focus, .grade-panel textarea:focus {
+  border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.2);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge { background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.member-badge span { cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px; display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px; }
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+
+/* ================= GAME LEVEL & ZONA ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--math-light); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--math-main); color: #fff; font-weight: 900; flex: 0 0 auto; font-size: 17px; }
+
+.game-level { position: relative; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 22px; margin-bottom: 10px; transition: all .3s; }
+.game-level.locked { opacity: 0.62; pointer-events: none; filter: grayscale(92%); min-height: 220px; }
+.lock-overlay { position: absolute; inset: 0; background: rgba(248, 250, 252, 0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; border-radius: 16px; text-align: center; padding: 20px; }
+.lock-icon { font-size: 52px; margin-bottom: 8px; }
+.game-level.unlocked .lock-overlay { display: none; }
+.game-level.completed { border-color: var(--green); background: #f0fdf4; }
+
+.story-box { background: #fff; border-left: 5px solid var(--math-main); padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); font-size: 14.5px; font-weight: 600; line-height: 1.6; }
+
+/* ================= KARTU SOAL ================= */
+.q-card {
+  background: #ffffff; border: 2px solid #e2e8f0; border-radius: 18px;
+  padding: 20px; margin-bottom: 22px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  transition: border-color .25s, box-shadow .25s;
+}
+.q-card.card-correct { border-color: #22c55e; background: #fafffe; }
+.q-card.card-wrong { border-color: #ef4444; animation: shake 0.4s; }
+
+.q-header {
+  display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px;
+  background: #f8fafc; border-left: 4px solid var(--math-main); padding: 12px 16px; border-radius: 12px;
+}
+.q-no {
+  background: var(--math-main); color: #fff; font-weight: 900; font-size: 13px;
+  padding: 4px 10px; border-radius: 99px; flex: 0 0 auto; margin-top: 2px;
+}
+.q-story { font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.55; }
+
+.q-hint {
+  display: none; margin-top: 10px; padding: 9px 14px; border-radius: 10px;
+  background: var(--red-soft); color: #991b1b; font-size: 13px; font-weight: 700;
+}
+.q-hint.show { display: block; }
+
+/* ================= PAPAN 100 UBIN & INDIKATOR BATERAI ================= */
+.stage-panel {
+  background: linear-gradient(135deg, #fdf2f8, #fffbeb); border: 2px dashed var(--math-main);
+  border-radius: 16px; padding: 14px; margin-bottom: 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.stage-panel.teal-panel { background: linear-gradient(135deg, #f0fdfa, #f0f9ff); border-color: var(--teal); }
+.brush-bar { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; align-items: center; width: 100%; }
+.brush-btn {
+  padding: 6px 12px; border-radius: 99px; font-size: 12.5px; font-weight: 900;
+  background: #fff; border: 2px solid #cbd5e1; color: var(--slate);
+}
+.brush-btn.active { background: var(--math-main); border-color: var(--math-dark); color: #fff; }
+.brush-btn:hover { transform: none; box-shadow: none; border-color: var(--math-main); }
+
+.grid100 {
+  display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px;
+  width: min(295px, 100%); aspect-ratio: 1 / 1;
+  background: #475569; padding: 4px; border-radius: 12px; user-select: none;
+}
+.grid100.compact { width: min(230px, 100%); }
+.g100-cell {
+  background: #ffffff; border-radius: 3px; cursor: pointer; transition: background .12s;
+}
+.g100-cell:hover { background: #fbcfe8; }
+.g100-cell.on-pink   { background: linear-gradient(135deg, #f472b6, #db2777); }
+.g100-cell.on-blue   { background: linear-gradient(135deg, #38bdf8, #0284c7); }
+.g100-cell.on-green  { background: linear-gradient(135deg, #34d399, #059669); }
+.g100-cell.on-amber  { background: linear-gradient(135deg, #fbbf24, #d97706); }
+.g100-cell.on-indigo { background: linear-gradient(135deg, #818cf8, #4f46e5); }
+.g100-cell.on-teal   { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
+.g100-cell.b-r { border-right: 2.5px solid #ef4444; }
+.g100-cell.b-b { border-bottom: 2.5px solid #ef4444; }
+.g100-cell.locked-cell { cursor: default; }
+
+.stat-pill {
+  background: #fff; border: 1.5px solid #cbd5e1; border-radius: 99px;
+  padding: 5px 14px; font-size: 13px; font-weight: 800; color: var(--slate); text-align: center;
+}
+.stat-pill b { color: var(--math-dark); }
+.stat-pill.ok { background: #dcfce7; border-color: #86efac; color: #166534; }
+
+.twin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; }
+.board-card {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 16px; padding: 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.board-card.b-ok { border-color: #22c55e; background: #f0fdf4; }
+.board-card.b-err { border-color: #ef4444; background: #fef2f2; }
+.board-title { font-size: 13.5px; font-weight: 900; color: var(--ink); text-align: center; }
+
+/* ================= ZONA 3: SORTIR KEMBAR TIGA & DETEKTIF ================= */
+.sort-pool {
+  background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 14px;
+  padding: 12px; margin-bottom: 12px; min-height: 60px;
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center;
+}
+.pct-chip {
+  background: #fff; border: 2.5px solid var(--indigo); color: var(--indigo-dark);
+  border-radius: 12px; padding: 7px 14px; font-size: 15px; font-weight: 900;
+  cursor: grab; user-select: none; transition: .15s; box-shadow: 0 3px 8px rgba(79,70,229,0.12);
+}
+.pct-chip:hover { transform: translateY(-2px); }
+.pct-chip.armed { background: var(--indigo); color: #fff; box-shadow: 0 0 0 4px rgba(79,70,229,0.28); }
+.pct-chip.chip-ok { border-color: #22c55e; background: #dcfce7; color: #15803d; }
+.pct-chip.chip-err { border-color: #ef4444; background: #fee2e2; color: #b91c1c; }
+
+.buckets-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.bucket {
+  border-radius: 16px; padding: 12px; min-height: 112px; cursor: pointer;
+  display: flex; flex-direction: column; gap: 8px; transition: .2s;
+}
+.bucket.b1 { background: #fce7f3; border: 2.5px solid #f472b6; }
+.bucket.b2 { background: #e0f2fe; border: 2.5px solid #38bdf8; }
+.bucket.b3 { background: #fef3c7; border: 2.5px solid #fbbf24; }
+.bucket.drag-over { transform: scale(1.02); box-shadow: 0 0 0 4px rgba(79,70,229,0.22); }
+.bucket-title { font-size: 13px; font-weight: 900; text-align: center; padding-bottom: 6px; border-bottom: 1.5px dashed rgba(0,0,0,0.12); color: var(--ink); }
+.bucket-items { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; align-items: center; flex: 1; }
+
+.choice-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
+.tf-btn {
+  padding: 10px 20px; border-radius: 12px; background: #fff; border: 2.5px solid #cbd5e1;
+  font-size: 14px; font-weight: 900; color: var(--slate);
+}
+.tf-btn.selected { background: var(--indigo); border-color: var(--indigo-dark); color: #fff; }
+.tf-btn.s-ok { background: #16a34a !important; border-color: #15803d !important; color: #fff !important; }
+.tf-btn.s-err { background: #ef4444 !important; border-color: #b91c1c !important; color: #fff !important; }
+
+/* ================= ZONA 4: UANG DISKON, PROGRES UNDUHAN & SURVEI ================= */
+.money-arena {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+  background: #f8fafc; border: 2px dashed var(--amber); border-radius: 16px;
+  padding: 14px; margin-bottom: 14px;
+}
+.bill-card {
+  width: 118px; padding: 10px 8px; border-radius: 12px; cursor: pointer; user-select: none;
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 2.5px solid #10b981;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  font-weight: 900; color: #065f46; transition: .18s; position: relative;
+}
+.bill-card.bill-5k {
+  width: 142px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-color: #d97706; color: #92400e;
+}
+.bill-card:hover { transform: translateY(-2px); }
+.bill-card.discounted {
+  background: linear-gradient(135deg, #ffe4e6, #fecdd3); border-color: #e11d48; color: #9f1239;
+  box-shadow: 0 0 0 3px rgba(225,29,72,0.22);
+}
+.bill-tag {
+  font-size: 10.5px; font-weight: 900; padding: 2px 7px; border-radius: 99px;
+  background: rgba(255,255,255,0.85); color: #334155;
+}
+.bill-card.discounted .bill-tag { background: #e11d48; color: #fff; }
+
+.dl-row {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 14px; padding: 10px 14px;
+  display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px;
+}
+.dl-row.r-ok { border-color: #22c55e; background: #f0fdf4; }
+.dl-row.r-err { border-color: #ef4444; background: #fef2f2; }
+.dl-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 13px; font-weight: 900; }
+.dl-bar { width: 100%; height: 22px; background: #e2e8f0; border-radius: 99px; overflow: hidden; border: 1.5px solid #64748b; }
+.dl-fill { height: 100%; transition: width .2s; border-radius: 99px; }
+
+.order-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.order-slot {
+  background: #fff; border: 2px dashed #f472b6; border-radius: 14px; padding: 10px 8px;
+  min-height: 74px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  cursor: pointer; transition: .18s;
+}
+.order-slot:hover, .order-slot.drag-over { border-color: var(--math-main); background: var(--math-light); }
+.slot-lbl { font-size: 11px; font-weight: 900; color: var(--muted); text-transform: uppercase; }
+
+.legend-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.leg-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 800; background: #fff; border: 1.5px solid #cbd5e1; border-radius: 99px; padding: 4px 12px; }
+.leg-dot { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+
+/* ================= BARIS PERSAMAAN & INPUT ================= */
+.eq-bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px;
+  background: #fdf2f8; border: 2px solid #fbcfe8; border-radius: 16px; padding: 14px 16px;
+}
+.eq-bar.teal-bar   { background: #f0fdfa; border-color: #99f6e4; }
+.eq-bar.indigo-bar { background: #eef2ff; border-color: #c7d2fe; }
+.eq-bar.amber-bar  { background: #fffbeb; border-color: #fde68a; }
+
+.frac-stack { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.frac-static { font-size: 19px; font-weight: 900; color: var(--ink); min-width: 34px; text-align: center; }
+.frac-line { width: 58px; height: 3.5px; background: var(--ink); border-radius: 2px; }
+.eq-sym { font-size: 22px; font-weight: 900; color: var(--ink); }
+.eq-sub { font-size: 11px; font-weight: 800; color: var(--math-dark); text-transform: uppercase; }
+.eq-bar.teal-bar .eq-sub { color: var(--teal-dark); }
+
+.m-in {
+  width: 58px; height: 40px; text-align: center; font-size: 17px; font-weight: 900;
+  color: #0f172a; border: 2px solid #94a3b8; border-radius: 10px; background: #fff;
+  outline: none; transition: .2s; font-family: inherit;
+}
+.m-in.dec { width: 80px; background: #fef08a; border-color: #eab308; font-size: 18px; }
+.m-in.pct { width: 66px; background: #fce7f3; border-color: #db2777; font-size: 18px; color: #831843; }
+.m-in.rp  { width: 96px; background: #fef08a; border-color: #eab308; font-size: 17px; }
+.m-in:focus { border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.22); }
+
+.sign-picker { display: flex; gap: 6px; align-items: center; }
+.sign-btn {
+  width: 44px; height: 44px; border-radius: 12px; background: #fff;
+  border: 2.5px solid #cbd5e1; font-size: 21px; font-weight: 900; color: var(--ink);
+  display: grid; place-items: center; padding: 0;
+}
+.sign-btn:hover { border-color: var(--indigo); background: var(--indigo-soft); transform: translateY(-1px); }
+.sign-btn.selected { background: var(--indigo); border-color: var(--indigo-dark); color: #fff; }
+.sign-btn.s-ok { background: #16a34a !important; border-color: #15803d !important; color: #fff !important; }
+.sign-btn.s-err { background: #ef4444 !important; border-color: #b91c1c !important; color: #fff !important; }
+
+.lkpd-val.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+.lkpd-val.wrong { animation: shake 0.4s; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);} }
+
+.check-btn { display: block; margin: 20px auto 0; background: var(--math-main); color: #fff; border-radius: 99px; padding: 13px 32px; font-weight: 900; font-size: 15px; }
+
+/* ================= PANEL PENILAIAN GURU + TABEL OBSERVASI (SOP V4.2) ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 24px; margin: 20px auto; width: min(1040px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.obs-wrap { overflow-x: auto; margin-bottom: 18px; }
+.rubric-table {
+  width: 100%; border-collapse: collapse; background: #fff; border-radius: 14px; overflow: hidden;
+  border: 1.5px solid #cbd5e1; font-size: 13.5px;
+}
+.rubric-table th { background: var(--math-dark); color: #fff; padding: 10px 12px; text-align: left; font-weight: 800; }
+.rubric-table td { padding: 10px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; color: var(--ink); line-height: 1.5; }
+.rubric-table tr:nth-child(even) td { background: #f8fafc; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 50; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #fce7f3; border-top-color: var(--math-main); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 780px) {
+  .hero, .idgrid, .grade-grid, .twin-grid, .buckets-3, .concept-strip { grid-template-columns: 1fr; }
+  .order-slots { grid-template-columns: repeat(2, 1fr); }
+  .sheet { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="appbar" id="appbar">
+  <div class="brand">🧮 PORTAL LMS SDN 1 SUKAHAJI</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Jawaban</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 2.4 • SERI PECAHAN (4/4 — PENUTUP)</span>
+      <h1>Persen (%) &amp; Jembatan Pecahan–Desimal–Persen</h1>
+      <p><b>Matematika • Fase B / Kelas IV</b><br>Mari mengisi baterai Chromebook, mewarnai papan 100 ubin, menghitung diskon belanja koperasi, dan menyusun survei kelas untuk menguasai <b>konsep Persen (%)</b> dan hubungannya dengan <b>Pecahan Biasa</b> serta <b>Desimal</b>!</p>
+
+      <div class="concept-strip">
+        <div class="concept-pill c-p">🔋 <b>Persen (%) = Per Seratus (/100):</b><br><b>25/100 = 25%</b> &nbsp;|&nbsp; <b>8/100 = 8% = 0,08</b> (bukan 80%!).</div>
+        <div class="concept-pill c-b">🌉 <b>Jembatan 3 Wujud Populer:</b><br><b>1/2 = 0,5 = 50%</b> &nbsp;|&nbsp; <b>1/4 = 0,25 = 25%</b> &nbsp;|&nbsp; <b>3/4 = 0,75 = 75%</b>.</div>
+      </div>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input type="date" name="tanggal" id="inputTanggal" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Konsep Persen dan Hubungan Pecahan, Desimal, dan Persen" readonly>
+        </div>
+        <div class="group-builder">
+          <label>👥 Data Kelompok (1 – 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN temanmu..." style="flex:1;">
+              <button type="button" class="btn-main" id="btnAddMember" disabled>🔍 Cari &amp; Tambah</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa...</p>
+          </div>
+          <div id="readGroupView" style="display:none;"><div class="readonly-group-list" id="readonlyMemberList"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">🔋🏷️💯</div>
+      <b>🎯 Misi Penutup Bab Pecahan</b>
+      <p>Taklukkan <b>4 Zona Gamifikasi (16 Soal Konkret)</b> untuk meraih gelar <b>Master Pecahan, Desimal &amp; Persen</b>!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZONA 1: MAKNA PERSEN (UBIN 100 & BATERAI) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Zona 1: Makna Persen — Papan 100 Ubin &amp; Baterai Chromebook (Soal 1–4)</h2></div>
+  <div class="game-level unlocked" id="level1">
+    <div class="story-box">
+      🔋 <b>Petunjuk:</b> Persen artinya <b>per seratus</b>! Warnai papan 100 ubin (pakai tombol <b>+10 / +1</b> atau klik langsung) dan isi daya baterai Chromebook sesuai cerita, lalu lengkapi bentuk perseratusan dan persennya!
+    </div>
+    <div id="zone1Container"></div>
+    <button type="button" class="check-btn" onclick="checkLevel(1)">Periksa Zona 1 &amp; Buka Zona 2 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 2: JEMBATAN 3 WUJUD (PECAHAN - DESIMAL - PERSEN) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--teal);">2</div><h2>Zona 2: Jembatan 3 Wujud — Pecahan Biasa ↔ Desimal ↔ Persen (Soal 5–8)</h2></div>
+  <div class="game-level locked" id="level2">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 2 Terkunci</b><p>Selesaikan Zona 1 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--teal);">
+      🌉 <b>Petunjuk:</b> Papan 100 ubin dibagi garis merah menjadi <b>2 paruh</b>, <b>4 kuadran</b>, atau <b>5 lajur</b> sama besar! Klik bagian papan sesuai pecahan pada cerita untuk melihat berapa per seratusnya, lalu lengkapi ketiga wujudnya: <b>Pecahan /100 = Desimal = Persen (%)</b>!
+    </div>
+    <div id="zone2Container"></div>
+    <button type="button" class="check-btn" style="background:var(--teal);" onclick="checkLevel(2)">Periksa Zona 2 &amp; Buka Zona 3 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 3: SORTIR KEMBAR TIGA & DETEKTIF ANTI-MISKONSEPSI ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--indigo);">3</div><h2>Zona 3: Sortir Kembar Tiga &amp; Detektif Persen (Soal 9–12)</h2></div>
+  <div class="game-level locked" id="level3">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 3 Terkunci</b><p>Selesaikan Zona 2 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--indigo);">
+      🕵️‍♂️ <b>Petunjuk:</b> Pada <b>Soal 9–10</b>, sortir kartu pecahan &amp; desimal ke keranjang persen yang senilai! Pada <b>Soal 11–12</b>, bandingkan dua baterai dan patahkan miskonsepsi <b>0,07 vs 70%</b> di papan 100 ubin!
+    </div>
+    <div id="zone3Container"></div>
+    <button type="button" class="check-btn" style="background:var(--indigo);" onclick="checkLevel(3)">Periksa Zona 3 &amp; Buka Zona 4 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 4: MISI PUNCAK — DISKON, UNDUHAN & SURVEI 100% ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--amber);">4</div><h2>Zona 4: Misi Puncak — Diskon Koperasi, Progres Unduhan &amp; Survei Kelas (Soal 13–16)</h2></div>
+  <div class="game-level locked" id="level4">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 4 Terkunci</b><p>Selesaikan Zona 3 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--amber);">
+      🏆 <b>Misi Puncak Bab 2 Pecahan:</b> Gunakan konsep persen dalam kehidupan nyata—menghitung potongan diskon belanja koperasi (Soal 13–14), mengurutkan progres unduhan e-book dalam wujud campuran (Soal 15), dan melengkapi survei 100 siswa hingga genap 100% (Soal 16)!
+    </div>
+    <div id="zone4Container"></div>
+    <button type="button" class="check-btn" style="background:var(--amber);" onclick="checkLevel(4)">Kunci Jawaban Akhir Bab Pecahan! 🏆</button>
+    <div id="msgFinal" style="display:none; text-align:center; color:var(--green2); font-weight:900; font-size:18px; margin-top:16px; background:#dcfce7; padding:16px; border-radius:14px; border:2px solid #22c55e;">
+      🎉 SELAMAT! KAMU TELAH MENAKLUKKAN SELURUH SERI BAB 2 PECAHAN (LKPD 2.1 – 2.4) DENGAN GEMILANG! 🎉
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:24px; display:flex; justify-content:center;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 28px; font-size:16px; display:none;">📤 Kirim Hasil Pekerjaan ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN GURU + TABEL OBSERVASI (SOP V4.2) ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik &amp; Tabel Observasi Penilaian Guru</h2></div>
+
+  <div class="obs-wrap">
+    <table class="rubric-table">
+      <thead>
+        <tr>
+          <th style="width:22%;">Aspek / Zona Observasi</th>
+          <th style="width:19%;">A (Sangat Baik)</th>
+          <th style="width:19%;">B (Baik)</th>
+          <th style="width:20%;">C (Cukup)</th>
+          <th style="width:20%;">D (Perlu Bimbingan)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>1. Makna Persen (/100 ↔ %)</b><br><span style="font-size:12px; color:#64748b;">(Zona 1)</span></td>
+          <td>Tepat memodelkan papan 100 &amp; baterai serta menulis perseratusan, persen, &amp; desimal (termasuk 8% = 0,08).</td>
+          <td>Model konkret tepat, hanya 1 kekeliruan kecil pada penulisan desimal 0,08.</td>
+          <td>Masih sering mengira 8% sama dengan 0,8 atau keliru mengisi skala baterai.</td>
+          <td>Belum memahami arti simbol persen (%) sebagai perseratusan (/100).</td>
+        </tr>
+        <tr>
+          <td><b>2. Jembatan 3 Wujud</b><br><span style="font-size:12px; color:#64748b;">(Zona 2)</span></td>
+          <td>Lancar menghubungkan 1/2, 1/4, 3/4, dan 2/5 menjadi bentuk /100, desimal, &amp; persen 100% tepat.</td>
+          <td>Tepat pada ≥ 3 dari 4 soal jembatan 3 wujud melalui visual papan 100.</td>
+          <td>Masih bingung mengubah penyebut 4 atau 5 ke perseratusan tanpa bantuan guru.</td>
+          <td>Belum mampu mengaitkan pecahan biasa dengan desimal dan persen.</td>
+        </tr>
+        <tr>
+          <td><b>3. Sortir &amp; Anti-Miskonsepsi</b><br><span style="font-size:12px; color:#64748b;">(Zona 3)</span></td>
+          <td>Menyortir seluruh kartu lintas wujud dengan tepat serta membedakan 0,07 (7%) vs 70% dan 0,6 vs 45%.</td>
+          <td>Berhasil menyortir &amp; membandingkan setelah 1 kali cek visual baterai/ubin.</td>
+          <td>Masih terkecoh menyamakan 0,05 dengan 50% atau 0,07 dengan 70%.</td>
+          <td>Belum dapat membandingkan nilai lintas wujud (pecahan, desimal, persen).</td>
+        </tr>
+        <tr>
+          <td><b>4. Aplikasi Diskon, Urutan &amp; Survei 100%</b><br><span style="font-size:12px; color:#64748b;">(Zona 4)</span></td>
+          <td>Tepat menghitung diskon koperasi, mengurutkan 4 wujud campuran, &amp; melengkapi survei total 100%.</td>
+          <td>Menuntaskan 3 dari 4 misi puncak secara mandiri dan akurat.</td>
+          <td>Masih keliru membedakan besar potongan diskon dengan harga yang harus dibayar.</td>
+          <td>Memerlukan bimbingan langsung dalam menerapkan persen pada soal cerita sehari-hari.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Pemahaman Persen &amp; Jembatan Pecahan (LKPD 2.4)</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (Menguasai persen, konversi 3 wujud pecahan–desimal–persen, &amp; aplikasi diskon/survei)</option>
+        <option value="B">B — Baik (Memahami konsep persen &amp; konversi dengan sedikit kekeliruan hitung)</option>
+        <option value="C">C — Cukup (Masih memerlukan bantuan membedakan 0,07 vs 70% atau menghitung diskon)</option>
+        <option value="D">D — Perlu Bimbingan (Belum memahami hubungan persen dengan perseratusan &amp; desimal)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi dan evaluasi untuk siswa/kelompok ini..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:16px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan &amp; Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 2.4 MATEMATIKA (LMS V4.2)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Matematika';
+const LKPD_ID  = '2.4_Persen_Pecahan';
+const STORAGE  = 'lkpd_mtk_2_4_v42';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+let readOnlyMode = false;
+let unlockedMax  = 1;
+
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+function cleanDecInput(el) {
+  el.value = el.value.replace(/\./g, ',').replace(/[^0-9,]/g, '');
+}
+function cleanRpInput(el) {
+  el.value = el.value.replace(/[^0-9.]/g, '');
+}
+
+// =========================================================================
+// GENERATOR SVG INDIKATOR BATERAI CHROMEBOOK / TABLET (0% – 100%)
+// =========================================================================
+function makeBatterySVG(pct, width = 250) {
+  const fillCol = pct >= 60 ? '#10b981' : (pct >= 30 ? '#f59e0b' : '#ef4444');
+  const barW = 200 * (pct / 100);
+  let ticks = '';
+  for (let i = 1; i < 10; i++) {
+    const x = 16 + i * 20;
+    ticks += `<line x1="${x}" y1="18" x2="${x}" y2="76" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.4" stroke-dasharray="3,2"/>`;
+  }
+  return `<svg width="${width}" viewBox="0 0 248 94" aria-label="Baterai ${pct}%">
+    <rect x="8" y="10" width="216" height="74" rx="14" fill="#f8fafc" stroke="#334155" stroke-width="4"/>
+    <rect x="224" y="30" width="16" height="34" rx="5" fill="#334155"/>
+    <rect x="16" y="18" width="200" height="58" rx="8" fill="#e2e8f0"/>
+    <rect x="16" y="18" width="${barW.toFixed(1)}" height="58" rx="8" fill="${fillCol}"/>
+    ${ticks}
+    <text x="116" y="55" text-anchor="middle" font-size="24" font-weight="900" fill="${pct >= 45 ? '#ffffff' : '#0f172a'}" style="text-shadow:0 1px 2px rgba(0,0,0,0.2);">${pct}%</text>
+  </svg>`;
+}
+
+// =========================================================================
+// DATA 16 SOAL KONTEKSTUAL (4 ZONA GAMIFIKASI)
+// =========================================================================
+
+// ZONA 1 (Soal 1–4): Makna Persen (Papan 100 & Baterai)
+const Z1_DATA = [
+  {
+    id: 'z1_q1', no: 1, icon: '🧱', mode: 'grid', colorCls: 'on-pink',
+    story: '<b>Ubin Panggung Pentas (25/100):</b> Panggung sekolah terdiri dari <b>100 ubin</b>. Sebanyak <b>25/100</b> bagian dipasang karpet merah muda. Warnai 25 ubin pada papan 10×10, lalu tuliskan dalam bentuk persen (%)!',
+    target: 25, given: 'frac', extraDec: null
+  },
+  {
+    id: 'z1_q2', no: 2, icon: '💻', mode: 'battery',
+    story: '<b>Baterai Chromebook Kelas (60%):</b> Sebelum kuis dimulai, baterai Chromebook terisi <b>60%</b>. Atur daya baterai di bawah ini hingga tepat <b>60%</b>, lalu ubah menjadi bentuk pecahan perseratusan!',
+    target: 60, given: 'pct', extraDec: null
+  },
+  {
+    id: 'z1_q3', no: 3, icon: '📱', mode: 'battery',
+    story: '<b>Baterai Tablet Guru (85/100):</b> Tablet yang dipakai merekam kegiatan terisi <b>85/100</b> daya penuh. Atur daya baterai hingga <b>85%</b> (gunakan tombol +10% dan +5%), lalu tulis bentuk persennya!',
+    target: 85, given: 'frac', extraDec: null
+  },
+  {
+    id: 'z1_q4', no: 4, icon: '⚠️', mode: 'grid', colorCls: 'on-blue',
+    story: '<b>Hati-hati Persen Satuan (8/100):</b> Di aula sekolah ada 100 kursi dan <b>8/100</b> di antaranya berwarna biru. Warnai tepat <b>8 ubin</b> saja, lalu lengkapi bentuk <b>persen (%)</b> dan <b>desimalnya</b> dengan teliti!',
+    target: 8, given: 'frac', extraDec: '0,08'
+  }
+];
+
+// ZONA 2 (Soal 5–8): Jembatan 3 Wujud (Pecahan Biasa <-> /100 <-> Desimal <-> Persen)
+const Z2_DATA = [
+  {
+    id: 'z2_q5', no: 5, icon: '🎂', splitMode: 'half', colorCls: 'on-pink',
+    story: '<b>Setengah Loyang (1/2):</b> Papan 100 ubin dibagi garis merah menjadi <b>2 bagian sama besar</b> (masing-masing 50 ubin). Klik <b>1 bagian (1/2)</b>, lalu lengkapi jembatan 3 wujudnya!',
+    n: 1, d: 2, targetGroups: 1, targetTiles: 50, decAns: '0,5|0,50', pctAns: 50
+  },
+  {
+    id: 'z2_q6', no: 6, icon: '🥧', splitMode: 'quad', colorCls: 'on-teal',
+    story: '<b>Seperempat Loyang (1/4):</b> Papan 100 ubin dibagi menjadi <b>4 bagian sama besar</b> (masing-masing 25 ubin). Klik <b>1 bagian (1/4)</b>, lalu ubah ke perseratusan, desimal, dan persen!',
+    n: 1, d: 4, targetGroups: 1, targetTiles: 25, decAns: '0,25', pctAns: 25
+  },
+  {
+    id: 'z2_q7', no: 7, icon: '📚', splitMode: 'quad', colorCls: 'on-green',
+    story: '<b>Progres Baca Buku (3/4):</b> Dini sudah membaca <b>3/4</b> dari buku ceritanya. Klik <b>3 dari 4 bagian</b> pada papan 100 ubin, lalu lengkapi seluruh bentuk senilainya!',
+    n: 3, d: 4, targetGroups: 3, targetTiles: 75, decAns: '0,75', pctAns: 75
+  },
+  {
+    id: 'z2_q8', no: 8, icon: '🧃', splitMode: 'fifth', colorCls: 'on-amber',
+    story: '<b>Takaran Jus (2/5):</b> Papan 100 ubin dibagi garis merah menjadi <b>5 lajur sama besar</b> (masing-masing 20 ubin). Klik <b>2 dari 5 lajur (2/5)</b>, lalu lengkapi perseratusan, desimal, dan persennya!',
+    n: 2, d: 5, targetGroups: 2, targetTiles: 40, decAns: '0,4|0,40', pctAns: 40
+  }
+];
+
+// ZONA 3A (Soal 9–10): Sortir Kembar Tiga
+const Z3_SORT_DATA = [
+  {
+    id: 'z3_q9', no: 9, icon: '🧲',
+    story: '<b>Mesin Sortir Kembar Tiga (50%, 25%, 5%):</b> Seret setiap kartu pecahan &amp; desimal (atau klik kartu lalu klik keranjang) ke nilai persen yang tepat! Awas jebakan <b>0,05</b>!',
+    buckets: [
+      { key: 'b1', title: '🩷 Senilai 50%' },
+      { key: 'b2', title: '🩵 Senilai 25%' },
+      { key: 'b3', title: '💛 Senilai 5%' }
+    ],
+    cards: [
+      { id: 'c1', label: '1/2',    dest: 'b1' },
+      { id: 'c2', label: '0,50',   dest: 'b1' },
+      { id: 'c3', label: '1/4',    dest: 'b2' },
+      { id: 'c4', label: '0,25',   dest: 'b2' },
+      { id: 'c5', label: '0,05',   dest: 'b3' },
+      { id: 'c6', label: '5/100',  dest: 'b3' }
+    ]
+  },
+  {
+    id: 'z3_q10', no: 10, icon: '🧲',
+    story: '<b>Mesin Sortir Kembar Tiga (20%, 75%, 40%):</b> Kelompokkan ke-6 kartu berikut sesuai nilai persennya! Ingat: 1/5 = 20/100 = 20%.',
+    buckets: [
+      { key: 'b1', title: '🩷 Senilai 20%' },
+      { key: 'b2', title: '🩵 Senilai 75%' },
+      { key: 'b3', title: '💛 Senilai 40%' }
+    ],
+    cards: [
+      { id: 'd1', label: '1/5',    dest: 'b1' },
+      { id: 'd2', label: '0,2',    dest: 'b1' },
+      { id: 'd3', label: '3/4',    dest: 'b2' },
+      { id: 'd4', label: '75/100', dest: 'b2' },
+      { id: 'd5', label: '2/5',    dest: 'b3' },
+      { id: 'd6', label: '0,40',   dest: 'b3' }
+    ]
+  }
+];
+
+// ZONA 4 — Soal 15 (Progres Unduhan Campuran)
+const Z4_Q15_ITEMS = [
+  { key: 'A', name: '📕 E-Book Dongeng', label: '0,8',  target: 80, color: '#e11d48' },
+  { key: 'B', name: '📘 E-Book Sains',   label: '3/4',  target: 75, color: '#0284c7' },
+  { key: 'C', name: '📗 E-Book Koding',  label: '90%',  target: 90, color: '#059669' },
+  { key: 'D', name: '📙 E-Book Sejarah', label: '1/2',  target: 50, color: '#d97706' }
+];
+const Z4_Q15_ORDER = ['1/2', '3/4', '0,8', '90%'];
+
+// =========================================================================
+// STATE INTERAKTIF
+// =========================================================================
+const g100State  = {}; // { boardId: Set(0..99) }
+const g100Brush  = {}; // { boardId: 'col'|'cell' }
+const batState   = {}; // { id: 0..100 }
+const z2GrpState = {}; // { id: Set(groupIdx) }
+const z3SortSt   = {}; // { id: { cardId: 'pool'|'b1'|'b2'|'b3' } }
+let armedZ3      = null;
+
+let q11Sign      = '';
+let q12Verdict   = '';
+const q13Bills   = new Set(); // 10 bills @ Rp1.000
+const q14Bills   = new Set(); // 4 bills @ Rp5.000
+const q15DlVal   = { A: 0, B: 0, C: 0, D: 0 };
+const q15Ord     = [null, null, null, null];
+let armedQ15     = null;
+const q16Music   = new Set(); // indices 80..99 (20 tiles)
+
+// =========================================================================
+// HELPER PAPAN 100 UBIN
+// =========================================================================
+function makeGrid100HTML(boardId, colorCls, compact = false) {
+  let cells = '';
+  for (let r = 0; r < 10; r++) {
+    for (let c = 0; c < 10; c++) {
+      const idx = c * 10 + r;
+      cells += `<div class="g100-cell" id="g100_${boardId}_${idx}" onclick="clickGrid100('${boardId}', ${c}, ${r}, '${colorCls}')"></div>`;
+    }
+  }
+  return `<div class="grid100 ${compact ? 'compact' : ''}">${cells}</div>`;
+}
+
+function setGridBrush(boardId, mode) {
+  if (readOnlyMode) return;
+  g100Brush[boardId] = mode;
+  const bCol  = document.getElementById(`bcol_${boardId}`);
+  const bCell = document.getElementById(`bcell_${boardId}`);
+  if (bCol)  bCol.classList.toggle('active', mode === 'col');
+  if (bCell) bCell.classList.toggle('active', mode === 'cell');
+}
+
+function clickGrid100(boardId, col, row, colorCls) {
+  if (readOnlyMode) return;
+  const set = g100State[boardId];
+  const mode = g100Brush[boardId] || 'col';
+  if (mode === 'col') {
+    let full = true;
+    for (let r = 0; r < 10; r++) { if (!set.has(col * 10 + r)) { full = false; break; } }
+    for (let r = 0; r < 10; r++) {
+      if (full) set.delete(col * 10 + r);
+      else set.add(col * 10 + r);
+    }
+  } else {
+    const idx = col * 10 + row;
+    if (set.has(idx)) set.delete(idx);
+    else set.add(idx);
+  }
+  refreshGrid100(boardId, colorCls, true);
+}
+
+function stepGrid100(boardId, delta, colorCls) {
+  if (readOnlyMode) return;
+  const set = g100State[boardId];
+  const next = Math.max(0, Math.min(100, set.size + delta));
+  set.clear();
+  for (let i = 0; i < next; i++) set.add(i);
+  refreshGrid100(boardId, colorCls, true);
+}
+
+function clearGrid100(boardId, colorCls) {
+  if (readOnlyMode) return;
+  g100State[boardId].clear();
+  refreshGrid100(boardId, colorCls, true);
+}
+
+function refreshGrid100(boardId, colorCls, triggerProgress = true) {
+  const set = g100State[boardId];
+  for (let i = 0; i < 100; i++) {
+    const el = document.getElementById(`g100_${boardId}_${i}`);
+    if (el) el.classList.toggle(colorCls, set.has(i));
+  }
+  const cnt = set.size;
+  const stat = document.getElementById(`stat100_${boardId}`);
+  if (stat) stat.innerHTML = `Terwarnai: <b>${cnt}/100</b> ubin (<b>${cnt}%</b>)`;
+  const hid = document.getElementById(`hid100_${boardId}`);
+  if (hid) hid.value = cnt > 0 ? String(cnt) : '';
+  if (triggerProgress) {
+    clearHint(boardId.replace(/_(L|R)$/, ''));
+    updateProgress();
+  }
+}
+
+// =========================================================================
+// BANGUN SEMUA 4 ZONA
+// =========================================================================
+function buildAllZones() {
+  renderZone1();
+  renderZone2();
+  renderZone3();
+  renderZone4();
+}
+
+// ---------- ZONA 1: PAPAN 100 UBIN & BATERAI ----------
+function renderZone1() {
+  const wrap = document.getElementById('zone1Container');
+  wrap.innerHTML = Z1_DATA.map(q => {
+    let visualHtml = '', hidHtml = '';
+    if (q.mode === 'grid') {
+      g100State[q.id] = new Set();
+      g100Brush[q.id] = 'col';
+      visualHtml = `
+        <div class="brush-bar">
+          <button type="button" class="brush-btn active" id="bcol_${q.id}" onclick="setGridBrush('${q.id}', 'col')">🖌️ Kuas 1 Kolom (+10)</button>
+          <button type="button" class="brush-btn" id="bcell_${q.id}" onclick="setGridBrush('${q.id}', 'cell')">✏️ Kuas 1 Ubin (+1)</button>
+          <button type="button" class="btn-main btn-sm" onclick="stepGrid100('${q.id}', 10, '${q.colorCls}')">+10</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepGrid100('${q.id}', -10, '${q.colorCls}')">−10</button>
+          <button type="button" class="btn-blue btn-sm" onclick="stepGrid100('${q.id}', 1, '${q.colorCls}')">+1</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepGrid100('${q.id}', -1, '${q.colorCls}')">−1</button>
+          <button type="button" class="btn-light btn-sm" onclick="clearGrid100('${q.id}', '${q.colorCls}')">🧹</button>
+        </div>
+        ${makeGrid100HTML(q.id, q.colorCls, false)}
+        <div class="stat-pill" id="stat100_${q.id}">Terwarnai: <b>0/100</b> ubin (<b>0%</b>)</div>`;
+      hidHtml = `<input type="hidden" class="lkpd-val" id="hid100_${q.id}" name="${q.id}_grid" value="">`;
+    } else {
+      batState[q.id] = 0;
+      visualHtml = `
+        <div id="bat_${q.id}"></div>
+        <div class="brush-bar">
+          <button type="button" class="btn-light btn-sm" onclick="stepBat('${q.id}', -10)">−10%</button>
+          <button type="button" class="btn-main btn-sm" onclick="stepBat('${q.id}', 10)">+10%</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepBat('${q.id}', -5)">−5%</button>
+          <button type="button" class="btn-amber btn-sm" onclick="stepBat('${q.id}', 5)">+5%</button>
+          <button type="button" class="btn-light btn-sm" onclick="setBat('${q.id}', 0)">🔄 0%</button>
+        </div>`;
+      hidHtml = `<input type="hidden" class="lkpd-val" id="hidbat_${q.id}" name="${q.id}_bat" value="">`;
+    }
+
+    let eqHtml = '';
+    if (q.given === 'frac') {
+      eqHtml = `
+        <div class="frac-stack"><span class="frac-static">${q.target}</span><div class="frac-line"></div><span class="frac-static">100</span></div>
+        <span class="eq-sym">=</span>
+        <div style="display:inline-flex; align-items:center; gap:5px;">
+          <input type="tel" class="m-in pct lkpd-val lvl1" data-ans="${q.target}" name="${q.id}_pct" placeholder="?">
+          <span class="eq-sym" style="color:var(--math-main);">%</span>
+        </div>`;
+      if (q.extraDec) {
+        eqHtml += `
+          <span class="eq-sym">=</span>
+          <div class="frac-stack">
+            <input type="text" inputmode="decimal" oninput="cleanDecInput(this)" class="m-in dec lkpd-val lvl1" data-ans="${q.extraDec}" name="${q.id}_dec" placeholder="0,??">
+            <span class="eq-sub">Desimal</span>
+          </div>`;
+      }
+    } else {
+      eqHtml = `
+        <span class="frac-static" style="font-size:22px; color:var(--math-main);">${q.target}%</span>
+        <span class="eq-sym">=</span>
+        <div class="frac-stack">
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="${q.target}" name="${q.id}_n" placeholder="?">
+          <div class="frac-line"></div>
+          <input type="tel" class="m-in lkpd-val lvl1" data-ans="100" name="${q.id}_d" placeholder="?">
+        </div>`;
+    }
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+      <div class="stage-panel">${visualHtml}</div>
+      ${hidHtml}
+      <div class="eq-bar">${eqHtml}</div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  Z1_DATA.filter(q => q.mode === 'battery').forEach(q => refreshBat(q.id, false));
+}
+
+function stepBat(id, delta) {
+  if (readOnlyMode) return;
+  setBat(id, (batState[id] || 0) + delta, true);
+}
+function setBat(id, val, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  batState[id] = Math.max(0, Math.min(100, val));
+  refreshBat(id, triggerProgress);
+}
+function refreshBat(id, triggerProgress = true) {
+  const v = batState[id] || 0;
+  const el = document.getElementById('bat_' + id);
+  if (el) el.innerHTML = makeBatterySVG(v, id.startsWith('z3_q11') ? 210 : 250);
+  const hid = document.getElementById('hidbat_' + id);
+  if (hid) hid.value = v > 0 ? String(v) : '';
+  if (triggerProgress) {
+    clearHint(id.replace(/_(L|R)$/, ''));
+    updateProgress();
+  }
+}
+
+// ---------- ZONA 2: JEMBATAN 3 WUJUD (PAPAN 100 BERGARIS BAGI) ----------
+function getSplitGroup(splitMode, r, c) {
+  if (splitMode === 'half') return c < 5 ? 0 : 1;
+  if (splitMode === 'quad') return (r < 5 ? 0 : 2) + (c < 5 ? 0 : 1);
+  return Math.floor(c / 2); // fifth: 5 vertical bands of 2 cols (20 tiles each)
+}
+
+function renderZone2() {
+  const wrap = document.getElementById('zone2Container');
+  wrap.innerHTML = Z2_DATA.map(q => {
+    z2GrpState[q.id] = new Set();
+    let cells = '';
+    for (let r = 0; r < 10; r++) {
+      for (let c = 0; c < 10; c++) {
+        const gIdx = getSplitGroup(q.splitMode, r, c);
+        let bdr = '';
+        if (q.splitMode === 'half' && c === 4) bdr = ' b-r';
+        if (q.splitMode === 'quad') {
+          if (c === 4) bdr += ' b-r';
+          if (r === 4) bdr += ' b-b';
+        }
+        if (q.splitMode === 'fifth' && (c === 1 || c === 3 || c === 5 || c === 7)) bdr = ' b-r';
+        cells += `<div class="g100-cell${bdr}" id="z2c_${q.id}_${r}_${c}" onclick="toggleZ2Group('${q.id}', ${gIdx})"></div>`;
+      }
+    }
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="stage-panel teal-panel">
+        <div class="grid100">${cells}</div>
+        <div class="stat-pill" id="z2stat_${q.id}">Terpilih: <b>0/${q.d}</b> bagian = <b>0/100</b> ubin</div>
+      </div>
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}_grp" name="${q.id}_grp" value="">
+
+      <div class="eq-bar teal-bar">
+        <div class="frac-stack"><span class="frac-static">${q.n}</span><div class="frac-line"></div><span class="frac-static">${q.d}</span></div>
+        <span class="eq-sym">=</span>
+        <div class="frac-stack">
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="${q.targetTiles}" name="${q.id}_n100" placeholder="?">
+          <div class="frac-line"></div>
+          <span class="frac-static">100</span>
+        </div>
+        <span class="eq-sym">=</span>
+        <div class="frac-stack">
+          <input type="text" inputmode="decimal" oninput="cleanDecInput(this)" class="m-in dec lkpd-val lvl2" data-ans="${q.decAns}" name="${q.id}_dec" placeholder="0,??">
+          <span class="eq-sub">Desimal</span>
+        </div>
+        <span class="eq-sym">=</span>
+        <div style="display:inline-flex; align-items:center; gap:5px;">
+          <input type="tel" class="m-in pct lkpd-val lvl2" data-ans="${q.pctAns}" name="${q.id}_pct" placeholder="?">
+          <span class="eq-sym" style="color:var(--math-main);">%</span>
+        </div>
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+}
+
+function toggleZ2Group(id, gIdx, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const set = z2GrpState[id];
+  if (set.has(gIdx)) set.delete(gIdx);
+  else set.add(gIdx);
+  refreshZ2Group(id, triggerProgress);
+}
+
+function refreshZ2Group(id, triggerProgress = true) {
+  const q = Z2_DATA.find(x => x.id === id);
+  const set = z2GrpState[id];
+  for (let r = 0; r < 10; r++) {
+    for (let c = 0; c < 10; c++) {
+      const gIdx = getSplitGroup(q.splitMode, r, c);
+      const el = document.getElementById(`z2c_${id}_${r}_${c}`);
+      if (el) el.classList.toggle(q.colorCls, set.has(gIdx));
+    }
+  }
+  const perGrp = 100 / q.d;
+  const tiles = set.size * perGrp;
+  const stat = document.getElementById('z2stat_' + id);
+  stat.innerHTML = `Terpilih: <b>${set.size}/${q.d}</b> bagian = <b>${tiles}/100</b> ubin (<b>${tiles}%</b>)`;
+  stat.classList.toggle('ok', set.size === q.targetGroups);
+  document.getElementById(`hid_${id}_grp`).value = set.size ? JSON.stringify([...set]) : '';
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+// ---------- ZONA 3: SORTIR KEMBAR TIGA (Q9–10), BATERAI KEMBAR (Q11), DETEKTIF (Q12) ----------
+function renderZone3() {
+  const wrap = document.getElementById('zone3Container');
+
+  const sortHtml = Z3_SORT_DATA.map(q => {
+    z3SortSt[q.id] = {};
+    q.cards.forEach(c => z3SortSt[q.id][c.id] = 'pool');
+
+    const bHtml = q.buckets.map((bk, idx) => `
+      <div class="bucket b${idx + 1}"
+           ondragover="event.preventDefault(); this.classList.add('drag-over');"
+           ondragleave="this.classList.remove('drag-over');"
+           ondrop="onZ3Drop(event, '${q.id}', '${bk.key}')"
+           onclick="onZ3BucketClick('${q.id}', '${bk.key}')">
+        <div class="bucket-title">${bk.title}</div>
+        <div class="bucket-items" id="z3b_${q.id}_${bk.key}"></div>
+      </div>`).join('');
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+      <div class="sort-pool" id="z3pool_${q.id}"
+           ondragover="event.preventDefault();"
+           ondrop="onZ3Drop(event, '${q.id}', 'pool')"
+           onclick="onZ3BucketClick('${q.id}', 'pool')"></div>
+      <div class="buckets-3">${bHtml}</div>
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}_s" name="${q.id}_sort" value="">
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  // Soal 11: Bandingkan 0,6 vs 45% pada 2 baterai
+  batState['z3_q11_L'] = 0;
+  batState['z3_q11_R'] = 0;
+
+  // Soal 12: Detektif 0,07 vs 70% pada 2 papan 100
+  g100State['z3_q12_L'] = new Set(); g100Brush['z3_q12_L'] = 'cell';
+  g100State['z3_q12_R'] = new Set(); g100Brush['z3_q12_R'] = 'col';
+
+  const q11_12Html = `
+  <!-- SOAL 11: BANDINGKAN BATERAI (0,6 vs 45%) -->
+  <div class="q-card" id="card_z3_q11">
+    <div class="q-header">
+      <span class="q-no">Soal 11</span>
+      <div class="q-story">🔋 <b>Bandingkan Daya Baterai (0,6 vs 45%):</b> Chromebook A memiliki sisa daya <b>0,6</b> (ingat: 0,6 = 60/100 = 60%), sedangkan Chromebook B memiliki sisa daya <b>45%</b>. Atur kedua baterai di bawah ini lalu pilih tanda perbandingan yang tepat!</div>
+    </div>
+
+    <div class="twin-grid">
+      <div class="board-card" id="bcard_q11_L">
+        <div class="board-title">💻 Baterai A (Target: <b>0,6</b>)</div>
+        <div id="bat_z3_q11_L"></div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+          <button type="button" class="btn-light btn-sm" onclick="stepBat('z3_q11_L', -10)">−10%</button>
+          <button type="button" class="btn-indigo btn-sm" onclick="stepBat('z3_q11_L', 10)">+10%</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepBat('z3_q11_L', -5)">−5%</button>
+          <button type="button" class="btn-main btn-sm" onclick="stepBat('z3_q11_L', 5)">+5%</button>
+        </div>
+      </div>
+
+      <div class="board-card" id="bcard_q11_R">
+        <div class="board-title">💻 Baterai B (Target: <b>45%</b>)</div>
+        <div id="bat_z3_q11_R"></div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+          <button type="button" class="btn-light btn-sm" onclick="stepBat('z3_q11_R', -10)">−10%</button>
+          <button type="button" class="btn-indigo btn-sm" onclick="stepBat('z3_q11_R', 10)">+10%</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepBat('z3_q11_R', -5)">−5%</button>
+          <button type="button" class="btn-main btn-sm" onclick="stepBat('z3_q11_R', 5)">+5%</button>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hidbat_z3_q11_L" name="z3_q11_L_bat" value="">
+    <input type="hidden" class="lkpd-val" id="hidbat_z3_q11_R" name="z3_q11_R_bat" value="">
+    <input type="hidden" class="lkpd-val" id="hid_z3_q11_sign" name="z3_q11_sign" value="">
+
+    <div class="eq-bar indigo-bar">
+      <span class="frac-static" style="font-size:22px; color:var(--indigo-dark);">0,6</span>
+      <div class="sign-picker">
+        <button type="button" class="sign-btn" id="sg_q11_lt" onclick="pickQ11Sign('<')">&lt;</button>
+        <button type="button" class="sign-btn" id="sg_q11_eq" onclick="pickQ11Sign('=')">=</button>
+        <button type="button" class="sign-btn" id="sg_q11_gt" onclick="pickQ11Sign('>')">&gt;</button>
+      </div>
+      <span class="frac-static" style="font-size:22px; color:var(--math-main);">45%</span>
+    </div>
+    <div class="q-hint" id="hint_z3_q11"></div>
+  </div>
+
+  <!-- SOAL 12: DETEKTIF ANTI-MISKONSEPSI (0,07 vs 70%) -->
+  <div class="q-card" id="card_z3_q12">
+    <div class="q-header">
+      <span class="q-no">Soal 12</span>
+      <div class="q-story">🕵️‍♂️ <b>Detektif Persen (Anti-Miskonsepsi):</b> Dito berkata: <i>"Bilangan desimal <b>0,07</b> itu sama dengan <b>70%</b>!"</i> Buktikan di kedua Papan 100 Ubin di bawah ini (warnai papan kiri untuk <b>0,07</b> dan papan kanan untuk <b>70%</b>), lalu putuskan apakah Dito benar atau salah!</div>
+    </div>
+
+    <div class="twin-grid">
+      <div class="board-card" id="bcard_z3_q12_L">
+        <div class="board-title">🟦 Uji Desimal <b>0,07</b> (= 7/100)</div>
+        ${makeGrid100HTML('z3_q12_L', 'on-blue', true)}
+        <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+          <button type="button" class="btn-blue btn-sm" onclick="stepGrid100('z3_q12_L', 1, 'on-blue')">+1 Ubin</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepGrid100('z3_q12_L', -1, 'on-blue')">−1</button>
+          <button type="button" class="btn-light btn-sm" onclick="clearGrid100('z3_q12_L', 'on-blue')">🧹</button>
+        </div>
+        <div class="stat-pill" id="stat100_z3_q12_L">Terwarnai: <b>0/100</b> ubin (<b>0%</b>)</div>
+      </div>
+
+      <div class="board-card" id="bcard_z3_q12_R">
+        <div class="board-title">🩷 Uji Persen <b>70%</b> (= 70/100)</div>
+        ${makeGrid100HTML('z3_q12_R', 'on-pink', true)}
+        <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+          <button type="button" class="btn-main btn-sm" onclick="stepGrid100('z3_q12_R', 10, 'on-pink')">+10 Ubin</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepGrid100('z3_q12_R', -10, 'on-pink')">−10</button>
+          <button type="button" class="btn-light btn-sm" onclick="clearGrid100('z3_q12_R', 'on-pink')">🧹</button>
+        </div>
+        <div class="stat-pill" id="stat100_z3_q12_R">Terwarnai: <b>0/100</b> ubin (<b>0%</b>)</div>
+      </div>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid100_z3_q12_L" name="z3_q12_L_grid" value="">
+    <input type="hidden" class="lkpd-val" id="hid100_z3_q12_R" name="z3_q12_R_grid" value="">
+    <input type="hidden" class="lkpd-val" id="hid_z3_q12_v" name="z3_q12_verdict" value="">
+
+    <div class="choice-row">
+      <button type="button" class="tf-btn" id="q12_benar" onclick="pickQ12Verdict('BENAR')">👍 Pendapat Dito BENAR</button>
+      <button type="button" class="tf-btn" id="q12_salah" onclick="pickQ12Verdict('SALAH')">❌ Pendapat Dito SALAH (Luasnya Jauh Berbeda!)</button>
+    </div>
+
+    <div class="eq-bar indigo-bar">
+      <span style="font-size:14.5px; font-weight:800; color:var(--indigo-dark);">💡 Jadi, bentuk persen yang benar dari <b>0,07</b> adalah</span>
+      <input type="tel" class="m-in pct lkpd-val lvl3" data-ans="7" name="z3_q12_pct" placeholder="?">
+      <span class="eq-sym" style="color:var(--math-main);">%</span>
+    </div>
+    <div class="q-hint" id="hint_z3_q12"></div>
+  </div>`;
+
+  wrap.innerHTML = sortHtml + q11_12Html;
+
+  Z3_SORT_DATA.forEach(q => refreshZ3SortUI(q.id, false));
+  refreshBat('z3_q11_L', false);
+  refreshBat('z3_q11_R', false);
+}
+
+function onZ3DragStart(e, qid, cid) {
+  if (readOnlyMode) { e.preventDefault(); return; }
+  e.dataTransfer.setData('text/plain', JSON.stringify({ qid, cid }));
+}
+function onZ3Drop(e, qid, dest) {
+  e.preventDefault(); e.currentTarget.classList.remove('drag-over');
+  if (readOnlyMode) return;
+  try {
+    const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+    if (data.qid === qid) {
+      z3SortSt[qid][data.cid] = dest;
+      armedZ3 = null;
+      refreshZ3SortUI(qid, true);
+    }
+  } catch (err) {}
+}
+function onZ3ChipClick(e, qid, cid) {
+  e.stopPropagation();
+  if (readOnlyMode) return;
+  if (armedZ3 && armedZ3.qid === qid && armedZ3.cid === cid) armedZ3 = null;
+  else armedZ3 = { qid, cid };
+  Z3_SORT_DATA.forEach(q => refreshZ3SortUI(q.id, false));
+}
+function onZ3BucketClick(qid, dest) {
+  if (readOnlyMode) return;
+  if (armedZ3 && armedZ3.qid === qid) {
+    z3SortSt[qid][armedZ3.cid] = dest;
+    armedZ3 = null;
+    refreshZ3SortUI(qid, true);
+  }
+}
+function refreshZ3SortUI(qid, triggerProgress = true) {
+  const q = Z3_SORT_DATA.find(x => x.id === qid);
+  const st = z3SortSt[qid];
+  const b = { pool: [], b1: [], b2: [], b3: [] };
+  q.cards.forEach(c => b[st[c.id] || 'pool'].push(c));
+  const mk = arr => arr.map(c => {
+    const arm = armedZ3 && armedZ3.qid === qid && armedZ3.cid === c.id;
+    return `<div class="pct-chip ${arm ? 'armed' : ''}" id="z3ch_${qid}_${c.id}"
+      draggable="true" ondragstart="onZ3DragStart(event, '${qid}', '${c.id}')"
+      onclick="onZ3ChipClick(event, '${qid}', '${c.id}')">${c.label}</div>`;
+  }).join('');
+
+  document.getElementById('z3pool_' + qid).innerHTML = b.pool.length
+    ? mk(b.pool) : `<span style="font-size:12.5px; color:#15803d; font-weight:800;">✅ Semua kartu sudah masuk keranjang!</span>`;
+  ['b1', 'b2', 'b3'].forEach(k => {
+    document.getElementById(`z3b_${qid}_${k}`).innerHTML = b[k].length ? mk(b[k]) : `<span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh di sini</span>`;
+  });
+  const placed = q.cards.length - b.pool.length;
+  document.getElementById(`hid_${qid}_s`).value = placed > 0 ? JSON.stringify(st) : '';
+  if (triggerProgress) { clearHint(qid); updateProgress(); }
+}
+
+function pickQ11Sign(s, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  q11Sign = s;
+  const map = { '<': 'lt', '=': 'eq', '>': 'gt' };
+  ['<', '=', '>'].forEach(k => {
+    const b = document.getElementById('sg_q11_' + map[k]);
+    if (b) { b.classList.remove('selected', 's-ok', 's-err'); if (k === s) b.classList.add('selected'); }
+  });
+  document.getElementById('hid_z3_q11_sign').value = s;
+  if (triggerProgress) { clearHint('z3_q11'); updateProgress(); }
+}
+
+function pickQ12Verdict(v, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  q12Verdict = v;
+  const b1 = document.getElementById('q12_benar'), b2 = document.getElementById('q12_salah');
+  [b1, b2].forEach(b => b && b.classList.remove('selected', 's-ok', 's-err'));
+  if (v === 'BENAR' && b1) b1.classList.add('selected');
+  if (v === 'SALAH' && b2) b2.classList.add('selected');
+  document.getElementById('hid_z3_q12_v').value = v;
+  if (triggerProgress) { clearHint('z3_q12'); updateProgress(); }
+}
+
+// ---------- ZONA 4: DISKON KOPERASI (Q13–14), UNDUHAN (Q15), SURVEI 100% (Q16) ----------
+function renderZone4() {
+  const wrap = document.getElementById('zone4Container');
+
+  // Soal 13: 10 lembar Rp1.000 (tiap 1 lembar = 10%)
+  let bills13 = '';
+  for (let i = 0; i < 10; i++) {
+    bills13 += `
+      <div class="bill-card" id="b13_${i}" onclick="toggleQ13Bill(${i})">
+        <span style="font-size:15px;">💵 Rp1.000</span>
+        <span class="bill-tag" id="b13t_${i}">10% (Bayar)</span>
+      </div>`;
+  }
+
+  // Soal 14: 4 lembar Rp5.000 (tiap 1 lembar = 25% = 1/4)
+  let bills14 = '';
+  for (let i = 0; i < 4; i++) {
+    bills14 += `
+      <div class="bill-card bill-5k" id="b14_${i}" onclick="toggleQ14Bill(${i})">
+        <span style="font-size:16px;">💵 Rp5.000</span>
+        <span class="bill-tag" id="b14t_${i}">25% (Bayar)</span>
+      </div>`;
+  }
+
+  // Soal 15: 4 Bilah progres unduhan
+  const dlHtml = Z4_Q15_ITEMS.map(it => `
+    <div class="dl-row" id="dlrow_${it.key}">
+      <div class="dl-head">
+        <span>${it.name} — Target: <b style="color:${it.color};">${it.label}</b></span>
+        <div style="display:flex; gap:5px; flex-wrap:wrap; align-items:center;">
+          <button type="button" class="btn-light btn-sm" onclick="stepQ15Dl('${it.key}', -10)">−10%</button>
+          <button type="button" class="btn-main btn-sm" onclick="stepQ15Dl('${it.key}', 10)">+10%</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepQ15Dl('${it.key}', -5)">−5%</button>
+          <button type="button" class="btn-amber btn-sm" onclick="stepQ15Dl('${it.key}', 5)">+5%</button>
+          <span class="stat-pill" style="padding:3px 10px; font-size:12px;" id="dlstat_${it.key}">0%</span>
+        </div>
+      </div>
+      <div class="dl-bar"><div class="dl-fill" id="dlfill_${it.key}" style="width:0%; background:${it.color};"></div></div>
+    </div>`).join('');
+
+  const q15Slots = [0, 1, 2, 3].map(idx => `
+    <div class="order-slot" id="q15slot_${idx}"
+         ondragover="event.preventDefault(); this.classList.add('drag-over');"
+         ondragleave="this.classList.remove('drag-over');"
+         ondrop="onQ15Drop(event, ${idx})"
+         onclick="onQ15SlotClick(${idx})">
+      <span class="slot-lbl">Urutan ${idx + 1}</span>
+      <div id="q15sbody_${idx}"><span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh di sini</span></div>
+    </div>`).join('');
+
+  // Soal 16: Papan Survei 100 Siswa (0..34 Bola, 35..59 Gambar, 60..79 Baca, 80..99 Musik klik siswa!)
+  let q16Cells = '';
+  for (let r = 0; r < 10; r++) {
+    for (let c = 0; c < 10; c++) {
+      const idx = c * 10 + r;
+      if (idx < 35) {
+        q16Cells += `<div class="g100-cell on-blue locked-cell" title="Sepak Bola (35%)"></div>`;
+      } else if (idx < 60) {
+        q16Cells += `<div class="g100-cell on-green locked-cell" title="Menggambar (25%)"></div>`;
+      } else if (idx < 80) {
+        q16Cells += `<div class="g100-cell on-amber locked-cell" title="Membaca (20%)"></div>`;
+      } else {
+        q16Cells += `<div class="g100-cell" id="q16c_${idx}" onclick="toggleQ16Music(${idx})" title="Klik untuk mewarnai Hobi Musik"></div>`;
+      }
+    }
+  }
+
+  wrap.innerHTML = `
+  <!-- SOAL 13: DISKON 20% KOPERASI -->
+  <div class="q-card" id="card_z4_q13">
+    <div class="q-header">
+      <span class="q-no">Soal 13</span>
+      <div class="q-story">🏷️ <b>Diskon 20% Buku Cerita:</b> Koperasi menjual buku cerita seharga <b>Rp10.000</b> (diwakili 10 lembar uang Rp1.000 — tiap lembar bernilai <b>10%</b>). Hari ini ada <b>diskon 20%</b>! Klik lembar uang yang menjadi potongan diskon (20%), lalu hitung potongan dan harga yang harus dibayar!</div>
+    </div>
+
+    <div class="money-arena">${bills13}</div>
+    <div style="text-align:center; margin-bottom:12px;">
+      <span class="stat-pill" id="q13Stat">Potongan dipilih: <b>0%</b> (Rp0) — Sisa Bayar: <b>Rp10.000</b></span>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q13" name="z4_q13_bills" value="">
+
+    <div class="eq-bar amber-bar">
+      <span style="font-weight:800; font-size:14px;">Potongan Diskon (20%) = Rp</span>
+      <input type="tel" oninput="cleanRpInput(this)" class="m-in rp lkpd-val lvl4" data-type="rp" data-ans="2000" name="z4_q13_disc" placeholder="....">
+      <span style="font-weight:800; font-size:14px;">&nbsp;|&nbsp; Harga Bayar = Rp</span>
+      <input type="tel" oninput="cleanRpInput(this)" class="m-in rp lkpd-val lvl4" data-type="rp" data-ans="8000" name="z4_q13_pay" placeholder="....">
+    </div>
+    <div class="q-hint" id="hint_z4_q13"></div>
+  </div>
+
+  <!-- SOAL 14: DISKON 25% KOTAK PENSIL -->
+  <div class="q-card" id="card_z4_q14">
+    <div class="q-header">
+      <span class="q-no">Soal 14</span>
+      <div class="q-story">🏷️ <b>Diskon 25% Kotak Pensil:</b> Harga kotak pensil adalah <b>Rp20.000</b> (diwakili 4 lembar uang Rp5.000 — tiap 1 lembar bernilai <b>1/4 = 25%</b>). Klik lembar uang yang menjadi <b>diskon 25%</b>, lalu hitung besar potongan dan harga bayarnya!</div>
+    </div>
+
+    <div class="money-arena">${bills14}</div>
+    <div style="text-align:center; margin-bottom:12px;">
+      <span class="stat-pill" id="q14Stat">Potongan dipilih: <b>0%</b> (Rp0) — Sisa Bayar: <b>Rp20.000</b></span>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q14" name="z4_q14_bills" value="">
+
+    <div class="eq-bar amber-bar">
+      <span style="font-weight:800; font-size:14px;">Potongan Diskon (25%) = Rp</span>
+      <input type="tel" oninput="cleanRpInput(this)" class="m-in rp lkpd-val lvl4" data-type="rp" data-ans="5000" name="z4_q14_disc" placeholder="....">
+      <span style="font-weight:800; font-size:14px;">&nbsp;|&nbsp; Harga Bayar = Rp</span>
+      <input type="tel" oninput="cleanRpInput(this)" class="m-in rp lkpd-val lvl4" data-type="rp" data-ans="15000" name="z4_q14_pay" placeholder="....">
+    </div>
+    <div class="q-hint" id="hint_z4_q14"></div>
+  </div>
+
+  <!-- SOAL 15: PROGRES UNDUHAN CAMPURAN & URUTAN -->
+  <div class="q-card" id="card_z4_q15">
+    <div class="q-header">
+      <span class="q-no">Soal 15</span>
+      <div class="q-story">📥 <b>Progres Unduhan E-Book Perpustakaan:</b> Atur 4 bilah progres unduhan di bawah ini sesuai targetnya (ubah semuanya ke persen dulu agar mudah dilihat!), lalu urutkan dari unduhan <b>PALING SEDIKIT (1) → PALING BANYAK (4)</b>!</div>
+    </div>
+
+    ${dlHtml}
+    <input type="hidden" class="lkpd-val" id="hid_z4_q15_dl" name="z4_q15_dl" value="">
+
+    <div style="background:#fdf2f8; border:2px dashed var(--math-main); border-radius:16px; padding:14px; margin-top:12px;">
+      <div style="font-size:13px; font-weight:900; color:var(--math-dark); text-align:center; margin-bottom:10px;">
+        📈 Urutkan dari PALING SEDIKIT (1) → PALING BANYAK (4):
+      </div>
+      <div class="sort-pool" id="q15Pool" style="background:#fff;"
+           ondragover="event.preventDefault();"
+           ondrop="onQ15PoolDrop(event)"
+           onclick="onQ15PoolClick()"></div>
+      <div class="order-slots">${q15Slots}</div>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q15_ord" name="z4_q15_ord" value="">
+    <div class="q-hint" id="hint_z4_q15"></div>
+  </div>
+
+  <!-- SOAL 16: SURVEI HOBI 100 SISWA SDN 1 SUKAHAJI (TOTAL 100%) -->
+  <div class="q-card" id="card_z4_q16">
+    <div class="q-header">
+      <span class="q-no">Soal 16</span>
+      <div class="q-story">📊 <b>Survei Hobi 100 Siswa SDN 1 Sukahaji:</b> Dari 100 siswa, <b>35%</b> suka Sepak Bola (biru), <b>25%</b> suka Menggambar (hijau), <b>20%</b> suka Membaca (kuning), dan <b>sisanya</b> suka Musik! Warnai seluruh sisa petak putih untuk <b>Hobi Musik</b> hingga papan genap 100%, lalu lengkapi datanya!</div>
+    </div>
+
+    <div class="stage-panel">
+      <div class="legend-row">
+        <span class="leg-pill"><i class="leg-dot" style="background:#0284c7;"></i> Sepak Bola: 35%</span>
+        <span class="leg-pill"><i class="leg-dot" style="background:#059669;"></i> Menggambar: 25%</span>
+        <span class="leg-pill"><i class="leg-dot" style="background:#d97706;"></i> Membaca: 20%</span>
+        <span class="leg-pill"><i class="leg-dot" style="background:#db2777;"></i> Musik: <b id="q16LegM">0%</b></span>
+      </div>
+      <div class="grid100">${q16Cells}</div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+        <button type="button" class="btn-main btn-sm" onclick="fillQ16MusicAll()">🎨 Warnai Semua Sisa (Musik)</button>
+        <button type="button" class="btn-light btn-sm" onclick="clearQ16Music()">🧹 Bersihkan Musik</button>
+      </div>
+      <div class="stat-pill" id="q16Stat">Total terdata: <b>80%</b> / 100% (Musik: <b>0</b> siswa)</div>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q16" name="z4_q16_music" value="">
+
+    <div class="eq-bar">
+      <span style="font-weight:800; font-size:14px;">Hobi Musik =</span>
+      <input type="tel" class="m-in pct lkpd-val lvl4" data-ans="20" name="z4_q16_pct" placeholder="?">
+      <span class="eq-sym" style="color:var(--math-main);">%</span>
+      <span class="eq-sym">=</span>
+      <div class="frac-stack">
+        <input type="text" inputmode="decimal" oninput="cleanDecInput(this)" class="m-in dec lkpd-val lvl4" data-ans="0,2|0,20" name="z4_q16_dec" placeholder="0,?">
+        <span class="eq-sub">Desimal</span>
+      </div>
+      <span class="eq-sym">=</span>
+      <div class="frac-stack">
+        <input type="tel" class="m-in lkpd-val lvl4" data-ans="1" name="z4_q16_sn" placeholder="?">
+        <div class="frac-line"></div>
+        <input type="tel" class="m-in lkpd-val lvl4" data-ans="5" name="z4_q16_sd" placeholder="?">
+        <span class="eq-sub">Paling Sederhana</span>
+      </div>
+    </div>
+    <div class="q-hint" id="hint_z4_q16"></div>
+  </div>`;
+
+  refreshQ15OrdUI(false);
+}
+
+// --- Handler Soal 13 & 14 (Diskon) ---
+function toggleQ13Bill(i, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  if (q13Bills.has(i)) q13Bills.delete(i);
+  else q13Bills.add(i);
+  refreshQ13Bills(triggerProgress);
+}
+function refreshQ13Bills(triggerProgress = true) {
+  for (let i = 0; i < 10; i++) {
+    const el = document.getElementById('b13_' + i);
+    const tg = document.getElementById('b13t_' + i);
+    const on = q13Bills.has(i);
+    if (el) el.classList.toggle('discounted', on);
+    if (tg) tg.textContent = on ? '🏷️ DISKON 10%' : '10% (Bayar)';
+  }
+  const pct = q13Bills.size * 10, disc = q13Bills.size * 1000, pay = 10000 - disc;
+  const st = document.getElementById('q13Stat');
+  st.innerHTML = `Potongan dipilih: <b>${pct}%</b> (Rp${disc.toLocaleString('id-ID')}) — Sisa Bayar: <b>Rp${pay.toLocaleString('id-ID')}</b>`;
+  st.classList.toggle('ok', q13Bills.size === 2);
+  document.getElementById('hid_z4_q13').value = q13Bills.size ? JSON.stringify([...q13Bills]) : '';
+  if (triggerProgress) { clearHint('z4_q13'); updateProgress(); }
+}
+
+function toggleQ14Bill(i, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  if (q14Bills.has(i)) q14Bills.delete(i);
+  else q14Bills.add(i);
+  refreshQ14Bills(triggerProgress);
+}
+function refreshQ14Bills(triggerProgress = true) {
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById('b14_' + i);
+    const tg = document.getElementById('b14t_' + i);
+    const on = q14Bills.has(i);
+    if (el) el.classList.toggle('discounted', on);
+    if (tg) tg.textContent = on ? '🏷️ DISKON 25%' : '25% (Bayar)';
+  }
+  const pct = q14Bills.size * 25, disc = q14Bills.size * 5000, pay = 20000 - disc;
+  const st = document.getElementById('q14Stat');
+  st.innerHTML = `Potongan dipilih: <b>${pct}%</b> (Rp${disc.toLocaleString('id-ID')}) — Sisa Bayar: <b>Rp${pay.toLocaleString('id-ID')}</b>`;
+  st.classList.toggle('ok', q14Bills.size === 1);
+  document.getElementById('hid_z4_q14').value = q14Bills.size ? JSON.stringify([...q14Bills]) : '';
+  if (triggerProgress) { clearHint('z4_q14'); updateProgress(); }
+}
+
+// --- Handler Soal 15 (Progres Unduhan + Urutkan) ---
+function stepQ15Dl(key, delta) {
+  if (readOnlyMode) return;
+  q15DlVal[key] = Math.max(0, Math.min(100, (q15DlVal[key] || 0) + delta));
+  refreshQ15Dl(key, true);
+}
+function refreshQ15Dl(key, triggerProgress = true) {
+  const v = q15DlVal[key] || 0;
+  document.getElementById('dlfill_' + key).style.width = v + '%';
+  document.getElementById('dlstat_' + key).textContent = v + '%';
+  const any = Object.values(q15DlVal).some(x => x > 0);
+  document.getElementById('hid_z4_q15_dl').value = any ? JSON.stringify(q15DlVal) : '';
+  if (triggerProgress) { clearHint('z4_q15'); updateProgress(); }
+}
+
+function onQ15DragStart(e, lbl) {
+  if (readOnlyMode) { e.preventDefault(); return; }
+  e.dataTransfer.setData('text/plain', lbl);
+}
+function placeQ15Chip(lbl, slotIdx) {
+  const old = q15Ord.indexOf(lbl);
+  if (old !== -1) q15Ord[old] = null;
+  if (slotIdx !== null && slotIdx >= 0 && slotIdx < 4) {
+    if (q15Ord[slotIdx] && old !== -1) q15Ord[old] = q15Ord[slotIdx];
+    q15Ord[slotIdx] = lbl;
+  }
+  armedQ15 = null;
+  refreshQ15OrdUI(true);
+}
+function onQ15Drop(e, slotIdx) {
+  e.preventDefault(); e.currentTarget.classList.remove('drag-over');
+  if (readOnlyMode) return;
+  const lbl = e.dataTransfer.getData('text/plain');
+  if (Z4_Q15_ORDER.includes(lbl)) placeQ15Chip(lbl, slotIdx);
+}
+function onQ15PoolDrop(e) {
+  e.preventDefault();
+  if (readOnlyMode) return;
+  const lbl = e.dataTransfer.getData('text/plain');
+  if (Z4_Q15_ORDER.includes(lbl)) placeQ15Chip(lbl, null);
+}
+function onQ15ChipClick(e, lbl) {
+  e.stopPropagation();
+  if (readOnlyMode) return;
+  armedQ15 = (armedQ15 === lbl) ? null : lbl;
+  refreshQ15OrdUI(false);
+}
+function onQ15SlotClick(slotIdx) {
+  if (readOnlyMode || !armedQ15) return;
+  placeQ15Chip(armedQ15, slotIdx);
+}
+function onQ15PoolClick() {
+  if (readOnlyMode || !armedQ15) return;
+  placeQ15Chip(armedQ15, null);
+}
+function safeId(s) { return s.replace(/[^a-zA-Z0-9]/g, '_'); }
+function refreshQ15OrdUI(triggerProgress = true) {
+  const allLbls = Z4_Q15_ITEMS.map(x => x.label);
+  const mk = lbl => `<div class="pct-chip ${armedQ15 === lbl ? 'armed' : ''}" id="q15ch_${safeId(lbl)}"
+    draggable="true" ondragstart="onQ15DragStart(event, '${lbl}')" onclick="onQ15ChipClick(event, '${lbl}')">${lbl}</div>`;
+  const unplaced = allLbls.filter(l => !q15Ord.includes(l));
+  document.getElementById('q15Pool').innerHTML = unplaced.length
+    ? unplaced.map(mk).join('') : `<span style="font-size:12.5px; color:#15803d; font-weight:800;">✅ Semua kartu sudah diurutkan!</span>`;
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('q15sbody_' + i).innerHTML = q15Ord[i]
+      ? mk(q15Ord[i]) : `<span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh di sini</span>`;
+  }
+  document.getElementById('hid_z4_q15_ord').value = q15Ord.some(x => x !== null) ? JSON.stringify(q15Ord) : '';
+  if (triggerProgress) { clearHint('z4_q15'); updateProgress(); }
+}
+
+// --- Handler Soal 16 (Survei Hobi 100%) ---
+function toggleQ16Music(idx, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  if (q16Music.has(idx)) q16Music.delete(idx);
+  else q16Music.add(idx);
+  refreshQ16Music(triggerProgress);
+}
+function fillQ16MusicAll() {
+  if (readOnlyMode) return;
+  for (let i = 80; i < 100; i++) q16Music.add(i);
+  refreshQ16Music(true);
+}
+function clearQ16Music() {
+  if (readOnlyMode) return;
+  q16Music.clear();
+  refreshQ16Music(true);
+}
+function refreshQ16Music(triggerProgress = true) {
+  for (let i = 80; i < 100; i++) {
+    const c = document.getElementById('q16c_' + i);
+    if (c) c.classList.toggle('on-pink', q16Music.has(i));
+  }
+  const m = q16Music.size;
+  const tot = 80 + m;
+  document.getElementById('q16LegM').textContent = m + '%';
+  const st = document.getElementById('q16Stat');
+  st.innerHTML = `Total terdata: <b>${tot}%</b> / 100% (Musik: <b>${m}</b> siswa)`;
+  st.classList.toggle('ok', tot === 100);
+  document.getElementById('hid_z4_q16').value = m ? JSON.stringify([...q16Music]) : '';
+  if (triggerProgress) { clearHint('z4_q16'); updateProgress(); }
+}
+
+function flashHint(id, msg) {
+  const el = document.getElementById('hint_' + id);
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+}
+function clearHint(id) {
+  const el = document.getElementById('hint_' + id);
+  if (el) { el.textContent = ''; el.classList.remove('show'); }
+}
+
+// =========================================================================
+// VALIDASI GAMIFIKASI PER ZONA
+// =========================================================================
+function matchAnswer(inp) {
+  let val = inp.value.trim().replace(/\./g, ',');
+  if (inp.dataset.type === 'rp') {
+    val = inp.value.trim().replace(/[.\s]/g, '');
+  }
+  const allowed = String(inp.dataset.ans).split('|').map(x => x.trim());
+  return allowed.includes(val);
+}
+
+function checkLevel(lvl) {
+  let allCorrect = true;
+
+  // 1. Validasi semua input angka/teks di level ini
+  const inputs = document.querySelectorAll('.lvl' + lvl + ':not([readonly])');
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    if (matchAnswer(inp)) {
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      allCorrect = false;
+      setTimeout(() => inp.classList.remove('wrong'), 500);
+    }
+  });
+
+  // 2. Validasi visual & interaksi konkret per zona
+  if (lvl === 1) {
+    Z1_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const curVal = q.mode === 'grid' ? g100State[q.id].size : batState[q.id];
+      const visOk = (curVal === q.target);
+      const eqOk = [...card.querySelectorAll('.lvl1')].every(el => el.classList.contains('correct'));
+      if (!visOk) {
+        allCorrect = false; card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Model ${q.mode === 'grid' ? 'papan 100 ubin' : 'baterai'} saat ini ${curVal}%, seharusnya tepat ${q.target}%!`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, q.extraDec
+          ? `⚠️ Papan sudah tepat 8%! Ingat 8/100 = 8% = 0,08 (ada nol di tempat persepuluhan).`
+          : `⚠️ Gambar sudah tepat ${q.target}%! Periksa kembali angka pecahan atau persennya.`);
+      } else card.classList.add('card-correct');
+    });
+  } else if (lvl === 2) {
+    Z2_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const grpOk = (z2GrpState[q.id].size === q.targetGroups);
+      const eqOk = [...card.querySelectorAll('.lvl2')].every(el => el.classList.contains('correct'));
+      if (!grpOk) {
+        allCorrect = false; card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Klik tepat ${q.targetGroups} dari ${q.d} bagian papan (${q.targetTiles} ubin) untuk memodelkan ${q.n}/${q.d}!`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Papan sudah tepat ${q.targetTiles}/100! Periksa kembali pengisian perseratusan, desimal, dan persennya.`);
+      } else card.classList.add('card-correct');
+    });
+  } else if (lvl === 3) {
+    // Soal 9 & 10 (Sortir)
+    Z3_SORT_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      let ok = true, unplaced = 0;
+      q.cards.forEach(c => {
+        const ch = document.getElementById(`z3ch_${q.id}_${c.id}`);
+        if (ch) ch.classList.remove('chip-ok', 'chip-err');
+        const loc = z3SortSt[q.id][c.id];
+        if (loc === 'pool') { unplaced++; ok = false; return; }
+        if (loc === c.dest) { if (ch) ch.classList.add('chip-ok'); }
+        else { if (ch) ch.classList.add('chip-err'); ok = false; }
+      });
+      if (!ok) {
+        allCorrect = false; card.classList.add('card-wrong');
+        flashHint(q.id, unplaced > 0
+          ? `⚠️ Masih ada ${unplaced} kartu yang belum dimasukkan ke keranjang!`
+          : `⚠️ Ada kartu bertanda merah yang salah keranjang! Ubah ke per seratus dulu (ingat 0,05 = 5%, sedangkan 0,50 = 50%).`);
+      } else card.classList.add('card-correct');
+    });
+
+    // Soal 11 (Baterai 0,6 vs 45%)
+    clearHint('z3_q11');
+    const c11 = document.getElementById('card_z3_q11');
+    c11.classList.remove('card-correct', 'card-wrong');
+    const b11L = document.getElementById('bcard_q11_L'), b11R = document.getElementById('bcard_q11_R');
+    [b11L, b11R].forEach(b => b.classList.remove('b-ok', 'b-err'));
+    const q11LOk = (batState['z3_q11_L'] === 60), q11ROk = (batState['z3_q11_R'] === 45);
+    b11L.classList.add(q11LOk ? 'b-ok' : 'b-err');
+    b11R.classList.add(q11ROk ? 'b-ok' : 'b-err');
+
+    const map = { '<': 'lt', '=': 'eq', '>': 'gt' };
+    ['<', '=', '>'].forEach(k => document.getElementById('sg_q11_' + map[k]).classList.remove('s-ok', 's-err'));
+    const q11SignOk = (q11Sign === '>');
+    if (q11Sign) document.getElementById('sg_q11_' + map[q11Sign]).classList.add(q11SignOk ? 's-ok' : 's-err');
+
+    if (!q11LOk || !q11ROk) { allCorrect = false; c11.classList.add('card-wrong'); flashHint('z3_q11', '⚠️ Atur dulu kedua baterai: Baterai A = 60% (dari 0,6) dan Baterai B = 45%!'); }
+    else if (!q11SignOk) { allCorrect = false; c11.classList.add('card-wrong'); flashHint('z3_q11', '⚠️ Bandingkan kedua baterai: 60% dibanding 45%! Pilih tanda <, =, atau > yang tepat.'); }
+    else c11.classList.add('card-correct');
+
+    // Soal 12 (Detektif 0,07 vs 70%)
+    clearHint('z3_q12');
+    const c12 = document.getElementById('card_z3_q12');
+    c12.classList.remove('card-correct', 'card-wrong');
+    const b12L = document.getElementById('bcard_z3_q12_L'), b12R = document.getElementById('bcard_z3_q12_R');
+    [b12L, b12R].forEach(b => b.classList.remove('b-ok', 'b-err'));
+    const q12LOk = (g100State['z3_q12_L'].size === 7), q12ROk = (g100State['z3_q12_R'].size === 70);
+    b12L.classList.add(q12LOk ? 'b-ok' : 'b-err');
+    b12R.classList.add(q12ROk ? 'b-ok' : 'b-err');
+
+    const tb1 = document.getElementById('q12_benar'), tb2 = document.getElementById('q12_salah');
+    [tb1, tb2].forEach(b => b.classList.remove('s-ok', 's-err'));
+    const q12VOk = (q12Verdict === 'SALAH');
+    if (q12Verdict === 'BENAR') tb1.classList.add('s-err');
+    if (q12Verdict === 'SALAH') tb2.classList.add('s-ok');
+    const q12EqOk = [...c12.querySelectorAll('.lvl3')].every(el => el.classList.contains('correct'));
+
+    if (!q12LOk || !q12ROk) { allCorrect = false; c12.classList.add('card-wrong'); flashHint('z3_q12', '⚠️ Warnai dulu kedua papan: Kiri 7 ubin (0,07) dan Kanan 70 ubin (70%)!'); }
+    else if (!q12VOk) { allCorrect = false; c12.classList.add('card-wrong'); flashHint('z3_q12', '⚠️ Bandingkan 7 ubin dengan 70 ubin! Apakah pendapat Dito benar atau salah?'); }
+    else if (!q12EqOk) { c12.classList.add('card-wrong'); flashHint('z3_q12', '⚠️ Tuliskan nilai persen yang benar dari 0,07 (= 7/100)!'); }
+    else c12.classList.add('card-correct');
+  } else if (lvl === 4) {
+    // Soal 13 (Diskon 20% Rp10.000)
+    clearHint('z4_q13');
+    const c13 = document.getElementById('card_z4_q13');
+    c13.classList.remove('card-correct', 'card-wrong');
+    const q13BillOk = (q13Bills.size === 2);
+    const q13EqOk = [...c13.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+    if (!q13BillOk) { allCorrect = false; c13.classList.add('card-wrong'); flashHint('z4_q13', '⚠️ Klik tepat 2 lembar uang Rp1.000 (2 × 10% = 20%) sebagai potongan diskon!'); }
+    else if (!q13EqOk) { c13.classList.add('card-wrong'); flashHint('z4_q13', '⚠️ Lembar diskon sudah benar (Rp2.000)! Periksa kembali isian potongan dan harga bayarnya (Rp10.000 − Rp2.000).'); }
+    else c13.classList.add('card-correct');
+
+    // Soal 14 (Diskon 25% Rp20.000)
+    clearHint('z4_q14');
+    const c14 = document.getElementById('card_z4_q14');
+    c14.classList.remove('card-correct', 'card-wrong');
+    const q14BillOk = (q14Bills.size === 1);
+    const q14EqOk = [...c14.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+    if (!q14BillOk) { allCorrect = false; c14.classList.add('card-wrong'); flashHint('z4_q14', '⚠️ Klik tepat 1 lembar uang Rp5.000 (1/4 = 25%) sebagai potongan diskon!'); }
+    else if (!q14EqOk) { c14.classList.add('card-wrong'); flashHint('z4_q14', '⚠️ Lembar diskon sudah benar (Rp5.000)! Periksa kembali potongan dan harga bayarnya (Rp20.000 − Rp5.000).'); }
+    else c14.classList.add('card-correct');
+
+    // Soal 15 (Progres Unduhan + Urutan)
+    clearHint('z4_q15');
+    const c15 = document.getElementById('card_z4_q15');
+    c15.classList.remove('card-correct', 'card-wrong');
+    let dlOk = true;
+    Z4_Q15_ITEMS.forEach(it => {
+      const row = document.getElementById('dlrow_' + it.key);
+      row.classList.remove('r-ok', 'r-err');
+      if (q15DlVal[it.key] === it.target) row.classList.add('r-ok');
+      else { row.classList.add('r-err'); dlOk = false; }
+    });
+    let ordOk = true, empty15 = 0;
+    for (let i = 0; i < 4; i++) {
+      const l = q15Ord[i];
+      if (!l) { empty15++; ordOk = false; continue; }
+      const ch = document.getElementById('q15ch_' + safeId(l));
+      if (ch) ch.classList.remove('chip-ok', 'chip-err');
+      if (l === Z4_Q15_ORDER[i]) { if (ch) ch.classList.add('chip-ok'); }
+      else { if (ch) ch.classList.add('chip-err'); ordOk = false; }
+    }
+    if (!dlOk) { allCorrect = false; c15.classList.add('card-wrong'); flashHint('z4_q15', '⚠️ Atur dulu ke-4 bilah progres (bertanda merah) ke persentase yang tepat: 0,8 = 80%, 3/4 = 75%, 90% = 90%, 1/2 = 50%!'); }
+    else if (!ordOk) { allCorrect = false; c15.classList.add('card-wrong'); flashHint('z4_q15', empty15 > 0 ? '⚠️ Masukkan seluruh 4 kartu ke kotak Urutan 1–4!' : '⚠️ Urutan kartu bertanda merah belum tepat! Bandingkan panjang bilah progres di atas (50% → 75% → 80% → 90%).'); }
+    else c15.classList.add('card-correct');
+
+    // Soal 16 (Survei Hobi 100%)
+    clearHint('z4_q16');
+    const c16 = document.getElementById('card_z4_q16');
+    c16.classList.remove('card-correct', 'card-wrong');
+    const q16VisOk = (q16Music.size === 20);
+    const q16EqOk = [...c16.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+    if (!q16VisOk) { allCorrect = false; c16.classList.add('card-wrong'); flashHint('z4_q16', '⚠️ Warnai seluruh 20 petak putih sisa di papan survei untuk Hobi Musik hingga total genap 100%!'); }
+    else if (!q16EqOk) { c16.classList.add('card-wrong'); flashHint('z4_q16', '⚠️ Papan survei sudah genap 100%! Periksa kembali persen (20%), desimal (0,2), dan pecahan paling sederhana dari 20/100 (1/5).'); }
+    else c16.classList.add('card-correct');
+  }
+
+  if (allCorrect) {
+    document.getElementById('level' + lvl).classList.add('completed');
+    if (lvl === 4) {
+      document.getElementById('msgFinal').style.display = 'block';
+      document.getElementById('sendBtn2').style.display = 'block';
+      document.getElementById('msgFinal').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      unlockedMax = Math.max(unlockedMax, lvl + 1);
+      const next = document.getElementById('level' + (lvl + 1));
+      if (next) {
+        next.classList.remove('locked');
+        next.classList.add('unlocked');
+        next.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  } else {
+    const firstWrong = document.querySelector(`#level${lvl} .card-wrong, #level${lvl} .wrong`);
+    if (firstWrong) firstWrong.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// =========================================================================
+// PEMULIHAN STATE VISUAL (DRAF & ARSIP PENILAIAN GURU/SISWA)
+// =========================================================================
+function restoreGridCount(boardId, cnt, colorCls) {
+  g100State[boardId] = new Set();
+  for (let i = 0; i < cnt; i++) g100State[boardId].add(i);
+  refreshGrid100(boardId, colorCls, false);
+}
+
+function restoreInteractiveStates(answers) {
+  if (!answers) return;
+
+  // 1. Zona 1
+  Z1_DATA.forEach(q => {
+    if (q.mode === 'grid') {
+      const cnt = Number(answers[q.id + '_grid']);
+      if (!isNaN(cnt) && cnt > 0) restoreGridCount(q.id, cnt, q.colorCls);
+    } else {
+      const v = Number(answers[q.id + '_bat']);
+      if (!isNaN(v) && v > 0) setBat(q.id, v, false);
+    }
+  });
+
+  // 2. Zona 2
+  Z2_DATA.forEach(q => {
+    const raw = answers[q.id + '_grp'];
+    if (raw) {
+      try {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)) {
+          z2GrpState[q.id] = new Set(arr.map(Number));
+          refreshZ2Group(q.id, false);
+        }
+      } catch (e) {}
+    }
+  });
+
+  // 3. Zona 3
+  Z3_SORT_DATA.forEach(q => {
+    const raw = answers[q.id + '_sort'];
+    if (raw) {
+      try {
+        const obj = JSON.parse(raw);
+        if (obj) {
+          q.cards.forEach(c => { if (obj[c.id]) z3SortSt[q.id][c.id] = obj[c.id]; });
+          refreshZ3SortUI(q.id, false);
+        }
+      } catch (e) {}
+    }
+  });
+  if (answers.z3_q11_L_bat) setBat('z3_q11_L', Number(answers.z3_q11_L_bat) || 0, false);
+  if (answers.z3_q11_R_bat) setBat('z3_q11_R', Number(answers.z3_q11_R_bat) || 0, false);
+  if (answers.z3_q11_sign) pickQ11Sign(answers.z3_q11_sign, false);
+
+  if (answers.z3_q12_L_grid) restoreGridCount('z3_q12_L', Number(answers.z3_q12_L_grid) || 0, 'on-blue');
+  if (answers.z3_q12_R_grid) restoreGridCount('z3_q12_R', Number(answers.z3_q12_R_grid) || 0, 'on-pink');
+  if (answers.z3_q12_verdict) pickQ12Verdict(answers.z3_q12_verdict, false);
+
+  // 4. Zona 4
+  if (answers.z4_q13_bills) {
+    try {
+      const arr = JSON.parse(answers.z4_q13_bills);
+      q13Bills.clear();
+      if (Array.isArray(arr)) arr.forEach(i => q13Bills.add(Number(i)));
+      refreshQ13Bills(false);
+    } catch (e) {}
+  }
+  if (answers.z4_q14_bills) {
+    try {
+      const arr = JSON.parse(answers.z4_q14_bills);
+      q14Bills.clear();
+      if (Array.isArray(arr)) arr.forEach(i => q14Bills.add(Number(i)));
+      refreshQ14Bills(false);
+    } catch (e) {}
+  }
+  if (answers.z4_q15_dl) {
+    try {
+      const obj = JSON.parse(answers.z4_q15_dl);
+      if (obj) {
+        Z4_Q15_ITEMS.forEach(it => {
+          q15DlVal[it.key] = Number(obj[it.key]) || 0;
+          refreshQ15Dl(it.key, false);
+        });
+      }
+    } catch (e) {}
+  }
+  if (answers.z4_q15_ord) {
+    try {
+      const arr = JSON.parse(answers.z4_q15_ord);
+      if (Array.isArray(arr) && arr.length === 4) {
+        for (let i = 0; i < 4; i++) q15Ord[i] = arr[i];
+        refreshQ15OrdUI(false);
+      }
+    } catch (e) {}
+  }
+  if (answers.z4_q16_music) {
+    try {
+      const arr = JSON.parse(answers.z4_q16_music);
+      q16Music.clear();
+      if (Array.isArray(arr)) arr.forEach(i => q16Music.add(Number(i)));
+      refreshQ16Music(false);
+    } catch (e) {}
+  }
+}
+
+function normalizeDateForInput(raw) {
+  if (!raw) return '';
+  const s = String(raw).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const d = new Date(s);
+  if (!isNaN(d.getTime())) {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  return '';
+}
+
+// =========================================================================
+// MESIN LMS V4.2 (KONTRAK PAYLOAD GAS + TANGGAL KALENDER)
+// =========================================================================
+document.addEventListener("DOMContentLoaded", () => {
+  buildAllZones();
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+    updateProgress();
+  }
+});
+
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN anggota kelompok lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+            updateProgress();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Gagal memuat database."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => String(s.nisn) === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+
+function collect() {
+  let d = {};
+  getValFields().forEach(el => { if (el.name) d[el.name] = el.value; });
+  const tglVal = document.querySelector('[name="tanggal"]').value;
+  if (tglVal) d.tanggal = tglVal;
+  return d;
+}
+
+function setupInputs() {
+  getValFields().forEach(el => {
+    el.addEventListener("input", updateProgress);
+    el.addEventListener("change", updateProgress);
+  });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+  document.querySelector('[name="tanggal"]').addEventListener("change", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields();
+  let filled = 0;
+  vals.forEach(x => {
+    const v = String(x.value || "").trim();
+    if (v && v !== "[]" && v !== "{}") filled++;
+  });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  const pct = Math.min(100, Math.round((filled + (groupMembers.length > 0 ? 1 : 0)) / (vals.length + 2) * 100));
+  document.getElementById("progressBar").style.width = pct + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({
+    members: groupMembers,
+    tanggal: document.querySelector('[name="tanggal"]').value,
+    unlockedMax: unlockedMax,
+    answers: collect()
+  }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><p>Semua hasil baterai, papan 100, sortir, diskon, dan surveimu tersimpan di perangkat ini.</p><button class='btn-main' onclick='closeModal()'>Lanjut</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE));
+    if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = normalizeDateForInput(d.tanggal);
+    if (d.unlockedMax && d.unlockedMax > 1) {
+      unlockedMax = d.unlockedMax;
+      for (let i = 2; i <= unlockedMax; i++) {
+        const el = document.getElementById('level' + i);
+        if (el) { el.classList.remove('locked'); el.classList.add('unlocked'); }
+      }
+    }
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+      restoreInteractiveStates(d.answers);
+    }
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) {
+    return showModal("<h3>⚠️ Belum Lengkap</h3><p>Isi Hari/Tanggal pada kalender dan pastikan Anggota Kelompok terisi!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Jawaban...</h3>");
+  let payload = {
+    action: 'submitLKPD',
+    lkpdId: LKPD_ID,
+    subject: SUBJECT,
+    hariTanggal: tgl,
+    materiPokok: document.querySelector('[name="materi"]').value,
+    members: groupMembers,
+    answers: JSON.stringify(collect())
+  };
+
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      readOnlyMode = true;
+      document.querySelectorAll("input,select,textarea,button").forEach(el => el.disabled = true);
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Jawaban dan seluruh simulasi persen kelompokmu telah masuk ke Dasbor Guru.</p>`);
+      document.getElementById("appbar").style.display = "none";
+    } else {
+      showModal("<h3>⚠️ Gagal Mengirim</h3><p>Silakan coba kirim kembali.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Koneksi Terputus</h3><p>Periksa jaringan internet lalu coba lagi.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+};
+
+async function loadLMSViewMode() {
+  readOnlyMode = true;
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  showModal("<div class='spinner'></div><h3>Memuat Data Arsip...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + encodeURIComponent(LKPD_ID) + "&submissionId=" + encodeURIComponent(submissionId));
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if (result.members) { groupMembers = result.members; renderMembers(); }
+      else { document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database)</i></div>`; }
+
+      const tglEl = document.querySelector('[name="tanggal"]');
+      if (tglEl) {
+        const tglRestored = normalizeDateForInput(answers.tanggal || result.hariTanggal || '');
+        if (tglRestored) tglEl.value = tglRestored;
+      }
+
+      Object.keys(answers).forEach(k => {
+        if (k === 'tanggal') return;
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+
+      restoreInteractiveStates(answers);
+
+      document.querySelectorAll('.game-level').forEach(el => {
+        el.classList.remove('locked');
+        el.classList.add('unlocked');
+        let ovr = el.querySelector('.lock-overlay');
+        if (ovr) ovr.remove();
+      });
+
+      document.querySelectorAll("input,select,textarea,button").forEach(el => {
+        if (!el.closest('#gradePanel')) {
+          el.disabled = true;
+          el.readOnly = true;
+        }
+      });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel");
+      panel.classList.add("show");
+      let scale = document.getElementById("gradeScale");
+      let note  = document.getElementById("gradeNote");
+      let btn   = document.getElementById("lockGradeBtn");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade;
+          note.value = result.feedback;
+          scale.disabled = true;
+          note.disabled = true;
+          btn.style.display = "none";
+          renderStars(scale.value);
+        } else {
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none";
+        scale.disabled = true;
+        note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade;
+          note.value = result.feedback;
+          renderStars(scale.value);
+        }
+      }
+    } else {
+      showModal("<h3>⚠️ Data Tidak Ditemukan</h3>");
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) {
+  const n = { A:4, B:3, C:2, D:1 }[v] || 0;
+  const st = document.getElementById("starRating");
+  st.textContent = '★'.repeat(n) + '☆'.repeat(4 - n);
+  st.style.color = n ? '#f59e0b' : '#cbd5e1';
+}
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian terlebih dahulu!");
+  let btn = document.getElementById("lockGradeBtn");
+  btn.disabled = true;
+  btn.innerText = "⏳ Menyimpan...";
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        action: 'saveGrade',
+        lkpdId: LKPD_ID,
+        submissionId: submissionId,
+        grade: grade,
+        feedback: feedback
+      })
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Tersimpan & Terdistribusi";
+      document.getElementById("gradeScale").disabled = true;
+      document.getElementById("gradeNote").disabled = true;
+    } else {
+      alert("Gagal menyimpan nilai.");
+      btn.disabled = false;
+      btn.innerText = "🔒 Simpan & Distribusikan Nilai";
+    }
+  } catch (e) {
+    alert("Koneksi gagal.");
+    btn.disabled = false;
+    btn.innerText = "🔒 Simpan & Distribusikan Nilai";
+  }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
