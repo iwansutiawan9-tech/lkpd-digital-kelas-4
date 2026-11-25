@@ -1,1 +1,2041 @@
+<!doctype html>
+<!-- MESIN ASESMEN SUMATIF V4.3 (LMS INTEGRATED — NISN, KKTP, GRAFIK TP & ANALISIS BUTIR) -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sumatif Akhir Semester (SAS) Pendidikan Pancasila - Kelas IV</title>
+<style>
+:root{
+  --green:#059669;--green2:#047857;--mint:#d1fae5;--mint-soft:#ecfdf5;
+  --ink:#0f172a;--slate:#334155;--muted:#64748b;--line:#e2e8f0;
+  --white:#ffffff;--blue:#0284c7;--blue-soft:#e0f2fe;--blue-dark:#0369a1;
+  --amber:#d97706;--amber-soft:#fef3c7;--red:#dc2626;--red-soft:#fee2e2;
+  --purple:#7c3aed;--purple-soft:#ede9fe;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:linear-gradient(135deg,#ecfdf5,#f0f9ff 55%,#fffbeb);
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  color:var(--ink);line-height:1.65;overflow-x:hidden;padding-bottom:56px;
+}
 
+/* APPBAR & PROGRESS */
+.appbar{
+  position:sticky;top:0;z-index:50;display:flex;gap:10px;align-items:center;
+  justify-content:space-between;padding:12px 18px;
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);flex-wrap:wrap;
+}
+.brand{font-weight:900;color:var(--green2);font-size:14.5px;letter-spacing:.2px}
+.top-actions{display:flex;gap:8px;align-items:center}
+.status-banner{
+  display:none;font-size:13px;font-weight:800;color:var(--blue-dark);
+  background:var(--blue-soft);padding:8px 14px;border-radius:999px;
+}
+button{
+  border:0;border-radius:12px;padding:10px 16px;font-weight:800;cursor:pointer;
+  transition:.2s transform,.2s box-shadow;font-family:inherit;font-size:14px;
+}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,0.09)}
+button:active{transform:scale(.98)}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-light{background:#f1f5f9;color:#334155}
+.btn-main{background:var(--green);color:#fff}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-amber{background:var(--amber);color:#fff}
+
+.progress{height:6px;background:var(--mint);position:sticky;top:61px;z-index:49}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--blue));transition:.25s}
+
+/* SHEET & HERO */
+.sheet{
+  width:min(1040px,calc(100% - 24px));margin:20px auto;background:var(--white);
+  border-radius:24px;box-shadow:0 12px 35px rgba(15,23,42,0.06);
+  padding:28px;border:1px solid var(--line);
+}
+.hero{display:grid;grid-template-columns:1.75fr .75fr;gap:20px;align-items:stretch}
+.hero-card{
+  background:linear-gradient(135deg,#ecfdf5,#e0f2fe);
+  border-radius:22px;padding:24px;border:1px solid #a7f3d0;
+}
+.badge{
+  display:inline-block;background:var(--green);color:#fff;
+  padding:6px 14px;border-radius:999px;font-weight:900;font-size:12px;
+  margin-bottom:10px;letter-spacing:.4px;
+}
+h1{font-size:clamp(22px,3.4vw,32px);line-height:1.18;margin:6px 0 10px;font-weight:900}
+h2{margin:0;font-size:20px;font-weight:900}
+p{line-height:1.7;font-size:15px;color:var(--slate);margin:0 0 10px}
+
+.mission{
+  background:#fffbeb;border-radius:20px;padding:22px;display:flex;
+  flex-direction:column;justify-content:center;text-align:center;
+  font-size:14.5px;border:2px dashed #f59e0b;
+}
+.mission-icon{font-size:52px;margin-bottom:8px}
+
+.tp-box{
+  background:#fff;border-radius:14px;padding:12px 16px;margin:12px 0;
+  font-size:13.5px;border:1px solid #cbd5e1;
+}
+.tp-box ul{margin:6px 0 0;padding-left:18px}
+.tp-box li{margin-bottom:5px;color:var(--slate)}
+
+/* IDENTITAS FORM */
+.idgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.field label{display:block;font-size:13px;font-weight:800;color:#334155;margin-bottom:6px}
+input:not([type="radio"]):not([type="checkbox"]),textarea,select{
+  width:100%;font:inherit;border:2px solid #cbd5e1;border-radius:12px;
+  padding:11px 14px;outline:none;background:#fff;font-size:14.5px;font-weight:600;
+  color:var(--ink);
+}
+input:not([type="radio"]):not([type="checkbox"]):focus,textarea:focus,select:focus{
+  border-color:var(--green);box-shadow:0 0 0 3px rgba(5,150,105,0.15);
+}
+input[readonly]{background:#f1f5f9;color:#1e293b}
+.nisn-feedback{font-size:12.5px;font-weight:800;margin-top:6px;min-height:18px}
+.nisn-ok{color:var(--green2)}
+.nisn-err{color:var(--red)}
+.nisn-wait{color:var(--blue-dark)}
+
+/* SECTIONS & TABLES */
+.section-title{
+  display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--mint);
+  padding-bottom:12px;margin-bottom:18px;
+}
+.num{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  background:var(--green);color:#fff;font-weight:900;flex:0 0 auto;font-size:18px;
+}
+.tip{
+  background:#fff9d6;border-left:5px solid #f2d73a;padding:14px 16px;
+  border-radius:12px;margin:14px 0;font-size:14.5px;
+}
+.sub-banner{
+  background:linear-gradient(90deg,#047857,#0284c7);color:#fff;
+  padding:12px 16px;border-radius:14px;font-weight:900;font-size:15px;
+  margin:26px 0 14px;box-shadow:0 4px 12px rgba(2,132,199,0.16);
+}
+.sub-banner:first-of-type{margin-top:6px}
+
+/* QUESTION CARDS & STIMULUS */
+.question-card{
+  background:#f8fafc;border:2px solid #e2e8f0;border-radius:18px;
+  padding:20px;margin-bottom:18px;
+}
+.question-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:10px;flex-wrap:wrap;gap:8px;
+}
+.q-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.q-number{
+  font-weight:900;color:var(--green2);background:var(--mint);
+  padding:4px 12px;border-radius:8px;font-size:13px;
+}
+.q-tp{
+  font-weight:800;color:var(--blue-dark);background:var(--blue-soft);
+  padding:4px 10px;border-radius:8px;font-size:12px;
+}
+.q-weight{
+  font-size:12px;font-weight:800;color:var(--muted);
+  background:#e2e8f0;padding:4px 10px;border-radius:8px;
+}
+.stimulus-box{
+  background:#ffffff;border:2px solid #e2e8f0;border-left:5px solid var(--green);
+  border-radius:12px;padding:14px 16px;margin:10px 0 12px;font-size:14.5px;
+  color:var(--slate);
+}
+.svg-wrap{
+  margin:10px 0 6px;display:flex;justify-content:center;
+  background:#fff;border-radius:12px;overflow:hidden;
+}
+.svg-wrap svg{max-width:100%;height:auto;display:block}
+.stim-caption{
+  font-size:12.5px;color:var(--muted);font-style:italic;
+  margin-top:6px;text-align:center;
+}
+.stim-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13.5px}
+.stim-table th,.stim-table td{
+  border:1px solid #cbd5e1;padding:8px 10px;text-align:left;
+}
+.stim-table th{background:#ecfdf5;color:var(--green2);font-weight:800}
+
+/* STORYBOARD & INFOGRAPHIC STIMULUS */
+.storyboard{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:10px;margin-top:10px;
+}
+.sb-panel{
+  background:linear-gradient(180deg,#f8fafc,#ffffff);
+  border:1.5px solid #cbd5e1;border-radius:14px;padding:12px;
+  display:flex;flex-direction:column;gap:6px;
+}
+.sb-tag{
+  display:inline-block;align-self:flex-start;background:var(--blue-soft);
+  color:var(--blue-dark);font-size:11px;font-weight:900;
+  padding:2px 8px;border-radius:999px;
+}
+.sb-scene{
+  font-size:28px;text-align:center;background:#f0fdf4;
+  border-radius:10px;padding:8px 4px;letter-spacing:3px;
+}
+.sb-desc{font-size:13px;line-height:1.5;color:var(--slate)}
+
+.id-card-stim{
+  background:linear-gradient(135deg,#0369a1,#0284c7);color:#fff;
+  border-radius:14px;padding:14px 16px;margin-top:8px;
+  box-shadow:0 6px 16px rgba(2,132,199,0.2);
+}
+.id-card-head{
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid rgba(255,255,255,0.3);padding-bottom:8px;
+  margin-bottom:8px;font-weight:900;font-size:13px;
+}
+.id-card-grid{
+  display:grid;grid-template-columns:150px 1fr;gap:4px 8px;font-size:13.5px;
+}
+
+.poster-two-col{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;
+}
+.poster-col{border-radius:12px;padding:12px 14px;font-size:13.5px}
+.poster-kewajiban{background:#fffbeb;border:2px solid #f59e0b}
+.poster-hak{background:#ecfdf5;border:2px solid #10b981}
+.poster-col ul{margin:6px 0 0;padding-left:18px}
+
+/* OPTIONS, PGK, MJ */
+.options-list{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.option-item{
+  display:flex;align-items:flex-start;gap:10px;background:#fff;
+  border:2px solid #e2e8f0;padding:11px 14px;border-radius:12px;
+  cursor:pointer;font-size:14.5px;font-weight:600;transition:.15s;
+}
+.option-item:hover{border-color:var(--green);background:#f0fdf4}
+.option-item input{width:auto;margin:3px 0 0;flex:0 0 auto;transform:scale(1.15)}
+.pgk-hint{font-size:12.5px;font-weight:800;color:var(--amber);margin-top:8px}
+
+.mj-legend{
+  background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:12px;
+  padding:10px 14px;margin-bottom:10px;font-size:13.5px;color:#1e3a8a;
+}
+.mj-box{display:flex;flex-direction:column;gap:8px}
+.mj-row{
+  display:grid;grid-template-columns:1.3fr 1fr;gap:10px;align-items:center;
+  background:#fff;border:2px solid #e2e8f0;border-radius:12px;padding:10px 12px;
+}
+.mj-premise{font-weight:700;font-size:14px;color:var(--ink)}
+
+/* TEACHER RUBRIC & GRADING */
+.teacher-rubric{
+  display:none;margin-top:12px;background:var(--purple-soft);
+  border-left:4px solid var(--purple);border-radius:10px;
+  padding:10px 14px;font-size:13px;color:#3b0764;
+}
+.teacher-rubric.show{display:block}
+.grading-row{
+  display:none;gap:12px;align-items:center;flex-wrap:wrap;margin-top:12px;
+  background:#fffbeb;padding:12px 14px;border-radius:12px;border:2px dashed #f59e0b;
+}
+.grading-row.show{display:flex}
+.grading-row input[type="number"]{
+  width:110px;text-align:center;font-weight:900;color:var(--green2);background:#fff;
+}
+
+/* SCORE CARD, HIGHLIGHTS & TP CHART */
+.score-card-display{
+  display:none;background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+  border:3px solid var(--green);border-radius:20px;padding:18px;
+  text-align:center;margin-top:16px;
+}
+.score-card-display.remedial{
+  background:linear-gradient(135deg,#fef2f2,#fee2e2);border-color:var(--red);
+}
+.score-big{font-size:48px;font-weight:900;color:var(--green2);line-height:1.1;margin:6px 0}
+.score-card-display.remedial .score-big{color:var(--red)}
+
+.tp-highlights{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.hl-card{border-radius:16px;padding:16px;border:2px solid transparent}
+.hl-best{background:#ecfdf5;border-color:#6ee7b7}
+.hl-improve{background:#fff7ed;border-color:#fdba74}
+.hl-label{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.hl-value{font-size:20px;font-weight:900;color:var(--ink);margin:4px 0}
+.hl-sub{font-size:13px;color:var(--slate);font-weight:600}
+
+.chart-panel{
+  background:#f8fafc;border:2px solid #cbd5e1;border-radius:18px;
+  padding:18px;margin-bottom:18px;
+}
+.chart-header{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:10px;margin-bottom:16px;
+}
+.chart-legend{display:flex;gap:14px;font-size:12.5px;font-weight:800;color:var(--slate);flex-wrap:wrap}
+.chart-legend .dot{
+  display:inline-block;width:11px;height:11px;border-radius:3px;
+  margin-right:5px;vertical-align:middle;
+}
+.tp-chart-list{display:flex;flex-direction:column;gap:14px;padding-top:14px}
+.tp-bar-row{display:grid;grid-template-columns:190px 1fr 56px;gap:12px;align-items:center}
+.tp-bar-name{font-weight:900;font-size:13.5px;color:var(--ink);line-height:1.25}
+.tp-bar-name small{display:block;font-weight:600;font-size:11.5px;color:var(--muted);margin-top:2px}
+.tp-bar-track{
+  position:relative;height:30px;background:#e2e8f0;border-radius:999px;
+  overflow:visible;
+}
+.tp-bar-fill{
+  height:100%;border-radius:999px;display:flex;align-items:center;
+  justify-content:flex-end;padding-right:10px;color:#fff;font-size:12px;
+  font-weight:900;transition:width .4s ease;min-width:14px;
+}
+.tp-bar-fill.pass{background:linear-gradient(90deg,#10b981,#059669)}
+.tp-bar-fill.warn{background:linear-gradient(90deg,#f97316,#ef4444)}
+.kktp-line{
+  position:absolute;top:-5px;bottom:-5px;width:2px;
+  border-left:2px dashed #0f172a;z-index:3;pointer-events:none;
+}
+.kktp-line-tag{
+  position:absolute;top:-22px;left:50%;transform:translateX(-50%);
+  background:#0f172a;color:#fff;font-size:10px;font-weight:900;
+  padding:2px 6px;border-radius:6px;white-space:nowrap;
+}
+.tp-bar-pct{font-size:14.5px;font-weight:900;text-align:right}
+
+.recap-box{background:#fff;border:2px solid #cbd5e1;border-radius:16px;padding:16px;margin-top:16px}
+.recap-table{width:100%;border-collapse:collapse;margin-top:10px}
+.recap-table th,.recap-table td{
+  border:1px solid #e2e8f0;padding:10px 12px;font-size:13.5px;text-align:left;
+}
+.recap-table th{background:var(--mint);color:var(--green2);font-weight:900}
+.pill-tuntas{
+  display:inline-block;background:#d1fae5;color:#065f46;
+  padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;
+}
+.pill-belum{
+  display:inline-block;background:#fee2e2;color:#991b1b;
+  padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;
+}
+
+.grade-panel{display:none}
+.grade-panel.show{display:block}
+.teacher-status{
+  background:#fef3c7;border-left:5px solid #f59e0b;padding:12px 16px;
+  border-radius:12px;margin-bottom:16px;font-size:14px;
+}
+
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px}
+.modal{
+  position:fixed;inset:0;background:rgba(15,23,42,0.55);
+  display:none;place-items:center;z-index:100;padding:18px;
+}
+.modal-card{
+  width:min(500px,100%);background:#fff;border-radius:22px;padding:24px;
+  text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.2);
+}
+.spinner{
+  width:40px;height:40px;border:5px solid #d1fae5;border-top-color:var(--green);
+  border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:780px){
+  .hero,.idgrid,.tp-highlights,.poster-two-col,.mj-row{grid-template-columns:1fr}
+  .tp-bar-row{grid-template-columns:1fr;gap:6px}
+  .tp-bar-pct{text-align:left}
+  .id-card-grid{grid-template-columns:1fr}
+  .sheet{padding:16px}
+  .actions button{width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="appbar">
+  <div class="brand">🇮🇩 ASESMEN SUMATIF • PENDIDIKAN PANCASILA KELAS IV</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveDraftBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="submitBtn">📤 Kirim Jawaban</button>
+  </div>
+  <div class="status-banner" id="statusBanner">✅ Jawaban Sumatif Tersimpan di LMS</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="sumatifForm" onsubmit="return false;">
+  <!-- 1. IDENTITAS SISWA -->
+  <section class="sheet">
+    <div class="hero">
+      <div class="hero-card">
+        <span class="badge">ASESMEN SUMATIF • SAS</span>
+        <h1 id="examTitleDisplay">Sumatif Akhir Semester (SAS) Pendidikan Pancasila</h1>
+        <p><b>Mata Pelajaran:</b> <span id="subjectDisplay">Pendidikan Pancasila</span> • <b>Kelas:</b> IV • <b>KKTP:</b> <span id="kktpDisplay">75</span></p>
+
+        <div class="tp-box">
+          <b>Tujuan Pembelajaran (TP) Bab 1 – Bab 2:</b>
+          <ul>
+            <li><b>TP1 (Bab 1):</b> Mengidentifikasi, membedakan, dan menghargai identitas masyarakat sesuai budaya, suku bangsa, bahasa, agama, dan kepercayaannya serta mempraktikkannya dalam sikap dan perilaku terpuji.</li>
+            <li><b>TP2 (Bab 1):</b> Mengenal dan mengidentifikasi lingkungan tempat tinggal (RT/RW, desa/kelurahan, dan kecamatan) sebagai bagian tidak terpisahkan dari wilayah Negara Kesatuan Republik Indonesia (NKRI).</li>
+            <li><b>TP3 (Bab 2):</b> Mengidentifikasi, membedakan, membuat, dan melaksanakan aturan bersama di lingkungan sekolah dan tempat tinggal (termasuk aturan agama, adat, sekolah, hukum, serta pengambilan keputusan melalui musyawarah).</li>
+            <li><b>TP4 (Bab 2):</b> Mengidentifikasi dan melaksanakan hak serta kewajiban sebagai warga sekolah dan masyarakat dalam kehidupan sehari-hari.</li>
+          </ul>
+        </div>
+
+        <div class="score-card-display" id="scoreCardDisplay">
+          <div style="font-size:12.5px;font-weight:900;text-transform:uppercase;letter-spacing:1px">Nilai Akhir Sumatif</div>
+          <div class="score-big" id="finalScoreBig">0</div>
+          <div id="kktpBadgeText" style="font-weight:800;font-size:14px"></div>
+        </div>
+
+        <div class="idgrid">
+          <div class="field">
+            <label>NISN Siswa <span style="color:var(--red)">*</span></label>
+            <input type="text" id="inNisn" name="nisn" inputmode="numeric" placeholder="Ketik NISN lalu cocokkan..." required autocomplete="off">
+            <div class="nisn-feedback nisn-wait" id="nisnStatus">⏳ Memuat data siswa dari database sekolah...</div>
+          </div>
+
+          <div class="field">
+            <label>Hari / Tanggal <span style="color:var(--red)">*</span></label>
+            <input type="date" id="inTanggal" name="tanggal" required>
+            <div class="nisn-feedback" id="tanggalFormatted" style="color:var(--muted)"></div>
+          </div>
+
+          <div class="field">
+            <label>Nama Lengkap Siswa (Otomatis dari NISN)</label>
+            <input type="text" id="inNama" name="nama" placeholder="Terisi otomatis setelah NISN cocok" readonly required>
+          </div>
+
+          <div class="field">
+            <label>Kelas / Rombel (Otomatis dari NISN) &amp; No. Absen (Opsional)</label>
+            <div style="display:grid;grid-template-columns:1.3fr .7fr;gap:8px;">
+              <input type="text" id="inKelas" name="kelas" placeholder="Kelas / Rombel" readonly>
+              <input type="number" id="inAbsen" name="absen" placeholder="No. Absen">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mission">
+        <div class="mission-icon">🦅</div>
+        <b>🛡️ Mode Asesmen Aktif</b>
+        <p style="margin-top:8px;">Masukkan <b>NISN</b> terdaftar agar identitas terverifikasi otomatis. Kerjakan 40 butir soal secara jujur, teliti, dan hindari berpindah tab selama asesmen berlangsung.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PETUNJUK & KOMPOSISI PENILAIAN -->
+  <section class="sheet">
+    <div class="section-title"><div class="num">2</div><h2>📋 Petunjuk &amp; Komposisi Penilaian</h2></div>
+    <div class="tip">
+      <b>Kriteria Ketercapaian Tujuan Pembelajaran (KKTP):</b> Nilai minimal tuntas adalah <b><span id="kktpTip">75</span></b>.
+      Rumus Nilai Akhir: <code>(Skor Perolehan / 56) × 100</code>.
+    </div>
+    <div style="overflow-x:auto">
+      <table class="recap-table">
+        <thead>
+          <tr><th>Jenis Soal</th><th>Butir Soal</th><th>Jumlah &amp; Bobot</th><th>Total Poin</th><th>Sistem Penilaian</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Pilihan Ganda (PG)</td><td>No. 1 – 8</td><td>8 soal × 1 poin</td><td>8 Poin</td><td>Otomatis sesuai kunci</td></tr>
+          <tr><td>Pilihan Ganda Kompleks (PGK)</td><td>No. 9 – 16</td><td>8 soal × 2 poin</td><td>16 Poin</td><td>Otomatis (Skor Parsial: benar 2 = 2, benar 1 = 1)</td></tr>
+          <tr><td>Benar / Salah (BS)</td><td>No. 17 – 24</td><td>8 soal × 1 poin</td><td>8 Poin</td><td>Otomatis sesuai kunci</td></tr>
+          <tr><td>Menjodohkan (MJ)</td><td>No. 25 – 28</td><td>4 soal × 2 poin</td><td>8 Poin</td><td>Otomatis sesuai kunci</td></tr>
+          <tr><td>Isian Singkat</td><td>No. 29 – 36</td><td>8 soal × 1 poin</td><td>8 Poin</td><td>Penilaian Guru di LMS</td></tr>
+          <tr><td>Uraian</td><td>No. 37 – 40</td><td>4 soal × 2 poin</td><td>8 Poin</td><td>Penilaian Guru di LMS</td></tr>
+        </tbody>
+        <tfoot>
+          <tr style="font-weight:900;background:#f8fafc">
+            <td colspan="2">Total Keseluruhan (10 Soal per TP)</td>
+            <td>40 Butir Soal</td>
+            <td>56 Poin</td>
+            <td>Hibrida (Otomatis + Validasi Guru)</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+
+  <!-- 3. LEMBAR SOAL (40 BUTIR TERBENTUK PENUH DI DOM) -->
+  <section class="sheet">
+    <div class="section-title"><div class="num">3</div><h2>✍️ Butir Soal Sumatif Akhir Semester (40 Soal)</h2></div>
+    <div id="questionsContainer"></div>
+
+    <div class="actions">
+      <button type="button" class="btn-light" id="saveDraftBtn2">💾 Simpan Draf</button>
+      <button type="button" class="btn-main" id="submitBtn2">📤 Kirim Jawaban Sumatif</button>
+    </div>
+  </section>
+</form>
+
+<!-- 4. PANEL REKAP, GRAFIK TP & PENILAIAN GURU DI LMS -->
+<section class="sheet grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num" style="background:var(--purple)">★</div><h2>Rekapitulasi, Grafik TP &amp; Validasi Guru (LMS)</h2></div>
+  <div class="teacher-status" id="teacherStatus">⏳ Memuat status penilaian sumatif...</div>
+
+  <div class="tp-highlights">
+    <div class="hl-card hl-best">
+      <div class="hl-label">🏆 Capaian TP Terbaik</div>
+      <div class="hl-value" id="hlBestTitle">-</div>
+      <div class="hl-sub" id="hlBestSub">-</div>
+    </div>
+    <div class="hl-card hl-improve">
+      <div class="hl-label">🎯 Fokus Peningkatan TP</div>
+      <div class="hl-value" id="hlImproveTitle">-</div>
+      <div class="hl-sub" id="hlImproveSub">-</div>
+    </div>
+  </div>
+
+  <div class="chart-panel">
+    <div class="chart-header">
+      <h3 style="margin:0;color:var(--ink)">📈 Grafik Capaian Nilai per Tujuan Pembelajaran (TP)</h3>
+      <div class="chart-legend">
+        <span><i class="dot" style="background:#059669"></i>Tuntas (&ge; KKTP <span class="kktpLbl">75</span>%)</span>
+        <span><i class="dot" style="background:#ef4444"></i>Perlu Peningkatan (&lt; <span class="kktpLbl">75</span>%)</span>
+      </div>
+    </div>
+    <div class="tp-chart-list" id="tpChartList"></div>
+  </div>
+
+  <div class="recap-box" id="recapBox">
+    <h3 style="margin:0;font-size:16px;color:var(--green2)">📊 Data Ketercapaian Tujuan Pembelajaran (TP) &amp; KKTP</h3>
+    <div style="overflow-x:auto">
+      <table class="recap-table">
+        <thead>
+          <tr><th>Kode TP</th><th>Fokus Tujuan Pembelajaran</th><th>Skor Perolehan</th><th>Capaian (%)</th><th>Ketercapaian TP</th></tr>
+        </thead>
+        <tbody id="tpRecapBody"></tbody>
+        <tfoot>
+          <tr style="font-weight:900;background:#f8fafc">
+            <td colspan="2">Total Skor &amp; Nilai Akhir</td>
+            <td id="totalSkorCell">-</td>
+            <td id="nilaiAkhirCell" colspan="2">-</td>
+          </tr>
+          <tr style="font-weight:900;background:#f8fafc">
+            <td colspan="2">Status Ketuntasan KKTP (<span class="kktpLbl">75</span>)</td>
+            <td id="statusKktpCell" colspan="3">-</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div class="field" style="margin-top:16px;">
+    <label>Catatan / Umpan Balik Guru</label>
+    <textarea id="teacherNote" rows="3" placeholder="Tuliskan umpan balik, apresiasi, atau arahan penguatan TP untuk siswa..."></textarea>
+  </div>
+
+  <div class="actions" id="teacherActions">
+    <button type="button" class="btn-blue" id="btnRecalculate">🔄 Hitung Ulang Rekap &amp; Grafik</button>
+    <button type="button" class="btn-main" id="btnSaveGrade">🔒 Simpan &amp; Kunci Nilai Sumatif</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI WAJIB MESIN ASESMEN SUMATIF V4.3 (LMS SDN 1 SUKAHAJI)
+// =========================================================================
+const ENDPOINT   = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT    = 'Pendidikan Pancasila';
+const SUMATIF_ID = 'SAS-PendidikanPancasila-kls4';
+const EXAM_TITLE = 'Sumatif Akhir Semester (SAS) Pendidikan Pancasila';
+const KKTP       = 75;
+const STORAGE    = 'sumatif_v43_' + SUMATIF_ID;
+
+const TP_META = {
+  TP1: { title: 'Keberagaman Identitas & Toleransi', desc: 'Mengidentifikasi, membedakan, dan menghargai identitas suku, budaya, bahasa, agama, dan kepercayaan.' },
+  TP2: { title: 'Lingkungan Tempat Tinggal & NKRI', desc: 'Mengenal RT/RW, desa/kelurahan, dan kecamatan sebagai bagian tidak terpisahkan dari NKRI.' },
+  TP3: { title: 'Aturan & Musyawarah Mufakat', desc: 'Mengidentifikasi, membedakan, membuat, dan melaksanakan aturan bersama serta musyawarah.' },
+  TP4: { title: 'Hak & Kewajiban Warga', desc: 'Mengidentifikasi dan melaksanakan hak serta kewajiban sebagai warga sekolah dan masyarakat.' }
+};
+
+// =========================================================================
+// ASET STIMULUS VISUAL MANDIRI (INLINE SVG & HTML/CSS — TANPA CDN)
+// =========================================================================
+const SVG_STIM = {
+  fls2n: `<div class="svg-wrap"><svg viewBox="0 0 580 215" width="540" role="img" aria-label="Ilustrasi Festival Lomba Seni Siswa Nasional">
+    <rect width="580" height="215" rx="14" fill="#f0f9ff" stroke="#bae6fd" stroke-width="2"/>
+    <rect x="30" y="16" width="520" height="36" rx="8" fill="#dc2626"/>
+    <rect x="30" y="34" width="520" height="18" rx="0" fill="#ffffff"/>
+    <text x="290" y="30" text-anchor="middle" font-size="11.5" font-weight="900" fill="#fff" font-family="sans-serif">FESTIVAL LOMBA SENI SISWA NASIONAL (FLS2N)</text>
+    <text x="290" y="47" text-anchor="middle" font-size="10.5" font-weight="800" fill="#b91c1c" font-family="sans-serif">Bhinneka Tunggal Ika • Inklusif &amp; Berprestasi</text>
+    <rect x="155" y="130" width="270" height="24" rx="6" fill="#92400e"/>
+    <rect x="145" y="152" width="290" height="12" rx="4" fill="#78350f"/>
+    <!-- Siswa berkursi roda berpidato di panggung -->
+    <circle cx="290" cy="78" r="14" fill="#fed7aa" stroke="#9a3412" stroke-width="1.5"/>
+    <path d="M276 92 L304 92 L306 116 L274 116 Z" fill="#0284c7"/>
+    <circle cx="290" cy="119" r="16" fill="none" stroke="#1e293b" stroke-width="4"/>
+    <circle cx="290" cy="119" r="5" fill="#475569"/>
+    <line x1="316" y1="88" x2="316" y2="130" stroke="#334155" stroke-width="3"/>
+    <circle cx="316" cy="84" r="5" fill="#0f172a"/>
+    <rect x="328" y="60" width="128" height="24" rx="8" fill="#fff" stroke="#059669" stroke-width="1.5"/>
+    <text x="392" y="76" text-anchor="middle" font-size="10" font-weight="800" fill="#047857" font-family="sans-serif">"Mari bersatu dalam seni!"</text>
+    <!-- Siswa berhijab berkebaya (kiri depan) -->
+    <circle cx="95" cy="126" r="14" fill="#7c3aed"/>
+    <circle cx="95" cy="127" r="10" fill="#fed7aa"/>
+    <path d="M80 142 L110 142 L114 188 L76 188 Z" fill="#ec4899"/>
+    <rect x="78" y="172" width="34" height="18" fill="#92400e"/>
+    <text x="95" y="204" text-anchor="middle" font-size="10.5" font-weight="800" fill="#334155" font-family="sans-serif">Kebaya &amp; Hijab</text>
+    <!-- Siswa pakaian adat Papua + Noken (kanan depan) -->
+    <circle cx="485" cy="126" r="13" fill="#8d5524"/>
+    <path d="M472 117 L485 103 L498 117 Z" fill="#f59e0b"/>
+    <path d="M472 140 L498 140 L504 188 L466 188 Z" fill="#d97706"/>
+    <ellipse cx="456" cy="166" rx="11" ry="14" fill="#b45309" stroke="#78350f" stroke-width="2"/>
+    <text x="485" y="204" text-anchor="middle" font-size="10.5" font-weight="800" fill="#334155" font-family="sans-serif">Adat Papua &amp; Noken</text>
+    <text x="290" y="196" text-anchor="middle" font-size="11" font-weight="800" fill="#0369a1" font-family="sans-serif">🤝 Saling menyapa akrab &amp; memberi tepuk tangan semangat</text>
+  </svg></div><div class="stim-caption">Suasana FLS2N di sekolah: siswa berkursi roda berpidato di panggung, disambut akrab teman-teman berpakaian adat daerah.</div>`,
+
+  dayak: `<div class="svg-wrap"><svg viewBox="0 0 540 210" width="500" role="img" aria-label="Ilustrasi Pakaian Adat Suku Dayak">
+    <rect width="540" height="210" rx="14" fill="#fffbeb" stroke="#fcd34d" stroke-width="2"/>
+    <!-- Anak Laki-laki -->
+    <g transform="translate(115,24)">
+      <path d="M52 24 L36 0 M58 22 L58 -4 M64 24 L80 0" stroke="#dc2626" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="58" cy="40" r="17" fill="#fed7aa"/>
+      <rect x="40" y="24" width="36" height="8" rx="3" fill="#0f172a"/>
+      <path d="M43 28 L73 28" stroke="#facc15" stroke-width="2.5" stroke-dasharray="4 3"/>
+      <path d="M32 60 L84 60 L88 134 L28 134 Z" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+      <!-- Motif ukiran kuning merah biru -->
+      <path d="M40 72 Q58 62 76 72 Q58 84 40 72 Z" fill="none" stroke="#facc15" stroke-width="2.5"/>
+      <circle cx="58" cy="96" r="10" fill="none" stroke="#ef4444" stroke-width="3"/>
+      <path d="M42 118 L58 108 L74 118" fill="none" stroke="#38bdf8" stroke-width="3"/>
+      <!-- Kipas bulu -->
+      <path d="M88 94 L112 72 A26 26 0 0 1 118 112 Z" fill="#f59e0b" stroke="#b45309" stroke-width="2"/>
+    </g>
+    <!-- Anak Perempuan -->
+    <g transform="translate(305,24)">
+      <path d="M52 24 L36 0 M58 22 L58 -4 M64 24 L80 0" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="58" cy="40" r="17" fill="#fed7aa"/>
+      <rect x="40" y="24" width="36" height="8" rx="3" fill="#0f172a"/>
+      <path d="M43 28 L73 28" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="4 3"/>
+      <path d="M34 60 L82 60 L92 142 L24 142 Z" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+      <path d="M42 74 Q58 64 74 74 Q58 86 42 74 Z" fill="none" stroke="#facc15" stroke-width="2.5"/>
+      <circle cx="58" cy="100" r="10" fill="none" stroke="#38bdf8" stroke-width="3"/>
+      <path d="M36 126 L58 114 L80 126" fill="none" stroke="#ef4444" stroke-width="3"/>
+      <!-- Kipas bulu -->
+      <path d="M26 94 L2 72 A26 26 0 0 0 -4 112 Z" fill="#f59e0b" stroke="#b45309" stroke-width="2"/>
+    </g>
+    <text x="270" y="192" text-anchor="middle" font-size="11.5" font-weight="800" fill="#78350f" font-family="sans-serif">Busana gelap bermotif ukiran kuning-merah-biru, ikat kepala bulu burung enggang &amp; kipas bulu</text>
+  </svg></div>`,
+
+  grafikRT03: `<div class="svg-wrap"><svg viewBox="0 0 560 220" width="520" role="img" aria-label="Grafik Batang Kerja Bakti RT 03">
+    <rect width="560" height="220" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="280" y="24" text-anchor="middle" font-size="13" font-weight="900" fill="#0f172a" font-family="sans-serif">Keikutsertaan Warga RT 03 dalam Kerja Bakti Pembersihan Saluran Air</text>
+    <line x1="65" y1="175" x2="520" y2="175" stroke="#64748b" stroke-width="2"/>
+    <line x1="65" y1="145" x2="520" y2="145" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="65" y1="115" x2="520" y2="115" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="65" y1="85" x2="520" y2="85" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <line x1="65" y1="55" x2="520" y2="55" stroke="#e2e8f0" stroke-dasharray="4"/>
+    <text x="55" y="179" text-anchor="end" font-size="11" fill="#64748b" font-family="sans-serif">0</text>
+    <text x="55" y="149" text-anchor="end" font-size="11" fill="#64748b" font-family="sans-serif">10</text>
+    <text x="55" y="119" text-anchor="end" font-size="11" fill="#64748b" font-family="sans-serif">20</text>
+    <text x="55" y="89" text-anchor="end" font-size="11" fill="#64748b" font-family="sans-serif">30</text>
+    <text x="55" y="59" text-anchor="end" font-size="11" fill="#64748b" font-family="sans-serif">40</text>
+    <rect x="105" y="121" width="56" height="54" rx="6" fill="#38bdf8"/>
+    <text x="133" y="115" text-anchor="middle" font-size="12" font-weight="900" fill="#0369a1" font-family="sans-serif">18</text>
+    <text x="133" y="193" text-anchor="middle" font-size="12" font-weight="700" fill="#334155" font-family="sans-serif">Januari</text>
+    <rect x="210" y="103" width="56" height="72" rx="6" fill="#0284c7"/>
+    <text x="238" y="97" text-anchor="middle" font-size="12" font-weight="900" fill="#0369a1" font-family="sans-serif">24</text>
+    <text x="238" y="193" text-anchor="middle" font-size="12" font-weight="700" fill="#334155" font-family="sans-serif">Februari</text>
+    <rect x="315" y="79" width="56" height="96" rx="6" fill="#10b981"/>
+    <text x="343" y="73" text-anchor="middle" font-size="12" font-weight="900" fill="#047857" font-family="sans-serif">32</text>
+    <text x="343" y="193" text-anchor="middle" font-size="12" font-weight="700" fill="#334155" font-family="sans-serif">Maret</text>
+    <rect x="420" y="55" width="56" height="120" rx="6" fill="#059669"/>
+    <text x="448" y="49" text-anchor="middle" font-size="12" font-weight="900" fill="#047857" font-family="sans-serif">40</text>
+    <text x="448" y="193" text-anchor="middle" font-size="12" font-weight="700" fill="#334155" font-family="sans-serif">April</text>
+  </svg></div><div class="stim-caption">Dampak positif: Lingkungan RT 03 menjadi bersih dan bebas dari genangan banjir saat hujan deras.</div>`,
+
+  petaKecamatan: `<div class="svg-wrap"><svg viewBox="0 0 560 200" width="520" role="img" aria-label="Peta Wilayah Kecamatan Harapan">
+    <rect width="560" height="200" rx="14" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+    <path d="M90 65 L280 95 L465 60 M95 148 L280 95 L460 150 M280 42 L280 165" stroke="#f59e0b" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <rect x="35" y="42" width="110" height="36" rx="8" fill="#fff" stroke="#059669" stroke-width="2"/><text x="90" y="64" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46" font-family="sans-serif">🏛️ Desa Maju</text>
+    <rect x="225" y="20" width="110" height="36" rx="8" fill="#fff" stroke="#059669" stroke-width="2"/><text x="280" y="42" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46" font-family="sans-serif">🏫 Desa Makmur</text>
+    <rect x="410" y="42" width="115" height="36" rx="8" fill="#fff" stroke="#059669" stroke-width="2"/><text x="467" y="64" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46" font-family="sans-serif">🏥 Desa Sejahtera</text>
+    <rect x="40" y="130" width="115" height="36" rx="8" fill="#fff" stroke="#059669" stroke-width="2"/><text x="97" y="152" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46" font-family="sans-serif">🏛️ Desa Damai</text>
+    <rect x="220" y="148" width="120" height="36" rx="8" fill="#fff" stroke="#059669" stroke-width="2"/><text x="280" y="170" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46" font-family="sans-serif">🏫 Desa Harmoni</text>
+    <rect x="405" y="130" width="120" height="36" rx="8" fill="#fff" stroke="#059669" stroke-width="2"/><text x="465" y="152" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46" font-family="sans-serif">🏛️ Desa Sentosa</text>
+    <rect x="205" y="80" width="150" height="34" rx="10" fill="#0284c7"/><text x="280" y="101" text-anchor="middle" font-size="12" font-weight="900" fill="#fff" font-family="sans-serif">KECAMATAN HARAPAN</text>
+  </svg></div><div class="stim-caption">Simbol: 🏛️ Kantor Desa • 🏥 Puskesmas • 🏫 Sekolah Dasar • Garis kuning: Jalan penghubung antardesa.</div>`,
+
+  musyawarah: `<div class="svg-wrap"><svg viewBox="0 0 560 190" width="520" role="img" aria-label="Ilustrasi Musyawarah Kelas">
+    <rect width="560" height="190" rx="14" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+    <ellipse cx="280" cy="115" rx="135" ry="42" fill="#fde68a" stroke="#d97706" stroke-width="3"/>
+    <text x="280" y="119" text-anchor="middle" font-size="12" font-weight="900" fill="#92400e" font-family="sans-serif">MUSYAWARAH JADWAL PERPUSTAKAAN</text>
+    <circle cx="280" cy="40" r="16" fill="#fed7aa" stroke="#9a3412" stroke-width="1.5"/>
+    <rect x="258" y="56" width="44" height="20" rx="6" fill="#059669"/>
+    <text x="280" y="18" text-anchor="middle" font-size="11" font-weight="800" fill="#065f46" font-family="sans-serif">Wali Kelas</text>
+    <circle cx="122" cy="88" r="14" fill="#fed7aa"/><rect x="106" y="102" width="32" height="24" rx="6" fill="#0284c7"/>
+    <line x1="138" y1="104" x2="152" y2="70" stroke="#fed7aa" stroke-width="6" stroke-linecap="round"/>
+    <rect x="46" y="42" width="132" height="22" rx="8" fill="#fff" stroke="#0284c7"/>
+    <text x="112" y="57" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0369a1" font-family="sans-serif">"Saya usul hari Rabu!"</text>
+    <circle cx="438" cy="88" r="14" fill="#fed7aa"/><rect x="422" y="102" width="32" height="24" rx="6" fill="#dc2626"/>
+    <rect x="380" y="42" width="134" height="22" rx="8" fill="#fff" stroke="#059669"/>
+    <text x="447" y="57" text-anchor="middle" font-size="10.5" font-weight="800" fill="#047857" font-family="sans-serif">"Setuju, bergantian ya!"</text>
+    <circle cx="210" cy="158" r="12" fill="#fed7aa"/><circle cx="350" cy="158" r="12" fill="#fed7aa"/>
+  </svg></div><div class="stim-caption">Siswa kelas IV duduk melingkar bersama wali kelas, mengangkat tangan bergantian sebelum menyampaikan usulan.</div>`,
+
+  garuda: `<div class="svg-wrap"><svg viewBox="0 0 360 205" width="320" role="img" aria-label="Ilustrasi Garuda Pancasila dengan pita tanda tanya">
+    <rect width="360" height="205" rx="14" fill="#fffbeb" stroke="#fde68a" stroke-width="2"/>
+    <path d="M180 78 C130 50, 75 56, 52 84 C78 96, 118 112, 165 112 Z" fill="#eab308" stroke="#a16207" stroke-width="2"/>
+    <path d="M180 78 C230 50, 285 56, 308 84 C282 96, 242 112, 195 112 Z" fill="#eab308" stroke="#a16207" stroke-width="2"/>
+    <path d="M164 132 L180 164 L196 132 Z" fill="#ca8a04" stroke="#a16207" stroke-width="2"/>
+    <circle cx="180" cy="48" r="17" fill="#eab308" stroke="#a16207" stroke-width="2"/>
+    <path d="M193 45 L207 49 L194 55 Z" fill="#d97706"/><circle cx="185" cy="45" r="2.2" fill="#0f172a"/>
+    <path d="M156 72 L204 72 L204 106 Q180 134 156 106 Z" fill="#dc2626" stroke="#1e293b" stroke-width="2.5"/>
+    <rect x="180" y="72" width="24" height="22" fill="#ffffff"/><rect x="156" y="94" width="24" height="22" fill="#ffffff"/>
+    <polygon points="180,82 183,90 191,90 185,95 187,103 180,98 173,103 175,95 169,90 177,90" fill="#facc15" stroke="#0f172a" stroke-width="1"/>
+    <path d="M165 135 L155 158 M195 135 L205 158" stroke="#a16207" stroke-width="4" stroke-linecap="round"/>
+    <path d="M88 154 Q180 178 272 154 L264 178 Q180 200 96 178 Z" fill="#ffffff" stroke="#94a3b8" stroke-width="2.5"/>
+    <text x="180" y="180" text-anchor="middle" font-size="19" font-weight="900" fill="#dc2626" letter-spacing="4" font-family="sans-serif">? ? ?</text>
+  </svg></div><div class="stim-caption">Burung Garuda Pancasila mencengkeram pita putih bertuliskan semboyan persatuan bangsa Indonesia.</div>`,
+
+  diagramWilayah: `<div class="svg-wrap"><svg viewBox="0 0 520 145" width="490" role="img" aria-label="Diagram Desa menuju Wilayah Atasnya">
+    <rect width="520" height="145" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+    <rect x="175" y="14" width="170" height="36" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="260" y="37" text-anchor="middle" font-size="14" font-weight="900" fill="#b91c1c" font-family="sans-serif">Wilayah: ? ? ?</text>
+    <path d="M90 92 L220 54 M260 92 L260 54 M430 92 L300 54" stroke="#059669" stroke-width="2.5" fill="none"/>
+    <rect x="24" y="94" width="135" height="34" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2"/><text x="91" y="115" text-anchor="middle" font-size="12" font-weight="800" fill="#065f46" font-family="sans-serif">Desa / Kelurahan A</text>
+    <rect x="192" y="94" width="135" height="34" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2"/><text x="260" y="115" text-anchor="middle" font-size="12" font-weight="800" fill="#065f46" font-family="sans-serif">Desa / Kelurahan B</text>
+    <rect x="360" y="94" width="135" height="34" rx="8" fill="#d1fae5" stroke="#059669" stroke-width="2"/><text x="427" y="115" text-anchor="middle" font-size="12" font-weight="800" fill="#065f46" font-family="sans-serif">Desa / Kelurahan C</text>
+  </svg></div>`,
+
+  banteng: `<div class="svg-wrap"><svg viewBox="0 0 220 150" width="190" role="img" aria-label="Simbol Kepala Banteng">
+    <rect x="35" y="10" width="150" height="130" rx="18" fill="#dc2626" stroke="#991b1b" stroke-width="3"/>
+    <path d="M84 52 C62 46, 56 26, 70 22 C68 34, 76 42, 92 44 Z" fill="#0f172a"/>
+    <path d="M136 52 C158 46, 164 26, 150 22 C152 34, 144 42, 128 44 Z" fill="#0f172a"/>
+    <ellipse cx="76" cy="64" rx="14" ry="7" transform="rotate(-15 76 64)" fill="#0f172a"/>
+    <ellipse cx="144" cy="64" rx="14" ry="7" transform="rotate(15 144 64)" fill="#0f172a"/>
+    <path d="M84 48 Q110 38 136 48 L142 86 Q138 122 110 124 Q82 122 78 86 Z" fill="#0f172a"/>
+    <ellipse cx="96" cy="76" rx="4" ry="2.5" fill="#fff"/><ellipse cx="124" cy="76" rx="4" ry="2.5" fill="#fff"/>
+    <circle cx="101" cy="108" r="3.5" fill="#f8fafc"/><circle cx="119" cy="108" r="3.5" fill="#f8fafc"/>
+  </svg></div><div class="stim-caption">Simbol Kepala Banteng berwarna hitam dengan latar belakang merah pada perisai Garuda Pancasila.</div>`,
+
+  kelasRapi: `<div class="svg-wrap"><svg viewBox="0 0 560 185" width="520" role="img" aria-label="Ilustrasi Ruang Kelas IV Rapi">
+    <rect width="560" height="185" rx="14" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+    <rect x="130" y="16" width="230" height="62" rx="6" fill="#065f46" stroke="#92400e" stroke-width="5"/>
+    <text x="245" y="42" text-anchor="middle" font-size="12" font-weight="800" fill="#ecfdf5" font-family="sans-serif">Hak &amp; Kewajiban di Sekolah</text>
+    <text x="245" y="60" text-anchor="middle" font-size="10.5" fill="#a7f3d0" font-family="sans-serif">Kelas IV Bersih &amp; Tertib</text>
+    <circle cx="88" cy="64" r="14" fill="#fed7aa"/><rect x="72" y="78" width="32" height="44" rx="6" fill="#0284c7"/>
+    <text x="88" y="138" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0369a1" font-family="sans-serif">Guru Mengajar</text>
+    <rect x="165" y="128" width="60" height="24" rx="4" fill="#d97706"/><circle cx="195" cy="108" r="11" fill="#fed7aa"/>
+    <rect x="255" y="128" width="60" height="24" rx="4" fill="#d97706"/><circle cx="285" cy="108" r="11" fill="#fed7aa"/>
+    <text x="240" y="168" text-anchor="middle" font-size="11" font-weight="800" fill="#334155" font-family="sans-serif">Siswa Mendengarkan Tertib</text>
+    <rect x="420" y="34" width="110" height="96" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="2.5"/>
+    <line x1="420" y1="68" x2="530" y2="68" stroke="#b45309" stroke-width="2"/>
+    <line x1="420" y1="100" x2="530" y2="100" stroke="#b45309" stroke-width="2"/>
+    <rect x="430" y="42" width="12" height="24" fill="#ef4444"/><rect x="444" y="42" width="12" height="24" fill="#3b82f6"/>
+    <rect x="458" y="42" width="12" height="24" fill="#10b981"/><rect x="474" y="74" width="12" height="24" fill="#8b5cf6"/>
+    <text x="475" y="148" text-anchor="middle" font-size="10.5" font-weight="800" fill="#92400e" font-family="sans-serif">📚 Sudut Baca Rapi</text>
+  </svg></div><div class="stim-caption">Papan tulis bersih, guru mengajar, siswa duduk tertib, dan buku tertata rapi di rak sudut baca.</div>`
+};
+
+// =========================================================================
+// BANK 40 BUTIR SOAL SAS PENDIDIKAN PANCASILA KELAS IV (TERSTRUKTUR PENUH)
+// =========================================================================
+const SECTION_BANNERS = {
+  1:  'A. Pilihan Ganda (Nomor 1 – 8) • Pilihlah satu jawaban yang paling tepat!',
+  9:  'B. Pilihan Ganda Kompleks (Nomor 9 – 16) • Pilihlah DUA (2) jawaban yang benar! (Skor Parsial)',
+  17: 'C. Benar / Salah (Nomor 17 – 24) • Tentukan apakah pernyataan berikut Benar atau Salah!',
+  25: 'D. Menjodohkan (Nomor 25 – 28) • Pasangkan setiap pernyataan di sebelah kiri dengan pasangan yang tepat!',
+  29: 'E. Isian Singkat (Nomor 29 – 36) • Isilah titik-titik berikut dengan jawaban yang singkat dan tepat!',
+  37: 'F. Uraian (Nomor 37 – 40) • Jawablah pertanyaan berikut dengan jelas, runtut, dan lengkap!'
+};
+
+const QUESTIONS = [
+  // ---------- BAGIAN A: PILIHAN GANDA (1-8) ----------
+  {
+    qnum:1, tp:'TP1', type:'PG', weight:1, scoring:'auto', key:'B',
+    stimulus:`<b>Stimulus Ilustrasi — Festival Seni &amp; Inklusivitas Sekolah (FLS2N):</b>${SVG_STIM.fls2n}`,
+    question:'Sikap terpuji yang ditunjukkan para siswa pada ilustrasi festival tersebut adalah ....',
+    options:[
+      ['A','A. Hanya mau berteman dengan siswa yang mengenakan pakaian adat sama'],
+      ['B','B. Menghargai keberagaman suku, budaya, serta menghormati teman penyandang disabilitas'],
+      ['C','C. Menganggap budaya daerah sendiri lebih unggul dibandingkan daerah lain'],
+      ['D','D. Melarang teman dari luar daerah mengikuti lomba kesenian di sekolah']
+    ]
+  },
+  {
+    qnum:2, tp:'TP1', type:'PG', weight:1, scoring:'auto', key:'A',
+    stimulus:`<b>Stimulus Ilustrasi — Pakaian Adat Identitas Budaya Nusantara:</b>${SVG_STIM.dayak}`,
+    question:'Pakaian adat yang dikenakan oleh kedua anak pada ilustrasi tersebut merupakan kekayaan budaya dari suku ....',
+    options:[
+      ['A','A. Suku Dayak dari Kalimantan'],
+      ['B','B. Suku Betawi dari DKI Jakarta'],
+      ['C','C. Suku Asmat dari Papua Selatan'],
+      ['D','D. Suku Sasak dari Nusa Tenggara Barat']
+    ]
+  },
+  {
+    qnum:3, tp:'TP2', type:'PG', weight:1, scoring:'auto', key:'C',
+    stimulus:`<b>Stimulus Tabel — Susunan Wilayah Administrasi Tempat Tinggal:</b>
+      <table class="stim-table">
+        <thead><tr><th>Tingkatan</th><th>Nama Wilayah Administrasi</th></tr></thead>
+        <tbody>
+          <tr><td>Tingkat 1</td><td>Rukun Tetangga (RT)</td></tr>
+          <tr><td>Tingkat 2</td><td>Rukun Warga (RW) atau Dusun/Kampung</td></tr>
+          <tr><td>Tingkat 3</td><td><b>...</b> <i>(terdiri atas beberapa RW atau dusun/kampung)</i></td></tr>
+          <tr><td>Tingkat 4</td><td>Kecamatan</td></tr>
+        </tbody>
+      </table>`,
+    question:'Nama wilayah pemerintahan yang tepat untuk mengisi Tingkat 3 pada tabel tersebut adalah ....',
+    options:[
+      ['A','A. Provinsi'],
+      ['B','B. Kabupaten atau Kota'],
+      ['C','C. Desa atau Kelurahan'],
+      ['D','D. Negara Kesatuan']
+    ]
+  },
+  {
+    qnum:4, tp:'TP2', type:'PG', weight:1, scoring:'auto', key:'B',
+    stimulus:`<b>Stimulus Teks Bacaan — Peduli Lingkungan Tempat Tinggal:</b><br>Dewi dikenal peduli terhadap lingkungan tempat tinggalnya di Desa Suka Maju. Saat berjalan-jalan sore di taman desa pada hari libur, ia melihat banyak sampah plastik bekas minuman berserakan. Dewi segera memberi tahu ayahnya, lalu mereka bersama-sama memungut sampah tersebut dan membuangnya ke tempat sampah terpilah.`,
+    question:'Sikap yang ditunjukkan Dewi dan ayahnya mencerminkan tanggung jawab terhadap lingkungan tempat tinggal, yaitu ....',
+    options:[
+      ['A','A. Menunggu petugas kebersihan kecamatan datang membersihkan taman'],
+      ['B','B. Menjaga kebersihan fasilitas umum desa demi kenyamanan bersama'],
+      ['C','C. Membiarkan sampah menumpuk karena bukan milik keluarganya'],
+      ['D','D. Melarang warga desa lain bermain di taman pada hari libur']
+    ]
+  },
+  {
+    qnum:5, tp:'TP3', type:'PG', weight:1, scoring:'auto', key:'D',
+    stimulus:`<b>Stimulus Kasus — Tata Tertib Sekolah:</b><br>Dewi merupakan siswa kelas IV yang rajin melaksanakan piket kebersihan kelas. Selain itu, ia selalu bertutur kata sopan saat berbicara dengan guru maupun teman-temannya sehingga disayangi oleh seluruh warga sekolah.`,
+    question:'Perilaku yang ditampilkan oleh Dewi merupakan bentuk pengamalan aturan ....',
+    options:[
+      ['A','A. Keluarga'],
+      ['B','B. Hukum'],
+      ['C','C. Adat'],
+      ['D','D. Sekolah']
+    ]
+  },
+  {
+    qnum:6, tp:'TP3', type:'PG', weight:1, scoring:'auto', key:'B',
+    stimulus:`<b>Stimulus Kasus — Demokrasi di Kelas:</b><br>Sebagai ketua kelas, Laros ditugaskan oleh Bu Ika untuk memimpin musyawarah kelas mengenai jenis kesenian yang akan ditampilkan pada pentas seni sekolah. Akan tetapi, Laros langsung memutuskan sendiri jenis kesenian tersebut tanpa meminta pendapat teman-temannya terlebih dahulu.`,
+    question:'Tindakan Laros tersebut tidak dibenarkan karena ....',
+    options:[
+      ['A','A. Dapat menguntungkan kelas yang lain'],
+      ['B','B. Bertentangan dengan aturan pengambilan keputusan bersama melalui musyawarah'],
+      ['C','C. Membuat pentas seni sekolah menjadi batal dilaksanakan'],
+      ['D','D. Menyebabkan seluruh siswa tidak boleh mengikuti upacara bendera']
+    ]
+  },
+  {
+    qnum:7, tp:'TP4', type:'PG', weight:1, scoring:'auto', key:'B',
+    stimulus:`<b>Stimulus Grafik Batang — Partisipasi Kerja Bakti Warga RT 03:</b>${SVG_STIM.grafikRT03}`,
+    question:'Berdasarkan data grafik tersebut, hak yang diperoleh warga RT 03 setelah melaksanakan kewajiban kerja bakti adalah ....',
+    options:[
+      ['A','A. Mendapatkan hadiah uang tunai dari ketua RT setiap minggu'],
+      ['B','B. Menikmati lingkungan tempat tinggal yang bersih, sehat, dan bebas banjir'],
+      ['C','C. Bebas membuang sampah rumah tangga ke selokan di depan rumah'],
+      ['D','D. Tidak perlu lagi mengikuti kegiatan gotong royong di bulan berikutnya']
+    ]
+  },
+  {
+    qnum:8, tp:'TP4', type:'PG', weight:1, scoring:'auto', key:'B',
+    stimulus:`<b>Stimulus Adegan Visual — Etika di Ruang Publik (Pasar Tradisional):</b>
+      <div class="storyboard">
+        <div class="sb-panel"><span class="sb-tag">Adegan 1</span><div class="sb-scene">🏪🚶‍♂️🚶‍♀️🚶</div><div class="sb-desc">Suasana pasar tradisional sangat ramai. Pengunjung berdiri membentuk barisan rapi di depan kios jajanan tradisional.</div></div>
+        <div class="sb-panel"><span class="sb-tag">Adegan 2</span><div class="sb-scene">🧁🤝😊</div><div class="sb-desc">Penjual melayani pembeli satu per satu sesuai urutan kedatangan dengan ramah.</div></div>
+        <div class="sb-panel"><span class="sb-tag">Adegan 3</span><div class="sb-scene">✅🙏✨</div><div class="sb-desc">Tidak ada yang saling menyerobot; semua pembeli terlayani secara adil dan cepat.</div></div>
+      </div>`,
+    question:'Perilaku mengantre dengan tertib di tempat umum seperti pada adegan tersebut menunjukkan keseimbangan antara hak dan kewajiban, yaitu ....',
+    options:[
+      ['A','A. Mendahulukan hak diri sendiri meskipun merugikan orang lain'],
+      ['B','B. Mematuhi antrean agar setiap orang memperoleh hak pelayanan yang adil'],
+      ['C','C. Membiarkan orang yang lebih kuat mengambil barang lebih dahulu'],
+      ['D','D. Menghindari kewajiban membayar jajanan yang sudah diambil']
+    ]
+  },
+
+  // ---------- BAGIAN B: PILIHAN GANDA KOMPLEKS (9-16, SKOR PARSIAL) ----------
+  {
+    qnum:9, tp:'TP1', type:'PGK', weight:2, scoring:'auto', key:'A,C',
+    stimulus:`<b>Stimulus Bacaan — Toleransi Antarumat Beragama:</b><br>Di kelas IV terdapat siswa yang berasal dari beragam agama dan suku bangsa. Saat jam istirahat bertepatan dengan waktu ibadah salah satu teman, anggota kelompok belajar sepakat menunda diskusi sebentar agar teman tersebut dapat beribadah dengan tenang.`,
+    question:'Manakah <b>dua</b> sikap yang mencerminkan perilaku menghargai keberagaman identitas masyarakat di lingkungan sekolah? <i>(Pilihlah dua jawaban yang benar!)</i>',
+    options:[
+      ['A','A. Memberi kesempatan kepada teman untuk menjalankan ibadah sesuai agamanya'],
+      ['B','B. Mengejek logat bahasa daerah teman yang baru pindah dari luar pulau'],
+      ['C','C. Bekerja sama dalam kelompok belajar tanpa membeda-bedakan suku dan agama'],
+      ['D','D. Memaksa semua teman hanya menyukai makanan khas daerah sendiri']
+    ]
+  },
+  {
+    qnum:10, tp:'TP1', type:'PGK', weight:2, scoring:'auto', key:'A,B',
+    stimulus:`<b>Stimulus Tabel — Keragaman Identitas Teman Sekelas (Kelas IV):</b>
+      <table class="stim-table">
+        <thead><tr><th>Nama Siswa</th><th>Suku / Etnis</th><th>Bahasa Daerah</th><th>Agama</th></tr></thead>
+        <tbody>
+          <tr><td>Siti</td><td>Suku Sunda</td><td>Bahasa Sunda</td><td>Islam</td></tr>
+          <tr><td>Made</td><td>Suku Bali</td><td>Bahasa Bali</td><td>Hindu</td></tr>
+          <tr><td>Yosep</td><td>Suku Batak</td><td>Bahasa Batak</td><td>Kristen</td></tr>
+          <tr><td>Mei Ling</td><td>Etnis Tionghoa</td><td>Bahasa Indonesia / Mandarin</td><td>Konghucu</td></tr>
+        </tbody>
+      </table>`,
+    question:'Berdasarkan tabel keberagaman di atas, manakah <b>dua</b> manfaat positif yang dapat dirasakan siswa jika saling menghormati perbedaan tersebut? <i>(Pilihlah dua jawaban yang benar!)</i>',
+    options:[
+      ['A','A. Terciptanya suasana kelas yang rukun, aman, dan penuh persahabatan'],
+      ['B','B. Menambah wawasan tentang kekayaan bahasa dan budaya Nusantara'],
+      ['C','C. Memicu persaingan antarsuku agar salah satu kelompok mendominasi kelas'],
+      ['D','D. Menghilangkan identitas budaya daerah masing-masing siswa']
+    ]
+  },
+  {
+    qnum:11, tp:'TP2', type:'PGK', weight:2, scoring:'auto', key:'A,B',
+    stimulus:`<b>Stimulus Infografik — Kartu Identitas Wilayah Tempat Tinggal:</b>
+      <div class="id-card-stim">
+        <div class="id-card-head"><span>🇮🇩 KARTU IDENTITAS WILAYAH NKRI</span><span>Jawa Barat</span></div>
+        <div class="id-card-grid">
+          <div><b>Alamat Jalan</b></div><div>: Jalan Melati No. 12</div>
+          <div><b>RT / RW</b></div><div>: RT 02 / RW 05</div>
+          <div><b>Desa</b></div><div>: Desa Sukahaji</div>
+          <div><b>Kecamatan</b></div><div>: Kecamatan Cihaurbeuti</div>
+          <div><b>Kabupaten / Prov.</b></div><div>: Kabupaten Ciamis, Provinsi Jawa Barat</div>
+        </div>
+      </div>`,
+    question:'Berdasarkan infografik tersebut, manakah <b>dua</b> pernyataan yang BENAR mengenai lingkungan tempat tinggal sebagai bagian dari wilayah NKRI? <i>(Pilihlah dua jawaban yang benar!)</i>',
+    options:[
+      ['A','A. Desa atau kelurahan merupakan gabungan dari beberapa RW atau dusun/kampung'],
+      ['B','B. Kecamatan merupakan wilayah yang terdiri atas beberapa desa atau kelurahan'],
+      ['C','C. Ketua RT dipilih langsung oleh Presiden di tingkat pusat'],
+      ['D','D. Wilayah desa berdiri sendiri dan terpisah dari kedaulatan NKRI']
+    ]
+  },
+  {
+    qnum:12, tp:'TP2', type:'PGK', weight:2, scoring:'auto', key:'A,C',
+    stimulus:`<b>Stimulus Adegan Visual — Menjaga Fasilitas Umum Desa:</b>
+      <div class="storyboard">
+        <div class="sb-panel"><span class="sb-tag">Adegan 1</span><div class="sb-scene">🌱🌳👦👧</div><div class="sb-desc">Sekelompok anak SD bersama karang taruna desa menanam pohon peneduh di pinggir jalan desa.</div></div>
+        <div class="sb-panel"><span class="sb-tag">Adegan 2</span><div class="sb-scene">🎨🖌️🏠</div><div class="sb-desc">Mereka bergotong royong mengecat ulang pos ronda yang catnya mulai pudar agar kembali rapi.</div></div>
+      </div>`,
+    question:'Manakah <b>dua</b> tindakan yang menunjukkan rasa cinta dan kepedulian terhadap lingkungan desa/kelurahan tempat tinggal? <i>(Pilihlah dua jawaban yang benar!)</i>',
+    options:[
+      ['A','A. Ikut merawat tanaman peneduh dan tidak merusak fasilitas umum desa'],
+      ['B','B. Mencoret-coret dinding balai desa dengan spidol permanen'],
+      ['C','C. Memilah sampah organik dan anorganik sebelum dibuang ke tempat sampah lingkungan'],
+      ['D','D. Membuang bungkus makanan ringan ke saluran irigasi desa']
+    ]
+  },
+  {
+    qnum:13, tp:'TP3', type:'PGK', weight:2, scoring:'auto', key:'A,B',
+    stimulus:`<b>Stimulus Bacaan — Aturan dalam Kehidupan:</b><br>Kehidupan di lingkungan tempat tinggal harus berpedoman pada berbagai aturan agar tercipta masyarakat yang tertib, aman, dan damai. Setiap jenis aturan—baik aturan agama, adat-istiadat, sekolah, maupun hukum—memiliki manfaat masing-masing bagi warga negara.`,
+    question:'Manakah <b>dua</b> pernyataan yang TEPAT mengenai jenis aturan dan manfaatnya dalam kehidupan sehari-hari? <i>(Pilihlah dua jawaban yang benar!)</i>',
+    options:[
+      ['A','A. Aturan agama mendorong umat beragama dan berkepercayaan untuk meningkatkan iman dan takwa'],
+      ['B','B. Proses penyelenggaraan negara oleh pemerintah harus berdasarkan pada aturan hukum'],
+      ['C','C. Aturan sekolah hanya wajib dipatuhi oleh siswa kelas I sampai kelas III saja'],
+      ['D','D. Agar terhindar dari pelanggaran aturan agama, kita harus membanding-bandingkan agama lain']
+    ]
+  },
+  {
+    qnum:14, tp:'TP3', type:'PGK', weight:2, scoring:'auto', key:'A,B',
+    stimulus:`<b>Stimulus Tabel — Catatan Hasil Musyawarah Kelas IV:</b>
+      <table class="stim-table">
+        <tbody>
+          <tr><th style="width:170px">Pembahasan</th><td>Menyusun kesepakatan jadwal piket dan aturan penggunaan gawai di kelas</td></tr>
+          <tr><th>Usulan Siswa</th><td>Semua siswa sepakat piket dilakukan bergiliran dan gawai hanya dipakai untuk belajar atas izin guru</td></tr>
+          <tr><th>Hasil Musyawarah</th><td>Disetujui bersama dengan mufakat</td></tr>
+        </tbody>
+      </table>`,
+    question:'Manakah <b>dua</b> prinsip yang sesuai dengan pelaksanaan musyawarah mufakat berdasarkan nilai Pancasila? <i>(Pilihlah dua jawaban yang benar!)</i>',
+    options:[
+      ['A','A. Mengutamakan hikmat kebijaksanaan serta menghargai pendapat setiap anggota'],
+      ['B','B. Merupakan pengamalan nilai Pancasila khususnya sila keempat'],
+      ['C','C. Memaksakan kehendak ketua kelas agar keputusan cepat selesai'],
+      ['D','D. Mengabaikan hasil keputusan jika berbeda dengan usulan pribadi']
+    ]
+  },
+  {
+    qnum:15, tp:'TP4', type:'PGK', weight:2, scoring:'auto', key:'A,B',
+    stimulus:`<b>Stimulus Gambar Berseri (4 Panel) — Kerja Bakti Sekolah:</b>
+      <div class="storyboard">
+        <div class="sb-panel"><span class="sb-tag">Panel 1</span><div class="sb-scene">🍂🧴📄😟</div><div class="sb-desc">Lapangan sekolah kotor dipenuhi sampah plastik dan daun kering berserakan.</div></div>
+        <div class="sb-panel"><span class="sb-tag">Panel 2</span><div class="sb-scene">💬🧹👦👧</div><div class="sb-desc">Siswa kelas IV berdiskusi dan membawa sapu lidi bersama-sama.</div></div>
+        <div class="sb-panel"><span class="sb-tag">Panel 3</span><div class="sb-scene">♻️🗑️🤝</div><div class="sb-desc">Siswa bergotong royong menyapu dan memilah botol plastik serta daun ke tempat sampah terpisah.</div></div>
+        <div class="sb-panel"><span class="sb-tag">Panel 4</span><div class="sb-scene">✨⚽😄✨</div><div class="sb-desc">Lapangan sekolah kembali bersih dan siswa bermain dengan gembira.</div></div>
+      </div>`,
+    question:'Manakah <b>dua</b> pernyataan yang menunjukkan pelaksanaan kewajiban siswa sebagai warga sekolah berdasarkan gambar berseri tersebut? <i>(Pilihlah dua jawaban yang benar!)</i>',
+    options:[
+      ['A','A. Bergotong royong membersihkan lapangan sekolah dari sampah berserakan'],
+      ['B','B. Memilah sampah plastik dan sampah daun ke tempat sampah yang sesuai'],
+      ['C','C. Bermain bola di lapangan yang bersih tanpa pernah mau ikut piket'],
+      ['D','D. Memerintah adik kelas membersihkan sampah sementara kelas IV hanya menonton']
+    ]
+  },
+  {
+    qnum:16, tp:'TP4', type:'PGK', weight:2, scoring:'auto', key:'A,B',
+    stimulus:`<b>Stimulus Kasus — Hak dan Kewajiban di Masyarakat Digital:</b><br>Di era modern, warga kampung memanfaatkan grup pesan singkat RT untuk berbagi informasi kerja bakti, jadwal posyandu, dan keamanan lingkungan. Namun, beberapa orang kadang menyebarkan berita bohong (hoaks) yang membuat warga resah.`,
+    question:'Manakah <b>dua</b> sikap yang mencerminkan pelaksanaan kewajiban warga masyarakat yang bijak dalam situasi tersebut? <i>(Pilihlah dua jawaban yang benar!)</i>',
+    options:[
+      ['A','A. Memeriksa kebenaran informasi terlebih dahulu sebelum membagikannya kepada tetangga'],
+      ['B','B. Menggunakan bahasa yang santun saat menyampaikan pendapat di lingkungan masyarakat'],
+      ['C','C. Langsung meneruskan berita yang belum jelas kebenarannya agar terlihat paling tahu'],
+      ['D','D. Menyebarkan data pribadi tetangga tanpa izin di media sosial']
+    ]
+  },
+
+  // ---------- BAGIAN C: BENAR / SALAH (17-24) ----------
+  {
+    qnum:17, tp:'TP1', type:'BS', weight:1, scoring:'auto', key:'B',
+    stimulus:`<b>Stimulus Kasus:</b> Dani telah belajar tentang keberagaman identitas masyarakat berdasarkan suku, budaya, agama, dan kepercayaan. Dalam acara peringatan Hari Lahir Pancasila di sekolahnya, ia bersikap sopan dan dengan bangga bersedia mengenakan pakaian adat dari daerah lain.`,
+    question:'<b>Pernyataan:</b> Sikap dan perilaku Dani yang bersedia mengenakan pakaian adat daerah lain dengan sopan termasuk perilaku menghargai keberagaman.'
+  },
+  {
+    qnum:18, tp:'TP1', type:'BS', weight:1, scoring:'auto', key:'S',
+    stimulus:`<b>Stimulus Adegan Visual — Bahasa Daerah &amp; Bahasa Persatuan:</b>
+      <div class="storyboard">
+        <div class="sb-panel"><span class="sb-tag">Adegan 1</span><div class="sb-scene">🍜🗣️👦👧</div><div class="sb-desc">Dua siswa dari suku berbeda berbincang akrab di kantin sekolah.</div></div>
+        <div class="sb-panel"><span class="sb-tag">Adegan 2</span><div class="sb-scene">🇮🇩💬😊</div><div class="sb-desc">Karena bahasa daerahnya berbeda, keduanya memakai <b>Bahasa Indonesia</b> agar saling memahami.</div></div>
+      </div>`,
+    question:'<b>Pernyataan:</b> Menggunakan bahasa Indonesia saat berbicara dengan teman yang berbeda suku berarti kita harus melupakan dan berhenti melestarikan bahasa daerah sendiri.'
+  },
+  {
+    qnum:19, tp:'TP2', type:'BS', weight:1, scoring:'auto', key:'B',
+    stimulus:`<b>Stimulus Peta Sederhana — Wilayah Kecamatan Harapan:</b>${SVG_STIM.petaKecamatan}`,
+    question:'<b>Pernyataan:</b> Desa dan kelurahan merupakan bagian yang tidak terpisahkan dari wilayah kecamatan serta bagian dari Negara Kesatuan Republik Indonesia (NKRI).'
+  },
+  {
+    qnum:20, tp:'TP2', type:'BS', weight:1, scoring:'auto', key:'S',
+    stimulus:`<b>Stimulus Tabel — Perbandingan Pemimpin Wilayah:</b>
+      <table class="stim-table">
+        <thead><tr><th>Wilayah Pemerintahan</th><th>Sebutan Pemimpin Wilayah</th></tr></thead>
+        <tbody>
+          <tr><td>Desa</td><td>Kepala Desa</td></tr>
+          <tr><td>Kelurahan</td><td>Lurah</td></tr>
+          <tr><td>Kecamatan</td><td>Camat</td></tr>
+        </tbody>
+      </table>`,
+    question:'<b>Pernyataan:</b> Wilayah kecamatan dipimpin oleh seorang Kepala Desa, sedangkan wilayah desa dipimpin oleh seorang Camat.'
+  },
+  {
+    qnum:21, tp:'TP3', type:'BS', weight:1, scoring:'auto', key:'S',
+    stimulus:`<b>Stimulus Bacaan — Manfaat Aturan:</b><br>Masyarakat Desa Bineka selalu disiplin menaati aturan ronda malam, jadwal kerja bakti, dan aturan lalu lintas desa. Hasilnya, Desa Bineka menjadi desa yang tertib, aman, damai, dan mengalami berbagai kemajuan.`,
+    question:'<b>Pernyataan:</b> Mematuhi berbagai aturan dalam kehidupan sehari-hari hanya membatasi kebebasan warga dan tidak memberikan manfaat bagi kemajuan desa.'
+  },
+  {
+    qnum:22, tp:'TP3', type:'BS', weight:1, scoring:'auto', key:'B',
+    stimulus:`<b>Stimulus Ilustrasi — Kegiatan Musyawarah Kelas IV:</b>${SVG_STIM.musyawarah}`,
+    question:'<b>Pernyataan:</b> Musyawarah merupakan cara pengambilan keputusan bersama yang sesuai dengan prinsip demokrasi Pancasila dan pengamalan sila keempat Pancasila.'
+  },
+  {
+    qnum:23, tp:'TP4', type:'BS', weight:1, scoring:'auto', key:'B',
+    stimulus:`<b>Stimulus Infografik — Poster "Siswa Hebat":</b>
+      <div class="poster-two-col">
+        <div class="poster-col poster-kewajiban"><b>📌 Kewajiban di Sekolah</b><ul><li>Belajar sungguh-sungguh</li><li>Menjaga kebersihan kelas</li><li>Menghormati guru</li></ul></div>
+        <div class="poster-col poster-hak"><b>🌟 Hak di Sekolah</b><ul><li>Mendapatkan pelajaran</li><li>Menggunakan fasilitas perpustakaan</li><li>Mendapat perlakuan adil</li></ul></div>
+      </div>`,
+    question:'<b>Pernyataan:</b> Mendapatkan bimbingan dan ilmu pengetahuan dari guru merupakan salah satu hak peserta didik di lingkungan sekolah.'
+  },
+  {
+    qnum:24, tp:'TP4', type:'BS', weight:1, scoring:'auto', key:'S',
+    stimulus:`<b>Stimulus Kasus — Disiplin Waktu:</b><br>Riko menuntut haknya untuk selalu mendapat nilai tertinggi dari guru, tetapi ia sering datang terlambat ke sekolah dan tidak pernah mengerjakan tugas rumah yang diberikan.`,
+    question:'<b>Pernyataan:</b> Sikap Riko sudah tepat karena sebagai siswa ia boleh menuntut seluruh haknya terlebih dahulu tanpa perlu melaksanakan kewajibannya.'
+  },
+
+  // ---------- BAGIAN D: MENJODOHKAN (25-28) ----------
+  {
+    qnum:25, tp:'TP1', type:'MJ', weight:2, scoring:'auto', key:'B,C,A',
+    stimulus:`<b>Stimulus — Keberagaman Agama di Indonesia:</b> Indonesia mengakui enam agama resmi yang masing-masing memiliki tempat ibadah dan hari besar keagamaan tersendiri.`,
+    question:'Jodohkan nama agama berikut dengan tempat ibadahnya yang tepat sebagai wujud saling mengenal dan menghargai keberagaman!',
+    premises:['1. Islam','2. Hindu','3. Buddha'],
+    choices:[['A','A. Vihara'],['B','B. Masjid'],['C','C. Pura']]
+  },
+  {
+    qnum:26, tp:'TP2', type:'MJ', weight:2, scoring:'auto', key:'B,C,A',
+    stimulus:`<b>Stimulus — Wilayah Administrasi NKRI:</b> Di lingkungan tempat tinggal, setiap tingkatan wilayah pemerintahan memiliki pemimpin yang melayani kebutuhan masyarakat.`,
+    question:'Jodohkan tingkatan wilayah tempat tinggal berikut dengan sebutan pemimpin wilayahnya yang tepat!',
+    premises:['1. Desa','2. Kelurahan','3. Kecamatan'],
+    choices:[['A','A. Camat'],['B','B. Kepala Desa'],['C','C. Lurah']]
+  },
+  {
+    qnum:27, tp:'TP3', type:'MJ', weight:2, scoring:'auto', key:'B,C,A',
+    stimulus:`<b>Stimulus — Jenis-Jenis Aturan:</b> Dalam hidup bermasyarakat, kita mengenal aturan agama, aturan sekolah, dan aturan hukum yang masing-masing memiliki contoh penerapan berbeda.`,
+    question:'Jodohkan jenis aturan berikut dengan contoh penerapannya dalam kehidupan sehari-hari!',
+    premises:['1. Aturan agama','2. Aturan sekolah','3. Aturan hukum'],
+    choices:[
+      ['A','A. Menggunakan helm berstandar SNI dan mematuhi rambu lalu lintas saat berkendara'],
+      ['B','B. Beribadah dengan tekun sesuai agama dan kepercayaan masing-masing'],
+      ['C','C. Memakai seragam sesuai jadwal dan mengikuti upacara bendera dengan khidmat']
+    ]
+  },
+  {
+    qnum:28, tp:'TP4', type:'MJ', weight:2, scoring:'auto', key:'B,A,C',
+    stimulus:`<b>Stimulus — Kegiatan Warga Sekolah dan Masyarakat:</b> Setiap peran yang kita jalani di rumah, sekolah, maupun masyarakat selalu berkaitan dengan hak dan kewajiban.`,
+    question:'Jodohkan contoh aktivitas berikut dengan kategori hak atau kewajiban yang paling tepat!',
+    premises:[
+      '1. Mendapatkan suasana belajar yang aman dan nyaman di kelas',
+      '2. Membayar iuran sampah lingkungan dan menjaga kebersihan selokan',
+      '3. Memperoleh perlindungan serta pelayanan kesehatan di puskesmas desa'
+    ],
+    choices:[
+      ['A','A. Kewajiban sebagai warga masyarakat'],
+      ['B','B. Hak sebagai warga sekolah'],
+      ['C','C. Hak sebagai warga masyarakat']
+    ]
+  },
+
+  // ---------- BAGIAN E: ISIAN SINGKAT (29-36, MANUAL GURU) ----------
+  {
+    qnum:29, tp:'TP1', type:'Isian', weight:1, scoring:'manual',
+    stimulus:`<b>Stimulus Ilustrasi — Lambang Negara Indonesia:</b>${SVG_STIM.garuda}`,
+    question:'Semboyan bangsa Indonesia yang bermakna "berbeda-beda tetapi tetap satu jua" adalah ....',
+    rubric:'<b>Kunci Guru (Soal 29):</b> Bhinneka Tunggal Ika (Skor 1 jika tepat/makna sama, 0 jika salah).'
+  },
+  {
+    qnum:30, tp:'TP1', type:'Isian', weight:1, scoring:'manual',
+    stimulus:`<b>Stimulus Bacaan — Hidup Rukun:</b> "Meskipun teman-teman di kelas IV berasal dari berbagai suku dan agama, mereka selalu saling menghormati dan tidak memaksakan keyakinan kepada orang lain."`,
+    question:'Sikap saling menghargai dan menghormati perbedaan identitas budaya, suku, maupun agama disebut sikap ....',
+    rubric:'<b>Kunci Guru (Soal 30):</b> toleransi (Skor 1 jika tepat).'
+  },
+  {
+    qnum:31, tp:'TP2', type:'Isian', weight:1, scoring:'manual',
+    stimulus:`<b>Stimulus Formulir Data Diri:</b>
+      <div style="background:#f8fafc;border:1.5px dashed #94a3b8;border-radius:10px;padding:10px 14px;margin-top:8px;font-size:13.5px">
+        <b>FORMULIR ALAMAT RUMAH SISWA</b><br>
+        RT / RW : 03 / <span style="background:#fef3c7;padding:1px 8px;border-radius:4px;font-weight:900">___</span> &nbsp;|&nbsp; Desa/Kelurahan : _________ &nbsp;|&nbsp; Kecamatan : _________
+      </div>`,
+    question:'Gabungan dari beberapa Rukun Tetangga (RT) di lingkungan tempat tinggal disebut ....',
+    rubric:'<b>Kunci Guru (Soal 31):</b> Rukun Warga (RW) / RW (Skor 1 jika tepat).'
+  },
+  {
+    qnum:32, tp:'TP2', type:'Isian', weight:1, scoring:'manual',
+    stimulus:`<b>Stimulus Diagram — Struktur Wilayah Administrasi:</b>${SVG_STIM.diagramWilayah}`,
+    question:'Wilayah pemerintahan yang terdiri atas beberapa desa atau kelurahan disebut ....',
+    rubric:'<b>Kunci Guru (Soal 32):</b> kecamatan (Skor 1 jika tepat).'
+  },
+  {
+    qnum:33, tp:'TP3', type:'Isian', weight:1, scoring:'manual',
+    stimulus:`<b>Stimulus Bacaan:</b> "Dalam menyelesaikan perbedaan pendapat saat memilih ketua kelas atau kegiatan pentas seni, siswa kelas IV selalu mengutamakan diskusi bersama untuk mencapai mufakat."`,
+    question:'Cara pengambilan keputusan bersama melalui diskusi untuk mencapai mufakat disebut ....',
+    rubric:'<b>Kunci Guru (Soal 33):</b> musyawarah (Skor 1 jika tepat).'
+  },
+  {
+    qnum:34, tp:'TP3', type:'Isian', weight:1, scoring:'manual',
+    stimulus:`<b>Stimulus Ilustrasi — Simbol Sila Pancasila:</b>${SVG_STIM.banteng}`,
+    question:'Musyawarah merupakan pengamalan nilai-nilai Pancasila terutama sila ke-....',
+    rubric:'<b>Kunci Guru (Soal 34):</b> empat (4) / 4 (Skor 1 jika tepat).'
+  },
+  {
+    qnum:35, tp:'TP4', type:'Isian', weight:1, scoring:'manual',
+    stimulus:`<b>Stimulus Bacaan — Keseimbangan Hidup Disiplin:</b> "Setiap anak memiliki sesuatu yang harus dilakukan dengan penuh tanggung jawab, sekaligus memiliki sesuatu yang layak diterima secara adil."`,
+    question:'Segala sesuatu yang harus kita kerjakan atau laksanakan dengan penuh tanggung jawab disebut ....',
+    rubric:'<b>Kunci Guru (Soal 35):</b> kewajiban (Skor 1 jika tepat).'
+  },
+  {
+    qnum:36, tp:'TP4', type:'Isian', weight:1, scoring:'manual',
+    stimulus:`<b>Stimulus Adegan Visual — Perpustakaan Sekolah:</b>
+      <div class="storyboard">
+        <div class="sb-panel"><span class="sb-tag">Adegan 1</span><div class="sb-scene">📚👧👦</div><div class="sb-desc">Siswa masuk ke perpustakaan sekolah dan memilih buku cerita yang bersih serta layak baca.</div></div>
+        <div class="sb-panel"><span class="sb-tag">Adegan 2</span><div class="sb-scene">📖🤫✨</div><div class="sb-desc">Petugas perpustakaan melayani peminjaman dengan ramah sehingga siswa dapat membaca dengan nyaman dan tenang.</div></div>
+      </div>`,
+    question:'Memperoleh pinjaman buku cerita yang layak serta menikmati suasana ruang baca yang tenang di perpustakaan merupakan contoh ... siswa di sekolah.',
+    rubric:'<b>Kunci Guru (Soal 36):</b> hak (Skor 1 jika tepat).'
+  },
+
+  // ---------- BAGIAN F: URAIAN (37-40, MANUAL GURU) ----------
+  {
+    qnum:37, tp:'TP1', type:'Uraian', weight:2, scoring:'manual',
+    stimulus:`<b>Stimulus Kasus — Keberagaman di Sekolah:</b><br>Di kelasmu kedatangan seorang siswa baru pindahan dari luar pulau. Ia memiliki logat bicara daerah yang berbeda dan merasa malu karena belum mengenal teman-teman di kelas.`,
+    question:'Tuliskan <b>2 (dua)</b> tindakan nyata yang akan kamu lakukan untuk menghargai identitas teman barumu tersebut agar ia merasa diterima dan nyaman belajar di kelas!',
+    placeholder:'Tuliskan 2 tindakan nyatamu di sini...',
+    rubric:'<b>Rambu Kunci Guru (Soal 37):</b> (1) Menyapa ramah, berkenalan, mengajak bermain/belajar kelompok tanpa mengejek logatnya; (2) Membantu mengenal lingkungan sekolah dan memakai bahasa Indonesia yang santun.<br><i>Rubrik: Skor 2 = 2 tindakan nyata relevan &amp; toleran; Skor 1 = hanya 1 tindakan/kurang spesifik; Skor 0 = tidak relevan/kosong.</i>'
+  },
+  {
+    qnum:38, tp:'TP2', type:'Uraian', weight:2, scoring:'manual',
+    stimulus:`<b>Stimulus Kasus — Lingkungan Tempat Tinggal:</b><br>Menjelang musim hujan, saluran air di beberapa RT dalam wilayah desamu mulai tersumbat sampah plastik dan ranting pohon sehingga berpotensi menimbulkan banjir.`,
+    question:'Jelaskan <b>2 (dua)</b> bentuk peran atau kegiatan yang dapat dilakukan oleh warga desa bersama anak-anak untuk menjaga kebersihan dan kelestarian lingkungan tempat tinggal tersebut!',
+    placeholder:'Jelaskan 2 peran atau kegiatan konkret di sini...',
+    rubric:'<b>Rambu Kunci Guru (Soal 38):</b> (1) Kerja bakti gotong royong membersihkan saluran air dan memungut sampah plastik di sekitar RT/RW; (2) Membiasakan memilah/membuang sampah pada tempatnya serta menanam tanaman resapan air.<br><i>Rubrik: Skor 2 = 2 kegiatan konkret &amp; relevan; Skor 1 = hanya 1 kegiatan; Skor 0 = tidak relevan/kosong.</i>'
+  },
+  {
+    qnum:39, tp:'TP3', type:'Uraian', weight:2, scoring:'manual',
+    stimulus:`<b>Stimulus Kasus — Disiplin Menaati Aturan:</b><br>Aturan dibuat bukan untuk mengekang, melainkan untuk menciptakan ketertiban di rumah, sekolah, maupun masyarakat seperti yang berhasil membuat Desa Bineka menjadi desa yang maju dan damai.`,
+    question:'Mengapa kita harus mematuhi aturan di mana pun kita berada? Jelaskan <b>2 (dua)</b> manfaat yang akan kamu dan orang lain rasakan jika seluruh warga sekolah disiplin mematuhi aturan!',
+    placeholder:'Tuliskan alasan mematuhi aturan beserta 2 manfaatnya...',
+    rubric:'<b>Rambu Kunci Guru (Soal 39):</b> Alasan: agar kehidupan bersama teratur dan tidak saling merugikan. Manfaat: (1) Suasana belajar tertib, aman, nyaman, damai; (2) Melatih disiplin, tanggung jawab, serta mempererat kerukunan.<br><i>Rubrik: Skor 2 = alasan + 2 manfaat logis; Skor 1 = hanya alasan atau hanya 1 manfaat; Skor 0 = tidak relevan/kosong.</i>'
+  },
+  {
+    qnum:40, tp:'TP4', type:'Uraian', weight:2, scoring:'manual',
+    stimulus:`<b>Stimulus Ilustrasi — Suasana Ruang Kelas IV yang Tertib:</b>${SVG_STIM.kelasRapi}`,
+    question:'Sebutkan <b>2 (dua)</b> contoh hak dan <b>2 (dua)</b> contoh kewajibanmu sebagai peserta didik di lingkungan sekolah!',
+    placeholder:'Hak di sekolah:\n1. ...\n2. ...\nKewajiban di sekolah:\n1. ...\n2. ...',
+    rubric:'<b>Rambu Kunci Guru (Soal 40):</b> Hak: (1) Mendapat pengajaran/bimbingan guru; (2) Menggunakan fasilitas sekolah &amp; perlakuan adil. Kewajiban: (1) Belajar tekun &amp; mengerjakan tugas tepat waktu; (2) Menjaga kebersihan kelas, menaati tata tertib, menghormati guru &amp; teman.<br><i>Rubrik: Skor 2 = tepat 2 hak &amp; 2 kewajiban relevan; Skor 1 = sebagian/ada yang tertukar; Skor 0 = tidak relevan/kosong.</i>'
+  }
+];
+
+// =========================================================================
+// STATE & ROUTING PARAMETER LMS
+// =========================================================================
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = (urlParams.get('view') || '').toLowerCase();
+const submissionId = (urlParams.get('submissionId') || '').trim();
+const isReadOnly   = Boolean(submissionId);
+const SUBMISSION_ID = submissionId || ((window.crypto && crypto.randomUUID) ? crypto.randomUUID() : ('SUM-' + Date.now()));
+
+let studentDB = [];
+let matchedStudent = null;
+let loadedSubData = null;
+let violationCount = 0;
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && !isReadOnly) violationCount++;
+});
+
+// =========================================================================
+// RENDER SELURUH 40 KARTU SOAL KE DOM SEBELUM LISTENER & EVALUASI
+// =========================================================================
+function renderQuestions() {
+  const container = document.getElementById('questionsContainer');
+  const typeLabels = {
+    PG: 'Pilihan Ganda',
+    PGK: 'PG Kompleks',
+    BS: 'Benar / Salah',
+    MJ: 'Menjodohkan',
+    Isian: 'Isian Singkat',
+    Uraian: 'Uraian'
+  };
+
+  const htmlParts = QUESTIONS.map(q => {
+    let out = '';
+    if (SECTION_BANNERS[q.qnum]) {
+      out += `<div class="sub-banner">${SECTION_BANNERS[q.qnum]}</div>`;
+    }
+
+    const weightText = q.scoring === 'manual'
+      ? `Maks. Bobot: ${q.weight} Poin`
+      : (q.type === 'PGK' ? `Bobot: ${q.weight} Poin (Parsial)` : `Bobot: ${q.weight} Poin`);
+    const keyAttr = q.key ? ` data-key="${q.key}"` : '';
+
+    let bodyHtml = '';
+    if (q.type === 'PG') {
+      const opts = q.options.map(([v, txt]) =>
+        `<label class="option-item"><input type="radio" name="soal${q.qnum}" value="${v}"> <span>${txt}</span></label>`
+      ).join('');
+      bodyHtml = `<p><b>Pertanyaan:</b> ${q.question}</p><div class="options-list">${opts}</div><div class="auto-fb" id="fb_soal${q.qnum}" style="display:none;margin-top:8px;font-weight:800"></div>`;
+    } else if (q.type === 'PGK') {
+      const opts = q.options.map(([v, txt]) =>
+        `<label class="option-item"><input type="checkbox" name="soal${q.qnum}" value="${v}"> <span>${txt}</span></label>`
+      ).join('');
+      bodyHtml = `<p><b>Pertanyaan:</b> ${q.question}</p><div class="options-list">${opts}</div><div class="pgk-hint" id="hint_soal${q.qnum}">ℹ️ Pilih tepat 2 jawaban.</div><div class="auto-fb" id="fb_soal${q.qnum}" style="display:none;margin-top:8px;font-weight:800"></div>`;
+    } else if (q.type === 'BS') {
+      bodyHtml = `<p>${q.question}</p>
+        <div class="options-list">
+          <label class="option-item"><input type="radio" name="soal${q.qnum}" value="B"> <span>Benar (✓)</span></label>
+          <label class="option-item"><input type="radio" name="soal${q.qnum}" value="S"> <span>Salah (✗)</span></label>
+        </div>
+        <div class="auto-fb" id="fb_soal${q.qnum}" style="display:none;margin-top:8px;font-weight:800"></div>`;
+    } else if (q.type === 'MJ') {
+      const legend = q.choices.map(([, txt]) => `<div>${txt}</div>`).join('');
+      const optTags = '<option value="">-- Pilih Pasangan --</option>' +
+        q.choices.map(([v, txt]) => `<option value="${v}">${txt}</option>`).join('');
+      const rows = q.premises.map(p =>
+        `<div class="mj-row"><div class="mj-premise">${p}</div><select data-group="soal${q.qnum}">${optTags}</select></div>`
+      ).join('');
+      bodyHtml = `<p><b>Pertanyaan:</b> ${q.question}</p>
+        <div class="mj-legend"><b>Pilihan Pasangan:</b>${legend}</div>
+        <div class="mj-box">${rows}</div>
+        <div class="auto-fb" id="fb_soal${q.qnum}" style="display:none;margin-top:8px;font-weight:800"></div>`;
+    } else if (q.type === 'Isian') {
+      bodyHtml = `<p><b>Pertanyaan:</b> ${q.question}</p>
+        <input type="text" name="soal${q.qnum}" placeholder="Ketik jawaban singkatmu di sini...">
+        <div class="teacher-rubric">${q.rubric}</div>`;
+    } else {
+      bodyHtml = `<p><b>Pertanyaan:</b> ${q.question}</p>
+        <textarea name="soal${q.qnum}" rows="4" placeholder="${q.placeholder || 'Tuliskan jawabanmu di sini...'}"></textarea>
+        <div class="teacher-rubric">${q.rubric}</div>`;
+    }
+
+    out += `<div class="question-card" data-qnum="${q.qnum}" data-tp="${q.tp}" data-type="${q.type}" data-weight="${q.weight}" data-scoring="${q.scoring}"${keyAttr}>
+      <div class="question-header">
+        <div class="q-meta">
+          <span class="q-number">Soal ${q.qnum} • ${typeLabels[q.type]}</span>
+          <span class="q-tp">${q.tp}</span>
+        </div>
+        <span class="q-weight">${weightText}</span>
+      </div>
+      <div class="stimulus-box">${q.stimulus}</div>
+      ${bodyHtml}
+    </div>`;
+    return out;
+  });
+
+  container.innerHTML = htmlParts.join('');
+}
+
+// =========================================================================
+// INISIALISASI APLIKASI
+// =========================================================================
+document.addEventListener('DOMContentLoaded', async () => {
+  // 1. Pastikan seluruh 40 kartu .question-card terbentuk di DOM terlebih dahulu
+  renderQuestions();
+
+  document.getElementById('examTitleDisplay').textContent = EXAM_TITLE;
+  document.getElementById('subjectDisplay').textContent = SUBJECT;
+  document.getElementById('kktpDisplay').textContent = KKTP;
+  document.getElementById('kktpTip').textContent = KKTP;
+  document.querySelectorAll('.kktpLbl').forEach(el => el.textContent = KKTP);
+
+  const nisnInput = document.getElementById('inNisn');
+  const tglInput  = document.getElementById('inTanggal');
+
+  nisnInput.addEventListener('input', () => {
+    verifyNisnMatch(nisnInput.value.trim());
+    updateProgress();
+  });
+
+  tglInput.addEventListener('change', () => {
+    formatTanggalDisplay(tglInput.value);
+    updateProgress();
+  });
+
+  // Pembatasan maksimal 2 pilihan untuk PG Kompleks (PGK)
+  document.querySelectorAll('.question-card[data-type="PGK"]').forEach(card => {
+    const qnum = card.dataset.qnum;
+    const boxes = card.querySelectorAll('input[type="checkbox"][name="soal' + qnum + '"]');
+    const hint = document.getElementById('hint_soal' + qnum);
+    boxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        const checked = [...boxes].filter(b => b.checked);
+        if (checked.length > 2) {
+          cb.checked = false;
+          if (hint) {
+            hint.style.color = 'var(--red)';
+            hint.textContent = '⚠️ Maksimal memilih 2 jawaban! Lepas satu centang terlebih dahulu jika ingin mengganti.';
+          }
+        } else if (hint) {
+          hint.style.color = checked.length === 2 ? 'var(--green2)' : 'var(--amber)';
+          hint.textContent = checked.length === 2
+            ? '✅ 2 jawaban sudah dipilih.'
+            : 'ℹ️ Terpilih ' + checked.length + ' dari 2 jawaban.';
+        }
+        updateProgress();
+      });
+    });
+  });
+
+  document.querySelectorAll('#sumatifForm input, #sumatifForm textarea, #sumatifForm select').forEach(el => {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+
+  document.getElementById('saveDraftBtn').onclick = saveDraft;
+  document.getElementById('saveDraftBtn2').onclick = saveDraft;
+  document.getElementById('submitBtn').onclick = confirmSubmitSumatif;
+  document.getElementById('submitBtn2').onclick = confirmSubmitSumatif;
+
+  if (isReadOnly) {
+    await loadLMSSubmissionView();
+  } else {
+    await loadStudentsFromSchoolDB();
+    loadDraft();
+    updateProgress();
+  }
+});
+
+function formatTanggalDisplay(isoDate) {
+  const el = document.getElementById('tanggalFormatted');
+  if (!isoDate) { el.textContent = ''; return; }
+  const parts = isoDate.split('-');
+  if (parts.length !== 3) { el.textContent = isoDate; return; }
+  const d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+  if (isNaN(d)) { el.textContent = isoDate; return; }
+  el.textContent = d.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+// =========================================================================
+// 1. PENCOCOKAN NISN OTOMATIS KE DATABASE SEKOLAH
+// =========================================================================
+async function loadStudentsFromSchoolDB() {
+  const fb = document.getElementById('nisnStatus');
+  fb.className = 'nisn-feedback nisn-wait';
+  fb.textContent = '⏳ Menghubungkan ke database siswa...';
+
+  try {
+    const res = await fetch(ENDPOINT + '?action=getSumatifStudents');
+    const json = await res.json();
+    if (json.status === 'success' && Array.isArray(json.data)) {
+      studentDB = json.data;
+      fb.className = 'nisn-feedback nisn-wait';
+      fb.textContent = 'ℹ️ Masukkan NISN siswa untuk mencocokkan nama & kelas.';
+      if (document.getElementById('inNisn').value.trim()) {
+        verifyNisnMatch(document.getElementById('inNisn').value.trim());
+      }
+    } else {
+      fb.className = 'nisn-feedback nisn-err';
+      fb.textContent = '⚠️ Gagal memuat database siswa.';
+    }
+  } catch (e) {
+    fb.className = 'nisn-feedback nisn-err';
+    fb.textContent = '⚠️ Koneksi ke database siswa terputus.';
+  }
+}
+
+function verifyNisnMatch(nisnVal) {
+  const fb = document.getElementById('nisnStatus');
+  const namaEl = document.getElementById('inNama');
+  const kelasEl = document.getElementById('inKelas');
+
+  if (!nisnVal) {
+    matchedStudent = null;
+    namaEl.value = '';
+    kelasEl.value = '';
+    fb.className = 'nisn-feedback nisn-wait';
+    fb.textContent = 'ℹ️ Masukkan NISN siswa untuk mencocokkan nama & kelas.';
+    return false;
+  }
+
+  if (studentDB.length === 0) {
+    matchedStudent = null;
+    namaEl.value = '';
+    kelasEl.value = '';
+    fb.className = 'nisn-feedback nisn-err';
+    fb.textContent = '⏳ Data siswa belum siap, tunggu sebentar lalu coba lagi.';
+    return false;
+  }
+
+  const found = studentDB.find(s => String(s.nisn).trim() === nisnVal);
+  if (found) {
+    matchedStudent = found;
+    namaEl.value = found.nama || '';
+    kelasEl.value = found.kelas || found.rombel || '';
+    fb.className = 'nisn-feedback nisn-ok';
+    fb.textContent = '✅ NISN cocok: ' + found.nama + (kelasEl.value ? ' (' + kelasEl.value + ')' : '');
+    return true;
+  } else {
+    matchedStudent = null;
+    namaEl.value = '';
+    kelasEl.value = '';
+    fb.className = 'nisn-feedback nisn-err';
+    fb.textContent = '❌ NISN tidak ditemukan di database siswa. Wajib cocok dengan NISN terdaftar.';
+    return false;
+  }
+}
+
+// =========================================================================
+// 2. KOLEKSI JAWABAN & EVALUASI HIBRIDA V4.3 (SIAP ANALISIS BUTIR LMS)
+// =========================================================================
+function collectAnswers() {
+  const ans = {};
+  document.querySelectorAll('.question-card').forEach(card => {
+    const qnum = card.dataset.qnum;
+    const type = card.dataset.type;
+    if (type === 'PG' || type === 'BS') {
+      const checked = document.querySelector('input[name="soal' + qnum + '"]:checked');
+      ans['soal' + qnum] = checked ? checked.value : '';
+    } else if (type === 'PGK') {
+      const checked = [...document.querySelectorAll('input[name="soal' + qnum + '"]:checked')]
+        .map(el => el.value).sort();
+      ans['soal' + qnum] = checked.join(',');
+    } else if (type === 'MJ') {
+      const sels = [...card.querySelectorAll('select[data-group="soal' + qnum + '"]')];
+      ans['soal' + qnum] = sels.map(s => s.value || '').join(',');
+    } else if (type === 'Isian') {
+      const inp = card.querySelector('input[name="soal' + qnum + '"]');
+      ans['soal' + qnum] = inp ? inp.value : '';
+    } else {
+      const ta = card.querySelector('textarea[name="soal' + qnum + '"]');
+      ans['soal' + qnum] = ta ? ta.value : '';
+    }
+  });
+  return ans;
+}
+
+function applyAnswersToForm(ansObj) {
+  if (!ansObj || typeof ansObj !== 'object') return;
+  document.querySelectorAll('.question-card').forEach(card => {
+    const qnum = card.dataset.qnum;
+    const type = card.dataset.type;
+    const val = ansObj['soal' + qnum];
+    if (val === undefined || val === null) return;
+
+    if (type === 'PG' || type === 'BS') {
+      const radio = document.querySelector('input[name="soal' + qnum + '"][value="' + val + '"]');
+      if (radio) radio.checked = true;
+    } else if (type === 'PGK') {
+      const arr = String(val).split(',').map(s => s.trim()).filter(Boolean);
+      document.querySelectorAll('input[name="soal' + qnum + '"]').forEach(cb => {
+        cb.checked = arr.includes(cb.value);
+      });
+      const hint = document.getElementById('hint_soal' + qnum);
+      if (hint && arr.length > 0) {
+        hint.style.color = arr.length === 2 ? 'var(--green2)' : 'var(--amber)';
+        hint.textContent = arr.length === 2 ? '✅ 2 jawaban dipilih.' : 'ℹ️ Terpilih ' + arr.length + ' dari 2 jawaban.';
+      }
+    } else if (type === 'MJ') {
+      const parts = String(val).split(',');
+      const sels = [...card.querySelectorAll('select[data-group="soal' + qnum + '"]')];
+      sels.forEach((s, idx) => { if (parts[idx] !== undefined) s.value = parts[idx]; });
+    } else if (type === 'Isian') {
+      const inp = card.querySelector('input[name="soal' + qnum + '"]');
+      if (inp) inp.value = val;
+    } else {
+      const ta = card.querySelector('textarea[name="soal' + qnum + '"]');
+      if (ta) ta.value = val;
+    }
+  });
+}
+
+function evaluateSumatif(manualScoresMap = {}, showAutoFeedback = false) {
+  let autoScore = 0;
+  let manualScore = 0;
+  let maxScore = 0;
+  let hasManual = false;
+  const itemScores = [];
+  const tpMap = {};
+
+  document.querySelectorAll('.question-card').forEach(card => {
+    const qnum = Number(card.dataset.qnum);
+    const tp = card.dataset.tp || 'TP';
+    const type = card.dataset.type || 'PG';
+    const weight = Number(card.dataset.weight || 1);
+    const scoring = card.dataset.scoring || 'auto';
+
+    maxScore += weight;
+    if (!tpMap[tp]) {
+      tpMap[tp] = {
+        code: tp,
+        title: (TP_META[tp] && TP_META[tp].title) || tp,
+        earned: 0,
+        max: 0,
+        totalItems: 0,
+        pct: 0,
+        status: 'Perlu Peningkatan'
+      };
+    }
+    tpMap[tp].max += weight;
+    tpMap[tp].totalItems += 1;
+
+    if (scoring === 'auto') {
+      const key = String(card.dataset.key || '').trim();
+      let ansStr = '';
+      let earned = 0;
+      let fbHtml = '';
+
+      if (type === 'PG' || type === 'BS') {
+        const checked = document.querySelector('input[name="soal' + qnum + '"]:checked');
+        ansStr = checked ? String(checked.value) : '';
+        const isRight = (ansStr !== '' && ansStr === key);
+        earned = isRight ? weight : 0;
+        fbHtml = isRight
+          ? '<span style="color:var(--green2)">✅ Benar (+' + earned + '/' + weight + ' Poin)</span>'
+          : '<span style="color:var(--red)">❌ Kurang tepat (+0/' + weight + ' Poin • Kunci: ' + key + ')</span>';
+      } else if (type === 'PGK') {
+        const keyArr = key.split(',').map(s => s.trim()).filter(Boolean).sort();
+        const selArr = [...document.querySelectorAll('input[name="soal' + qnum + '"]:checked')]
+          .map(el => el.value.trim()).sort();
+        ansStr = selArr.join(',');
+        const hits = selArr.filter(v => keyArr.includes(v)).length;
+        const extraPenalty = Math.max(0, selArr.length - keyArr.length);
+        earned = Math.max(0, Math.min(weight, hits - extraPenalty));
+
+        if (earned === weight) {
+          fbHtml = '<span style="color:var(--green2)">✅ Benar Penuh (+' + earned + '/' + weight + ' Poin)</span>';
+        } else if (earned > 0) {
+          fbHtml = '<span style="color:var(--amber)">🟡 Benar Sebagian / Parsial (+' + earned + '/' + weight + ' Poin • Kunci: ' + keyArr.join(', ') + ')</span>';
+        } else {
+          fbHtml = '<span style="color:var(--red)">❌ Kurang tepat (+0/' + weight + ' Poin • Kunci: ' + keyArr.join(', ') + ')</span>';
+        }
+      } else if (type === 'MJ') {
+        const keyArr = key.split(',').map(s => s.trim());
+        const sels = [...card.querySelectorAll('select[data-group="soal' + qnum + '"]')];
+        const selArr = sels.map(s => s.value.trim());
+        ansStr = selArr.join(',');
+        const exactMatch = keyArr.length > 0 && keyArr.every((k, i) => selArr[i] === k);
+        earned = exactMatch ? weight : 0;
+        const keyLabel = keyArr.map((k, i) => (i + 1) + '-' + k).join(', ');
+        fbHtml = exactMatch
+          ? '<span style="color:var(--green2)">✅ Semua Pasangan Benar (+' + earned + '/' + weight + ' Poin)</span>'
+          : '<span style="color:var(--red)">❌ Belum tepat semua (+0/' + weight + ' Poin • Kunci: ' + keyLabel + ')</span>';
+      }
+
+      autoScore += earned;
+      tpMap[tp].earned += earned;
+      const statusItem = earned === weight ? 'Benar' : (earned > 0 ? 'Parsial' : 'Salah');
+      itemScores.push({
+        qnum, tp, type, scoring: 'auto',
+        answer: ansStr, key, earned, max: weight,
+        ratio: weight > 0 ? Number((earned / weight).toFixed(4)) : 0,
+        status: statusItem
+      });
+
+      const fb = document.getElementById('fb_soal' + qnum);
+      if (fb) {
+        fb.style.display = showAutoFeedback ? 'block' : 'none';
+        if (showAutoFeedback) fb.innerHTML = fbHtml;
+      }
+    } else {
+      hasManual = true;
+      let ansText = '';
+      if (type === 'Isian') {
+        const inpAns = card.querySelector('input[name="soal' + qnum + '"]');
+        ansText = inpAns ? inpAns.value.trim() : '';
+      } else {
+        const taAns = card.querySelector('textarea[name="soal' + qnum + '"]');
+        ansText = taAns ? taAns.value.trim() : '';
+      }
+
+      let mVal = manualScoresMap[qnum];
+      const inp = document.getElementById('manual_s' + qnum);
+      let isScored = false;
+
+      if (mVal !== undefined && mVal !== null && mVal !== '') {
+        isScored = true;
+      } else if (inp && inp.value !== '') {
+        mVal = Number(inp.value);
+        isScored = true;
+      }
+
+      const earned = isScored && !isNaN(Number(mVal))
+        ? Math.max(0, Math.min(weight, Number(mVal)))
+        : 0;
+
+      if (inp && isScored) inp.value = earned;
+
+      manualScore += earned;
+      tpMap[tp].earned += earned;
+      const statusItem = !isScored
+        ? 'Belum Dinilai'
+        : (earned === weight ? 'Benar' : (earned > 0 ? 'Parsial' : 'Salah'));
+
+      itemScores.push({
+        qnum, tp, type, scoring: 'manual',
+        answer: ansText, key: 'Rubrik Guru', earned, max: weight,
+        ratio: weight > 0 ? Number((earned / weight).toFixed(4)) : 0,
+        status: statusItem
+      });
+    }
+  });
+
+  Object.keys(tpMap).forEach(tpCode => {
+    const st = tpMap[tpCode];
+    st.pct = st.max > 0 ? Math.round((st.earned / st.max) * 100) : 0;
+    st.status = st.pct >= KKTP ? 'Tuntas' : 'Perlu Peningkatan';
+  });
+
+  const totalEarned = autoScore + manualScore;
+  const finalScore = maxScore > 0 ? Math.round((totalEarned / maxScore) * 100) : 0;
+  const statusKktp = finalScore >= KKTP ? 'Tuntas' : 'Perlu Bimbingan';
+
+  return {
+    autoScore, manualScore, totalEarned, maxScore,
+    finalScore, statusKktp, hasManual, itemScores, tpSummary: tpMap
+  };
+}
+
+// =========================================================================
+// 3. RENDER GRAFIK BATANG TP, KARTU SOROTAN & TABEL KETERCAPAIAN TP
+// =========================================================================
+function renderTpRecap(evalRes) {
+  const tbody = document.getElementById('tpRecapBody');
+  const chartList = document.getElementById('tpChartList');
+  if (!tbody || !chartList) return;
+
+  tbody.innerHTML = '';
+  chartList.innerHTML = '';
+
+  const tpList = Object.keys(evalRes.tpSummary).map(code => evalRes.tpSummary[code]);
+
+  tpList.forEach((st, idx) => {
+    const isPass = st.pct >= KKTP;
+    const row = document.createElement('div');
+    row.className = 'tp-bar-row';
+    row.innerHTML =
+      '<div class="tp-bar-name">' + st.code + '<small>' + st.title + '</small></div>' +
+      '<div class="tp-bar-track">' +
+        '<div class="kktp-line" style="left:' + KKTP + '%">' +
+          (idx === 0 ? '<span class="kktp-line-tag">KKTP ' + KKTP + '%</span>' : '') +
+        '</div>' +
+        '<div class="tp-bar-fill ' + (isPass ? 'pass' : 'warn') + '" style="width:' + Math.max(st.pct, 4) + '%">' +
+          (st.pct >= 18 ? st.earned + '/' + st.max : '') +
+        '</div>' +
+      '</div>' +
+      '<div class="tp-bar-pct" style="color:' + (isPass ? 'var(--green2)' : 'var(--red)') + '">' + st.pct + '%</div>';
+    chartList.appendChild(row);
+
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><b>' + st.code + '</b></td>' +
+      '<td>' + st.title + '</td>' +
+      '<td>' + st.earned + ' / ' + st.max + ' Poin</td>' +
+      '<td><b>' + st.pct + '%</b></td>' +
+      '<td>' + (isPass
+        ? '<span class="pill-tuntas">✅ Tuntas</span>'
+        : '<span class="pill-belum">⚠️ Perlu Peningkatan</span>') + '</td>';
+    tbody.appendChild(tr);
+  });
+
+  if (tpList.length > 0) {
+    const maxPct = Math.max(...tpList.map(t => t.pct));
+    const minPct = Math.min(...tpList.map(t => t.pct));
+    const bestTps = tpList.filter(t => t.pct === maxPct);
+    const lowTps  = tpList.filter(t => t.pct === minPct);
+    const belowKktp = tpList.filter(t => t.pct < KKTP);
+
+    document.getElementById('hlBestTitle').textContent =
+      bestTps.map(t => t.code).join(', ') + ' (' + maxPct + '%)';
+    document.getElementById('hlBestSub').textContent =
+      bestTps.map(t => t.title).join(' • ');
+
+    if (belowKktp.length > 0) {
+      document.getElementById('hlImproveTitle').textContent =
+        lowTps.map(t => t.code).join(', ') + ' (' + minPct + '%)';
+      document.getElementById('hlImproveSub').textContent =
+        'Belum mencapai KKTP ' + KKTP + '%: ' + belowKktp.map(t => t.code + ' (' + t.pct + '%)').join(', ');
+    } else {
+      document.getElementById('hlImproveTitle').textContent = 'Semua TP Tuntas! 🎉';
+      document.getElementById('hlImproveSub').textContent =
+        'Pengayaan dapat difokuskan pada ' + lowTps.map(t => t.code + ' (' + t.pct + '%)').join(', ');
+    }
+  }
+
+  document.getElementById('totalSkorCell').textContent =
+    evalRes.totalEarned + ' / ' + evalRes.maxScore + ' Poin (Otomatis: ' + evalRes.autoScore + ', Guru: ' + evalRes.manualScore + ')';
+  document.getElementById('nilaiAkhirCell').textContent = 'Nilai Akhir: ' + evalRes.finalScore;
+
+  const tuntas = evalRes.finalScore >= KKTP;
+  document.getElementById('statusKktpCell').innerHTML = tuntas
+    ? '<span style="color:var(--green2)">✅ Tuntas (Memenuhi KKTP ' + KKTP + ')</span>'
+    : '<span style="color:var(--red)">⚠️ Perlu Bimbingan (Di bawah KKTP ' + KKTP + ')</span>';
+
+  const card = document.getElementById('scoreCardDisplay');
+  const big = document.getElementById('finalScoreBig');
+  const badge = document.getElementById('kktpBadgeText');
+  if (card && big && badge) {
+    card.style.display = 'block';
+    big.textContent = evalRes.finalScore;
+    if (tuntas) {
+      card.classList.remove('remedial');
+      badge.innerHTML = '<span style="color:var(--green2)">🎉 Tuntas (Memenuhi KKTP ' + KKTP + ')</span>';
+    } else {
+      card.classList.add('remedial');
+      badge.innerHTML = '<span style="color:var(--red)">📌 Belum Mencapai KKTP (' + KKTP + ')</span>';
+    }
+  }
+}
+
+// =========================================================================
+// 4. DRAF LOKAL, PROGRESS & PENGIRIMAN JAWABAN SISWA
+// =========================================================================
+function updateProgress() {
+  const cards = [...document.querySelectorAll('.question-card')];
+  let done = 0;
+  if (matchedStudent) done++;
+  if (document.getElementById('inTanggal').value) done++;
+
+  cards.forEach(card => {
+    const qnum = card.dataset.qnum;
+    const type = card.dataset.type;
+    if (type === 'PG' || type === 'BS') {
+      if (document.querySelector('input[name="soal' + qnum + '"]:checked')) done++;
+    } else if (type === 'PGK') {
+      if (document.querySelectorAll('input[name="soal' + qnum + '"]:checked').length > 0) done++;
+    } else if (type === 'MJ') {
+      const sels = [...card.querySelectorAll('select[data-group="soal' + qnum + '"]')];
+      if (sels.length > 0 && sels.every(s => s.value !== '')) done++;
+    } else if (type === 'Isian') {
+      const inp = card.querySelector('input[name="soal' + qnum + '"]');
+      if (inp && inp.value.trim()) done++;
+    } else {
+      const ta = card.querySelector('textarea[name="soal' + qnum + '"]');
+      if (ta && ta.value.trim()) done++;
+    }
+  });
+  const total = cards.length + 2;
+  document.getElementById('progressBar').style.width = Math.round((done / total) * 100) + '%';
+}
+
+function saveDraft() {
+  const payload = {
+    nisn: document.getElementById('inNisn').value.trim(),
+    tanggal: document.getElementById('inTanggal').value,
+    absen: document.getElementById('inAbsen').value.trim(),
+    answers: collectAnswers()
+  };
+  try { localStorage.setItem(STORAGE, JSON.stringify(payload)); } catch (e) {}
+  showModal('<div style="font-size:44px">💾</div><h3>Draf Tersimpan</h3><p>Jawaban sementara tersimpan di peramban ini.</p><button class="btn-main" onclick="closeModal()">Lanjutkan</button>');
+}
+
+function loadDraft() {
+  try {
+    const raw = localStorage.getItem(STORAGE);
+    if (!raw) return;
+    const d = JSON.parse(raw);
+    if (d.nisn) {
+      document.getElementById('inNisn').value = d.nisn;
+      verifyNisnMatch(d.nisn);
+    }
+    if (d.tanggal) {
+      document.getElementById('inTanggal').value = d.tanggal;
+      formatTanggalDisplay(d.tanggal);
+    }
+    if (d.absen) document.getElementById('inAbsen').value = d.absen;
+    if (d.answers) applyAnswersToForm(d.answers);
+  } catch (e) {}
+}
+
+function confirmSubmitSumatif() {
+  const nisnVal = document.getElementById('inNisn').value.trim();
+  const tglVal = document.getElementById('inTanggal').value;
+
+  if (!nisnVal || !verifyNisnMatch(nisnVal)) {
+    return showModal('<div style="font-size:44px">🆔</div><h3>NISN Belum Valid</h3><p>Masukkan NISN yang terdaftar dan cocok dengan database siswa.</p><button class="btn-main" onclick="closeModal()">Periksa NISN</button>');
+  }
+  if (!tglVal) {
+    return showModal('<div style="font-size:44px">📅</div><h3>Tanggal Wajib Diisi</h3><p>Pilih Hari / Tanggal pada form kalender terlebih dahulu.</p><button class="btn-main" onclick="closeModal()">Pilih Tanggal</button>');
+  }
+
+  showModal('<div style="font-size:44px">📤</div><h3>Kirim Jawaban SAS?</h3><p>Pastikan seluruh 40 soal telah diperiksa. Setelah dikirim, jawaban akan disimpan ke database LMS dan dikunci.</p><div style="display:flex;gap:10px;justify-content:center;margin-top:14px"><button class="btn-light" onclick="closeModal()">Batal</button><button class="btn-main" id="btnConfirmSend">Ya, Kirim</button></div>');
+
+  document.getElementById('btnConfirmSend').onclick = async () => {
+    closeModal();
+    showModal('<div class="spinner"></div><h3>Mengirim Jawaban...</h3><p>Menyimpan ke database sumatif mata pelajaran ' + SUBJECT + '.</p>');
+
+    const evalRes = evaluateSumatif({}, false);
+    const payload = {
+      action: 'submitSumatif',
+      submissionId: SUBMISSION_ID,
+      sumatifId: SUMATIF_ID,
+      examTitle: EXAM_TITLE,
+      subject: SUBJECT,
+      kktp: KKTP,
+      nisn: matchedStudent.nisn,
+      nama: matchedStudent.nama,
+      kelas: matchedStudent.kelas || matchedStudent.rombel || '',
+      absen: document.getElementById('inAbsen').value.trim(),
+      tanggal: tglVal,
+      answersJson: JSON.stringify(collectAnswers()),
+      itemScoresJson: JSON.stringify(evalRes.itemScores),
+      tpSummaryJson: JSON.stringify(evalRes.tpSummary),
+      autoScore: evalRes.autoScore,
+      manualScore: 0,
+      maxScore: evalRes.maxScore,
+      hasManual: evalRes.hasManual,
+      violations: violationCount
+    };
+
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json();
+      if (result.status === 'success') {
+        try { localStorage.removeItem(STORAGE); } catch (e) {}
+        lockStudentForm();
+        document.getElementById('topActions').style.display = 'none';
+        document.getElementById('statusBanner').style.display = 'block';
+        showModal('<div style="font-size:48px">✅</div><h3>Berhasil Dikirim!</h3><p>Jawaban SAS Pendidikan Pancasila sudah masuk ke database LMS.</p><button class="btn-main" onclick="closeModal()">Selesai</button>');
+      } else {
+        showModal('<div style="font-size:44px">⚠️</div><h3>Gagal Mengirim</h3><p>' + (result.message || 'Terjadi kesalahan pada server.') + '</p><button class="btn-light" onclick="closeModal()">Tutup</button>');
+      }
+    } catch (e) {
+      showModal('<div style="font-size:44px">⚠️</div><h3>Koneksi Terputus</h3><p>Silakan coba kirim kembali.</p><button class="btn-light" onclick="closeModal()">Tutup</button>');
+    }
+  };
+}
+
+function lockStudentForm() {
+  document.querySelectorAll('#sumatifForm input, #sumatifForm textarea, #sumatifForm select').forEach(el => {
+    el.disabled = true;
+  });
+}
+
+// =========================================================================
+// 5. MODE BACA SISWA & PENILAIAN GURU VIA LMS
+// =========================================================================
+function injectManualScoreInputs(allowEdit) {
+  document.querySelectorAll('.question-card[data-scoring="manual"]').forEach(card => {
+    const qnum = card.dataset.qnum;
+    const maxW = Number(card.dataset.weight || 1);
+    const tp = card.dataset.tp || 'TP';
+    const type = card.dataset.type || 'Uraian';
+    if (document.getElementById('manualBox_' + qnum)) return;
+
+    const row = document.createElement('div');
+    row.className = 'grading-row show';
+    row.id = 'manualBox_' + qnum;
+    row.innerHTML =
+      '<span style="font-size:13px;font-weight:900;color:#92400e">Skor Guru (Soal ' + qnum + ' • ' + type + ' • ' + tp + '):</span>' +
+      '<input type="number" id="manual_s' + qnum + '" min="0" max="' + maxW + '" step="1" placeholder="0-' + maxW + '"' + (allowEdit ? '' : ' disabled') + '>' +
+      '<span style="font-size:12px;color:var(--muted);font-weight:700">Maks: ' + maxW + ' Poin</span>';
+
+    card.appendChild(row);
+    const inp = document.getElementById('manual_s' + qnum);
+    if (inp && allowEdit) {
+      inp.addEventListener('input', () => {
+        renderTpRecap(evaluateSumatif({}, true));
+      });
+    }
+  });
+}
+
+async function loadLMSSubmissionView() {
+  document.getElementById('topActions').style.display = 'none';
+  document.getElementById('statusBanner').style.display = 'block';
+  showModal('<div class="spinner"></div><h3>Memuat Data Sumatif dari LMS...</h3>');
+
+  try {
+    const url = ENDPOINT + '?action=getSumatifSubmission&submissionId=' + encodeURIComponent(submissionId) + '&subject=' + encodeURIComponent(SUBJECT);
+    const res = await fetch(url);
+    const json = await res.json();
+
+    if (json.status !== 'success' || !json.data) {
+      return showModal('<div style="font-size:44px">❌</div><h3>Data Tidak Ditemukan</h3><p>' + (json.message || 'Submisi tidak ditemukan.') + '</p><button class="btn-light" onclick="closeModal()">Tutup</button>');
+    }
+
+    loadedSubData = json.data;
+    document.getElementById('inNisn').value = loadedSubData.nisn || '';
+    document.getElementById('inNama').value = loadedSubData.nama || '';
+    document.getElementById('inKelas').value = loadedSubData.kelas || '';
+    document.getElementById('inAbsen').value = loadedSubData.absen || '';
+    document.getElementById('inTanggal').value = loadedSubData.tanggal || '';
+    formatTanggalDisplay(loadedSubData.tanggal || '');
+
+    const nisnFb = document.getElementById('nisnStatus');
+    nisnFb.className = 'nisn-feedback nisn-ok';
+    nisnFb.textContent = '✅ Terverifikasi: ' + (loadedSubData.nama || loadedSubData.nisn);
+
+    try { applyAnswersToForm(JSON.parse(loadedSubData.answersJson || '{}')); } catch (e) {}
+
+    lockStudentForm();
+    closeModal();
+
+    document.getElementById('gradePanel').classList.add('show');
+
+    // Kotak kunci/rambu jawaban HANYA tampil untuk Mode Guru
+    if (viewMode === 'guru') {
+      document.querySelectorAll('.teacher-rubric').forEach(el => el.classList.add('show'));
+    }
+
+    const manualMap = {};
+    try {
+      const items = JSON.parse(loadedSubData.itemScoresJson || '[]');
+      items.forEach(it => {
+        if (it.scoring === 'manual' && it.status !== 'Belum Dinilai') {
+          manualMap[it.qnum] = it.earned;
+        }
+      });
+    } catch (e) {}
+
+    const canTeacherEdit = (viewMode === 'guru') && (loadedSubData.gradeStatus !== 'Sudah Dinilai');
+    injectManualScoreInputs(canTeacherEdit);
+
+    Object.keys(manualMap).forEach(qnum => {
+      const inp = document.getElementById('manual_s' + qnum);
+      if (inp) inp.value = manualMap[qnum];
+    });
+
+    const noteEl = document.getElementById('teacherNote');
+    noteEl.value = loadedSubData.feedback || '';
+
+    renderTpRecap(evaluateSumatif(manualMap, true));
+
+    const stEl = document.getElementById('teacherStatus');
+    const actEl = document.getElementById('teacherActions');
+
+    if (viewMode === 'guru') {
+      if (loadedSubData.gradeStatus === 'Sudah Dinilai') {
+        noteEl.disabled = true;
+        actEl.style.display = 'none';
+        stEl.innerHTML = '🔒 <b>Penilaian Sudah Dikunci.</b> Nilai akhir: <b>' + loadedSubData.finalScore + '</b> (' + loadedSubData.statusKktp + ').';
+      } else {
+        noteEl.disabled = false;
+        actEl.style.display = 'flex';
+        stEl.innerHTML = '📝 <b>Mode Penilaian Guru Aktif.</b> Soal No. 1–28 dikoreksi otomatis; silakan isi skor Isian Singkat (No. 29–36) &amp; Uraian (No. 37–40) sesuai kotak rambu kunci, lalu klik <b>Simpan &amp; Kunci Nilai Sumatif</b>.';
+        document.getElementById('btnRecalculate').onclick = () => renderTpRecap(evaluateSumatif({}, true));
+        document.getElementById('btnSaveGrade').onclick = handleSaveGradeClick;
+      }
+    } else {
+      noteEl.disabled = true;
+      actEl.style.display = 'none';
+      if (loadedSubData.gradeStatus === 'Sudah Dinilai') {
+        stEl.innerHTML = '🏆 <b>Hasil Penilaian Guru Telah Ditetapkan.</b> Status: <b>' + loadedSubData.statusKktp + '</b>. Perhatikan grafik capaian per TP di bawah untuk melihat kekuatan dan fokus peningkatan.';
+      } else {
+        stEl.innerHTML = '⏳ <b>Menunggu Validasi Isian &amp; Uraian dari Guru.</b> Skor objektif (No. 1–28) sudah tampil sementara pada grafik &amp; tabel di bawah.';
+      }
+    }
+  } catch (e) {
+    showModal('<div style="font-size:44px">⚠️</div><h3>Gagal Memuat Data</h3><p>Periksa koneksi ke server LMS.</p><button class="btn-light" onclick="closeModal()">Tutup</button>');
+  }
+}
+
+function handleSaveGradeClick() {
+  const emptyInputs = [...document.querySelectorAll('.grading-row input[type="number"]')]
+    .filter(inp => inp.value.trim() === '');
+  if (emptyInputs.length > 0) {
+    showModal(
+      '<div style="font-size:44px">⚠️</div><h3>Ada Skor Manual Kosong</h3>' +
+      '<p>Masih ada <b>' + emptyInputs.length + ' butir</b> soal Isian/Uraian yang belum diisi skornya (akan dihitung 0). Tetap simpan &amp; kunci nilai?</p>' +
+      '<div style="display:flex;gap:10px;justify-content:center;margin-top:14px">' +
+      '<button class="btn-light" id="btnCancelSave">Periksa Dulu</button>' +
+      '<button class="btn-main" id="btnForceSave">Ya, Simpan &amp; Kunci</button></div>'
+    );
+    document.getElementById('btnCancelSave').onclick = () => {
+      closeModal();
+      emptyInputs[0].focus();
+    };
+    document.getElementById('btnForceSave').onclick = () => {
+      emptyInputs.forEach(inp => { inp.value = '0'; });
+      closeModal();
+      executeSaveFinalTeacherGrade();
+    };
+    return;
+  }
+  executeSaveFinalTeacherGrade();
+}
+
+async function executeSaveFinalTeacherGrade() {
+  const evalRes = evaluateSumatif({}, true);
+  renderTpRecap(evalRes);
+  const noteVal = document.getElementById('teacherNote').value;
+  const btn = document.getElementById('btnSaveGrade');
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Menyimpan ke Database...';
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        action: 'saveSumatifGrade',
+        submissionId: SUBMISSION_ID,
+        subject: SUBJECT,
+        kktp: KKTP,
+        autoScore: evalRes.autoScore,
+        manualScore: evalRes.manualScore,
+        maxScore: evalRes.maxScore,
+        finalScore: evalRes.finalScore,
+        itemScoresJson: JSON.stringify(evalRes.itemScores),
+        tpSummaryJson: JSON.stringify(evalRes.tpSummary),
+        feedback: noteVal
+      })
+    });
+    const json = await res.json();
+    if (json.status === 'success') {
+      document.querySelectorAll('.grading-row input').forEach(i => i.disabled = true);
+      document.getElementById('teacherNote').disabled = true;
+      document.getElementById('teacherActions').style.display = 'none';
+      document.getElementById('teacherStatus').innerHTML = '🔒 <b>Penilaian Berhasil Disimpan &amp; Dikunci.</b> Nilai Akhir: <b>' + evalRes.finalScore + '</b> (' + evalRes.statusKktp + ').';
+      showModal('<div style="font-size:48px">🔒</div><h3>Nilai Tersimpan</h3><p>Hasil penilaian sumatif, grafik TP, dan data analisis butir soal sudah diperbarui di database LMS.</p><button class="btn-main" onclick="closeModal()">Selesai</button>');
+    } else {
+      showModal('<div style="font-size:44px">⚠️</div><h3>Gagal Menyimpan</h3><p>' + (json.message || 'Terjadi kesalahan pada server.') + '</p><button class="btn-light" onclick="closeModal()">Tutup</button>');
+      btn.disabled = false;
+      btn.textContent = '🔒 Simpan & Kunci Nilai Sumatif';
+    }
+  } catch (e) {
+    showModal('<div style="font-size:44px">⚠️</div><h3>Koneksi Gagal</h3><p>Koneksi terputus saat menyimpan nilai. Silakan coba lagi.</p><button class="btn-light" onclick="closeModal()">Tutup</button>');
+    btn.disabled = false;
+    btn.textContent = '🔒 Simpan & Kunci Nilai Sumatif';
+  }
+}
+
+function showModal(html) {
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modal').style.display = 'grid';
+}
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+}
+</script>
+</body>
+</html>
