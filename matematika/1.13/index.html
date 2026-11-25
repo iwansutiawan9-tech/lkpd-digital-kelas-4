@@ -1,1 +1,1862 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.2 (GAMIFIKASI MATEMATIKA - KONSEP PERKALIAN) -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 1.13 Matematika - Mengenal Konsep Perkalian (Sampai 100)</title>
+<style>
+:root {
+  --green: #059669; --green2: #047857; --green-soft: #dcfce7;
+  --ink: #1e293b; --slate: #334155; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --red: #ef4444; --red-soft: #fee2e2;
+  --math-main: #0d9488; --math-light: #ccfbf1; --math-dark: #115e59; --math-accent: #f59e0b;
+  --indigo: #4f46e5; --indigo-soft: #e0e7ff;
+  --blue: #0284c7; --blue-soft: #e0f2fe;
+  --rose: #e11d48; --rose-soft: #ffe4e6;
+  --amber-soft: #fef3c7;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: linear-gradient(135deg, #ecfeff, #fef3c7 52%, #e0f2fe);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--ink); overflow-x: hidden;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(6px); opacity: .45; pointer-events: none;
+}
+body::before { width: 260px; height: 260px; background: #99f6e4; left: -75px; top: 120px; }
+body::after { width: 220px; height: 220px; background: #fde68a; right: -55px; bottom: 90px; }
 
+/* ================= APPBAR ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--math-main); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--math-dark); background: var(--math-light); padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow, .2s background; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--math-main); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+.btn-amber { background: var(--math-accent); color: #fff; }
+.btn-sm { padding: 6px 11px; font-size: 12px; border-radius: 9px; }
+
+.progress { height: 6px; background: var(--math-light); position: sticky; top: 61px; z-index: 29; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--math-main), var(--math-accent)); transition: .3s; }
+
+/* ================= HERO & IDENTITAS ================= */
+.sheet {
+  width: min(1040px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px;
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #f0fdfa, #fffbeb); border-radius: 22px; padding: 26px; border: 1px solid #99f6e4; }
+.badge { display: inline-block; background: var(--math-main); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(25px, 4vw, 33px); line-height: 1.15; margin: 0 0 12px; color: var(--math-dark); }
+h2 { margin: 0; font-size: 20px; color: var(--ink); }
+p { line-height: 1.65; font-size: 15px; color: var(--slate); }
+
+.mission {
+  background: #fff; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; justify-content: center; text-align: center; font-size: 15px; border: 2px dashed var(--math-accent);
+}
+.mission-icon { font-size: 56px; animation: bob 2.8s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(3deg); } }
+
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+.field label { display: block; font-size: 13px; font-weight: 900; color: #334155; margin-bottom: 6px; }
+.idgrid input, .grade-panel select, .grade-panel textarea {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s;
+}
+.idgrid input:focus, .grade-panel select:focus, .grade-panel textarea:focus {
+  border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge { background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.member-badge span { cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px; display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px; }
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+
+/* ================= GAME LEVEL & ZONA ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--math-light); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--math-main); color: #fff; font-weight: 900; flex: 0 0 auto; font-size: 17px; }
+
+.game-level { position: relative; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 22px; margin-bottom: 10px; transition: all .3s; }
+.game-level.locked { opacity: 0.62; pointer-events: none; filter: grayscale(92%); min-height: 220px; }
+.lock-overlay { position: absolute; inset: 0; background: rgba(248, 250, 252, 0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; border-radius: 16px; text-align: center; padding: 20px; }
+.lock-icon { font-size: 52px; margin-bottom: 8px; }
+.game-level.unlocked .lock-overlay { display: none; }
+.game-level.completed { border-color: var(--green); background: #f0fdf4; }
+
+.story-box { background: #fff; border-left: 5px solid var(--math-accent); padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); font-size: 14.5px; font-weight: 600; line-height: 1.6; }
+
+/* ================= KARTU SOAL KONKRET ================= */
+.q-card {
+  background: #ffffff; border: 2px solid #e2e8f0; border-radius: 18px;
+  padding: 20px; margin-bottom: 22px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  transition: border-color .25s, box-shadow .25s;
+}
+.q-card.card-correct { border-color: #22c55e; background: #fafffe; }
+.q-card.card-wrong { border-color: #ef4444; animation: shake 0.4s; }
+
+.q-header {
+  display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px;
+  background: #f8fafc; border-left: 4px solid var(--math-main); padding: 12px 16px; border-radius: 12px;
+}
+.q-no {
+  background: var(--math-main); color: #fff; font-weight: 900; font-size: 13px;
+  padding: 4px 10px; border-radius: 99px; flex: 0 0 auto; margin-top: 2px;
+}
+.q-story { font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.55; }
+
+.q-hint {
+  display: none; margin-top: 10px; padding: 9px 14px; border-radius: 10px;
+  background: var(--red-soft); color: #991b1b; font-size: 13px; font-weight: 700;
+}
+.q-hint.show { display: block; }
+
+/* ================= ZONA 1 & 5: RAK PERSEDIAAN + WADAH KONKRET ================= */
+.supply-bar {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+  background: linear-gradient(135deg, #fffbeb, #f0fdfa); border: 2px dashed #0d9488;
+  border-radius: 14px; padding: 12px 16px; margin-bottom: 14px;
+}
+.supply-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.drag-token {
+  display: inline-flex; align-items: center; gap: 8px; background: #fff;
+  border: 2px solid var(--math-main); border-radius: 14px; padding: 6px 12px;
+  cursor: grab; user-select: none; font-weight: 800; font-size: 13px; color: var(--math-dark);
+  box-shadow: 0 3px 8px rgba(13,148,136,0.12); transition: .2s;
+}
+.drag-token:active { cursor: grabbing; transform: scale(0.96); }
+.drag-token.tap-armed { background: var(--math-main); color: #fff; box-shadow: 0 0 0 4px rgba(13,148,136,0.25); }
+.stock-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.stock-pill {
+  background: #fff; border: 1px solid #cbd5e1; border-radius: 99px;
+  padding: 5px 12px; font-size: 12.5px; font-weight: 800; color: var(--slate);
+}
+.stock-pill b { color: var(--math-dark); }
+.stock-pill.low { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+
+.pack-toolbar {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+}
+
+.packs-arena {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 12px; margin-bottom: 16px; min-height: 112px;
+  background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px; padding: 14px;
+}
+.packs-empty {
+  grid-column: 1 / -1; text-align: center; padding: 26px 14px; color: var(--muted);
+  font-size: 14px; font-weight: 700;
+}
+
+.pack-box {
+  background: #fff; border: 2px solid #cbd5e1; border-radius: 14px; padding: 10px;
+  display: flex; flex-direction: column; gap: 8px; transition: .2s; position: relative;
+}
+.pack-box.drag-over { border-color: var(--math-main); background: #f0fdfa; transform: scale(1.02); }
+.pack-box.pack-ok { border-color: #22c55e; background: #f0fdf4; }
+.pack-box.pack-err { border-color: #ef4444; background: #fef2f2; }
+.pack-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  border-bottom: 1px dashed #e2e8f0; padding-bottom: 6px;
+}
+.pack-title { font-size: 12px; font-weight: 900; color: var(--slate); }
+.pack-count-badge {
+  background: var(--math-light); color: var(--math-dark); font-size: 12px; font-weight: 900;
+  padding: 2px 8px; border-radius: 99px;
+}
+.pack-items {
+  display: flex; flex-wrap: wrap; gap: 3px; align-items: center; justify-content: center;
+  min-height: 58px; padding: 6px; border-radius: 10px;
+  background: linear-gradient(180deg, #fffdf7, #f8fafc); border: 1px solid #e2e8f0;
+  cursor: pointer;
+}
+.pack-items:hover { border-color: var(--math-main); }
+.pack-controls {
+  display: flex; justify-content: center; gap: 4px; flex-wrap: wrap;
+}
+.mini-btn {
+  padding: 4px 8px; font-size: 11.5px; font-weight: 900; border-radius: 8px;
+  background: #f1f5f9; color: #1e293b; border: 1px solid #cbd5e1;
+}
+.mini-btn:hover { background: var(--math-light); border-color: var(--math-main); transform: none; box-shadow: none; }
+.mini-btn.plus { background: #ecfdf5; color: #065f46; border-color: #6ee7b7; }
+.mini-btn.minus { background: #fff1f2; color: #9f1239; border-color: #fda4af; }
+
+/* ================= ZONA 2: PAJANGAN BENDA KONKRET + PENJUMLAHAN BERULANG ================= */
+.static-groups {
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+  background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px; padding: 16px; margin-bottom: 16px;
+}
+.static-tray {
+  background: #fff; border: 2px solid #cbd5e1; border-radius: 16px; padding: 10px 12px;
+  min-width: 135px; max-width: 215px; display: flex; flex-direction: column; align-items: center; gap: 6px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+}
+.tray-label { font-size: 11.5px; font-weight: 900; color: var(--muted); text-transform: uppercase; letter-spacing: .3px; }
+.tray-objects { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; align-items: center; }
+
+.repeat-add-row {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px;
+  background: #fffbeb; border: 1.5px dashed #f59e0b; border-radius: 14px;
+  padding: 12px 14px; margin-bottom: 12px; font-weight: 900; font-size: 16px; color: #92400e;
+}
+
+/* ================= ZONA 3: PILIH MODEL KONKRET (ANTI MISKONSEPSI) ================= */
+.choice-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 16px;
+}
+.model-card {
+  background: #f8fafc; border: 2.5px solid #cbd5e1; border-radius: 16px; padding: 12px;
+  cursor: pointer; transition: .2s; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  position: relative;
+}
+.model-card:hover { border-color: var(--math-main); transform: translateY(-2px); background: #fff; }
+.model-card.selected {
+  border-color: var(--indigo); background: var(--indigo-soft);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.22);
+}
+.model-card.mc-correct { border-color: #22c55e !important; background: #dcfce7 !important; }
+.model-card.mc-wrong { border-color: #ef4444 !important; background: #fee2e2 !important; }
+.mc-badge {
+  align-self: flex-start; background: #0f172a; color: #fff; font-size: 12px; font-weight: 900;
+  padding: 3px 10px; border-radius: 99px;
+}
+.model-card.selected .mc-badge { background: var(--indigo); }
+.mc-trays { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; width: 100%; }
+.mc-tray {
+  background: #fff; border: 1.5px solid #94a3b8; border-radius: 10px; padding: 5px 6px;
+  display: flex; flex-wrap: wrap; gap: 2px; justify-content: center; max-width: 82px;
+}
+
+/* ================= ZONA 4: PAPAN BARIS & KOLOM (ARRAY) ================= */
+.array-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px; padding: 14px; margin-bottom: 16px;
+  overflow-x: auto;
+}
+.array-topbar {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; width: 100%;
+}
+.array-grid {
+  display: grid; gap: 4px; user-select: none; touch-action: manipulation;
+  background: #e2e8f0; padding: 8px; border-radius: 14px;
+}
+.arr-idx {
+  display: grid; place-items: center; font-size: 11px; font-weight: 900; color: #475569;
+  min-width: 24px; min-height: 24px;
+}
+.arr-cell {
+  width: 40px; height: 40px; background: #ffffff; border: 1.5px dashed #cbd5e1;
+  border-radius: 9px; display: grid; place-items: center; cursor: pointer;
+  transition: .14s transform, .14s background, .14s border-color;
+}
+.arr-cell:hover { border-color: var(--math-main); background: #f0fdfa; }
+.arr-cell.filled {
+  background: #ecfeff; border: 2px solid var(--math-main); box-shadow: inset 0 0 0 1px #99f6e4;
+}
+.arr-cell.filled svg { animation: popIn .18s ease-out; }
+@keyframes popIn { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* ================= BARIS KALIMAT PERKALIAN (KETAT A x B) ================= */
+.eq-bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px;
+  background: #f0fdfa; border: 2px solid #99f6e4; border-radius: 14px; padding: 12px 16px;
+}
+.eq-part { display: inline-flex; flex-direction: column; align-items: center; gap: 3px; }
+.eq-sub { font-size: 11px; font-weight: 800; color: var(--math-dark); text-transform: uppercase; letter-spacing: .2px; }
+.eq-op { font-size: 22px; font-weight: 900; color: var(--math-dark); margin-top: -12px; }
+
+.m-in {
+  width: 68px; height: 44px; text-align: center; font-size: 18px; font-weight: 900;
+  color: #0f172a; border: 2px solid #94a3b8; border-radius: 11px; background: #fff;
+  outline: none; transition: .2s; font-family: inherit;
+}
+.m-in:focus { border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.22); }
+.m-in.final { width: 84px; background: #fef08a; border-color: #eab308; font-size: 19px; }
+.m-in.small { width: 54px; height: 38px; font-size: 16px; }
+
+.lkpd-val.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+.lkpd-val.wrong { animation: shake 0.4s; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);} }
+
+.check-btn { display: block; margin: 20px auto 0; background: var(--math-main); color: #fff; border-radius: 99px; padding: 13px 32px; font-weight: 900; font-size: 15px; }
+
+/* ================= PANEL PENILAIAN GURU + TABEL OBSERVASI (SOP V4.2) ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 24px; margin: 20px auto; width: min(1040px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.obs-wrap { overflow-x: auto; margin-bottom: 18px; }
+.rubric-table {
+  width: 100%; border-collapse: collapse; background: #fff; border-radius: 14px; overflow: hidden;
+  border: 1.5px solid #cbd5e1; font-size: 13.5px;
+}
+.rubric-table th {
+  background: var(--math-dark); color: #fff; padding: 10px 12px; text-align: left; font-weight: 800;
+}
+.rubric-table td {
+  padding: 10px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; color: var(--ink); line-height: 1.5;
+}
+.rubric-table tr:nth-child(even) td { background: #f8fafc; }
+.rubric-table .center { text-align: center; font-weight: 900; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 50; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #ccfbf1; border-top-color: var(--math-main); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 780px) {
+  .hero, .idgrid, .grade-grid, .choice-grid { grid-template-columns: 1fr; }
+  .sheet { padding: 16px; }
+  .packs-arena { grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); padding: 10px; }
+  .arr-cell { width: 32px; height: 32px; }
+  .m-in { width: 58px; height: 40px; font-size: 16px; }
+  .m-in.final { width: 72px; }
+}
+</style>
+</head>
+<body>
+
+<div class="appbar" id="appbar">
+  <div class="brand">🧮 PORTAL LMS SDN 1 SUKAHAJI</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Jawaban</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 1.13</span>
+      <h1>Mengenal Konsep Perkalian Bilangan Cacah (Sampai 100)</h1>
+      <p><b>Matematika • Fase B / Kelas IV</b><br>Mari membangun pemahaman makna perkalian <b>(Banyak Kelompok × Isi Setiap Kelompok)</b> melalui simulasi menyusun benda konkret sehari-hari, membaca susunan benda, detektif miskonsepsi, dan papan baris–kolom!</p>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input type="date" name="tanggal" id="inputTanggal" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Mengenal Konsep Perkalian Bilangan Cacah sampai 100" readonly>
+        </div>
+        <div class="group-builder">
+          <label>👥 Data Kelompok (1 – 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN temanmu..." style="flex:1;">
+              <button type="button" class="btn-main" id="btnAddMember" disabled>🔍 Cari & Tambah</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa...</p>
+          </div>
+          <div id="readGroupView" style="display:none;"><div class="readonly-group-list" id="readonlyMemberList"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">📦✏️🍊</div>
+      <b>🎯 Misi Bengkel Perkalian</b>
+      <p>Taklukkan <b>5 Zona Gamifikasi (25 Soal Konkret)</b>! Ingat aturan emas: <b>Wadah × Isi per Wadah = Total</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZONA 1 ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Zona 1: Merakit Wadah & Isi Benda Nyata (Soal 1–5)</h2></div>
+  <div class="game-level unlocked" id="level1">
+    <div class="story-box">
+      💡 <b>Petunjuk:</b> Stok benda dan wadah di rak <b>sengaja dilebihkan</b>! Tambahkan jumlah wadah sesuai cerita, lalu <b>seret (drag)</b> ikon benda ke dalam wadah atau <b>klik tombol +1 / +5</b> di tiap wadah. Setelah Wadah 1 terisi tepat, kamu boleh memakai tombol <b>📋 Samakan Semua</b> untuk mempercepat pengisian! Jangan lupa tulis kalimat perkalian <b>(Banyak Wadah × Isi Tiap Wadah = Total)</b>.
+    </div>
+    <div id="zone1Container"></div>
+    <button type="button" class="check-btn" onclick="checkLevel(1)">Periksa Zona 1 & Buka Zona 2 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 2 ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--math-accent);">2</div><h2>Zona 2: Membaca Susunan Benda ke Kalimat Matematika (Soal 6–10)</h2></div>
+  <div class="game-level locked" id="level2">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 2 Terkunci</b><p>Selesaikan Zona 1 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--math-accent);">
+      👀 <b>Petunjuk:</b> Amati banyak wadah dan isi benda pada setiap gambar! Tuliskan terlebih dahulu bentuk <b>penjumlahan berulangnya</b>, lalu ubah menjadi kalimat perkalian yang tepat: <b>Banyak Wadah × Isi Tiap Wadah = Total</b>.
+    </div>
+    <div id="zone2Container"></div>
+    <button type="button" class="check-btn" style="background:var(--math-accent); color:#78350f;" onclick="checkLevel(2)">Periksa Zona 2 & Buka Zona 3 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 3 ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--indigo);">3</div><h2>Zona 3: Detektif Konsep — Hati-hati Tertukar! (Soal 11–15)</h2></div>
+  <div class="game-level locked" id="level3">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 3 Terkunci</b><p>Selesaikan Zona 2 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--indigo);">
+      🕵️‍♀️ <b>Petunjuk:</b> Meskipun hasilnya bisa sama, <b>3 × 2 berbeda maknanya dengan 2 × 3</b>! Pilih satu kartu susunan benda (A, B, atau C) yang <b>benar-benar sesuai cerita</b>, lalu tulis kalimat perkaliannya secara berurutan!
+    </div>
+    <div id="zone3Container"></div>
+    <button type="button" class="check-btn" style="background:var(--indigo);" onclick="checkLevel(3)">Periksa Zona 3 & Buka Zona 4 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 4 ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--blue);">4</div><h2>Zona 4: Papan Susunan Baris & Kolom (Soal 16–20)</h2></div>
+  <div class="game-level locked" id="level4">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 4 Terkunci</b><p>Selesaikan Zona 3 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--blue);">
+      📐 <b>Petunjuk:</b> Petak papan sengaja dibuat lebih luas sebagai pengecoh! Klik (atau sentuh & geser) petak untuk menaruh benda sehingga membentuk susunan rapi <b>(Banyak Baris × Isi Setiap Baris/Kolom)</b>, lalu lengkapi kalimat perkaliannya!
+    </div>
+    <div id="zone4Container"></div>
+    <button type="button" class="check-btn" style="background:var(--blue);" onclick="checkLevel(4)">Periksa Zona 4 & Buka Zona 5 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 5 ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--rose);">5</div><h2>Zona 5: Misi Puncak — Lengkapi Stok Sekolah sampai 100 (Soal 21–25)</h2></div>
+  <div class="game-level locked" id="level5">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 5 Terkunci</b><p>Selesaikan Zona 4 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--rose);">
+      🏆 <b>Misi Puncak:</b> Petugas sekolah baru menata sebagian wadah dan isinya pun masih ada yang kurang atau kelebihan! Perbaiki isi wadah yang keliru, tambahkan wadah yang kurang dari stok pengecoh, lalu hitung total seluruh benda (sampai 100)!
+    </div>
+    <div id="zone5Container"></div>
+    <button type="button" class="check-btn" style="background:var(--rose);" onclick="checkLevel(5)">Kunci Jawaban Akhir! 🏆</button>
+    <div id="msgFinal" style="display:none; text-align:center; color:var(--green2); font-weight:900; font-size:18px; margin-top:16px; background:#dcfce7; padding:16px; border-radius:14px; border:2px solid #22c55e;">
+      🎉 LUAR BIASA! SELURUH 25 SOAL KONSEP PERKALIAN KONKRET TELAH DISELESAIKAN DENGAN TEPAT! 🎉
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:24px; display:flex; justify-content:center;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 28px; font-size:16px; display:none;">📤 Kirim Hasil Pekerjaan ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN GURU + TABEL OBSERVASI (SOP V4.2) ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik & Tabel Observasi Penilaian Guru</h2></div>
+
+  <div class="obs-wrap">
+    <table class="rubric-table">
+      <thead>
+        <tr>
+          <th style="width:22%;">Aspek / Zona Observasi</th>
+          <th style="width:19%;">A (Sangat Baik)</th>
+          <th style="width:19%;">B (Baik)</th>
+          <th style="width:20%;">C (Cukup)</th>
+          <th style="width:20%;">D (Perlu Bimbingan)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>1. Representasi Konkret</b><br><span style="font-size:12px; color:#64748b;">(Zona 1 & Zona 5)</span></td>
+          <td>Mampu menyusun jumlah wadah & isi benda tepat tanpa terpengaruh stok pengecoh.</td>
+          <td>Mampu menyusun wadah & isi dengan benar setelah 1–2 kali penyesuaian.</td>
+          <td>Masih keliru menyamakan isi antarwadah atau terpengaruh stok pengecoh.</td>
+          <td>Belum mampu menerjemahkan soal cerita menjadi susunan objek konkret.</td>
+        </tr>
+        <tr>
+          <td><b>2. Penjumlahan Berulang</b><br><span style="font-size:12px; color:#64748b;">(Zona 2)</span></td>
+          <td>Menuliskan seluruh suku penjumlahan berulang & kalimat perkalian 100% tepat.</td>
+          <td>Penjumlahan berulang tepat, namun sedikit keliru saat menjumlah hasil akhir.</td>
+          <td>Sebagian suku penjumlahan tertukar antara banyak wadah dan isi wadah.</td>
+          <td>Belum memahami hubungan penjumlahan berulang dengan perkalian.</td>
+        </tr>
+        <tr>
+          <td><b>3. Anti-Miskonsepsi (A × B)</b><br><span style="font-size:12px; color:#64748b;">(Zona 3)</span></td>
+          <td>Konsisten membedakan makna A × B dan B × A pada seluruh konteks soal.</td>
+          <td>Mampu memilih model visual tepat pada ≥ 4 dari 5 soal konteks.</td>
+          <td>Masih sering tertukar memilih model A × B dengan B × A.</td>
+          <td>Belum memahami perbedaan makna jumlah kelompok dan isi kelompok.</td>
+        </tr>
+        <tr>
+          <td><b>4. Susunan Baris–Kolom & Bilangan sampai 100</b><br><span style="font-size:12px; color:#64748b;">(Zona 4 & Zona 5)</span></td>
+          <td>Menyusun array baris × kolom rapi dan menghitung akurat hingga hasil 100.</td>
+          <td>Susunan array rapi, hanya sedikit kurang teliti pada hitungan bilangan besar.</td>
+          <td>Bentuk array belum konsisten persegi panjang atau salah hitung di atas 50.</td>
+          <td>Memerlukan bimbingan langsung dalam membentuk baris × kolom & berhitung.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Pemahaman Konsep Perkalian</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (Menguasai konsep perkalian konkret A × B hingga 100 secara mandiri)</option>
+        <option value="B">B — Baik (Memahami konsep A × B dengan sedikit kekeliruan hitung)</option>
+        <option value="C">C — Cukup (Masih memerlukan bimbingan pada konsep kelompok × isi)</option>
+        <option value="D">D — Perlu Bimbingan (Belum memahami makna perkalian benda konkret)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi dan evaluasi untuk siswa/kelompok ini..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:16px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan & Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 1.13 MATEMATIKA (LMS V4.2)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Matematika';
+const LKPD_ID  = '1.13_Konsep_Perkalian';
+const STORAGE  = 'lkpd_mtk_1_13_v42';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+let readOnlyMode = false;
+let armedTapKey  = null; // Untuk mode Tap-to-Place di HP/Tablet
+let unlockedMax  = 1;
+
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+// =========================================================================
+// PUSTAKA ILUSTRASI SVG INLINE REALISTIS (MIRIP BENDA ASLI)
+// =========================================================================
+function getObjSVG(type, size = 26) {
+  const s = size;
+  switch (type) {
+    case 'pensil':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Pensil">
+        <g transform="rotate(-35 20 20)">
+          <rect x="14" y="4" width="12" height="5" rx="2" fill="#f472b6" stroke="#be185d" stroke-width="1"/>
+          <rect x="14" y="8.5" width="12" height="3.5" fill="#cbd5e1" stroke="#64748b" stroke-width="0.9"/>
+          <rect x="14" y="12" width="4" height="17" fill="#facc15"/>
+          <rect x="18" y="12" width="4" height="17" fill="#eab308"/>
+          <rect x="22" y="12" width="4" height="17" fill="#ca8a04"/>
+          <rect x="14" y="12" width="12" height="17" fill="none" stroke="#854d0e" stroke-width="0.9"/>
+          <polygon points="14,29 26,29 20,38" fill="#fed7aa" stroke="#9a3412" stroke-width="0.9"/>
+          <polygon points="18,34.5 22,34.5 20,38" fill="#1e293b"/>
+        </g>
+      </svg>`;
+    case 'donat':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Donat">
+        <circle cx="20" cy="21" r="15" fill="#d97706" stroke="#92400e" stroke-width="1.2"/>
+        <path d="M6.5,19 C7,10 14,6 20,6 C27,6 33.5,11 33.8,19 C32,22 29.5,20 28,22.5 C26,25 23,22 20,23.5 C17,25 14,22 11.5,23 C9,24 7,21.5 6.5,19 Z" fill="#f472b6"/>
+        <circle cx="20" cy="21" r="5.5" fill="#fffdf7" stroke="#b45309" stroke-width="1.2"/>
+        <rect x="13" y="11" width="3.5" height="1.6" rx="0.8" fill="#fef08a" transform="rotate(25 14 11)"/>
+        <rect x="23" y="10" width="3.5" height="1.6" rx="0.8" fill="#38bdf8" transform="rotate(-30 24 10)"/>
+        <rect x="27" y="16" width="3.5" height="1.6" rx="0.8" fill="#4ade80" transform="rotate(40 28 16)"/>
+        <rect x="10" y="17" width="3.5" height="1.6" rx="0.8" fill="#fff" transform="rotate(-20 11 17)"/>
+      </svg>`;
+    case 'susu':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Kotak Susu">
+        <path d="M26,9 L28,4 L33,3" fill="none" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polygon points="10,12 24,12 29,9 15,9" fill="#bae6fd" stroke="#0284c7" stroke-width="1"/>
+        <rect x="10" y="12" width="14" height="23" rx="1.5" fill="#ffffff" stroke="#0284c7" stroke-width="1.2"/>
+        <polygon points="24,12 29,9 29,32 24,35" fill="#7dd3fc" stroke="#0284c7" stroke-width="1.1"/>
+        <path d="M10,24 Q14,21 17,24 T24,24 L24,35 L10,35 Z" fill="#38bdf8"/>
+        <circle cx="17" cy="18" r="3.2" fill="#0284c7"/>
+        <circle cx="17" cy="18" r="1.4" fill="#fff"/>
+      </svg>`;
+    case 'jeruk':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Jeruk">
+        <circle cx="20" cy="22" r="13.5" fill="#f97316" stroke="#c2410c" stroke-width="1.2"/>
+        <ellipse cx="15" cy="17" rx="4" ry="2.3" fill="#fdba74" opacity="0.7" transform="rotate(-28 15 17)"/>
+        <circle cx="25" cy="25" r="0.9" fill="#c2410c" opacity="0.5"/>
+        <circle cx="22" cy="28" r="0.9" fill="#c2410c" opacity="0.5"/>
+        <circle cx="27" cy="21" r="0.9" fill="#c2410c" opacity="0.5"/>
+        <path d="M20,9 L20,5" stroke="#78350f" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M20,8 C25,4 30,6 29,11 C25,12 22,11 20,8 Z" fill="#22c55e" stroke="#15803d" stroke-width="0.9"/>
+      </svg>`;
+    case 'buku':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Buku Tulis">
+        <rect x="8" y="6" width="23" height="28" rx="2.5" fill="#2563eb" stroke="#1e3a8a" stroke-width="1.2"/>
+        <rect x="8" y="6" width="5" height="28" rx="1" fill="#1d4ed8"/>
+        <rect x="15" y="11" width="12" height="7" rx="1.2" fill="#fff" stroke="#93c5fd" stroke-width="0.9"/>
+        <line x1="17" y1="14" x2="25" y2="14" stroke="#64748b" stroke-width="1.2"/>
+        <line x1="17" y1="16.5" x2="23" y2="16.5" stroke="#94a3b8" stroke-width="1.1"/>
+        <path d="M31,8 L33,9.5 L33,33 L10,33" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+      </svg>`;
+    case 'telur':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Telur">
+        <path d="M20,5 C12.5,5 8.5,16 8.5,24 C8.5,31.5 13.5,35.5 20,35.5 C26.5,35.5 31.5,31.5 31.5,24 C31.5,16 27.5,5 20,5 Z" fill="#e6b88a" stroke="#a16207" stroke-width="1.2"/>
+        <ellipse cx="15.5" cy="15" rx="3" ry="5.5" fill="#fef3c7" opacity="0.65" transform="rotate(15 15.5 15)"/>
+      </svg>`;
+    case 'permen':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Permen">
+        <g transform="rotate(-25 20 20)">
+          <polygon points="3,14 11,20 3,26 5,20" fill="#fb7185" stroke="#be123c" stroke-width="1"/>
+          <polygon points="37,14 29,20 37,26 35,20" fill="#fb7185" stroke="#be123c" stroke-width="1"/>
+          <ellipse cx="20" cy="20" rx="10" ry="7.5" fill="#f43f5e" stroke="#be123c" stroke-width="1.2"/>
+          <path d="M15,13.5 Q18,20 15,26.5" fill="none" stroke="#fde047" stroke-width="2.4"/>
+          <path d="M22,12.8 Q25,20 22,27.2" fill="none" stroke="#fde047" stroke-width="2.4"/>
+          <ellipse cx="18" cy="16.5" rx="4" ry="1.6" fill="#fff" opacity="0.5"/>
+        </g>
+      </svg>`;
+    case 'biskuit':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Biskuit">
+        <circle cx="20" cy="20" r="14.5" fill="#d99a4e" stroke="#92400e" stroke-width="1.3"/>
+        <circle cx="14" cy="15" r="2.2" fill="#451a03"/>
+        <circle cx="25" cy="14" r="2.4" fill="#451a03"/>
+        <circle cx="20" cy="21" r="2.5" fill="#451a03"/>
+        <circle cx="13" cy="25" r="2" fill="#451a03"/>
+        <circle cx="26" cy="25" r="2.2" fill="#451a03"/>
+        <circle cx="19" cy="29" r="1.7" fill="#451a03"/>
+      </svg>`;
+    case 'kelereng':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Kelereng">
+        <circle cx="20" cy="20" r="13.5" fill="#06b6d4" stroke="#0e7490" stroke-width="1.3"/>
+        <path d="M11,15 C16,12 24,28 29,24" fill="none" stroke="#0284c7" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+        <path d="M10,24 C17,22 22,12 28,15" fill="none" stroke="#fef08a" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+        <ellipse cx="14.5" cy="13.5" rx="3.5" ry="2" fill="#ffffff" opacity="0.85" transform="rotate(-35 14.5 13.5)"/>
+      </svg>`;
+    case 'apel':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Apel">
+        <path d="M20,12 C15,9 8,12 8,21 C8,30 14,35 18.5,35 C19.5,35 20,34 20,34 C20,34 20.5,35 21.5,35 C26,35 32,30 32,21 C32,12 25,9 20,12 Z" fill="#ef4444" stroke="#991b1b" stroke-width="1.2"/>
+        <ellipse cx="14" cy="19" rx="2.6" ry="5" fill="#fca5a5" opacity="0.6" transform="rotate(15 14 19)"/>
+        <path d="M20,12 L21,6" stroke="#78350f" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M21,8 C26,5 30,7 29,11 C25,12 23,10.5 21,8 Z" fill="#22c55e" stroke="#15803d" stroke-width="0.9"/>
+      </svg>`;
+    case 'kursi':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Kursi">
+        <rect x="10" y="6" width="20" height="10" rx="2.5" fill="#d97706" stroke="#78350f" stroke-width="1.2"/>
+        <line x1="12" y1="16" x2="12" y2="22" stroke="#475569" stroke-width="2.2"/>
+        <line x1="28" y1="16" x2="28" y2="22" stroke="#475569" stroke-width="2.2"/>
+        <rect x="8" y="20" width="24" height="5" rx="2" fill="#f59e0b" stroke="#78350f" stroke-width="1.2"/>
+        <line x1="11" y1="25" x2="10" y2="35" stroke="#334155" stroke-width="2.4" stroke-linecap="round"/>
+        <line x1="29" y1="25" x2="30" y2="35" stroke="#334155" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>`;
+    case 'pot':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Pot Bunga">
+        <line x1="20" y1="22" x2="20" y2="12" stroke="#15803d" stroke-width="2.4"/>
+        <ellipse cx="15" cy="18" rx="4" ry="2" fill="#22c55e" transform="rotate(-25 15 18)"/>
+        <ellipse cx="25" cy="18" rx="4" ry="2" fill="#22c55e" transform="rotate(25 25 18)"/>
+        <circle cx="20" cy="9" r="5" fill="#facc15" stroke="#ca8a04" stroke-width="1"/>
+        <circle cx="20" cy="9" r="2.2" fill="#92400e"/>
+        <rect x="10" y="21" width="20" height="4" rx="1.2" fill="#ea580c" stroke="#9a3412" stroke-width="1"/>
+        <polygon points="12,25 28,25 25,35 15,35" fill="#c2410c" stroke="#7c2d12" stroke-width="1.1"/>
+      </svg>`;
+    default:
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40"><circle cx="20" cy="20" r="12" fill="#0d9488"/></svg>`;
+  }
+}
+
+// =========================================================================
+// DATA 25 SOAL KONTEKSTUAL (HASIL MAKSIMAL 100, KETAT A x B)
+// =========================================================================
+
+// ZONA 1 (Soal 1–5): Rakitan Wadah & Isi (Cerita -> Objek Konkret + Stok Pengecoh)
+const Z1_DATA = [
+  {
+    id: 'z1_q1', no: 1, icon: '✏️',
+    story: '<b>Koperasi Sekolah:</b> Sebuah koperasi sekolah membeli <b>8 pak</b> pensil tulis untuk dijual kembali kepada siswa. Setiap pak berisi <b>12 batang</b> pensil. Susunlah pak dan pensil dari stok yang tersedia, lalu hitung banyaknya pensil yang akan dijual!',
+    obj: 'pensil', objName: 'Pensil', packName: 'Pak',
+    targetPacks: 8, targetPerPack: 12, targetTotal: 96,
+    maxPacks: 10, maxStock: 120, initPacks: [0]
+  },
+  {
+    id: 'z1_q2', no: 2, icon: '🍩',
+    story: '<b>Kantin Sehat:</b> Ibu kantin menata <b>4 piring</b> donat stroberi untuk jam istirahat. Setiap piring berisi <b>6 buah</b> donat. Susunlah piring dan donat dari nampan persediaan, lalu hitung jumlah seluruh donat!',
+    obj: 'donat', objName: 'Donat', packName: 'Piring',
+    targetPacks: 4, targetPerPack: 6, targetTotal: 24,
+    maxPacks: 7, maxStock: 40, initPacks: [0]
+  },
+  {
+    id: 'z1_q3', no: 3, icon: '🥛',
+    story: '<b>Program Makan Bergizi:</b> Petugas UKS menyiapkan <b>5 dus</b> kotak susu UHT untuk kelas IV. Setiap dus berisi <b>8 kotak</b> susu. Susunlah dus dan kotak susu dari gudang, lalu hitung banyaknya susu kotak!',
+    obj: 'susu', objName: 'Susu', packName: 'Dus',
+    targetPacks: 5, targetPerPack: 8, targetTotal: 40,
+    maxPacks: 8, maxStock: 60, initPacks: [0]
+  },
+  {
+    id: 'z1_q4', no: 4, icon: '🍊',
+    story: '<b>Bantu Ibu di Dapur:</b> Ibu membeli <b>6 keranjang</b> jeruk manis di pasar. Setiap keranjang berisi <b>7 buah</b> jeruk. Susunlah keranjang dan jeruk dari peti buah, lalu hitung seluruh jeruk ibu!',
+    obj: 'jeruk', objName: 'Jeruk', packName: 'Keranjang',
+    targetPacks: 6, targetPerPack: 7, targetTotal: 42,
+    maxPacks: 9, maxStock: 65, initPacks: [0]
+  },
+  {
+    id: 'z1_q5', no: 5, icon: '📘',
+    story: '<b>Perpustakaan Kelas:</b> Ketua kelas menata <b>7 ikat</b> buku tulis baru untuk hadiah lomba kebersihan kelas. Setiap ikat berisi <b>10 buah</b> buku tulis. Susunlah ikatan buku dari lemari, lalu hitung seluruh buku!',
+    obj: 'buku', objName: 'Buku', packName: 'Ikat',
+    targetPacks: 7, targetPerPack: 10, targetTotal: 70,
+    maxPacks: 10, maxStock: 95, initPacks: [0]
+  }
+];
+
+// ZONA 2 (Soal 6–10): Membaca Susunan Benda Konkret -> Penjumlahan Berulang & Kalimat Perkalian
+const Z2_DATA = [
+  {
+    id: 'z2_q6', no: 6, icon: '🥚',
+    story: '<b>Dapur Kantin:</b> Ibu kantin menyiapkan beberapa wadah telur rebus untuk sarapan sehat. Amati gambar wadah telur di bawah ini, tulis bentuk penjumlahan berulangnya, lalu ubah menjadi perkalian!',
+    obj: 'telur', packName: 'Wadah', packs: 3, perPack: 6, total: 18
+  },
+  {
+    id: 'z2_q7', no: 7, icon: '🍬',
+    story: '<b>Hadiah Kuis Kelas:</b> Pak Guru meletakkan beberapa toples permen buah di meja guru. Amati banyak toples dan isi setiap toplesnya!',
+    obj: 'permen', packName: 'Toples', packs: 5, perPack: 7, total: 35
+  },
+  {
+    id: 'z2_q8', no: 8, icon: '🍪',
+    story: '<b>Kerja Kelompok:</b> Kelompok belajar kelas IV berbagi biskuit cokelat di atas beberapa piring. Amati banyak piring dan isi tiap piringnya!',
+    obj: 'biskuit', packName: 'Piring', packs: 4, perPack: 9, total: 36
+  },
+  {
+    id: 'z2_q9', no: 9, icon: '🔮',
+    story: '<b>Permainan Tradisional:</b> Edo menyimpan kelereng miliknya ke dalam beberapa kantong kecil dengan isi sama banyak. Amati gambarnya dan tulis perkaliannya!',
+    obj: 'kelereng', packName: 'Kantong', packs: 6, perPack: 8, total: 48
+  },
+  {
+    id: 'z2_q10', no: 10, icon: '🍎',
+    story: '<b>Panen Kebun Sekolah:</b> Siswa menata buah apel merah ke dalam beberapa keranjang. Amati banyak keranjang dan jumlah apel di tiap keranjang!',
+    obj: 'apel', packName: 'Keranjang', packs: 5, perPack: 12, total: 60
+  }
+];
+
+// ZONA 3 (Soal 11–15): Detektif Konsep A x B vs B x A (Anti-Miskonsepsi)
+const Z3_DATA = [
+  {
+    id: 'z3_q11', no: 11, icon: '💊',
+    story: '<b>Anjuran UKS:</b> Petugas UKS menyarankan minum vitamin <b>3 kali</b> sehari, setiap kali minum sebanyak <b>2 butir</b>. Pilih gambar susunan yang paling tepat menggambarkan aturan tersebut!',
+    obj: 'permen', a: 3, b: 2, total: 6, correctOpt: 'B',
+    options: [
+      { key: 'A', packs: 2, perPack: 3 },
+      { key: 'B', packs: 3, perPack: 2 },
+      { key: 'C', packs: 3, perPack: 3 }
+    ]
+  },
+  {
+    id: 'z3_q12', no: 12, icon: '🍩',
+    story: '<b>Berbagi Bekal:</b> Sinta membawa <b>2 kotak</b> donat untuk teman sekelompok. Setiap kotak berisi <b>5 buah</b> donat. Gambar manakah yang sesuai dengan isi bekal Sinta?',
+    obj: 'donat', a: 2, b: 5, total: 10, correctOpt: 'A',
+    options: [
+      { key: 'A', packs: 2, perPack: 5 },
+      { key: 'B', packs: 5, perPack: 2 },
+      { key: 'C', packs: 2, perPack: 4 }
+    ]
+  },
+  {
+    id: 'z3_q13', no: 13, icon: '📘',
+    story: '<b>Regu Piket:</b> Pak Guru membagikan <b>4 tumpuk</b> buku tulis di meja kelas. Setiap tumpuk terdiri atas <b>6 buah</b> buku. Manakah susunan yang benar?',
+    obj: 'buku', a: 4, b: 6, total: 24, correctOpt: 'C',
+    options: [
+      { key: 'A', packs: 6, perPack: 4 },
+      { key: 'B', packs: 4, perPack: 5 },
+      { key: 'C', packs: 4, perPack: 6 }
+    ]
+  },
+  {
+    id: 'z3_q14', no: 14, icon: '🍊',
+    story: '<b>Kemah Pramuka:</b> Regu Pramuka membawa <b>3 keranjang</b> jeruk segar. Setiap keranjang berisi <b>8 buah</b> jeruk. Pilih gambar konkret yang paling tepat!',
+    obj: 'jeruk', a: 3, b: 8, total: 24, correctOpt: 'B',
+    options: [
+      { key: 'A', packs: 8, perPack: 3 },
+      { key: 'B', packs: 3, perPack: 8 },
+      { key: 'C', packs: 3, perPack: 7 }
+    ]
+  },
+  {
+    id: 'z3_q15', no: 15, icon: '🥛',
+    story: '<b>Rapat Komite:</b> Sekolah menyiapkan <b>6 nampan</b> susu kotak. Setiap nampan berisi <b>4 kotak</b> susu. Manakah susunan nampan susu yang benar?',
+    obj: 'susu', a: 6, b: 4, total: 24, correctOpt: 'C',
+    options: [
+      { key: 'A', packs: 4, perPack: 6 },
+      { key: 'B', packs: 6, perPack: 3 },
+      { key: 'C', packs: 6, perPack: 4 }
+    ]
+  }
+];
+
+// ZONA 4 (Soal 16–20): Susunan Baris & Kolom (Array Konkret + Papan Pengecoh)
+const Z4_DATA = [
+  {
+    id: 'z4_q16', no: 16, icon: '🪑',
+    story: '<b>Aula Sekolah:</b> Penjaga sekolah menata kursi di aula menjadi <b>4 baris</b> rapi. Setiap baris terdiri dari <b>7 kursi</b>. Pasang kursi di denah aula di bawah ini, lalu hitung total kursinya!',
+    obj: 'kursi', objName: 'Kursi', targetRows: 4, targetCols: 7, total: 28, gridRows: 6, gridCols: 9
+  },
+  {
+    id: 'z4_q17', no: 17, icon: '🌻',
+    story: '<b>Taman Kelas:</b> Murid kelas IV menata pot bunga matahari di depan kelas menjadi <b>5 baris</b>. Setiap baris berisi <b>6 pot</b> bunga. Susunlah pot pada petak taman!',
+    obj: 'pot', objName: 'Pot Bunga', targetRows: 5, targetCols: 6, total: 30, gridRows: 7, gridCols: 8
+  },
+  {
+    id: 'z4_q18', no: 18, icon: '🍪',
+    story: '<b>Loyang Kantin:</b> Ibu kantin memanggang biskuit cokelat yang disusun menjadi <b>6 baris</b>. Setiap baris berisi <b>9 keping</b> biskuit. Susunlah biskuit di atas loyang!',
+    obj: 'biskuit', objName: 'Biskuit', targetRows: 6, targetCols: 9, total: 54, gridRows: 8, gridCols: 10
+  },
+  {
+    id: 'z4_q19', no: 19, icon: '🥚',
+    story: '<b>Rak Telur Warung:</b> Paman menata telur ayam pada papan cetakan menjadi <b>5 baris</b>. Setiap baris berisi <b>8 butir</b> telur. Susunlah telur pada papan cetakan!',
+    obj: 'telur', objName: 'Telur', targetRows: 5, targetCols: 8, total: 40, gridRows: 7, gridCols: 10
+  },
+  {
+    id: 'z4_q20', no: 20, icon: '📘',
+    story: '<b>Rak Perpustakaan:</b> Pustakawan memajang buku cerita baru menjadi <b>7 baris</b>. Setiap baris berisi <b>9 buku</b>. Susunlah buku di rak pajangan, lalu hitung totalnya!',
+    obj: 'buku', objName: 'Buku', targetRows: 7, targetCols: 9, total: 63, gridRows: 8, gridCols: 10
+  }
+];
+
+// ZONA 5 (Soal 21–25): Misi Puncak — Perbaiki & Lengkapi Wadah (Hasil 72–100)
+const Z5_DATA = [
+  {
+    id: 'z5_q21', no: 21, icon: '✏️',
+    story: '<b>Lomba Mewarnai:</b> Panitia membutuhkan <b>6 kotak</b> pensil warna dengan isi <b>12 batang</b> per kotak. Saat ini baru ada 4 kotak dan isinya belum seragam! Lengkapi dari stok pengecoh lalu hitung total pensil!',
+    obj: 'pensil', objName: 'Pensil', packName: 'Kotak',
+    targetPacks: 6, targetPerPack: 12, targetTotal: 72,
+    maxPacks: 9, maxStock: 100, initPacks: [10, 12, 8, 10]
+  },
+  {
+    id: 'z5_q22', no: 22, icon: '🍎',
+    story: '<b>Parsel Hari Guru:</b> Kelas IV menyiapkan <b>7 keranjang</b> apel merah. Setiap keranjang harus berisi <b>12 buah</b> apel. Saat ini baru ada 5 keranjang yang isinya masih kurang dan ada yang kelebihan! Perbaiki dan lengkapi!',
+    obj: 'apel', objName: 'Apel', packName: 'Keranjang',
+    targetPacks: 7, targetPerPack: 12, targetTotal: 84,
+    maxPacks: 10, maxStock: 110, initPacks: [12, 10, 14, 9, 12]
+  },
+  {
+    id: 'z5_q23', no: 23, icon: '🥛',
+    story: '<b>Petugas Upacara:</b> Sekolah menyiapkan <b>6 dus</b> susu kotak. Setiap dus berisi <b>15 kotak</b> susu. Saat ini baru tersedia 4 dus yang belum penuh! Lengkapi dari gudang pengecoh lalu hitung jumlah susu!',
+    obj: 'susu', objName: 'Susu', packName: 'Dus',
+    targetPacks: 6, targetPerPack: 15, targetTotal: 90,
+    maxPacks: 8, maxStock: 120, initPacks: [15, 12, 10, 15]
+  },
+  {
+    id: 'z5_q24', no: 24, icon: '🍬',
+    story: '<b>Lomba 17 Agustus:</b> Panitia mengemas <b>9 kantong</b> permen hadiah. Setiap kantong harus berisi <b>11 butir</b> permen. Perbaiki isi 6 kantong yang sudah ada dan tambahkan kantong yang kurang!',
+    obj: 'permen', objName: 'Permen', packName: 'Kantong',
+    targetPacks: 9, targetPerPack: 11, targetTotal: 99,
+    maxPacks: 11, maxStock: 125, initPacks: [11, 9, 11, 13, 8, 11]
+  },
+  {
+    id: 'z5_q25', no: 25, icon: '🔮',
+    story: '<b>Tantangan 100 Kelereng:</b> Toko mainan mengemas <b>4 stoples</b> kelereng edisi spesial. Setiap stoples berisi <b>25 butir</b> kelereng. Lengkapi 3 stoples yang belum penuh dan tambahkan kekurangannya hingga tepat 100 kelereng!',
+    obj: 'kelereng', objName: 'Kelereng', packName: 'Stoples',
+    targetPacks: 4, targetPerPack: 25, targetTotal: 100,
+    maxPacks: 6, maxStock: 130, initPacks: [20, 25, 18]
+  }
+];
+
+// State penyimpanan widget interaktif
+const packStates  = {}; // { id: [count1, count2, ...] }
+const pickStates  = {}; // { id: 'A' | 'B' | 'C' | '' }
+const arrayStates = {}; // { id: Set("r,c") }
+let arrayPointerDown = false;
+let arrayPaintMode   = true; // true = isi, false = hapus
+let activeArrayId    = null;
+
+// =========================================================================
+// RENDER SEMUA 5 ZONA SEBELUM MUAT DRAF / ARSIP
+// =========================================================================
+function buildAllZones() {
+  renderPackZone('zone1Container', Z1_DATA, 1);
+  renderZone2();
+  renderZone3();
+  renderZone4();
+  renderPackZone('zone5Container', Z5_DATA, 5);
+}
+
+// ---------- RENDER ZONA 1 & ZONA 5 (PACK BUILDER) ----------
+function renderPackZone(containerId, list, lvl) {
+  const wrap = document.getElementById(containerId);
+  wrap.innerHTML = list.map(q => {
+    packStates[q.id] = [...q.initPacks];
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="supply-bar">
+        <div class="supply-left">
+          <div class="drag-token" id="tok_${q.id}" draggable="true"
+               ondragstart="onTokenDragStart(event, '${q.id}')"
+               onclick="toggleTapArm('${q.id}')"
+               title="Seret ke wadah atau klik lalu ketuk wadah">
+            ${getObjSVG(q.obj, 28)}
+            <span>Seret / Ketuk ${q.objName}</span>
+          </div>
+          <div class="stock-pills">
+            <span class="stock-pill" id="stockObj_${q.id}">Stok ${q.objName}: <b>0</b> / ${q.maxStock}</span>
+            <span class="stock-pill" id="stockPack_${q.id}">${q.packName} Terpakai: <b>0</b> / ${q.maxPacks}</span>
+          </div>
+        </div>
+        <div class="pack-toolbar" id="tools_${q.id}">
+          <button type="button" class="btn-main btn-sm" onclick="addPack('${q.id}')">+1 ${q.packName}</button>
+          <button type="button" class="btn-light btn-sm" onclick="removePack('${q.id}')">−1 ${q.packName}</button>
+          <button type="button" class="btn-amber btn-sm" onclick="syncAllPacks('${q.id}')" title="Samakan isi semua wadah mengikuti Wadah 1">📋 Samakan Semua</button>
+        </div>
+      </div>
+
+      <div class="packs-arena" id="arena_${q.id}"></div>
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}" name="${q.id}_packs" value="">
+
+      <div class="eq-bar">
+        <div class="eq-part">
+          <input type="tel" class="m-in lkpd-val lvl${lvl}" data-ans="${q.targetPacks}" name="${q.id}_a" placeholder="?">
+          <span class="eq-sub">Banyak ${q.packName}</span>
+        </div>
+        <span class="eq-op">×</span>
+        <div class="eq-part">
+          <input type="tel" class="m-in lkpd-val lvl${lvl}" data-ans="${q.targetPerPack}" name="${q.id}_b" placeholder="?">
+          <span class="eq-sub">Isi Tiap ${q.packName}</span>
+        </div>
+        <span class="eq-op">=</span>
+        <div class="eq-part">
+          <input type="tel" class="m-in final lkpd-val lvl${lvl}" data-ans="${q.targetTotal}" name="${q.id}_res" placeholder="?">
+          <span class="eq-sub">Total ${q.objName}</span>
+        </div>
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  list.forEach(q => refreshPackArena(q.id, false));
+}
+
+function getPackMeta(id) {
+  return Z1_DATA.find(x => x.id === id) || Z5_DATA.find(x => x.id === id);
+}
+
+function getUsedObjects(id) {
+  return (packStates[id] || []).reduce((a, b) => a + b, 0);
+}
+
+function onTokenDragStart(e, id) {
+  if (readOnlyMode) { e.preventDefault(); return; }
+  e.dataTransfer.setData('text/plain', id);
+}
+
+function toggleTapArm(id) {
+  if (readOnlyMode) return;
+  const prev = armedTapKey;
+  if (prev) {
+    const prevEl = document.getElementById('tok_' + prev);
+    if (prevEl) prevEl.classList.remove('tap-armed');
+  }
+  if (prev === id) {
+    armedTapKey = null;
+  } else {
+    armedTapKey = id;
+    const el = document.getElementById('tok_' + id);
+    if (el) el.classList.add('tap-armed');
+  }
+}
+
+function addPack(id) {
+  if (readOnlyMode) return;
+  const q = getPackMeta(id);
+  if (packStates[id].length >= q.maxPacks) {
+    return flashHint(id, `⚠️ Persediaan wadah di rak maksimal ${q.maxPacks} ${q.packName}.`);
+  }
+  packStates[id].push(0);
+  refreshPackArena(id, true);
+}
+
+function removePack(id) {
+  if (readOnlyMode) return;
+  if (packStates[id].length <= 0) return;
+  packStates[id].pop();
+  refreshPackArena(id, true);
+}
+
+function changePackItem(id, idx, delta) {
+  if (readOnlyMode) return;
+  const q = getPackMeta(id);
+  const curr = packStates[id][idx] || 0;
+  const used = getUsedObjects(id);
+  let next = curr + delta;
+  if (next < 0) next = 0;
+  const maxAdd = q.maxStock - used;
+  if (delta > 0 && (next - curr) > maxAdd) {
+    next = curr + Math.max(0, maxAdd);
+    flashHint(id, `⚠️ Stok ${q.objName} di rak habis (${q.maxStock} buah). Kurangi isi wadah lain jika terlalu banyak.`);
+  }
+  if (next > 30) next = 30;
+  packStates[id][idx] = next;
+  refreshPackArena(id, true);
+}
+
+function syncAllPacks(id) {
+  if (readOnlyMode) return;
+  const q = getPackMeta(id);
+  const arr = packStates[id];
+  if (arr.length < 2) {
+    return flashHint(id, `ℹ️ Tambahkan minimal 2 ${q.packName} terlebih dahulu sebelum menyamakan isi.`);
+  }
+  const base = arr[0];
+  if (base <= 0) {
+    return flashHint(id, `ℹ️ Isi ${q.packName} 1 terlebih dahulu sesuai jumlah pada soal cerita!`);
+  }
+  if (base * arr.length > q.maxStock) {
+    return flashHint(id, `⚠️ Stok ${q.objName} di rak (${q.maxStock}) tidak cukup jika semua ${arr.length} ${q.packName} diisi ${base}! Periksa kembali jumlah wadah atau isinya.`);
+  }
+  packStates[id] = arr.map(() => base);
+  refreshPackArena(id, true);
+}
+
+function onPackDrop(e, id, idx) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if (readOnlyMode) return;
+  const dragId = e.dataTransfer.getData('text/plain');
+  if (dragId === id) {
+    changePackItem(id, idx, 1);
+  }
+}
+
+function onPackAreaClick(id, idx) {
+  if (readOnlyMode) return;
+  changePackItem(id, idx, 1);
+}
+
+function refreshPackArena(id, triggerProgress = true) {
+  const q = getPackMeta(id);
+  const arr = packStates[id] || [];
+  const used = getUsedObjects(id);
+  const rem = q.maxStock - used;
+
+  const stockObjEl = document.getElementById('stockObj_' + id);
+  if (stockObjEl) {
+    stockObjEl.innerHTML = `Sisa Stok ${q.objName}: <b>${rem}</b> / ${q.maxStock}`;
+    stockObjEl.classList.toggle('low', rem <= 5);
+  }
+  const stockPackEl = document.getElementById('stockPack_' + id);
+  if (stockPackEl) {
+    stockPackEl.innerHTML = `${q.packName} Aktif: <b>${arr.length}</b> / ${q.maxPacks}`;
+  }
+
+  const arena = document.getElementById('arena_' + id);
+  if (arr.length === 0) {
+    arena.innerHTML = `<div class="packs-empty">Belum ada ${q.packName}. Klik <b>+1 ${q.packName}</b> di atas untuk mulai menyusun!</div>`;
+  } else {
+    const svgSize = q.targetPerPack >= 15 ? 20 : (q.targetPerPack >= 10 ? 22 : 25);
+    arena.innerHTML = arr.map((cnt, idx) => {
+      let itemsHtml = '';
+      for (let i = 0; i < cnt; i++) itemsHtml += getObjSVG(q.obj, svgSize);
+      if (cnt === 0) itemsHtml = `<span style="font-size:11.5px; color:#94a3b8; font-weight:700;">Ketuk / seret ${q.objName} ke sini</span>`;
+      const stepBig = q.targetPerPack >= 10 ? `<button type="button" class="mini-btn plus" onclick="changePackItem('${id}',${idx},5)">+5</button>` : '';
+      return `
+      <div class="pack-box" id="pbox_${id}_${idx}"
+           ondragover="event.preventDefault(); this.classList.add('drag-over');"
+           ondragleave="this.classList.remove('drag-over');"
+           ondrop="onPackDrop(event, '${id}', ${idx})">
+        <div class="pack-head">
+          <span class="pack-title">${q.packName} ${idx + 1}</span>
+          <span class="pack-count-badge">${cnt}</span>
+        </div>
+        <div class="pack-items" onclick="onPackAreaClick('${id}', ${idx})" title="Ketuk untuk tambah 1 ${q.objName}">
+          ${itemsHtml}
+        </div>
+        <div class="pack-controls">
+          <button type="button" class="mini-btn minus" onclick="changePackItem('${id}',${idx},-1)">−1</button>
+          <button type="button" class="mini-btn plus" onclick="changePackItem('${id}',${idx},1)">+1</button>
+          ${stepBig}
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  const hid = document.getElementById('hid_' + id);
+  if (hid) hid.value = JSON.stringify(arr);
+  if (triggerProgress) updateProgress();
+}
+
+// ---------- RENDER ZONA 2 (OBJEK KONKRET -> PENJUMLAHAN BERULANG + PERKALIAN) ----------
+function renderZone2() {
+  const wrap = document.getElementById('zone2Container');
+  wrap.innerHTML = Z2_DATA.map(q => {
+    let traysHtml = '';
+    const svgSize = q.perPack >= 10 ? 22 : 25;
+    for (let p = 0; p < q.packs; p++) {
+      let objs = '';
+      for (let i = 0; i < q.perPack; i++) objs += getObjSVG(q.obj, svgSize);
+      traysHtml += `
+      <div class="static-tray">
+        <div class="tray-label">${q.packName} ${p + 1}</div>
+        <div class="tray-objects">${objs}</div>
+      </div>`;
+    }
+
+    let addInputs = [];
+    for (let p = 0; p < q.packs; p++) {
+      addInputs.push(`<input type="tel" class="m-in small lkpd-val lvl2" data-ans="${q.perPack}" name="${q.id}_add_${p+1}" placeholder="?">`);
+    }
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="static-groups">${traysHtml}</div>
+
+      <div class="repeat-add-row">
+        <span style="font-size:13px; width:100%; text-align:center; color:#b45309;">Penjumlahan Berulang:</span>
+        ${addInputs.join(' <span>+</span> ')}
+      </div>
+
+      <div class="eq-bar">
+        <div class="eq-part">
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="${q.packs}" name="${q.id}_a" placeholder="?">
+          <span class="eq-sub">Banyak ${q.packName}</span>
+        </div>
+        <span class="eq-op">×</span>
+        <div class="eq-part">
+          <input type="tel" class="m-in lkpd-val lvl2" data-ans="${q.perPack}" name="${q.id}_b" placeholder="?">
+          <span class="eq-sub">Isi Tiap ${q.packName}</span>
+        </div>
+        <span class="eq-op">=</span>
+        <div class="eq-part">
+          <input type="tel" class="m-in final lkpd-val lvl2" data-ans="${q.total}" name="${q.id}_res" placeholder="?">
+          <span class="eq-sub">Jumlah Total</span>
+        </div>
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+}
+
+// ---------- RENDER ZONA 3 (DETEKTIF KONSEP A x B vs B x A) ----------
+function renderZone3() {
+  const wrap = document.getElementById('zone3Container');
+  wrap.innerHTML = Z3_DATA.map(q => {
+    pickStates[q.id] = '';
+    const cardsHtml = q.options.map(opt => {
+      let trays = '';
+      const sz = opt.perPack >= 6 ? 18 : 21;
+      for (let p = 0; p < opt.packs; p++) {
+        let items = '';
+        for (let i = 0; i < opt.perPack; i++) items += getObjSVG(q.obj, sz);
+        trays += `<div class="mc-tray">${items}</div>`;
+      }
+      return `
+      <div class="model-card" id="mc_${q.id}_${opt.key}" onclick="selectModelCard('${q.id}', '${opt.key}')">
+        <span class="mc-badge">Pilihan ${opt.key}</span>
+        <div class="mc-trays">${trays}</div>
+      </div>`;
+    }).join('');
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="choice-grid">${cardsHtml}</div>
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}" name="${q.id}_pick" value="">
+
+      <div class="eq-bar">
+        <div class="eq-part">
+          <input type="tel" class="m-in lkpd-val lvl3" data-ans="${q.a}" name="${q.id}_a" placeholder="?">
+          <span class="eq-sub">Banyak Kelompok</span>
+        </div>
+        <span class="eq-op">×</span>
+        <div class="eq-part">
+          <input type="tel" class="m-in lkpd-val lvl3" data-ans="${q.b}" name="${q.id}_b" placeholder="?">
+          <span class="eq-sub">Isi Per Kelompok</span>
+        </div>
+        <span class="eq-op">=</span>
+        <div class="eq-part">
+          <input type="tel" class="m-in final lkpd-val lvl3" data-ans="${q.total}" name="${q.id}_res" placeholder="?">
+          <span class="eq-sub">Hasil Perkalian</span>
+        </div>
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+}
+
+function selectModelCard(id, key, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  pickStates[id] = key;
+  ['A', 'B', 'C'].forEach(k => {
+    const el = document.getElementById(`mc_${id}_${k}`);
+    if (el) {
+      el.classList.remove('selected', 'mc-correct', 'mc-wrong');
+      if (k === key) el.classList.add('selected');
+    }
+  });
+  const hid = document.getElementById('hid_' + id);
+  if (hid) hid.value = key;
+  if (triggerProgress) updateProgress();
+}
+
+// ---------- RENDER ZONA 4 (PAPAN BARIS & KOLOM / ARRAY) ----------
+function renderZone4() {
+  const wrap = document.getElementById('zone4Container');
+  wrap.innerHTML = Z4_DATA.map(q => {
+    arrayStates[q.id] = new Set();
+    let gridHtml = `<div class="arr-idx"></div>`;
+    for (let c = 1; c <= q.gridCols; c++) {
+      gridHtml += `<div class="arr-idx">K${c}</div>`;
+    }
+    for (let r = 0; r < q.gridRows; r++) {
+      gridHtml += `<div class="arr-idx">B${r + 1}</div>`;
+      for (let c = 0; c < q.gridCols; c++) {
+        gridHtml += `<div class="arr-cell" id="cell_${q.id}_${r}_${c}"
+          onpointerdown="onArrDown(event, '${q.id}', ${r}, ${c})"
+          onpointerenter="onArrEnter('${q.id}', ${r}, ${c})"></div>`;
+      }
+    }
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="array-wrap">
+        <div class="array-topbar">
+          <span class="stock-pill" id="arrStat_${q.id}">${q.objName} terpasang: <b>0</b></span>
+          <button type="button" class="btn-light btn-sm" onclick="clearArray('${q.id}')">🧹 Bersihkan Papan</button>
+        </div>
+        <div class="array-grid" style="grid-template-columns: 28px repeat(${q.gridCols}, auto);" onpointerleave="">
+          ${gridHtml}
+        </div>
+      </div>
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}" name="${q.id}_grid" value="">
+
+      <div class="eq-bar">
+        <div class="eq-part">
+          <input type="tel" class="m-in lkpd-val lvl4" data-ans="${q.targetRows}" name="${q.id}_a" placeholder="?">
+          <span class="eq-sub">Banyak Baris</span>
+        </div>
+        <span class="eq-op">×</span>
+        <div class="eq-part">
+          <input type="tel" class="m-in lkpd-val lvl4" data-ans="${q.targetCols}" name="${q.id}_b" placeholder="?">
+          <span class="eq-sub">Isi Per Baris (Kolom)</span>
+        </div>
+        <span class="eq-op">=</span>
+        <div class="eq-part">
+          <input type="tel" class="m-in final lkpd-val lvl4" data-ans="${q.total}" name="${q.id}_res" placeholder="?">
+          <span class="eq-sub">Total ${q.objName}</span>
+        </div>
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  document.addEventListener('pointerup', () => { arrayPointerDown = false; activeArrayId = null; });
+}
+
+function getArrayMeta(id) { return Z4_DATA.find(x => x.id === id); }
+
+function onArrDown(e, id, r, c) {
+  if (readOnlyMode) return;
+  e.preventDefault();
+  const key = `${r},${c}`;
+  arrayPointerDown = true;
+  activeArrayId = id;
+  arrayPaintMode = !arrayStates[id].has(key);
+  setArrayCell(id, r, c, arrayPaintMode);
+}
+
+function onArrEnter(id, r, c) {
+  if (readOnlyMode || !arrayPointerDown || activeArrayId !== id) return;
+  setArrayCell(id, r, c, arrayPaintMode);
+}
+
+function setArrayCell(id, r, c, fill, triggerProgress = true) {
+  const q = getArrayMeta(id);
+  const key = `${r},${c}`;
+  const cell = document.getElementById(`cell_${id}_${r}_${c}`);
+  if (!cell) return;
+  if (fill) {
+    arrayStates[id].add(key);
+    cell.classList.add('filled');
+    cell.innerHTML = getObjSVG(q.obj, 24);
+  } else {
+    arrayStates[id].delete(key);
+    cell.classList.remove('filled');
+    cell.innerHTML = '';
+  }
+  syncArrayHidden(id, triggerProgress);
+}
+
+function clearArray(id) {
+  if (readOnlyMode) return;
+  const q = getArrayMeta(id);
+  arrayStates[id].clear();
+  for (let r = 0; r < q.gridRows; r++) {
+    for (let c = 0; c < q.gridCols; c++) {
+      const cell = document.getElementById(`cell_${id}_${r}_${c}`);
+      if (cell) { cell.classList.remove('filled'); cell.innerHTML = ''; }
+    }
+  }
+  syncArrayHidden(id, true);
+}
+
+function syncArrayHidden(id, triggerProgress = true) {
+  const q = getArrayMeta(id);
+  const arr = [...arrayStates[id]];
+  const stat = document.getElementById('arrStat_' + id);
+  if (stat) stat.innerHTML = `${q.objName} terpasang: <b>${arr.length}</b>`;
+  const hid = document.getElementById('hid_' + id);
+  if (hid) hid.value = JSON.stringify(arr);
+  if (triggerProgress) updateProgress();
+}
+
+function isValidArrayShape(id, targetR, targetC) {
+  const set = arrayStates[id];
+  if (!set || set.size !== targetR * targetC) return { ok: false, reason: `Jumlah benda terpasang belum tepat ${targetR} baris × ${targetC} kolom.` };
+  let minR = 999, maxR = -1, minC = 999, maxC = -1;
+  set.forEach(k => {
+    const [r, c] = k.split(',').map(Number);
+    if (r < minR) minR = r;
+    if (r > maxR) maxR = r;
+    if (c < minC) minC = c;
+    if (c > maxC) maxC = c;
+  });
+  const spanR = maxR - minR + 1;
+  const spanC = maxC - minC + 1;
+  if (spanR !== targetR || spanC !== targetC) {
+    if (spanR === targetC && spanC === targetR) {
+      return { ok: false, reason: `Hati-hati tertukar! Soal meminta ${targetR} baris (ke bawah) dan ${targetC} kolom (ke samping), bukan sebaliknya.` };
+    }
+    return { ok: false, reason: `Bentuk susunan belum rapi menjadi persegi panjang ${targetR} baris × ${targetC} kolom.` };
+  }
+  for (let r = minR; r <= maxR; r++) {
+    for (let c = minC; c <= maxC; c++) {
+      if (!set.has(`${r},${c}`)) {
+        return { ok: false, reason: `Masih ada petak kosong di tengah susunan persegi panjang.` };
+      }
+    }
+  }
+  return { ok: true };
+}
+
+function flashHint(id, msg) {
+  const el = document.getElementById('hint_' + id);
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+}
+function clearHint(id) {
+  const el = document.getElementById('hint_' + id);
+  if (el) { el.textContent = ''; el.classList.remove('show'); }
+}
+
+// =========================================================================
+// VALIDASI GAMIFIKASI PER ZONA (KETAT A x B + OBJEK KONKRET)
+// =========================================================================
+function checkLevel(lvl) {
+  let allCorrect = true;
+
+  // 1. Cek semua input angka di level tersebut
+  const inputs = document.querySelectorAll('.lvl' + lvl + ':not([readonly])');
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    if (inp.value.trim() === String(inp.dataset.ans).trim()) {
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      allCorrect = false;
+      setTimeout(() => inp.classList.remove('wrong'), 500);
+    }
+  });
+
+  // 2. Cek manipulasi objek konkret sesuai zona
+  if (lvl === 1 || lvl === 5) {
+    const list = lvl === 1 ? Z1_DATA : Z5_DATA;
+    list.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const arr = packStates[q.id] || [];
+      let objOk = true;
+      let errMsg = '';
+
+      if (arr.length !== q.targetPacks) {
+        objOk = false;
+        errMsg = `⚠️ Jumlah ${q.packName} belum tepat (saat ini ${arr.length} ${q.packName}). Periksa lagi soal ceritanya!`;
+      } else {
+        arr.forEach((cnt, idx) => {
+          const box = document.getElementById(`pbox_${q.id}_${idx}`);
+          if (box) box.classList.remove('pack-ok', 'pack-err');
+          if (cnt === q.targetPerPack) {
+            if (box) box.classList.add('pack-ok');
+          } else {
+            if (box) box.classList.add('pack-err');
+            objOk = false;
+            errMsg = `⚠️ Isi setiap ${q.packName} belum tepat (ada kotak bertanda merah yang isinya kurang atau lebih)!`;
+          }
+        });
+      }
+
+      const eqOk = [...card.querySelectorAll('.lvl' + lvl)].every(el => el.classList.contains('correct'));
+      if (!objOk) {
+        allCorrect = false;
+        flashHint(q.id, errMsg);
+        card.classList.add('card-wrong');
+      } else if (!eqOk) {
+        flashHint(q.id, `⚠️ Susunan bendamu sudah tepat! Periksa kembali urutan angka perkalian (Banyak ${q.packName} × Isi Tiap ${q.packName} = Total).`);
+        card.classList.add('card-wrong');
+      } else {
+        card.classList.add('card-correct');
+      }
+    });
+  } else if (lvl === 2) {
+    Z2_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const eqOk = [...card.querySelectorAll('.lvl2')].every(el => el.classList.contains('correct'));
+      if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Periksa kembali suku penjumlahan berulang dan urutan (Banyak ${q.packName} × Isi Tiap ${q.packName} = Total).`);
+      } else {
+        card.classList.add('card-correct');
+      }
+    });
+  } else if (lvl === 3) {
+    Z3_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const picked = pickStates[q.id];
+      ['A', 'B', 'C'].forEach(k => {
+        const mc = document.getElementById(`mc_${q.id}_${k}`);
+        if (mc) mc.classList.remove('mc-correct', 'mc-wrong');
+      });
+
+      let pickOk = (picked === q.correctOpt);
+      if (picked) {
+        const chosenEl = document.getElementById(`mc_${q.id}_${picked}`);
+        if (chosenEl) chosenEl.classList.add(pickOk ? 'mc-correct' : 'mc-wrong');
+      }
+      const eqOk = [...card.querySelectorAll('.lvl3')].every(el => el.classList.contains('correct'));
+
+      if (!pickOk) {
+        allCorrect = false;
+        card.classList.add('card-wrong');
+        flashHint(q.id, picked ? `⚠️ Pilihan gambar belum tepat! Hati-hati tertukar antara jumlah wadah/kelompok dengan isi per wadah.` : `⚠️ Pilih salah satu gambar susunan (A, B, atau C) terlebih dahulu!`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Gambar pilihanmu sudah benar! Periksa lagi urutan kalimat perkaliannya (Kelompok × Isi = Hasil).`);
+      } else {
+        card.classList.add('card-correct');
+      }
+    });
+  } else if (lvl === 4) {
+    Z4_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const check = isValidArrayShape(q.id, q.targetRows, q.targetCols);
+      const eqOk = [...card.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+      if (!check.ok) {
+        allCorrect = false;
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ ${check.reason}`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Susunan baris & kolom di papan sudah rapi! Periksa lagi angka (Baris × Kolom = Total).`);
+      } else {
+        card.classList.add('card-correct');
+      }
+    });
+  }
+
+  if (allCorrect) {
+    document.getElementById('level' + lvl).classList.add('completed');
+    if (lvl === 5) {
+      document.getElementById('msgFinal').style.display = 'block';
+      document.getElementById('sendBtn2').style.display = 'block';
+      document.getElementById('msgFinal').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      unlockedMax = Math.max(unlockedMax, lvl + 1);
+      const next = document.getElementById('level' + (lvl + 1));
+      if (next) {
+        next.classList.remove('locked');
+        next.classList.add('unlocked');
+        next.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  } else {
+    const firstWrong = document.querySelector(`#level${lvl} .card-wrong, #level${lvl} .wrong`);
+    if (firstWrong) firstWrong.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// =========================================================================
+// PEMULIHAN STATE VISUAL (UNTUK DRAF & MODE PENILAIAN GURU/SISWA)
+// =========================================================================
+function restoreInteractiveStates(answers) {
+  if (!answers) return;
+
+  // 1. Pulihkan Zona 1 & 5 (Pack Builder)
+  [...Z1_DATA, ...Z5_DATA].forEach(q => {
+    const raw = answers[q.id + '_packs'];
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          packStates[q.id] = parsed;
+          refreshPackArena(q.id, false);
+        }
+      } catch (e) {}
+    }
+  });
+
+  // 2. Pulihkan Zona 3 (Model Card)
+  Z3_DATA.forEach(q => {
+    const val = answers[q.id + '_pick'];
+    if (val) selectModelCard(q.id, val, false);
+  });
+
+  // 3. Pulihkan Zona 4 (Array Grid)
+  Z4_DATA.forEach(q => {
+    const raw = answers[q.id + '_grid'];
+    if (raw) {
+      try {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)) {
+          arrayStates[q.id] = new Set();
+          arr.forEach(coord => {
+            const [r, c] = String(coord).split(',').map(Number);
+            if (!isNaN(r) && !isNaN(c)) setArrayCell(q.id, r, c, true, false);
+          });
+        }
+      } catch (e) {}
+    }
+  });
+}
+
+function normalizeDateForInput(raw) {
+  if (!raw) return '';
+  const s = String(raw).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const d = new Date(s);
+  if (!isNaN(d.getTime())) {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  return '';
+}
+
+// =========================================================================
+// MESIN LMS V4.2 (IDENTIK KONTRAK PAYLOAD GAS + PERBAIKAN TANGGAL KALENDER)
+// =========================================================================
+document.addEventListener("DOMContentLoaded", () => {
+  buildAllZones();
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+    updateProgress();
+  }
+});
+
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN anggota kelompok lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+            updateProgress();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Gagal memuat database."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => String(s.nisn) === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+
+function collect() {
+  let d = {};
+  getValFields().forEach(el => { if (el.name) d[el.name] = el.value; });
+  // Cadangkan tanggal ke dalam answers agar pasti terbaca kembali di mode penilaian guru
+  const tglVal = document.querySelector('[name="tanggal"]').value;
+  if (tglVal) d.tanggal = tglVal;
+  return d;
+}
+
+function setupInputs() {
+  getValFields().forEach(el => {
+    el.addEventListener("input", updateProgress);
+    el.addEventListener("change", updateProgress);
+  });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+  document.querySelector('[name="tanggal"]').addEventListener("change", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields();
+  let filled = 0;
+  vals.forEach(x => {
+    const v = String(x.value || "").trim();
+    if (v && v !== "[]" && v !== "[0]") filled++;
+  });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  const pct = Math.min(100, Math.round((filled + (groupMembers.length > 0 ? 1 : 0)) / (vals.length + 2) * 100));
+  document.getElementById("progressBar").style.width = pct + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({
+    members: groupMembers,
+    tanggal: document.querySelector('[name="tanggal"]').value,
+    unlockedMax: unlockedMax,
+    answers: collect()
+  }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><p>Semua susunan benda dan jawabanmu tersimpan di perangkat ini.</p><button class='btn-main' onclick='closeModal()'>Lanjut</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE));
+    if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = normalizeDateForInput(d.tanggal);
+    if (d.unlockedMax && d.unlockedMax > 1) {
+      unlockedMax = d.unlockedMax;
+      for (let i = 2; i <= unlockedMax; i++) {
+        const el = document.getElementById('level' + i);
+        if (el) { el.classList.remove('locked'); el.classList.add('unlocked'); }
+      }
+    }
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+      restoreInteractiveStates(d.answers);
+    }
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) {
+    return showModal("<h3>⚠️ Belum Lengkap</h3><p>Isi Hari/Tanggal pada kalender dan pastikan Anggota Kelompok terisi!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Jawaban...</h3>");
+  let payload = {
+    action: 'submitLKPD',
+    lkpdId: LKPD_ID,
+    subject: SUBJECT,
+    hariTanggal: tgl,
+    materiPokok: document.querySelector('[name="materi"]').value,
+    members: groupMembers,
+    answers: JSON.stringify(collect())
+  };
+
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      readOnlyMode = true;
+      document.querySelectorAll("input,select,textarea,button").forEach(el => el.disabled = true);
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Jawaban dan seluruh susunan benda konkret kelompokmu telah masuk ke Dasbor Guru.</p>`);
+      document.getElementById("appbar").style.display = "none";
+    } else {
+      showModal("<h3>⚠️ Gagal Mengirim</h3><p>Silakan coba kirim kembali.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Koneksi Terputus</h3><p>Periksa jaringan internet lalu coba lagi.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+};
+
+async function loadLMSViewMode() {
+  readOnlyMode = true;
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  showModal("<div class='spinner'></div><h3>Memuat Data Arsip...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + encodeURIComponent(LKPD_ID) + "&submissionId=" + encodeURIComponent(submissionId));
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if (result.members) { groupMembers = result.members; renderMembers(); }
+      else { document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database)</i></div>`; }
+
+      // Pulihkan Tanggal Kalender (prioritaskan answers.tanggal agar format YYYY-MM-DD aman, fallback ke result.hariTanggal)
+      const tglEl = document.querySelector('[name="tanggal"]');
+      if (tglEl) {
+        const tglRestored = normalizeDateForInput(answers.tanggal || result.hariTanggal || '');
+        if (tglRestored) tglEl.value = tglRestored;
+      }
+
+      // Pulihkan semua input standar & hidden
+      Object.keys(answers).forEach(k => {
+        if (k === 'tanggal') return;
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+
+      // Pulihkan seluruh tampilan visual objek konkret (Zona 1, 3, 4, 5)
+      restoreInteractiveStates(answers);
+
+      // Buka seluruh zona agar guru dapat memeriksa 25 soal sekaligus
+      document.querySelectorAll('.game-level').forEach(el => {
+        el.classList.remove('locked');
+        el.classList.add('unlocked');
+        let ovr = el.querySelector('.lock-overlay');
+        if (ovr) ovr.remove();
+      });
+
+      // Kunci seluruh form jawaban siswa (kecuali panel penilaian guru)
+      document.querySelectorAll("input,select,textarea,button").forEach(el => {
+        if (!el.closest('#gradePanel')) {
+          el.disabled = true;
+          el.readOnly = true;
+        }
+      });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel");
+      panel.classList.add("show");
+      let scale = document.getElementById("gradeScale");
+      let note  = document.getElementById("gradeNote");
+      let btn   = document.getElementById("lockGradeBtn");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade;
+          note.value = result.feedback;
+          scale.disabled = true;
+          note.disabled = true;
+          btn.style.display = "none";
+          renderStars(scale.value);
+        } else {
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none";
+        scale.disabled = true;
+        note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade;
+          note.value = result.feedback;
+          renderStars(scale.value);
+        }
+      }
+    } else {
+      showModal("<h3>⚠️ Data Tidak Ditemukan</h3>");
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) {
+  const n = { A:4, B:3, C:2, D:1 }[v] || 0;
+  const st = document.getElementById("starRating");
+  st.textContent = '★'.repeat(n) + '☆'.repeat(4 - n);
+  st.style.color = n ? '#f59e0b' : '#cbd5e1';
+}
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian terlebih dahulu!");
+  let btn = document.getElementById("lockGradeBtn");
+  btn.disabled = true;
+  btn.innerText = "⏳ Menyimpan...";
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        action: 'saveGrade',
+        lkpdId: LKPD_ID,
+        submissionId: submissionId,
+        grade: grade,
+        feedback: feedback
+      })
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Tersimpan & Terdistribusi";
+      document.getElementById("gradeScale").disabled = true;
+      document.getElementById("gradeNote").disabled = true;
+    } else {
+      alert("Gagal menyimpan nilai.");
+      btn.disabled = false;
+      btn.innerText = "🔒 Simpan & Distribusikan Nilai";
+    }
+  } catch (e) {
+    alert("Koneksi gagal.");
+    btn.disabled = false;
+    btn.innerText = "🔒 Simpan & Distribusikan Nilai";
+  }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
