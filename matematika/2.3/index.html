@@ -1,1 +1,2040 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.2 (GAMIFIKASI MATEMATIKA - PECAHAN DESIMAL) -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 2.3 Matematika - Pecahan Desimal (Persepuluhan & Perseratusan)</title>
+<style>
+:root {
+  --green: #059669; --green2: #047857; --green-soft: #dcfce7;
+  --ink: #1e293b; --slate: #334155; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --red: #ef4444; --red-soft: #fee2e2;
+  --math-main: #0891b2; --math-light: #cffafe; --math-dark: #155e75; --math-accent: #f59e0b;
+  --blue: #0284c7; --blue-soft: #e0f2fe; --blue-dark: #0c4a6e;
+  --indigo: #4f46e5; --indigo-soft: #e0e7ff; --indigo-dark: #312e81;
+  --violet: #7c3aed; --violet-soft: #ede9fe; --violet-dark: #4c1d95;
+  --rose: #e11d48; --rose-soft: #ffe4e6; --rose-dark: #9f1239;
+  --amber: #d97706; --amber-soft: #fef3c7;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: linear-gradient(135deg, #ecfeff, #fef3c7 52%, #eef2ff);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--ink); overflow-x: hidden;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(6px); opacity: .45; pointer-events: none;
+}
+body::before { width: 260px; height: 260px; background: #a5f3fc; left: -75px; top: 120px; }
+body::after { width: 220px; height: 220px; background: #fde68a; right: -55px; bottom: 90px; }
 
+/* ================= APPBAR ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--math-main); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--math-dark); background: var(--math-light); padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow, .2s background; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--math-main); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-indigo { background: var(--indigo); color: #fff; }
+.btn-violet { background: var(--violet); color: #fff; }
+.btn-rose { background: var(--rose); color: #fff; }
+.btn-amber { background: var(--amber); color: #fff; }
+.btn-sm { padding: 6px 11px; font-size: 12.5px; border-radius: 9px; }
+
+.progress { height: 6px; background: var(--math-light); position: sticky; top: 61px; z-index: 29; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--math-main), var(--indigo)); transition: .3s; }
+
+/* ================= HERO & IDENTITAS ================= */
+.sheet {
+  width: min(1040px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px;
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #ecfeff, #fffbeb); border-radius: 22px; padding: 26px; border: 1px solid #a5f3fc; }
+.badge { display: inline-block; background: var(--math-main); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(25px, 4vw, 33px); line-height: 1.15; margin: 0 0 12px; color: var(--math-dark); }
+h2 { margin: 0; font-size: 20px; color: var(--ink); }
+p { line-height: 1.65; font-size: 15px; color: var(--slate); }
+
+.mission {
+  background: #fff; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; justify-content: center; text-align: center; font-size: 15px; border: 2px dashed var(--math-accent);
+}
+.mission-icon { font-size: 54px; animation: bob 2.8s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(3deg); } }
+
+.concept-strip {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;
+}
+.concept-pill {
+  border-radius: 14px; padding: 11px 14px; font-size: 13.5px; line-height: 1.5; font-weight: 600;
+}
+.concept-pill.c-10 { background: #cffafe; border: 1.5px solid #67e8f9; color: #155e75; }
+.concept-pill.c-100 { background: #ede9fe; border: 1.5px solid #c4b5fd; color: #4c1d95; }
+
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.field label { display: block; font-size: 13px; font-weight: 900; color: #334155; margin-bottom: 6px; }
+.idgrid input, .grade-panel select, .grade-panel textarea {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s;
+}
+.idgrid input:focus, .grade-panel select:focus, .grade-panel textarea:focus {
+  border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.2);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge { background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.member-badge span { cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px; display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px; }
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+
+/* ================= GAME LEVEL & ZONA ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--math-light); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--math-main); color: #fff; font-weight: 900; flex: 0 0 auto; font-size: 17px; }
+
+.game-level { position: relative; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 22px; margin-bottom: 10px; transition: all .3s; }
+.game-level.locked { opacity: 0.62; pointer-events: none; filter: grayscale(92%); min-height: 220px; }
+.lock-overlay { position: absolute; inset: 0; background: rgba(248, 250, 252, 0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; border-radius: 16px; text-align: center; padding: 20px; }
+.lock-icon { font-size: 52px; margin-bottom: 8px; }
+.game-level.unlocked .lock-overlay { display: none; }
+.game-level.completed { border-color: var(--green); background: #f0fdf4; }
+
+.story-box { background: #fff; border-left: 5px solid var(--math-main); padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); font-size: 14.5px; font-weight: 600; line-height: 1.6; }
+
+/* ================= KARTU SOAL ================= */
+.q-card {
+  background: #ffffff; border: 2px solid #e2e8f0; border-radius: 18px;
+  padding: 20px; margin-bottom: 22px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  transition: border-color .25s, box-shadow .25s;
+}
+.q-card.card-correct { border-color: #22c55e; background: #fafffe; }
+.q-card.card-wrong { border-color: #ef4444; animation: shake 0.4s; }
+
+.q-header {
+  display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px;
+  background: #f8fafc; border-left: 4px solid var(--math-main); padding: 12px 16px; border-radius: 12px;
+}
+.q-no {
+  background: var(--math-main); color: #fff; font-weight: 900; font-size: 13px;
+  padding: 4px 10px; border-radius: 99px; flex: 0 0 auto; margin-top: 2px;
+}
+.q-story { font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.55; }
+
+.q-hint {
+  display: none; margin-top: 10px; padding: 9px 14px; border-radius: 10px;
+  background: var(--red-soft); color: #991b1b; font-size: 13px; font-weight: 700;
+}
+.q-hint.show { display: block; }
+
+/* ================= ZONA 1: GELAS UKUR 10 SKALA & PITA 10 RUAS ================= */
+.tenth-stage {
+  background: linear-gradient(135deg, #f0fdfa, #fffbeb); border: 2px dashed var(--math-main);
+  border-radius: 16px; padding: 16px; margin-bottom: 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.ten-strip {
+  display: flex; width: min(640px, 100%); height: 48px; border-radius: 11px; overflow: hidden;
+  border: 2.5px solid #334155; background: #fff; user-select: none;
+}
+.ten-cell {
+  flex: 1; border-right: 1.5px solid #94a3b8; display: grid; place-items: center;
+  font-size: 12px; font-weight: 900; color: #94a3b8; cursor: pointer; transition: background .15s;
+}
+.ten-cell:last-child { border-right: none; }
+.ten-cell:hover { background: #cffafe; }
+.ten-cell.lit-cyan { background: linear-gradient(180deg, #22d3ee, #0891b2); color: #fff; }
+.ten-cell.lit-amber { background: linear-gradient(180deg, #fbbf24, #d97706); color: #fff; }
+.ten-cell.lit-rose { background: linear-gradient(180deg, #fb7185, #e11d48); color: #fff; }
+.ten-cell.lit-green { background: linear-gradient(180deg, #34d399, #059669); color: #fff; }
+.ten-cell.lit-indigo { background: linear-gradient(180deg, #818cf8, #4f46e5); color: #fff; }
+
+.stat-pill {
+  background: #fff; border: 1.5px solid #cbd5e1; border-radius: 99px;
+  padding: 5px 14px; font-size: 13px; font-weight: 800; color: var(--slate); text-align: center;
+}
+.stat-pill b { color: var(--math-dark); }
+.stat-pill.ok { background: #dcfce7; border-color: #86efac; color: #166534; }
+
+/* ================= ZONA 2 & 3: PAPAN UBIN 10x10 (100 PETAK ERGONOMIS) ================= */
+.grid100-panel {
+  background: linear-gradient(135deg, #f5f3ff, #f0f9ff); border: 2px dashed var(--violet);
+  border-radius: 16px; padding: 14px; margin-bottom: 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.brush-bar {
+  display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; align-items: center; width: 100%;
+}
+.brush-btn {
+  padding: 6px 12px; border-radius: 99px; font-size: 12.5px; font-weight: 900;
+  background: #fff; border: 2px solid #cbd5e1; color: var(--slate);
+}
+.brush-btn.active { background: var(--violet); border-color: var(--violet-dark); color: #fff; box-shadow: 0 3px 8px rgba(124,58,237,0.28); }
+.brush-btn:hover { transform: none; box-shadow: none; border-color: var(--violet); }
+
+.grid100 {
+  display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px;
+  width: min(300px, 100%); aspect-ratio: 1 / 1;
+  background: #475569; padding: 4px; border-radius: 12px; user-select: none;
+  position: relative;
+}
+.grid100.compact { width: min(230px, 100%); }
+.g100-cell {
+  background: #ffffff; border-radius: 3px; cursor: pointer; transition: background .12s;
+}
+.g100-cell:hover { background: #ddd6fe; }
+.g100-cell.on-violet { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+.g100-cell.on-cyan   { background: linear-gradient(135deg, #22d3ee, #0891b2); }
+.g100-cell.on-amber  { background: linear-gradient(135deg, #fbbf24, #d97706); }
+.g100-cell.on-green  { background: linear-gradient(135deg, #34d399, #059669); }
+.g100-cell.on-rose   { background: linear-gradient(135deg, #fb7185, #e11d48); }
+.g100-cell.q-border-r { border-right: 2.5px solid #ef4444; }
+.g100-cell.q-border-b { border-bottom: 2.5px solid #ef4444; }
+
+.twin-board-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;
+}
+.board-card {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 16px; padding: 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.board-card.b-ok { border-color: #22c55e; background: #f0fdf4; }
+.board-card.b-err { border-color: #ef4444; background: #fef2f2; }
+.board-title { font-size: 13.5px; font-weight: 900; color: var(--indigo-dark); text-align: center; }
+
+/* Pita Vertikal 10 Kolom sejajar Papan 100 (untuk Q9-Q10 membuktikan 0,3 = 0,30) */
+.col10-box {
+  display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px;
+  width: min(230px, 100%); aspect-ratio: 1 / 1;
+  background: #475569; padding: 4px; border-radius: 12px;
+}
+.col10-bar { background: #ffffff; border-radius: 4px; }
+.col10-bar.on-cyan { background: linear-gradient(180deg, #22d3ee, #0891b2); }
+
+/* ================= ZONA 4: LASER PITA, KUADRAN 100, SORTIR & URUTAN ================= */
+.laser-wall {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 14px;
+  padding: 14px; margin-bottom: 10px; position: relative;
+}
+.wall-inner {
+  position: relative; width: 100%; display: flex; flex-direction: column; gap: 10px; padding: 6px 0;
+}
+.laser-beam {
+  position: absolute; top: 0; bottom: 0; width: 0;
+  border-left: 3px dashed #ef4444; z-index: 5; pointer-events: none;
+}
+.wall-strip {
+  display: flex; width: 100%; height: 34px; border-radius: 8px; overflow: hidden;
+  border: 2px solid #334155; background: #fff; user-select: none;
+}
+.wall-cell {
+  flex: 1; border-right: 1px solid #94a3b8; display: grid; place-items: center;
+  font-size: 10.5px; font-weight: 900; color: #94a3b8;
+}
+.wall-cell:last-child { border-right: none; }
+.wall-cell.ref-lit { background: linear-gradient(180deg, #38bdf8, #0284c7); color: #fff; }
+.wall-cell.u-cell { cursor: pointer; }
+.wall-cell.u-lit { background: linear-gradient(180deg, #34d399, #059669); color: #fff; }
+
+.sort-pool {
+  background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 14px;
+  padding: 12px; margin-bottom: 12px; min-height: 60px;
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center;
+}
+.dec-chip {
+  background: #fff; border: 2.5px solid var(--rose); color: var(--rose-dark);
+  border-radius: 12px; padding: 7px 14px; font-size: 15px; font-weight: 900;
+  cursor: grab; user-select: none; transition: .15s; box-shadow: 0 3px 8px rgba(225,29,72,0.12);
+}
+.dec-chip:hover { transform: translateY(-2px); }
+.dec-chip.armed { background: var(--rose); color: #fff; box-shadow: 0 0 0 4px rgba(225,29,72,0.28); }
+.dec-chip.chip-ok { border-color: #22c55e; background: #dcfce7; color: #15803d; }
+.dec-chip.chip-err { border-color: #ef4444; background: #fee2e2; color: #b91c1c; }
+
+.buckets-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.bucket {
+  border-radius: 16px; padding: 12px; min-height: 110px; cursor: pointer;
+  display: flex; flex-direction: column; gap: 8px; transition: .2s;
+}
+.bucket.b1 { background: #ecfeff; border: 2.5px solid #22d3ee; }
+.bucket.b2 { background: #f5f3ff; border: 2.5px solid #a78bfa; }
+.bucket.b3 { background: #f1f5f9; border: 2.5px solid #cbd5e1; }
+.bucket.drag-over { transform: scale(1.02); box-shadow: 0 0 0 4px rgba(225,29,72,0.22); }
+.bucket-title { font-size: 13px; font-weight: 900; text-align: center; padding-bottom: 6px; border-bottom: 1.5px dashed rgba(0,0,0,0.12); color: var(--ink); }
+.bucket-items { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; align-items: center; flex: 1; }
+
+.rope-row {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 14px; padding: 10px 14px;
+  display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px;
+}
+.rope-row.r-ok { border-color: #22c55e; background: #f0fdf4; }
+.rope-row.r-err { border-color: #ef4444; background: #fef2f2; }
+.rope-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 13px; font-weight: 900; }
+.rope-meter {
+  width: 100%; height: 22px; background: #e2e8f0; border-radius: 99px; overflow: hidden;
+  border: 1.5px solid #64748b; position: relative;
+}
+.rope-fill { height: 100%; transition: width .2s; border-radius: 99px; }
+
+.order-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.order-slot {
+  background: #fff; border: 2px dashed #fda4af; border-radius: 14px; padding: 10px 8px;
+  min-height: 74px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  cursor: pointer; transition: .18s;
+}
+.order-slot:hover, .order-slot.drag-over { border-color: var(--rose); background: var(--rose-soft); }
+.slot-lbl { font-size: 11px; font-weight: 900; color: var(--muted); text-transform: uppercase; }
+
+/* ================= BARIS PERSAMAAN PECAHAN & DESIMAL ================= */
+.eq-bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px;
+  background: #ecfeff; border: 2px solid #a5f3fc; border-radius: 16px; padding: 14px 16px;
+}
+.eq-bar.violet-bar { background: #f5f3ff; border-color: #ddd6fe; }
+.eq-bar.indigo-bar { background: #eef2ff; border-color: #c7d2fe; }
+.eq-bar.rose-bar   { background: #fff1f2; border-color: #fecdd3; }
+
+.frac-stack { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.frac-static { font-size: 19px; font-weight: 900; color: var(--ink); min-width: 34px; text-align: center; }
+.frac-line { width: 58px; height: 3.5px; background: var(--ink); border-radius: 2px; }
+.eq-sym { font-size: 23px; font-weight: 900; color: var(--ink); }
+.eq-sub { font-size: 11px; font-weight: 800; color: var(--math-dark); text-transform: uppercase; }
+
+.m-in {
+  width: 58px; height: 40px; text-align: center; font-size: 17px; font-weight: 900;
+  color: #0f172a; border: 2px solid #94a3b8; border-radius: 10px; background: #fff;
+  outline: none; transition: .2s; font-family: inherit;
+}
+.m-in.dec { width: 88px; background: #fef08a; border-color: #eab308; font-size: 19px; }
+.m-in:focus { border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.22); }
+
+.sign-picker { display: flex; gap: 6px; align-items: center; }
+.sign-btn {
+  width: 44px; height: 44px; border-radius: 12px; background: #fff;
+  border: 2.5px solid #cbd5e1; font-size: 21px; font-weight: 900; color: var(--ink);
+  display: grid; place-items: center; padding: 0;
+}
+.sign-btn:hover { border-color: var(--indigo); background: var(--indigo-soft); transform: translateY(-1px); }
+.sign-btn.selected { background: var(--indigo); border-color: var(--indigo-dark); color: #fff; }
+.sign-btn.s-ok { background: #16a34a !important; border-color: #15803d !important; color: #fff !important; }
+.sign-btn.s-err { background: #ef4444 !important; border-color: #b91c1c !important; color: #fff !important; }
+
+.lkpd-val.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+.lkpd-val.wrong { animation: shake 0.4s; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);} }
+
+.check-btn { display: block; margin: 20px auto 0; background: var(--math-main); color: #fff; border-radius: 99px; padding: 13px 32px; font-weight: 900; font-size: 15px; }
+
+/* ================= PANEL PENILAIAN GURU + TABEL OBSERVASI (SOP V4.2) ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 24px; margin: 20px auto; width: min(1040px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.obs-wrap { overflow-x: auto; margin-bottom: 18px; }
+.rubric-table {
+  width: 100%; border-collapse: collapse; background: #fff; border-radius: 14px; overflow: hidden;
+  border: 1.5px solid #cbd5e1; font-size: 13.5px;
+}
+.rubric-table th { background: var(--math-dark); color: #fff; padding: 10px 12px; text-align: left; font-weight: 800; }
+.rubric-table td { padding: 10px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; color: var(--ink); line-height: 1.5; }
+.rubric-table tr:nth-child(even) td { background: #f8fafc; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 50; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #cffafe; border-top-color: var(--math-main); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 780px) {
+  .hero, .idgrid, .grade-grid, .twin-board-grid, .buckets-3, .concept-strip { grid-template-columns: 1fr; }
+  .order-slots { grid-template-columns: repeat(2, 1fr); }
+  .sheet { padding: 16px; }
+  .ten-cell { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="appbar" id="appbar">
+  <div class="brand">🧮 PORTAL LMS SDN 1 SUKAHAJI</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Jawaban</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 2.3 • SERI PECAHAN (3/4)</span>
+      <h1>Pecahan Desimal: Persepuluhan &amp; Perseratusan</h1>
+      <p><b>Matematika • Fase B / Kelas IV</b><br>Mari menuang gelas ukur 1 liter, menata papan ubin 10×10, dan membuktikan kesetaraan nilai tempat agar kamu paham betul hubungan antara <b>pecahan berpenyebut 10 &amp; 100</b> dengan <b>bilangan desimal (koma)</b>!</p>
+
+      <div class="concept-strip">
+        <div class="concept-pill c-10">🧪 <b>Persepuluhan (/10):</b> 1 angka di belakang koma.<br>Contoh: <b>3/10 = 0,3</b> &nbsp;|&nbsp; <b>7/10 = 0,7</b>.</div>
+        <div class="concept-pill c-100">🟦 <b>Perseratusan (/100):</b> 2 angka di belakang koma.<br>Contoh: <b>25/100 = 0,25</b> &nbsp;|&nbsp; <b>7/100 = 0,07</b> (hati-hati nol!).</div>
+      </div>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input type="date" name="tanggal" id="inputTanggal" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Pecahan Desimal Persepuluhan dan Perseratusan" readonly>
+        </div>
+        <div class="group-builder">
+          <label>👥 Data Kelompok (1 – 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN temanmu..." style="flex:1;">
+              <button type="button" class="btn-main" id="btnAddMember" disabled>🔍 Cari &amp; Tambah</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa...</p>
+          </div>
+          <div id="readGroupView" style="display:none;"><div class="readonly-group-list" id="readonlyMemberList"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">🧪🟦📏</div>
+      <b>🎯 Misi Lab Desimal</b>
+      <p>Selesaikan <b>4 Zona Gamifikasi (16 Soal Konkret)</b>! Gunakan tanda koma <b>(,)</b> saat menulis desimal seperti <b>0,4</b> atau <b>0,07</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZONA 1: PERSEPULUHAN (GELAS UKUR & PITA 10 RUAS) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Zona 1: Gelas Ukur 1 Liter &amp; Pita 10 Ruas — Persepuluhan (Soal 1–4)</h2></div>
+  <div class="game-level unlocked" id="level1">
+    <div class="story-box">
+      🧪 <b>Petunjuk:</b> Pada soal gelas ukur, klik langsung ketinggian skala atau tombol <b>+0,1 / −0,1</b>. Pada soal pita 10 ruas, klik ruas pita sampai panjang yang diminta. Lalu lengkapi hubungan <b>Pecahan Persepuluhan (/10) = Bilangan Desimal (0,...)</b>!
+    </div>
+    <div id="zone1Container"></div>
+    <button type="button" class="check-btn" onclick="checkLevel(1)">Periksa Zona 1 &amp; Buka Zona 2 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 2: PERSERATUSAN (PAPAN UBIN 10x10) ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--violet);">2</div><h2>Zona 2: Papan Ubin Taman 10×10 — Perseratusan (Soal 5–8)</h2></div>
+  <div class="game-level locked" id="level2">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 2 Terkunci</b><p>Selesaikan Zona 1 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--violet);">
+      🟦 <b>Petunjuk Ergonomis:</b> Papan berisi <b>100 ubin</b> (10 kolom × 10 baris). Supaya cepat dan rapi, gunakan tombol <b>+10 (1 Kolom = 0,10)</b> dan <b>+1 (1 Ubin = 0,01)</b>, atau pilih <b>Mode Kuas</b> lalu klik langsung papan ubinnya! Perhatikan baik-baik <b>Soal 7 (0,07)</b>!
+    </div>
+    <div id="zone2Container"></div>
+    <button type="button" class="check-btn" style="background:var(--violet);" onclick="checkLevel(2)">Periksa Zona 2 &amp; Buka Zona 3 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 3: KESETARAAN & ANTI-MISKONSEPSI DESIMAL ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--indigo);">3</div><h2>Zona 3: Lab Nilai Tempat — Kesetaraan &amp; Anti-Miskonsepsi (Soal 9–12)</h2></div>
+  <div class="game-level locked" id="level3">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 3 Terkunci</b><p>Selesaikan Zona 2 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--indigo);">
+      ⚖️ <b>Petunjuk:</b> Pada <b>Soal 9–10</b>, buktikan bahwa <b>0,3 = 0,30</b> dan <b>0,6 = 0,60</b> dengan mewarnai papan 100 ubin agar luasnya persis sama dengan pita 10 kolom! Pada <b>Soal 11–12</b>, hati-hati jebakan <b>0,4 vs 0,35</b> dan <b>0,08 vs 0,2</b>—warnai kedua papan 100 ubin lalu pilih tanda <b>&lt;</b>, <b>=</b>, atau <b>&gt;</b>!
+    </div>
+    <div id="zone3Container"></div>
+    <button type="button" class="check-btn" style="background:var(--indigo);" onclick="checkLevel(3)">Periksa Zona 3 &amp; Buka Zona 4 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 4: MISI PUNCAK KONVERSI, SORTIR & PENGUKURAN ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--rose);">4</div><h2>Zona 4: Misi Puncak — Pecahan Biasa ke Desimal, Sortir &amp; Tali Pramuka (Soal 13–16)</h2></div>
+  <div class="game-level locked" id="level4">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 4 Terkunci</b><p>Selesaikan Zona 3 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--rose);">
+      🏆 <b>Misi Puncak:</b> Ubah pecahan biasa (<b>1/2, 3/5, 1/4, 3/4</b>) menjadi desimal lewat pita laser &amp; kuadran 100 ubin (Soal 13–14), sortir kartu nilai desimal (Soal 15), dan ukur serta urutkan panjang 4 tali Pramuka SDN 1 Sukahaji (Soal 16)!
+    </div>
+    <div id="zone4Container"></div>
+    <button type="button" class="check-btn" style="background:var(--rose);" onclick="checkLevel(4)">Kunci Jawaban Akhir! 🏆</button>
+    <div id="msgFinal" style="display:none; text-align:center; color:var(--green2); font-weight:900; font-size:18px; margin-top:16px; background:#dcfce7; padding:16px; border-radius:14px; border:2px solid #22c55e;">
+      🎉 LUAR BIASA! SELURUH 16 SOAL PECAHAN DESIMAL PERSEPULUHAN &amp; PERSERATUSAN TELAH DITAKLUKKAN! 🎉
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:24px; display:flex; justify-content:center;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 28px; font-size:16px; display:none;">📤 Kirim Hasil Pekerjaan ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN GURU + TABEL OBSERVASI (SOP V4.2) ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik &amp; Tabel Observasi Penilaian Guru</h2></div>
+
+  <div class="obs-wrap">
+    <table class="rubric-table">
+      <thead>
+        <tr>
+          <th style="width:22%;">Aspek / Zona Observasi</th>
+          <th style="width:19%;">A (Sangat Baik)</th>
+          <th style="width:19%;">B (Baik)</th>
+          <th style="width:20%;">C (Cukup)</th>
+          <th style="width:20%;">D (Perlu Bimbingan)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>1. Desimal Persepuluhan (/10)</b><br><span style="font-size:12px; color:#64748b;">(Zona 1)</span></td>
+          <td>Tepat memodelkan gelas ukur &amp; pita 10 ruas serta mengonversi dua arah (/10 ↔ 0,a) 100% benar.</td>
+          <td>Model konkret tepat, hanya 1 kekeliruan kecil saat menulis koma desimal.</td>
+          <td>Masih bingung membaca angka 0 di depan koma pada persepuluhan.</td>
+          <td>Belum memahami hubungan pecahan persepuluhan dengan desimal satu angka di belakang koma.</td>
+        </tr>
+        <tr>
+          <td><b>2. Desimal Perseratusan (/100)</b><br><span style="font-size:12px; color:#64748b;">(Zona 2)</span></td>
+          <td>Efisien memakai kolom +10 &amp; petak +1 pada papan 100 serta tepat menulis 0,07 (nol di persepuluhan).</td>
+          <td>Tepat pada ≥ 3 dari 4 soal papan 100; sempat keliru pada 0,07 lalu berhasil memperbaiki.</td>
+          <td>Sering menulis 7/100 sebagai 0,7 atau salah menghitung kolom puluhan ubin.</td>
+          <td>Belum memahami nilai tempat persepuluhan dan perseratusan pada papan 100.</td>
+        </tr>
+        <tr>
+          <td><b>3. Kesetaraan &amp; Perbandingan Desimal</b><br><span style="font-size:12px; color:#64748b;">(Zona 3)</span></td>
+          <td>Membuktikan 0,3 = 0,30 &amp; membandingkan 0,4 &gt; 0,35 serta 0,08 &lt; 0,2 tanpa terkecoh panjang digit.</td>
+          <td>Berhasil membandingkan dengan benar setelah melihat luas warna di papan 100.</td>
+          <td>Masih sering mengira 0,35 &gt; 0,4 atau 0,08 &gt; 0,2 karena melihat bilangan bulatnya.</td>
+          <td>Belum mampu membandingkan dua bilangan desimal berbeda jumlah angka di belakang koma.</td>
+        </tr>
+        <tr>
+          <td><b>4. Konversi Pecahan Biasa, Sortir &amp; Urutan</b><br><span style="font-size:12px; color:#64748b;">(Zona 4)</span></td>
+          <td>Tepat mengubah 1/2, 3/5, 1/4, 3/4 ke desimal, menyortir kartu, &amp; mengurutkan panjang tali.</td>
+          <td>Menuntaskan 3 dari 4 tantangan puncak dengan mandiri dan akurat.</td>
+          <td>Masih memerlukan bantuan mengubah penyebut 4 ke perseratusan (×25) atau menyortir 0,05.</td>
+          <td>Memerlukan bimbingan langsung dalam mengaitkan pecahan biasa dengan desimal.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Pemahaman Pecahan Desimal (LKPD 2.3)</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (Menguasai persepuluhan, perseratusan, kesetaraan, &amp; konversi pecahan ke desimal)</option>
+        <option value="B">B — Baik (Memahami desimal konkret dengan sedikit kekeliruan nilai tempat)</option>
+        <option value="C">C — Cukup (Masih sering terkecoh penulisan 0,07 atau perbandingan 0,4 vs 0,35)</option>
+        <option value="D">D — Perlu Bimbingan (Belum memahami hubungan /10 dan /100 dengan bilangan desimal)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi dan evaluasi untuk siswa/kelompok ini..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:16px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan &amp; Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 2.3 MATEMATIKA (LMS V4.2)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Matematika';
+const LKPD_ID  = '2.3_Pecahan_Desimal';
+const STORAGE  = 'lkpd_mtk_2_3_v42';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+let readOnlyMode = false;
+let unlockedMax  = 1;
+
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+// Auto-format titik ke koma agar siswa di HP (keyboard angka bertitik) tetap menulis format Indonesia (0,4)
+function cleanDecInput(el) {
+  el.value = el.value.replace(/\./g, ',').replace(/[^0-9,]/g, '');
+}
+
+// =========================================================================
+// GENERATOR SVG GELAS UKUR 10 SKALA (PERSEPULUHAN)
+// =========================================================================
+function makeBeaker10SVG(filled, cTop, cBot, id) {
+  const hTotal = 180, yTop = 18, xLeft = 42, width = 94;
+  const segH = hTotal / 10;
+  let segs = '';
+  for (let i = 1; i <= 10; i++) {
+    const y = yTop + hTotal - i * segH;
+    const isLit = i <= filled;
+    const decLbl = i === 10 ? '1,0' : `0,${i}`;
+    segs += `
+      <rect x="${xLeft}" y="${y.toFixed(1)}" width="${width}" height="${segH.toFixed(1)}"
+            fill="${isLit ? cBot : '#ffffff'}" fill-opacity="${isLit ? '0.88' : '0.4'}"
+            stroke="#94a3b8" stroke-width="1" stroke-dasharray="${i === 10 ? '0' : '3,2'}"
+            style="cursor:pointer;" onclick="setZ1Val('${id}', ${i})"/>
+      <text x="${xLeft - 6}" y="${(y + segH / 2 + 4).toFixed(1)}" text-anchor="end" font-size="10.5" font-weight="800" fill="#475569">${i}/10</text>
+      <text x="${xLeft + width + 7}" y="${(y + segH / 2 + 4).toFixed(1)}" font-size="10.5" font-weight="900" fill="#0e7490">${decLbl}</text>`;
+  }
+  const liqTopY = yTop + hTotal - filled * segH;
+  const wave = filled > 0
+    ? `<ellipse cx="${xLeft + width / 2}" cy="${liqTopY.toFixed(1)}" rx="${width / 2}" ry="5" fill="${cTop}" opacity="0.95" style="pointer-events:none;"/>`
+    : '';
+
+  return `<svg width="186" height="214" viewBox="0 0 186 214" aria-label="Gelas Ukur 1 Liter">
+    <rect x="${xLeft}" y="${yTop}" width="${width}" height="${hTotal}" rx="6" fill="#f8fafc"/>
+    ${segs}
+    ${wave}
+    <path d="M ${xLeft} ${yTop} L ${xLeft} ${yTop + hTotal} Q ${xLeft} ${yTop + hTotal + 8} ${xLeft + 10} ${yTop + hTotal + 8} L ${xLeft + width - 10} ${yTop + hTotal + 8} Q ${xLeft + width} ${yTop + hTotal + 8} ${xLeft + width} ${yTop + hTotal} L ${xLeft + width} ${yTop}"
+          fill="none" stroke="#334155" stroke-width="3.2" style="pointer-events:none;"/>
+    <ellipse cx="${xLeft + width / 2}" cy="${yTop}" rx="${width / 2}" ry="5" fill="none" stroke="#475569" stroke-width="2.2" style="pointer-events:none;"/>
+  </svg>`;
+}
+
+// =========================================================================
+// DATA 16 SOAL KONTEKSTUAL (4 ZONA GAMIFIKASI)
+// =========================================================================
+
+// ZONA 1 (Soal 1–4): Persepuluhan (Gelas Ukur 10 Skala & Pita 10 Ruas)
+const Z1_DATA = [
+  {
+    id: 'z1_q1', no: 1, icon: '🥭', mode: 'beaker', cTop: '#fde047', cBot: '#f59e0b',
+    story: '<b>Gelas Ukur Jus Mangga:</b> Siti menuang jus mangga ke dalam gelas ukur 1 liter sebanyak <b>3/10 liter</b>. Tuang jus pada gelas ukur hingga ketinggian yang tepat, lalu tuliskan bentuk desimalnya!',
+    target: 3, decAns: '0,3', given: 'frac'
+  },
+  {
+    id: 'z1_q2', no: 2, icon: '📏', mode: 'strip', litCls: 'lit-cyan',
+    story: '<b>Pita Ukur Pramuka:</b> Edo memotong pita sepanjang <b>7/10 meter</b> dari gulungan 1 meter (10 ruas). Warnai 7 ruas pada pita ukur di bawah ini, lalu ubah menjadi bilangan desimal!',
+    target: 7, decAns: '0,7', given: 'frac'
+  },
+  {
+    id: 'z1_q3', no: 3, icon: '🍫', mode: 'beaker', cTop: '#d97706', cBot: '#92400e',
+    story: '<b>Gelas Ukur Susu Cokelat:</b> Ibu meminta Beni menuang <b>0,5 liter</b> susu cokelat untuk adonan kue. Tuang susu sampai angka <b>0,5</b> pada gelas ukur, lalu tuliskan bentuk pecahan persepuluhannya!',
+    target: 5, decAns: '0,5', given: 'dec'
+  },
+  {
+    id: 'z1_q4', no: 4, icon: '🎀', mode: 'strip', litCls: 'lit-rose',
+    story: '<b>Pita Hias Panggung:</b> Lani memerlukan pita merah sepanjang <b>0,9 meter</b>. Warnai pita 10 ruas sampai <b>0,9</b>, lalu tuliskan bentuk pecahan persepuluhannya!',
+    target: 9, decAns: '0,9', given: 'dec'
+  }
+];
+
+// ZONA 2 (Soal 5–8): Perseratusan (Papan Ubin 10x10)
+const Z2_DATA = [
+  {
+    id: 'z2_q5', no: 5, icon: '🟦', colorCls: 'on-violet',
+    story: '<b>Ubin Taman Kelas:</b> Halaman taman terdiri dari <b>100 ubin</b>. Murid kelas IV mengecat <b>25/100</b> bagian dengan warna ungu. Warnai 25 ubin (2 kolom penuh + 5 ubin), lalu tuliskan bentuk desimalnya!',
+    target: 25, decAns: '0,25', given: 'frac'
+  },
+  {
+    id: 'z2_q6', no: 6, icon: '🧱', colorCls: 'on-cyan',
+    story: '<b>Teras Perpustakaan:</b> Sebanyak <b>43/100</b> ubin teras perpustakaan baru saja dipasang keramik biru. Warnai 43 ubin pada papan 10×10, lalu tulis bilangan desimalnya!',
+    target: 43, decAns: '0,43', given: 'frac'
+  },
+  {
+    id: 'z2_q7', no: 7, icon: '⚠️', colorCls: 'on-amber',
+    story: '<b>Hati-hati Angka Nol!</b> Di lantai kebun ada <b>7/100</b> ubin yang sedang diperbaiki. Warnai tepat <b>7 ubin</b> saja (belum sampai 1 kolom penuh!), lalu tulis bentuk desimal perseratusannya dengan teliti!',
+    target: 7, decAns: '0,07', given: 'frac'
+  },
+  {
+    id: 'z2_q8', no: 8, icon: '🌿', colorCls: 'on-green',
+    story: '<b>Taman Hijau Sekolah:</b> Sebanyak <b>0,68</b> bagian lahan ubin ditanami rumput sintetis. Warnai papan 10×10 sesuai desimal <b>0,68</b>, lalu tuliskan bentuk pecahan perseratusannya!',
+    target: 68, decAns: '0,68', given: 'dec'
+  }
+];
+
+// ZONA 3A (Soal 9–10): Membuktikan 0,3 = 0,30 dan 0,6 = 0,60
+const Z3_EQ_DATA = [
+  {
+    id: 'z3_q9', no: 9, icon: '⚖️',
+    story: '<b>Membuktikan 0,3 = 0,30:</b> Papan kiri (persepuluhan) sudah diwarnai <b>3 dari 10 kolom (0,3)</b>. Warnai Papan 100 Ubin di sebelah kanan agar <b>luas warnanya sama persis</b> dengan papan kiri, lalu lengkapi kesetaraan pecahan dan desimalnya!',
+    tenths: 3, hundredths: 30, dec1: '0,3', dec2: '0,30'
+  },
+  {
+    id: 'z3_q10', no: 10, icon: '⚖️',
+    story: '<b>Membuktikan 0,6 = 0,60:</b> Papan kiri sudah diwarnai <b>6 dari 10 kolom (0,6)</b>. Warnai Papan 100 Ubin di kanan agar luasnya persis sama, lalu lengkapi kesetaraannya!',
+    tenths: 6, hundredths: 60, dec1: '0,6', dec2: '0,60'
+  }
+];
+
+// ZONA 3B (Soal 11–12): Membandingkan Desimal di Papan 100 Kembar (Anti-Miskonsepsi)
+const Z3_CMP_DATA = [
+  {
+    id: 'z3_q11', no: 11, icon: '🕵️‍♂️',
+    story: '<b>Jebakan Klasik (0,4 vs 0,35):</b> Manakah yang lebih besar, <b>0,4</b> atau <b>0,35</b>? Warnai papan kiri untuk <b>0,4</b> (ingat: 4 kolom = 40 ubin!) dan papan kanan untuk <b>0,35</b> (35 ubin), lalu pilih tanda perbandingan yang benar!',
+    lblL: '0,4', lblR: '0,35', targetL: 40, targetR: 35, sign: '>'
+  },
+  {
+    id: 'z3_q12', no: 12, icon: '🕵️‍♀️',
+    story: '<b>Jebakan Nol (0,08 vs 0,2):</b> Hati-hati! Warnai papan kiri untuk <b>0,08</b> (hanya 8 ubin!) dan papan kanan untuk <b>0,2</b> (2 kolom penuh = 20 ubin!), lalu bandingkan kedua desimal tersebut!',
+    lblL: '0,08', lblR: '0,2', targetL: 8, targetR: 20, sign: '<'
+  }
+];
+
+// ZONA 4 — Data Q15 (Sortir Nilai Desimal) & Q16 (Tali Pramuka)
+const Z4_Q15_CARDS = [
+  { id: 'c1', label: '5/10',   dest: 'b1' },
+  { id: 'c2', label: '50/100', dest: 'b1' },
+  { id: 'c3', label: '25/100', dest: 'b2' },
+  { id: 'c4', label: '1/4',    dest: 'b2' },
+  { id: 'c5', label: '0,05',   dest: 'b3' },
+  { id: 'c6', label: '2/10',   dest: 'b3' }
+];
+
+const Z4_Q16_ROPES = [
+  { key: 'A', name: '🔴 Tali Regu A', label: '0,6',  target: 60, color: '#e11d48' },
+  { key: 'B', name: '🔵 Tali Regu B', label: '0,45', target: 45, color: '#0284c7' },
+  { key: 'C', name: '🟢 Tali Regu C', label: '0,85', target: 85, color: '#059669' },
+  { key: 'D', name: '🟡 Tali Regu D', label: '0,15', target: 15, color: '#d97706' }
+];
+const Z4_Q16_ORDER = ['0,15', '0,45', '0,6', '0,85'];
+
+// =========================================================================
+// STATE INTERAKTIF
+// =========================================================================
+const z1State     = {}; // { id: count 0..10 }
+const g100State   = {}; // { boardId: Set(0..99) } -> idx = col*10 + row (kolom dulu agar +10 mengisi 1 kolom penuh!)
+const g100Brush   = {}; // { boardId: 'col' | 'cell' }
+const z3CmpSign   = {}; // { id: '<'|'='|'>'|'' }
+
+// Zona 4 states
+const q13Wall = { a: 0, b: 0 }; // a: 1/2 -> 5/10, b: 3/5 -> 6/10
+const q14Quad = { a: new Set(), b: new Set() }; // quadrants 0..3
+const q15Sort = {}; // { cardId: 'pool'|'b1'|'b2'|'b3' }
+let armedQ15  = null;
+const q16Rope = { A: 0, B: 0, C: 0, D: 0 };
+const q16Ord  = [null, null, null, null];
+let armedQ16  = null;
+
+// =========================================================================
+// HELPER PAPAN UBIN 10x10 (INDEXING PER KOLOM: col*10 + row)
+// =========================================================================
+function makeGrid100HTML(boardId, colorCls, compact = false, showQuadrants = false) {
+  let cells = '';
+  for (let r = 0; r < 10; r++) {
+    for (let c = 0; c < 10; c++) {
+      const idx = c * 10 + r; // column-major: 0..9 = col 0, 10..19 = col 1, dst.
+      let qCls = '';
+      if (showQuadrants) {
+        if (c === 4) qCls += ' q-border-r';
+        if (r === 4) qCls += ' q-border-b';
+      }
+      cells += `<div class="g100-cell${qCls}" id="g100_${boardId}_${idx}" onclick="clickGrid100('${boardId}', ${c}, ${r}, '${colorCls}')"></div>`;
+    }
+  }
+  return `<div class="grid100 ${compact ? 'compact' : ''}" id="wrap100_${boardId}">${cells}</div>`;
+}
+
+function setGridBrush(boardId, mode) {
+  if (readOnlyMode) return;
+  g100Brush[boardId] = mode;
+  const bCol  = document.getElementById(`bcol_${boardId}`);
+  const bCell = document.getElementById(`bcell_${boardId}`);
+  if (bCol)  bCol.classList.toggle('active', mode === 'col');
+  if (bCell) bCell.classList.toggle('active', mode === 'cell');
+}
+
+function clickGrid100(boardId, col, row, colorCls) {
+  if (readOnlyMode) return;
+  const set = g100State[boardId];
+  const mode = g100Brush[boardId] || 'col';
+  if (mode === 'col') {
+    // Toggle entire column (10 tiles)
+    let full = true;
+    for (let r = 0; r < 10; r++) {
+      if (!set.has(col * 10 + r)) { full = false; break; }
+    }
+    for (let r = 0; r < 10; r++) {
+      if (full) set.delete(col * 10 + r);
+      else set.add(col * 10 + r);
+    }
+  } else {
+    const idx = col * 10 + row;
+    if (set.has(idx)) set.delete(idx);
+    else set.add(idx);
+  }
+  refreshGrid100(boardId, colorCls, true);
+}
+
+function stepGrid100(boardId, delta, colorCls) {
+  if (readOnlyMode) return;
+  const set = g100State[boardId];
+  const next = Math.max(0, Math.min(100, set.size + delta));
+  set.clear();
+  for (let i = 0; i < next; i++) set.add(i);
+  refreshGrid100(boardId, colorCls, true);
+}
+
+function clearGrid100(boardId, colorCls) {
+  if (readOnlyMode) return;
+  g100State[boardId].clear();
+  refreshGrid100(boardId, colorCls, true);
+}
+
+function refreshGrid100(boardId, colorCls, triggerProgress = true) {
+  const set = g100State[boardId];
+  for (let i = 0; i < 100; i++) {
+    const el = document.getElementById(`g100_${boardId}_${i}`);
+    if (el) el.classList.toggle(colorCls, set.has(i));
+  }
+  const cnt = set.size;
+  const tens = Math.floor(cnt / 10), ones = cnt % 10;
+  const stat = document.getElementById(`stat100_${boardId}`);
+  if (stat) {
+    stat.innerHTML = `Terwarnai: <b>${cnt}/100</b> ubin (${tens} kolom + ${ones} petak)`;
+  }
+  const hid = document.getElementById(`hid100_${boardId}`);
+  if (hid) hid.value = cnt > 0 ? String(cnt) : '';
+  if (triggerProgress) {
+    const cardId = boardId.replace(/_(L|R)$/, '');
+    clearHint(cardId);
+    updateProgress();
+  }
+}
+
+// =========================================================================
+// BANGUN SEMUA 4 ZONA
+// =========================================================================
+function buildAllZones() {
+  renderZone1();
+  renderZone2();
+  renderZone3();
+  renderZone4();
+}
+
+// ---------- ZONA 1: GELAS UKUR 10 SKALA & PITA 10 RUAS ----------
+function renderZone1() {
+  const wrap = document.getElementById('zone1Container');
+  wrap.innerHTML = Z1_DATA.map(q => {
+    z1State[q.id] = 0;
+    let visualHtml = '';
+    if (q.mode === 'beaker') {
+      visualHtml = `
+        <div id="beak_${q.id}"></div>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn-light btn-sm" onclick="stepZ1Val('${q.id}', -1)">−0,1 Liter</button>
+          <button type="button" class="btn-main btn-sm" onclick="stepZ1Val('${q.id}', 1)">+0,1 Liter</button>
+        </div>`;
+    } else {
+      let cells = '';
+      for (let i = 1; i <= 10; i++) {
+        cells += `<div class="ten-cell" id="tcell_${q.id}_${i}" onclick="clickZ1Strip('${q.id}', ${i})">0,${i === 10 ? '10' : i}</div>`;
+      }
+      visualHtml = `
+        <div class="ten-strip">${cells}</div>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn-light btn-sm" onclick="stepZ1Val('${q.id}', -1)">−1 Ruas</button>
+          <button type="button" class="btn-main btn-sm" onclick="stepZ1Val('${q.id}', 1)">+1 Ruas</button>
+        </div>`;
+    }
+
+    const eqHtml = q.given === 'frac'
+      ? `<div class="frac-stack"><span class="frac-static">${q.target}</span><div class="frac-line"></div><span class="frac-static">10</span></div>
+         <span class="eq-sym">=</span>
+         <div class="frac-stack"><input type="text" inputmode="decimal" oninput="cleanDecInput(this)" class="m-in dec lkpd-val lvl1" data-ans="${q.decAns}" name="${q.id}_dec" placeholder="0,?"><span class="eq-sub">Desimal</span></div>`
+      : `<div class="frac-stack"><span class="frac-static" style="font-size:22px; color:var(--math-dark);">${q.decAns}</span><span class="eq-sub">Desimal</span></div>
+         <span class="eq-sym">=</span>
+         <div class="frac-stack">
+           <input type="tel" class="m-in lkpd-val lvl1" data-ans="${q.target}" name="${q.id}_n" placeholder="?">
+           <div class="frac-line"></div>
+           <input type="tel" class="m-in lkpd-val lvl1" data-ans="10" name="${q.id}_d" placeholder="?">
+         </div>`;
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="tenth-stage">
+        ${visualHtml}
+        <div class="stat-pill" id="z1stat_${q.id}">Terisi: <b>0/10</b> bagian</div>
+      </div>
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}_v" name="${q.id}_val" value="">
+
+      <div class="eq-bar">${eqHtml}</div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  Z1_DATA.forEach(q => refreshZ1(q.id, false));
+}
+
+function clickZ1Strip(id, idx) {
+  if (readOnlyMode) return;
+  const cur = z1State[id] || 0;
+  setZ1Val(id, cur === idx ? idx - 1 : idx, true);
+}
+function stepZ1Val(id, delta) {
+  if (readOnlyMode) return;
+  setZ1Val(id, Math.max(0, Math.min(10, (z1State[id] || 0) + delta)), true);
+}
+function setZ1Val(id, val, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  z1State[id] = Math.max(0, Math.min(10, val));
+  refreshZ1(id, triggerProgress);
+}
+function refreshZ1(id, triggerProgress = true) {
+  const q = Z1_DATA.find(x => x.id === id);
+  const v = z1State[id] || 0;
+  if (q.mode === 'beaker') {
+    document.getElementById('beak_' + id).innerHTML = makeBeaker10SVG(v, q.cTop, q.cBot, id);
+  } else {
+    for (let i = 1; i <= 10; i++) {
+      const c = document.getElementById(`tcell_${id}_${i}`);
+      if (c) c.classList.toggle(q.litCls, i <= v);
+    }
+  }
+  const st = document.getElementById('z1stat_' + id);
+  st.innerHTML = `Terisi: <b>${v}/10</b> bagian`;
+  st.classList.toggle('ok', v === q.target);
+  document.getElementById(`hid_${id}_v`).value = v > 0 ? String(v) : '';
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+// ---------- ZONA 2: PAPAN UBIN 10x10 (PERSERATUSAN) ----------
+function renderZone2() {
+  const wrap = document.getElementById('zone2Container');
+  wrap.innerHTML = Z2_DATA.map(q => {
+    g100State[q.id] = new Set();
+    g100Brush[q.id] = 'col';
+
+    const eqHtml = q.given === 'frac'
+      ? `<div class="frac-stack"><span class="frac-static">${q.target}</span><div class="frac-line"></div><span class="frac-static">100</span></div>
+         <span class="eq-sym">=</span>
+         <div class="frac-stack"><input type="text" inputmode="decimal" oninput="cleanDecInput(this)" class="m-in dec lkpd-val lvl2" data-ans="${q.decAns}" name="${q.id}_dec" placeholder="0,??"><span class="eq-sub">Desimal (2 angka)</span></div>`
+      : `<div class="frac-stack"><span class="frac-static" style="font-size:22px; color:var(--violet-dark);">${q.decAns}</span><span class="eq-sub">Desimal</span></div>
+         <span class="eq-sym">=</span>
+         <div class="frac-stack">
+           <input type="tel" class="m-in lkpd-val lvl2" data-ans="${q.target}" name="${q.id}_n" placeholder="?">
+           <div class="frac-line"></div>
+           <input type="tel" class="m-in lkpd-val lvl2" data-ans="100" name="${q.id}_d" placeholder="?">
+         </div>`;
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="grid100-panel">
+        <div class="brush-bar">
+          <button type="button" class="brush-btn active" id="bcol_${q.id}" onclick="setGridBrush('${q.id}', 'col')">🖌️ Kuas 1 Kolom (+10)</button>
+          <button type="button" class="brush-btn" id="bcell_${q.id}" onclick="setGridBrush('${q.id}', 'cell')">✏️ Kuas 1 Ubin (+1)</button>
+          <button type="button" class="btn-violet btn-sm" onclick="stepGrid100('${q.id}', 10, '${q.colorCls}')">+10</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepGrid100('${q.id}', -10, '${q.colorCls}')">−10</button>
+          <button type="button" class="btn-main btn-sm" onclick="stepGrid100('${q.id}', 1, '${q.colorCls}')">+1</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepGrid100('${q.id}', -1, '${q.colorCls}')">−1</button>
+          <button type="button" class="btn-light btn-sm" onclick="clearGrid100('${q.id}', '${q.colorCls}')">🧹</button>
+        </div>
+        ${makeGrid100HTML(q.id, q.colorCls, false, false)}
+        <div class="stat-pill" id="stat100_${q.id}">Terwarnai: <b>0/100</b> ubin (0 kolom + 0 petak)</div>
+      </div>
+      <input type="hidden" class="lkpd-val" id="hid100_${q.id}" name="${q.id}_grid" value="">
+
+      <div class="eq-bar violet-bar">${eqHtml}</div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+}
+
+// ---------- ZONA 3: KESETARAAN (Q9–10) & PERBANDINGAN PAPAN KEMBAR (Q11–12) ----------
+function renderZone3() {
+  const wrap = document.getElementById('zone3Container');
+
+  const eqHtml = Z3_EQ_DATA.map(q => {
+    g100State[q.id] = new Set();
+    g100Brush[q.id] = 'col';
+    let refCols = '';
+    for (let i = 0; i < 10; i++) {
+      refCols += `<div class="col10-bar ${i < q.tenths ? 'on-cyan' : ''}"></div>`;
+    }
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="twin-board-grid">
+        <div class="board-card b-ok">
+          <div class="board-title">🟦 Papan Persepuluhan (Acuan: ${q.tenths}/10 = ${q.dec1})</div>
+          <div class="col10-box">${refCols}</div>
+          <div class="stat-pill ok">Acuan: <b>${q.tenths}/10 = ${q.dec1}</b></div>
+        </div>
+
+        <div class="board-card" id="bcard_${q.id}">
+          <div class="board-title">🟪 Papan Perseratusan (Klik kolom / tombol +10)</div>
+          ${makeGrid100HTML(q.id, 'on-cyan', true, false)}
+          <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+            <button type="button" class="btn-light btn-sm" onclick="stepGrid100('${q.id}', -10, 'on-cyan')">−10</button>
+            <button type="button" class="btn-main btn-sm" onclick="stepGrid100('${q.id}', 10, 'on-cyan')">+10 (1 Kolom)</button>
+            <button type="button" class="btn-light btn-sm" onclick="clearGrid100('${q.id}', 'on-cyan')">🧹</button>
+          </div>
+          <div class="stat-pill" id="stat100_${q.id}">Terwarnai: <b>0/100</b> ubin (0 kolom + 0 petak)</div>
+        </div>
+      </div>
+      <input type="hidden" class="lkpd-val" id="hid100_${q.id}" name="${q.id}_grid" value="">
+
+      <div class="eq-bar indigo-bar">
+        <div class="frac-stack"><span class="frac-static">${q.tenths}</span><div class="frac-line"></div><span class="frac-static">10</span></div>
+        <span class="eq-sym">=</span>
+        <div class="frac-stack">
+          <input type="tel" class="m-in lkpd-val lvl3" data-ans="${q.hundredths}" name="${q.id}_n100" placeholder="?">
+          <div class="frac-line"></div>
+          <span class="frac-static">100</span>
+        </div>
+        <span style="font-size:18px; font-weight:900; color:var(--indigo-dark); margin:0 6px;">⟶</span>
+        <span class="frac-static" style="color:var(--math-dark);">${q.dec1}</span>
+        <span class="eq-sym">=</span>
+        <input type="text" inputmode="decimal" oninput="cleanDecInput(this)" class="m-in dec lkpd-val lvl3" data-ans="${q.dec2}" name="${q.id}_dec2" placeholder="0,??">
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  const cmpHtml = Z3_CMP_DATA.map(q => {
+    const idL = q.id + '_L', idR = q.id + '_R';
+    g100State[idL] = new Set(); g100Brush[idL] = 'col';
+    g100State[idR] = new Set(); g100Brush[idR] = 'col';
+    z3CmpSign[q.id] = '';
+
+    const makeBoardCard = (bId, title, colorCls) => `
+      <div class="board-card" id="bcard_${bId}">
+        <div class="board-title">🟦 Modelkan Desimal: <b>${title}</b></div>
+        ${makeGrid100HTML(bId, colorCls, true, false)}
+        <div style="display:flex; gap:5px; flex-wrap:wrap; justify-content:center;">
+          <button type="button" class="btn-indigo btn-sm" onclick="stepGrid100('${bId}', 10, '${colorCls}')">+10</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepGrid100('${bId}', -10, '${colorCls}')">−10</button>
+          <button type="button" class="btn-main btn-sm" onclick="stepGrid100('${bId}', 1, '${colorCls}')">+1</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepGrid100('${bId}', -1, '${colorCls}')">−1</button>
+          <button type="button" class="btn-light btn-sm" onclick="clearGrid100('${bId}', '${colorCls}')">🧹</button>
+        </div>
+        <div class="stat-pill" id="stat100_${bId}">Terwarnai: <b>0/100</b> ubin (0 kolom + 0 petak)</div>
+      </div>`;
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="twin-board-grid">
+        ${makeBoardCard(idL, q.lblL, 'on-cyan')}
+        ${makeBoardCard(idR, q.lblR, 'on-amber')}
+      </div>
+      <input type="hidden" class="lkpd-val" id="hid100_${idL}" name="${idL}_grid" value="">
+      <input type="hidden" class="lkpd-val" id="hid100_${idR}" name="${idR}_grid" value="">
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}_sign" name="${q.id}_sign" value="">
+
+      <div class="eq-bar indigo-bar">
+        <span class="frac-static" style="font-size:22px; color:var(--math-dark);">${q.lblL}</span>
+        <div class="sign-picker">
+          <button type="button" class="sign-btn" id="sg_${q.id}_lt" onclick="pickZ3Sign('${q.id}', '<')">&lt;</button>
+          <button type="button" class="sign-btn" id="sg_${q.id}_eq" onclick="pickZ3Sign('${q.id}', '=')">=</button>
+          <button type="button" class="sign-btn" id="sg_${q.id}_gt" onclick="pickZ3Sign('${q.id}', '>')">&gt;</button>
+        </div>
+        <span class="frac-static" style="font-size:22px; color:var(--amber);">${q.lblR}</span>
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  wrap.innerHTML = eqHtml + cmpHtml;
+}
+
+function pickZ3Sign(id, sign, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  z3CmpSign[id] = sign;
+  const map = { '<': 'lt', '=': 'eq', '>': 'gt' };
+  ['<', '=', '>'].forEach(s => {
+    const b = document.getElementById(`sg_${id}_${map[s]}`);
+    if (b) {
+      b.classList.remove('selected', 's-ok', 's-err');
+      if (s === sign) b.classList.add('selected');
+    }
+  });
+  document.getElementById(`hid_${id}_sign`).value = sign;
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+// ---------- ZONA 4: KONVERSI PECAHAN BIASA (Q13–14), SORTIR (Q15), TALI PRAMUKA (Q16) ----------
+function renderZone4() {
+  const wrap = document.getElementById('zone4Container');
+  Z4_Q15_CARDS.forEach(c => q15Sort[c.id] = 'pool');
+
+  const makeQ13Wall = (subKey, refN, refD) => {
+    const pct = (refN / refD) * 100;
+    let topC = '', botC = '';
+    for (let i = 0; i < refD; i++) topC += `<div class="wall-cell ${i < refN ? 'ref-lit' : ''}">1/${refD}</div>`;
+    for (let i = 1; i <= 10; i++) botC += `<div class="wall-cell u-cell" id="q13c_${subKey}_${i}" onclick="clickQ13('${subKey}', ${i})">${i}</div>`;
+    return `
+      <div class="laser-wall">
+        <div class="wall-inner">
+          <div class="laser-beam" style="left:${pct}%;"></div>
+          <div class="wall-strip">${topC}</div>
+          <div class="wall-strip">${botC}</div>
+        </div>
+        <div style="text-align:center; font-size:12px; font-weight:800; color:var(--slate); margin-top:4px;" id="q13st_${subKey}">Terwarnai: 0/10</div>
+      </div>`;
+  };
+
+  // Q14 Quadrant grid (4 quadrants of 25 tiles each)
+  const makeQ14Board = subKey => {
+    let cells = '';
+    for (let r = 0; r < 10; r++) {
+      for (let c = 0; c < 10; c++) {
+        const qIdx = (r < 5 ? 0 : 2) + (c < 5 ? 0 : 1);
+        const bdr = (c === 4 ? ' q-border-r' : '') + (r === 4 ? ' q-border-b' : '');
+        cells += `<div class="g100-cell${bdr}" id="q14c_${subKey}_${r}_${c}" onclick="toggleQ14Quad('${subKey}', ${qIdx})"></div>`;
+      }
+    }
+    return `<div class="grid100 compact">${cells}</div>`;
+  };
+
+  // Q16 Rope sliders/buttons
+  const ropesHtml = Z4_Q16_ROPES.map(rp => `
+    <div class="rope-row" id="rrow_${rp.key}">
+      <div class="rope-head">
+        <span>${rp.name} (Target: <b>${rp.label} m</b> = ${rp.target} cm)</span>
+        <div style="display:flex; gap:5px; flex-wrap:wrap; align-items:center;">
+          <button type="button" class="btn-light btn-sm" onclick="stepRope('${rp.key}', -10)">−0,10</button>
+          <button type="button" class="btn-main btn-sm" onclick="stepRope('${rp.key}', 10)">+0,10</button>
+          <button type="button" class="btn-light btn-sm" onclick="stepRope('${rp.key}', -5)">−0,05</button>
+          <button type="button" class="btn-amber btn-sm" onclick="stepRope('${rp.key}', 5)">+0,05</button>
+          <span class="stat-pill" style="padding:3px 10px; font-size:12px;" id="rstat_${rp.key}">0,00 m</span>
+        </div>
+      </div>
+      <div class="rope-meter"><div class="rope-fill" id="rfill_${rp.key}" style="width:0%; background:${rp.color};"></div></div>
+    </div>`).join('');
+
+  const ordSlotsHtml = [0, 1, 2, 3].map(idx => `
+    <div class="order-slot" id="q16slot_${idx}"
+         ondragover="event.preventDefault(); this.classList.add('drag-over');"
+         ondragleave="this.classList.remove('drag-over');"
+         ondrop="onQ16Drop(event, ${idx})"
+         onclick="onQ16SlotClick(${idx})">
+      <span class="slot-lbl">Urutan ${idx + 1}</span>
+      <div id="q16sbody_${idx}"><span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh di sini</span></div>
+    </div>`).join('');
+
+  wrap.innerHTML = `
+  <!-- SOAL 13: UBAH 1/2 DAN 3/5 KE DESIMAL PERSEPULUHAN -->
+  <div class="q-card" id="card_z4_q13">
+    <div class="q-header">
+      <span class="q-no">Soal 13</span>
+      <div class="q-story">🔦 <b>Pecahan Biasa ke Desimal (Persepuluhan):</b> Warnai pita bawah (bersekat 10) sampai tepat sejajar Garis Laser Merah untuk mengubah <b>1/2</b> dan <b>3/5</b> menjadi pecahan persepuluhan dan bilangan desimal!</div>
+    </div>
+
+    <div class="twin-board-grid">
+      <div class="board-card" id="q13box_a">
+        <div class="board-title">A. Ubah <b>1/2</b> ke Persepuluhan</div>
+        ${makeQ13Wall('a', 1, 2)}
+        <div class="eq-bar" style="width:100%; padding:10px;">
+          <div class="frac-stack"><span class="frac-static">1</span><div class="frac-line"></div><span class="frac-static">2</span></div>
+          <span class="eq-sym">=</span>
+          <div class="frac-stack"><input type="tel" class="m-in lkpd-val lvl4" data-ans="5" name="z4_q13_an" placeholder="?"><div class="frac-line"></div><span class="frac-static">10</span></div>
+          <span class="eq-sym">=</span>
+          <input type="text" inputmode="decimal" oninput="cleanDecInput(this)" class="m-in dec lkpd-val lvl4" data-ans="0,5" name="z4_q13_ad" placeholder="0,?">
+        </div>
+      </div>
+
+      <div class="board-card" id="q13box_b">
+        <div class="board-title">B. Ubah <b>3/5</b> ke Persepuluhan</div>
+        ${makeQ13Wall('b', 3, 5)}
+        <div class="eq-bar" style="width:100%; padding:10px;">
+          <div class="frac-stack"><span class="frac-static">3</span><div class="frac-line"></div><span class="frac-static">5</span></div>
+          <span class="eq-sym">=</span>
+          <div class="frac-stack"><input type="tel" class="m-in lkpd-val lvl4" data-ans="6" name="z4_q13_bn" placeholder="?"><div class="frac-line"></div><span class="frac-static">10</span></div>
+          <span class="eq-sym">=</span>
+          <input type="text" inputmode="decimal" oninput="cleanDecInput(this)" class="m-in dec lkpd-val lvl4" data-ans="0,6" name="z4_q13_bd" placeholder="0,?">
+        </div>
+      </div>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q13" name="z4_q13_wall" value="">
+    <div class="q-hint" id="hint_z4_q13"></div>
+  </div>
+
+  <!-- SOAL 14: UBAH 1/4 DAN 3/4 KE PERSERATUSAN (KUADRAN 100 UBIN) -->
+  <div class="q-card" id="card_z4_q14">
+    <div class="q-header">
+      <span class="q-no">Soal 14</span>
+      <div class="q-story">🟥 <b>Pecahan Perempat ke Desimal (Perseratusan):</b> Papan 100 ubin dibagi garis merah menjadi <b>4 bagian sama besar</b> (masing-masing 25 ubin)! Klik <b>1 bagian (1/4)</b> pada papan kiri dan <b>3 bagian (3/4)</b> pada papan kanan, lalu tuliskan desimal perseratusannya!</div>
+    </div>
+
+    <div class="twin-board-grid">
+      <div class="board-card" id="q14box_a">
+        <div class="board-title">A. Klik <b>1 dari 4</b> Bagian (1/4)</div>
+        ${makeQ14Board('a')}
+        <div class="stat-pill" id="q14st_a">Terwarnai: <b>0/100</b> ubin (0/4 bagian)</div>
+        <div class="eq-bar violet-bar" style="width:100%; padding:10px;">
+          <div class="frac-stack"><span class="frac-static">1</span><div class="frac-line"></div><span class="frac-static">4</span></div>
+          <span class="eq-sym">=</span>
+          <div class="frac-stack"><input type="tel" class="m-in lkpd-val lvl4" data-ans="25" name="z4_q14_an" placeholder="?"><div class="frac-line"></div><span class="frac-static">100</span></div>
+          <span class="eq-sym">=</span>
+          <input type="text" inputmode="decimal" oninput="cleanDecInput(this)" class="m-in dec lkpd-val lvl4" data-ans="0,25" name="z4_q14_ad" placeholder="0,??">
+        </div>
+      </div>
+
+      <div class="board-card" id="q14box_b">
+        <div class="board-title">B. Klik <b>3 dari 4</b> Bagian (3/4)</div>
+        ${makeQ14Board('b')}
+        <div class="stat-pill" id="q14st_b">Terwarnai: <b>0/100</b> ubin (0/4 bagian)</div>
+        <div class="eq-bar violet-bar" style="width:100%; padding:10px;">
+          <div class="frac-stack"><span class="frac-static">3</span><div class="frac-line"></div><span class="frac-static">4</span></div>
+          <span class="eq-sym">=</span>
+          <div class="frac-stack"><input type="tel" class="m-in lkpd-val lvl4" data-ans="75" name="z4_q14_bn" placeholder="?"><div class="frac-line"></div><span class="frac-static">100</span></div>
+          <span class="eq-sym">=</span>
+          <input type="text" inputmode="decimal" oninput="cleanDecInput(this)" class="m-in dec lkpd-val lvl4" data-ans="0,75" name="z4_q14_bd" placeholder="0,??">
+        </div>
+      </div>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q14" name="z4_q14_quad" value="">
+    <div class="q-hint" id="hint_z4_q14"></div>
+  </div>
+
+  <!-- SOAL 15: MESIN SORTIR NILAI DESIMAL -->
+  <div class="q-card" id="card_z4_q15">
+    <div class="q-header">
+      <span class="q-no">Soal 15</span>
+      <div class="q-story">🧲 <b>Mesin Sortir Nilai Desimal:</b> Seret setiap kartu pecahan/desimal (atau klik kartu lalu klik keranjang) ke keranjang <b>Senilai 0,5</b>, <b>Senilai 0,25</b>, atau <b>Nilai Lainnya</b>! Hati-hati dengan kartu <b>0,05</b>!</div>
+    </div>
+
+    <div class="sort-pool" id="q15Pool"
+         ondragover="event.preventDefault();"
+         ondrop="onQ15Drop(event, 'pool')"
+         onclick="onQ15BucketClick('pool')"></div>
+
+    <div class="buckets-3">
+      <div class="bucket b1" ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="onQ15Drop(event, 'b1')" onclick="onQ15BucketClick('b1')">
+        <div class="bucket-title">🟦 Senilai 0,5</div>
+        <div class="bucket-items" id="q15b_b1"></div>
+      </div>
+      <div class="bucket b2" ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="onQ15Drop(event, 'b2')" onclick="onQ15BucketClick('b2')">
+        <div class="bucket-title">🟪 Senilai 0,25</div>
+        <div class="bucket-items" id="q15b_b2"></div>
+      </div>
+      <div class="bucket b3" ondragover="event.preventDefault(); this.classList.add('drag-over');" ondragleave="this.classList.remove('drag-over');" ondrop="onQ15Drop(event, 'b3')" onclick="onQ15BucketClick('b3')">
+        <div class="bucket-title">⬜ Nilai Lainnya</div>
+        <div class="bucket-items" id="q15b_b3"></div>
+      </div>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q15" name="z4_q15_sort" value="">
+    <div class="q-hint" id="hint_z4_q15"></div>
+  </div>
+
+  <!-- SOAL 16: MENGUKUR & MENGURUTKAN TALI PRAMUKA -->
+  <div class="q-card" id="card_z4_q16">
+    <div class="q-header">
+      <span class="q-no">Soal 16</span>
+      <div class="q-story">⛺ <b>Tali Pramuka SDN 1 Sukahaji:</b> Atur panjang pita ukur untuk 4 tali regu Pramuka di bawah ini sesuai targetnya (gunakan tombol <b>+0,10</b> dan <b>+0,05</b>), lalu urutkan kartu desimalnya dari <b>TERPENDEK (1) → TERPANJANG (4)</b>!</div>
+    </div>
+
+    ${ropesHtml}
+    <input type="hidden" class="lkpd-val" id="hid_z4_q16_ropes" name="z4_q16_ropes" value="">
+
+    <div style="background:#fff1f2; border:2px dashed var(--rose); border-radius:16px; padding:14px; margin-top:12px;">
+      <div style="font-size:13px; font-weight:900; color:var(--rose-dark); text-align:center; margin-bottom:10px;">
+        📈 Urutkan dari Tali TERPENDEK (1) → TERPANJANG (4):
+      </div>
+      <div class="sort-pool" id="q16Pool" style="background:#fff;"
+           ondragover="event.preventDefault();"
+           ondrop="onQ16PoolDrop(event)"
+           onclick="onQ16PoolClick()"></div>
+      <div class="order-slots">${ordSlotsHtml}</div>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q16_ord" name="z4_q16_ord" value="">
+    <div class="q-hint" id="hint_z4_q16"></div>
+  </div>`;
+
+  refreshQ15UI(false);
+  refreshQ16OrdUI(false);
+}
+
+// --- Handler Soal 13 ---
+function clickQ13(subKey, idx, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  q13Wall[subKey] = (q13Wall[subKey] === idx) ? idx - 1 : idx;
+  refreshQ13(subKey, triggerProgress);
+}
+function refreshQ13(subKey, triggerProgress = true) {
+  const v = q13Wall[subKey] || 0;
+  for (let i = 1; i <= 10; i++) {
+    const c = document.getElementById(`q13c_${subKey}_${i}`);
+    if (c) c.classList.toggle('u-lit', i <= v);
+  }
+  document.getElementById(`q13st_${subKey}`).textContent = `Terwarnai: ${v}/10`;
+  document.getElementById('hid_z4_q13').value = (q13Wall.a || q13Wall.b) ? JSON.stringify(q13Wall) : '';
+  if (triggerProgress) { clearHint('z4_q13'); updateProgress(); }
+}
+
+// --- Handler Soal 14 ---
+function toggleQ14Quad(subKey, qIdx, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const set = q14Quad[subKey];
+  if (set.has(qIdx)) set.delete(qIdx);
+  else set.add(qIdx);
+  refreshQ14(subKey, triggerProgress);
+}
+function refreshQ14(subKey, triggerProgress = true) {
+  const set = q14Quad[subKey];
+  const cls = subKey === 'a' ? 'on-violet' : 'on-green';
+  for (let r = 0; r < 10; r++) {
+    for (let c = 0; c < 10; c++) {
+      const qIdx = (r < 5 ? 0 : 2) + (c < 5 ? 0 : 1);
+      const el = document.getElementById(`q14c_${subKey}_${r}_${c}`);
+      if (el) el.classList.toggle(cls, set.has(qIdx));
+    }
+  }
+  const cnt = set.size * 25;
+  document.getElementById(`q14st_${subKey}`).innerHTML = `Terwarnai: <b>${cnt}/100</b> ubin (${set.size}/4 bagian)`;
+  document.getElementById('hid_z4_q14').value = (q14Quad.a.size || q14Quad.b.size)
+    ? JSON.stringify({ a: [...q14Quad.a], b: [...q14Quad.b] }) : '';
+  if (triggerProgress) { clearHint('z4_q14'); updateProgress(); }
+}
+
+// --- Handler Soal 15 (Sortir) ---
+function onQ15DragStart(e, cid) {
+  if (readOnlyMode) { e.preventDefault(); return; }
+  e.dataTransfer.setData('text/plain', cid);
+}
+function onQ15Drop(e, dest) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if (readOnlyMode) return;
+  const cid = e.dataTransfer.getData('text/plain');
+  if (q15Sort[cid] !== undefined) {
+    q15Sort[cid] = dest;
+    armedQ15 = null;
+    refreshQ15UI(true);
+  }
+}
+function onQ15ChipClick(e, cid) {
+  e.stopPropagation();
+  if (readOnlyMode) return;
+  armedQ15 = (armedQ15 === cid) ? null : cid;
+  refreshQ15UI(false);
+}
+function onQ15BucketClick(dest) {
+  if (readOnlyMode || !armedQ15) return;
+  q15Sort[armedQ15] = dest;
+  armedQ15 = null;
+  refreshQ15UI(true);
+}
+function refreshQ15UI(triggerProgress = true) {
+  const b = { pool: [], b1: [], b2: [], b3: [] };
+  Z4_Q15_CARDS.forEach(c => b[q15Sort[c.id] || 'pool'].push(c));
+  const mk = arr => arr.map(c =>
+    `<div class="dec-chip ${armedQ15 === c.id ? 'armed' : ''}" id="q15ch_${c.id}"
+      draggable="true" ondragstart="onQ15DragStart(event, '${c.id}')" onclick="onQ15ChipClick(event, '${c.id}')">${c.label}</div>`
+  ).join('');
+
+  document.getElementById('q15Pool').innerHTML = b.pool.length
+    ? mk(b.pool) : `<span style="font-size:12.5px; color:#15803d; font-weight:800;">✅ Semua kartu sudah disortir!</span>`;
+  ['b1', 'b2', 'b3'].forEach(k => {
+    document.getElementById('q15b_' + k).innerHTML = b[k].length ? mk(b[k]) : `<span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh di sini</span>`;
+  });
+  const placed = Z4_Q15_CARDS.length - b.pool.length;
+  document.getElementById('hid_z4_q15').value = placed > 0 ? JSON.stringify(q15Sort) : '';
+  if (triggerProgress) { clearHint('z4_q15'); updateProgress(); }
+}
+
+// --- Handler Soal 16 (Ropes + Order) ---
+function stepRope(key, delta) {
+  if (readOnlyMode) return;
+  q16Rope[key] = Math.max(0, Math.min(100, (q16Rope[key] || 0) + delta));
+  refreshRopeUI(key, true);
+}
+function refreshRopeUI(key, triggerProgress = true) {
+  const v = q16Rope[key] || 0;
+  document.getElementById('rfill_' + key).style.width = v + '%';
+  const lbl = v === 100 ? '1,00 m' : `0,${String(v).padStart(2, '0')} m`;
+  document.getElementById('rstat_' + key).textContent = lbl;
+  const any = Object.values(q16Rope).some(x => x > 0);
+  document.getElementById('hid_z4_q16_ropes').value = any ? JSON.stringify(q16Rope) : '';
+  if (triggerProgress) { clearHint('z4_q16'); updateProgress(); }
+}
+
+function onQ16DragStart(e, lbl) {
+  if (readOnlyMode) { e.preventDefault(); return; }
+  e.dataTransfer.setData('text/plain', lbl);
+}
+function placeQ16Chip(lbl, slotIdx) {
+  const old = q16Ord.indexOf(lbl);
+  if (old !== -1) q16Ord[old] = null;
+  if (slotIdx !== null && slotIdx >= 0 && slotIdx < 4) {
+    if (q16Ord[slotIdx] && old !== -1) q16Ord[old] = q16Ord[slotIdx];
+    q16Ord[slotIdx] = lbl;
+  }
+  armedQ16 = null;
+  refreshQ16OrdUI(true);
+}
+function onQ16Drop(e, slotIdx) {
+  e.preventDefault(); e.currentTarget.classList.remove('drag-over');
+  if (readOnlyMode) return;
+  const lbl = e.dataTransfer.getData('text/plain');
+  if (Z4_Q16_ORDER.includes(lbl)) placeQ16Chip(lbl, slotIdx);
+}
+function onQ16PoolDrop(e) {
+  e.preventDefault();
+  if (readOnlyMode) return;
+  const lbl = e.dataTransfer.getData('text/plain');
+  if (Z4_Q16_ORDER.includes(lbl)) placeQ16Chip(lbl, null);
+}
+function onQ16ChipClick(e, lbl) {
+  e.stopPropagation();
+  if (readOnlyMode) return;
+  armedQ16 = (armedQ16 === lbl) ? null : lbl;
+  refreshQ16OrdUI(false);
+}
+function onQ16SlotClick(slotIdx) {
+  if (readOnlyMode || !armedQ16) return;
+  placeQ16Chip(armedQ16, slotIdx);
+}
+function onQ16PoolClick() {
+  if (readOnlyMode || !armedQ16) return;
+  placeQ16Chip(armedQ16, null);
+}
+function refreshQ16OrdUI(triggerProgress = true) {
+  const allLbls = Z4_Q16_ROPES.map(r => r.label);
+  const mk = lbl => `<div class="dec-chip ${armedQ16 === lbl ? 'armed' : ''}" id="q16ch_${lbl.replace(',','_')}"
+    draggable="true" ondragstart="onQ16DragStart(event, '${lbl}')" onclick="onQ16ChipClick(event, '${lbl}')">${lbl} m</div>`;
+
+  const unplaced = allLbls.filter(l => !q16Ord.includes(l));
+  document.getElementById('q16Pool').innerHTML = unplaced.length
+    ? unplaced.map(mk).join('') : `<span style="font-size:12.5px; color:#15803d; font-weight:800;">✅ Semua tali sudah diurutkan!</span>`;
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('q16sbody_' + i).innerHTML = q16Ord[i]
+      ? mk(q16Ord[i]) : `<span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh di sini</span>`;
+  }
+  document.getElementById('hid_z4_q16_ord').value = q16Ord.some(x => x !== null) ? JSON.stringify(q16Ord) : '';
+  if (triggerProgress) { clearHint('z4_q16'); updateProgress(); }
+}
+
+function flashHint(id, msg) {
+  const el = document.getElementById('hint_' + id);
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+}
+function clearHint(id) {
+  const el = document.getElementById('hint_' + id);
+  if (el) { el.textContent = ''; el.classList.remove('show'); }
+}
+
+// =========================================================================
+// VALIDASI GAMIFIKASI PER ZONA
+// =========================================================================
+function checkLevel(lvl) {
+  let allCorrect = true;
+
+  // 1. Validasi input teks/angka standar pada level ini
+  const inputs = document.querySelectorAll('.lvl' + lvl + ':not([readonly])');
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    const val = inp.value.trim().replace(/\./g, ',');
+    if (val === String(inp.dataset.ans).trim()) {
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      allCorrect = false;
+      setTimeout(() => inp.classList.remove('wrong'), 500);
+    }
+  });
+
+  // 2. Validasi visual & interaksi per zona
+  if (lvl === 1) {
+    Z1_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const visOk = (z1State[q.id] === q.target);
+      const eqOk = [...card.querySelectorAll('.lvl1')].every(el => el.classList.contains('correct'));
+      if (!visOk) {
+        allCorrect = false; card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Tinggi gelas / jumlah ruas pita belum tepat ${q.target}/10 (${q.decAns})!`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Gambar sudah tepat! Periksa kembali penulisan pecahan atau bilangan desimal (gunakan tanda koma, misal ${q.decAns}).`);
+      } else card.classList.add('card-correct');
+    });
+  } else if (lvl === 2) {
+    Z2_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const cnt = g100State[q.id].size;
+      const visOk = (cnt === q.target);
+      const eqOk = [...card.querySelectorAll('.lvl2')].every(el => el.classList.contains('correct'));
+      if (!visOk) {
+        allCorrect = false; card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Jumlah ubin terwarnai saat ini ${cnt}/100, seharusnya tepat ${q.target}/100!`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, q.id === 'z2_q7'
+          ? `⚠️ Hati-hati! 7/100 adalah perseratusan (2 angka di belakang koma, kolom persepuluhannya 0) → 0,07!`
+          : `⚠️ Papan ubin sudah tepat ${q.target}/100! Periksa kembali penulisan pecahan atau desimalnya.`);
+      } else card.classList.add('card-correct');
+    });
+  } else if (lvl === 3) {
+    Z3_EQ_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      const bcard = document.getElementById('bcard_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      bcard.classList.remove('b-ok', 'b-err');
+      const visOk = (g100State[q.id].size === q.hundredths);
+      bcard.classList.add(visOk ? 'b-ok' : 'b-err');
+      const eqOk = [...card.querySelectorAll('.lvl3')].every(el => el.classList.contains('correct'));
+      if (!visOk) {
+        allCorrect = false; card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Warnai ${q.tenths} kolom penuh (${q.hundredths} ubin) di papan kanan agar luasnya sama persis dengan papan kiri!`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Luas kedua papan sudah sama! Lengkapi angka pembilang perseratusan dan desimal 2 angkanya (${q.dec2}).`);
+      } else card.classList.add('card-correct');
+    });
+
+    Z3_CMP_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const bL = document.getElementById(`bcard_${q.id}_L`), bR = document.getElementById(`bcard_${q.id}_R`);
+      [bL, bR].forEach(b => b.classList.remove('b-ok', 'b-err'));
+      const lOk = (g100State[q.id + '_L'].size === q.targetL);
+      const rOk = (g100State[q.id + '_R'].size === q.targetR);
+      bL.classList.add(lOk ? 'b-ok' : 'b-err');
+      bR.classList.add(rOk ? 'b-ok' : 'b-err');
+
+      const map = { '<': 'lt', '=': 'eq', '>': 'gt' };
+      ['<', '=', '>'].forEach(s => {
+        const b = document.getElementById(`sg_${q.id}_${map[s]}`);
+        if (b) b.classList.remove('s-ok', 's-err');
+      });
+      const signOk = (z3CmpSign[q.id] === q.sign);
+      if (z3CmpSign[q.id]) {
+        const chosen = document.getElementById(`sg_${q.id}_${map[z3CmpSign[q.id]]}`);
+        if (chosen) chosen.classList.add(signOk ? 's-ok' : 's-err');
+      }
+
+      if (!lOk || !rOk) {
+        allCorrect = false; card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Model papan ubin belum tepat! Ingat: ${q.lblL} = ${q.targetL} ubin, dan ${q.lblR} = ${q.targetR} ubin.`);
+      } else if (!signOk) {
+        allCorrect = false; card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Bandingkan luas warna di kedua papan 100 ubin! Papan dengan ubin lebih banyak nilainya lebih besar.`);
+      } else card.classList.add('card-correct');
+    });
+  } else if (lvl === 4) {
+    // Soal 13
+    clearHint('z4_q13');
+    const c13 = document.getElementById('card_z4_q13');
+    c13.classList.remove('card-correct', 'card-wrong');
+    const b13a = document.getElementById('q13box_a'), b13b = document.getElementById('q13box_b');
+    [b13a, b13b].forEach(b => b.classList.remove('b-ok', 'b-err'));
+    const q13AOk = (q13Wall.a === 5), q13BOk = (q13Wall.b === 6);
+    b13a.classList.add(q13AOk ? 'b-ok' : 'b-err');
+    b13b.classList.add(q13BOk ? 'b-ok' : 'b-err');
+    const q13EqOk = [...c13.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+    if (!q13AOk || !q13BOk) { allCorrect = false; c13.classList.add('card-wrong'); flashHint('z4_q13', '⚠️ Warnai kedua pita 10 ruas sampai tepat berhenti di Garis Laser Merah!'); }
+    else if (!q13EqOk) { c13.classList.add('card-wrong'); flashHint('z4_q13', '⚠️ Pita sudah sejajar! Periksa kembali pembilang /10 dan bentuk desimalnya.'); }
+    else c13.classList.add('card-correct');
+
+    // Soal 14
+    clearHint('z4_q14');
+    const c14 = document.getElementById('card_z4_q14');
+    c14.classList.remove('card-correct', 'card-wrong');
+    const b14a = document.getElementById('q14box_a'), b14b = document.getElementById('q14box_b');
+    [b14a, b14b].forEach(b => b.classList.remove('b-ok', 'b-err'));
+    const q14AOk = (q14Quad.a.size === 1), q14BOk = (q14Quad.b.size === 3);
+    b14a.classList.add(q14AOk ? 'b-ok' : 'b-err');
+    b14b.classList.add(q14BOk ? 'b-ok' : 'b-err');
+    const q14EqOk = [...c14.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+    if (!q14AOk || !q14BOk) { allCorrect = false; c14.classList.add('card-wrong'); flashHint('z4_q14', '⚠️ Klik tepat 1 kuadran (25 ubin) di papan kiri dan 3 kuadran (75 ubin) di papan kanan!'); }
+    else if (!q14EqOk) { c14.classList.add('card-wrong'); flashHint('z4_q14', '⚠️ Kuadran sudah tepat! Lengkapi pecahan perseratusan dan desimalnya (0,25 dan 0,75).'); }
+    else c14.classList.add('card-correct');
+
+    // Soal 15
+    clearHint('z4_q15');
+    const c15 = document.getElementById('card_z4_q15');
+    c15.classList.remove('card-correct', 'card-wrong');
+    let q15Ok = true, unplaced15 = 0;
+    Z4_Q15_CARDS.forEach(c => {
+      const ch = document.getElementById('q15ch_' + c.id);
+      if (ch) ch.classList.remove('chip-ok', 'chip-err');
+      if (q15Sort[c.id] === 'pool') { unplaced15++; q15Ok = false; return; }
+      if (q15Sort[c.id] === c.dest) { if (ch) ch.classList.add('chip-ok'); }
+      else { if (ch) ch.classList.add('chip-err'); q15Ok = false; }
+    });
+    if (!q15Ok) {
+      allCorrect = false; c15.classList.add('card-wrong');
+      flashHint('z4_q15', unplaced15 > 0
+        ? `⚠️ Masih ada ${unplaced15} kartu yang belum dimasukkan ke keranjang!`
+        : `⚠️ Ada kartu bertanda merah yang salah keranjang! Ingat: 0,05 = 5/100 (BUKAN 0,5), sedangkan 5/10 = 50/100 = 0,5.`);
+    } else c15.classList.add('card-correct');
+
+    // Soal 16
+    clearHint('z4_q16');
+    const c16 = document.getElementById('card_z4_q16');
+    c16.classList.remove('card-correct', 'card-wrong');
+    let ropesOk = true;
+    Z4_Q16_ROPES.forEach(rp => {
+      const row = document.getElementById('rrow_' + rp.key);
+      row.classList.remove('r-ok', 'r-err');
+      if (q16Rope[rp.key] === rp.target) row.classList.add('r-ok');
+      else { row.classList.add('r-err'); ropesOk = false; }
+    });
+    let ordOk = true, empty16 = 0;
+    for (let i = 0; i < 4; i++) {
+      const l = q16Ord[i];
+      if (!l) { empty16++; ordOk = false; continue; }
+      const ch = document.getElementById('q16ch_' + l.replace(',', '_'));
+      if (ch) ch.classList.remove('chip-ok', 'chip-err');
+      if (l === Z4_Q16_ORDER[i]) { if (ch) ch.classList.add('chip-ok'); }
+      else { if (ch) ch.classList.add('chip-err'); ordOk = false; }
+    }
+    if (!ropesOk) {
+      allCorrect = false; c16.classList.add('card-wrong');
+      flashHint('z4_q16', '⚠️ Atur dulu panjang seluruh 4 tali Pramuka (yang bertanda merah) sesuai target meter masing-masing!');
+    } else if (!ordOk) {
+      allCorrect = false; c16.classList.add('card-wrong');
+      flashHint('z4_q16', empty16 > 0
+        ? `⚠️ Masukkan seluruh 4 kartu desimal ke kotak Urutan 1–4!`
+        : `⚠️ Urutan tali belum tepat! Bandingkan panjang batang warna di atas (ingat 0,6 = 0,60 lebih panjang dari 0,45!).`);
+    } else c16.classList.add('card-correct');
+  }
+
+  if (allCorrect) {
+    document.getElementById('level' + lvl).classList.add('completed');
+    if (lvl === 4) {
+      document.getElementById('msgFinal').style.display = 'block';
+      document.getElementById('sendBtn2').style.display = 'block';
+      document.getElementById('msgFinal').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      unlockedMax = Math.max(unlockedMax, lvl + 1);
+      const next = document.getElementById('level' + (lvl + 1));
+      if (next) {
+        next.classList.remove('locked');
+        next.classList.add('unlocked');
+        next.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  } else {
+    const firstWrong = document.querySelector(`#level${lvl} .card-wrong, #level${lvl} .wrong`);
+    if (firstWrong) firstWrong.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// =========================================================================
+// PEMULIHAN STATE VISUAL (DRAF & ARSIP PENILAIAN GURU/SISWA)
+// =========================================================================
+function restoreGridCount(boardId, cnt, colorCls) {
+  g100State[boardId] = new Set();
+  for (let i = 0; i < cnt; i++) g100State[boardId].add(i);
+  refreshGrid100(boardId, colorCls, false);
+}
+
+function restoreInteractiveStates(answers) {
+  if (!answers) return;
+
+  // 1. Zona 1
+  Z1_DATA.forEach(q => {
+    const v = Number(answers[q.id + '_val']);
+    if (!isNaN(v) && v > 0) setZ1Val(q.id, v, false);
+  });
+
+  // 2. Zona 2
+  Z2_DATA.forEach(q => {
+    const cnt = Number(answers[q.id + '_grid']);
+    if (!isNaN(cnt) && cnt > 0) restoreGridCount(q.id, cnt, q.colorCls);
+  });
+
+  // 3. Zona 3A & 3B
+  Z3_EQ_DATA.forEach(q => {
+    const cnt = Number(answers[q.id + '_grid']);
+    if (!isNaN(cnt) && cnt > 0) restoreGridCount(q.id, cnt, 'on-cyan');
+  });
+  Z3_CMP_DATA.forEach(q => {
+    const cL = Number(answers[q.id + '_L_grid']);
+    const cR = Number(answers[q.id + '_R_grid']);
+    if (!isNaN(cL) && cL > 0) restoreGridCount(q.id + '_L', cL, 'on-cyan');
+    if (!isNaN(cR) && cR > 0) restoreGridCount(q.id + '_R', cR, 'on-amber');
+    if (answers[q.id + '_sign']) pickZ3Sign(q.id, answers[q.id + '_sign'], false);
+  });
+
+  // 4. Zona 4
+  if (answers.z4_q13_wall) {
+    try {
+      const obj = JSON.parse(answers.z4_q13_wall);
+      if (obj) {
+        q13Wall.a = Number(obj.a) || 0; refreshQ13('a', false);
+        q13Wall.b = Number(obj.b) || 0; refreshQ13('b', false);
+      }
+    } catch (e) {}
+  }
+  if (answers.z4_q14_quad) {
+    try {
+      const obj = JSON.parse(answers.z4_q14_quad);
+      if (obj) {
+        q14Quad.a = new Set((obj.a || []).map(Number)); refreshQ14('a', false);
+        q14Quad.b = new Set((obj.b || []).map(Number)); refreshQ14('b', false);
+      }
+    } catch (e) {}
+  }
+  if (answers.z4_q15_sort) {
+    try {
+      const obj = JSON.parse(answers.z4_q15_sort);
+      if (obj) {
+        Z4_Q15_CARDS.forEach(c => { if (obj[c.id]) q15Sort[c.id] = obj[c.id]; });
+        refreshQ15UI(false);
+      }
+    } catch (e) {}
+  }
+  if (answers.z4_q16_ropes) {
+    try {
+      const obj = JSON.parse(answers.z4_q16_ropes);
+      if (obj) {
+        Z4_Q16_ROPES.forEach(rp => {
+          q16Rope[rp.key] = Number(obj[rp.key]) || 0;
+          refreshRopeUI(rp.key, false);
+        });
+      }
+    } catch (e) {}
+  }
+  if (answers.z4_q16_ord) {
+    try {
+      const arr = JSON.parse(answers.z4_q16_ord);
+      if (Array.isArray(arr) && arr.length === 4) {
+        for (let i = 0; i < 4; i++) q16Ord[i] = arr[i];
+        refreshQ16OrdUI(false);
+      }
+    } catch (e) {}
+  }
+}
+
+function normalizeDateForInput(raw) {
+  if (!raw) return '';
+  const s = String(raw).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const d = new Date(s);
+  if (!isNaN(d.getTime())) {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  return '';
+}
+
+// =========================================================================
+// MESIN LMS V4.2 (KONTRAK PAYLOAD GAS + TANGGAL KALENDER)
+// =========================================================================
+document.addEventListener("DOMContentLoaded", () => {
+  buildAllZones();
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+    updateProgress();
+  }
+});
+
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN anggota kelompok lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+            updateProgress();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Gagal memuat database."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => String(s.nisn) === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+
+function collect() {
+  let d = {};
+  getValFields().forEach(el => { if (el.name) d[el.name] = el.value; });
+  const tglVal = document.querySelector('[name="tanggal"]').value;
+  if (tglVal) d.tanggal = tglVal;
+  return d;
+}
+
+function setupInputs() {
+  getValFields().forEach(el => {
+    el.addEventListener("input", updateProgress);
+    el.addEventListener("change", updateProgress);
+  });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+  document.querySelector('[name="tanggal"]').addEventListener("change", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields();
+  let filled = 0;
+  vals.forEach(x => {
+    const v = String(x.value || "").trim();
+    if (v && v !== "[]" && v !== "{}") filled++;
+  });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  const pct = Math.min(100, Math.round((filled + (groupMembers.length > 0 ? 1 : 0)) / (vals.length + 2) * 100));
+  document.getElementById("progressBar").style.width = pct + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({
+    members: groupMembers,
+    tanggal: document.querySelector('[name="tanggal"]').value,
+    unlockedMax: unlockedMax,
+    answers: collect()
+  }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><p>Semua hasil gelas ukur, papan 100 ubin, sortir, dan urutan talimu sudah tersimpan di perangkat ini.</p><button class='btn-main' onclick='closeModal()'>Lanjut</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE));
+    if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = normalizeDateForInput(d.tanggal);
+    if (d.unlockedMax && d.unlockedMax > 1) {
+      unlockedMax = d.unlockedMax;
+      for (let i = 2; i <= unlockedMax; i++) {
+        const el = document.getElementById('level' + i);
+        if (el) { el.classList.remove('locked'); el.classList.add('unlocked'); }
+      }
+    }
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+      restoreInteractiveStates(d.answers);
+    }
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) {
+    return showModal("<h3>⚠️ Belum Lengkap</h3><p>Isi Hari/Tanggal pada kalender dan pastikan Anggota Kelompok terisi!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Jawaban...</h3>");
+  let payload = {
+    action: 'submitLKPD',
+    lkpdId: LKPD_ID,
+    subject: SUBJECT,
+    hariTanggal: tgl,
+    materiPokok: document.querySelector('[name="materi"]').value,
+    members: groupMembers,
+    answers: JSON.stringify(collect())
+  };
+
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      readOnlyMode = true;
+      document.querySelectorAll("input,select,textarea,button").forEach(el => el.disabled = true);
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Jawaban dan seluruh simulasi pecahan desimal kelompokmu telah masuk ke Dasbor Guru.</p>`);
+      document.getElementById("appbar").style.display = "none";
+    } else {
+      showModal("<h3>⚠️ Gagal Mengirim</h3><p>Silakan coba kirim kembali.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Koneksi Terputus</h3><p>Periksa jaringan internet lalu coba lagi.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+};
+
+async function loadLMSViewMode() {
+  readOnlyMode = true;
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  showModal("<div class='spinner'></div><h3>Memuat Data Arsip...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + encodeURIComponent(LKPD_ID) + "&submissionId=" + encodeURIComponent(submissionId));
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if (result.members) { groupMembers = result.members; renderMembers(); }
+      else { document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database)</i></div>`; }
+
+      const tglEl = document.querySelector('[name="tanggal"]');
+      if (tglEl) {
+        const tglRestored = normalizeDateForInput(answers.tanggal || result.hariTanggal || '');
+        if (tglRestored) tglEl.value = tglRestored;
+      }
+
+      Object.keys(answers).forEach(k => {
+        if (k === 'tanggal') return;
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+
+      restoreInteractiveStates(answers);
+
+      document.querySelectorAll('.game-level').forEach(el => {
+        el.classList.remove('locked');
+        el.classList.add('unlocked');
+        let ovr = el.querySelector('.lock-overlay');
+        if (ovr) ovr.remove();
+      });
+
+      document.querySelectorAll("input,select,textarea,button").forEach(el => {
+        if (!el.closest('#gradePanel')) {
+          el.disabled = true;
+          el.readOnly = true;
+        }
+      });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel");
+      panel.classList.add("show");
+      let scale = document.getElementById("gradeScale");
+      let note  = document.getElementById("gradeNote");
+      let btn   = document.getElementById("lockGradeBtn");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade;
+          note.value = result.feedback;
+          scale.disabled = true;
+          note.disabled = true;
+          btn.style.display = "none";
+          renderStars(scale.value);
+        } else {
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none";
+        scale.disabled = true;
+        note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade;
+          note.value = result.feedback;
+          renderStars(scale.value);
+        }
+      }
+    } else {
+      showModal("<h3>⚠️ Data Tidak Ditemukan</h3>");
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) {
+  const n = { A:4, B:3, C:2, D:1 }[v] || 0;
+  const st = document.getElementById("starRating");
+  st.textContent = '★'.repeat(n) + '☆'.repeat(4 - n);
+  st.style.color = n ? '#f59e0b' : '#cbd5e1';
+}
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian terlebih dahulu!");
+  let btn = document.getElementById("lockGradeBtn");
+  btn.disabled = true;
+  btn.innerText = "⏳ Menyimpan...";
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        action: 'saveGrade',
+        lkpdId: LKPD_ID,
+        submissionId: submissionId,
+        grade: grade,
+        feedback: feedback
+      })
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Tersimpan & Terdistribusi";
+      document.getElementById("gradeScale").disabled = true;
+      document.getElementById("gradeNote").disabled = true;
+    } else {
+      alert("Gagal menyimpan nilai.");
+      btn.disabled = false;
+      btn.innerText = "🔒 Simpan & Distribusikan Nilai";
+    }
+  } catch (e) {
+    alert("Koneksi gagal.");
+    btn.disabled = false;
+    btn.innerText = "🔒 Simpan & Distribusikan Nilai";
+  }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
