@@ -1,1 +1,2145 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.2 (GAMIFIKASI MATEMATIKA - PECAHAN PEMBILANG SATU & PENYEBUT SAMA) -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 2.1 Matematika - Pecahan Pembilang Satu & Penyebut Sama</title>
+<style>
+:root {
+  --green: #059669; --green2: #047857; --green-soft: #dcfce7;
+  --ink: #1e293b; --slate: #334155; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --red: #ef4444; --red-soft: #fee2e2;
+  --math-main: #ea580c; --math-light: #ffedd5; --math-dark: #9a3412; --math-accent: #f59e0b;
+  --berry: #9333ea; --berry-soft: #f3e8ff; --berry-dark: #581c87;
+  --blue: #0284c7; --blue-soft: #e0f2fe; --blue-dark: #0c4a6e;
+  --rose: #e11d48; --rose-soft: #ffe4e6;
+  --choco: #78350f; --choco-mid: #92400e; --choco-light: #fef3c7;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: linear-gradient(135deg, #fff7ed, #fef3c7 50%, #f3e8ff);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--ink); overflow-x: hidden;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(6px); opacity: .45; pointer-events: none;
+}
+body::before { width: 260px; height: 260px; background: #fed7aa; left: -75px; top: 120px; }
+body::after { width: 220px; height: 220px; background: #e9d5ff; right: -55px; bottom: 90px; }
 
+/* ================= APPBAR ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--math-main); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--math-dark); background: var(--math-light); padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow, .2s background; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--math-main); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+.btn-berry { background: var(--berry); color: #fff; }
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-rose { background: var(--rose); color: #fff; }
+.btn-sm { padding: 6px 12px; font-size: 12.5px; border-radius: 9px; }
+
+.progress { height: 6px; background: var(--math-light); position: sticky; top: 61px; z-index: 29; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--math-main), var(--berry)); transition: .3s; }
+
+/* ================= HERO & IDENTITAS ================= */
+.sheet {
+  width: min(1040px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px;
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #fff7ed, #faf5ff); border-radius: 22px; padding: 26px; border: 1px solid #fed7aa; }
+.badge { display: inline-block; background: var(--math-main); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(25px, 4vw, 33px); line-height: 1.15; margin: 0 0 12px; color: var(--math-dark); }
+h2 { margin: 0; font-size: 20px; color: var(--ink); }
+p { line-height: 1.65; font-size: 15px; color: var(--slate); }
+
+.mission {
+  background: #fff; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; justify-content: center; text-align: center; font-size: 15px; border: 2px dashed var(--math-accent);
+}
+.mission-icon { font-size: 54px; animation: bob 2.8s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(3deg); } }
+
+.concept-strip {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px;
+}
+.concept-pill {
+  border-radius: 14px; padding: 11px 14px; font-size: 13.5px; line-height: 1.5; font-weight: 600;
+}
+.concept-pill.c-u { background: #fff7ed; border: 1.5px solid #fdba74; color: #9a3412; }
+.concept-pill.c-d { background: #e0f2fe; border: 1.5px solid #7dd3fc; color: #0c4a6e; }
+
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.field label { display: block; font-size: 13px; font-weight: 900; color: #334155; margin-bottom: 6px; }
+.idgrid input, .grade-panel select, .grade-panel textarea {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s;
+}
+.idgrid input:focus, .grade-panel select:focus, .grade-panel textarea:focus {
+  border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.2);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge { background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.member-badge span { cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px; display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px; }
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+
+/* ================= GAME LEVEL & ZONA ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--math-light); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--math-main); color: #fff; font-weight: 900; flex: 0 0 auto; font-size: 17px; }
+
+.game-level { position: relative; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 22px; margin-bottom: 10px; transition: all .3s; }
+.game-level.locked { opacity: 0.62; pointer-events: none; filter: grayscale(92%); min-height: 220px; }
+.lock-overlay { position: absolute; inset: 0; background: rgba(248, 250, 252, 0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; border-radius: 16px; text-align: center; padding: 20px; }
+.lock-icon { font-size: 52px; margin-bottom: 8px; }
+.game-level.unlocked .lock-overlay { display: none; }
+.game-level.completed { border-color: var(--green); background: #f0fdf4; }
+
+.story-box { background: #fff; border-left: 5px solid var(--math-main); padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); font-size: 14.5px; font-weight: 600; line-height: 1.6; }
+
+/* ================= KARTU SOAL ================= */
+.q-card {
+  background: #ffffff; border: 2px solid #e2e8f0; border-radius: 18px;
+  padding: 20px; margin-bottom: 22px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  transition: border-color .25s, box-shadow .25s;
+}
+.q-card.card-correct { border-color: #22c55e; background: #fafffe; }
+.q-card.card-wrong { border-color: #ef4444; animation: shake 0.4s; }
+
+.q-header {
+  display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px;
+  background: #f8fafc; border-left: 4px solid var(--math-main); padding: 12px 16px; border-radius: 12px;
+}
+.q-no {
+  background: var(--math-main); color: #fff; font-weight: 900; font-size: 13px;
+  padding: 4px 10px; border-radius: 99px; flex: 0 0 auto; margin-top: 2px;
+}
+.q-story { font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.55; }
+
+.q-hint {
+  display: none; margin-top: 10px; padding: 9px 14px; border-radius: 10px;
+  background: var(--red-soft); color: #991b1b; font-size: 13px; font-weight: 700;
+}
+.q-hint.show { display: block; }
+
+/* ================= ZONA 1: DAPUR MARTABAK & PIZZA KEMBAR ================= */
+.kitchen-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;
+}
+.plate-box {
+  background: linear-gradient(180deg, #fffdf9, #f8fafc); border: 2px solid #e2e8f0;
+  border-radius: 16px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.plate-box.plate-ok { border-color: #22c55e; background: #f0fdf4; }
+.plate-box.plate-err { border-color: #ef4444; background: #fef2f2; }
+.plate-title { font-size: 13.5px; font-weight: 900; color: var(--math-dark); text-align: center; }
+.knife-bar {
+  display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; align-items: center;
+}
+.knife-label { font-size: 11.5px; font-weight: 800; color: var(--muted); width: 100%; text-align: center; margin-bottom: 2px; }
+.cut-btn {
+  padding: 4px 9px; font-size: 12px; font-weight: 900; border-radius: 8px;
+  background: #fff; border: 1.5px solid #cbd5e1; color: var(--slate); cursor: pointer;
+}
+.cut-btn:hover { border-color: var(--math-main); background: var(--math-light); transform: none; box-shadow: none; }
+.cut-btn.active { background: var(--math-main); border-color: var(--math-dark); color: #fff; }
+
+.pie-stage { cursor: pointer; user-select: none; display: grid; place-items: center; }
+.pie-slice { cursor: pointer; transition: opacity .15s, filter .15s; }
+.pie-slice:hover { filter: brightness(1.06); }
+.plate-stat {
+  font-size: 12.5px; font-weight: 800; color: var(--slate);
+  background: #fff; border: 1.5px solid #cbd5e1; padding: 4px 12px; border-radius: 99px;
+}
+.plate-stat b { color: var(--math-main); }
+
+.compare-tray-wrap { text-align: center; margin-bottom: 14px; }
+.compare-tray {
+  display: none; margin-top: 10px; background: linear-gradient(135deg, #fffbeb, #f0f9ff);
+  border: 2px dashed var(--math-accent); border-radius: 16px; padding: 14px;
+  justify-content: center; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.compare-tray.show { display: flex; }
+.wedge-preview { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 900; color: var(--ink); }
+
+/* ================= ZONA 2 & 4: PITA PECAHAN + URUTKAN KARTU ================= */
+.bar-cards-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 14px;
+}
+.fbar-card {
+  background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 14px; padding: 12px;
+  display: flex; flex-direction: column; gap: 8px; transition: .2s;
+}
+.fbar-card.fbar-ok { border-color: #22c55e; background: #f0fdf4; }
+.fbar-card.fbar-err { border-color: #ef4444; background: #fef2f2; }
+.fbar-head { display: flex; justify-content: space-between; align-items: center; }
+.fbar-name { font-size: 13px; font-weight: 900; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+.fbar-badge {
+  background: var(--berry-soft); color: var(--berry-dark); font-weight: 900; font-size: 13.5px;
+  padding: 2px 10px; border-radius: 99px;
+}
+.seg-strip {
+  display: flex; width: 100%; height: 34px; border-radius: 9px; overflow: hidden;
+  border: 2px solid #475569; background: #fff; user-select: none;
+}
+.seg-cell {
+  flex: 1; border-right: 1.5px solid #94a3b8; cursor: pointer; transition: background .15s;
+  display: grid; place-items: center; font-size: 10px; font-weight: 900; color: transparent;
+}
+.seg-cell:last-child { border-right: none; }
+.seg-cell:hover { background: #ffedd5; }
+.seg-cell.lit { background: linear-gradient(180deg, #fb923c, #ea580c); color: #fff; }
+.seg-cell.lit-berry { background: linear-gradient(180deg, #c084fc, #9333ea); color: #fff; }
+.seg-cell.lit-blue { background: linear-gradient(180deg, #38bdf8, #0284c7); color: #fff; }
+.seg-cell.lit-green { background: linear-gradient(180deg, #34d399, #059669); color: #fff; }
+.seg-cell.lit-amber { background: linear-gradient(180deg, #fbbf24, #d97706); color: #fff; }
+.seg-cell.lit-rose { background: linear-gradient(180deg, #fb7185, #e11d48); color: #fff; }
+
+.order-section {
+  background: #faf5ff; border: 2px dashed var(--berry); border-radius: 16px; padding: 14px;
+}
+.order-title { font-size: 13px; font-weight: 900; color: var(--berry-dark); text-align: center; margin-bottom: 10px; }
+.order-pool {
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; min-height: 52px;
+  padding: 8px; background: #fff; border-radius: 12px; border: 1.5px solid #e9d5ff; margin-bottom: 12px;
+}
+.order-chip {
+  background: #fff; border: 2.5px solid var(--berry); color: var(--berry-dark);
+  border-radius: 12px; padding: 6px 14px; font-weight: 900; font-size: 15px;
+  cursor: grab; user-select: none; display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 3px 8px rgba(147,51,234,0.12); transition: .15s;
+}
+.order-chip:hover { transform: translateY(-2px); }
+.order-chip.armed { background: var(--berry); color: #fff; box-shadow: 0 0 0 4px rgba(147,51,234,0.28); }
+.order-chip.chip-ok { border-color: #22c55e; background: #dcfce7; color: #15803d; }
+.order-chip.chip-err { border-color: #ef4444; background: #fee2e2; color: #b91c1c; }
+
+.order-slots {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+}
+.order-slot {
+  background: #fff; border: 2px dashed #c084fc; border-radius: 14px; padding: 10px 8px;
+  min-height: 76px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  cursor: pointer; transition: .18s;
+}
+.order-slot:hover, .order-slot.drag-over { border-color: var(--berry); background: #f3e8ff; }
+.slot-lbl { font-size: 11px; font-weight: 900; color: var(--muted); text-transform: uppercase; }
+
+/* ================= ZONA 3: COKELAT BATANG & GELAS JUS ================= */
+.choco-bar {
+  display: grid; gap: 4px; background: #451a03; padding: 8px; border-radius: 12px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.4); width: min(320px, 100%);
+}
+.choco-sq {
+  height: 44px; border-radius: 6px; background: linear-gradient(145deg, #fef3c7, #fde68a);
+  border: 2px dashed #b45309; cursor: pointer; display: grid; place-items: center;
+  font-size: 12px; font-weight: 900; color: #92400e; transition: .15s; user-select: none;
+}
+.choco-sq:hover { transform: scale(1.03); }
+.choco-sq.filled {
+  background: linear-gradient(145deg, #92400e, #78350f);
+  border: 2px solid #451a03; color: #fde68a;
+  box-shadow: inset 2px 2px 4px rgba(255,255,255,0.22), inset -2px -2px 4px rgba(0,0,0,0.35);
+}
+.choco-sq.filled-pink {
+  background: linear-gradient(145deg, #f472b6, #db2777);
+  border: 2px solid #9d174d; color: #fff;
+  box-shadow: inset 2px 2px 4px rgba(255,255,255,0.3), inset -2px -2px 4px rgba(0,0,0,0.25);
+}
+
+.glass-stage { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.glass-svg { cursor: pointer; user-select: none; }
+.glass-controls { display: flex; gap: 8px; }
+
+/* ================= KALIMAT PECAHAN BERTINGKAT & PERBANDINGAN ================= */
+.frac-eq-bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px;
+  background: #fff7ed; border: 2px solid #fed7aa; border-radius: 16px; padding: 14px 16px;
+}
+.frac-eq-bar.blue-bar { background: #f0f9ff; border-color: #bae6fd; }
+.frac-group { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.frac-lbl { font-size: 11px; font-weight: 900; color: var(--math-dark); text-transform: uppercase; }
+.frac-eq-bar.blue-bar .frac-lbl { color: var(--blue-dark); }
+.frac-stack { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.frac-line { width: 56px; height: 3.5px; background: var(--ink); border-radius: 2px; }
+
+.m-in {
+  width: 54px; height: 38px; text-align: center; font-size: 17px; font-weight: 900;
+  color: #0f172a; border: 2px solid #94a3b8; border-radius: 10px; background: #fff;
+  outline: none; transition: .2s; font-family: inherit;
+}
+.m-in:focus { border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.22); }
+
+.sign-picker { display: flex; gap: 6px; align-items: center; }
+.sign-btn {
+  width: 44px; height: 44px; border-radius: 12px; background: #fff;
+  border: 2.5px solid #cbd5e1; font-size: 21px; font-weight: 900; color: var(--ink);
+  display: grid; place-items: center; padding: 0;
+}
+.sign-btn:hover { border-color: var(--math-main); background: var(--math-light); transform: translateY(-1px); }
+.sign-btn.selected {
+  background: var(--math-main); border-color: var(--math-dark); color: #fff;
+  box-shadow: 0 4px 10px rgba(234,88,12,0.28);
+}
+.sign-btn.s-ok { background: #16a34a !important; border-color: #15803d !important; color: #fff !important; }
+.sign-btn.s-err { background: #ef4444 !important; border-color: #b91c1c !important; color: #fff !important; }
+
+.inline-select {
+  font: inherit; font-weight: 800; font-size: 14.5px; padding: 8px 14px;
+  border: 2px solid #94a3b8; border-radius: 10px; background: #fff; color: var(--ink); outline: none;
+}
+.inline-select:focus { border-color: var(--math-main); }
+
+.choice-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 12px 0; }
+.tf-btn {
+  padding: 10px 22px; border-radius: 12px; background: #fff; border: 2.5px solid #cbd5e1;
+  font-size: 14.5px; font-weight: 900; color: var(--slate);
+}
+.tf-btn.selected { background: var(--rose); border-color: #9f1239; color: #fff; }
+.tf-btn.s-ok { background: #16a34a !important; border-color: #15803d !important; color: #fff !important; }
+.tf-btn.s-err { background: #ef4444 !important; border-color: #b91c1c !important; color: #fff !important; }
+
+.lkpd-val.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+.lkpd-val.wrong { animation: shake 0.4s; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);} }
+
+.check-btn { display: block; margin: 20px auto 0; background: var(--math-main); color: #fff; border-radius: 99px; padding: 13px 32px; font-weight: 900; font-size: 15px; }
+
+/* ================= PANEL PENILAIAN GURU + TABEL OBSERVASI (SOP V4.2) ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 24px; margin: 20px auto; width: min(1040px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.obs-wrap { overflow-x: auto; margin-bottom: 18px; }
+.rubric-table {
+  width: 100%; border-collapse: collapse; background: #fff; border-radius: 14px; overflow: hidden;
+  border: 1.5px solid #cbd5e1; font-size: 13.5px;
+}
+.rubric-table th { background: var(--math-dark); color: #fff; padding: 10px 12px; text-align: left; font-weight: 800; }
+.rubric-table td { padding: 10px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; color: var(--ink); line-height: 1.5; }
+.rubric-table tr:nth-child(even) td { background: #f8fafc; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 50; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #ffedd5; border-top-color: var(--math-main); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 780px) {
+  .hero, .idgrid, .grade-grid, .kitchen-grid, .bar-cards-grid, .concept-strip { grid-template-columns: 1fr; }
+  .order-slots { grid-template-columns: repeat(2, 1fr); }
+  .sheet { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="appbar" id="appbar">
+  <div class="brand">🧮 PORTAL LMS SDN 1 SUKAHAJI</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Jawaban</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 2.1 • SERI PECAHAN (1/4)</span>
+      <h1>Pecahan Pembilang Satu &amp; Penyebut Sama</h1>
+      <p><b>Matematika • Fase B / Kelas IV</b><br>Mari memotong martabak &amp; pizza, membagi batang cokelat, dan menuang gelas jus untuk memahami cara <b>membandingkan</b> serta <b>mengurutkan</b> pecahan pembilang satu dan pecahan berpenyebut sama!</p>
+
+      <div class="concept-strip">
+        <div class="concept-pill c-u">🍕 <b>Pembilang Satu (1/a):</b> Makin <b>banyak potongan (penyebut besar)</b>, ukuran tiap potong justru makin <b>kecil</b>!</div>
+        <div class="concept-pill c-d">🍫 <b>Penyebut Sama (a/n &amp; b/n):</b> Ukuran potongannya sama besar, jadi makin <b>banyak bagian diambil (pembilang besar)</b>, nilainya makin <b>besar</b>!</div>
+      </div>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input type="date" name="tanggal" id="inputTanggal" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Membandingkan & Mengurutkan Pecahan (Pembilang 1 & Penyebut Sama)" readonly>
+        </div>
+        <div class="group-builder">
+          <label>👥 Data Kelompok (1 – 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN temanmu..." style="flex:1;">
+              <button type="button" class="btn-main" id="btnAddMember" disabled>🔍 Cari &amp; Tambah</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa...</p>
+          </div>
+          <div id="readGroupView" style="display:none;"><div class="readonly-group-list" id="readonlyMemberList"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">🍕🍫🧃</div>
+      <b>🎯 Misi Dapur Pecahan</b>
+      <p>Selesaikan <b>4 Zona Gamifikasi (16 Soal Konkret)</b>! Potong, warnai, bandingkan, dan urutkan pecahan dengan tepat!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZONA 1: MEMBANDINGKAN PECAHAN PEMBILANG SATU ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num">1</div><h2>Zona 1: Dapur Martabak &amp; Pizza — Membandingkan Pembilang Satu (Soal 1–4)</h2></div>
+  <div class="game-level unlocked" id="level1">
+    <div class="story-box">
+      🍕 <b>Petunjuk:</b> Kedua kue memiliki diameter <b>sama persis</b>! Pilih tombol <b>Pisau Pemotong</b> sesuai banyak potongan pada cerita, lalu <b>klik tepat 1 potong</b> pada masing-masing kue untuk mengambilnya. Klik <b>⚖️ Bandingkan Potongan</b> untuk melihat besar potongan berdampingan, lalu isi pecahan dan pilih tanda <b>&lt;</b>, <b>&gt;</b>, atau <b>=</b>!
+    </div>
+    <div id="zone1Container"></div>
+    <button type="button" class="check-btn" onclick="checkLevel(1)">Periksa Zona 1 &amp; Buka Zona 2 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 2: MENGURUTKAN PECAHAN PEMBILANG SATU ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--berry);">2</div><h2>Zona 2: Mengurutkan Pecahan Pembilang Satu (Soal 5–8)</h2></div>
+  <div class="game-level locked" id="level2">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 2 Terkunci</b><p>Selesaikan Zona 1 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--berry);">
+      🎀 <b>Petunjuk:</b> Pertama, <b>klik 1 petak</b> pada setiap pita/kue yang panjangnya sama agar kamu bisa melihat ukuran aslinya. Setelah itu, <b>seret kartu pecahan</b> (atau klik kartu lalu klik kotak urutan 1–4) sesuai perintah: <b>Terkecil → Terbesar</b> atau <b>Terbesar → Terkecil</b>!
+    </div>
+    <div id="zone2Container"></div>
+    <button type="button" class="check-btn" style="background:var(--berry);" onclick="checkLevel(2)">Periksa Zona 2 &amp; Buka Zona 3 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 3: MEMBANDINGKAN PECAHAN PENYEBUT SAMA ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--blue);">3</div><h2>Zona 3: Batang Cokelat &amp; Gelas Jus — Membandingkan Penyebut Sama (Soal 9–12)</h2></div>
+  <div class="game-level locked" id="level3">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 3 Terkunci</b><p>Selesaikan Zona 2 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--blue);">
+      🍫 <b>Petunjuk:</b> Pada soal cokelat, <b>klik petak cokelat</b> sebanyak bagian yang dimakan. Pada soal jus, <b>klik tombol +1 / −1 atau klik langsung skala gelas</b> untuk menuang jus sesuai cerita. Lalu tuliskan pecahannya dan pilih tanda <b>&lt;</b>, <b>&gt;</b>, atau <b>=</b>!
+    </div>
+    <div id="zone3Container"></div>
+    <button type="button" class="check-btn" style="background:var(--blue);" onclick="checkLevel(3)">Periksa Zona 3 &amp; Buka Zona 4 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 4: MISI PUNCAK URUTKAN PENYEBUT SAMA & DETEKTIF ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--rose);">4</div><h2>Zona 4: Misi Puncak — Mengurutkan Penyebut Sama &amp; Detektif Pecahan (Soal 13–16)</h2></div>
+  <div class="game-level locked" id="level4">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 4 Terkunci</b><p>Selesaikan Zona 3 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--rose);">
+      🏆 <b>Misi Puncak:</b> Warnai dan urutkan pecahan berpenyebut sama (Soal 13–14), buktikan pendapat Tono di Lab Martabak agar bebas miskonsepsi (Soal 15), dan selesaikan laporan Lomba Estafet SDN 1 Sukahaji (Soal 16)!
+    </div>
+    <div id="zone4Container"></div>
+    <button type="button" class="check-btn" style="background:var(--rose);" onclick="checkLevel(4)">Kunci Jawaban Akhir! 🏆</button>
+    <div id="msgFinal" style="display:none; text-align:center; color:var(--green2); font-weight:900; font-size:18px; margin-top:16px; background:#dcfce7; padding:16px; border-radius:14px; border:2px solid #22c55e;">
+      🎉 HEBAT! SELURUH 16 SOAL PECAHAN PEMBILANG SATU &amp; PENYEBUT SAMA TELAH DISELESAIKAN DENGAN TEPAT! 🎉
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:24px; display:flex; justify-content:center;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 28px; font-size:16px; display:none;">📤 Kirim Hasil Pekerjaan ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN GURU + TABEL OBSERVASI (SOP V4.2) ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik &amp; Tabel Observasi Penilaian Guru</h2></div>
+
+  <div class="obs-wrap">
+    <table class="rubric-table">
+      <thead>
+        <tr>
+          <th style="width:22%;">Aspek / Zona Observasi</th>
+          <th style="width:19%;">A (Sangat Baik)</th>
+          <th style="width:19%;">B (Baik)</th>
+          <th style="width:20%;">C (Cukup)</th>
+          <th style="width:20%;">D (Perlu Bimbingan)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>1. Membandingkan Pembilang Satu</b><br><span style="font-size:12px; color:#64748b;">(Zona 1 &amp; Soal 15)</span></td>
+          <td>Mampu memotong kue tepat, menuliskan pecahan, dan membandingkan (&lt;, &gt;) tanpa terkecoh besar penyebut.</td>
+          <td>Tepat memotong &amp; membandingkan setelah 1 kali cek perbandingan visual.</td>
+          <td>Masih sesekali mengira penyebut besar berarti pecahan lebih besar.</td>
+          <td>Belum memahami pengaruh jumlah potongan terhadap ukuran pecahan pembilang 1.</td>
+        </tr>
+        <tr>
+          <td><b>2. Mengurutkan Pembilang Satu</b><br><span style="font-size:12px; color:#64748b;">(Zona 2)</span></td>
+          <td>Mewarnai seluruh pita tepat dan mengurutkan baik dari terkecil maupun terbesar 100% benar.</td>
+          <td>Tepat pada 3 dari 4 soal urutan pecahan pembilang satu.</td>
+          <td>Sering terbalik antara urutan terkecil→terbesar dengan terbesar→terkecil.</td>
+          <td>Belum mampu mengurutkan pecahan pembilang satu meski dibantu gambar.</td>
+        </tr>
+        <tr>
+          <td><b>3. Membandingkan Penyebut Sama</b><br><span style="font-size:12px; color:#64748b;">(Zona 3)</span></td>
+          <td>Tepat memodelkan batang cokelat &amp; gelas jus serta memilih tanda &lt;, &gt;, = dengan akurat.</td>
+          <td>Visualisasi benda konkret tepat, hanya 1 kekeliruan kecil saat menulis tanda.</td>
+          <td>Masih tertukar posisi pembilang dan penyebut saat menuliskan pecahan.</td>
+          <td>Belum memahami makna pembilang pada pecahan berpenyebut sama.</td>
+        </tr>
+        <tr>
+          <td><b>4. Mengurutkan &amp; Aplikasi Kontekstual</b><br><span style="font-size:12px; color:#64748b;">(Zona 4)</span></td>
+          <td>Tepat mengurutkan penyebut sama, menyimpulkan aturan pembilang 1, dan menyelesaikan lintasan estafet.</td>
+          <td>Menyelesaikan 3 dari 4 misi puncak dengan mandiri dan tepat.</td>
+          <td>Memerlukan bantuan untuk menarik kesimpulan aturan konsep pecahan.</td>
+          <td>Memerlukan bimbingan langsung dalam mengurutkan &amp; menafsirkan pecahan kontekstual.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Pemahaman Pecahan (LKPD 2.1)</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (Menguasai konsep membandingkan &amp; mengurutkan pembilang 1 &amp; penyebut sama)</option>
+        <option value="B">B — Baik (Memahami konsep dengan sedikit kekeliruan urutan/tanda)</option>
+        <option value="C">C — Cukup (Masih terkecoh ukuran penyebut pada pecahan pembilang 1)</option>
+        <option value="D">D — Perlu Bimbingan (Belum memahami representasi &amp; perbandingan pecahan konkret)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi dan evaluasi untuk siswa/kelompok ini..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:16px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan &amp; Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 2.1 MATEMATIKA (LMS V4.2)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Matematika';
+const LKPD_ID  = '2.1_Pecahan_Dasar';
+const STORAGE  = 'lkpd_mtk_2_1_v42';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+let readOnlyMode = false;
+let unlockedMax  = 1;
+
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+// =========================================================================
+// GENERATOR SVG REALISTIS (MARTABAK/PIZZA/BOLU/PIE & GELAS JUS)
+// =========================================================================
+const FOOD_THEMES = {
+  martabak: { crust: '#b45309', base: '#fde68a', active: '#f59e0b', stroke: '#78350f', dot1: '#451a03', dot2: '#d97706' },
+  pizza:    { crust: '#d97706', base: '#fef08a', active: '#fb923c', stroke: '#9a3412', dot1: '#dc2626', dot2: '#16a34a' },
+  bolu:     { crust: '#15803d', base: '#bbf7d0', active: '#22c55e', stroke: '#166534', dot1: '#fef08a', dot2: '#fff' },
+  pie:      { crust: '#9a3412', base: '#fed7aa', active: '#ea580c', stroke: '#7c2d12', dot1: '#b91c1c', dot2: '#fef3c7' }
+};
+
+function makePieSVG(foodType, cuts, selectedSet, clickHandlerName, argPrefix, size = 176) {
+  const th = FOOD_THEMES[foodType] || FOOD_THEMES.pizza;
+  const cx = 100, cy = 100, rOuter = 88, rInner = 78;
+  let paths = '';
+
+  for (let i = 0; i < cuts; i++) {
+    const a1 = (i * 2 * Math.PI / cuts) - Math.PI / 2;
+    const a2 = ((i + 1) * 2 * Math.PI / cuts) - Math.PI / 2;
+    const mid = (a1 + a2) / 2;
+    const isSel = selectedSet.has(i);
+    const shift = isSel ? 7 : 0;
+    const tx = Math.cos(mid) * shift;
+    const ty = Math.sin(mid) * shift;
+
+    const x1o = cx + rOuter * Math.cos(a1), y1o = cy + rOuter * Math.sin(a1);
+    const x2o = cx + rOuter * Math.cos(a2), y2o = cy + rOuter * Math.sin(a2);
+    const x1i = cx + rInner * Math.cos(a1), y1i = cy + rInner * Math.sin(a1);
+    const x2i = cx + rInner * Math.cos(a2), y2i = cy + rInner * Math.sin(a2);
+    const large = (a2 - a1) > Math.PI ? 1 : 0;
+
+    // Topping details inside wedge
+    const d1x = cx + 48 * Math.cos(mid - 0.14), d1y = cy + 48 * Math.sin(mid - 0.14);
+    const d2x = cx + 32 * Math.cos(mid + 0.16), d2y = cy + 32 * Math.sin(mid + 0.16);
+    const d3x = cx + 60 * Math.cos(mid + 0.08), d3y = cy + 60 * Math.sin(mid + 0.08);
+    const fillCol = isSel ? th.active : th.base;
+    const opac = isSel ? '1' : '0.45';
+
+    paths += `
+      <g class="pie-slice" transform="translate(${tx.toFixed(1)}, ${ty.toFixed(1)})"
+         onclick="${clickHandlerName}(${argPrefix}, ${i})">
+        <path d="M ${cx} ${cy} L ${x1o.toFixed(1)} ${y1o.toFixed(1)} A ${rOuter} ${rOuter} 0 ${large} 1 ${x2o.toFixed(1)} ${y2o.toFixed(1)} Z"
+              fill="${th.crust}" opacity="${isSel ? '1' : '0.65'}" stroke="${th.stroke}" stroke-width="1.8"/>
+        <path d="M ${cx} ${cy} L ${x1i.toFixed(1)} ${y1i.toFixed(1)} A ${rInner} ${rInner} 0 ${large} 1 ${x2i.toFixed(1)} ${y2i.toFixed(1)} Z"
+              fill="${fillCol}" opacity="${opac}" stroke="${th.stroke}" stroke-width="1.6"/>
+        <circle cx="${d1x.toFixed(1)}" cy="${d1y.toFixed(1)}" r="4.2" fill="${th.dot1}" opacity="${isSel ? '0.95' : '0.35'}"/>
+        <circle cx="${d2x.toFixed(1)}" cy="${d2y.toFixed(1)}" r="3.4" fill="${th.dot2}" opacity="${isSel ? '0.95' : '0.35'}"/>
+        <circle cx="${d3x.toFixed(1)}" cy="${d3y.toFixed(1)}" r="3.2" fill="${th.dot1}" opacity="${isSel ? '0.9' : '0.3'}"/>
+      </g>`;
+  }
+
+  return `<svg width="${size}" height="${size}" viewBox="0 0 200 200" aria-label="Kue Pecahan">
+    <circle cx="100" cy="100" r="95" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+    ${paths}
+  </svg>`;
+}
+
+function makeSingleWedgeSVG(foodType, cuts, labelText) {
+  const th = FOOD_THEMES[foodType] || FOOD_THEMES.pizza;
+  const cx = 70, cy = 82, rOuter = 68, rInner = 60;
+  const span = 2 * Math.PI / cuts;
+  const a1 = -Math.PI / 2 - span / 2;
+  const a2 = -Math.PI / 2 + span / 2;
+  const x1o = cx + rOuter * Math.cos(a1), y1o = cy + rOuter * Math.sin(a1);
+  const x2o = cx + rOuter * Math.cos(a2), y2o = cy + rOuter * Math.sin(a2);
+  const x1i = cx + rInner * Math.cos(a1), y1i = cy + rInner * Math.sin(a1);
+  const x2i = cx + rInner * Math.cos(a2), y2i = cy + rInner * Math.sin(a2);
+  const large = span > Math.PI ? 1 : 0;
+
+  return `<div class="wedge-preview">
+    <svg width="140" height="95" viewBox="0 0 140 95">
+      <path d="M ${cx} ${cy} L ${x1o.toFixed(1)} ${y1o.toFixed(1)} A ${rOuter} ${rOuter} 0 ${large} 1 ${x2o.toFixed(1)} ${y2o.toFixed(1)} Z"
+            fill="${th.crust}" stroke="${th.stroke}" stroke-width="2"/>
+      <path d="M ${cx} ${cy} L ${x1i.toFixed(1)} ${y1i.toFixed(1)} A ${rInner} ${rInner} 0 ${large} 1 ${x2i.toFixed(1)} ${y2i.toFixed(1)} Z"
+            fill="${th.active}" stroke="${th.stroke}" stroke-width="1.6"/>
+      <circle cx="70" cy="46" r="4" fill="${th.dot1}"/>
+    </svg>
+    <span>${labelText} (1/${cuts})</span>
+  </div>`;
+}
+
+function makeGlassSVG(denom, filled, colorTop, colorBot, id, side) {
+  const hTotal = 160, yTop = 20, xLeft = 36, width = 88;
+  const segH = hTotal / denom;
+  let segs = '';
+  for (let i = 1; i <= denom; i++) {
+    const y = yTop + hTotal - i * segH;
+    const isLit = i <= filled;
+    segs += `
+      <rect x="${xLeft}" y="${y.toFixed(1)}" width="${width}" height="${segH.toFixed(1)}"
+            fill="${isLit ? colorBot : '#ffffff'}" fill-opacity="${isLit ? '0.88' : '0.35'}"
+            stroke="#94a3b8" stroke-width="1" stroke-dasharray="${i === denom ? '0' : '3,2'}"
+            style="cursor:pointer;" onclick="setGlassLevel('${id}', '${side}', ${i})"/>
+      <text x="${xLeft + width + 7}" y="${(y + segH / 2 + 4).toFixed(1)}" font-size="11" font-weight="800" fill="#475569">${i}/${denom}</text>`;
+  }
+  const liqTopY = yTop + hTotal - filled * segH;
+  const wave = filled > 0
+    ? `<ellipse cx="${xLeft + width / 2}" cy="${liqTopY.toFixed(1)}" rx="${width / 2}" ry="5" fill="${colorTop}" opacity="0.95" style="pointer-events:none;"/>`
+    : '';
+
+  return `<svg class="glass-svg" width="165" height="196" viewBox="0 0 165 196" aria-label="Gelas Ukur Jus">
+    <rect x="${xLeft}" y="${yTop}" width="${width}" height="${hTotal}" rx="6" fill="#f8fafc"/>
+    ${segs}
+    ${wave}
+    <path d="M ${xLeft} ${yTop} L ${xLeft} ${yTop + hTotal} Q ${xLeft} ${yTop + hTotal + 8} ${xLeft + 10} ${yTop + hTotal + 8} L ${xLeft + width - 10} ${yTop + hTotal + 8} Q ${xLeft + width} ${yTop + hTotal + 8} ${xLeft + width} ${yTop + hTotal} L ${xLeft + width} ${yTop}"
+          fill="none" stroke="#334155" stroke-width="3.2" style="pointer-events:none;"/>
+    <ellipse cx="${xLeft + width / 2}" cy="${yTop}" rx="${width / 2}" ry="5" fill="none" stroke="#475569" stroke-width="2.2" style="pointer-events:none;"/>
+  </svg>`;
+}
+
+// =========================================================================
+// DATA 16 SOAL KONTEKSTUAL (4 ZONA GAMIFIKASI)
+// =========================================================================
+
+// ZONA 1 (Soal 1–4): Membandingkan Pecahan Pembilang Satu (Dapur Martabak/Pizza)
+const Z1_DATA = [
+  {
+    id: 'z1_q1', no: 1, icon: '🥞', food: 'martabak',
+    story: '<b>Martabak Manis Kantin:</b> Beni membeli martabak lalu memotongnya menjadi <b>2 bagian</b> sama besar dan mengambil <b>1 potong</b>. Siti membeli martabak sama besar, memotongnya menjadi <b>4 bagian</b> sama besar, dan mengambil <b>1 potong</b>. Potong kedua martabak, ambil 1 potong di masing-masing piring, lalu bandingkan!',
+    leftName: 'Martabak Beni', rightName: 'Martabak Siti',
+    cutOpts: [2, 3, 4, 6, 8],
+    d1: 2, d2: 4, sign: '>'
+  },
+  {
+    id: 'z1_q2', no: 2, icon: '🍕', food: 'pizza',
+    story: '<b>Pizza Kerja Kelompok:</b> Kelompok Edo memotong pizza menjadi <b>6 bagian</b> sama besar dan Edo makan <b>1 potong</b>. Kelompok Lani memotong pizza sama besar menjadi <b>3 bagian</b> dan Lani makan <b>1 potong</b>. Bandingkan potongan pizza Edo dan Lani!',
+    leftName: 'Pizza Edo', rightName: 'Pizza Lani',
+    cutOpts: [2, 3, 4, 6, 8],
+    d1: 6, d2: 3, sign: '<'
+  },
+  {
+    id: 'z1_q3', no: 3, icon: '🍰', food: 'bolu',
+    story: '<b>Bolu Pandan Hari Guru:</b> Ibu Guru memotong bolu A menjadi <b>8 bagian</b> sama besar lalu mengambil <b>1 potong</b>. Bolu B yang ukurannya sama dipotong menjadi <b>5 bagian</b> sama besar lalu diambil <b>1 potong</b>. Bandingkan keduanya!',
+    leftName: 'Bolu Pandan A', rightName: 'Bolu Pandan B',
+    cutOpts: [3, 4, 5, 6, 8],
+    d1: 8, d2: 5, sign: '<'
+  },
+  {
+    id: 'z1_q4', no: 4, icon: '🥧', food: 'pie',
+    story: '<b>Pie Apel Ulang Tahun:</b> Pie di piring kiri dipotong menjadi <b>4 bagian</b> sama besar (diambil <b>1 potong</b>). Pie di piring kanan dipotong menjadi <b>10 bagian</b> sama besar (diambil <b>1 potong</b>). Bandingkan ukuran potongan keduanya!',
+    leftName: 'Pie Piring Kiri', rightName: 'Pie Piring Kanan',
+    cutOpts: [2, 4, 6, 8, 10],
+    d1: 4, d2: 10, sign: '>'
+  }
+];
+
+// ZONA 2 (Soal 5–8): Mengurutkan Pecahan Pembilang Satu (Visual Pita + Kartu Urutan)
+const Z2_DATA = [
+  {
+    id: 'z2_q5', no: 5, icon: '🎀', dir: 'asc',
+    story: '<b>Potongan Pita Hias Kelas:</b> Warnai <b>1 petak</b> pada setiap pita hias berikut agar terlihat ukuran aslinya, lalu urutkan pecahannya dari yang <b>TERKECIL ke TERBESAR</b>!',
+    colorCls: 'lit',
+    items: [
+      { key: '1/2', label: 'Pita A', num: 1, den: 2 },
+      { key: '1/8', label: 'Pita B', num: 1, den: 8 },
+      { key: '1/4', label: 'Pita C', num: 1, den: 4 },
+      { key: '1/6', label: 'Pita D', num: 1, den: 6 }
+    ],
+    correctOrder: ['1/8', '1/6', '1/4', '1/2']
+  },
+  {
+    id: 'z2_q6', no: 6, icon: '🍫', dir: 'desc',
+    story: '<b>Batang Cokelat Mini:</b> Warnai <b>1 bagian</b> pada setiap batang cokelat, lalu urutkan pecahannya dari yang <b>TERBESAR ke TERKECIL</b>!',
+    colorCls: 'lit-amber',
+    items: [
+      { key: '1/5', label: 'Cokelat A', num: 1, den: 5 },
+      { key: '1/2', label: 'Cokelat B', num: 1, den: 2 },
+      { key: '1/10', label: 'Cokelat C', num: 1, den: 10 },
+      { key: '1/3', label: 'Cokelat D', num: 1, den: 3 }
+    ],
+    correctOrder: ['1/2', '1/3', '1/5', '1/10']
+  },
+  {
+    id: 'z2_q7', no: 7, icon: '🍮', dir: 'asc',
+    story: '<b>Kue Lapis Kantin:</b> Warnai <b>1 potongan</b> pada setiap loyang kue lapis, lalu urutkan pecahannya dari yang <b>TERKECIL ke TERBESAR</b>!',
+    colorCls: 'lit-berry',
+    items: [
+      { key: '1/3', label: 'Kue A', num: 1, den: 3 },
+      { key: '1/9', label: 'Kue B', num: 1, den: 9 },
+      { key: '1/4', label: 'Kue C', num: 1, den: 4 },
+      { key: '1/7', label: 'Kue D', num: 1, den: 7 }
+    ],
+    correctOrder: ['1/9', '1/7', '1/4', '1/3']
+  },
+  {
+    id: 'z2_q8', no: 8, icon: '🥭', dir: 'desc',
+    story: '<b>Puding Mangga Sehat:</b> Warnai <b>1 potong</b> pada setiap cetakan puding, lalu urutkan pecahannya dari yang <b>TERBESAR ke TERKECIL</b>!',
+    colorCls: 'lit-green',
+    items: [
+      { key: '1/12', label: 'Puding A', num: 1, den: 12 },
+      { key: '1/4', label: 'Puding B', num: 1, den: 4 },
+      { key: '1/6', label: 'Puding C', num: 1, den: 6 },
+      { key: '1/2', label: 'Puding D', num: 1, den: 2 }
+    ],
+    correctOrder: ['1/2', '1/4', '1/6', '1/12']
+  }
+];
+
+// ZONA 3 (Soal 9–12): Membandingkan Pecahan Berpenyebut Sama (Cokelat & Gelas Jus)
+const Z3_DATA = [
+  {
+    id: 'z3_q9', no: 9, icon: '🍫', mode: 'choco', styleCls: 'filled',
+    story: '<b>Batang Cokelat Susu (Penyebut 6):</b> Raka dan Dini masing-masing punya 1 batang cokelat yang terdiri dari <b>6 petak</b>. Raka makan <b>2 petak</b>, sedangkan Dini makan <b>5 petak</b>. Klik petak cokelat yang dimakan masing-masing, tulis pecahannya, lalu bandingkan!',
+    leftName: 'Cokelat Raka', rightName: 'Cokelat Dini',
+    den: 6, cols: 3, n1: 2, n2: 5, sign: '<'
+  },
+  {
+    id: 'z3_q10', no: 10, icon: '🧃', mode: 'glass', cTop: '#fb923c', cBot: '#f97316',
+    story: '<b>Gelas Jus Jeruk (Penyebut 8):</b> Gelas Andi dan Budi sama-sama berskala <b>8 bagian</b>. Andi menuang jus setinggi <b>7 bagian</b>, sedangkan Budi menuang jus setinggi <b>3 bagian</b>. Tuang jus pada kedua gelas, lalu bandingkan!',
+    leftName: 'Jus Jeruk Andi', rightName: 'Jus Jeruk Budi',
+    den: 8, n1: 7, n2: 3, sign: '>'
+  },
+  {
+    id: 'z3_q11', no: 11, icon: '🍓', mode: 'choco', styleCls: 'filled-pink',
+    story: '<b>Cokelat Stroberi Kelompok (Penyebut 10):</b> Tiap batang terdiri dari <b>10 petak</b>. Kelompok 1 menghabiskan <b>4 petak</b>, sedangkan Kelompok 2 menghabiskan <b>9 petak</b>. Tandai cokelat keduanya lalu bandingkan!',
+    leftName: 'Cokelat Kelompok 1', rightName: 'Cokelat Kelompok 2',
+    den: 10, cols: 5, n1: 4, n2: 9, sign: '<'
+  },
+  {
+    id: 'z3_q12', no: 12, icon: '🥑', mode: 'glass', cTop: '#86efac', cBot: '#22c55e',
+    story: '<b>Gelas Jus Alpukat (Penyebut 9):</b> Gelas kiri dan gelas kanan berskala <b>9 bagian</b>. Gelas kiri diisi <b>5 bagian</b> jus alpukat, dan gelas kanan juga diisi <b>5 bagian</b>. Tuang jusnya lalu pilih tanda perbandingan yang tepat!',
+    leftName: 'Jus Kiri', rightName: 'Jus Kanan',
+    den: 9, n1: 5, n2: 5, sign: '='
+  }
+];
+
+// ZONA 4 (Soal 13–14 Urutkan Penyebut Sama; Soal 15 Detektif; Soal 16 Estafet)
+const Z4_ORD_DATA = [
+  {
+    id: 'z4_q13', no: 13, icon: '🍮', dir: 'asc',
+    story: '<b>Papan Puding Cokelat (Penyebut 8):</b> Warnai petak puding sesuai pecahan pada setiap kartu, lalu urutkan dari yang <b>TERKECIL ke TERBESAR</b>!',
+    colorCls: 'lit-blue',
+    items: [
+      { key: '5/8', label: 'Puding A', num: 5, den: 8 },
+      { key: '2/8', label: 'Puding B', num: 2, den: 8 },
+      { key: '7/8', label: 'Puding C', num: 7, den: 8 },
+      { key: '3/8', label: 'Puding D', num: 3, den: 8 }
+    ],
+    correctOrder: ['2/8', '3/8', '5/8', '7/8']
+  },
+  {
+    id: 'z4_q14', no: 14, icon: '🍓', dir: 'desc',
+    story: '<b>Pita Takaran Sirup (Penyebut 10):</b> Warnai petak sirup sesuai pecahan tiap gelas, lalu urutkan dari yang <b>TERBESAR ke TERKECIL</b>!',
+    colorCls: 'lit-rose',
+    items: [
+      { key: '4/10', label: 'Sirup A', num: 4, den: 10 },
+      { key: '9/10', label: 'Sirup B', num: 9, den: 10 },
+      { key: '1/10', label: 'Sirup C', num: 1, den: 10 },
+      { key: '6/10', label: 'Sirup D', num: 6, den: 10 }
+    ],
+    correctOrder: ['9/10', '6/10', '4/10', '1/10']
+  }
+];
+
+const Z4_Q16_TEAMS = [
+  { key: 'merah',  name: '🔴 Regu Merah',  num: 7,  den: 12, cls: 'lit-rose' },
+  { key: 'biru',   name: '🔵 Regu Biru',   num: 11, den: 12, cls: 'lit-blue' },
+  { key: 'hijau',  name: '🟢 Regu Hijau',  num: 5,  den: 12, cls: 'lit-green' },
+  { key: 'kuning', name: '🟡 Regu Kuning', num: 9,  den: 12, cls: 'lit-amber' }
+];
+
+// =========================================================================
+// STATE INTERAKTIF
+// =========================================================================
+const pieState   = {}; // { id: { L: { cuts, sel: Set }, R: { cuts, sel: Set }, sign: '' } }
+const barState   = {}; // { id: { itemKey: Set(idx) } }
+const orderState = {}; // { id: [null, null, null, null] }
+let armedOrdChip = null; // { id, key }
+const z3State    = {}; // { id: { L: Set|number, R: Set|number, sign: '' } }
+
+// Q15 Detective state
+const q15State = { L: { cuts: 2, sel: new Set() }, R: { cuts: 2, sel: new Set() }, verdict: '' };
+// Q16 Relay track state
+const q16State = { merah: new Set(), biru: new Set(), hijau: new Set(), kuning: new Set() };
+
+// =========================================================================
+// BUILD ALL 4 ZONES
+// =========================================================================
+function buildAllZones() {
+  renderZone1();
+  renderOrderZone('zone2Container', Z2_DATA, 2);
+  renderZone3();
+  renderZone4();
+}
+
+// ---------- ZONA 1: DAPUR MARTABAK & PIZZA ----------
+function renderZone1() {
+  const wrap = document.getElementById('zone1Container');
+  wrap.innerHTML = Z1_DATA.map(q => {
+    pieState[q.id] = {
+      L: { cuts: 2, sel: new Set() },
+      R: { cuts: 2, sel: new Set() },
+      sign: ''
+    };
+    const makeKnifeBtns = side => q.cutOpts.map(c =>
+      `<button type="button" class="cut-btn ${c === 2 ? 'active' : ''}" id="cut_${q.id}_${side}_${c}" onclick="setPieCuts('${q.id}', '${side}', ${c})">Bagi ${c}</button>`
+    ).join('');
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="kitchen-grid">
+        <div class="plate-box" id="plate_${q.id}_L">
+          <div class="plate-title">🍽️ ${q.leftName}</div>
+          <div class="knife-bar"><span class="knife-label">🔪 Pisau Pemotong:</span>${makeKnifeBtns('L')}</div>
+          <div class="pie-stage" id="pie_${q.id}_L"></div>
+          <div class="plate-stat" id="pstat_${q.id}_L">Terambil: <b>0</b> / 2 potong</div>
+        </div>
+
+        <div class="plate-box" id="plate_${q.id}_R">
+          <div class="plate-title">🍽️ ${q.rightName}</div>
+          <div class="knife-bar"><span class="knife-label">🔪 Pisau Pemotong:</span>${makeKnifeBtns('R')}</div>
+          <div class="pie-stage" id="pie_${q.id}_R"></div>
+          <div class="plate-stat" id="pstat_${q.id}_R">Terambil: <b>0</b> / 2 potong</div>
+        </div>
+      </div>
+
+      <div class="compare-tray-wrap">
+        <button type="button" class="btn-light btn-sm" onclick="toggleCompareTray('${q.id}')">⚖️ Bandingkan Ukuran 1 Potongan Berdampingan</button>
+        <div class="compare-tray" id="ctray_${q.id}"></div>
+      </div>
+
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}_vis" name="${q.id}_vis" value="">
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}_sign" name="${q.id}_sign" value="">
+
+      <div class="frac-eq-bar">
+        <div class="frac-group">
+          <span class="frac-lbl">${q.leftName}</span>
+          <div class="frac-stack">
+            <input type="tel" class="m-in lkpd-val lvl1" data-ans="1" name="${q.id}_n1" placeholder="?">
+            <div class="frac-line"></div>
+            <input type="tel" class="m-in lkpd-val lvl1" data-ans="${q.d1}" name="${q.id}_d1" placeholder="?">
+          </div>
+        </div>
+
+        <div class="sign-picker">
+          <button type="button" class="sign-btn" id="sg_${q.id}_lt" onclick="pickZ1Sign('${q.id}', '<')">&lt;</button>
+          <button type="button" class="sign-btn" id="sg_${q.id}_eq" onclick="pickZ1Sign('${q.id}', '=')">=</button>
+          <button type="button" class="sign-btn" id="sg_${q.id}_gt" onclick="pickZ1Sign('${q.id}', '>')">&gt;</button>
+        </div>
+
+        <div class="frac-group">
+          <span class="frac-lbl">${q.rightName}</span>
+          <div class="frac-stack">
+            <input type="tel" class="m-in lkpd-val lvl1" data-ans="1" name="${q.id}_n2" placeholder="?">
+            <div class="frac-line"></div>
+            <input type="tel" class="m-in lkpd-val lvl1" data-ans="${q.d2}" name="${q.id}_d2" placeholder="?">
+          </div>
+        </div>
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  Z1_DATA.forEach(q => {
+    refreshPie(q.id, 'L', false);
+    refreshPie(q.id, 'R', false);
+  });
+}
+
+function setPieCuts(id, side, cuts, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const st = id === 'z4_q15' ? q15State[side] : pieState[id][side];
+  st.cuts = cuts;
+  st.sel = new Set();
+  const opts = id === 'z4_q15' ? [2, 4, 6, 8] : Z1_DATA.find(x => x.id === id).cutOpts;
+  opts.forEach(c => {
+    const b = document.getElementById(`cut_${id}_${side}_${c}`);
+    if (b) b.classList.toggle('active', c === cuts);
+  });
+  refreshPie(id, side, triggerProgress);
+}
+
+function togglePieSlice(id, side, sliceIdx, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const st = id === 'z4_q15' ? q15State[side] : pieState[id][side];
+  if (st.sel.has(sliceIdx)) st.sel.delete(sliceIdx);
+  else st.sel.add(sliceIdx);
+  refreshPie(id, side, triggerProgress);
+}
+
+function refreshPie(id, side, triggerProgress = true) {
+  const isQ15 = (id === 'z4_q15');
+  const q = isQ15 ? { food: 'martabak', leftName: 'Potongan 1/8', rightName: 'Potongan 1/4' } : Z1_DATA.find(x => x.id === id);
+  const fullSt = isQ15 ? q15State : pieState[id];
+  const st = fullSt[side];
+
+  const stage = document.getElementById(`pie_${id}_${side}`);
+  if (stage) {
+    stage.innerHTML = makePieSVG(q.food, st.cuts, st.sel, 'togglePieSlice', `'${id}', '${side}'`);
+  }
+  const stat = document.getElementById(`pstat_${id}_${side}`);
+  if (stat) {
+    stat.innerHTML = `Terambil: <b>${st.sel.size}</b> / ${st.cuts} potong`;
+  }
+
+  // Update compare tray if visible
+  const tray = document.getElementById('ctray_' + id);
+  if (tray) {
+    tray.innerHTML =
+      makeSingleWedgeSVG(q.food, fullSt.L.cuts, q.leftName) +
+      `<span style="font-size:22px; font-weight:900; color:#64748b;">VS</span>` +
+      makeSingleWedgeSVG(q.food, fullSt.R.cuts, q.rightName);
+  }
+
+  const hid = document.getElementById(`hid_${id}_vis`);
+  if (hid) {
+    hid.value = JSON.stringify({
+      Lc: fullSt.L.cuts, Ls: [...fullSt.L.sel],
+      Rc: fullSt.R.cuts, Rs: [...fullSt.R.sel]
+    });
+  }
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+function toggleCompareTray(id) {
+  const tray = document.getElementById('ctray_' + id);
+  if (tray) tray.classList.toggle('show');
+}
+
+function pickZ1Sign(id, sign, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  pieState[id].sign = sign;
+  const map = { '<': 'lt', '=': 'eq', '>': 'gt' };
+  ['<', '=', '>'].forEach(s => {
+    const b = document.getElementById(`sg_${id}_${map[s]}`);
+    if (b) {
+      b.classList.remove('selected', 's-ok', 's-err');
+      if (s === sign) b.classList.add('selected');
+    }
+  });
+  const hid = document.getElementById(`hid_${id}_sign`);
+  if (hid) hid.value = sign;
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+// ---------- ZONA 2 & ZONA 4 (Q13–14): PITA PECAHAN + URUTKAN KARTU ----------
+function renderOrderZone(containerId, list, lvl) {
+  const wrap = document.getElementById(containerId);
+  const html = list.map(q => {
+    barState[q.id] = {};
+    q.items.forEach(it => barState[q.id][it.key] = new Set());
+    orderState[q.id] = [null, null, null, null];
+
+    const dirBadge = q.dir === 'asc'
+      ? '📈 Urutkan dari TERKECIL (1) → TERBESAR (4)'
+      : '📉 Urutkan dari TERBESAR (1) → TERKECIL (4)';
+
+    const barsHtml = q.items.map(it => {
+      let cells = '';
+      for (let i = 0; i < it.den; i++) {
+        cells += `<div class="seg-cell" id="seg_${q.id}_${it.key.replace('/','_')}_${i}" onclick="toggleBarSeg('${q.id}', '${it.key}', ${i})">${i+1}</div>`;
+      }
+      return `
+      <div class="fbar-card" id="fbar_${q.id}_${it.key.replace('/','_')}">
+        <div class="fbar-head">
+          <span class="fbar-name">${it.label}</span>
+          <span class="fbar-badge">${it.key}</span>
+        </div>
+        <div class="seg-strip">${cells}</div>
+        <div style="font-size:11.5px; color:#64748b; font-weight:700;" id="bstat_${q.id}_${it.key.replace('/','_')}">Diwarnai: <b>0</b> / ${it.den} petak</div>
+      </div>`;
+    }).join('');
+
+    const slotsHtml = [0, 1, 2, 3].map(idx => `
+      <div class="order-slot" id="oslot_${q.id}_${idx}"
+           ondragover="event.preventDefault(); this.classList.add('drag-over');"
+           ondragleave="this.classList.remove('drag-over');"
+           ondrop="onOrdDrop(event, '${q.id}', ${idx})"
+           onclick="onOrdSlotClick('${q.id}', ${idx})">
+        <span class="slot-lbl">Urutan ${idx + 1}</span>
+        <div id="oslotBody_${q.id}_${idx}"><span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh di sini</span></div>
+      </div>`).join('');
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="bar-cards-grid">${barsHtml}</div>
+
+      <div class="order-section">
+        <div class="order-title">${dirBadge} (seret kartu atau klik kartu lalu klik kotak urutan)</div>
+        <div class="order-pool" id="opool_${q.id}"
+             ondragover="event.preventDefault();"
+             ondrop="onOrdPoolDrop(event, '${q.id}')"
+             onclick="onOrdPoolClick('${q.id}')"></div>
+        <div class="order-slots">${slotsHtml}</div>
+      </div>
+
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}_bars" name="${q.id}_bars" value="">
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}_ord" name="${q.id}_ord" value="">
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  if (lvl === 2) wrap.innerHTML = html;
+  else wrap.insertAdjacentHTML('beforeend', html);
+
+  list.forEach(q => refreshOrderUI(q.id, false));
+}
+
+function getOrderMeta(id) {
+  return Z2_DATA.find(x => x.id === id) || Z4_ORD_DATA.find(x => x.id === id);
+}
+
+function toggleBarSeg(id, key, idx, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const q = getOrderMeta(id);
+  const it = q.items.find(x => x.key === key);
+  const set = barState[id][key];
+  const cell = document.getElementById(`seg_${id}_${key.replace('/','_')}_${idx}`);
+  if (!cell) return;
+  if (set.has(idx)) {
+    set.delete(idx);
+    cell.classList.remove(q.colorCls);
+  } else {
+    set.add(idx);
+    cell.classList.add(q.colorCls);
+  }
+  const stEl = document.getElementById(`bstat_${id}_${key.replace('/','_')}`);
+  if (stEl) stEl.innerHTML = `Diwarnai: <b>${set.size}</b> / ${it.den} petak`;
+  syncBarsHidden(id, triggerProgress);
+}
+
+function syncBarsHidden(id, triggerProgress = true) {
+  const obj = {};
+  Object.keys(barState[id]).forEach(k => obj[k] = [...barState[id][k]]);
+  const hid = document.getElementById(`hid_${id}_bars`);
+  if (hid) hid.value = JSON.stringify(obj);
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+function onOrdDragStart(e, id, key) {
+  if (readOnlyMode) { e.preventDefault(); return; }
+  e.dataTransfer.setData('text/plain', JSON.stringify({ id, key }));
+}
+
+function placeOrdChip(id, key, slotIdx) {
+  const arr = orderState[id];
+  const oldIdx = arr.indexOf(key);
+  if (oldIdx !== -1) arr[oldIdx] = null;
+  if (slotIdx !== null && slotIdx >= 0 && slotIdx < 4) {
+    // If slot occupied, swap back to oldIdx or pool
+    if (arr[slotIdx] && oldIdx !== -1) {
+      arr[oldIdx] = arr[slotIdx];
+    }
+    arr[slotIdx] = key;
+  }
+  armedOrdChip = null;
+  refreshOrderUI(id, true);
+}
+
+function onOrdDrop(e, id, slotIdx) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if (readOnlyMode) return;
+  try {
+    const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+    if (data.id === id) placeOrdChip(id, data.key, slotIdx);
+  } catch (err) {}
+}
+
+function onOrdPoolDrop(e, id) {
+  e.preventDefault();
+  if (readOnlyMode) return;
+  try {
+    const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+    if (data.id === id) placeOrdChip(id, data.key, null);
+  } catch (err) {}
+}
+
+function onOrdChipClick(e, id, key) {
+  e.stopPropagation();
+  if (readOnlyMode) return;
+  if (armedOrdChip && armedOrdChip.id === id && armedOrdChip.key === key) {
+    armedOrdChip = null;
+  } else {
+    armedOrdChip = { id, key };
+  }
+  [...Z2_DATA, ...Z4_ORD_DATA].forEach(q => refreshOrderUI(q.id, false));
+}
+
+function onOrdSlotClick(id, slotIdx) {
+  if (readOnlyMode) return;
+  if (armedOrdChip && armedOrdChip.id === id) {
+    placeOrdChip(id, armedOrdChip.key, slotIdx);
+  }
+}
+
+function onOrdPoolClick(id) {
+  if (readOnlyMode) return;
+  if (armedOrdChip && armedOrdChip.id === id) {
+    placeOrdChip(id, armedOrdChip.key, null);
+  }
+}
+
+function refreshOrderUI(id, triggerProgress = true) {
+  const q = getOrderMeta(id);
+  const placed = orderState[id];
+  const makeChip = key => {
+    const isArmed = armedOrdChip && armedOrdChip.id === id && armedOrdChip.key === key;
+    return `<div class="order-chip ${isArmed ? 'armed' : ''}" id="ochip_${id}_${key.replace('/','_')}"
+      draggable="true"
+      ondragstart="onOrdDragStart(event, '${id}', '${key}')"
+      onclick="onOrdChipClick(event, '${id}', '${key}')">${key}</div>`;
+  };
+
+  const unplaced = q.items.map(x => x.key).filter(k => !placed.includes(k));
+  const pool = document.getElementById('opool_' + id);
+  if (pool) {
+    pool.innerHTML = unplaced.length
+      ? unplaced.map(makeChip).join('')
+      : `<span style="font-size:12.5px; color:#15803d; font-weight:800;">✅ Semua kartu sudah di kotak urutan! (Klik kartu jika ingin menukar posisi)</span>`;
+  }
+
+  for (let i = 0; i < 4; i++) {
+    const body = document.getElementById(`oslotBody_${id}_${i}`);
+    if (body) {
+      body.innerHTML = placed[i] ? makeChip(placed[i]) : `<span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh di sini</span>`;
+    }
+  }
+
+  const hid = document.getElementById(`hid_${id}_ord`);
+  if (hid) hid.value = placed.some(x => x !== null) ? JSON.stringify(placed) : '';
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+// ---------- ZONA 3: BATANG COKELAT & GELAS JUS (PENYEBUT SAMA) ----------
+function renderZone3() {
+  const wrap = document.getElementById('zone3Container');
+  wrap.innerHTML = Z3_DATA.map(q => {
+    if (q.mode === 'choco') {
+      z3State[q.id] = { L: new Set(), R: new Set(), sign: '' };
+    } else {
+      z3State[q.id] = { L: 0, R: 0, sign: '' };
+    }
+
+    const buildPanel = side => {
+      const title = side === 'L' ? q.leftName : q.rightName;
+      if (q.mode === 'choco') {
+        let sqs = '';
+        for (let i = 0; i < q.den; i++) {
+          sqs += `<div class="choco-sq" id="csq_${q.id}_${side}_${i}" onclick="toggleChocoSq('${q.id}', '${side}', ${i})">${i+1}</div>`;
+        }
+        return `
+        <div class="plate-box" id="plate_${q.id}_${side}">
+          <div class="plate-title">🍫 ${title}</div>
+          <div class="choco-bar" style="grid-template-columns: repeat(${q.cols}, 1fr);">${sqs}</div>
+          <div class="plate-stat" id="z3stat_${q.id}_${side}">Dimakan: <b>0</b> / ${q.den} petak</div>
+        </div>`;
+      } else {
+        return `
+        <div class="plate-box" id="plate_${q.id}_${side}">
+          <div class="plate-title">🧃 ${title}</div>
+          <div class="glass-stage">
+            <div id="glass_${q.id}_${side}"></div>
+            <div class="glass-controls">
+              <button type="button" class="btn-light btn-sm" onclick="stepGlass('${q.id}', '${side}', -1)">−1 Skala</button>
+              <button type="button" class="btn-blue btn-sm" onclick="stepGlass('${q.id}', '${side}', 1)">+1 Skala</button>
+            </div>
+          </div>
+          <div class="plate-stat" id="z3stat_${q.id}_${side}">Terisi: <b>0</b> / ${q.den} skala</div>
+        </div>`;
+      }
+    };
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="kitchen-grid">
+        ${buildPanel('L')}
+        ${buildPanel('R')}
+      </div>
+
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}_vis" name="${q.id}_vis" value="">
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}_sign" name="${q.id}_sign" value="">
+
+      <div class="frac-eq-bar blue-bar">
+        <div class="frac-group">
+          <span class="frac-lbl">${q.leftName}</span>
+          <div class="frac-stack">
+            <input type="tel" class="m-in lkpd-val lvl3" data-ans="${q.n1}" name="${q.id}_n1" placeholder="?">
+            <div class="frac-line"></div>
+            <input type="tel" class="m-in lkpd-val lvl3" data-ans="${q.den}" name="${q.id}_d1" placeholder="?">
+          </div>
+        </div>
+
+        <div class="sign-picker">
+          <button type="button" class="sign-btn" id="sg_${q.id}_lt" onclick="pickZ3Sign('${q.id}', '<')">&lt;</button>
+          <button type="button" class="sign-btn" id="sg_${q.id}_eq" onclick="pickZ3Sign('${q.id}', '=')">=</button>
+          <button type="button" class="sign-btn" id="sg_${q.id}_gt" onclick="pickZ3Sign('${q.id}', '>')">&gt;</button>
+        </div>
+
+        <div class="frac-group">
+          <span class="frac-lbl">${q.rightName}</span>
+          <div class="frac-stack">
+            <input type="tel" class="m-in lkpd-val lvl3" data-ans="${q.n2}" name="${q.id}_n2" placeholder="?">
+            <div class="frac-line"></div>
+            <input type="tel" class="m-in lkpd-val lvl3" data-ans="${q.den}" name="${q.id}_d2" placeholder="?">
+          </div>
+        </div>
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  Z3_DATA.forEach(q => {
+    if (q.mode === 'glass') {
+      refreshGlass(q.id, 'L', false);
+      refreshGlass(q.id, 'R', false);
+    }
+  });
+}
+
+function toggleChocoSq(id, side, idx, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const q = Z3_DATA.find(x => x.id === id);
+  const set = z3State[id][side];
+  const el = document.getElementById(`csq_${id}_${side}_${idx}`);
+  if (!el) return;
+  if (set.has(idx)) { set.delete(idx); el.classList.remove(q.styleCls); }
+  else { set.add(idx); el.classList.add(q.styleCls); }
+
+  document.getElementById(`z3stat_${id}_${side}`).innerHTML = `Dimakan: <b>${set.size}</b> / ${q.den} petak`;
+  syncZ3Hidden(id, triggerProgress);
+}
+
+function setGlassLevel(id, side, lvl, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const q = Z3_DATA.find(x => x.id === id);
+  z3State[id][side] = Math.max(0, Math.min(q.den, lvl));
+  refreshGlass(id, side, triggerProgress);
+}
+
+function stepGlass(id, side, delta) {
+  if (readOnlyMode) return;
+  setGlassLevel(id, side, (z3State[id][side] || 0) + delta, true);
+}
+
+function refreshGlass(id, side, triggerProgress = true) {
+  const q = Z3_DATA.find(x => x.id === id);
+  const val = z3State[id][side] || 0;
+  const el = document.getElementById(`glass_${id}_${side}`);
+  if (el) el.innerHTML = makeGlassSVG(q.den, val, q.cTop, q.cBot, id, side);
+  const st = document.getElementById(`z3stat_${id}_${side}`);
+  if (st) st.innerHTML = `Terisi: <b>${val}</b> / ${q.den} skala`;
+  syncZ3Hidden(id, triggerProgress);
+}
+
+function syncZ3Hidden(id, triggerProgress = true) {
+  const q = Z3_DATA.find(x => x.id === id);
+  const st = z3State[id];
+  const payload = q.mode === 'choco'
+    ? { L: [...st.L], R: [...st.R] }
+    : { L: st.L, R: st.R };
+  const hid = document.getElementById(`hid_${id}_vis`);
+  if (hid) hid.value = JSON.stringify(payload);
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+function pickZ3Sign(id, sign, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  z3State[id].sign = sign;
+  const map = { '<': 'lt', '=': 'eq', '>': 'gt' };
+  ['<', '=', '>'].forEach(s => {
+    const b = document.getElementById(`sg_${id}_${map[s]}`);
+    if (b) {
+      b.classList.remove('selected', 's-ok', 's-err');
+      if (s === sign) b.classList.add('selected');
+    }
+  });
+  const hid = document.getElementById(`hid_${id}_sign`);
+  if (hid) hid.value = sign;
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+// ---------- ZONA 4: SOAL 13–14 (URUTKAN PENYEBUT SAMA) + SOAL 15 (DETEKTIF) + SOAL 16 (ESTAFET) ----------
+function renderZone4() {
+  const wrap = document.getElementById('zone4Container');
+  wrap.innerHTML = '';
+  renderOrderZone('zone4Container', Z4_ORD_DATA, 4);
+
+  // Soal 15: Detektif Anti-Miskonsepsi
+  const makeQ15CutBtns = side => [2, 4, 6, 8].map(c =>
+    `<button type="button" class="cut-btn ${c === 2 ? 'active' : ''}" id="cut_z4_q15_${side}_${c}" onclick="setPieCuts('z4_q15', '${side}', ${c})">Bagi ${c}</button>`
+  ).join('');
+
+  // Soal 16: Lomba Estafet 4 Regu (Penyebut 12)
+  const q16Tracks = Z4_Q16_TEAMS.map(t => {
+    let segs = '';
+    for (let i = 0; i < t.den; i++) {
+      segs += `<div class="seg-cell" id="q16seg_${t.key}_${i}" onclick="toggleQ16Seg('${t.key}', ${i})">${i+1}</div>`;
+    }
+    return `
+    <div class="fbar-card" id="q16card_${t.key}">
+      <div class="fbar-head">
+        <span class="fbar-name">${t.name}</span>
+        <span class="fbar-badge" style="background:#ffe4e6; color:#9f1239;">Target: ${t.num}/${t.den}</span>
+      </div>
+      <div class="seg-strip">${segs}</div>
+      <div style="font-size:11.5px; color:#64748b; font-weight:700;" id="q16stat_${t.key}">Jarak ditempuh: <b>0</b> / 12 petak</div>
+    </div>`;
+  }).join('');
+
+  wrap.insertAdjacentHTML('beforeend', `
+  <!-- SOAL 15: DETEKTIF MISKONSEPSI -->
+  <div class="q-card" id="card_z4_q15">
+    <div class="q-header">
+      <span class="q-no">Soal 15</span>
+      <div class="q-story">🕵️‍♂️ <b>Detektif Martabak (Anti-Miskonsepsi):</b> Tono berkata: <i>"Pecahan <b>1/8</b> lebih besar dari <b>1/4</b> karena angka 8 lebih besar dari 4!"</i> Buktikan di Dapur Martabak di bawah ini (potong kiri menjadi <b>8</b> dan ambil 1, potong kanan menjadi <b>4</b> dan ambil 1), lalu putuskan apakah pendapat Tono benar atau salah!</div>
+    </div>
+
+    <div class="kitchen-grid">
+      <div class="plate-box" id="plate_z4_q15_L">
+        <div class="plate-title">🍽️ Uji Pecahan 1/8</div>
+        <div class="knife-bar"><span class="knife-label">🔪 Pisau Pemotong:</span>${makeQ15CutBtns('L')}</div>
+        <div class="pie-stage" id="pie_z4_q15_L"></div>
+        <div class="plate-stat" id="pstat_z4_q15_L">Terambil: <b>0</b> / 2 potong</div>
+      </div>
+
+      <div class="plate-box" id="plate_z4_q15_R">
+        <div class="plate-title">🍽️ Uji Pecahan 1/4</div>
+        <div class="knife-bar"><span class="knife-label">🔪 Pisau Pemotong:</span>${makeQ15CutBtns('R')}</div>
+        <div class="pie-stage" id="pie_z4_q15_R"></div>
+        <div class="plate-stat" id="pstat_z4_q15_R">Terambil: <b>0</b> / 2 potong</div>
+      </div>
+    </div>
+
+    <div class="compare-tray-wrap">
+      <button type="button" class="btn-light btn-sm" onclick="toggleCompareTray('z4_q15')">⚖️ Bandingkan Ukuran 1/8 vs 1/4</button>
+      <div class="compare-tray" id="ctray_z4_q15"></div>
+    </div>
+
+    <input type="hidden" class="lkpd-val" id="hid_z4_q15_vis" name="z4_q15_vis" value="">
+    <input type="hidden" class="lkpd-val" id="hid_z4_q15_verdict" name="z4_q15_verdict" value="">
+
+    <div class="choice-row">
+      <button type="button" class="tf-btn" id="tf_benar" onclick="pickQ15Verdict('BENAR')">👍 Pendapat Tono BENAR</button>
+      <button type="button" class="tf-btn" id="tf_salah" onclick="pickQ15Verdict('SALAH')">❌ Pendapat Tono SALAH (1/8 &lt; 1/4)</button>
+    </div>
+
+    <div class="frac-eq-bar" style="flex-direction:column; gap:8px;">
+      <div style="font-size:14px; font-weight:800; color:var(--math-dark); text-align:center;">
+        💡 Kesimpulan Konsep: Jika pembilangnya sama-sama <b>1</b>, semakin <b>BESAR</b> penyebutnya, maka ukuran pecahannya semakin
+        <select class="inline-select lkpd-val lvl4" data-ans="kecil" name="z4_q15_rule">
+          <option value="">-- pilih --</option>
+          <option value="besar">besar</option>
+          <option value="kecil">kecil</option>
+        </select> !
+      </div>
+    </div>
+    <div class="q-hint" id="hint_z4_q15"></div>
+  </div>
+
+  <!-- SOAL 16: LOMBA ESTAFET (PENYEBUT 12) -->
+  <div class="q-card" id="card_z4_q16">
+    <div class="q-header">
+      <span class="q-no">Soal 16</span>
+      <div class="q-story">🏃‍♂️ <b>Lomba Lari Estafet SDN 1 Sukahaji:</b> Lintasan lari dibagi menjadi <b>12 petak</b> sama panjang. Warnai lintasan masing-masing regu sesuai jarak tempuhnya, lalu lengkapi laporan hasil lomba di bawah ini!</div>
+    </div>
+
+    <div class="bar-cards-grid">${q16Tracks}</div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q16_tracks" name="z4_q16_tracks" value="">
+
+    <div class="frac-eq-bar blue-bar" style="flex-direction:column; gap:12px;">
+      <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center; font-size:14px; font-weight:800;">
+        <span>🏆 Regu Paling Jauh:</span>
+        <select class="inline-select lkpd-val lvl4" data-ans="biru" name="z4_q16_far">
+          <option value="">-- pilih regu --</option>
+          <option value="merah">Regu Merah (7/12)</option>
+          <option value="biru">Regu Biru (11/12)</option>
+          <option value="hijau">Regu Hijau (5/12)</option>
+          <option value="kuning">Regu Kuning (9/12)</option>
+        </select>
+        <span>&nbsp;|&nbsp; Regu Paling Dekat:</span>
+        <select class="inline-select lkpd-val lvl4" data-ans="hijau" name="z4_q16_near">
+          <option value="">-- pilih regu --</option>
+          <option value="merah">Regu Merah (7/12)</option>
+          <option value="biru">Regu Biru (11/12)</option>
+          <option value="hijau">Regu Hijau (5/12)</option>
+          <option value="kuning">Regu Kuning (9/12)</option>
+        </select>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; font-size:14px; font-weight:800;">
+        <span>Urutan pembilang dari jarak TERJAUH → TERDEKAT (per 12):</span>
+        <input type="tel" class="m-in lkpd-val lvl4" data-ans="11" name="z4_q16_o1" placeholder="?"> <span>/12 ,</span>
+        <input type="tel" class="m-in lkpd-val lvl4" data-ans="9" name="z4_q16_o2" placeholder="?"> <span>/12 ,</span>
+        <input type="tel" class="m-in lkpd-val lvl4" data-ans="7" name="z4_q16_o3" placeholder="?"> <span>/12 ,</span>
+        <input type="tel" class="m-in lkpd-val lvl4" data-ans="5" name="z4_q16_o4" placeholder="?"> <span>/12</span>
+      </div>
+    </div>
+    <div class="q-hint" id="hint_z4_q16"></div>
+  </div>`);
+
+  refreshPie('z4_q15', 'L', false);
+  refreshPie('z4_q15', 'R', false);
+}
+
+function pickQ15Verdict(v, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  q15State.verdict = v;
+  const b1 = document.getElementById('tf_benar'), b2 = document.getElementById('tf_salah');
+  [b1, b2].forEach(b => b && b.classList.remove('selected', 's-ok', 's-err'));
+  if (v === 'BENAR' && b1) b1.classList.add('selected');
+  if (v === 'SALAH' && b2) b2.classList.add('selected');
+  document.getElementById('hid_z4_q15_verdict').value = v;
+  if (triggerProgress) { clearHint('z4_q15'); updateProgress(); }
+}
+
+function toggleQ16Seg(teamKey, idx, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const t = Z4_Q16_TEAMS.find(x => x.key === teamKey);
+  const set = q16State[teamKey];
+  const cell = document.getElementById(`q16seg_${teamKey}_${idx}`);
+  if (!cell) return;
+  if (set.has(idx)) { set.delete(idx); cell.classList.remove(t.cls); }
+  else { set.add(idx); cell.classList.add(t.cls); }
+  document.getElementById(`q16stat_${teamKey}`).innerHTML = `Jarak ditempuh: <b>${set.size}</b> / 12 petak`;
+
+  const payload = {};
+  Z4_Q16_TEAMS.forEach(x => payload[x.key] = [...q16State[x.key]]);
+  document.getElementById('hid_z4_q16_tracks').value = JSON.stringify(payload);
+  if (triggerProgress) { clearHint('z4_q16'); updateProgress(); }
+}
+
+function flashHint(id, msg) {
+  const el = document.getElementById('hint_' + id);
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+}
+function clearHint(id) {
+  const el = document.getElementById('hint_' + id);
+  if (el) { el.textContent = ''; el.classList.remove('show'); }
+}
+
+// =========================================================================
+// VALIDASI GAMIFIKASI PER ZONA
+// =========================================================================
+function validateOrderQuestion(q) {
+  clearHint(q.id);
+  const card = document.getElementById('card_' + q.id);
+  card.classList.remove('card-correct', 'card-wrong');
+  let barsOk = true;
+  q.items.forEach(it => {
+    const fcard = document.getElementById(`fbar_${q.id}_${it.key.replace('/','_')}`);
+    if (fcard) fcard.classList.remove('fbar-ok', 'fbar-err');
+    if (barState[q.id][it.key].size === it.num) {
+      if (fcard) fcard.classList.add('fbar-ok');
+    } else {
+      if (fcard) fcard.classList.add('fbar-err');
+      barsOk = false;
+    }
+  });
+
+  const placed = orderState[q.id];
+  let ordOk = true;
+  let emptySlots = 0;
+  for (let i = 0; i < 4; i++) {
+    const k = placed[i];
+    if (!k) { emptySlots++; ordOk = false; continue; }
+    const chip = document.getElementById(`ochip_${q.id}_${k.replace('/','_')}`);
+    if (chip) chip.classList.remove('chip-ok', 'chip-err');
+    if (k === q.correctOrder[i]) {
+      if (chip) chip.classList.add('chip-ok');
+    } else {
+      if (chip) chip.classList.add('chip-err');
+      ordOk = false;
+    }
+  }
+
+  if (!barsOk) {
+    card.classList.add('card-wrong');
+    flashHint(q.id, `⚠️ Warnai dulu petak pada setiap pita/batang (bertanda merah) sesuai pembilang pecahannya agar ukurannya terlihat jelas!`);
+    return false;
+  }
+  if (!ordOk) {
+    card.classList.add('card-wrong');
+    flashHint(q.id, emptySlots > 0
+      ? `⚠️ Masih ada ${emptySlots} kotak urutan yang kosong! Masukkan seluruh 4 kartu pecahan.`
+      : `⚠️ Urutan kartu bertanda merah belum tepat! Perhatikan perintah (${q.dir === 'asc' ? 'Terkecil → Terbesar' : 'Terbesar → Terkecil'}) dan bandingkan panjang warna di atas.`);
+    return false;
+  }
+  card.classList.add('card-correct');
+  return true;
+}
+
+function checkLevel(lvl) {
+  let allCorrect = true;
+
+  // 1. Validasi input & select standar pada level ini
+  const inputs = document.querySelectorAll('.lvl' + lvl + ':not([readonly])');
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    if (inp.value.trim().toLowerCase() === String(inp.dataset.ans).trim().toLowerCase()) {
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      allCorrect = false;
+      setTimeout(() => inp.classList.remove('wrong'), 500);
+    }
+  });
+
+  // 2. Validasi visual & interaksi per zona
+  if (lvl === 1) {
+    Z1_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const st = pieState[q.id];
+      const pL = document.getElementById(`plate_${q.id}_L`), pR = document.getElementById(`plate_${q.id}_R`);
+      [pL, pR].forEach(p => p.classList.remove('plate-ok', 'plate-err'));
+
+      const lOk = (st.L.cuts === q.d1 && st.L.sel.size === 1);
+      const rOk = (st.R.cuts === q.d2 && st.R.sel.size === 1);
+      pL.classList.add(lOk ? 'plate-ok' : 'plate-err');
+      pR.classList.add(rOk ? 'plate-ok' : 'plate-err');
+
+      const map = { '<': 'lt', '=': 'eq', '>': 'gt' };
+      ['<', '=', '>'].forEach(s => {
+        const b = document.getElementById(`sg_${q.id}_${map[s]}`);
+        if (b) b.classList.remove('s-ok', 's-err');
+      });
+      const signOk = (st.sign === q.sign);
+      if (st.sign) {
+        const chosen = document.getElementById(`sg_${q.id}_${map[st.sign]}`);
+        if (chosen) chosen.classList.add(signOk ? 's-ok' : 's-err');
+      }
+      const eqOk = [...card.querySelectorAll('.lvl1')].every(el => el.classList.contains('correct'));
+
+      if (!lOk || !rOk) {
+        allCorrect = false;
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Potong kue sesuai cerita (kiri Bagi ${q.d1}, kanan Bagi ${q.d2}) dan klik tepat 1 potongan pada masing-masing piring!`);
+      } else if (!signOk) {
+        allCorrect = false;
+        card.classList.add('card-wrong');
+        flashHint(q.id, st.sign ? `⚠️ Tanda perbandingan masih keliru! Klik tombol "⚖️ Bandingkan Ukuran" untuk melihat potongan mana yang lebih besar.` : `⚠️ Pilih tanda perbandingan (<, =, atau >) di tengah kedua pecahan!`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Potongan kue dan tandanya sudah tepat! Periksa kembali angka pembilang (atas) dan penyebut (bawah).`);
+      } else {
+        card.classList.add('card-correct');
+      }
+    });
+  } else if (lvl === 2) {
+    Z2_DATA.forEach(q => {
+      if (!validateOrderQuestion(q)) allCorrect = false;
+    });
+  } else if (lvl === 3) {
+    Z3_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const st = z3State[q.id];
+      const pL = document.getElementById(`plate_${q.id}_L`), pR = document.getElementById(`plate_${q.id}_R`);
+      [pL, pR].forEach(p => p.classList.remove('plate-ok', 'plate-err'));
+
+      const cntL = q.mode === 'choco' ? st.L.size : st.L;
+      const cntR = q.mode === 'choco' ? st.R.size : st.R;
+      const lOk = (cntL === q.n1), rOk = (cntR === q.n2);
+      pL.classList.add(lOk ? 'plate-ok' : 'plate-err');
+      pR.classList.add(rOk ? 'plate-ok' : 'plate-err');
+
+      const map = { '<': 'lt', '=': 'eq', '>': 'gt' };
+      ['<', '=', '>'].forEach(s => {
+        const b = document.getElementById(`sg_${q.id}_${map[s]}`);
+        if (b) b.classList.remove('s-ok', 's-err');
+      });
+      const signOk = (st.sign === q.sign);
+      if (st.sign) {
+        const chosen = document.getElementById(`sg_${q.id}_${map[st.sign]}`);
+        if (chosen) chosen.classList.add(signOk ? 's-ok' : 's-err');
+      }
+      const eqOk = [...card.querySelectorAll('.lvl3')].every(el => el.classList.contains('correct'));
+
+      if (!lOk || !rOk) {
+        allCorrect = false;
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Jumlah bagian yang ditandai/diisi belum sesuai cerita (kiri ${q.n1}/${q.den}, kanan ${q.n2}/${q.den})!`);
+      } else if (!signOk) {
+        allCorrect = false;
+        card.classList.add('card-wrong');
+        flashHint(q.id, st.sign ? `⚠️ Tanda perbandingan (<, =, >) belum tepat! Bandingkan tinggi/banyak bagian kiri dan kanan.` : `⚠️ Pilih tanda perbandingan (<, =, atau >) terlebih dahulu!`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Gambar dan tandanya sudah tepat! Periksa lagi penulisan pembilang dan penyebutnya.`);
+      } else {
+        card.classList.add('card-correct');
+      }
+    });
+  } else if (lvl === 4) {
+    // Soal 13 & 14
+    Z4_ORD_DATA.forEach(q => {
+      if (!validateOrderQuestion(q)) allCorrect = false;
+    });
+
+    // Soal 15
+    clearHint('z4_q15');
+    const c15 = document.getElementById('card_z4_q15');
+    c15.classList.remove('card-correct', 'card-wrong');
+    const pL = document.getElementById('plate_z4_q15_L'), pR = document.getElementById('plate_z4_q15_R');
+    [pL, pR].forEach(p => p.classList.remove('plate-ok', 'plate-err'));
+    const q15LOk = (q15State.L.cuts === 8 && q15State.L.sel.size === 1);
+    const q15ROk = (q15State.R.cuts === 4 && q15State.R.sel.size === 1);
+    pL.classList.add(q15LOk ? 'plate-ok' : 'plate-err');
+    pR.classList.add(q15ROk ? 'plate-ok' : 'plate-err');
+
+    const b1 = document.getElementById('tf_benar'), b2 = document.getElementById('tf_salah');
+    [b1, b2].forEach(b => b.classList.remove('s-ok', 's-err'));
+    const vOk = (q15State.verdict === 'SALAH');
+    if (q15State.verdict === 'BENAR') b1.classList.add('s-err');
+    if (q15State.verdict === 'SALAH') b2.classList.add('s-ok');
+    const q15RuleOk = document.querySelector('[name="z4_q15_rule"]').classList.contains('correct');
+
+    if (!q15LOk || !q15ROk) {
+      allCorrect = false; c15.classList.add('card-wrong');
+      flashHint('z4_q15', '⚠️ Uji dulu di kedua piring martabak: kiri Bagi 8 (ambil 1 potong) dan kanan Bagi 4 (ambil 1 potong)!');
+    } else if (!vOk) {
+      allCorrect = false; c15.classList.add('card-wrong');
+      flashHint('z4_q15', '⚠️ Amati ukuran potongan 1/8 dibanding 1/4! Apakah pendapat Tono benar atau salah?');
+    } else if (!q15RuleOk) {
+      c15.classList.add('card-wrong');
+      flashHint('z4_q15', '⚠️ Pilih kesimpulan aturan pecahan pembilang 1 pada kotak pilihan di bawah!');
+    } else {
+      c15.classList.add('card-correct');
+    }
+
+    // Soal 16
+    clearHint('z4_q16');
+    const c16 = document.getElementById('card_z4_q16');
+    c16.classList.remove('card-correct', 'card-wrong');
+    let tracksOk = true;
+    Z4_Q16_TEAMS.forEach(t => {
+      const tc = document.getElementById('q16card_' + t.key);
+      tc.classList.remove('fbar-ok', 'fbar-err');
+      if (q16State[t.key].size === t.num) tc.classList.add('fbar-ok');
+      else { tc.classList.add('fbar-err'); tracksOk = false; }
+    });
+    const q16EqOk = [...c16.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+    if (!tracksOk) {
+      allCorrect = false; c16.classList.add('card-wrong');
+      flashHint('z4_q16', '⚠️ Warnai lintasan seluruh 4 regu sesuai target jaraknya (Merah 7, Biru 11, Hijau 5, Kuning 9 petak)!');
+    } else if (!q16EqOk) {
+      c16.classList.add('card-wrong');
+      flashHint('z4_q16', '⚠️ Lintasan sudah benar! Periksa kembali pilihan Regu Paling Jauh, Paling Dekat, dan urutan pembilangnya.');
+    } else {
+      c16.classList.add('card-correct');
+    }
+  }
+
+  if (allCorrect) {
+    document.getElementById('level' + lvl).classList.add('completed');
+    if (lvl === 4) {
+      document.getElementById('msgFinal').style.display = 'block';
+      document.getElementById('sendBtn2').style.display = 'block';
+      document.getElementById('msgFinal').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      unlockedMax = Math.max(unlockedMax, lvl + 1);
+      const next = document.getElementById('level' + (lvl + 1));
+      if (next) {
+        next.classList.remove('locked');
+        next.classList.add('unlocked');
+        next.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  } else {
+    const firstWrong = document.querySelector(`#level${lvl} .card-wrong, #level${lvl} .wrong`);
+    if (firstWrong) firstWrong.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// =========================================================================
+// PEMULIHAN STATE VISUAL (DRAF & ARSIP PENILAIAN GURU/SISWA)
+// =========================================================================
+function restoreInteractiveStates(answers) {
+  if (!answers) return;
+
+  // 1. Pulihkan Zona 1 (Pie + Sign)
+  Z1_DATA.forEach(q => {
+    const rawVis = answers[q.id + '_vis'];
+    if (rawVis) {
+      try {
+        const obj = JSON.parse(rawVis);
+        if (obj) {
+          setPieCuts(q.id, 'L', Number(obj.Lc) || 2, false);
+          (obj.Ls || []).forEach(i => pieState[q.id].L.sel.add(Number(i)));
+          refreshPie(q.id, 'L', false);
+
+          setPieCuts(q.id, 'R', Number(obj.Rc) || 2, false);
+          (obj.Rs || []).forEach(i => pieState[q.id].R.sel.add(Number(i)));
+          refreshPie(q.id, 'R', false);
+        }
+      } catch (e) {}
+    }
+    if (answers[q.id + '_sign']) pickZ1Sign(q.id, answers[q.id + '_sign'], false);
+  });
+
+  // 2. Pulihkan Zona 2 & Soal 13–14 (Bars + Order)
+  [...Z2_DATA, ...Z4_ORD_DATA].forEach(q => {
+    const rawBars = answers[q.id + '_bars'];
+    if (rawBars) {
+      try {
+        const obj = JSON.parse(rawBars);
+        if (obj) {
+          q.items.forEach(it => {
+            barState[q.id][it.key] = new Set();
+            (obj[it.key] || []).forEach(idx => toggleBarSeg(q.id, it.key, Number(idx), false));
+          });
+        }
+      } catch (e) {}
+    }
+    const rawOrd = answers[q.id + '_ord'];
+    if (rawOrd) {
+      try {
+        const arr = JSON.parse(rawOrd);
+        if (Array.isArray(arr) && arr.length === 4) {
+          orderState[q.id] = arr;
+          refreshOrderUI(q.id, false);
+        }
+      } catch (e) {}
+    }
+  });
+
+  // 3. Pulihkan Zona 3 (Choco / Glass + Sign)
+  Z3_DATA.forEach(q => {
+    const rawVis = answers[q.id + '_vis'];
+    if (rawVis) {
+      try {
+        const obj = JSON.parse(rawVis);
+        if (obj) {
+          if (q.mode === 'choco') {
+            z3State[q.id].L = new Set();
+            z3State[q.id].R = new Set();
+            (obj.L || []).forEach(i => toggleChocoSq(q.id, 'L', Number(i), false));
+            (obj.R || []).forEach(i => toggleChocoSq(q.id, 'R', Number(i), false));
+          } else {
+            setGlassLevel(q.id, 'L', Number(obj.L) || 0, false);
+            setGlassLevel(q.id, 'R', Number(obj.R) || 0, false);
+          }
+        }
+      } catch (e) {}
+    }
+    if (answers[q.id + '_sign']) pickZ3Sign(q.id, answers[q.id + '_sign'], false);
+  });
+
+  // 4. Pulihkan Soal 15 (Detektif Martabak)
+  if (answers.z4_q15_vis) {
+    try {
+      const obj = JSON.parse(answers.z4_q15_vis);
+      if (obj) {
+        setPieCuts('z4_q15', 'L', Number(obj.Lc) || 2, false);
+        (obj.Ls || []).forEach(i => q15State.L.sel.add(Number(i)));
+        refreshPie('z4_q15', 'L', false);
+
+        setPieCuts('z4_q15', 'R', Number(obj.Rc) || 2, false);
+        (obj.Rs || []).forEach(i => q15State.R.sel.add(Number(i)));
+        refreshPie('z4_q15', 'R', false);
+      }
+    } catch (e) {}
+  }
+  if (answers.z4_q15_verdict) pickQ15Verdict(answers.z4_q15_verdict, false);
+
+  // 5. Pulihkan Soal 16 (Lintasan Estafet)
+  if (answers.z4_q16_tracks) {
+    try {
+      const obj = JSON.parse(answers.z4_q16_tracks);
+      if (obj) {
+        Z4_Q16_TEAMS.forEach(t => {
+          q16State[t.key] = new Set();
+          (obj[t.key] || []).forEach(idx => toggleQ16Seg(t.key, Number(idx), false));
+        });
+      }
+    } catch (e) {}
+  }
+}
+
+function normalizeDateForInput(raw) {
+  if (!raw) return '';
+  const s = String(raw).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const d = new Date(s);
+  if (!isNaN(d.getTime())) {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  return '';
+}
+
+// =========================================================================
+// MESIN LMS V4.2 (KONTRAK PAYLOAD GAS + TANGGAL KALENDER)
+// =========================================================================
+document.addEventListener("DOMContentLoaded", () => {
+  buildAllZones();
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+    updateProgress();
+  }
+});
+
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN anggota kelompok lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+            updateProgress();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Gagal memuat database."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => String(s.nisn) === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+
+function collect() {
+  let d = {};
+  getValFields().forEach(el => { if (el.name) d[el.name] = el.value; });
+  const tglVal = document.querySelector('[name="tanggal"]').value;
+  if (tglVal) d.tanggal = tglVal;
+  return d;
+}
+
+function setupInputs() {
+  getValFields().forEach(el => {
+    el.addEventListener("input", updateProgress);
+    el.addEventListener("change", updateProgress);
+  });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+  document.querySelector('[name="tanggal"]').addEventListener("change", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields();
+  let filled = 0;
+  vals.forEach(x => {
+    const v = String(x.value || "").trim();
+    if (v && v !== "[]" && v !== "{}" && v !== '{"L":0,"R":0}') filled++;
+  });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  const pct = Math.min(100, Math.round((filled + (groupMembers.length > 0 ? 1 : 0)) / (vals.length + 2) * 100));
+  document.getElementById("progressBar").style.width = pct + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({
+    members: groupMembers,
+    tanggal: document.querySelector('[name="tanggal"]').value,
+    unlockedMax: unlockedMax,
+    answers: collect()
+  }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><p>Semua potongan kue, urutan pita, cokelat, dan gelas jusmu tersimpan di perangkat ini.</p><button class='btn-main' onclick='closeModal()'>Lanjut</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE));
+    if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = normalizeDateForInput(d.tanggal);
+    if (d.unlockedMax && d.unlockedMax > 1) {
+      unlockedMax = d.unlockedMax;
+      for (let i = 2; i <= unlockedMax; i++) {
+        const el = document.getElementById('level' + i);
+        if (el) { el.classList.remove('locked'); el.classList.add('unlocked'); }
+      }
+    }
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+      restoreInteractiveStates(d.answers);
+    }
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) {
+    return showModal("<h3>⚠️ Belum Lengkap</h3><p>Isi Hari/Tanggal pada kalender dan pastikan Anggota Kelompok terisi!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Jawaban...</h3>");
+  let payload = {
+    action: 'submitLKPD',
+    lkpdId: LKPD_ID,
+    subject: SUBJECT,
+    hariTanggal: tgl,
+    materiPokok: document.querySelector('[name="materi"]').value,
+    members: groupMembers,
+    answers: JSON.stringify(collect())
+  };
+
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      readOnlyMode = true;
+      document.querySelectorAll("input,select,textarea,button").forEach(el => el.disabled = true);
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Jawaban dan seluruh simulasi pecahan kelompokmu telah masuk ke Dasbor Guru.</p>`);
+      document.getElementById("appbar").style.display = "none";
+    } else {
+      showModal("<h3>⚠️ Gagal Mengirim</h3><p>Silakan coba kirim kembali.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Koneksi Terputus</h3><p>Periksa jaringan internet lalu coba lagi.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+};
+
+async function loadLMSViewMode() {
+  readOnlyMode = true;
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  showModal("<div class='spinner'></div><h3>Memuat Data Arsip...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + encodeURIComponent(LKPD_ID) + "&submissionId=" + encodeURIComponent(submissionId));
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if (result.members) { groupMembers = result.members; renderMembers(); }
+      else { document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database)</i></div>`; }
+
+      const tglEl = document.querySelector('[name="tanggal"]');
+      if (tglEl) {
+        const tglRestored = normalizeDateForInput(answers.tanggal || result.hariTanggal || '');
+        if (tglRestored) tglEl.value = tglRestored;
+      }
+
+      Object.keys(answers).forEach(k => {
+        if (k === 'tanggal') return;
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+
+      restoreInteractiveStates(answers);
+
+      document.querySelectorAll('.game-level').forEach(el => {
+        el.classList.remove('locked');
+        el.classList.add('unlocked');
+        let ovr = el.querySelector('.lock-overlay');
+        if (ovr) ovr.remove();
+      });
+
+      document.querySelectorAll("input,select,textarea,button").forEach(el => {
+        if (!el.closest('#gradePanel')) {
+          el.disabled = true;
+          el.readOnly = true;
+        }
+      });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel");
+      panel.classList.add("show");
+      let scale = document.getElementById("gradeScale");
+      let note  = document.getElementById("gradeNote");
+      let btn   = document.getElementById("lockGradeBtn");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade;
+          note.value = result.feedback;
+          scale.disabled = true;
+          note.disabled = true;
+          btn.style.display = "none";
+          renderStars(scale.value);
+        } else {
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none";
+        scale.disabled = true;
+        note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade;
+          note.value = result.feedback;
+          renderStars(scale.value);
+        }
+      }
+    } else {
+      showModal("<h3>⚠️ Data Tidak Ditemukan</h3>");
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) {
+  const n = { A:4, B:3, C:2, D:1 }[v] || 0;
+  const st = document.getElementById("starRating");
+  st.textContent = '★'.repeat(n) + '☆'.repeat(4 - n);
+  st.style.color = n ? '#f59e0b' : '#cbd5e1';
+}
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian terlebih dahulu!");
+  let btn = document.getElementById("lockGradeBtn");
+  btn.disabled = true;
+  btn.innerText = "⏳ Menyimpan...";
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        action: 'saveGrade',
+        lkpdId: LKPD_ID,
+        submissionId: submissionId,
+        grade: grade,
+        feedback: feedback
+      })
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Tersimpan & Terdistribusi";
+      document.getElementById("gradeScale").disabled = true;
+      document.getElementById("gradeNote").disabled = true;
+    } else {
+      alert("Gagal menyimpan nilai.");
+      btn.disabled = false;
+      btn.innerText = "🔒 Simpan & Distribusikan Nilai";
+    }
+  } catch (e) {
+    alert("Koneksi gagal.");
+    btn.disabled = false;
+    btn.innerText = "🔒 Simpan & Distribusikan Nilai";
+  }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
