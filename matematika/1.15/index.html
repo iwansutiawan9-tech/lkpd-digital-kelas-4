@@ -1,1 +1,2035 @@
+<!doctype html>
+<!-- MASTER LKPD DIGITAL V4.2 (GAMIFIKASI MATEMATIKA - FAKTOR & KELIPATAN) -->
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LKPD 1.15 Matematika - Mengenal Konsep Faktor dan Kelipatan (Sampai 100)</title>
+<style>
+:root {
+  --green: #059669; --green2: #047857; --green-soft: #dcfce7;
+  --ink: #1e293b; --slate: #334155; --muted: #64748b; --line: #e2e8f0;
+  --white: #ffffff; --red: #ef4444; --red-soft: #fee2e2;
+  --math-main: #0284c7; --math-light: #e0f2fe; --math-dark: #0c4a6e; --math-accent: #f59e0b;
+  --factor-main: #0891b2; --factor-soft: #cffafe; --factor-dark: #155e75;
+  --mult-main: #d97706; --mult-soft: #fef3c7; --mult-dark: #92400e;
+  --indigo: #4f46e5; --indigo-soft: #e0e7ff;
+  --rose: #e11d48; --rose-soft: #ffe4e6;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: linear-gradient(135deg, #f0f9ff, #fef3c7 52%, #ecfdf5);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--ink); overflow-x: hidden;
+}
+body::before, body::after {
+  content: ""; position: fixed; z-index: -1; border-radius: 50%; filter: blur(6px); opacity: .45; pointer-events: none;
+}
+body::before { width: 260px; height: 260px; background: #bae6fd; left: -75px; top: 120px; }
+body::after { width: 220px; height: 220px; background: #fde68a; right: -55px; bottom: 90px; }
 
+/* ================= APPBAR ================= */
+.appbar {
+  position: sticky; top: 0; z-index: 30; display: flex; gap: 10px; align-items: center; justify-content: space-between;
+  padding: 12px 18px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #cbd5e1;
+}
+.brand { font-weight: 900; color: var(--math-main); font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.top-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.status-text { font-size: 13px; font-weight: 800; color: var(--math-dark); background: var(--math-light); padding: 8px 14px; border-radius: 99px; display: none; }
+
+button {
+  border: 0; border-radius: 12px; padding: 10px 16px; font-weight: 800; cursor: pointer;
+  transition: .2s transform, .2s box-shadow, .2s background; font-family: inherit; font-size: 14px;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.1); }
+button:active { transform: scale(.98); }
+button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+.btn-light { background: #f1f5f9; color: #334155; }
+.btn-main { background: var(--math-main); color: #fff; }
+.btn-green { background: var(--green); color: #fff; }
+.btn-amber { background: var(--mult-main); color: #fff; }
+.btn-indigo { background: var(--indigo); color: #fff; }
+.btn-rose { background: var(--rose); color: #fff; }
+.btn-sm { padding: 6px 12px; font-size: 12.5px; border-radius: 9px; }
+
+.progress { height: 6px; background: var(--math-light); position: sticky; top: 61px; z-index: 29; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--math-main), var(--math-accent)); transition: .3s; }
+
+/* ================= HERO & IDENTITAS ================= */
+.sheet {
+  width: min(1040px, calc(100% - 24px)); margin: 20px auto; background: #fff;
+  border-radius: 24px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07); padding: 28px;
+}
+.hero { display: grid; grid-template-columns: 1.7fr .8fr; gap: 20px; align-items: stretch; }
+.hero-card { background: linear-gradient(135deg, #f0f9ff, #fffbeb); border-radius: 22px; padding: 26px; border: 1px solid #bae6fd; }
+.badge { display: inline-block; background: var(--math-main); color: #fff; padding: 7px 14px; border-radius: 99px; font-weight: 900; font-size: 13px; margin-bottom: 12px; }
+h1 { font-size: clamp(25px, 4vw, 33px); line-height: 1.15; margin: 0 0 12px; color: var(--math-dark); }
+h2 { margin: 0; font-size: 20px; color: var(--ink); }
+p { line-height: 1.65; font-size: 15px; color: var(--slate); }
+
+.mission {
+  background: #fff; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; justify-content: center; text-align: center; font-size: 15px; border: 2px dashed var(--math-accent);
+}
+.mission-icon { font-size: 54px; animation: bob 2.8s ease-in-out infinite; margin-bottom: 8px; }
+@keyframes bob { 50% { transform: translateY(-8px) rotate(3deg); } }
+
+.concept-strip {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;
+}
+.concept-pill {
+  border-radius: 14px; padding: 12px 14px; font-size: 13.5px; line-height: 1.5; font-weight: 600;
+}
+.concept-pill.c-fac { background: var(--factor-soft); border: 1.5px solid #67e8f9; color: var(--factor-dark); }
+.concept-pill.c-mul { background: var(--mult-soft); border: 1.5px solid #fcd34d; color: var(--mult-dark); }
+
+.idgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.field label { display: block; font-size: 13px; font-weight: 900; color: #334155; margin-bottom: 6px; }
+.idgrid input, .grade-panel select, .grade-panel textarea {
+  width: 100%; font: inherit; border: 2px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; outline: none; background: #fff; transition: .2s;
+}
+.idgrid input:focus, .grade-panel select:focus, .grade-panel textarea:focus {
+  border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.2);
+}
+.group-builder { background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 16px; padding: 16px; grid-column: 1 / -1; }
+.member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.member-badge { background: #0f172a; color: #fff; padding: 6px 14px; border-radius: 99px; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+.member-badge span { cursor: pointer; background: #fff; color: #0f172a; width: 20px; height: 20px; display: inline-grid; place-items: center; border-radius: 50%; font-size: 12px; }
+.add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.readonly-group-list { margin-top: 8px; background: #fff; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px 16px; }
+.readonly-item { padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 14px; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+.readonly-item:last-child { border-bottom: none; }
+
+/* ================= GAME LEVEL & ZONA ================= */
+.section-title { display: flex; align-items: center; gap: 12px; border-bottom: 3px solid var(--math-light); padding-bottom: 12px; margin-bottom: 18px; }
+.num { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--math-main); color: #fff; font-weight: 900; flex: 0 0 auto; font-size: 17px; }
+
+.game-level { position: relative; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 18px; padding: 22px; margin-bottom: 10px; transition: all .3s; }
+.game-level.locked { opacity: 0.62; pointer-events: none; filter: grayscale(92%); min-height: 220px; }
+.lock-overlay { position: absolute; inset: 0; background: rgba(248, 250, 252, 0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; border-radius: 16px; text-align: center; padding: 20px; }
+.lock-icon { font-size: 52px; margin-bottom: 8px; }
+.game-level.unlocked .lock-overlay { display: none; }
+.game-level.completed { border-color: var(--green); background: #f0fdf4; }
+
+.story-box { background: #fff; border-left: 5px solid var(--factor-main); padding: 14px 18px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); font-size: 14.5px; font-weight: 600; line-height: 1.6; }
+
+/* ================= KARTU SOAL ================= */
+.q-card {
+  background: #ffffff; border: 2px solid #e2e8f0; border-radius: 18px;
+  padding: 20px; margin-bottom: 22px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  transition: border-color .25s, box-shadow .25s;
+}
+.q-card.card-correct { border-color: #22c55e; background: #fafffe; }
+.q-card.card-wrong { border-color: #ef4444; animation: shake 0.4s; }
+
+.q-header {
+  display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px;
+  background: #f8fafc; border-left: 4px solid var(--math-main); padding: 12px 16px; border-radius: 12px;
+}
+.q-no {
+  background: var(--math-main); color: #fff; font-weight: 900; font-size: 13px;
+  padding: 4px 10px; border-radius: 99px; flex: 0 0 auto; margin-top: 2px;
+}
+.q-story { font-size: 14.5px; font-weight: 600; color: var(--ink); line-height: 1.55; }
+
+.q-hint {
+  display: none; margin-top: 10px; padding: 9px 14px; border-radius: 10px;
+  background: var(--red-soft); color: #991b1b; font-size: 13px; font-weight: 700;
+}
+.q-hint.show { display: block; }
+
+/* ================= ZONA 1 & ZONA 4 (LAB UJI FAKTOR) ================= */
+.lab-bar {
+  background: linear-gradient(135deg, #ecfeff, #f8fafc); border: 2px dashed var(--factor-main);
+  border-radius: 14px; padding: 12px 14px; margin-bottom: 12px;
+}
+.lab-label { font-size: 12.5px; font-weight: 900; color: var(--factor-dark); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.test-btns { display: flex; flex-wrap: wrap; gap: 7px; }
+.test-btn {
+  min-width: 44px; height: 38px; padding: 0 10px; border-radius: 10px;
+  background: #fff; border: 2px solid #cbd5e1; color: var(--ink);
+  font-weight: 900; font-size: 14px; cursor: pointer; transition: .18s;
+}
+.test-btn:hover { border-color: var(--factor-main); background: var(--factor-soft); transform: translateY(-1px); box-shadow: none; }
+.test-btn.active-test { box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.35); }
+.test-btn.is-factor { background: #dcfce7; border-color: #22c55e; color: #15803d; }
+.test-btn.not-factor { background: #fee2e2; border-color: #fca5a5; color: #b91c1c; text-decoration: line-through; }
+
+.lab-stage {
+  background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
+  padding: 14px; margin-bottom: 14px; min-height: 110px;
+}
+.lab-banner {
+  display: inline-block; padding: 6px 14px; border-radius: 99px; font-size: 13px; font-weight: 900; margin-bottom: 12px;
+}
+.lab-banner.ok { background: #dcfce7; color: #166534; border: 1.5px solid #86efac; }
+.lab-banner.fail { background: #fee2e2; color: #991b1b; border: 1.5px solid #fca5a5; }
+.lab-banner.idle { background: #e2e8f0; color: #475569; }
+
+.lab-groups { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+.lab-box {
+  background: #fff; border: 2px solid #86efac; border-radius: 12px; padding: 8px;
+  min-width: 72px; display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.lab-box.fail-box { border-color: #cbd5e1; }
+.lab-box-title { font-size: 11px; font-weight: 900; color: var(--muted); }
+.lab-box-objs { display: flex; flex-wrap: wrap; gap: 2px; justify-content: center; max-width: 120px; }
+
+.rem-zone {
+  margin-top: 12px; background: #fef2f2; border: 2px dashed #ef4444; border-radius: 12px;
+  padding: 10px 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+}
+.rem-label { font-size: 12.5px; font-weight: 900; color: #b91c1c; }
+
+/* ================= ZONA 2: GROSIR PAK & PAPAN LOMPATAN ================= */
+.mult-toolbar {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between;
+  background: linear-gradient(135deg, #fffbeb, #f0f9ff); border: 2px dashed var(--mult-main);
+  border-radius: 14px; padding: 12px 14px; margin-bottom: 12px;
+}
+.stock-pill {
+  background: #fff; border: 1.5px solid #cbd5e1; border-radius: 99px;
+  padding: 5px 12px; font-size: 12.5px; font-weight: 800; color: var(--slate);
+}
+.stock-pill b { color: var(--math-dark); }
+.stock-pill.amber { background: #fef3c7; border-color: #fcd34d; color: #92400e; }
+
+.mult-packs-arena {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
+  padding: 14px; margin-bottom: 14px; min-height: 105px;
+}
+.mp-box {
+  background: #fff; border: 2px solid #fcd34d; border-radius: 14px; padding: 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  animation: popIn .2s ease-out;
+}
+.mp-head { width: 100%; display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; font-weight: 900; color: #92400e; }
+.mp-tot { background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 99px; font-size: 12px; font-weight: 900; }
+.mp-objs { display: flex; flex-wrap: wrap; gap: 2px; justify-content: center; }
+
+.num-board-wrap {
+  background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 16px;
+  padding: 14px; margin-bottom: 14px; overflow-x: auto;
+}
+.num-board {
+  display: grid; grid-template-columns: repeat(10, minmax(30px, 1fr)); gap: 5px;
+  max-width: 580px; margin: 0 auto; user-select: none;
+}
+.nb-cell {
+  height: 38px; border-radius: 9px; background: #fff; border: 1.5px solid #cbd5e1;
+  display: grid; place-items: center; font-weight: 800; font-size: 13.5px; color: var(--slate);
+  cursor: pointer; transition: .15s;
+}
+.nb-cell:hover { border-color: var(--mult-main); background: #fffbeb; }
+.nb-cell.jumped {
+  background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; border-color: #b45309;
+  font-weight: 900; transform: scale(1.04); box-shadow: 0 3px 8px rgba(217, 119, 6, 0.3);
+}
+.nb-cell.nb-err { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+.nb-cell.nb-ok { background: #10b981 !important; border-color: #059669 !important; color: #fff !important; }
+
+/* ================= ZONA 3: MESIN SORTIR FAKTOR VS KELIPATAN ================= */
+.sort-pool {
+  background: #f8fafc; border: 2px dashed #94a3b8; border-radius: 14px;
+  padding: 12px 14px; margin-bottom: 14px; min-height: 64px;
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center;
+}
+.sort-chip {
+  background: #fff; border: 2.5px solid var(--indigo); color: var(--indigo);
+  border-radius: 12px; padding: 7px 15px; font-size: 16px; font-weight: 900;
+  cursor: grab; user-select: none; transition: .18s; box-shadow: 0 3px 8px rgba(79,70,229,0.12);
+}
+.sort-chip:hover { transform: translateY(-2px); }
+.sort-chip.armed {
+  background: var(--indigo); color: #fff; box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.28);
+}
+.sort-chip.chip-ok { border-color: #22c55e; background: #dcfce7; color: #15803d; }
+.sort-chip.chip-err { border-color: #ef4444; background: #fee2e2; color: #b91c1c; }
+
+.buckets-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px;
+}
+.bucket {
+  border-radius: 16px; padding: 12px; min-height: 112px; cursor: pointer;
+  display: flex; flex-direction: column; gap: 8px; transition: .2s;
+}
+.bucket.b-fac { background: #ecfeff; border: 2.5px solid #22d3ee; }
+.bucket.b-mul { background: #fffbeb; border: 2.5px solid #fbbf24; }
+.bucket.b-non { background: #f1f5f9; border: 2.5px solid #cbd5e1; }
+.bucket.drag-over { transform: scale(1.02); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.22); }
+.bucket-title { font-size: 13px; font-weight: 900; text-align: center; padding-bottom: 6px; border-bottom: 1.5px dashed rgba(0,0,0,0.12); }
+.bucket.b-fac .bucket-title { color: var(--factor-dark); }
+.bucket.b-mul .bucket-title { color: var(--mult-dark); }
+.bucket.b-non .bucket-title { color: var(--slate); }
+.bucket-items { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; align-items: center; flex: 1; }
+
+/* ================= ZONA 4: KALENDER INTERAKTIF & TABEL PASANGAN FAKTOR ================= */
+.cal-tools {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between;
+  background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 14px; padding: 10px 14px; margin-bottom: 12px;
+}
+.brush-btn {
+  padding: 7px 14px; border-radius: 99px; font-size: 13px; font-weight: 900;
+  background: #fff; border: 2px solid #cbd5e1; color: var(--slate);
+}
+.brush-btn.active-a { background: #0284c7; border-color: #0369a1; color: #fff; box-shadow: 0 0 0 3px rgba(2,132,199,0.25); }
+.brush-btn.active-b { background: #e11d48; border-color: #be123c; color: #fff; box-shadow: 0 0 0 3px rgba(225,29,72,0.25); }
+
+.cal-grid {
+  display: grid; grid-template-columns: repeat(7, minmax(36px, 1fr)); gap: 6px;
+  max-width: 560px; margin: 0 auto 14px; background: #f8fafc; padding: 12px;
+  border-radius: 16px; border: 2px solid #e2e8f0;
+}
+.cal-head { text-align: center; font-size: 11px; font-weight: 900; color: var(--muted); padding-bottom: 4px; }
+.cal-day {
+  min-height: 46px; border-radius: 11px; background: #fff; border: 1.5px solid #cbd5e1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  font-weight: 900; font-size: 14px; color: var(--ink); cursor: pointer; transition: .15s;
+  user-select: none;
+}
+.cal-day:hover { border-color: var(--math-main); }
+.cal-day.mark-a { background: #e0f2fe; border-color: #0284c7; color: #0c4a6e; }
+.cal-day.mark-b { background: #ffe4e6; border-color: #e11d48; color: #881337; }
+.cal-day.mark-both {
+  background: linear-gradient(135deg, #fef08a, #fbbf24); border: 2.5px solid #b45309; color: #78350f;
+  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.35);
+}
+.cal-tag { font-size: 11px; line-height: 1; }
+
+.pair-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px;
+  margin-bottom: 12px;
+}
+.pair-item {
+  background: #f0f9ff; border: 1.5px solid #bae6fd; border-radius: 12px; padding: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 900; font-size: 16px; color: var(--math-dark);
+}
+
+/* ================= BARIS ISIAN DERET & KALIMAT MATEMATIKA ================= */
+.seq-bar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px;
+  background: #f0f9ff; border: 2px solid #bae6fd; border-radius: 14px; padding: 12px 16px;
+}
+.seq-bar.amber-bar { background: #fffbeb; border-color: #fde68a; }
+.seq-bar.indigo-bar { background: #eef2ff; border-color: #c7d2fe; }
+.seq-title {
+  width: 100%; text-align: center; font-size: 12.5px; font-weight: 900;
+  color: var(--math-dark); margin-bottom: 4px;
+}
+.seq-bar.amber-bar .seq-title { color: var(--mult-dark); }
+.seq-bar.indigo-bar .seq-title { color: #3730a3; }
+
+.m-in {
+  width: 60px; height: 42px; text-align: center; font-size: 17px; font-weight: 900;
+  color: #0f172a; border: 2px solid #94a3b8; border-radius: 10px; background: #fff;
+  outline: none; transition: .2s; font-family: inherit;
+}
+.m-in:focus { border-color: var(--math-main); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.22); }
+.m-in.final { width: 78px; background: #fef08a; border-color: #eab308; font-size: 18px; }
+.m-in.xs { width: 52px; height: 38px; font-size: 15.5px; }
+
+.lkpd-val.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d !important; }
+.lkpd-val.wrong { animation: shake 0.4s; background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c !important; }
+@keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-5px);} 75%{transform:translateX(5px);} }
+@keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.check-btn { display: block; margin: 20px auto 0; background: var(--math-main); color: #fff; border-radius: 99px; padding: 13px 32px; font-weight: 900; font-size: 15px; }
+
+/* ================= PANEL PENILAIAN GURU + TABEL OBSERVASI (SOP V4.2) ================= */
+.grade-panel { display: none; background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 20px; padding: 24px; margin: 20px auto; width: min(1040px, calc(100% - 24px)); }
+.grade-panel.show { display: block; }
+.obs-wrap { overflow-x: auto; margin-bottom: 18px; }
+.rubric-table {
+  width: 100%; border-collapse: collapse; background: #fff; border-radius: 14px; overflow: hidden;
+  border: 1.5px solid #cbd5e1; font-size: 13.5px;
+}
+.rubric-table th { background: var(--math-dark); color: #fff; padding: 10px 12px; text-align: left; font-weight: 800; }
+.rubric-table td { padding: 10px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; color: var(--ink); line-height: 1.5; }
+.rubric-table tr:nth-child(even) td { background: #f8fafc; }
+.grade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.star-rating { font-size: 32px; letter-spacing: 4px; text-align: center; margin: 12px 0 4px; color: #cbd5e1; }
+
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: none; place-items: center; z-index: 50; padding: 18px; }
+.modal-card { width: min(520px, 100%); background: #fff; border-radius: 22px; padding: 24px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+.spinner { width: 42px; height: 42px; border: 5px solid #e0f2fe; border-top-color: var(--math-main); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 14px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 780px) {
+  .hero, .idgrid, .grade-grid, .buckets-grid, .concept-strip { grid-template-columns: 1fr; }
+  .sheet { padding: 16px; }
+  .num-board { grid-template-columns: repeat(10, minmax(24px, 1fr)); gap: 3px; }
+  .nb-cell { height: 32px; font-size: 12px; border-radius: 7px; }
+  .cal-grid { gap: 4px; padding: 8px; }
+  .cal-day { min-height: 40px; font-size: 12.5px; }
+  .m-in { width: 52px; height: 38px; font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<div class="appbar" id="appbar">
+  <div class="brand">🧮 PORTAL LMS SDN 1 SUKAHAJI</div>
+  <div class="top-actions" id="topActions">
+    <button type="button" class="btn-light" id="saveBtn">💾 Simpan Draf</button>
+    <button type="button" class="btn-main" id="sendBtn">📤 Kirim Jawaban</button>
+  </div>
+  <div class="status-text" id="statusText">✅ Lembar Kerjamu Sudah Terkirim dan Siap Dinilai Guru</div>
+</div>
+<div class="progress"><i id="progressBar"></i></div>
+
+<form id="lkpd" onsubmit="return false;">
+<section class="sheet">
+  <div class="hero">
+    <div class="hero-card">
+      <span class="badge">LEMBAR KERJA 1.15</span>
+      <h1>Mengenal Konsep Faktor dan Kelipatan Bilangan Cacah (Sampai 100)</h1>
+      <p><b>Matematika • Fase B / Kelas IV</b><br>Mari menyelidiki perbedaan <b>Faktor</b> dan <b>Kelipatan</b> secara konkret melalui eksperimen bagi habis tanpa sisa, penumpukan kemasan grosir, papan lompatan angka, mesin sortir anti-tertukar, dan kalender kegiatan sekolah!</p>
+
+      <div class="concept-strip">
+        <div class="concept-pill c-fac">🔬 <b>Faktor:</b> Bilangan yang dapat <b>membagi habis (sisa 0)</b> suatu bilangan. Nilainya selalu <b>≤ bilangan tersebut</b>.</div>
+        <div class="concept-pill c-mul">🚀 <b>Kelipatan:</b> Hasil <b>perkalian berulang</b> suatu bilangan (×1, ×2, ×3, ...). Nilainya selalu <b>≥ bilangan tersebut</b>.</div>
+      </div>
+
+      <div class="idgrid">
+        <div class="field">
+          <label>Hari / Tanggal <span style="color:red">*</span></label>
+          <input type="date" name="tanggal" id="inputTanggal" required>
+        </div>
+        <div class="field">
+          <label>Materi Pokok</label>
+          <input name="materi" value="Mengenal Konsep Faktor dan Kelipatan Bilangan Cacah sampai 100" readonly>
+        </div>
+        <div class="group-builder">
+          <label>👥 Data Kelompok (1 – 5 Siswa)</label>
+          <div id="editGroupView">
+            <div class="member-list" id="memberList"></div>
+            <div class="add-row" id="addMemberTools">
+              <input type="tel" id="inNisn" placeholder="Ketik NISN temanmu..." style="flex:1;">
+              <button type="button" class="btn-main" id="btnAddMember" disabled>🔍 Cari & Tambah</button>
+            </div>
+            <p style="font-size:12px; color:#64748b; margin-top:8px;" id="dbStatusText">⏳ Menghubungkan ke Database Siswa...</p>
+          </div>
+          <div id="readGroupView" style="display:none;"><div class="readonly-group-list" id="readonlyMemberList"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission">
+      <div class="mission-icon">🔬🐸📅</div>
+      <b>🎯 Misi Lab Faktor & Kelipatan</b>
+      <p>Taklukkan <b>4 Zona Gamifikasi (16 Soal Konkret)</b>! Ingat: <b>Faktor = Bagi Habis</b>, <b>Kelipatan = Melompat Bertambah</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ZONA 1: LAB UJI FAKTOR ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--factor-main);">1</div><h2>Zona 1: Lab Uji Faktor — Eksperimen Habis vs. Bersisa (Soal 1–4)</h2></div>
+  <div class="game-level unlocked" id="level1">
+    <div class="story-box">
+      🔬 <b>Petunjuk:</b> Klik tombol angka uji satu per satu untuk mencoba membagi benda ke dalam kotak! Jika <b>sisa 0</b>, tombol menyala <b style="color:#15803d;">hijau (Faktor)</b>. Jika masih <b>ada sisa</b>, tombol tercoret <b style="color:#b91c1c;">merah (Bukan Faktor)</b>. Temukan semua faktornya lalu tuliskan secara berurutan dari terkecil ke terbesar!
+    </div>
+    <div id="zone1Container"></div>
+    <button type="button" class="check-btn" style="background:var(--factor-main);" onclick="checkLevel(1)">Periksa Zona 1 & Buka Zona 2 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 2: GROSIR PAK & PAPAN LOMPATAN ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--mult-main);">2</div><h2>Zona 2: Grosir Pak & Papan Lompatan Kelipatan (Soal 5–8)</h2></div>
+  <div class="game-level locked" id="level2">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 2 Terkunci</b><p>Selesaikan Zona 1 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--mult-main);">
+      🚀 <b>Petunjuk:</b> Pada Soal 5–6, tambahkan kemasan pak satu per satu (awas stok pengecoh!) dan catat jumlah bendanya. Pada Soal 7–8, klik semua angka kelipatan pada <b>Papan Lompatan Angka</b> yang penuh pengecoh, lalu tuliskan deret kelipatannya secara berurutan!
+    </div>
+    <div id="zone2Container"></div>
+    <button type="button" class="check-btn" style="background:var(--mult-main);" onclick="checkLevel(2)">Periksa Zona 2 & Buka Zona 3 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 3: MESIN SORTIR ANTI-MISKONSEPSI ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--indigo);">3</div><h2>Zona 3: Mesin Sortir "Faktor vs. Kelipatan" (Soal 9–12)</h2></div>
+  <div class="game-level locked" id="level3">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 3 Terkunci</b><p>Selesaikan Zona 2 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--indigo);">
+      🧲 <b>Petunjuk:</b> Jangan sampai tertukar! <b>Seret (drag)</b> setiap kartu angka—atau <b>klik kartu lalu klik keranjang tujuan</b>—ke wadah <b>Faktor</b>, <b>Kelipatan</b>, atau <b>Bukan Keduanya</b>. Kamu juga bisa mengklik kartu di dalam keranjang untuk memindahkannya kembali.
+    </div>
+    <div id="zone3Container"></div>
+    <button type="button" class="check-btn" style="background:var(--indigo);" onclick="checkLevel(3)">Periksa Zona 3 & Buka Zona 4 🔓</button>
+  </div>
+</section>
+
+<!-- ================= ZONA 4: MISI PUNCAK KONTEKSTUAL SEKOLAH ================= -->
+<section class="sheet">
+  <div class="section-title"><div class="num" style="background:var(--rose);">4</div><h2>Zona 4: Misi Puncak — Aplikasi Faktor, Kelipatan & Jadwal Sekolah (Soal 13–16)</h2></div>
+  <div class="game-level locked" id="level4">
+    <div class="lock-overlay"><div class="lock-icon">🔒</div><b>Zona 4 Terkunci</b><p>Selesaikan Zona 3 dengan benar terlebih dahulu!</p></div>
+    <div class="story-box" style="border-left-color:var(--rose);">
+      🏆 <b>Misi Puncak SDN 1 Sukahaji:</b> Gunakan pemahaman Faktor dan Kelipatan untuk menata parsel apel tanpa sisa, menandai jadwal perpustakaan & pertemuan dua ekstrakurikuler di kalender, serta membuat paket hadiah lomba yang seragam!
+    </div>
+    <div id="zone4Container"></div>
+    <button type="button" class="check-btn" style="background:var(--rose);" onclick="checkLevel(4)">Kunci Jawaban Akhir! 🏆</button>
+    <div id="msgFinal" style="display:none; text-align:center; color:var(--green2); font-weight:900; font-size:18px; margin-top:16px; background:#dcfce7; padding:16px; border-radius:14px; border:2px solid #22c55e;">
+      🎉 LUAR BIASA! SELURUH 16 SOAL FAKTOR DAN KELIPATAN KONKRET TELAH DITAKLUKKAN DENGAN TEPAT! 🎉
+    </div>
+  </div>
+
+  <div class="actions" style="margin-top:24px; display:flex; justify-content:center;">
+    <button type="button" class="btn-main" id="sendBtn2" style="padding:14px 28px; font-size:16px; display:none;">📤 Kirim Hasil Pekerjaan ke Guru</button>
+  </div>
+</section>
+</form>
+
+<!-- ================= PANEL PENILAIAN GURU + TABEL OBSERVASI (SOP V4.2) ================= -->
+<section class="grade-panel" id="gradePanel">
+  <div class="section-title"><div class="num">★</div><h2>Rubrik & Tabel Observasi Penilaian Guru</h2></div>
+
+  <div class="obs-wrap">
+    <table class="rubric-table">
+      <thead>
+        <tr>
+          <th style="width:22%;">Aspek / Zona Observasi</th>
+          <th style="width:19%;">A (Sangat Baik)</th>
+          <th style="width:19%;">B (Baik)</th>
+          <th style="width:20%;">C (Cukup)</th>
+          <th style="width:20%;">D (Perlu Bimbingan)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>1. Menemukan Faktor Bilangan</b><br><span style="font-size:12px; color:#64748b;">(Zona 1)</span></td>
+          <td>Mampu menguji & menuliskan seluruh faktor bilangan secara lengkap dan urut tanpa terlewat.</td>
+          <td>Menemukan seluruh faktor setelah melakukan uji ulang pada 1–2 angka pengecoh.</td>
+          <td>Sebagian faktor terlewat (misal lupa angka 1 atau bilangan itu sendiri).</td>
+          <td>Belum memahami bahwa faktor harus membagi habis tanpa sisa.</td>
+        </tr>
+        <tr>
+          <td><b>2. Membangun Deret Kelipatan</b><br><span style="font-size:12px; color:#64748b;">(Zona 2)</span></td>
+          <td>Tepat menyusun kemasan grosir & menandai seluruh kelipatan di papan lompatan sampai 100.</td>
+          <td>Susunan konkret & papan benar, hanya sedikit keliru hitung di atas bilangan 50.</td>
+          <td>Masih ada angka pengecoh yang ikut ditandai pada papan lompatan kelipatan.</td>
+          <td>Belum memahami kelipatan sebagai hasil penjumlahan/perkalian berulang.</td>
+        </tr>
+        <tr>
+          <td><b>3. Membedakan Faktor vs. Kelipatan</b><br><span style="font-size:12px; color:#64748b;">(Zona 3)</span></td>
+          <td>Konsisten menyortir seluruh kartu angka ke keranjang Faktor, Kelipatan, & Bukan Keduanya tanpa tertukar.</td>
+          <td>Tepat pada ≥ 3 dari 4 soal sortir dengan sedikit penyesuaian pada angka pengecoh.</td>
+          <td>Masih sesekali menukar kartu faktor ke keranjang kelipatan atau sebaliknya.</td>
+          <td>Belum mampu membedakan konsep faktor dan kelipatan suatu bilangan.</td>
+        </tr>
+        <tr>
+          <td><b>4. Aplikasi Kontekstual & Persekutuan</b><br><span style="font-size:12px; color:#64748b;">(Zona 4)</span></td>
+          <td>Tepat menyelesaikan tabel pasangan faktor, kalender kelipatan, jadwal bertemu, & paket seragam.</td>
+          <td>Mampu menyelesaikan 3 dari 4 misi kontekstual secara mandiri dan akurat.</td>
+          <td>Masih perlu bantuan menemukan tanggal bertemu (kelipatan persekutuan) atau paket terbanyak.</td>
+          <td>Memerlukan bimbingan langsung dalam menerapkan faktor & kelipatan pada soal cerita.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grade-grid">
+    <div class="field">
+      <label>Skala Pencapaian Pemahaman Faktor & Kelipatan</label>
+      <select id="gradeScale">
+        <option value="">-- Pilih Nilai Skala --</option>
+        <option value="A">A — Sangat Baik (Menguasai konsep faktor, kelipatan, pembedaan keduanya, dan aplikasi kontekstual)</option>
+        <option value="B">B — Baik (Memahami faktor & kelipatan dengan sedikit kekeliruan pada bilangan besar)</option>
+        <option value="C">C — Cukup (Masih memerlukan bimbingan dalam membedakan faktor dan kelipatan)</option>
+        <option value="D">D — Perlu Bimbingan (Belum memahami konsep membagi habis dan kelipatan berulang)</option>
+      </select>
+      <div class="star-rating" id="starRating">☆☆☆☆</div>
+    </div>
+    <div class="field">
+      <label>Catatan Umpan Balik Guru</label>
+      <textarea id="gradeNote" rows="4" placeholder="Tuliskan apresiasi dan evaluasi untuk siswa/kelompok ini..."></textarea>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:16px;">
+    <button type="button" class="btn-green" id="lockGradeBtn">🔒 Simpan & Distribusikan Nilai</button>
+  </div>
+</section>
+
+<div class="modal" id="modal"><div class="modal-card" id="modalBody"></div></div>
+
+<script>
+// =========================================================================
+// KONFIGURASI LKPD 1.15 MATEMATIKA (LMS V4.2)
+// =========================================================================
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycby5rj16xD-15Q1s0UxtK-h8AZEwbvAt5bsdGtsBuhkP-urB5SJzKlk8usPaNkdwcoqS/exec';
+const SUBJECT  = 'Matematika';
+const LKPD_ID  = '1.15_Faktor_Kelipatan';
+const STORAGE  = 'lkpd_mtk_1_15_v42';
+
+const urlParams    = new URLSearchParams(window.location.search);
+const viewMode     = urlParams.get('view');
+const submissionId = urlParams.get('submissionId');
+
+let studentList  = [];
+let groupMembers = [];
+let readOnlyMode = false;
+let unlockedMax  = 1;
+
+const modal = document.getElementById("modal"), modalBody = document.getElementById("modalBody");
+
+// =========================================================================
+// PUSTAKA ILUSTRASI SVG INLINE REALISTIS
+// =========================================================================
+function getObjSVG(type, size = 22) {
+  const s = size;
+  switch (type) {
+    case 'donat':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Donat">
+        <circle cx="20" cy="21" r="15" fill="#d97706" stroke="#92400e" stroke-width="1.2"/>
+        <path d="M6.5,19 C7,10 14,6 20,6 C27,6 33.5,11 33.8,19 C32,22 29.5,20 28,22.5 C26,25 23,22 20,23.5 C17,25 14,22 11.5,23 C9,24 7,21.5 6.5,19 Z" fill="#f472b6"/>
+        <circle cx="20" cy="21" r="5.5" fill="#fffdf7" stroke="#b45309" stroke-width="1.2"/>
+        <rect x="13" y="11" width="3.5" height="1.6" rx="0.8" fill="#fef08a" transform="rotate(25 14 11)"/>
+        <rect x="23" y="10" width="3.5" height="1.6" rx="0.8" fill="#38bdf8" transform="rotate(-30 24 10)"/>
+        <rect x="27" y="16" width="3.5" height="1.6" rx="0.8" fill="#4ade80" transform="rotate(40 28 16)"/>
+      </svg>`;
+    case 'pensil':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Pensil">
+        <g transform="rotate(-35 20 20)">
+          <rect x="14" y="4" width="12" height="5" rx="2" fill="#f472b6" stroke="#be185d" stroke-width="1"/>
+          <rect x="14" y="8.5" width="12" height="3.5" fill="#cbd5e1" stroke="#64748b" stroke-width="0.9"/>
+          <rect x="14" y="12" width="4" height="17" fill="#facc15"/>
+          <rect x="18" y="12" width="4" height="17" fill="#eab308"/>
+          <rect x="22" y="12" width="4" height="17" fill="#ca8a04"/>
+          <rect x="14" y="12" width="12" height="17" fill="none" stroke="#854d0e" stroke-width="0.9"/>
+          <polygon points="14,29 26,29 20,38" fill="#fed7aa" stroke="#9a3412" stroke-width="0.9"/>
+          <polygon points="18,34.5 22,34.5 20,38" fill="#1e293b"/>
+        </g>
+      </svg>`;
+    case 'buku':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Buku">
+        <rect x="8" y="6" width="23" height="28" rx="2.5" fill="#2563eb" stroke="#1e3a8a" stroke-width="1.2"/>
+        <rect x="8" y="6" width="5" height="28" rx="1" fill="#1d4ed8"/>
+        <rect x="15" y="11" width="12" height="7" rx="1.2" fill="#fff" stroke="#93c5fd" stroke-width="0.9"/>
+        <line x1="17" y1="14" x2="25" y2="14" stroke="#64748b" stroke-width="1.2"/>
+        <line x1="17" y1="16.5" x2="23" y2="16.5" stroke="#94a3b8" stroke-width="1.1"/>
+        <path d="M31,8 L33,9.5 L33,33 L10,33" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+      </svg>`;
+    case 'jeruk':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Jeruk">
+        <circle cx="20" cy="22" r="13.5" fill="#f97316" stroke="#c2410c" stroke-width="1.2"/>
+        <ellipse cx="15" cy="17" rx="4" ry="2.3" fill="#fdba74" opacity="0.7" transform="rotate(-28 15 17)"/>
+        <path d="M20,9 L20,5" stroke="#78350f" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M20,8 C25,4 30,6 29,11 C25,12 22,11 20,8 Z" fill="#22c55e" stroke="#15803d" stroke-width="0.9"/>
+      </svg>`;
+    case 'susu':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Susu">
+        <path d="M26,9 L28,4 L33,3" fill="none" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polygon points="10,12 24,12 29,9 15,9" fill="#bae6fd" stroke="#0284c7" stroke-width="1"/>
+        <rect x="10" y="12" width="14" height="23" rx="1.5" fill="#ffffff" stroke="#0284c7" stroke-width="1.2"/>
+        <polygon points="24,12 29,9 29,32 24,35" fill="#7dd3fc" stroke="#0284c7" stroke-width="1.1"/>
+        <path d="M10,24 Q14,21 17,24 T24,24 L24,35 L10,35 Z" fill="#38bdf8"/>
+        <circle cx="17" cy="18" r="3" fill="#0284c7"/>
+      </svg>`;
+    case 'apel':
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40" aria-label="Apel">
+        <path d="M20,12 C15,9 8,12 8,21 C8,30 14,35 18.5,35 C19.5,35 20,34 20,34 C20,34 20.5,35 21.5,35 C26,35 32,30 32,21 C32,12 25,9 20,12 Z" fill="#ef4444" stroke="#991b1b" stroke-width="1.2"/>
+        <ellipse cx="14" cy="19" rx="2.6" ry="5" fill="#fca5a5" opacity="0.6" transform="rotate(15 14 19)"/>
+        <path d="M20,12 L21,6" stroke="#78350f" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M21,8 C26,5 30,7 29,11 C25,12 23,10.5 21,8 Z" fill="#22c55e" stroke="#15803d" stroke-width="0.9"/>
+      </svg>`;
+    default:
+      return `<svg width="${s}" height="${s}" viewBox="0 0 40 40"><circle cx="20" cy="20" r="12" fill="#0284c7"/></svg>`;
+  }
+}
+
+// =========================================================================
+// DATA 16 SOAL KONTEKSTUAL (4 ZONA GAMIFIKASI)
+// =========================================================================
+
+// ZONA 1 (Soal 1–4): Lab Uji Faktor
+const Z1_DATA = [
+  {
+    id: 'z1_q1', no: 1, icon: '🍩',
+    story: '<b>Kantin Sehat:</b> Ibu kantin punya <b>12 donat</b> yang ingin dikemas sama banyak ke beberapa piring <b>tanpa ada sisa</b>. Uji angka-angka piring di bawah ini untuk menemukan seluruh <b>faktor dari 12</b>!',
+    obj: 'donat', objName: 'Donat', boxName: 'Piring', n: 12,
+    candidates: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12],
+    factors: [1, 2, 3, 4, 6, 12]
+  },
+  {
+    id: 'z1_q2', no: 2, icon: '✏️',
+    story: '<b>Koperasi Sekolah:</b> Koperasi memiliki <b>16 pensil</b> yang akan diikat sama banyak tanpa sisa. Uji angka pengikat berikut untuk menemukan seluruh <b>faktor dari 16</b>!',
+    obj: 'pensil', objName: 'Pensil', boxName: 'Ikat', n: 16,
+    candidates: [1, 2, 3, 4, 5, 6, 8, 10, 12, 16],
+    factors: [1, 2, 4, 8, 16]
+  },
+  {
+    id: 'z1_q3', no: 3, icon: '📘',
+    story: '<b>Perpustakaan Kelas:</b> Pustakawan menata <b>18 buku tulis</b> ke dalam beberapa tumpukan yang sama tinggi tanpa sisa. Uji angka berikut untuk menemukan semua <b>faktor dari 18</b>!',
+    obj: 'buku', objName: 'Buku', boxName: 'Tumpukan', n: 18,
+    candidates: [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 18],
+    factors: [1, 2, 3, 6, 9, 18]
+  },
+  {
+    id: 'z1_q4', no: 4, icon: '🍊',
+    story: '<b>Panen Kebun Sekolah:</b> Murid kelas IV memetik <b>24 jeruk</b> dan ingin membaginya ke dalam keranjang tanpa sisa. Temukan seluruh <b>faktor dari 24</b> lewat percobaan berikut!',
+    obj: 'jeruk', objName: 'Jeruk', boxName: 'Keranjang', n: 24,
+    candidates: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 24],
+    factors: [1, 2, 3, 4, 6, 8, 12, 24]
+  }
+];
+
+// ZONA 2 (Soal 5–8): Grosir Pak (Q5–Q6) & Papan Lompatan Kelipatan (Q7–Q8)
+const Z2_PACK_DATA = [
+  {
+    id: 'z2_q5', no: 5, icon: '🥛',
+    story: '<b>Grosir Susu UKS:</b> Setiap 1 dus berisi <b>6 kotak susu</b>. Tambahkan dus satu per satu sampai <b>6 dus</b> (awas di gudang tersedia hingga 8 dus pengecoh!), lalu tuliskan <b>6 kelipatan pertama dari 6</b>!',
+    obj: 'susu', objName: 'Susu', packName: 'Dus', perPack: 6, targetCount: 6, maxPacks: 8,
+    multiples: [6, 12, 18, 24, 30, 36]
+  },
+  {
+    id: 'z2_q6', no: 6, icon: '📘',
+    story: '<b>Stok Koperasi:</b> Setiap 1 ikat berisi <b>8 buku tulis</b>. Susunlah sampai <b>6 ikat</b> (stok rak ada 9 ikat pengecoh!), lalu tuliskan <b>6 kelipatan pertama dari 8</b>!',
+    obj: 'buku', objName: 'Buku', packName: 'Ikat', perPack: 8, targetCount: 6, maxPacks: 9,
+    multiples: [8, 16, 24, 32, 40, 48]
+  }
+];
+
+const Z2_BOARD_DATA = [
+  {
+    id: 'z2_q7', no: 7, icon: '🐸',
+    story: '<b>Lompatan Katak Kelipatan 7:</b> Katak melompat setiap <b>7 langkah</b> dari angka 0! Klik semua angka <b>kelipatan 7 yang kurang dari 50</b> pada papan angka, lalu tuliskan deret kelipatannya!',
+    step: 7, boardMax: 50,
+    multiples: [7, 14, 21, 28, 35, 42, 49]
+  },
+  {
+    id: 'z2_q8', no: 8, icon: '🐇',
+    story: '<b>Lompatan Kelinci Kelipatan 12 (Sampai 100):</b> Kelinci melompat setiap <b>12 petak</b>! Nyalakan semua angka <b>kelipatan 12 sampai dengan 100</b> pada papan angka, lalu tuliskan seluruh deretnya!',
+    step: 12, boardMax: 100,
+    multiples: [12, 24, 36, 48, 60, 72, 84, 96]
+  }
+];
+
+// ZONA 3 (Soal 9–12): Mesin Sortir Faktor vs Kelipatan vs Bukan Keduanya
+const Z3_DATA = [
+  {
+    id: 'z3_q9', no: 9, icon: '🧲', target: 12,
+    story: '<b>Mesin Sortir Bilangan 12:</b> Kelompokkan ke-8 kartu angka di bawah ini ke keranjang <b>Faktor dari 12</b>, <b>Kelipatan dari 12</b>, atau <b>Bukan Keduanya</b>! Kemudian jawab pertanyaan konsep singkatnya.',
+    cards: [2, 3, 5, 6, 18, 24, 36, 40],
+    ansFac: [2, 3, 6], ansMul: [24, 36], ansNon: [5, 18, 40],
+    qLabel: 'Kelipatan ke-4 dari 12 adalah', qAns: 48
+  },
+  {
+    id: 'z3_q10', no: 10, icon: '🧲', target: 15,
+    story: '<b>Mesin Sortir Bilangan 15:</b> Sortirlah setiap kartu angka dengan cermat berdasarkan hubungannya dengan bilangan <b>15</b>!',
+    cards: [3, 4, 5, 10, 30, 45, 50, 60],
+    ansFac: [3, 5], ansMul: [30, 45, 60], ansNon: [4, 10, 50],
+    qLabel: 'Kelipatan ke-5 dari 15 adalah', qAns: 75
+  },
+  {
+    id: 'z3_q11', no: 11, icon: '🧲', target: 20,
+    story: '<b>Mesin Sortir Bilangan 20:</b> Hati-hati dengan angka pengecoh seperti 8 dan 30! Sortir semua kartu untuk bilangan <b>20</b>.',
+    cards: [2, 4, 5, 8, 10, 30, 40, 80],
+    ansFac: [2, 4, 5, 10], ansMul: [40, 80], ansNon: [8, 30],
+    qLabel: 'Kelipatan ke-5 dari 20 adalah', qAns: 100
+  },
+  {
+    id: 'z3_q12', no: 12, icon: '🧲', target: 18,
+    story: '<b>Mesin Sortir Bilangan 18:</b> Tentukan mana saja yang membagi habis 18 (Faktor), mana yang kelipatan 18, dan mana yang bukan keduanya!',
+    cards: [2, 3, 4, 6, 9, 27, 36, 72],
+    ansFac: [2, 3, 6, 9], ansMul: [36, 72], ansNon: [4, 27],
+    qLabel: 'Kelipatan ke-3 dari 18 adalah', qAns: 54
+  }
+];
+
+// State penyimpanan widget interaktif
+const labTested   = {}; // { id: Set(nums) }
+const multPacks   = {}; // { id: count }
+const boardMarks  = {}; // { id: Set(nums) }
+const sortState   = {}; // { id: { cardNum: 'pool'|'fac'|'mul'|'non' } }
+let armedSortCard = null; // { id, num }
+
+// Zona 4 state
+const z4Q13Tested = new Set();
+const z4Q14Days   = new Set();
+const z4Q15A      = new Set(); // Pramuka (kelipatan 4)
+const z4Q15B      = new Set(); // Tari (kelipatan 6)
+let z4Q15Brush    = 'A';       // 'A' or 'B'
+const z4Q16Tested = new Set();
+
+// =========================================================================
+// BANGUN SEMUA 4 ZONA
+// =========================================================================
+function buildAllZones() {
+  renderZone1();
+  renderZone2();
+  renderZone3();
+  renderZone4();
+}
+
+// ---------- ZONA 1: LAB UJI FAKTOR ----------
+function renderZone1() {
+  const wrap = document.getElementById('zone1Container');
+  wrap.innerHTML = Z1_DATA.map(q => {
+    labTested[q.id] = new Set();
+    const btns = q.candidates.map(k =>
+      `<button type="button" class="test-btn" id="tbtn_${q.id}_${k}" onclick="runFactorTest('${q.id}', ${k})">${k}</button>`
+    ).join('');
+    const inps = q.factors.map((f, i) =>
+      `<input type="tel" class="m-in xs lkpd-val lvl1" data-ans="${f}" name="${q.id}_f${i+1}" placeholder="?">`
+    ).join('<span>,</span>');
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="lab-bar">
+        <div class="lab-label">
+          <span>🧪 Klik angka untuk menguji pembagian ${q.n} ${q.objName} ke dalam ${q.boxName}:</span>
+          <span class="stock-pill" id="labProg_${q.id}">Faktor ditemukan: <b>0</b> / ${q.factors.length}</span>
+        </div>
+        <div class="test-btns">${btns}</div>
+      </div>
+
+      <div class="lab-stage" id="stage_${q.id}">
+        <div class="lab-banner idle">👆 Pilih salah satu tombol angka di atas untuk melihat simulasi pembagian konkretnya!</div>
+      </div>
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}" name="${q.id}_tested" value="">
+
+      <div class="seq-bar">
+        <div class="seq-title">Tuliskan semua faktor dari ${q.n} secara berurutan (terkecil → terbesar):</div>
+        ${inps}
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+}
+
+function runFactorTest(id, k, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const q = Z1_DATA.find(x => x.id === id);
+  if (!q) return;
+
+  labTested[id].add(k);
+  const quot = Math.floor(q.n / k);
+  const rem  = q.n % k;
+  const isFac = (rem === 0);
+
+  // Update tombol angka
+  q.candidates.forEach(c => {
+    const b = document.getElementById(`tbtn_${id}_${c}`);
+    if (b) b.classList.remove('active-test');
+  });
+  const btn = document.getElementById(`tbtn_${id}_${k}`);
+  if (btn) {
+    btn.classList.add('active-test', isFac ? 'is-factor' : 'not-factor');
+  }
+
+  // Render panggung konkret
+  const stage = document.getElementById('stage_' + id);
+  const bannerCls = isFac ? 'ok' : 'fail';
+  const bannerTxt = isFac
+    ? `✅ ${q.n} ÷ ${k} = ${quot} (Sisa 0) → ${k} adalah FAKTOR dari ${q.n}!`
+    : `❌ ${q.n} ÷ ${k} = ${quot} (Sisa ${rem}) → ${k} BUKAN faktor karena masih bersisa!`;
+
+  const svgSize = q.n >= 24 ? 17 : 20;
+  let boxesHtml = '';
+  for (let i = 0; i < k; i++) {
+    let objs = '';
+    for (let j = 0; j < quot; j++) objs += getObjSVG(q.obj, svgSize);
+    boxesHtml += `
+      <div class="lab-box ${isFac ? '' : 'fail-box'}">
+        <span class="lab-box-title">${q.boxName} ${i + 1} (${quot})</span>
+        <div class="lab-box-objs">${objs}</div>
+      </div>`;
+  }
+
+  let remHtml = '';
+  if (rem > 0) {
+    let rObjs = '';
+    for (let r = 0; r < rem; r++) rObjs += getObjSVG(q.obj, svgSize + 2);
+    remHtml = `<div class="rem-zone"><span class="rem-label">⚠️ Sisa Tidak Kebagian ${q.boxName} (${rem} ${q.objName}):</span> ${rObjs}</div>`;
+  }
+
+  stage.innerHTML = `<div class="lab-banner ${bannerCls}">${bannerTxt}</div><div class="lab-groups">${boxesHtml}</div>${remHtml}`;
+
+  // Hitung faktor ditemukan
+  const foundCount = q.factors.filter(f => labTested[id].has(f)).length;
+  const prog = document.getElementById('labProg_' + id);
+  if (prog) prog.innerHTML = `Faktor ditemukan: <b>${foundCount}</b> / ${q.factors.length}`;
+
+  const hid = document.getElementById('hid_' + id);
+  if (hid) hid.value = JSON.stringify([...labTested[id]]);
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+// ---------- ZONA 2: GROSIR PAK + PAPAN LOMPATAN ----------
+function renderZone2() {
+  const wrap = document.getElementById('zone2Container');
+
+  const part1 = Z2_PACK_DATA.map(q => {
+    multPacks[q.id] = 0;
+    const inps = q.multiples.map((m, i) =>
+      `<input type="tel" class="m-in xs lkpd-val lvl2" data-ans="${m}" name="${q.id}_m${i+1}" placeholder="?">`
+    ).join('<span>,</span>');
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="mult-toolbar">
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <span class="stock-pill amber" id="mpCnt_${q.id}">${q.packName} Terpasang: <b>0</b> / ${q.maxPacks} (Stok Gudang)</span>
+          <span class="stock-pill" id="mpTot_${q.id}">Total ${q.objName}: <b>0</b></span>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn-amber btn-sm" onclick="changeMultPack('${q.id}', 1)">+1 ${q.packName} (+${q.perPack})</button>
+          <button type="button" class="btn-light btn-sm" onclick="changeMultPack('${q.id}', -1)">−1 ${q.packName}</button>
+        </div>
+      </div>
+
+      <div class="mult-packs-arena" id="mpArena_${q.id}">
+        <div style="grid-column:1/-1; text-align:center; padding:24px; color:#64748b; font-weight:700; font-size:14px;">
+          Klik <b>+1 ${q.packName}</b> untuk melihat kelipatan ${q.perPack} bertambah secara nyata!
+        </div>
+      </div>
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}" name="${q.id}_cnt" value="">
+
+      <div class="seq-bar amber-bar">
+        <div class="seq-title">Tuliskan ${q.targetCount} kelipatan pertama dari ${q.perPack}:</div>
+        ${inps}
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  const part2 = Z2_BOARD_DATA.map(q => {
+    boardMarks[q.id] = new Set();
+    let cells = '';
+    for (let n = 1; n <= q.boardMax; n++) {
+      cells += `<div class="nb-cell" id="nb_${q.id}_${n}" onclick="toggleBoardNum('${q.id}', ${n})">${n}</div>`;
+    }
+    const inps = q.multiples.map((m, i) =>
+      `<input type="tel" class="m-in xs lkpd-val lvl2" data-ans="${m}" name="${q.id}_m${i+1}" placeholder="?">`
+    ).join('<span>,</span>');
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div class="num-board-wrap">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+          <span class="stock-pill amber" id="nbStat_${q.id}">Angka menyala: <b>0</b></span>
+          <button type="button" class="btn-light btn-sm" onclick="clearBoard('${q.id}')">🧹 Bersihkan Papan</button>
+        </div>
+        <div class="num-board">${cells}</div>
+      </div>
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}" name="${q.id}_board" value="">
+
+      <div class="seq-bar amber-bar">
+        <div class="seq-title">Tuliskan seluruh kelipatan ${q.step} sampai ${q.boardMax}:</div>
+        ${inps}
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  wrap.innerHTML = part1 + part2;
+}
+
+function changeMultPack(id, delta, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const q = Z2_PACK_DATA.find(x => x.id === id);
+  if (!q) return;
+  let next = (multPacks[id] || 0) + delta;
+  if (next < 0) next = 0;
+  if (next > q.maxPacks) next = q.maxPacks;
+  multPacks[id] = next;
+  refreshMultPackArena(id, triggerProgress);
+}
+
+function refreshMultPackArena(id, triggerProgress = true) {
+  const q = Z2_PACK_DATA.find(x => x.id === id);
+  const cnt = multPacks[id] || 0;
+  document.getElementById('mpCnt_' + id).innerHTML = `${q.packName} Terpasang: <b>${cnt}</b> / ${q.maxPacks} (Stok Gudang)`;
+  document.getElementById('mpTot_' + id).innerHTML = `Total ${q.objName}: <b>${cnt * q.perPack}</b>`;
+
+  const arena = document.getElementById('mpArena_' + id);
+  if (cnt === 0) {
+    arena.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px; color:#64748b; font-weight:700; font-size:14px;">Klik <b>+1 ${q.packName}</b> untuk melihat kelipatan ${q.perPack} bertambah secara nyata!</div>`;
+  } else {
+    let html = '';
+    for (let i = 1; i <= cnt; i++) {
+      let objs = '';
+      for (let j = 0; j < q.perPack; j++) objs += getObjSVG(q.obj, 21);
+      html += `
+      <div class="mp-box">
+        <div class="mp-head"><span>${q.packName} ${i}</span><span class="mp-tot">${i}×${q.perPack} = ${i * q.perPack}</span></div>
+        <div class="mp-objs">${objs}</div>
+      </div>`;
+    }
+    arena.innerHTML = html;
+  }
+
+  const hid = document.getElementById('hid_' + id);
+  if (hid) hid.value = cnt > 0 ? String(cnt) : '';
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+function toggleBoardNum(id, n, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const set = boardMarks[id];
+  const cell = document.getElementById(`nb_${id}_${n}`);
+  if (!cell) return;
+  cell.classList.remove('nb-err', 'nb-ok');
+  if (set.has(n)) {
+    set.delete(n);
+    cell.classList.remove('jumped');
+  } else {
+    set.add(n);
+    cell.classList.add('jumped');
+  }
+  syncBoardHidden(id, triggerProgress);
+}
+
+function clearBoard(id) {
+  if (readOnlyMode) return;
+  const q = Z2_BOARD_DATA.find(x => x.id === id);
+  boardMarks[id].clear();
+  for (let n = 1; n <= q.boardMax; n++) {
+    const c = document.getElementById(`nb_${id}_${n}`);
+    if (c) c.classList.remove('jumped', 'nb-err', 'nb-ok');
+  }
+  syncBoardHidden(id, true);
+}
+
+function syncBoardHidden(id, triggerProgress = true) {
+  const arr = [...boardMarks[id]].sort((a, b) => a - b);
+  const stat = document.getElementById('nbStat_' + id);
+  if (stat) stat.innerHTML = `Angka menyala: <b>${arr.length}</b>`;
+  const hid = document.getElementById('hid_' + id);
+  if (hid) hid.value = arr.length ? JSON.stringify(arr) : '';
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+// ---------- ZONA 3: MESIN SORTIR FAKTOR VS KELIPATAN ----------
+function renderZone3() {
+  const wrap = document.getElementById('zone3Container');
+  wrap.innerHTML = Z3_DATA.map(q => {
+    sortState[q.id] = {};
+    q.cards.forEach(c => sortState[q.id][c] = 'pool');
+
+    return `
+    <div class="q-card" id="card_${q.id}">
+      <div class="q-header">
+        <span class="q-no">Soal ${q.no}</span>
+        <div class="q-story">${q.icon} ${q.story}</div>
+      </div>
+
+      <div style="font-size:12.5px; font-weight:800; color:#475569; margin-bottom:6px; text-align:center;">
+        Kartu Angka (seret ke keranjang, atau klik angka lalu klik keranjang):
+      </div>
+      <div class="sort-pool" id="pool_${q.id}"
+           ondragover="event.preventDefault();"
+           ondrop="onSortDrop(event, '${q.id}', 'pool')"
+           onclick="onBucketClick('${q.id}', 'pool')"></div>
+
+      <div class="buckets-grid">
+        <div class="bucket b-fac" id="bkt_${q.id}_fac"
+             ondragover="event.preventDefault(); this.classList.add('drag-over');"
+             ondragleave="this.classList.remove('drag-over');"
+             ondrop="onSortDrop(event, '${q.id}', 'fac')"
+             onclick="onBucketClick('${q.id}', 'fac')">
+          <div class="bucket-title">🔬 Faktor dari ${q.target}</div>
+          <div class="bucket-items" id="bitems_${q.id}_fac"></div>
+        </div>
+        <div class="bucket b-mul" id="bkt_${q.id}_mul"
+             ondragover="event.preventDefault(); this.classList.add('drag-over');"
+             ondragleave="this.classList.remove('drag-over');"
+             ondrop="onSortDrop(event, '${q.id}', 'mul')"
+             onclick="onBucketClick('${q.id}', 'mul')">
+          <div class="bucket-title">🚀 Kelipatan dari ${q.target}</div>
+          <div class="bucket-items" id="bitems_${q.id}_mul"></div>
+        </div>
+        <div class="bucket b-non" id="bkt_${q.id}_non"
+             ondragover="event.preventDefault(); this.classList.add('drag-over');"
+             ondragleave="this.classList.remove('drag-over');"
+             ondrop="onSortDrop(event, '${q.id}', 'non')"
+             onclick="onBucketClick('${q.id}', 'non')">
+          <div class="bucket-title">🚫 Bukan Keduanya</div>
+          <div class="bucket-items" id="bitems_${q.id}_non"></div>
+        </div>
+      </div>
+      <input type="hidden" class="lkpd-val" id="hid_${q.id}" name="${q.id}_sort" value="">
+
+      <div class="seq-bar indigo-bar">
+        <span style="font-weight:800; font-size:14.5px; color:#312e81;">💡 ${q.qLabel} =</span>
+        <input type="tel" class="m-in final lkpd-val lvl3" data-ans="${q.qAns}" name="${q.id}_q" placeholder="?">
+      </div>
+      <div class="q-hint" id="hint_${q.id}"></div>
+    </div>`;
+  }).join('');
+
+  Z3_DATA.forEach(q => refreshSortUI(q.id, false));
+}
+
+function onSortDragStart(e, id, num) {
+  if (readOnlyMode) { e.preventDefault(); return; }
+  e.dataTransfer.setData('text/plain', JSON.stringify({ id, num }));
+}
+
+function onSortDrop(e, id, dest) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if (readOnlyMode) return;
+  try {
+    const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+    if (data.id === id) {
+      sortState[id][data.num] = dest;
+      armedSortCard = null;
+      refreshSortUI(id, true);
+    }
+  } catch (err) {}
+}
+
+function onChipClick(e, id, num) {
+  e.stopPropagation();
+  if (readOnlyMode) return;
+  if (armedSortCard && armedSortCard.id === id && armedSortCard.num === num) {
+    armedSortCard = null;
+  } else {
+    armedSortCard = { id, num };
+  }
+  Z3_DATA.forEach(q => refreshSortUI(q.id, false));
+}
+
+function onBucketClick(id, dest) {
+  if (readOnlyMode) return;
+  if (armedSortCard && armedSortCard.id === id) {
+    sortState[id][armedSortCard.num] = dest;
+    armedSortCard = null;
+    refreshSortUI(id, true);
+  }
+}
+
+function refreshSortUI(id, triggerProgress = true) {
+  const q = Z3_DATA.find(x => x.id === id);
+  const st = sortState[id];
+  const buckets = { pool: [], fac: [], mul: [], non: [] };
+  q.cards.forEach(num => {
+    const loc = st[num] || 'pool';
+    buckets[loc].push(num);
+  });
+
+  const makeChips = arr => arr.map(num => {
+    const isArmed = armedSortCard && armedSortCard.id === id && armedSortCard.num === num;
+    return `<div class="sort-chip ${isArmed ? 'armed' : ''}" id="chip_${id}_${num}"
+      draggable="true"
+      ondragstart="onSortDragStart(event, '${id}', ${num})"
+      onclick="onChipClick(event, '${id}', ${num})">${num}</div>`;
+  }).join('');
+
+  const poolEl = document.getElementById('pool_' + id);
+  poolEl.innerHTML = buckets.pool.length
+    ? makeChips(buckets.pool)
+    : `<span style="font-size:13px; color:#15803d; font-weight:800;">✅ Semua kartu sudah masuk keranjang! (Klik kartu jika ingin memindahkannya)</span>`;
+
+  document.getElementById(`bitems_${id}_fac`).innerHTML = makeChips(buckets.fac) || `<span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh faktor di sini</span>`;
+  document.getElementById(`bitems_${id}_mul`).innerHTML = makeChips(buckets.mul) || `<span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh kelipatan di sini</span>`;
+  document.getElementById(`bitems_${id}_non`).innerHTML = makeChips(buckets.non) || `<span style="font-size:12px; color:#94a3b8; font-weight:700;">Taruh pengecoh di sini</span>`;
+
+  const placedCount = q.cards.length - buckets.pool.length;
+  const hid = document.getElementById('hid_' + id);
+  if (hid) hid.value = placedCount > 0 ? JSON.stringify(st) : '';
+  if (triggerProgress) { clearHint(id); updateProgress(); }
+}
+
+// ---------- ZONA 4: MISI PUNCAK KONTEKSTUAL SEKOLAH (SOAL 13–16) ----------
+function renderZone4() {
+  const wrap = document.getElementById('zone4Container');
+
+  // Soal 13: Faktor 30 Apel + Tabel Pasangan Faktor
+  const q13Cands = [1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 30];
+  const q13Btns = q13Cands.map(k =>
+    `<button type="button" class="test-btn" id="q13btn_${k}" onclick="runQ13Test(${k})">${k}</button>`
+  ).join('');
+
+  // Soal 14: Kalender 1–30 Kelipatan 4
+  const calHead = ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map(h => `<div class="cal-head">${h}</div>`).join('');
+  let q14Cal = calHead;
+  for (let d = 1; d <= 30; d++) {
+    q14Cal += `<div class="cal-day" id="q14day_${d}" onclick="toggleQ14Day(${d})"><span>${d}</span><span class="cal-tag" id="q14tag_${d}"></span></div>`;
+  }
+
+  // Soal 15: Kalender 1–30 Kelipatan 4 (Pramuka) & Kelipatan 6 (Tari)
+  let q15Cal = calHead;
+  for (let d = 1; d <= 30; d++) {
+    q15Cal += `<div class="cal-day" id="q15day_${d}" onclick="toggleQ15Day(${d})"><span>${d}</span><span class="cal-tag" id="q15tag_${d}"></span></div>`;
+  }
+
+  // Soal 16: Paket Hadiah 12 Pensil & 18 Buku (Faktor Persekutuan)
+  const q16Cands = [1, 2, 3, 4, 5, 6, 9, 12];
+  const q16Btns = q16Cands.map(k =>
+    `<button type="button" class="test-btn" id="q16btn_${k}" onclick="runQ16Test(${k})">${k}</button>`
+  ).join('');
+
+  wrap.innerHTML = `
+  <!-- SOAL 13 -->
+  <div class="q-card" id="card_z4_q13">
+    <div class="q-header">
+      <span class="q-no">Soal 13</span>
+      <div class="q-story">🍎 <b>Parsel Hari Guru (Faktor dari 30):</b> Panitia memiliki <b>30 buah apel merah</b> untuk dikemas sama banyak ke dalam keranjang <b>tanpa ada sisa</b>. Uji angka keranjang di bawah ini, lalu lengkapi <b>4 Pasangan Faktor dari 30</b>!</div>
+    </div>
+    <div class="lab-bar">
+      <div class="lab-label">
+        <span>🧪 Uji banyak keranjang untuk 30 apel:</span>
+        <span class="stock-pill" id="q13Prog">Faktor ditemukan: <b>0</b> / 8</span>
+      </div>
+      <div class="test-btns">${q13Btns}</div>
+    </div>
+    <div class="lab-stage" id="stage_z4_q13">
+      <div class="lab-banner idle">👆 Klik tombol angka keranjang di atas untuk menguji pembagian 30 apel!</div>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q13" name="z4_q13_tested" value="">
+
+    <div style="font-size:13px; font-weight:900; color:var(--math-dark); text-align:center; margin-bottom:8px;">Lengkapi Pasangan Perkalian (Faktor) dari 30 secara berurutan:</div>
+    <div class="pair-grid">
+      <div class="pair-item"><input type="tel" class="m-in xs lkpd-val lvl4" data-ans="1" name="z4_q13_p1a" placeholder="?"> × <input type="tel" class="m-in xs lkpd-val lvl4" data-ans="30" name="z4_q13_p1b" placeholder="?"> = 30</div>
+      <div class="pair-item"><input type="tel" class="m-in xs lkpd-val lvl4" data-ans="2" name="z4_q13_p2a" placeholder="?"> × <input type="tel" class="m-in xs lkpd-val lvl4" data-ans="15" name="z4_q13_p2b" placeholder="?"> = 30</div>
+      <div class="pair-item"><input type="tel" class="m-in xs lkpd-val lvl4" data-ans="3" name="z4_q13_p3a" placeholder="?"> × <input type="tel" class="m-in xs lkpd-val lvl4" data-ans="10" name="z4_q13_p3b" placeholder="?"> = 30</div>
+      <div class="pair-item"><input type="tel" class="m-in xs lkpd-val lvl4" data-ans="5" name="z4_q13_p4a" placeholder="?"> × <input type="tel" class="m-in xs lkpd-val lvl4" data-ans="6" name="z4_q13_p4b" placeholder="?"> = 30</div>
+    </div>
+    <div class="q-hint" id="hint_z4_q13"></div>
+  </div>
+
+  <!-- SOAL 14 -->
+  <div class="q-card" id="card_z4_q14">
+    <div class="q-header">
+      <span class="q-no">Soal 14</span>
+      <div class="q-story">📚 <b>Kalender Pojok Baca (Kelipatan 4):</b> Kelas IV mengadakan kunjungan Pojok Baca setiap <b>4 hari sekali</b> (dimulai tanggal <b>4</b>). Tandai semua tanggal kunjungan pada kalender 30 hari di bawah ini, lalu jawab pertanyaannya!</div>
+    </div>
+    <div class="cal-tools">
+      <span class="stock-pill" id="q14Stat">Tanggal ditandai: <b>0</b></span>
+      <button type="button" class="btn-light btn-sm" onclick="clearQ14()">🧹 Bersihkan Kalender</button>
+    </div>
+    <div class="cal-grid">${q14Cal}</div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q14" name="z4_q14_days" value="">
+    <div class="seq-bar amber-bar">
+      <span style="font-weight:800; font-size:14px;">Total kunjungan dalam sebulan =</span>
+      <input type="tel" class="m-in xs lkpd-val lvl4" data-ans="7" name="z4_q14_cnt" placeholder="?">
+      <span style="font-weight:800; font-size:14px;">kali &nbsp;|&nbsp; Tanggal kunjungan terakhir = tanggal</span>
+      <input type="tel" class="m-in xs final lkpd-val lvl4" data-ans="28" name="z4_q14_last" placeholder="?">
+    </div>
+    <div class="q-hint" id="hint_z4_q14"></div>
+  </div>
+
+  <!-- SOAL 15 -->
+  <div class="q-card" id="card_z4_q15">
+    <div class="q-header">
+      <span class="q-no">Soal 15</span>
+      <div class="q-story">📅 <b>Jadwal Ekskul Bertemu (Pengantar Kelipatan Persekutuan):</b> Ekskul <b>Pramuka</b> berlatih setiap <b>4 hari sekali</b> (tgl 4, 8, ...), sedangkan <b>Seni Tari</b> berlatih setiap <b>6 hari sekali</b> (tgl 6, 12, ...). Gunakan 2 tombol kuas di bawah untuk menandai kedua jadwal di kalender! Tanggal saat keduanya <b>berlatih bersama</b> akan menyala emas!</div>
+    </div>
+    <div class="cal-tools">
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button type="button" class="brush-btn active-a" id="brushBtnA" onclick="setQ15Brush('A')">⚜️ Kuas Pramuka (Kelipatan 4)</button>
+        <button type="button" class="brush-btn" id="brushBtnB" onclick="setQ15Brush('B')">💃 Kuas Seni Tari (Kelipatan 6)</button>
+      </div>
+      <button type="button" class="btn-light btn-sm" onclick="clearQ15()">🧹 Bersihkan</button>
+    </div>
+    <div class="cal-grid">${q15Cal}</div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q15" name="z4_q15_cal" value="">
+    <div class="seq-bar amber-bar">
+      <span style="font-weight:800; font-size:14px;">⭐ Pramuka & Seni Tari berlatih BERSAMAAN pada tanggal:</span>
+      <input type="tel" class="m-in xs final lkpd-val lvl4" data-ans="12" name="z4_q15_c1" placeholder="?">
+      <span style="font-weight:900;">dan tanggal</span>
+      <input type="tel" class="m-in xs final lkpd-val lvl4" data-ans="24" name="z4_q15_c2" placeholder="?">
+    </div>
+    <div class="q-hint" id="hint_z4_q15"></div>
+  </div>
+
+  <!-- SOAL 16 -->
+  <div class="q-card" id="card_z4_q16">
+    <div class="q-header">
+      <span class="q-no">Soal 16</span>
+      <div class="q-story">🎁 <b>Paket Hadiah Lomba (Pengantar Faktor Persekutuan):</b> Koperasi ingin membungkus <b>12 pensil</b> dan <b>18 buku tulis</b> ke dalam beberapa paket hadiah dengan isi sama banyak <b>tanpa ada sisa keduanya</b>. Uji tombol jumlah paket berikut untuk melihat paket mana yang membuat pensil DAN buku sama-sama sisa 0!</div>
+    </div>
+    <div class="lab-bar">
+      <div class="lab-label">
+        <span>🧪 Uji banyak paket hadiah untuk 12 Pensil & 18 Buku:</span>
+        <span class="stock-pill" id="q16Prog">Faktor sama ditemukan: <b>0</b> / 4</span>
+      </div>
+      <div class="test-btns">${q16Btns}</div>
+    </div>
+    <div class="lab-stage" id="stage_z4_q16">
+      <div class="lab-banner idle">👆 Klik tombol angka paket di atas untuk menguji pembagian 12 pensil dan 18 buku sekaligus!</div>
+    </div>
+    <input type="hidden" class="lkpd-val" id="hid_z4_q16" name="z4_q16_tested" value="">
+
+    <div class="seq-bar">
+      <div class="seq-title">Tuliskan semua banyak paket yang mungkin (berurutan):</div>
+      <input type="tel" class="m-in xs lkpd-val lvl4" data-ans="1" name="z4_q16_f1" placeholder="?"><span>,</span>
+      <input type="tel" class="m-in xs lkpd-val lvl4" data-ans="2" name="z4_q16_f2" placeholder="?"><span>,</span>
+      <input type="tel" class="m-in xs lkpd-val lvl4" data-ans="3" name="z4_q16_f3" placeholder="?"><span>,</span>
+      <input type="tel" class="m-in xs lkpd-val lvl4" data-ans="6" name="z4_q16_f4" placeholder="?">
+      <span style="width:100%; height:4px;"></span>
+      <span style="font-weight:800; font-size:14px; color:var(--math-dark);">🏆 Jadi, paket hadiah PALING BANYAK yang bisa dibuat adalah</span>
+      <input type="tel" class="m-in xs final lkpd-val lvl4" data-ans="6" name="z4_q16_max" placeholder="?">
+      <span style="font-weight:800; font-size:14px; color:var(--math-dark);">paket!</span>
+    </div>
+    <div class="q-hint" id="hint_z4_q16"></div>
+  </div>`;
+}
+
+// --- Handler Soal 13 ---
+function runQ13Test(k, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  z4Q13Tested.add(k);
+  const factors30 = [1, 2, 3, 5, 6, 10, 15, 30];
+  const quot = Math.floor(30 / k), rem = 30 % k, ok = (rem === 0);
+
+  [1,2,3,4,5,6,8,10,12,15,20,30].forEach(c => {
+    const b = document.getElementById('q13btn_' + c);
+    if (b) b.classList.remove('active-test');
+  });
+  const btn = document.getElementById('q13btn_' + k);
+  if (btn) btn.classList.add('active-test', ok ? 'is-factor' : 'not-factor');
+
+  const stage = document.getElementById('stage_z4_q13');
+  const txt = ok
+    ? `✅ 30 ÷ ${k} = ${quot} apel per keranjang (Sisa 0) → ${k} keranjang BISA dipakai!`
+    : `❌ 30 ÷ ${k} = ${quot} apel per keranjang (Sisa ${rem} apel) → TIDAK bisa, masih bersisa!`;
+
+  const showMax = Math.min(k, 10);
+  let boxes = '';
+  for (let i = 0; i < showMax; i++) {
+    let objs = '';
+    for (let j = 0; j < quot; j++) objs += getObjSVG('apel', 16);
+    boxes += `<div class="lab-box ${ok ? '' : 'fail-box'}"><span class="lab-box-title">Keranjang ${i+1} (${quot})</span><div class="lab-box-objs">${objs}</div></div>`;
+  }
+  if (k > showMax) {
+    boxes += `<div class="lab-box ${ok ? '' : 'fail-box'}" style="justify-content:center; padding:12px;"><span class="lab-box-title">… + ${k - showMax} keranjang lagi (masing-masing isi ${quot})</span></div>`;
+  }
+  let remHtml = '';
+  if (rem > 0) {
+    let rObjs = '';
+    for (let r = 0; r < rem; r++) rObjs += getObjSVG('apel', 18);
+    remHtml = `<div class="rem-zone"><span class="rem-label">⚠️ Sisa Apel (${rem}):</span> ${rObjs}</div>`;
+  }
+  stage.innerHTML = `<div class="lab-banner ${ok ? 'ok' : 'fail'}">${txt}</div><div class="lab-groups">${boxes}</div>${remHtml}`;
+
+  const found = factors30.filter(f => z4Q13Tested.has(f)).length;
+  document.getElementById('q13Prog').innerHTML = `Faktor ditemukan: <b>${found}</b> / 8`;
+  document.getElementById('hid_z4_q13').value = JSON.stringify([...z4Q13Tested]);
+  if (triggerProgress) { clearHint('z4_q13'); updateProgress(); }
+}
+
+// --- Handler Soal 14 ---
+function toggleQ14Day(d, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  if (z4Q14Days.has(d)) z4Q14Days.delete(d);
+  else z4Q14Days.add(d);
+  refreshQ14UI(triggerProgress);
+}
+function clearQ14() {
+  if (readOnlyMode) return;
+  z4Q14Days.clear();
+  refreshQ14UI(true);
+}
+function refreshQ14UI(triggerProgress = true) {
+  for (let d = 1; d <= 30; d++) {
+    const el = document.getElementById('q14day_' + d);
+    const tg = document.getElementById('q14tag_' + d);
+    if (!el) continue;
+    const on = z4Q14Days.has(d);
+    el.classList.toggle('mark-a', on);
+    tg.textContent = on ? '📚' : '';
+  }
+  const arr = [...z4Q14Days].sort((a, b) => a - b);
+  document.getElementById('q14Stat').innerHTML = `Tanggal ditandai: <b>${arr.length}</b>`;
+  document.getElementById('hid_z4_q14').value = arr.length ? JSON.stringify(arr) : '';
+  if (triggerProgress) { clearHint('z4_q14'); updateProgress(); }
+}
+
+// --- Handler Soal 15 ---
+function setQ15Brush(b) {
+  if (readOnlyMode) return;
+  z4Q15Brush = b;
+  document.getElementById('brushBtnA').classList.toggle('active-a', b === 'A');
+  document.getElementById('brushBtnB').classList.toggle('active-b', b === 'B');
+}
+function toggleQ15Day(d, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  const set = z4Q15Brush === 'A' ? z4Q15A : z4Q15B;
+  if (set.has(d)) set.delete(d);
+  else set.add(d);
+  refreshQ15UI(triggerProgress);
+}
+function clearQ15() {
+  if (readOnlyMode) return;
+  z4Q15A.clear(); z4Q15B.clear();
+  refreshQ15UI(true);
+}
+function refreshQ15UI(triggerProgress = true) {
+  for (let d = 1; d <= 30; d++) {
+    const el = document.getElementById('q15day_' + d);
+    const tg = document.getElementById('q15tag_' + d);
+    if (!el) continue;
+    const hasA = z4Q15A.has(d), hasB = z4Q15B.has(d);
+    el.classList.remove('mark-a', 'mark-b', 'mark-both');
+    if (hasA && hasB) { el.classList.add('mark-both'); tg.textContent = '⭐'; }
+    else if (hasA) { el.classList.add('mark-a'); tg.textContent = '⚜️'; }
+    else if (hasB) { el.classList.add('mark-b'); tg.textContent = '💃'; }
+    else { tg.textContent = ''; }
+  }
+  const payload = { a: [...z4Q15A].sort((x,y)=>x-y), b: [...z4Q15B].sort((x,y)=>x-y) };
+  document.getElementById('hid_z4_q15').value = (payload.a.length || payload.b.length) ? JSON.stringify(payload) : '';
+  if (triggerProgress) { clearHint('z4_q15'); updateProgress(); }
+}
+
+// --- Handler Soal 16 ---
+function runQ16Test(k, triggerProgress = true) {
+  if (readOnlyMode && triggerProgress) return;
+  z4Q16Tested.add(k);
+  const commonF = [1, 2, 3, 6];
+  const qP = Math.floor(12 / k), rP = 12 % k;
+  const qB = Math.floor(18 / k), rB = 18 % k;
+  const ok = (rP === 0 && rB === 0);
+
+  [1,2,3,4,5,6,9,12].forEach(c => {
+    const b = document.getElementById('q16btn_' + c);
+    if (b) b.classList.remove('active-test');
+  });
+  const btn = document.getElementById('q16btn_' + k);
+  if (btn) btn.classList.add('active-test', ok ? 'is-factor' : 'not-factor');
+
+  const stage = document.getElementById('stage_z4_q16');
+  const txt = ok
+    ? `✅ ${k} Paket BISA dibuat! Tiap paket isi ${qP} pensil & ${qB} buku (Keduanya Sisa 0)!`
+    : `❌ ${k} Paket GAGAL! 12 Pensil → ${qP}/paket (sisa ${rP}), 18 Buku → ${qB}/paket (sisa ${rB}).`;
+
+  const showMax = Math.min(k, 8);
+  let boxes = '';
+  for (let i = 0; i < showMax; i++) {
+    let objs = '';
+    for (let p = 0; p < qP; p++) objs += getObjSVG('pensil', 17);
+    for (let b = 0; b < qB; b++) objs += getObjSVG('buku', 17);
+    boxes += `<div class="lab-box ${ok ? '' : 'fail-box'}"><span class="lab-box-title">Paket ${i+1}</span><div class="lab-box-objs">${objs}</div></div>`;
+  }
+  if (k > showMax) {
+    boxes += `<div class="lab-box ${ok ? '' : 'fail-box'}"><span class="lab-box-title">… + ${k - showMax} paket lagi</span></div>`;
+  }
+  let remHtml = '';
+  if (rP > 0 || rB > 0) {
+    let rObjs = '';
+    for (let p = 0; p < rP; p++) rObjs += getObjSVG('pensil', 18);
+    for (let b = 0; b < rB; b++) rObjs += getObjSVG('buku', 18);
+    remHtml = `<div class="rem-zone"><span class="rem-label">⚠️ Sisa Tidak Terbagi (${rP} pensil, ${rB} buku):</span> ${rObjs}</div>`;
+  }
+  stage.innerHTML = `<div class="lab-banner ${ok ? 'ok' : 'fail'}">${txt}</div><div class="lab-groups">${boxes}</div>${remHtml}`;
+
+  const found = commonF.filter(f => z4Q16Tested.has(f)).length;
+  document.getElementById('q16Prog').innerHTML = `Faktor sama ditemukan: <b>${found}</b> / 4`;
+  document.getElementById('hid_z4_q16').value = JSON.stringify([...z4Q16Tested]);
+  if (triggerProgress) { clearHint('z4_q16'); updateProgress(); }
+}
+
+function flashHint(id, msg) {
+  const el = document.getElementById('hint_' + id);
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+}
+function clearHint(id) {
+  const el = document.getElementById('hint_' + id);
+  if (el) { el.textContent = ''; el.classList.remove('show'); }
+}
+
+function sameNumberSet(setA, arrB) {
+  if (setA.size !== arrB.length) return false;
+  return arrB.every(x => setA.has(x));
+}
+
+// =========================================================================
+// VALIDASI GAMIFIKASI PER ZONA
+// =========================================================================
+function checkLevel(lvl) {
+  let allCorrect = true;
+
+  // 1. Cek semua input angka pada level ini
+  const inputs = document.querySelectorAll('.lvl' + lvl + ':not([readonly])');
+  inputs.forEach(inp => {
+    inp.classList.remove('correct', 'wrong');
+    if (inp.value.trim() === String(inp.dataset.ans).trim()) {
+      inp.classList.add('correct');
+    } else {
+      inp.classList.add('wrong');
+      allCorrect = false;
+      setTimeout(() => inp.classList.remove('wrong'), 500);
+    }
+  });
+
+  // 2. Cek interaksi konkret tiap zona
+  if (lvl === 1) {
+    Z1_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const allTested = q.factors.every(f => labTested[q.id].has(f));
+      const eqOk = [...card.querySelectorAll('.lvl1')].every(el => el.classList.contains('correct'));
+      if (!allTested) {
+        allCorrect = false;
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Belum semua faktor dari ${q.n} diuji di tombol lab! Klik tombol angka hingga menemukan semua ${q.factors.length} faktor berwarna hijau.`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Semua faktor sudah ditemukan di lab! Tuliskan seluruh angka yang berwarna HIJAU secara berurutan dari terkecil ke terbesar.`);
+      } else {
+        card.classList.add('card-correct');
+      }
+    });
+  } else if (lvl === 2) {
+    Z2_PACK_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const packOk = (multPacks[q.id] === q.targetCount);
+      const eqOk = [...card.querySelectorAll('.lvl2')].every(el => el.classList.contains('correct'));
+      if (!packOk) {
+        allCorrect = false;
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Jumlah ${q.packName} terpasang belum tepat ${q.targetCount} ${q.packName} (saat ini ${multPacks[q.id]}). Sesuaikan dengan tombol +1 / −1!`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Susunan ${q.packName} sudah pas! Periksa kembali deret kelipatan ${q.perPack} yang kamu tuliskan.`);
+      } else {
+        card.classList.add('card-correct');
+      }
+    });
+
+    Z2_BOARD_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const set = boardMarks[q.id];
+      const boardOk = sameNumberSet(set, q.multiples);
+      for (let n = 1; n <= q.boardMax; n++) {
+        const c = document.getElementById(`nb_${q.id}_${n}`);
+        if (!c) continue;
+        c.classList.remove('nb-err', 'nb-ok');
+        if (set.has(n)) {
+          c.classList.add(q.multiples.includes(n) ? 'nb-ok' : 'nb-err');
+        }
+      }
+      const eqOk = [...card.querySelectorAll('.lvl2')].every(el => el.classList.contains('correct'));
+      if (!boardOk) {
+        allCorrect = false;
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Papan lompatan kelipatan ${q.step} belum tepat! Matikan angka berwarna merah (bukan kelipatan ${q.step}) dan nyalakan semua kelipatan ${q.step} sampai ${q.boardMax}.`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Papan lompatan sudah tepat! Periksa kembali angka deret yang kamu ketik di kotak bawah.`);
+      } else {
+        card.classList.add('card-correct');
+      }
+    });
+  } else if (lvl === 3) {
+    Z3_DATA.forEach(q => {
+      clearHint(q.id);
+      const card = document.getElementById('card_' + q.id);
+      card.classList.remove('card-correct', 'card-wrong');
+      const st = sortState[q.id];
+      let sortOk = true;
+      let unplaced = 0;
+
+      q.cards.forEach(num => {
+        const loc = st[num];
+        const chip = document.getElementById(`chip_${q.id}_${num}`);
+        if (chip) chip.classList.remove('chip-ok', 'chip-err');
+        if (loc === 'pool') { unplaced++; sortOk = false; return; }
+        const expected = q.ansFac.includes(num) ? 'fac' : (q.ansMul.includes(num) ? 'mul' : 'non');
+        if (loc === expected) {
+          if (chip) chip.classList.add('chip-ok');
+        } else {
+          if (chip) chip.classList.add('chip-err');
+          sortOk = false;
+        }
+      });
+
+      const eqOk = [...card.querySelectorAll('.lvl3')].every(el => el.classList.contains('correct'));
+      if (!sortOk) {
+        allCorrect = false;
+        card.classList.add('card-wrong');
+        flashHint(q.id, unplaced > 0
+          ? `⚠️ Masih ada ${unplaced} kartu angka yang belum dimasukkan ke keranjang!`
+          : `⚠️ Ada kartu angka bertanda merah yang salah keranjang! Ingat: Faktor membagi habis ${q.target} (lebih kecil), Kelipatan hasil kali ${q.target} (lebih besar).`);
+      } else if (!eqOk) {
+        card.classList.add('card-wrong');
+        flashHint(q.id, `⚠️ Semua kartu sudah tepat di keranjangnya! Periksa kembali jawaban isian kelipatan di bawah.`);
+      } else {
+        card.classList.add('card-correct');
+      }
+    });
+  } else if (lvl === 4) {
+    // Soal 13
+    clearHint('z4_q13');
+    const c13 = document.getElementById('card_z4_q13');
+    c13.classList.remove('card-correct', 'card-wrong');
+    const q13LabOk = [1,2,3,5,6,10,15,30].every(f => z4Q13Tested.has(f));
+    const q13EqOk = [...c13.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+    if (!q13LabOk) { allCorrect = false; c13.classList.add('card-wrong'); flashHint('z4_q13', '⚠️ Uji tombol keranjang hingga menemukan semua 8 faktor dari 30 yang berwarna hijau!'); }
+    else if (!q13EqOk) { c13.classList.add('card-wrong'); flashHint('z4_q13', '⚠️ Periksa kembali 4 pasangan perkalian faktor dari 30 secara berurutan (mulai dari 1 × 30).'); }
+    else c13.classList.add('card-correct');
+
+    // Soal 14
+    clearHint('z4_q14');
+    const c14 = document.getElementById('card_z4_q14');
+    c14.classList.remove('card-correct', 'card-wrong');
+    const q14CalOk = sameNumberSet(z4Q14Days, [4,8,12,16,20,24,28]);
+    const q14EqOk = [...c14.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+    if (!q14CalOk) { allCorrect = false; c14.classList.add('card-wrong'); flashHint('z4_q14', '⚠️ Tanggal pada kalender belum tepat! Tandai semua kelipatan 4 dari tanggal 1 sampai 30 (4, 8, 12, ...).'); }
+    else if (!q14EqOk) { c14.classList.add('card-wrong'); flashHint('z4_q14', '⚠️ Kalender sudah tepat! Hitung ulang berapa kali kunjungan dan tanggal terakhirnya.'); }
+    else c14.classList.add('card-correct');
+
+    // Soal 15
+    clearHint('z4_q15');
+    const c15 = document.getElementById('card_z4_q15');
+    c15.classList.remove('card-correct', 'card-wrong');
+    const q15AOk = sameNumberSet(z4Q15A, [4,8,12,16,20,24,28]);
+    const q15BOk = sameNumberSet(z4Q15B, [6,12,18,24,30]);
+    const q15EqOk = [...c15.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+    if (!q15AOk || !q15BOk) {
+      allCorrect = false; c15.classList.add('card-wrong');
+      flashHint('z4_q15', `⚠️ Penandaan kalender belum lengkap! Pastikan Kuas Pramuka menandai semua kelipatan 4 (7 tanggal) dan Kuas Seni Tari menandai semua kelipatan 6 (5 tanggal).`);
+    } else if (!q15EqOk) {
+      c15.classList.add('card-wrong');
+      flashHint('z4_q15', '⚠️ Kalender sudah bersinar emas! Tuliskan dua tanggal bertanda bintang ⭐ secara berurutan.');
+    } else c15.classList.add('card-correct');
+
+    // Soal 16
+    clearHint('z4_q16');
+    const c16 = document.getElementById('card_z4_q16');
+    c16.classList.remove('card-correct', 'card-wrong');
+    const q16LabOk = [1,2,3,6].every(f => z4Q16Tested.has(f));
+    const q16EqOk = [...c16.querySelectorAll('.lvl4')].every(el => el.classList.contains('correct'));
+    if (!q16LabOk) { allCorrect = false; c16.classList.add('card-wrong'); flashHint('z4_q16', '⚠️ Uji tombol paket hingga menemukan semua 4 angka yang membuat pensil dan buku sama-sama sisa 0!'); }
+    else if (!q16EqOk) { c16.classList.add('card-wrong'); flashHint('z4_q16', '⚠️ Hasil uji sudah lengkap! Tuliskan 4 angka hijau secara berurutan dan angka terbesarnya.'); }
+    else c16.classList.add('card-correct');
+  }
+
+  if (allCorrect) {
+    document.getElementById('level' + lvl).classList.add('completed');
+    if (lvl === 4) {
+      document.getElementById('msgFinal').style.display = 'block';
+      document.getElementById('sendBtn2').style.display = 'block';
+      document.getElementById('msgFinal').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      unlockedMax = Math.max(unlockedMax, lvl + 1);
+      const next = document.getElementById('level' + (lvl + 1));
+      if (next) {
+        next.classList.remove('locked');
+        next.classList.add('unlocked');
+        next.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  } else {
+    const firstWrong = document.querySelector(`#level${lvl} .card-wrong, #level${lvl} .wrong`);
+    if (firstWrong) firstWrong.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// =========================================================================
+// PEMULIHAN STATE VISUAL (DRAF & ARSIP PENILAIAN GURU/SISWA)
+// =========================================================================
+function restoreInteractiveStates(answers) {
+  if (!answers) return;
+
+  // 1. Pulihkan Zona 1 (Lab Faktor)
+  Z1_DATA.forEach(q => {
+    const raw = answers[q.id + '_tested'];
+    if (raw) {
+      try {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)) {
+          labTested[q.id] = new Set();
+          arr.forEach(k => runFactorTest(q.id, Number(k), false));
+        }
+      } catch (e) {}
+    }
+  });
+
+  // 2. Pulihkan Zona 2 (Grosir Pak & Papan Lompatan)
+  Z2_PACK_DATA.forEach(q => {
+    const raw = answers[q.id + '_cnt'];
+    if (raw !== undefined && raw !== '') {
+      multPacks[q.id] = Number(raw) || 0;
+      refreshMultPackArena(q.id, false);
+    }
+  });
+  Z2_BOARD_DATA.forEach(q => {
+    const raw = answers[q.id + '_board'];
+    if (raw) {
+      try {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)) {
+          boardMarks[q.id] = new Set();
+          arr.forEach(n => toggleBoardNum(q.id, Number(n), false));
+        }
+      } catch (e) {}
+    }
+  });
+
+  // 3. Pulihkan Zona 3 (Sortir Faktor vs Kelipatan)
+  Z3_DATA.forEach(q => {
+    const raw = answers[q.id + '_sort'];
+    if (raw) {
+      try {
+        const obj = JSON.parse(raw);
+        if (obj && typeof obj === 'object') {
+          q.cards.forEach(num => {
+            if (obj[num]) sortState[q.id][num] = obj[num];
+          });
+          refreshSortUI(q.id, false);
+        }
+      } catch (e) {}
+    }
+  });
+
+  // 4. Pulihkan Zona 4 (Soal 13–16)
+  if (answers.z4_q13_tested) {
+    try {
+      const arr = JSON.parse(answers.z4_q13_tested);
+      z4Q13Tested.clear();
+      if (Array.isArray(arr)) arr.forEach(k => runQ13Test(Number(k), false));
+    } catch (e) {}
+  }
+  if (answers.z4_q14_days) {
+    try {
+      const arr = JSON.parse(answers.z4_q14_days);
+      z4Q14Days.clear();
+      if (Array.isArray(arr)) arr.forEach(d => z4Q14Days.add(Number(d)));
+      refreshQ14UI(false);
+    } catch (e) {}
+  }
+  if (answers.z4_q15_cal) {
+    try {
+      const obj = JSON.parse(answers.z4_q15_cal);
+      z4Q15A.clear(); z4Q15B.clear();
+      if (obj && Array.isArray(obj.a)) obj.a.forEach(d => z4Q15A.add(Number(d)));
+      if (obj && Array.isArray(obj.b)) obj.b.forEach(d => z4Q15B.add(Number(d)));
+      refreshQ15UI(false);
+    } catch (e) {}
+  }
+  if (answers.z4_q16_tested) {
+    try {
+      const arr = JSON.parse(answers.z4_q16_tested);
+      z4Q16Tested.clear();
+      if (Array.isArray(arr)) arr.forEach(k => runQ16Test(Number(k), false));
+    } catch (e) {}
+  }
+}
+
+function normalizeDateForInput(raw) {
+  if (!raw) return '';
+  const s = String(raw).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const d = new Date(s);
+  if (!isNaN(d.getTime())) {
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  return '';
+}
+
+// =========================================================================
+// MESIN LMS V4.2 (KONTRAK PAYLOAD GAS + TANGGAL KALENDER)
+// =========================================================================
+document.addEventListener("DOMContentLoaded", () => {
+  buildAllZones();
+  if (submissionId) {
+    loadLMSViewMode();
+  } else {
+    fetchStudents();
+    loadDraft();
+    setupInputs();
+    updateProgress();
+  }
+});
+
+async function fetchStudents() {
+  const statusText = document.getElementById("dbStatusText");
+  const btnAdd = document.getElementById("btnAddMember");
+  try {
+    let res = await fetch(ENDPOINT + "?action=getStudents");
+    let result = await res.json();
+    if (result.status === 'success') {
+      studentList = result.data;
+      statusText.innerHTML = "✅ Database Siswa Terhubung. Ketik NISN anggota kelompok lalu klik Cari & Tambah.";
+      btnAdd.disabled = false;
+      try {
+        let sess = JSON.parse(localStorage.getItem('sdn1_sukahaji_lms_session') || 'null');
+        if (sess && sess.user && sess.user.role === 'Siswa') {
+          if (!groupMembers.find(m => m.nisn === String(sess.user.username))) {
+            groupMembers.push({ nisn: String(sess.user.username), nama: sess.user.nama });
+            renderMembers();
+            updateProgress();
+          }
+        }
+      } catch (e) {}
+    }
+  } catch (e) { statusText.innerHTML = "⚠️ Gagal memuat database."; }
+}
+
+document.getElementById("btnAddMember").onclick = () => {
+  let nisnInput = document.getElementById("inNisn").value.trim();
+  if (!nisnInput) return;
+  let found = studentList.find(s => String(s.nisn) === nisnInput);
+  if (!found) return showModal("<h3>❌ NISN Tidak Ditemukan</h3><button class='btn-main' onclick='closeModal()'>Tutup</button>");
+  if (groupMembers.find(m => m.nisn === found.nisn)) return;
+  if (groupMembers.length >= 5) return showModal("<h3>⚠️ Kelompok Penuh</h3><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  groupMembers.push({ nisn: found.nisn, nama: found.nama });
+  renderMembers();
+  document.getElementById("inNisn").value = "";
+  updateProgress();
+};
+
+function renderMembers() {
+  document.getElementById("memberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="member-badge">${m.nama} (${m.nisn}) <span onclick="removeMember(${i})">✖</span></div>
+  `).join('');
+  document.getElementById("readonlyMemberList").innerHTML = groupMembers.map((m, i) => `
+    <div class="readonly-item"><span>${i + 1}.</span> <span>${m.nama}</span> <span style="color:#64748b; font-size:12px; margin-left:auto;">NISN: ${m.nisn}</span></div>
+  `).join('');
+}
+function removeMember(idx) { groupMembers.splice(idx, 1); renderMembers(); updateProgress(); }
+
+function getValFields() { return [...document.querySelectorAll(".lkpd-val")]; }
+
+function collect() {
+  let d = {};
+  getValFields().forEach(el => { if (el.name) d[el.name] = el.value; });
+  const tglVal = document.querySelector('[name="tanggal"]').value;
+  if (tglVal) d.tanggal = tglVal;
+  return d;
+}
+
+function setupInputs() {
+  getValFields().forEach(el => {
+    el.addEventListener("input", updateProgress);
+    el.addEventListener("change", updateProgress);
+  });
+  document.querySelector('[name="tanggal"]').addEventListener("input", updateProgress);
+  document.querySelector('[name="tanggal"]').addEventListener("change", updateProgress);
+}
+
+function updateProgress() {
+  const vals = getValFields();
+  let filled = 0;
+  vals.forEach(x => {
+    const v = String(x.value || "").trim();
+    if (v && v !== "[]" && v !== "{}") filled++;
+  });
+  if (String(document.querySelector('[name="tanggal"]').value).trim()) filled++;
+  const pct = Math.min(100, Math.round((filled + (groupMembers.length > 0 ? 1 : 0)) / (vals.length + 2) * 100));
+  document.getElementById("progressBar").style.width = pct + "%";
+}
+
+document.getElementById("saveBtn").onclick = () => {
+  localStorage.setItem(STORAGE, JSON.stringify({
+    members: groupMembers,
+    tanggal: document.querySelector('[name="tanggal"]').value,
+    unlockedMax: unlockedMax,
+    answers: collect()
+  }));
+  showModal("<div style='font-size:46px'>💾</div><h3>Draf Tersimpan</h3><p>Semua hasil percobaan faktor, kelipatan, sortir, dan kalendermu sudah tersimpan di perangkat ini.</p><button class='btn-main' onclick='closeModal()'>Lanjut</button>");
+};
+
+function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORAGE));
+    if (!d) return;
+    if (d.members) { groupMembers = d.members; renderMembers(); }
+    if (d.tanggal) document.querySelector('[name="tanggal"]').value = normalizeDateForInput(d.tanggal);
+    if (d.unlockedMax && d.unlockedMax > 1) {
+      unlockedMax = d.unlockedMax;
+      for (let i = 2; i <= unlockedMax; i++) {
+        const el = document.getElementById('level' + i);
+        if (el) { el.classList.remove('locked'); el.classList.add('unlocked'); }
+      }
+    }
+    if (d.answers) {
+      getValFields().forEach(el => { if (d.answers[el.name] !== undefined) el.value = d.answers[el.name]; });
+      restoreInteractiveStates(d.answers);
+    }
+  } catch (e) {}
+}
+
+document.getElementById("sendBtn").onclick = document.getElementById("sendBtn2").onclick = async () => {
+  let tgl = document.querySelector('[name="tanggal"]').value.trim();
+  if (groupMembers.length === 0 || !tgl) {
+    return showModal("<h3>⚠️ Belum Lengkap</h3><p>Isi Hari/Tanggal pada kalender dan pastikan Anggota Kelompok terisi!</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+
+  showModal("<div class='spinner'></div><h3>Mengirim Jawaban...</h3>");
+  let payload = {
+    action: 'submitLKPD',
+    lkpdId: LKPD_ID,
+    subject: SUBJECT,
+    hariTanggal: tgl,
+    materiPokok: document.querySelector('[name="materi"]').value,
+    members: groupMembers,
+    answers: JSON.stringify(collect())
+  };
+
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      localStorage.removeItem(STORAGE);
+      readOnlyMode = true;
+      document.querySelectorAll("input,select,textarea,button").forEach(el => el.disabled = true);
+      showModal(`<div style='font-size:52px'>✅</div><h3>Berhasil Dikirim!</h3><p>Jawaban dan seluruh hasil eksperimen faktor & kelipatan kelompokmu telah masuk ke Dasbor Guru.</p>`);
+      document.getElementById("appbar").style.display = "none";
+    } else {
+      showModal("<h3>⚠️ Gagal Mengirim</h3><p>Silakan coba kirim kembali.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+    }
+  } catch (e) {
+    showModal("<h3>⚠️ Koneksi Terputus</h3><p>Periksa jaringan internet lalu coba lagi.</p><button class='btn-light' onclick='closeModal()'>Tutup</button>");
+  }
+};
+
+async function loadLMSViewMode() {
+  readOnlyMode = true;
+  document.getElementById("topActions").style.display = "none";
+  document.getElementById("statusText").style.display = "block";
+  document.getElementById("editGroupView").style.display = "none";
+  document.getElementById("readGroupView").style.display = "block";
+  showModal("<div class='spinner'></div><h3>Memuat Data Arsip...</h3>");
+
+  try {
+    let res = await fetch(ENDPOINT + "?action=getSubmission&lkpdId=" + encodeURIComponent(LKPD_ID) + "&submissionId=" + encodeURIComponent(submissionId));
+    let result = await res.json();
+    if (result.status === 'success') {
+      let answers = JSON.parse(result.answers || '{}');
+      if (result.members) { groupMembers = result.members; renderMembers(); }
+      else { document.getElementById("readonlyMemberList").innerHTML = `<div class="readonly-item"><i>(Anggota Tercatat di Database)</i></div>`; }
+
+      const tglEl = document.querySelector('[name="tanggal"]');
+      if (tglEl) {
+        const tglRestored = normalizeDateForInput(answers.tanggal || result.hariTanggal || '');
+        if (tglRestored) tglEl.value = tglRestored;
+      }
+
+      Object.keys(answers).forEach(k => {
+        if (k === 'tanggal') return;
+        let el = document.querySelector(`[name="${k}"]`);
+        if (el) el.value = answers[k];
+      });
+
+      restoreInteractiveStates(answers);
+
+      document.querySelectorAll('.game-level').forEach(el => {
+        el.classList.remove('locked');
+        el.classList.add('unlocked');
+        let ovr = el.querySelector('.lock-overlay');
+        if (ovr) ovr.remove();
+      });
+
+      document.querySelectorAll("input,select,textarea,button").forEach(el => {
+        if (!el.closest('#gradePanel')) {
+          el.disabled = true;
+          el.readOnly = true;
+        }
+      });
+      closeModal();
+
+      let panel = document.getElementById("gradePanel");
+      panel.classList.add("show");
+      let scale = document.getElementById("gradeScale");
+      let note  = document.getElementById("gradeNote");
+      let btn   = document.getElementById("lockGradeBtn");
+
+      if (viewMode === 'guru') {
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade;
+          note.value = result.feedback;
+          scale.disabled = true;
+          note.disabled = true;
+          btn.style.display = "none";
+          renderStars(scale.value);
+        } else {
+          btn.onclick = () => submitTeacherGrade(scale.value, note.value);
+        }
+      } else {
+        btn.style.display = "none";
+        scale.disabled = true;
+        note.disabled = true;
+        if (result.gradeStatus === 'Sudah Dinilai') {
+          scale.value = result.grade;
+          note.value = result.feedback;
+          renderStars(scale.value);
+        }
+      }
+    } else {
+      showModal("<h3>⚠️ Data Tidak Ditemukan</h3>");
+    }
+  } catch (e) { showModal("<h3>⚠️ Gagal Memuat Arsip</h3>"); }
+}
+
+function renderStars(v) {
+  const n = { A:4, B:3, C:2, D:1 }[v] || 0;
+  const st = document.getElementById("starRating");
+  st.textContent = '★'.repeat(n) + '☆'.repeat(4 - n);
+  st.style.color = n ? '#f59e0b' : '#cbd5e1';
+}
+document.getElementById("gradeScale").addEventListener("change", e => renderStars(e.target.value));
+
+async function submitTeacherGrade(grade, feedback) {
+  if (!grade) return alert("Pilih skala penilaian terlebih dahulu!");
+  let btn = document.getElementById("lockGradeBtn");
+  btn.disabled = true;
+  btn.innerText = "⏳ Menyimpan...";
+  try {
+    let res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({
+        action: 'saveGrade',
+        lkpdId: LKPD_ID,
+        submissionId: submissionId,
+        grade: grade,
+        feedback: feedback
+      })
+    });
+    let result = await res.json();
+    if (result.status === 'success') {
+      btn.innerText = "✅ Tersimpan & Terdistribusi";
+      document.getElementById("gradeScale").disabled = true;
+      document.getElementById("gradeNote").disabled = true;
+    } else {
+      alert("Gagal menyimpan nilai.");
+      btn.disabled = false;
+      btn.innerText = "🔒 Simpan & Distribusikan Nilai";
+    }
+  } catch (e) {
+    alert("Koneksi gagal.");
+    btn.disabled = false;
+    btn.innerText = "🔒 Simpan & Distribusikan Nilai";
+  }
+}
+
+function showModal(html) { modalBody.innerHTML = html; modal.style.display = "grid"; }
+function closeModal() { modal.style.display = "none"; }
+</script>
+</body>
+</html>
